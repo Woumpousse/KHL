@@ -1,6 +1,36 @@
-require 'sqlite3'
+# require 'sqlite3'
 
-$db = SQLite3::Database.new ":memory:"
+# $db = SQLite3::Database.new ":memory:"
+
+module Database
+  @@db = nil
+
+  def self.initialize
+    @@db = SQLite3::Database.new ":memory:"
+  end
+
+  def execute(sql)
+    @@db.execute(sql)
+  end
+
+  def raw_query(sql)
+    @@db.execute2(sql)
+  end
+
+  def query(sql)
+    headers, *rows = raw_query(sql)
+
+    Table.new(headers, rows)
+  end
+
+  def get_table(table_name)
+    query("SELECT * FROM #{table_name}")
+  end
+
+  def drop_table(table_name)
+    execute("DROP TABLE #{table_name}")
+  end
+end
 
 
 def indent(string)
@@ -33,35 +63,32 @@ end
 
 
 class Table
-  def initialize(name, headers, rows)
-    @name = name
+  def initialize(headers, rows)
     @headers = headers
     @rows = rows
   end
 
-  attr_reader :name, :headers, :rows
+  attr_reader :headers, :rows
 end
 
 class Exercise
   def self.parse(data)
     data =~ /#SETUP(.+)#QUERY(.+)$/m or abort "Could not read\n#{indent(data)}"
     setup, query = $1.strip, unindent($2)
-    tableNames = setup.scan(/CREATE TABLE (\w+) \(/).map { |x| x[0] } or abort "Could not find tables in\n#{indent(data)}"
+    table_names = setup.scan(/CREATE TABLE (\w+) \(/).map { |x| x[0] } or abort "Could not find tables in\n#{indent(data)}"
 
     setup.split("\n\n").each do |sql|
-      $db.execute(sql)
+      Database.execute(sql)
     end
 
-    inputTables = tableNames.map do |tableName|
-      headers, *rows = $db.execute2("SELECT * FROM #{tableName}")
-      Table.new(tableName, headers, rows)
+    inputTables = table_names.map do |table_name|
+      Database.get_table(table_name)
     end
 
-    headers, *rows = $db.execute2(query)
-    solutionTable = Table.new("solution", headers, rows)
+    headers, *rows = Database.query(query)
 
-    tableNames.each do |tableName|
-      $db.execute("DROP TABLE #{tableName}")
+    table_names.each do |table_name|
+      Database.drop_table(table_name)
     end
 
     Exercise.new(inputTables, query, solutionTable)
@@ -77,135 +104,16 @@ class Exercise
 end
 
 
-# def process_exercise(data)
-#   begin
-#     db = SQLite3::Database.new ":memory:"
-
-#     data =~ /#SETUP(.+)#QUERY(.+)$/m or abort "Could not read\n#{indent(data)}"
-#     setup, query = $1.strip, $2.strip
-#     tableNames = setup.scan(/CREATE TABLE (\w+) \(/).map { |x| x[0] } or abort "Could not find tables in\n#{indent(data)}"
-
-#     setup.split("\n\n").each do |sql|
-#       db.execute(sql)
-#     end
-
-#     inputTables = tableNames.map do |tableName|
-#       headers, *rows = db.execute2("SELECT * FROM #{tableName}")
-#       Table.new(tableName, headers, rows)
-#     end
-
-#     headers, *rows = db.execute2(query)
-#     solutionTable = Table.new("solution", headers, rows)
-
-#     tableNames.each do |tableName|
-#       db.execute("DROP TABLE #{tableName}")
-#     end
-
-#     Exercise.new(inputTables, query, solutionTable)
-
-#   rescue SQLite3::Exception => e
-#     puts "Error"
-#     puts "#{indent(e.to_s)}"
-#     puts "while processing"
-#     puts(indent(data))
-
-#     abort
-
-#   ensure
-#     db.close
-#   end
-# end
-
 
 def process_file(data)
   data.scan(/#EXERCISE(.+?)#END/m).map do |exercise|
     exercise[0].strip
   end.each do |exercise|
-    # process_exercise(exercise)
     p Exercise.parse(exercise)
   end
 end
 
 
 process_file(IO.read('inner-joins.txt'))
-
-
-# def process(contents)
-#   begin
-#     puts "Creating database..."
-#     db = SQLite3::Database.new ":memory:"
-
-#     contents.gsub(/%<(.*?)%>/m) do |match|
-#       command = $1.strip
-
-#       case command
-#       when /^SQL(.*)$/m
-#         $1.split(/;/).select do |x|
-#           x.strip.length > 0
-#         end.each do |sql|
-#           puts "Executing\n#{sql.strip}\n\n"
-#           db.execute(sql)
-#         end
-
-#         ""
-
-#       when /^SELECT-TABLE(.*)$/m
-#         sql = $1
-
-#         puts "Formatting table for\n#{sql.strip}\n\n"
-#         headers, *rows = db.execute2(sql)
-
-#         latexPrefix = "\\begin{tabular}{#{"l" * headers.length}}\n"
-#         latexPostfix= "\\end{tabular}\n"
-
-#         latexHeaders = headers.map { |x| "\\textbf{#{x}}" }.join(" & ") + ' \\\\ \toprule' + "\n"
-#         latexRows = rows.map do |row|
-#           row.map do |value|
-#             if value == nil
-#             then "\\textsc{null}"
-#             else value
-#             end
-#           end.join(" & ")
-#         end.join(" \\\\\n") + "\n"
-
-#         latexPrefix + latexHeaders + latexRows + latexPostfix
-
-#       when /^EXECUTE-SCRIPT(.*)$/m
-#         script = $1.strip
-#         puts "Executing script {#1}"
-
-#         IO.readlines(script).join.split(';').map { |x| x.strip }.select { |x| x.length > 0 }.each do |sql|
-#           puts "Executing\n#{sql}"
-#           db.execute(sql)
-#         end
-
-#         ""
-#       else
-#         puts "Unknown command\n#{command}"
-#         abort
-#       end
-#     end
-
-#   rescue SQLite3::Exception => e
-#     puts "Error\n#{e}"
-#     abort
-#   ensure
-#     db.close
-#   end
-# end
-
-
-# Dir['*.template'].each do |input|
-#   input =~ /^(.*)\.template$/
-#   output = $1
-
-#   puts "PROCESSING #{input} -> #{output}"
-#   contents = IO.readlines(input).join
-#   result = process(preprocess(contents))
-
-#   File.open(output, 'w') do |out|
-#     out.write result
-#   end
-# end
 
 
