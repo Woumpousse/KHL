@@ -1,0 +1,32 @@
+#EXERCISE
+#SETUP
+  CREATE TABLE foo (
+    id INTEGER,
+    col1 CHAR(1),
+    PRIMARY KEY (id)
+  )
+
+  CREATE TABLE bar (
+    id INTEGER,
+    col2 CHAR(1),
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES foo(id)
+  )
+
+  INSERT INTO foo
+  VALUES (1, 'a'),
+         (2, 'b'),
+         (3, 'c')
+
+  INSERT INTO bar
+  VALUES (1, 'x'),
+         (2, 'y'),
+         (3, 'z')
+
+#QUERY
+
+  SELECT id, col1, col2
+  FROM foo
+  INNER JOIN bar USING (id)
+
+#END
