@@ -1,5 +1,8 @@
-#EXERCISE
-#SETUP
+#Exercise
+#Category inner join
+#Difficulty 1
+#Setup
+
   CREATE TABLE foo (
     id INTEGER,
     col1 CHAR(1),
@@ -23,10 +26,10 @@
          (2, 'y'),
          (3, 'z')
 
-#QUERY
+#Query
 
   SELECT id, col1, col2
   FROM foo
   INNER JOIN bar USING (id)
 
-#END
+#End
