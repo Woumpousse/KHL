@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{answers}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pxfonts}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{hyperref}
+
+\geometry{a4paper,total={210mm,297mm},left=10mm,right=10mm,top=10mm,bottom=10mm,bindingoffset=0mm}
+
+\usetikzlibrary{shadows,calc}
+
+\newtheoremstyle{mytheoremstyle} % name
+    {1cm}                        % Space above
+    {1cm}                        % Space below
+    {\rmfamily}                  % Body font
+    {}                           % Indent amount
+    {\scshape}                   % Theorem head font
+    {.}                          % Punctuation after theorem head
+    {.5em}                       % Space after theorem head
+    {}                           % Theorem head spec (can be left empty, meaning 'normal')
+
+\theoremstyle{mytheoremstyle}
+
+
+\Newassociation{solution}{Oplossing}{answers}
+\newtheorem{Exercise}{Oefening}
+
+\newenvironment{exercise}{\begin{center}\begin{framed}\begin{minipage}{.95\textwidth}\begin{Exercise}}{\end{Exercise}\end{minipage}\end{framed}\end{center}}
+
+
+
+\lstset{language=SQL,basicstyle=\tt}
+
+\tikzstyle{dbtablehead}=[]
+\tikzstyle{dbtable}=[draw,drop shadow,fill=white]
+
+
+\newcounter{dbtablecounter}
+\makeatletter
+\long\def\TABLES#1{%
+  \setcounter{dbtablecounter}{0}%
+  \begin{center}%
+    \begin{tikzpicture}%
+    #1%
+    \end{tikzpicture}%
+  \end{center}}
+\long\def\SHOWTABLE#1#2{%
+  \ifnum\value{dbtablecounter}=0%
+  \@FIRSTTABLE{#1}{#2}%
+  \else%
+  \@NEXTTABLE{#1}{#2}%
+  \fi%
+  \stepcounter{dbtablecounter}%
+}
+\long\def\@FIRSTTABLE#1#2{
+  \@FORMATTABLE{(0,0)}{#1}{#2}
+}
+\long\def\@NEXTTABLE#1#2{
+  \addtocounter{dbtablecounter}{-1}
+  \coordinate (pos) at (body\arabic{dbtablecounter}.north east);
+  \addtocounter{dbtablecounter}{1}
+  \@FORMATTABLE{($ (pos) + (1, 0) $)}{#1}{#2}
+}
+\long\def\@FORMATTABLE#1#2#3{
+  \node[anchor=north west,dbtable] (body\arabic{dbtablecounter}) at #1 {#3 };
+  \node[anchor=south,dbtablehead] (head\arabic{dbtablecounter}) at (body\arabic{dbtablecounter}.north) {\textsc{#2}};
+}
+\newcommand{\drawtable}[3]{
+  \node[anchor=north west,dbtable] (body #2) at #1 {#3};
+  \node[anchor=south,dbtablehead] (head #2) at (body #2.north) {\textsc{#2}};
+}
+
+\makeatother
+
+\pagestyle{empty}
+
+
+\begin{document}
+% \Opensolutionfile{answers}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[dbtable] (table) {
+      \begin{tabular}{cc}
+        {\bf id} & {\bf x} \\
+        \toprule
+        1 & a \\
+        2 & b \\
+        3 & c \\
+      \end{tabular}
+    };
+    \node[dbtablehead,anchor=south] at (table.north) {\sc table};
+  \end{tikzpicture}
+  \hspace{5mm}
+  \begin{tikzpicture}
+    \node[dbtable] (table) {
+      \begin{tabular}{cc}
+        {\bf id} & {\bf x} \\
+        \toprule
+        1 & a \\
+        2 & b \\
+        3 & c \\
+      \end{tabular}
+    };
+    \node[dbtablehead,anchor=south] at (table.north) {\sc table};
+  \end{tikzpicture}
+\end{center}
+
+% \Closesolutionfile{answers}
+
+% \clearpage
+% \section{Oplossingen}
+% \input{answers}
+
+\end{document}
