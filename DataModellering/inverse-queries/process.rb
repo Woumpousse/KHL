@@ -1,40 +1,18 @@
-# require 'sqlite3'
+require 'sqlite3'
+require 'logger'
 
-# $db = SQLite3::Database.new ":memory:"
-
-module Database
-  @@db = nil
-
-  def self.initialize
-#    @@db = SQLite3::Database.new ":memory:"
-  end
-
-  def self.execute(sql)
-#    @@db.execute(sql)
-  end
-
-  def self.raw_query(sql)
-#    @@db.execute2(sql)
-  end
-
-  def self.query(sql)
-    headers, *rows = raw_query(sql)
-
-    Table.new(headers, rows)
-  end
-
-  def self.get_table(table_name)
-    query("SELECT * FROM #{table_name}")
-  end
-
-  def self.drop_table(table_name)
-    execute("DROP TABLE #{table_name}")
+class Array
+  def pick(n)
+    (0..length-1).to_a.shuffle[0..n-1].map do |i|
+      self[i]
+    end
   end
 end
 
+
 class String
-  def indent
-    lines.map { |s| "  " + s }.join
+  def indent(n = 2)
+    lines.map { |s| (" " * n) + s }.join
   end
 
   def unindent
@@ -42,81 +20,173 @@ class String
   end
 
   def blocks
-    result = []
-    current = ""
+    result = Hash.new
+    name = nil
+    accumulator = ""
     
-    lines.each do |line|
+    strip.lines.each do |line|
       if line.start_with?("#") then
-        result.push(current)
-        current = line
+        result[name] = accumulator
+        name = line[1..-1].strip
+        accumulator = ""
       else
-        current += line
+        accumulator += line
       end
 
-      result.push(current)
-
-      result
+      result[name] = accumulator
     end
+
+    result
   end
 end
 
-def format_table(headers, rows)
-  colSpecs = "{" + "c" * headers.length + "}"
 
-  formattedHeaders = headers.map do |header|
-    "{\\bf #{header}}"
-  end.join(" & ")
+module Log
+  @@err = Logger.new(STDERR)
 
-  formattedRows = rows.map do |row|
-    row.join(" & ")
+  def self.error( msg )
+    @@err.error( msg )
   end
 
-<<END
+  def self.info( msg )
+    @err.info( msg )
+  end
+end
+
+
+module Database
+  @@db = SQLite3::Database.new ":memory:"
+
+  class DatabaseError < Exception
+
+  end
+
+  def self.execute(sql)
+    begin
+      @@db.execute2(sql)
+    rescue SQLite3::Exception => e
+      Log.error( <<END )
+#{e.to_s.indent}
+while executing
+#{sql.indent}
+END
+      raise DatabaseError
+    end
+  end
+
+  def self.query(sql)
+    headers, *rows = execute(sql)
+
+    Table.new(headers, rows)
+  end
+
+  def self.get_table(table_name)
+    headers, *rows = execute("SELECT * FROM #{table_name}")
+    Table.new(headers, rows)
+  end
+
+  def self.drop_table(table_name)
+    execute("DROP TABLE #{table_name}")
+  end
+
+  class Table
+    def initialize(headers, rows)
+      @headers = headers
+      @rows = rows
+    end
+
+    attr_reader :headers, :rows
+  end
+end
+
+
+module LaTeX
+  def self.format_exercises(exercises)
+    generate_document( exercises.map { |exercise| format_exercise(exercise) }.join("\n") )
+  end
+
+  def self.generate_document(contents)
+    IO.read('template.tex').gsub('%TEMPLATE%') { contents }
+  end
+
+  def self.format_exercise(exercise)
+    formatted_input_tables = format_input_tables(exercise.tables)
+    formatted_query = format_query(exercise.query)
+
+    <<END
+\\begin{exercise}
+#{formatted_input_tables}
+#{formatted_query}
+\\end{exercise}
+END
+  end
+
+  def self.format_query(query)
+    <<END
+\\begin{center}
+  \\begin{minipage}{.8\\textwidth}
+    \\begin{center}
+      \\begin{tabular}{c}
+        \\begin{lstlisting}
+#{query.unindent}
+        \\end{lstlisting}
+     \\end{tabular}
+    \\end{center}
+  \\end{minipage}
+\\end{center}
+END
+  end
+
+  def self.format_input_tables(tables)
+    formatted_tables = tables.map do |table_name, table|
+      format_named_table(table_name, table)
+    end.join
+
+    <<END
+\\begin{center}
+#{formatted_tables.indent}
+\\end{center}
+END
+  end
+
+  def self.format_named_table(table_name, table)
+    formatted_table = format_table(table)
+
+    <<END
+\\namedtable{#{table_name}}{
+#{formatted_table.indent}
+}
+END
+  end
+
+  def self.format_table(table)
+    headers, rows = table.headers, table.rows
+
+    colSpecs = "{" + "c" * headers.length + "}"
+
+    formattedHeaders = headers.map do |header|
+      "{\\bf #{header}}"
+    end.join(" & ")
+
+    formattedRows = rows.map do |row|
+      row.join(" & ") + " \\\\"
+    end.join("\n")
+
+    <<END
 \\begin{tabular}#{colSpecs}
   #{formattedHeaders} \\\\
   \\toprule
-  #{formattedRows}"
+#{formattedRows.indent}
 \\end{tabular}
 END
-end
 
-
-class Table
-  def initialize(headers, rows)
-    @headers = headers
-    @rows = rows
   end
-
-  attr_reader :headers, :rows
 end
-
 
 
 class Exercise
-  # def self.parse(data)
-  #   data =~ /#SETUP(.+)#QUERY(.+)$/m or abort "Could not read\n#{indent(data)}"
-  #   setup, query = $1.strip, unindent($2)
-  #   table_names = setup.scan(/CREATE TABLE (\w+) \(/).map { |x| x[0] } or abort "Could not find tables in\n#{indent(data)}"
-
-  #   setup.split("\n\n").each do |sql|
-  #     Database.execute(sql)
-  #   end
-
-  #   inputTables = table_names.map do |table_name|
-  #     Database.get_table(table_name)
-  #   end
-
-  #   headers, *rows = Database.query(query)
-
-  #   table_names.each do |table_name|
-  #     Database.drop_table(table_name)
-  #   end
-
-  #   Exercise.new(inputTables, query, solutionTable)
-  # end
-
   def self.parse(string)
-    p(string.blocks)
+    Exercise.new(string.blocks)
   end
 
   def initialize(data)
@@ -124,30 +194,73 @@ class Exercise
   end
 
   def method_missing(id)
-    @data[name.id2name]
+    @data[id.id2name]
+  end
+
+  def tables
+    solve unless @tables
+    @tables
+  end
+
+  def solution
+    solve unless @solution
+    @solution
+  end
+
+  private
+  def solve
+    initialize_tables
+    build_solution
+    drop_tables
+  end
+
+  def initialize_tables
+    setup.strip.split("\n\n").each do |sql|
+      Database.execute(sql)
+    end
+
+    @tables = Hash.new
+
+    find_table_names.each do |table_name|
+      @tables[table_name] = Database.get_table(table_name)
+    end
+  end
+
+  def build_solution
+    @solution = Database.query(self.query)
+  end
+
+  def drop_tables
+    find_table_names.each do |table_name|
+      Database.drop_table(table_name)
+    end
+  end
+
+  def find_table_names
+    table_names = setup.scan(/CREATE TABLE (\w+) \(/).map { |x| x[0] } or abort "Could not find tables in\n#{indent(setup)}"
   end
 end
 
 
-
-def process_file(data)
-  data.scan(/#Exercise(.+?)#End/m).map do |exercise|
+def read_exercises(data)
+  exercises = data.scan(/#exercise(.+?)#end/m).map do |exercise|
     exercise[0].strip
-  end.each do |exercise|
-    Exercise.parse(exercise)
+  end.map do |exercise|
+    begin
+      Exercise.parse(exercise)
+    rescue Database::DatabaseError => e
+      p e
+    end
   end
+
+  exercises
 end
 
 
-# process_file(IO.read('inner-joins.txt'))
+$exercises = read_exercises(IO.read('inner-joins.txt'))
+$exercise = $exercises[0]
+
+# p $exercise.tables
+puts (LaTeX.format_exercises $exercises)
 
 
-x = <<END
-#jfklfj jflf
-fjdklf
-fjdkl
-
-#fjlkf fjkl
-END
-
-p(x.blocks.join(" | "))
