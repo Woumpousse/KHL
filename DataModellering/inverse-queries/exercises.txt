@@ -1,0 +1,218 @@
+#exercise
+  @category
+    inner join
+  @difficulty
+    1
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col1 CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    CREATE TABLE bar (
+      id INTEGER,
+      col2 CHAR(1),
+      PRIMARY KEY (id),
+      FOREIGN KEY (id) REFERENCES foo(id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+
+    INSERT INTO bar
+    VALUES (1, 'x'),
+           (2, 'y'),
+           (3, 'z')
+  @query
+    SELECT *
+    FROM foo
+    INNER JOIN bar USING (id)
+
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    1
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col1 CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    CREATE TABLE bar (
+      id INTEGER,
+      col2 CHAR(1),
+      PRIMARY KEY (id),
+      FOREIGN KEY (id) REFERENCES foo(id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+
+    INSERT INTO bar
+    VALUES (1, 'x'),
+           (2, 'y'),
+           (3, 'z')
+  @query
+    SELECT *
+    FROM foo
+    INNER JOIN bar ON foo.id = bar.id
+
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    1
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+  @query
+    SELECT f1.id, f1.col, f2.col
+    FROM foo f1
+    INNER JOIN foo f2 ON f1.id = f2.id
+
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    2
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+  @query
+    SELECT f1.id, f1.col, f2.col
+    FROM foo f1
+    INNER JOIN foo f2 ON f1.id < f2.id
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    2
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+  @query
+    SELECT f1.id, f1.col, f2.col
+    FROM foo f1
+    INNER JOIN foo f2 ON f1.id > f2.id
+
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    2
+  @setup
+    CREATE TABLE foo (
+      id INTEGER,
+      col1 CHAR(1),
+      PRIMARY KEY (id)
+    )
+
+    CREATE TABLE bar (
+      id INTEGER,
+      col2 CHAR(1),
+      PRIMARY KEY (id),
+      FOREIGN KEY (id) REFERENCES foo(id)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 'a'),
+           (2, 'b'),
+           (3, 'c')
+
+    INSERT INTO bar
+    VALUES (1, 'x'),
+           (2, 'y'),
+           (3, 'z'),
+           (4, 'w')
+  @query
+    SELECT foo.id, bar.id, foo.col1, bar.col2
+    FROM foo
+    INNER JOIN bar ON foo.id * foo.id = bar.id
+
+
+#exercise
+  @category
+    inner join
+  @difficulty
+    3
+  @setup
+    CREATE TABLE foo (
+      a INTEGER,
+      b INTEGER,
+      PRIMARY KEY (a)
+    )
+
+    CREATE TABLE bar (
+      b INTEGER,
+      c INTEGER,
+      PRIMARY KEY (b)
+    )
+
+    CREATE TABLE qux (
+      c INTEGER,
+      d INTEGER,
+      PRIMARY KEY (c)
+    )
+
+    INSERT INTO foo
+    VALUES (1, 5),
+           (2, 4),
+           (3, 3),
+           (4, 2),
+           (5, 1)
+
+    INSERT INTO bar
+    VALUES (1, 2),
+           (2, 3),
+           (3, 4),
+           (4, 5),      
+           (5, 1)
+
+    INSERT INTO qux
+    VALUES (1, 2),
+           (2, 4),
+           (3, 1),
+           (4, 3),
+           (5, 5)
+    
+  @query
+    SELECT a, b, c, d
+    FROM foo
+    INNER JOIN bar USING b
+    INNER JOIN qux USING c

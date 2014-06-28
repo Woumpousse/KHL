@@ -26,7 +26,7 @@
 \theoremstyle{mytheoremstyle}
 
 
-\newenvironment{exercise}{\begin{center}\begin{framed}\begin{minipage}{.95\textwidth}}{\end{minipage}\end{framed}\end{center}}
+\newenvironment{exercise}{\begin{center}\begin{framed}\begin{minipage}{.95\linewidth}}{\end{minipage}\end{framed}\end{center}}
 
 
 
@@ -37,6 +37,7 @@
 
 \newcommand{\namedtable}[2]{
   \begin{tikzpicture}
+    \pgfsetbaselinepointlater{\pgfpointanchor{table}{north}}
     \node[dbtable] (table) {
       #2
     };
@@ -44,6 +45,14 @@
   \end{tikzpicture}
 }
 
+\newcounter{QuestionSet}
+\newenvironment{questionset}{
+  \begin{center}
+    \stepcounter{QuestionSet}\textsc{\Large Set \arabic{QuestionSet}}\vskip2mm
+    \begin{minipage}{.99\linewidth}}{
+    \end{minipage}
+  \end{center}\clearpage
+}
 
 \pagestyle{empty}
 

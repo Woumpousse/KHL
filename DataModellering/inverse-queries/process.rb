@@ -1,5 +1,7 @@
-require 'sqlite3'
 require 'logger'
+require './Parser.rb'
+require './Database.rb'
+
 
 class Array
   def pick(n)
@@ -54,55 +56,24 @@ module Log
 end
 
 
-module Database
-  @@db = SQLite3::Database.new ":memory:"
-
-  class DatabaseError < Exception
-
-  end
-
-  def self.execute(sql)
-    begin
-      @@db.execute2(sql)
-    rescue SQLite3::Exception => e
-      Log.error( <<END )
-#{e.to_s.indent}
-while executing
-#{sql.indent}
-END
-      raise DatabaseError
-    end
-  end
-
-  def self.query(sql)
-    headers, *rows = execute(sql)
-
-    Table.new(headers, rows)
-  end
-
-  def self.get_table(table_name)
-    headers, *rows = execute("SELECT * FROM #{table_name}")
-    Table.new(headers, rows)
-  end
-
-  def self.drop_table(table_name)
-    execute("DROP TABLE #{table_name}")
-  end
-
-  class Table
-    def initialize(headers, rows)
-      @headers = headers
-      @rows = rows
-    end
-
-    attr_reader :headers, :rows
-  end
-end
-
 
 module LaTeX
+  def self.format_exercise_sets(exercise_sets)
+    exercise_sets.map do |exercise_set|
+      format_exercise_set(exercise_set)
+    end.join("\n")
+  end
+
+  def self.format_exercise_set(exercises)
+    <<END
+\\begin{questionset}
+#{format_exercises(exercises).indent}
+\\end{questionset}
+END
+  end
+
   def self.format_exercises(exercises)
-    generate_document( exercises.map { |exercise| format_exercise(exercise) }.join("\n") )
+    exercises.map { |exercise| format_exercise(exercise) }.join("\n")
   end
 
   def self.generate_document(contents)
@@ -119,6 +90,10 @@ module LaTeX
 #{formatted_query}
 \\end{exercise}
 END
+  end
+
+  def self.format_solution(table)
+    format_table(table)
   end
 
   def self.format_query(query)
@@ -154,7 +129,7 @@ END
 
     <<END
 \\namedtable{#{table_name}}{
-#{formatted_table.indent}
+#{formatted_table.strip.indent}
 }
 END
   end
@@ -179,22 +154,25 @@ END
 #{formattedRows.indent}
 \\end{tabular}
 END
-
   end
 end
 
 
 class Exercise
-  def self.parse(string)
-    Exercise.new(string.blocks)
+  def self.from_hash(hash)    
+    category = hash['category'].join or raise "Missing category (line #{hash[:line]})"
+    difficulty = hash['difficulty'].join.to_i or raise "Missing difficulty (line #{hash[:line]})"
+    setup = hash['setup'].join("\n") or raise "Missing setup (line #{hash[:line]})"
+    query = hash['query'].join("\n") or raise "Missing query (line #{hash[:line]})"
+
+    Exercise.new(category, difficulty, setup, query)
   end
 
-  def initialize(data)
-    @data = data
-  end
-
-  def method_missing(id)
-    @data[id.id2name]
+  def initialize(category, difficulty, setup, query)
+    @category = category
+    @difficulty = difficulty
+    @setup = setup
+    @query = query
   end
 
   def tables
@@ -206,6 +184,8 @@ class Exercise
     solve unless @solution
     @solution
   end
+
+  attr_reader :category, :difficulty, :setup, :query
 
   private
   def solve
@@ -242,25 +222,31 @@ class Exercise
 end
 
 
-def read_exercises(data)
-  exercises = data.scan(/#exercise(.+?)#end/m).map do |exercise|
-    exercise[0].strip
-  end.map do |exercise|
-    begin
-      Exercise.parse(exercise)
-    rescue Database::DatabaseError => e
-      p e
+module Exercises
+  @@exercises = []
+
+  def self.add(exercise)
+    @@exercises.push(exercise)
+  end
+
+  def self.read_from_string(string)
+    Parser.parse_lines(string.lines).each do |hash|
+      add(Exercise.from_hash(hash))
     end
   end
 
-  exercises
+  def self.read_from_file(filename)
+    read_from_string(IO.read(filename))
+  end
+
+  def self.exercises
+    @@exercises
+  end
 end
 
 
-$exercises = read_exercises(IO.read('inner-joins.txt'))
-$exercise = $exercises[0]
+Exercises.read_from_file('exercises.txt')
 
-# p $exercise.tables
-puts (LaTeX.format_exercises $exercises)
+p Exercises.exercises
 
-
+# puts LaTeX.generate_document(LaTeX.format_exercises( Exercises.exercises ))
