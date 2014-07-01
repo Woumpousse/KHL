@@ -1,0 +1,113 @@
+\documentclass[a4paper,twoside]{article}
+\usepackage{a4wide}
+\usepackage{ifthen}
+\usepackage{fancybox}
+\usepackage{pxfonts}
+\usepackage{microtype}
+\usepackage{listings}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{lipsum}
+
+\makeatletter
+
+\pgfkeys{/khl/code/.cd,
+         frame/.code=\lstset{frame=#1},
+         frame/.default=lines,
+         line numbers/.code=\lstset{numbers=#1},
+         line numbers/.default=left,
+         continue line numbers/.code=\lstset{firstnumber=last},
+         continue line numbers/.value forbidden,
+         language/.code=\lstset{language=#1},
+         language caption/.store in=\languagecaption,
+         java/.style={language=java,language caption=java},
+         csharp/.style={language=csharp,language caption=\csharp},
+         caption/.code=\lstset{caption=#1,captionpos=b},
+         label/.code=\lstset{label=#1},
+         highlight 1/.code=\lstset{moredelim={**[is][{\highlight[#1]}]{@1}{@}}},
+         font size/.code=\lstset{basicstyle={\ttfamily #1}}}
+
+\pgfkeysdef{}{.8\linewidth}
+
+% \newenvironment{highlightenvironment}[1][]%
+% {\begingroup\tikzset{highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}%
+% {\end{lrbox}\@highlightbox{@tempboxa}\endgroup}
+
+% \newenvironment{highlightenvironment}[1][]%
+% {\begingroup\begin{lrbox}{\@tempboxa}}%
+% {\end{lrbox}\fbox{\usebox{\@tempboxa}}\endgroup}
+
+% \newcommand{\highlightbox}[1][]{%
+%   {\begin{highlightenvironment}[#1]\bgroup\aftergroup\highlightenvironment@end}
+% }
+
+% \def\highlightenvironment@end{\end{highlightenvironment}\egroup}
+
+% \newcommand{\@highlightbox}[2][]{%
+%   \tikz[#1]{%
+%     \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd#2}{\ht#2}}%
+%     \pgfusepath{use as bounding box}%
+%     \node[anchor=base west,fill=orange!30,outer sep=0pt,inner xsep=1pt,inner ysep=0pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
+%   }
+% }
+
+
+
+\newenvironment{khl@highlightenv}[1][]{\tikzset{highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}{\end{lrbox}\khl@highlight@present{\@tempboxa}}
+\def\khl@highlightenv@end{\end{khl@highlightenv}\egroup}
+\newcommand{\highlight}[1][]{\begin{khl@highlightenv}[#1]\bgroup\aftergroup\khl@highlightenv@end}
+\newcommand{\khl@highlight@present}[1]{\tikz{\pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd#1}{\ht#1}}\pgfusepath{use as bounding box}\node[highlight,anchor=base west,outer sep=0pt,inner xsep=1pt,inner ysep=1pt]{\usebox{#1}};}}
+
+
+
+\def\csharp{C\ensuremath{^\sharp}}
+
+\lstdefinelanguage{csharp}[sharp]{C}{
+  morekeywords={get,set}
+}
+
+\lstset{escapeinside=\`\`,%
+        basicstyle={\ttfamily\small},%
+        keywordstyle={\ttfamily\bfseries},%
+        commentstyle={\it},%
+        showstringspaces=false}
+
+
+\newcommand{\code}[2][]{
+  {
+    \pgfkeys{/khl/code/.cd,#1,frame=none}
+    \begin{Sbox}
+      \lstinputlisting{#2}
+    \end{Sbox}
+    \pgfkeys{/khl/code/.cd,#1}
+    \begin{center}
+      \begin{minipage}{\wd\@Sbox}
+        \parbox[c][5mm][b]{\linewidth}{\hfill\textsc{\small\languagecaption}}
+        \lstinputlisting{#2}
+      \end{minipage}
+    \end{center}
+  }
+}
+
+
+\newcommand{\onleftside}[1]{\afterpage{\clearpage\ifodd\value{page}\onleftside{#1}\else#1\fi}}
+\newcommand{\onrightside}[1]{\afterpage{\clearpage\ifodd\value{page}#1\else\onrightside{#1}\fi}}
+\newcommand{\onopposingpages}[2]{\onleftside{#1 \onrightside{#2}}}
+
+\makeatother
+
+
+\begin{document}
+
+
+% {\highlight xx}
+
+
+\code[csharp,highlight 1={fill=blue!20},frame]{test.cs}
+
+% \input{properties/properties.tex}
+
+
+\end{document}
