@@ -22,37 +22,17 @@
          continue line numbers/.value forbidden,
          language/.code=\lstset{language=#1},
          language caption/.store in=\languagecaption,
-         java/.style={language=java,language caption=java},
-         csharp/.style={language=csharp,language caption=\csharp},
+         java/.style={language=java,language caption=java,language alignment=right},
+         csharp/.style={language=csharp,language caption=\csharp,language alignment=left},
          caption/.code=\lstset{caption=#1,captionpos=b},
          label/.code=\lstset{label=#1},
-         highlight 1/.code=\lstset{moredelim={**[is][{\highlight[#1]}]{@1}{@}}},
+         highlight/.code=\lstset{moredelim={**[is][{\highlight[#1]}]{@1}{@}}},
+         highlight/.default={gray!20},
+         highlight lines/.code={\lstset{moredelim={**[il][\color{#1}]{@@}}}},
+         highlight lines/.default=red,
+         bars color/.initial=black,
+         language alignment/.initial=left,
          font size/.code=\lstset{basicstyle={\ttfamily #1}}}
-
-\pgfkeysdef{}{.8\linewidth}
-
-% \newenvironment{highlightenvironment}[1][]%
-% {\begingroup\tikzset{highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}%
-% {\end{lrbox}\@highlightbox{@tempboxa}\endgroup}
-
-% \newenvironment{highlightenvironment}[1][]%
-% {\begingroup\begin{lrbox}{\@tempboxa}}%
-% {\end{lrbox}\fbox{\usebox{\@tempboxa}}\endgroup}
-
-% \newcommand{\highlightbox}[1][]{%
-%   {\begin{highlightenvironment}[#1]\bgroup\aftergroup\highlightenvironment@end}
-% }
-
-% \def\highlightenvironment@end{\end{highlightenvironment}\egroup}
-
-% \newcommand{\@highlightbox}[2][]{%
-%   \tikz[#1]{%
-%     \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd#2}{\ht#2}}%
-%     \pgfusepath{use as bounding box}%
-%     \node[anchor=base west,fill=orange!30,outer sep=0pt,inner xsep=1pt,inner ysep=0pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
-%   }
-% }
-
 
 
 \newenvironment{khl@highlightenv}[1][]{\tikzset{highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}{\end{lrbox}\khl@highlight@present{\@tempboxa}}
@@ -61,11 +41,10 @@
 \newcommand{\khl@highlight@present}[1]{\tikz{\pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd#1}{\ht#1}}\pgfusepath{use as bounding box}\node[highlight,anchor=base west,outer sep=0pt,inner xsep=1pt,inner ysep=1pt]{\usebox{#1}};}}
 
 
-
 \def\csharp{C\ensuremath{^\sharp}}
 
 \lstdefinelanguage{csharp}[sharp]{C}{
-  morekeywords={get,set}
+  morekeywords={get,set,value}
 }
 
 \lstset{escapeinside=\`\`,%
@@ -75,25 +54,34 @@
         showstringspaces=false}
 
 
+
+% Puts code in a box that fits perfectly and centers it
 \newcommand{\code}[2][]{
   {
-    \pgfkeys{/khl/code/.cd,#1,frame=none}
+    \pgfkeys{/khl/code/.cd,#1,frame=none,caption=,label=}
     \begin{Sbox}
       \lstinputlisting{#2}
     \end{Sbox}
     \pgfkeys{/khl/code/.cd,#1}
+    \pgfkeys{/khl/code/bars color/.get=\barscolor}
+    \pgfkeys{/khl/code/language alignment/.get=\languagealign}
     \begin{center}
-      \begin{minipage}{\wd\@Sbox}
-        \parbox[c][5mm][b]{\linewidth}{\hfill\textsc{\small\languagecaption}}
-        \lstinputlisting{#2}
-      \end{minipage}
+        \colorbox{\barscolor}{\parbox[t][2mm][b]{\linewidth}{\ifthenelse{\equal{\languagealign}{left}}{}{\hfill}\textsc{\color{white}\small\languagecaption}}}
+        \hspace*{\fill} \begin{minipage}{\wd\@Sbox} \lstinputlisting{#2} \end{minipage} \hspace*{\fill} \\
+        \colorbox{\barscolor}{\parbox[t][2mm][b]{\linewidth}{\hfill}}
     \end{center}
   }
 }
 
 
-\newcommand{\onleftside}[1]{\afterpage{\clearpage\ifodd\value{page}\onleftside{#1}\else#1\fi}}
-\newcommand{\onrightside}[1]{\afterpage{\clearpage\ifodd\value{page}#1\else\onrightside{#1}\fi}}
+
+\newcommand{\onleftside}[1]{
+  \ifodd\value{page}
+    \afterpage{\clearpage\ifodd\value{page}\onleftside{#1}\else\begin{figure}[!t]#1\end{figure}\fi}
+    \else
+    \begin{figure}[!t]#1\end{figure}
+}
+\newcommand{\onrightside}[1]{\afterpage{\clearpage\ifodd\value{page}\begin{figure}[!t]#1\end{figure}\else\onrightside{#1}\fi}}
 \newcommand{\onopposingpages}[2]{\onleftside{#1 \onrightside{#2}}}
 
 \makeatother
@@ -101,13 +89,11 @@
 
 \begin{document}
 
+\tableofcontents
+\clearpage
 
-% {\highlight xx}
 
-
-\code[csharp,highlight 1={fill=blue!20},frame]{test.cs}
-
-% \input{properties/properties.tex}
+\input{properties/properties.tex}
 
 
 \end{document}

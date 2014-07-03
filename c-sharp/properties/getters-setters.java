@@ -20,7 +20,7 @@ public class Book {
     }
 
     public void setPageCount(int pageCount) {
-        if ( !isValidPageCount(pageCount) ) {
+        if ( pageCount < 0 ) {
             throw new IllegalArgumentException();
         }
         else {

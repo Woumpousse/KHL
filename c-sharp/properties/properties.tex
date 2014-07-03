@@ -1,12 +1,38 @@
 \section{Properties}
-A typical coding pattern in Java is shown in~\cref{fig:properties:getters-and-setters}.
-
+A typical coding pattern in Java is shown in~\cref{fig:properties:getters-and-setters}:
+fields are typically kept private but made accessible through
+public getters and setters. These three together (i.e.\ field, getter, setter)
+form a \emph{property}, and thus it can be said that the class {\tt Book} from
+\cref{fig:properties:getters-and-setters} has two properties: {\tt title} and {\tt pageCount}.
+Properties exist only \emph{implicitly} in Java: it is up to the programmer
+to notice that a field and two methods are semantically linked.
 
 \onopposingpages{
-  \code[java,frame,caption=Getters and setters in Java,label=fig:properties:getters-and-setters]{properties/getters-setters.java}
+  \code[java,caption=Getters and setters in Java,label={fig:properties:getters-and-setters}]{properties/getters-setters.java}
 }{
-  \code[csharp,highlight 1,frame,caption={Properties in \csharp},label=fig:properties:getters-and-setters]{properties/properties.cs}
+  \code[csharp,highlight lines,caption={Properties in \csharp},label={fig:properties:getters-and-setters},line numbers]{properties/properties.cs}
 }
+
+However, this approach has some drawbacks.
+Say we are interested in programmatically finding out which properties a class has\footnote{This functionality
+can come in handy to develop e.g.\ GUI libraries.}. In order
+to do this, one needs to enumerate the class's methods and find method pairs
+called {\tt get}X (or {\tt is}X) and {\tt set}X. This requires the method names
+to perfectly follow the convention: one mistake and a property will fail to be recognized.
+The compiler, to the best of our knowledge, does not provide any help in detecting such mistakes.
+
+A language can provide explicit support for properties, such as is the case for \csharp.
+\Cref{fig:properties:getters-and-setters} shows what the syntax looks like:
+\Crefrange{line:properties:Book:Title:start}{line:properties:Book:Title:end} define
+the property {\tt Title}, \crefrange{line:properties:Book:PageCount:start}{line:properties:Book:PageCount:end}
+do the same for {\tt PageCount}. It is possible to read and write a property's value as if
+it were a field, as shown in \cref{fig:properties:property-usage}:
+\cref{line:properties:usage:reading} reads the property and executes \cref{line:properties:Book:PageCounter:getter} (\cref{fig:properties:getters-and-setters}) behind the scenes,
+whereas the assignment on \cref{line:properties:usage:writing} is actually a method call which executes
+\crefrange{line:properties:Book:PageCounter:setter:start}{line:properties:Book:PageCounter:setter:end} with {\tt value} bound to {\tt 500}.
+This means that if we were to assign {\tt -1} to {\tt PageCount}, an exception would be thrown on \cref{line:properties:Book:PageCounter:exception}.
+
+\code[csharp,line numbers,caption=Reading and Writing Properties,label={fig:properties:property-usage}]{properties/properties-usage.cs}
 
 
 
