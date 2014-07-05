@@ -75,4 +75,14 @@ module Types
       end
     end
   end
+
+  def Types.one_of(*values)
+    names = values.map do |value|
+      value.to_s
+    end.join("|")
+
+    predicate(names) do |object|
+      values.member?(object)
+    end
+  end
 end

@@ -1,5 +1,13 @@
 require './Types.rb'
 
+module Enumerable
+  def intersperse(item)
+    map do |elt|
+      [ item, elt ]
+    end.flatten(1).drop(1)
+  end
+end
+
 class String
   def unindent
     indentation = lines.map do |line|
@@ -16,9 +24,10 @@ end
 module Questions
 
   class Question
-    def initialize()
+    protected
+    def format_toledo(prefix, fields)
+      ([prefix] + fields).join("\t")
     end
-
   end
 
 
@@ -39,7 +48,7 @@ module Questions
     end
 
     def toledo
-      ([ TOLEDO_PREFIX, text ] + @answers).join("\t")
+      format_toledo(TOLEDO_PREFIX, [text] + @answers)
     end
 
     def to_s
@@ -61,6 +70,8 @@ module Questions
   # MultipleFillInQuestion
   #
   class MultipleFillInQuestion < Question
+    TOLEDO_PREFIX = 'FIB_PLUS'
+
     def initialize(text, pairs)
       Types.check(binding, {
                     'text' => String,
@@ -71,9 +82,9 @@ module Questions
     end
 
     def toledo
-      pairs = @pairs.map { |pair| pair.join("\t") }.join("\t\t")
+      answers = @pairs.intersperse([""]).flatten
 
-      "FIB_PLUS\t#{text}\t#{pairs}"
+      format_toledo(TOLEDO_PREFIX, [text] + answers)
     end
 
     def to_s
@@ -95,10 +106,12 @@ module Questions
   # MultipleAnswerQuestion
   #
   class MultipleAnswerQuestion < Question
+    TOLEDO_PREFIX = 'MA'
+
     def initialize(text, pairs)
       Types.check(binding, {
                     'text' => String,
-                    'pairs' => [ [String,Bool] ]
+                    'pairs' => [ [String, Types.one_of(true, false)] ]
                   } )
 
       @text, @pairs = text, pairs
@@ -106,11 +119,10 @@ module Questions
 
     def toledo
       pairs = @pairs.map do |answer, truth|
-        t = if truth then "correct" else "incorrect" end
-        "#{answer}\t#{t}"
-      end.join("\t")
+        [ answer, if truth then "correct" else "incorrect" end ]
+      end.flatten(1)
 
-      "MA\t#{text}\t#{pairs}"
+      format_toledo(TOLEDO_PREFIX, [ text ] + pairs)
     end
 
     def to_s
@@ -129,5 +141,6 @@ module Questions
 end
 
 include Questions
-q = MultipleFillInQuestion.new("x", [ ["T1", "5"] ])
-puts q
+q1 = MultipleFillInQuestion.new("x", [ ["T1", "5"], ["T2", "8"] ])
+q2 = MultipleAnswerQuestion.new("?", [ ["x", true], ["y", false] ])
+puts q2.toledo
