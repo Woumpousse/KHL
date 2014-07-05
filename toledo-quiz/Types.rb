@@ -12,6 +12,10 @@ module Types
       @code.call(object)
     end
 
+    def to_s
+      @name
+    end
+
     attr_reader :name
   end
 
@@ -24,8 +28,11 @@ module Types
     when Class
       type(t)
     when Array
-      raise "Must contain exactly one element" unless t.length == 1
-      seq_of( smart_predicate( t[0] ) )
+      if t.size == 1 then
+        seq_of( smart_predicate( t[0] ) )
+      else
+        tuple_of( t.map { |x| smart_predicate(x) } )
+      end
     else
       t
     end
@@ -52,7 +59,20 @@ module Types
 
   def Types.seq_of(predicate)
     predicate("[#{predicate.name}]") do |object|
-      object.methods.member?(:all?) and object.all? { |item| predicate(item) }
+      object.methods.member?(:all?) and object.all? { |item| predicate.call(item) }
+    end
+  end
+
+  def Types.tuple_of(predicates)
+    names = predicates.map { |predicate| predicate.name }.join(",")
+
+    predicate("[#{names}]") do |tuple|
+      tuple.methods.member?(:[]) and tuple.length == predicates.length and (0...predicates.length).all? do |idx|
+        predicate = predicates[idx]
+        object = tuple[idx]
+
+        predicate.call( object )
+      end
     end
   end
 end

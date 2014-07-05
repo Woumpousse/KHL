@@ -1,8 +1,33 @@
 require './Types.rb'
 
+class String
+  def unindent
+    indentation = lines.map do |line|
+      line =~ /^( *)/
+      $1.length
+    end.min
+
+    lines.map do |line|
+      line[indentation..-1]
+    end.join
+  end
+end
+
 module Questions
 
-  class FillInQuestion
+  class Question
+    def initialize()
+    end
+
+  end
+
+
+  #
+  # FillInQuestion
+  #
+  class FillInQuestion < Question
+    TOLEDO_PREFIX = 'FIB'
+
     def initialize(text, answers)
       Types.check(binding, {
                     'text' => String,
@@ -13,57 +38,73 @@ module Questions
       @text, @answers = text, answers
     end
 
-    def toledo(text)
-      ([ "FIB", text ] + @answers).join("\t")
+    def toledo
+      ([ TOLEDO_PREFIX, text ] + @answers).join("\t")
     end
 
     def to_s
-      <<END
-FillInQuestion
-Text:
-#{@text}
-Answers:
-#{@answers.join("\n")}
----
-END
+      <<-END.unindent
+      FillInQuestion
+        Text:
+        #{@text}
+        Answers:
+        #{@answers.join("\n")}
+      END
     end
 
     attr_reader :text, :answers
   end
 
 
-  class MultipleFillInQuestion
+
+  #
+  # MultipleFillInQuestion
+  #
+  class MultipleFillInQuestion < Question
     def initialize(text, pairs)
+      Types.check(binding, {
+                    'text' => String,
+                    'pairs' => [ [String,String] ]
+                  } )
+
       @text, @pairs = text, pairs
     end
 
-    def toledo(text)
+    def toledo
       pairs = @pairs.map { |pair| pair.join("\t") }.join("\t\t")
 
       "FIB_PLUS\t#{text}\t#{pairs}"
     end
 
     def to_s
-      <<END
-MultipleFillInQuestion
-Text:
-#{@text}
-Question/Answer Pairs:
-#{@pairs.map {|x| x.join(":")}.join("\n")}
----
-END
+      <<-END.unindent
+      MultipleFillInQuestion
+        Text:
+        #{@text}
+        Question/Answer Pairs:
+        #{@pairs.map {|x| x.join(":")}.join("\n")}
+      END
     end
 
     attr_reader :text, :answers
   end
 
 
-  class MultipleAnswerQuestion
+
+  #
+  # MultipleAnswerQuestion
+  #
+  class MultipleAnswerQuestion < Question
     def initialize(text, pairs)
+      Types.check(binding, {
+                    'text' => String,
+                    'pairs' => [ [String,Bool] ]
+                  } )
+
       @text, @pairs = text, pairs
     end
 
-    def toledo(text)
+    def toledo
       pairs = @pairs.map do |answer, truth|
         t = if truth then "correct" else "incorrect" end
         "#{answer}\t#{t}"
@@ -73,14 +114,13 @@ END
     end
 
     def to_s
-      <<END
-MultipleAnswerQuestion
-Text:
-#{@text}
-Question/Answer Pairs:
-#{@pairs.map {|x| x.join(":")}.join("\n")}
----
-END
+      <<-END.unindent
+      MultipleAnswerQuestion
+        Text:
+        #{@text}
+        Question/Answer Pairs:
+        #{@pairs.map {|x| x.join(":")}.join("\n")}
+      END
     end
 
     attr_reader :text, :answers
@@ -88,4 +128,6 @@ END
 
 end
 
-
+include Questions
+q = MultipleFillInQuestion.new("x", [ ["T1", "5"] ])
+puts q
