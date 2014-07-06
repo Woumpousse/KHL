@@ -1,0 +1,24 @@
+% Figuur domein en bereik
+\begin{tikzpicture}[thick]
+\draw \vertellipl node [above=2.3cm, left] {$A$};
+\draw \vertellipr node [above=2.3cm, left] {$B$};
+% linkse elementen
+\draw[fill] (0,1.3) \bol node [above] {1};
+\draw[fill] (0,0.4) \bol node [above] {2};
+\draw[fill] (0,-0.5) \bol node [above] {3};
+\draw[fill] (0,-1.4) \bol node [above] {4};
+% rechtse elementen
+\draw[fill] (3,1) \bol node [above] {a};
+\draw[fill] (3,0) \bol node [above] {b};
+\draw[fill] (3,-1) \bol node [above] {c};
+% pijlen
+\begin{scope}[decoration={
+    markings,
+    mark=at position 0.5 with {\arrow{>}}}
+    ] 
+    \draw[postaction={decorate}] (0,1.3) to (3,1);
+    \draw[postaction={decorate}] (0,1.3) to (3,0);
+    \draw[postaction={decorate}] (0,0.4) to (3,0);
+    \draw[postaction={decorate}] (0,-1.4) to (3,0);
+\end{scope}
+\end{tikzpicture}

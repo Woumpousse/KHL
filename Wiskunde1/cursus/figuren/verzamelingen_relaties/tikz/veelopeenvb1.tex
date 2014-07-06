@@ -1,0 +1,31 @@
+% Figuur veel-op-een relatie voorbeeld 1 (y=x^2)
+\begin{tikzpicture}[thick]
+\draw \grvertellipl node [above=3.3cm, left] {$A$};
+\draw \grvertellipr node [above=3.3cm, left] {$B$};
+% linkse elementen
+\draw[fill] (0,2.2) \bol node [above] {$-3$};
+\draw[fill] (0,1.3) \bol node [above] {$-2$};
+\draw[fill] (0,0.4) \bol node [above] {$-1$};
+\draw[fill] (0,-0.5) \bol node [above] {$1$};
+\draw[fill] (0,-1.4) \bol node [above] {$2$};
+\draw[fill] (0,-2.3) \bol node [above] {$3$};
+% rechtse elementen
+\draw[fill] (4,2.3) \bol node [above] {$1$};
+\draw[fill] (4,1.4) \bol node [above] {$2$};
+\draw[fill] (4,0.5) \bol node [above] {$4$};
+\draw[fill] (4,-0.4) \bol node [above] {$5$};
+\draw[fill] (4,-1.3) \bol node [above] {$8$};
+\draw[fill] (4,-2.2) \bol node [above] {$9$};
+% pijlen
+\begin{scope}[decoration={
+    markings,
+    mark=at position 0.5 with {\arrow{>}}}
+    ] 
+    \draw[postaction={decorate}] (0,2.2) to (4,-2.2);
+    \draw[postaction={decorate}] (0,1.3) to (4,0.5);
+    \draw[postaction={decorate}] (0,0.4) to (4,2.3);
+    \draw[postaction={decorate}] (0,-0.5) to (4,2.3);
+    \draw[postaction={decorate}] (0,-1.4) to (4,0.5);
+    \draw[postaction={decorate}] (0,-2.3) to (4,-2.2);
+\end{scope}
+\end{tikzpicture}

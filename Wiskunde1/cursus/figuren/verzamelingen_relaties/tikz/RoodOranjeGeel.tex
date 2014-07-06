@@ -1,0 +1,23 @@
+% Figuur geen veel-op-een relatie
+\begin{tikzpicture}[thick]
+\draw \grvertellipl node [above=3.3cm, left] {$A$};
+\draw \grvertellipr node [above=3.3cm, left] {$B$};
+% rechtse elementen
+\draw[fill] (4,2) \bol node [above] {a};
+\draw[fill] (4,0) \bol node [above] {g};
+\draw[fill] (4,-2) \bol node [above] {r};
+% linkse elementen
+\draw[fill] (0,2) \bol node [above] {rood};
+\draw[fill] (0,0) \bol node [above] {oranje};
+\draw[fill] (0,-2) \bol node [above] {geel};
+% pijlen
+\begin{scope}[decoration={
+    markings,
+    mark=at position 0.5 with {\arrow{>}}}
+    ] 
+    \draw[postaction={decorate}] (0,2) to (4,-2);
+    \draw[postaction={decorate}] (0,0) to (4,2);
+    \draw[postaction={decorate}] (0,0) to (4,-2);
+    \draw[postaction={decorate}] (0,-2) to (4,0);
+\end{scope}
+\end{tikzpicture}

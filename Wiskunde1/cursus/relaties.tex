@@ -1,0 +1,806 @@
+%%%%%%%%%%%%%%%%
+% 5 sept 2013 [Jan] opmerkingen Greetje in theorie aangepast, stukje surjectie enz. toegev.
+% 5 sept 2013 [Greetje] Oefeningen wat bijgewerkt
+% sept 2013 [Jan]: OOD door OPO vervangen.
+%
+% 28/06/13 [Greetje] Oefeningen toegevoegd
+% to do: injectie, bijectie surject herwerken
+%%%%%%%%%%%%%%%%
+ 
+ 
+\chapter{Relaties}
+\label{chap:relatie}
+\begin{quote}
+\textit{Ha, nu gaat het leuk worden! dacht Alice. Ik ben blij dat ze raadsels gaan opgeven -- `Ik geloof dat ik het weet,' voegde ze er hardop aan toe.}
+
+\textit{`Bedoel je dat je denkt dat je wel achter het antwoord kunt komen?' zei de Maartse Haas.}
+
+\textit{`Precies, ja,' zei Alice.}
+
+\textit{`Zeg dan meteen wat je bedoelt,' ging de Maartse Haas voort.}
+
+\textit{`Dat doe ik toch,' gaf Alice haastig ten antwoord, `tenminste -- tenminste, ik bedoel wat ik zeg -- dat komt op hetzelfde neer, hoor.'}
+
+\textit{`Helemaal niet hetzelfde! zei de Hoedenmaker. `Dan zou je met evenveel recht kunnen zeggen dat ``Ik zie wat ik eet'' op hetzelfde neerkomt als ``Ik eet wat ik zie''!'}
+
+          Uit `Alice in wonderland' -- Lewis Carroll
+\end{quote}
+
+
+
+\newpage
+ \section{Definitie}
+ \label{sec:defRelatie}
+Het voorbeeld van de verzameling van postcodes en bijhorend inwonersaantal (sectie~\ref{sec:prodverz} op pagina~\pageref{pg:postcodes}), is een deelverzameling van de productverzameling  $\mathbb{N}\times\mathbb{N}$. Zo'n deelverzameling van een productverzameling noemen we een \emph{relatie}. 
+
+
+Voorbeelden:
+\begin{itemize}
+\item $Af=\{1,2,3\}$ en $B=\{\text{a}, \text{b}\}$. De verzameling $\{(1, \text{a}), (2,\text{a}),(2,\text{b}),(3,\text{b)}\}$ is een relatie van de verzameling $A$ naar\footnote{In plaats van het woord `naar' mag je ook `op' gebruiken en dus spreken over `de relatie van de verzameling $A$ op de verzameling $B$'.} de verzameling $B$.
+\item $A=\{0,1\}$, $B=\{\mathrm{a},\mathrm{b}\}$, $C=\{8,9\}$. De verzameling \\
+$\{(0,\mathrm{a},8), (0,\mathrm{a},9), (1,\mathrm{a},8) \}$ is een relatie op de verzamelingen $A$, $B$ en $C$.
+\item $A=\mathbb{N}_0$, $B$ de verzameling van strings met lengte 20 (spatie toegelaten), $C=\{10,11,12,\dots,90\}$. Dan kan je met een relatie op de verzamelingen $A, B, C$ en $B$ de leden van de zwemclub omschrijven (inschrijvingsnummer, naam, leeftijd, woonplaats).
+\end{itemize}
+
+Het concept van relatie is de basis van de relationele databank, onderwerp van het OPO `Technieken van datamodellering'. De gegevens van \'e\'en rij worden gezien als een geordend $n$-tal. Alle rijen samen vormen een deelverzameling van de productverzameling van de  datatypes van de verschillende kolommen.
+
+Als een relatie paren bevat, spreken we van een \emph{binaire relatie}, bijvoorbeeld
+\begin{itemize}
+\item $A=\{\mathrm{Jan},\mathrm{Pol},\mathrm{Anne}\}$ en $B=\mathbb{N}$. De verzameling\\ $\{(\mathrm{Jan},10),(\mathrm{Pol},6),(\mathrm{Anne},11) \}$ is een binaire relatie. Deze relatie is een deelverzameling van de productverzameling $A\times B$.
+\end{itemize}
+We spreken in zo'n geval ook over een relatie van $A$ \emph{naar} $B$. De elementen van $A$ worden \emph{afgebeeld} op de elementen van $B$. De verzameling $A$ is de \emph{bronverzameling}, de verzameling $B$ de \emph{doelverzameling}. Als $(a,b)$ element is van de relatie, zeggen we dat $b$ het \emph{beeld} is van $a$.
+
+De idee van `een relatie van $A$ naar $B$' en `het punt $a$ wordt afgebeeld op $b$' breiden we uit naar relaties op meer dan twee verzamelingen. Voorbeelden:
+\begin{itemize}
+\item De relatie $U=\{(1,2,3),(2,3,5),(4,5,9), (5,6,11),\dots\} $ is een deelverzameling van de productverzameling $\mathbb{N}\times\mathbb{N}\times\mathbb{N}$. Het derde getal van het drietal $(a,b,c)$ is gelijk aan de som van de twee voorgaande getallen: $c=a+b$. De getallen $a$ en $b$ worden afgebeeld op $c$.
+\item $V=\{(\text{rood},\text{blauw},\text{magenta}), (\text{rood},\text{groen},\text{geel}), (\text{groen},\text{blauw},\text{cyaan}),\dots\}$ is een deelverzameling van $A\times A\times B$ waarbij $A$ de verzameling van primaire kleuren is en $B$ de verzameling van secundaire kleuren: twee primaire kleuren vormen een secundaire kleur. De relatie $V$ beeldt twee primaire kleuren af op een secundaire kleur.
+\end{itemize}
+
+We geven tenslotte nog enkele voorbeelden van relaties, gegrepen uit het dagelijkse leven:
+\begin{itemize}
+\item de relatie die de     snelheid van een auto afbeeldt op zijn verbruik;
+\item de relatie die de evolutie van de mazoutprijs weergeeft in functie van de tijd;
+\item de relatie die  de  kostprijs van een online  bestelling van foto's (verzendingskosten inbegrepen) toont naargelang het aantal bestelde foto's.
+\end{itemize}
+
+\section{Domein en bereik}
+\label{sec:domeinBereik}
+Gegeven de binaire relatie $U=\{({a},{b})|{a}\in A \mathrm{~ en~} {b} \in B\}\subset A \times B$. 
+Het \emph{domein} van de relatie $U$ is de verzameling van de elementen ${a}$ waarvoor er een $b\in B$ 
+bestaat zodat het paar $({a},{b})\in U$. We noteren het domein van $U$ met $\text{Dom}(U)$.
+
+Het \emph{bereik} van de relatie $U$ is de verzameling van de elementen 
+${b}$ waarvoor er een $a\in A$ bestaat zodat het paar $({a},{b})\in U$. Het bereik wordt ook vaak het \emph{beeld} van $U$ genoemd. Notatie: $\text{Ber}(U)$ of $\text{Bld}(U)$.
+
+Voorbeeld: voor de relatie $U=\{(1,\mathrm{a}),(1,\mathrm{b}),(2,\mathrm{b}),(4,\mathrm{b}) \}$ van $A=\{1,2,3,4\}$ op $B=\{\mathrm{a},\mathrm{b},\mathrm{c} \}$ is 
+\begin{itemize}
+\item het domein gelijk aan $\text{Dom}(U)=\{1,2,4\}$. Dit zijn de elementen van $\mathbf{A}$ waar een pijl \textbf{vertrekt} (figuur~\ref{fig:dombereik}).
+\item het bereik gelijk aan $\text{Ber}(U)=\{ \mathrm{a},\mathrm{b}\}$. Dit zijn de elementen van $\mathbf{B}$ waar een pijl \textbf{aankomt} (figuur~\ref{fig:dombereik}).
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\input{figuren/verzamelingen_relaties/tikz/domeinbereik}
+\caption{Relatie: domein = \{1,2,4\} en bereik = \{a,b\}}
+\label{fig:dombereik}
+\end{figure}
+
+
+\section{Soorten relaties}
+\label{subsec:soortenrelaties}
+
+In het voorgaande stelden we geen voorwaarden aan het aantal vertrekkende (in bronverzameling) en toekomende pijlen (in doelverzameling) en noemden we alles `relatie'. Je kan echter wel een aantal bijzondere relaties onderscheiden. 
+
+Als we ons richten naar de \emph{bron}verzameling kunnen we een onderscheid maken tussen afbeeldingen en functies. Verleggen we de focus naar de \emph{doel}ver\-za\-me\-ling, dan kunnen we de begrippen injectief, surjectief en bijectief definiëren.
+
+\subsection{Functie, afbeelding}
+\label{subsec:functies}
+Gegeven twee verzamelingen $A$ en $B$ en een relatie van $A$ op $B$. We bekijken enkel de elementen uit de bronverzameling $A$. Je kan nu drie gevallen onderscheiden:
+\begin{enumerate}
+\item Als elk element van $A$ \emph{hoogstens} één beeld heeft, noemen we de relatie een \textbf{functie}. In de pijlenvoorstelling vertrekt uit elk element van $A$ ten hoogste één pijl.
+
+\item Als elk element van $A$ \emph{juist} één beeld heeft, noemen we deze speciale relatie een \textbf{afbeelding}. In de pijlenvoorstelling vertrekt uit elk element van $A$ juist één pijl. Elke afbeelding is dus een functie. Geldt het omgekeerde ook: is elke functie ook een afbeelding\footnote{Nee, natuurlijk! Leg zelf uit waarom.}?
+
+
+\item Een relatie die niet aan één van beide bovenstaande voorwaarden voldoet (er zijn elementen in $A$ die meerdere beelden hebben en dus vertrekken er uit die elementen meer dan één pijl) is een gewone relatie.
+\end{enumerate}
+
+\subsection{Surjectief, injectief, bijectief}
+\label{subsec:jectief}
+Gegeven twee verzamelingen $A$ en $B$ en een relatie van $A$ op $B$. We bekijken dit keer enkel de elementen uit de doelverzameling $B$. Je kan nu volgende gevallen onderscheiden:
+\begin{enumerate}
+\item Als elk element van de doelverzameling $B$ het beeld is van \emph{minstens} één element van $A$ noemen we de relatie \textbf{surjectief}\footnote{Een mogelijk trucje om dit te onthouden is de betekenis van het Franse woord `sur' (op). Elk element van $B$ krijgt minstens één pijl en dus is het bereik van de relatie de doelverzameling $B$ zelf. Het is alsof het bereik \emph{op} de doelverzameling valt en die helemaal bedekt.}. In de pijlenvoorstelling komt in elk element van $B$ minstens één pijl toe.
+
+\item Als elk element van $B$ het beeld is van \emph{hoogstens} één element van $A$ spreken we van een \textbf{injectieve} relatie. In elk element van $B$ komt hoogstens één pijl toe. Het is dus mogelijk dat er elementen in $B$ zijn waar geen pijl toekomt.
+
+\item Combineer bovenstaande eisen en je krijgt een \textbf{bijectieve} relatie: elk element uit $B$ is het beeld van juist één element uit $A$. In elk element van $B$ komt juist één pijl toe. Een bijectieve relatie is zowel surjectief als injectief.
+\end{enumerate}
+
+\subsection{Surjectie, injectie, bijectie}
+Uit het aantal vertrekkende pijlen van de elementen van de bronverzameling (sectie \ref{subsec:functies}) kan je opmaken of de relatie een functie of afbeelding (of geen van beiden) is. In sectie \ref{subsec:jectief} definieerden we de begrippen surjectief, injectief en bijectief die iets vertellen over het aantal aankomende pijlen in de elementen van de doelverzameling.
+
+Als de relatie een afbeelding is, kom je tot volgende veel gebruikte termen:
+\begin{description}
+\item[surjectie:] een surjectieve afbeelding
+\item[injectie:] een injectieve afbeelding
+\item[bijectie:] een bijectieve afbeelding
+\end{description}
+
+
+\subsection{Voorbeelden}
+\subsubsection*{Voorbeeld 1}
+Gegeven de verzameling $B$ van alle wachtwoorden $y_i$ die in G\&T gebruikt worden om in te loggen op de PC's en $A$ de verzameling van alle gebruikersaccounts $x_i$. Beschrijf de relatie ``Account \ldots \ heeft als wachtwoord \ldots ''.
+
+Elke account heeft juist één wachtwoord en dus is deze relatie een afbeelding: uit elk element van $A$ (elke account) vertrekt juist één pijl.
+Sommige mensen hebben misschien toevallig hetzelfde wachtwoord gekozen voor hun account maar elk wachtwoord wordt zeker één keer gebruikt. Het is dus mogelijk dat er meerdere pijlen toekomen in elementen van $B$. Dit voldoet aan de voorwaarde voor een surjectieve relatie.
+
+We vatten samen: deze relatie is een surjectieve afbeelding, of kortweg `surjectie'. In databankenterminologie noemt men dit een `veel-op-één relatie'.
+\begin{figure}[htbp]
+\centering
+    \input{figuren/verzamelingen_relaties/tikz/veelopeen}
+\caption{Een surjectieve afbeelding}
+\label{fig:surjectie}
+\end{figure}
+
+
+\subsubsection*{Voorbeeld 2}
+Als $A=\{\mathrm{rood},\mathrm{oranje},\mathrm{geel}\}$ en $B=\{\mathrm{a},\mathrm{g},\mathrm{r}\}$, wat is dan de relatie $U=\{({x},{y})\mid \mathrm{kleur~}x\mathrm{~bevat~de~letter~}y\}$?
+
+Figuur \ref{fig:surjectieverel} toont een grafische weergave van deze relatie. Uit het element oranje vertrekken twee pijlen. De relatie is dus geen functie of afbeelding. Als je naar de doelverzameling kijkt, merk je dat er in elk element minstens één pijl toekomt. De relatie is dus \emph{surjectief}, maar omdat het geen afbeelding is mag je dit geen  `surjectie' noemen.
+\begin{figure}[htbp]
+\centering
+    \input{figuren/verzamelingen_relaties/tikz/RoodOranjeGeel}
+\caption{Een surjectieve relatie}
+\label{fig:surjectieverel}
+\end{figure}
+
+
+\subsubsection*{Voorbeeld 3}
+Beschouw als bronverzameling de pasfoto's die genomen worden bij de inschrijvingen aan de KHLeuven. De doelverzameling is alle studentennummers. Welke relatie wordt voorgesteld door ``\ldots \ is de pasfoto die hoort bij student \ldots ''.
+
+Bij elke pasfoto hoort juist één nummer en dus is deze relatie een afbeelding. Omgekeerd is elk studentennummer ook het beeld van één foto en dus is deze afbeelding ook bijectief. Een bijectieve afbeelding noemt men kortweg een `bijectie'. In databankentaal spreekt men over een `één-op-één relatie'.
+
+\subsubsection*{Voorbeeld 4}
+Wat voor een relatie is $U$?
+\[
+U=\left\{(x,y)\mid x,y\in\mathbb{R} \mathrm{~en~} y=x^2\right\}.
+\]
+
+Elke $x$ uit de bronverzameling ($\mathbb{R}$) heeft een beeld, dus dit is een afbeelding (functie). Aan de kant van de doelverzameling merk je dat er $y$-waarden zijn die geen beeld kunnen zijn van elementen $x$, zoals negatieve getallen: $-1$ kan nooit het kwadraat zijn van een reëel getal. Hieruit volgt dat deze afbeelding niet surjectief is. Anderzijds zijn er $y$-waarden die het beeld zijn van twee verschillende $x$-waarden: $4$ is zowel het beeld van $2$ als van $-2$. De afbeelding is dus ook niet injectief. We besluiten: de relatie $U$ is een afbeelding.
+
+\subsubsection*{Voorbeeld 5}
+We passen voorbeeld 4 lichtjes aan en bekijken de relatie $V$:
+\[
+V=\left\{(x,y)\mid x\in\mathbb{R}, y\in\mathbb{R}^+ \mathrm{~en~} y=x^2\right\}.
+\]
+
+Wat is het verschil tussen $U$ uit het vorig voorbeeld en deze relatie $V$? De doelverzameling wordt beperkt tot de positieve reële getallen ($\mathbb{R}^+$). Deze keuze heeft echter een effect op de relatie.
+
+We kunnen de uitleg uit vorig voorbeeld hernemen om te besluiten dat $V$ een afbeelding is. Door de beperking van de doelverzameling tot $\mathbb{R}^+$ is elke $y$ nu het beeld van minstens één $x$. Deze afbeelding is dus surjectief (kortweg `surjectie').
+
+\subsubsection*{Voorbeeld 6}
+Laten we iets verder gaan in het aanpassen van de vorige relatie tot:
+\[
+W=\left\{(x,y)\mid x\in\mathbb{R}^+, y\in\mathbb{R} \mathrm{~en~} y=x^2\right\}.
+\]
+
+Elke $x$ heeft juist één beeld, dus deze relatie is een afbeelding. Wat de doelverzameling betreft: elke $y$ is het beeld van juist één $x$ ($4$ is het kwadraat van $2$) of is geen beeld ($-1$ kan nooit het kwadraat zijn van een positief reëel getal). Dit voldoet aan de definitie van injectiviteit. Bijgevolg is $W$ een injectieve afbeelding, of kortweg `injectie'.
+
+Denk bij wijze van oefening eens na hoe je de bron- en of doelverzameling moet aanpassen om van deze relatie een bijectie te maken?
+
+
+
+
+
+
+
+
+%\section{Soorten relaties}
+%\label{subsec:soortenrelaties}
+%
+%Binnen relationele databanken en ERD, het bijhorende entity-relationship 
+%diagram worden relaties  onderscheiden naargelang \'e\'en of meer 
+%elementen uit de bronverzameling op \'e\'en of meer elementen uit de 
+%beeldverzameling worden afgebeeld. In wat volgt wordt er enkel gesproken 
+%over binaire relaties. De idee\"en kunnen uitgebreid worden naar andere 
+%relaties.
+%
+%\subsection{Veel-op-veel relaties}
+%Bij een veel-op-veel relatie (in de notatie van ERD: $N..  N$) 
+%wordt elk element uit de bronverzameling  op \'e\'en of meerdere 
+%elementen uit de beeldverzameling afgebeeld (figuur~\ref{fig:veelopveelvb}). Ieder element uit de beeldverzameling is één of meerdere keren beeld van een element uit de bronverzameling. Het kan zijn dat elementen uit de bronverzameling geen beeld hebben en dat elementen uit de beeldverzameling geen beeld zijn. 
+%Enkele voorbeelden:
+%\begin{itemize}
+%\item de relatie `leverancier levert biermerk': iedere leverancier levert meerdere biermerken en ieder biermerk wordt door meerdere leveranciers geleverd
+%\item de relatie `lector geeft les aan student van KHLeuven'
+%\end{itemize}
+%
+%\begin{figure}[htbp]
+%\centering
+%    \input{figuren/verzamelingen_relaties/tikz/veelopveelvb1}
+%\caption{Veel-op-veel relatie}
+%\label{fig:veelopveelvb}
+%\end{figure}
+%
+%
+%\subsection{E\'en-op-veel relaties}
+%Bij een \'e\'en-op-veel relatie ($1..N$) heeft ieder element van de bronverzameling  \'e\'en of meerdere beelden (figuur~\ref{fig:eenopveel}). Een element van de beeldverzameling is maar beeld van \'e\'en element van de bronverzameling.
+%
+% Enkele voorbeelden:
+%\begin{itemize}
+%\item de relatie `leerling is eigenaar van e-mail adres'
+%\item de relatie `vrouw is moeder van kind'
+%\end{itemize}
+%\begin{figure}[htbp]
+%\centering
+%\input{figuren/verzamelingen_relaties/tikz/eenopveelvb1}
+%\caption{E\'en-op-veel relatie}
+%\label{fig:eenopveel}
+%\end{figure}
+%
+%Als niet ieder element van de bronverzameling een beeld heeft, spreken we van de \emph{optionele} \'e\'en-op-veel relatie ($0..N$). Zo kan een vrouw ook geen kinderen hebben.
+%
+%
+%\subsection{Functies  en veel-op-\'e\'en relaties}
+%\label{subsec:functies}
+%In de hierboven beschreven relaties kan een element uit de bronverzameling meerdere beelden hebben in de beeldverzameling. Dat is niet altijd praktisch. 
+%
+%In een database worden bijvoorbeeld  gebruikersnamen (positief geheel getal)
+% opgeslagen die geregistreerd zijn. 
+%Als je  een relatie gebruikt om een gebruikersnaam uit de database te 
+%verbinden aan een wachtwoord (string met lengte kleiner dan 20), 
+%dan kan elke gebruikersnaam \emph{juist \'e\'en keer} gekoppeld worden 
+%aan een wachtwoord (iedere gebruiker kan maar \'e\'en zinvol wachtwoord 
+%hebben). Als de admin de gebruikers registreert, kan het voorkomen dat een gebruiker nog geen wachtwoord heeft. Eenzelfde wachtwoord  mag 
+%evenwel aan verschillende gebruikersnamen verbonden worden. In de 
+%relatie van `gebruikte gebruikersnamen' op `gebruikte wachtwoorden' 
+%heeft ieder gebruikersnaam dus  \emph{hoogstens} \'e\'en beeld, maar 
+%kan een `gebruikt wachtwoord' beeld zijn van meerdere `gebruikte 
+%gebruikersnamen'. Dit soort relatie noemen we een 
+%\emph{ veel-op-\'e\'en relatie}.
+%
+%\begin{quote}
+%Bij een  veel-op-\'e\'en relatie ($N..1$) heeft ieder element uit de bronverzameling juist \'e\'en beeld en is ieder element uit de beeldverzamelingen beeld  van één of meerdere elementen uit de bronverzameling (figuur~\ref{fig:veelopeen2}).
+%\end{quote}
+%
+%\begin{quote}
+%Bij een  \emph{optionele} veel-op-\'e\'en relatie ($N..0$) heeft ieder element uit de bronverzameling \'e\'en  beeld, maar moet niet  elk element uit de beeldverzamelingen beeld zijn van één of meerdere elementen uit de bronverzameling.
+%\end{quote}
+%
+%Merk op dat iedere veel-op-één relatie ook een \emph{optionele} veel-op-één relatie is.
+%
+%\begin{figure}[htbp]
+%\centering
+%    \input{figuren/verzamelingen_relaties/tikz/veelopeen}
+%\caption{Veel-op-\'e\'en relatie}
+%\label{fig:veelopeen2}
+%\end{figure}
+%
+%We geven enkele voorbeelden:
+%\begin{itemize}
+%\item Als $A=\{1,-1,2,-2,3,-3\}$ en $B=\{1,2,4,5,8,9\}$, dan is de relatie $U=\{({x},\mathrm{y})\mid {y}={x}^2\}$ een veel-op-\'e\'en relatie (figuur~\ref{fig:afbeelding1}).
+%\item Als $A=\{\mathrm{rood},\mathrm{oranje},\mathrm{geel}\}$ en $B=\{\mathrm{a},\mathrm{g},\mathrm{r}\}$, dan is de relatie $U=\{({x},{y})\mid \mathrm{kleur~}x\mathrm{~bevat~de~letter~}y\}$ \emph{geen} veel-op-\'e\'en relatie (figuur~\ref{fig:afbeelding2}).
+%\item de relatie die kinderen afbeeldt op hun moeder: ieder kind heeft 1 vrouw als moeder en een vrouw kan moeder zijn van verschillende kinderen
+%\item de relatie `leerling zit in klas': elke leerling zit in 1 klas\footnote{waarbij we aannemen dat je geen aangepast jaarprogramma volgt en verschillende vakken in verschillende klassen volgt} en de klas bevat meerdere leerlingen
+%\end{itemize}
+%
+%\begin{figure}[htbp]
+%\centering
+%\subfloat[functie $U=\{({x},{y})\mid {y}={x}^2\}$]{
+%    \input{figuren/verzamelingen_relaties/tikz/veelopeenvb1}
+%    \label{fig:afbeelding1}
+%}\qquad
+%\subfloat[relatie die geen functie is]{
+%    \input{figuren/verzamelingen_relaties/tikz/RoodOranjeGeel}
+%    \label{fig:afbeelding2}
+%}
+%\caption{Niet elke relatie is een functie}
+%\label{fig:afbeeldingen}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\centering
+%    \input{figuren/verzamelingen_relaties/tikz/veelopeen}
+%\caption{Veel-op-\'e\'en relatie}
+%\label{fig:veelopeen}
+%\end{figure}
+%
+%
+%In de wiskunde wordt  een veel-op-één relatie ($N..0$) een \emph{functie} genoemd. Formeel wordt een functie als volgt omschreven
+%\begin{quote}
+%Zij $U$ een functie van de productverzameling $A\times B$. Als $(a,b)\in U$ en $(a,c)\in U$, dan is $b=c$.
+%\end{quote}
+%In woorden: het element $a$ kan maar \'e\'en beeld hebben.
+%
+%Als in een functie van de productverzameling $A\times B$ \emph{ieder} element van $B$ het beeld is van minstens één element van $A$, dan noemen we de relatie een \emph{surjectie} ($N..1$). Het bereik van een surjectieve functie is dus gelijk aan de volledige beeldverzameling $B$.
+%
+%\subsection{E\'en-op-\'e\'en relaties}\label{subsec:eenOpEen}
+%Bij een \'e\'en-op-\'e\'en relatie ($1..1$) wordt ieder element van de bronverzameling afgebeeld op  \'e\'en element van de beeldverzameling, \'en is ieder element van de beeldverzameling juist \'e\'en keer beeld van een element van de bronverzameling. In de wiskunde noemen we dit een \emph{bijectie}. De bronverzameling is tevens domein van de functie en de doelverzameling is gelijk aan het bereik.
+%
+%Enkele voorbeelden:
+%\begin{itemize}
+%\item de relatie `pasfoto toont leerling'
+%\item de relatie `Belg heeft nationaal nummer'
+%\end{itemize}
+%
+%\begin{figure}[htbp]
+%\centering
+%\input{figuren/verzamelingen_relaties/tikz/eenopeenvb1}
+%\label{fig:veelopveel}
+%\caption{E\'en-op-\'e\'en relatie}
+%\end{figure}
+%
+%Bij de optionele \'e\'en-op-\'e\'en relatie  ($1..0$) hoort niet ieder element van de beeldverzameling tot het bereik. We noemen dit een \emph{injectie}. Een injectie is dus een functie, waarbij geen twee (verschillende) elementen uit de bronverzameling hetzelfde beeld hebben.  Elk beeld heeft een uniek origineel. In tegenstelling tot de bijectie hoeft de doelverzameling gelijk te zijn aan het bereik. 
+
+
+\section{Relatie voorstellen}
+\label{sec:relatieVoorstellen}
+\subsection{Opsomming}
+Een  relatie kan je voorstellen door \emph{opsomming}, zoals we in voorgaande voorbeelden deden:
+\begin{itemize}
+\item $U=\{(1,\mathrm{a}),(1,\mathrm{b}),(2,\mathrm{b}),(4,\mathrm{b}) \}$
+\end{itemize}
+
+\subsection{Tabel}
+Een relatie kan je voorstellen met een tabel. Stel dat een winkel promotie voert bij aankoop van een paar sportschoenen: hoe meer schoenen je koopt, hoe goedkoper  ze worden. In tabel~\ref{tab:sportschoenen} wordt de prijs van een paar schoenen (per paar) weergegeven in functie van het aantal paar dat je koopt.
+
+\begin{table}[htbp]
+\centering
+\caption{De prijs per paar  sportschoenen in euro in functie van het aantal paar schoenen dat je koopt.}
+\begin{tabular}{ccccccccc}
+\hline 
+aantal & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ 
+\hline 
+prijs per stuk & 50 & 49 & 47 & 43 & 39 & 35 & 30 & 25 \\ 
+\hline 
+\end{tabular} 
+\label{tab:sportschoenen}
+\end{table}
+
+Een ander voorbeeld vind je in tabel~\ref{tab:reclame}. Daar lees  je de evolutie van de reclame-investeringen in de Belgische media in functie van de tijd.
+\begin{table}[htbp]
+\centering
+\caption{Evolutie van de reclame-investeringen in de Belgische media (budget in miljoen euro)}
+\begin{tabular}{ccccccccc}
+\toprule
+jaar & 2001 & 2002 & 2003 & 2004 & 2005 & 2006 & 2007 & 2008 \\ 
+\midrule
+budget & \num{1.752} & \num{1.933} & \num{2.137} & \num{2.299} & \num{2.387} & \num{2.863} & \num{3.089} & \num{3.148} \\ 
+\bottomrule
+\end{tabular} 
+\label{tab:reclame}
+\end{table}
+
+\subsection{Venndiagram met pijlen}
+Je kan een binaire relatie  voorstellen met een \emph{venndiagram met pijlen}. In figuur~\ref{fig:grafiek} vind je de voorstelling van de relatie $U=\{(1,\mathrm{a}),(1,\mathrm{b}),(2,\mathrm{b}),(4,\mathrm{b}) \}$. 
+
+\begin{figure}[htbp]
+\centering
+\input{figuren/verzamelingen_relaties/tikz/domeinbereik}
+\caption{Voorstelling van een relatie van $A=\{1,2,3,4\}$ naar $B=\{\mathrm{a},\mathrm{b},\mathrm{c} \}$}
+\label{fig:grafiek}
+\end{figure}
+
+\subsection{Twee-dimensionale vlak}
+Een binaire relatie waar zowel bron- als beeldverzameling getallen betreft, kunnen we tekenen in 
+het twee-dimensionale vlak. In dat vlak tekenen we  een cartesisch 
+assenstelsel. Elk koppel $(x,y)$ van de relatie bekijken we als een 
+stel co\"ordinaten van een punt in het vlak. We tekenen de punten en 
+verbinden ze (eventueel) door een vloeiende lijn.
+
+\begin{figure}[htbp]
+\centering
+\subfloat[grafiek horende bij tabel~\ref{tab:sportschoenen}]{
+\input{figuren/verzamelingen_relaties/tikz/schoenenprijs}
+    \label{fig:grafieksportschoenen}
+}\qquad
+\subfloat[grafiek horende bij tabel~\ref{tab:reclame}]{
+\input{figuren/verzamelingen_relaties/tikz/reclameinvesteringen}
+    \label{fig:grafiekreclame}
+}
+\caption{Binaire relatie voorstellen in het twee-dimensionale vlak}
+\end{figure}
+
+
+\subsection{Functievoorschrift}
+\label{subsec:voorschrift}
+Bij een functievoorschrift noteer je op een eenduidige manier hoe de elementen van bron- en beeldverzameling met mekaar in verband staan. Dat is enkel mogelijk als dat verband onafhankelijk van de elementen van de bronverzameling  bepaald kan worden. Bij de kostprijs van de sportschoenen is dat bijvoorbeeld niet mogelijk.
+
+Voorbeelden
+\begin{itemize}
+\item Bij een zwemmarathon sponsort de buurman je prestatie als volgt: \euros{6} startvergoeding en \euros{5} per kilometer (uitgedrukt als reëel getal).  Als je  $x$ \si{\kilo\meter} zwemt, betaalt de buurman  $y=6+5\cdot x$. Dit geeft de relatie
+\[
+U=\left\{(x,y)\mid x,y\in\mathbb{R}^+ \mathrm{~en~} y=6+5\cdot x\right\}
+\]
+\item Om op onze vakantiebestemming te geraken moeten we \SI{1323}{\km} afleggen. We rijden gemiddeld \SI{100}{\km\per\hour}. Als $t$ gelijk is aan de tijd  die we reeds in de auto doorbrachten uitgedrukt in uren, geeft volgende relatie  de resterende reistijd $r$ weer:
+\[
+V=\left \{(t,r)\mid t,r\in \mathbb{R}^+\mathrm{~en~} r=\frac{1323}{100}-t\right \}
+\]
+\end{itemize}
+
+
+Het verband tussen de koppels $(x,y)$ van de relatie kan je schrijven als $y=f(x)$. In het voorgaande voorbeeld 
+van de zwemmarathon is $f(x)=6+5\cdot x$.  Het getal $y$ noemen we de \emph{functiewaarde}. We noteren de relatie kort met $f$.  We schrijven ook
+\[
+f: \mathbb{R}\to\mathbb{R}: x\mapsto y =f(x)
+\]
+Deze notatie lezen we als `de relatie $f$ van $\mathbb{R}$ naar $\mathbb{R}$ waarbij $x$ wordt afgebeeld op $y$ en $y=f(x)$. Het spreekt voor zich dat je in plaats van de letter $f$ ook andere letters mag gebruiken, bijvoorbeeld $h$, $r$, \dots
+
+Het functievoorschrift kan je ook gebruiken voor niet-binaire relaties. De relatie onderaan sectie~\ref{sec:defRelatie} kan je beschrijven met het voorschrift
+\[
+u:\mathbb{R}^2\to\mathbb{R}:(a,b)\mapsto c =a+b
+\]
+
+Het is heel belangrijk dat je bij deze notatie goed vermeldt wat het domein is van de functie. Zo heeft de relatie $\text{wortel}(x)=\sqrt{x}$ geen zin als de bronverzameling $\mathbb{R}$ is: je kan immers geen vierkantswortel berekenen van een negatief getal.
+
+\subsection{Algoritme}
+Als de functie voorgesteld wordt met een functievoorschrift, kan je het beeld  $y$ rechtstreeks berekenen uit $x$. Dat is niet altijd mogelijk: soms zijn er enkele `tussenstappen' nodig. Neem het volgende voorbeeld:
+\begin{itemize}
+\item Het is solden. Iedere klant krijgt 30\% korting. Als het totaal van de oorspronkelijke prijzen groter is dan \euros{100}, krijgt de klant 40\% korting. Als het totaal groter is dan \euros{200}, krijgt de klant 50\% korting. 
+\end{itemize}
+Als we een functie willen bepalen die het totaal $t$ van de oorspronkelijke prijzen afbeeldt op het te betalen bedrag $b$, moeten we in stappen werken:
+\begin{enumerate}
+\item Is $t<100$? Dan is $b=0,70\cdot t$
+\item Is $100\leqslant t<200$? Dan is $b=0,60\cdot t$
+\item Anders: $b=0,50\cdot t$
+\end{enumerate}
+
+Er is dus een werkwijze, een \emph{algoritme} nodig om de functie te bepalen. Dit brengt ons tot een verband tussen wiskunde en (functioneel) programmeren\footnote{Functioneel programmeren is niet hetzelfde als object-geori\"enteerd programmeren. Een methode op een object kan wel `functioneel' zijn. \url{http://nl.wikipedia.org/wiki/Functioneel_programmeren}}. Soms is het nodig om een programma te schrijven om een wiskundige functie te berekenen. In dit OPO gebruiken we Scilab als programmeertaal (zie hoofdstuk~\ref{scilab}). Bovenstaande functie kan in Scilab als volgt geprogrammeerd worden\footnote{Je kan ook een ‘elseif’ i.p.v. een ‘else if’ gebruiken, met een licht andere syntaxis.}:
+
+\begin{verbatim}
+function b=bedrag(t)
+  if t<100 then
+    b=0.70*t
+  else 
+    if t<200 then
+      b=0.60*t
+    else
+      b=0.50*t
+    end
+  end
+endfunction
+\end{verbatim} 
+
+Met de Scilab-functie \verb/plot/ kan je de grafiek van de functie tekenen (zie figuur~\ref{fig:solden}).
+Uit deze grafiek blijkt dat je vriendin beter nog een T-shirt extra koopt als ze al een bedrag van \euros{85} besteed heeft.
+
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=0.7\textwidth]{figuren/verzamelingen_relaties/solden.jpeg}
+\caption{Grafiek van de functie \texttt{bedrag}, getekend in Scilab.}
+\label{fig:solden}
+\end{figure}
+
+Een algoritme kan ook \emph{recursief} zijn: uit de functiewaarde van het ene element leid je de functiewaarde van een ander element af. Voorbeeld hiervan is de functie die de waarde van $n!$ berekent. Immers $n!=n\cdot(n-1)!$. We verwijzen naar de OPO's `Algoritmen en datastructuren' voor meer details.
+
+
+
+We vermelden tenslotte dat binaire relaties ook voorgesteld kunnen worden met grafen\footnote{\url{http://nl.wikipedia.org/wiki/Grafen}} en matrices\footnote{\url{http://nl.wikipedia.org/wiki/Matrix_(wiskunde)}}. Deze leerstof wordt behandeld in het OPO `Toegepaste Wiskunde 2'.
+
+\section{Inverse relatie}
+\label{sec:invrelatie}
+Een relatie kan je `inverteren: je verwisselt bron en beeld met mekaar.
+\begin{quote}
+Zij $U$ een relatie van $A$ naar $B$: 
+\[U=\{({x},{y})\mid {x}\in A \mathrm{~en~}{y}\in B\},\]
+dan is de inverse relatie van $U$ gelijk aan 
+\[U^{-1}=\{({y},{x})\mid ({x},{y})\in U \}\]
+\end{quote}
+Het komt erop neer dat je in de koppels $({x},{y})$ de $x$ en $y$ van plaats wisselt.
+
+
+Is de inverse van een functie altijd opnieuw een functie?  In sectie~\ref{subsec:functies} gaven we aan dat een relatie een functie is waarbij elke $x$ hoogstens één beeld heeft. Neem de functie $f:\mathbb{R}\to\mathbb{R}:x\mapsto y= x^2$. Het getal \num{4} is beeld van zowel $x=2$ als $x=-2$. Voor de inverse functie moet je $x$ en $y$ met mekaar verwisselen, maar neem je dan 2 als invers beeld voor 4 of $-2$? We besluiten hieruit dat de inverse relatie van een functie niet altijd een functie is. Als de functie \emph{injectief} is, is de inverse van die functie wél een functie. 
+
+Voorbeelden
+\begin{itemize}
+\item als $U$ de relatie `student $x$ heeft inschrijvingsnummer $y$', dan is de inverse relatie $U^{-1}$ de relatie `inschrijvingsnummer $y$ hoort bij student $x$'
+\item als $V$ de relatie 'computer met serienummer $x$ is eigendom van persoon $y$', dan is de inverse relatie $V^{-1}$ de relatie 'persoon $y$ is eigenaar van computer met serienummer $x$'
+\item gegeven de relatie $W=\{(x,y)\mid x,y\in \mathbb{Z} \mathrm{~en~} y=x+3\}$ dan is $W^{-1}=\{(a,b)\mid a,b\in \mathbb{Z} \mathrm{~en~} b=a-3\}$.
+\end{itemize}
+
+
+
+
+Als laatste bespreken we de inverse van een functie die omschreven wordt door een functievoorschrift. 
+Neem het voorbeeld van de functie $f(x)=6+5\cdot x$ uit sectie~\ref{subsec:voorschrift} die het aantal gezwommen kilometers afbeeldt op het te betalen bedrag. De grafiek van deze functie wordt ook getoond in figuur~\ref{fig:fotos}. Op deze grafiek zie je duidelijk dat bij elke $x$ juist \'e\'en $y$ hoort. De functie is dus \'e\'en-op-\'e\'en en kan dus ge\"inverteerd worden. We moeten  de waarde van $x$ zoeken als we $y$ kennen. Als $y=20$, kunnen we op de grafiek aflezen dat $x\approx \num{2.8}$. Als je bij buurman \euros{20} sponsorgeld wil verdienen, moet je ongeveer \SI{2.8}{\kilo\meter} zwemmen. 
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=2cm,y=0.25cm]
+\draw[->] (-0.2,0) -- (5.2,0) node[right] {$x$};
+\draw[->] (0,-1) -- (0,32) node[above] {$f(x)$};
+\foreach \x in {0.5,1,...,5}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {5,10,...,30}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[thick](0,6) -- (5,31);
+\node [below left] at (0,0) {\footnotesize 0};
+\draw[dashed,-latex](0,20) -- (2.8,20);
+\draw[dashed, -latex](2.8,20) -- (2.8,0);
+\filldraw [red] (2.8,20) circle (2pt);
+\end{tikzpicture}
+\caption{Grafiek van de functie $f(x)=6+5\cdot x$ }
+\label{fig:fotos}
+\end{figure}
+
+Wil je exact weten hoeveel kilometer je moet zwemmen om \euros{20} te krijgen van buurman, kan je het functievoorschrift gebruiken:
+\[
+\begin{split}
+y&=6+5\cdot x\\
+& \Updownarrow\\
+x&=\frac{y-6}{5}
+\end{split}
+\]
+Als buurman \euros{20} betaalt, heb je $x=\frac{20-6}{5}=\frac{14}{5}=2,8$ kilometer gezwommen.
+
+
+
+
+
+
+
+\newpage
+\section{Oefeningen}
+\begin{oef}
+\label{oef21}
+$A = \{1, 3, 5, 7\}$ en  $B = \{2, 4, 6,8\}$. Noteer volgende relaties door middel van opsomming:
+\begin{enumerate}
+\item $U=\{(x,y) \mid x\in A \mathrm{~en~} y \in B \mathrm{~en~} x+y<9\}$
+\item $V=\{(x,y) \mid x\in A \mathrm{~en~} y \in B  \mathrm{~en~} x<y \}$
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item $U=\{(1,2),(1,4),(1,6),(3,2),(3,4),(5,2) \}$
+\item $V=\{(1,2),(1,4),(1,6),(1,8),(3,4),(3,6),(3,8),(5,6),(5,8),(7,8) \}$
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+\begin{oef}
+\begin{enumerate}
+\item Bepaal domein en bereik van de relaties van oefening~2.1.
+\item Geef de meest correcte benaming van de relaties.
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item $\text{dom}(U)=\{1,3,5 \}$; $\text{ber}(U)=\{2,4,6 \}$; relatie, geen injectie (want bvb. in het element 2 komen drie pijlen toe) of surjectie (want in het element 8 komt geen pijl toe). De relatie is geen functie want er zijn elementen met meer dan één beeld (bvb. het element 1 heeft drie beelden).
+\item $\text{dom}(V)=\{1,3,5,7 \}$; $\text{ber}(V)=\{2,4,6,8 \}$; surjectieve relatie
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+
+
+
+\begin{oef}
+Gegeven $X = \{\mathrm{a},\mathrm{ b}\}$ en $Y = \{\mathrm{c}, \mathrm{d}, \mathrm{e}, \mathrm{f}\}$. Noteer volgende productverzamelingen door middel van opsomming:
+\begin{enumerate}
+\item $X\times Y$
+\item $Y\times X$
+\item $X^2$
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item $X\times Y=\{(a,c),(a,d),(a,e),(a,f),(b,c),(b,d),(b,e),(b,f) \}$
+\item $Y\times X=\{(c,a),(c,b),(d,a),(d,b),(e,a),(e,b),(f,a),(f,b) \}$
+\item $X^2=\{(a,a),(a,b),(b,a),(b,b) \}$
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+\begin{oef}
+Een e-mailadres kan je beschouwen als  een productverzameling van drie verzamelingen. Noteer deze verzamelingen zorgvuldig en definieer de gevraagde productverzameling.
+\begin{opl}
+$A=\{\text{strings bestaande uit a-zA-Z,.,0-9} \}$\\
+$B=\{\text{strings bestaande uit a-zA-Z,.} \}$\\
+$C=\{ \text{strings uit de lijst met goedgekeurde TLD's (Top Level Domain names}\}$\\
+$A\times B\times C$
+\end{opl}
+\end{oef}
+
+\begin{oef}
+Hieronder vind je een aantal relaties van verzameling $A$ naar $B$. 
+\begin{itemize}
+\item Definieer voor elk van de gevallen de verzamelingen $A$ en $B$ eenduidig. Er zijn verschillende mogelijkheden.
+\item Zoek een gepaste voorstellingswijze voor de relatie
+\item Bepaal  welk soort relatie er beschreven wordt.
+\end{itemize}
+\begin{enumerate}
+\item Klant heeft contactmoment
+\item Klant heeft id
+\item Persoon woont op adres
+\item Student heeft telefoonnummer
+\item Student krijgt rapport
+\item Student volgt OPO
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+
+\item Klant heeft contactmoment: $A$=$\{\text{klanten van het bedrijf}\}$; \\
+$B=\{\text{mogelijke contactmomenten voor manager}\}$; 
+één klant kan meerdere contactmomenten hebben, maar is er niet toe verplicht; 
+niet alle mogelijke contactmomenten moeten ingevuld worden, maar nooit meer dan één klant per contactmoment: injectieve relatie
+
+\item Klant heeft id: $A$=$\{\text{klanten van het bedrijf}\}$; \\
+$B=\{\text{id's die de software toegekend heeft}\}$ 
+iedere klant heeft juist één id: bijectie (afbeelding die bijectief is)
+
+\item Persoon woont op adres: $A=\{\text{mensen met een geregistreerd adres}\}$; \\
+$B=\{\text{geregistreerde adressen}\}$; iedere persoon woont op één adres; op één adres kunnen meerdere personen wonen: surjectie (afbeelding die surjectief is); als $A$ ook daklozen bevat: surjectieve functie
+
+\item Student heeft telefoonnummer: $A=\{\text{studenten KHLeuven}\}$; \\
+$B=\{$telefoonnummers die in het studentenregistratiesysteem opgenomen zijn$\}$.  Iedere student heeft nul, één of meerdere telefoonnummers; ieder telefoonnummer heeft één eigenaar: bijectieve relatie.
+Als je broers en zussen toelaat als student: surjectieve relatie want telefoonnummer kan horen bij verschillende studenten.
+
+\item Student krijgt rapport: $A=\{\text{leerlingen van KHLeuven}\}$; \\
+$B=\{\text{afgedrukte rapporten op het einde van een examenperiode}\}$ voor elke student is er juist één rapport: bijectie (afbeelding die bijectief is)
+
+\item Student volgt OPO: $A=\{\text{studenten van KHLeuven}\}$; \\
+$B=\{\text{OPO's die de KHLeuven inricht}\}$ student volgt meerdere OPO's en elk OPO wordt door meerdere studenten gevolgd: surjectieve relatie, tenzij er OPO's zijn die door geen enkele student gevolgd worden (dat zou kunnen gebeuren bij keuzeOPO's bvb). In dat geval is het een gewone relatie.
+\end{enumerate}
+
+\end{opl}
+\end{oef}
+
+\begin{oef}
+\label{oef:26}
+Definieer volgende relaties correct:
+\begin{itemize}
+\item Bepaal bron- en doelverzameling zodat de relatie een bijectie is.
+\item Stel de relatie voor als een verzameling van paren door middel van een functievoorschrift, bijv.\ $U=\{(x,y)|x,y\in \mathbb{R}\text{ en } y=x+1\}$
+\item Geef nog minstens één andere voorstellingswijze
+\end{itemize}
+\begin{enumerate}
+\item de functie $y=\sqrt{x}$
+\item de relatie die de kostprijs van de brandstof van een autorit weergeeft in functie van de lengte van de rit (uitgedrukt in kilometers). De auto verbruikt \SI{6,45}{\litre} per \SI{100}{\kilo\meter}. De brandstof kost \euros{1,315} per liter.
+\item de relatie die de prijs van de factuur van een mazoutlevering weergeeft in functie van het aantal gekochte liter. Mazout kost \euros{0,9155} per liter als je minder dan \SI{2000}{\litre} afneemt en \euros{0,8887} per liter als je meer dan \SI{2000}{\litre} afneemt.
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item 
+\begin{enumerate}
+\item bron- en beeldverzameling: $\mathbb{R}^+$
+\item $U=\{(x,y)|x,y\in \mathbb{R}^+\text{ en } y=\sqrt{x} \}$
+\item zie figuur~\ref{oef:opl26}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[help lines] (-1,-1) grid (9,4);
+\draw[->] (-1.5,0) -- (9.5,0) node[right] {$x$};
+\draw[->] (0,-1.5) -- (0,4.5) node[above] {$y$};
+\foreach \x in {-1,1,2,...,9}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {-1,1,2,...,4}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw [domain=0:9,samples=200,thick] plot(\x,{sqrt(\x)});
+\node [below left] at (0,0) {\footnotesize 0};
+\end{tikzpicture}
+%\includegraphics[width=0.5\textwidth]{figuren/verzamelingen_relaties/opl_oef26}
+\caption{Oplossing van oefening~\ref{oef:26} }
+\label{oef:opl26}
+\end{figure}
+\end{enumerate}
+
+
+\item 
+\begin{enumerate}
+\item bron- en beeldverzameling is  $\mathbb{R}^+$
+\item $U=\{(x,y)|x,y\in \mathbb{R}^+\text{ en } y=8,48175\cdot x/100\}$
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item bron- en beeldverzameling is  $\mathbb{R}^+$
+\item $U=\left\lbrace(x,y)|x,y\in \mathbb{R}^+\text{ en } y=
+\begin{cases}
+0,9155\cdot x&\text{ als }x<2000\\
+0,8887\cdot x&\text{ anders }
+\end{cases} \qquad
+\right\rbrace$
+\end{enumerate}
+
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+\begin{oef}
+Wat is de inverse van volgende relaties? Stel de relatie op dezelfde manier voor als de opgave.
+\begin{enumerate}
+\item $\{(1,7),(2,10),(3,9) \}$
+\item 
+\begin{tabular}{c|cccccc}
+$x$ & \num{0.1} & \num{0.2} & \num{0.3} & \num{0.4} & \num{0.5} & \num{0.6} \\ 
+\midrule
+$y$ & 2 & 4 & 6 & 8 & 10 & 12 \\ 
+\end{tabular} 
+\item $f: \mathbb{R}\rightarrow\mathbb{R}:x\mapsto y \mid y=2\cdot x+10 $
+\item $f: \mathbb{R}^+\rightarrow\mathbb{R}:x\mapsto y \mid y=\sqrt{x}$
+\end{enumerate}
+\begin{opl}
+\item \{(7,1),(10,2),(9,3) \}
+\item 
+\begin{tabular}{c|cccccc}
+$y$ & 2 & 4 & 6 & 8 & 10 & 12 \\ 
+\midrule
+$x$ & \num{0.1} & \num{0.2} & \num{0.3} & \num{0.4} & \num{0.5} & \num{0.6} \\ 
+\end{tabular} 
+\item $f^{-1}: \mathbb{R}\rightarrow\mathbb{R}:x\mapsto  y=\dfrac{x-10}{2} $
+\item $f^{-1}: \mathbb{R}^+\rightarrow\mathbb{R}^+:x\mapsto y=x^2$
+\end{opl}
+\end{oef}
+
+\begin{oef}
+Zelfde vraag voor elke figuur:
+\begin{itemize}
+\item Teken de inverse functie.
+\item Wat is het functievoorschrift van de getekende functie en zijn inverse?
+\end{itemize}
+\begin{enumerate}
+
+\begin{minipage}{\columnwidth}
+\item
+%\centering
+\begin{tikzpicture}[x=1cm,y=.5cm]
+\draw[help lines] (-1,-2) grid (5,12);
+\draw[->] (-1.5,0) -- (6,0) node[right] {$x$};
+\draw[->] (0,-2) -- (0,13) node[above] {$y$};
+\foreach \x in {-1,1,2,...,5}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {-2,2,4,...,12}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[thick](5,-2.5) -- (-1,12.5); % rechte 1
+\node [below left] at (0,0) {\footnotesize 0};
+\end{tikzpicture}
+\end{minipage}
+%
+%\item
+%\centering
+%\vspace{-0.4cm}
+%\includegraphics[width=0.7\textwidth]{figuren/verzamelingen_relaties/grafiek_lineair1}
+
+
+\begin{minipage}{\columnwidth}
+\item
+%\centering
+\begin{tikzpicture}[x=1cm,y=.2cm]
+\draw[help lines] (-3,-11) grid (7,10);
+\draw[->] (-3.5,0) -- (7.5,0) node[right] {$x$};
+\draw[->] (0,-11) -- (0,12) node[above] {$y$};
+\foreach \x in {-3,-2,-1,1,2,...,7}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {-10,-5,5,10}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[thick](-3,-11) -- (7,9); % rechte 1
+\node [below left] at (0,0) {\footnotesize 0};
+\end{tikzpicture}
+%\includegraphics[width=0.7\textwidth]{figuren/verzamelingen_relaties/grafiek_lineair2}
+\end{minipage}
+
+\begin{minipage}{\columnwidth}
+\item
+%\centering
+\begin{tikzpicture}[x=1cm,y=.5cm]
+\draw[help lines] (-7,-4) grid (4,4);
+\draw[->] (-7.5,0) -- (4.5,0) node[right] {$x$};
+\draw[->] (0,-4.5) -- (0,4.5) node[above] {$y$};
+\foreach \x in {-7,-6,...,-1,1,2,...,4}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {-4,-2,2,4}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[thick](-7,0.8) -- (4,-3.6); % rechte 1
+\node [below left] at (0,0) {\footnotesize 0};
+\end{tikzpicture}
+%\includegraphics[width=0.7\textwidth]{figuren/verzamelingen_relaties/grafiek_lineair4}
+\end{minipage}
+
+\end{enumerate}
+
+\begin{opl}
+\begin{enumerate}
+\item $y=-\frac52 x +10$; inverse functie: $y=-\frac25 x +4$
+\item $y=2x-5$; inverse functie: $y=\frac12 x+\frac52$
+\item $y=-\frac25x-2$; inverse functie: $y=-\frac52x-5$
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+

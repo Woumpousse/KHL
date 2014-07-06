@@ -1,0 +1,18 @@
+\begin{tikzpicture}[x=1cm,y=2cm]
+%\draw[help lines] (0,0) grid [xstep=1, ystep=5] (8.5,3.5);
+\draw[->] (-0.2,0) -- (8.2,0) node[right] {jaar na 2000};
+\draw[->] (0,-0.2) -- (0,3.2) node[above] {Reclame-investeringen};
+\foreach \x in {1,...,8}
+	\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\foreach \y in {0.5,1,...,3}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\node [below left] at (0,0) {\footnotesize 0};
+\filldraw [red] (1,1.752) circle (2pt);
+\filldraw [red] (2,1.933) circle (2pt);
+\filldraw [red] (3,2.137) circle (2pt) ;
+\filldraw [red] (4,2.299) circle (2pt);
+\filldraw [red] (5,2.387) circle (2pt);
+\filldraw [red] (6,2.863) circle (2pt);
+\filldraw [red] (7,3.089) circle (2pt);
+\filldraw [red] (8,3.148) circle (2pt);
+\end{tikzpicture}

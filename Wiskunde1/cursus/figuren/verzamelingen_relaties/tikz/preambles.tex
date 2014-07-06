@@ -1,0 +1,38 @@
+% Definition of circles
+\def\firstcircle{(0,0) ellipse [x radius=1.5cm, y radius=2cm]}
+\def\secondcircle{(0:2cm) ellipse [x radius=1.5cm, y radius=2cm]}
+\def\tweedecirkel{(0:1.5cm) ellipse [x radius=1.5cm, y radius=2cm]}
+
+% Drie ellipsen
+\def\firstellipse{(40:1.55cm) ellipse [x radius=2cm,y radius=1.5cm]}
+\def\secondellipse{(140:1.5cm) ellipse [x radius=2cm,y radius=1.5cm]}
+\def\thirdellipse{(270:0.5cm) ellipse [x radius=2cm,y radius=1.5cm]}
+
+%2 verticale ellipsen
+\def\vertellipl{(0,0) ellipse [x radius=1cm, y radius=2cm]}
+\def\vertellipr{(3,0) ellipse [x radius=1cm, y radius=2cm]}
+
+%2 grotere verticale ellipsen
+\def\grvertellipl{(0,0) ellipse [x radius=1.5cm, y radius=3cm]}
+\def\grvertellipr{(4,0) ellipse [x radius=1.5cm, y radius=3cm]}
+
+
+% bolletje voor elementen
+\def\bol{circle (1.5pt)}
+
+%%%%% vullen in kleuren bij venn
+%\def\vuleen{\fill[red, opacity=0.3]}
+%\def\vultwee{\fill[green, opacity=0.3]}
+\def\vulgrijs{\fill[black!30,opacity=0.5]}
+
+%%%%% vullen met arceringen bij venn
+\def\vuleen{\fill[pattern=horizontal lines,pattern color=blue]}
+\def\vultwee{\fill[pattern=vertical lines,pattern color=red]}
+\def\arceerschuin{\fill[pattern=north east lines,pattern color=blue]}
+\def\arceerpuntjes{\fill[pattern=dots,pattern color=blue]}
+
+\colorlet{circle edge}{black!70}
+\colorlet{circle area}{blue!20}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}

@@ -1,0 +1,124 @@
+\documentclass[DIV=calc,BCOR=1cm]{scrbook}
+
+\usepackage{showlabels}
+\usepackage[utf8]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage[labelsep=space,hang,small,bf]{caption}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{answers} %Voor oefeningen en oplossingen
+\usepackage{amsthm}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{textcomp} %voor euro met nieuw command \euros{}
+\usepackage[utopia]{quotchap}
+\usepackage{latexsym}
+\usepackage{varioref}
+\usepackage{amscd}
+\usepackage{epsfig}
+\usepackage{array}
+%\usepackage{psboxit}
+\usepackage{float}
+\usepackage{boxedminipage}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+%\linespread{1.02}
+\usepackage[output-decimal-marker={,},quotient-mode = fraction,per-mode=symbol]{siunitx}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multirow} 
+\usepackage{multicol} 
+\usepackage{wrapfig}
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage{pdfpages}
+%\usepackage[adobe-utopia]{mathdesign}
+\usepackage[bitstream-charter]{mathdesign}
+%\usepackage[colorlinks,citecolor=spot,linkcolor=spot,urlcolor=spot]{hyperref} %Voor screenpdf
+\usepackage{hyperref}
+
+
+\usetikzlibrary{patterns,topaths,arrows,calc,decorations.markings,positioning}
+\frenchspacing
+
+% Kleuren. Voor het printen in enkel zwart en wit
+% kan je kleuren herdefiniëren. Dit wordt dan automatisch
+% aangepast, zowel in \textcolor commando's, als in
+% TikZ tekening met \draw[kleur ...] ...
+\definecolor{grijs}{rgb}{0.9,0.9,0.9}
+\definecolor{donkergroen}{RGB}{1,74,0}
+\definecolor{spot}{rgb}{0,0.1,0.6}
+%\definecolor{chaptergrey}{RGB}{84,106,150}
+%\definecolor{orange}{RGB}{0,0,0}
+
+% Geen schreefloze in titels enz.
+\setkomafont{sectioning}{\rmfamily\bfseries\boldmath}
+\setkomafont{descriptionlabel}{\rmfamily\bfseries}
+%\addtokomafont{disposition}{\color{spot}} %hoofdstuktitels in blauw voor screenpdf
+
+%%%%%%%%%%%% splitsing %%%%%%%%%%%%%%
+\hyphenation{Kar-naugh-af-beel-ding}
+
+
+
+
+
+%%%%%% Tellers %%%%%%
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+%%%%%% Environments %%%%%%
+\newenvironment{bewijs}{\noindent{\textbf{Bewijs}} \\}{\proofend}
+\newenvironment{stelling}{\noindent{\textbf{Stelling}} }{}
+\newenvironment{definitie}{\noindent{\textbf{Definitie}} }{}
+
+%%%%%%%%% Voor oefeningen en oplossingen %%%%%%%%%%%
+\Newassociation{opl}{Oplossing}{ans}
+\theoremstyle{definition} % want anders inhoud van oefeningen cursief
+\newtheorem{oef}{Oefening}[chapter]
+\Opensolutionfile{ans}[ans1]
+
+
+%%%%%% commands %%%%%%
+\newcommand{\euros}[1]{\texteuro~#1}
+
+\newcommand{\dif}{\text{d}}
+\newcommand{\Dif}[1]{\text{D} \left( #1 \right)}
+\newcommand{\Dom}{\text{Dom}}
+\newcommand{\proofend}{\begin{flushright} $\Box$ \end{flushright}}
+\newcommand{\vraagis}{\stackrel{?}{=}}
+\newcommand{\en}{\wedge}
+\newcommand{\of}{\vee}
+\newcommand{\niet}{\neg}
+\newcommand{\alsdan}{\rightarrow}
+\newcommand{\asa}{\leftrightarrow}
+\newcommand{\verbspatie}{\vspace{0.2cm}}
+\newcommand{\opdracht}[1]{\begin{quote}#1\marginpar[]{$\triangleleft$}\end{quote}}
+\newcommand{\veld}[1]{{\tt #1}}
+\newcommand{\knop}[1]{``{\it #1}''}
+\newcommand{\func}[1]{{\tt #1}}
+\newcommand{\D}{{\rm D}}
+\newcommand{\mysection}[1]{\vspace{1.em} \noindent {\bf {\large #1}}}
+\newcommand{\im}[1]{\begin{itemize} #1 \end{itemize}}
+\newcommand{\mym}[1]{${\displaystyle #1}$}
+
+\newcommand{\voorbeeld}{
+\refstepcounter{vb}%
+\subsubsection*{Voorbeeld~\thesection.\arabic{vb}}
+}
+
+\newcommand{\vbsection}[1]{\setcounter{vb}{0}\section{#1}}
+
+%%%%%%% nodig voor aanmaak bibliografie %%%%%%%
+\def\bbt#1{\bibitem{#1} \label{bb:#1}}
+\setlength{\unitlength}{1pt}
+\bibliographystyle{unsrt}
+
+%\input kvmacros nodig voor Karnaugh
+
+\lstset{language=Scilab,basicstyle=\ttfamily \footnotesize,backgroundcolor=\color{white},
+frame=single,framerule=0.5pt,rulecolor=\color{gray},tabsize=2,numbers=none,showstringspaces=false}
+\lstdefinestyle{inline} {basicstyle=\normalsize \ttfamily}

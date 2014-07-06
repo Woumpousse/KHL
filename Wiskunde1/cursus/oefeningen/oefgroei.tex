@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 6 sept 2013 [Jan]: kleine verbeteringen (komma's, eenheden, getallen)
+% november 2012 [Greetje]: oplossingen, fout bij oef 1 en kleine wijziging in oef 2
+% mei 2011 [Jan]: oefening Fukushima Jodium 131
+%
+% 9/4/11 [Greetje] Grondige herziening
+% 
+%Aanpassing greetje   %
+% 10/09/01  
+% verbeteringen roos    %
+% 
+% Laatste aanpassing:           %
+% 17/08/02 door Roos
+%   verbeteringen schooljaar 2001-2002
+%  nieuwe oefeningen test en ex.Roby %
+% 12/07/02 door Roos        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \chapter{Oefeningen op exponenti\"{e}le groei}
+\section{Oefeningen}
+
+
+\begin{oef}    
+In tabel~\ref{tbl:6processen} vind je de functiewaarden van enkele functies. 
+     Ga na of de functies overeenkomen met een
+      exponentieel of een lineair proces of geen van
+      beide.
+      \begin{table}[htb]
+                \centering
+                \caption{6 verschillende groeiprocessen}
+          \begin{tabular}{ccccccc}
+         \toprule
+         $t$ & $f(t)$ & $g(t)$ & $h(t)$ & $k(t)$ & $m(t)$ & $w(t)$ \\
+         \midrule
+
+         1 & 10 & 105 & 12 & 1701 & 5 & \num{29.7}  \\
+
+         2 & 17 & 118 & \num{13.2} & 567 & 25 & \num{27.1}  \\
+
+         3 & 24 & 131 & \num{14.52} & 189 & 125 & \num{24.5}  \\
+
+         4 & 31 & 146 & \num{15.972} & 63 & 625 & \num{21.9}  \\
+
+         5 & 38 & 163 & \num{17.5692} & 21 & 3125 & \num{19.3}  \\
+         \bottomrule
+
+     \end{tabular}
+          \label{tbl:6processen}
+      \end{table}
+      \begin{opl}
+      \begin{itemize}
+      \item $f$: lineair groeiproces met toename gelijk aan 7
+      \item $g$: geen exponentiële en geen lineaire groei
+      \item $h$: exponentieel groeiproces met groeifactor gelijk aan 1,1
+      \item $k$: exponentieel groeiproces met groeifactor gelijk aan $\frac13$
+      \item $m$: exponentieel groeiproces met groeifactor gelijk aan 5
+      \item $w$: lineair groeiproces met toename gelijk aan $-2,6$
+      \end{itemize}
+      \end{opl}
+\end{oef}
+
+\begin{oef}
+ 
+    
+        Het aantal microben in een proefopstelling verdubbelt in 6
+     uren tijd.
+     \begin{enumerate}
+         \item  Wat is de groeifactor (i) per 6 uur? (ii) per dag? (iii) per uur?
+
+         \item  Veronderstel dat het aantal microben nu 100 bedraagt. Bereken zonder rekenmachine en zonder functievoorschrift, indien mogelijk, wanneer het er (i) 400 zijn, (ii) 25,  (iii) 1000.
+
+         \item  Geef het functievoorschrift voor dit groeiproces met als periode
+          (i) \'e\'en dag, (ii)  6 uur, (iii) \'{e}\'{e}n uur. Neem 100 als beginwaarde.
+          
+          \item Maak in Scilab de grafiek van \'e\'en van de functievoorschriften die je hierboven vond. Lees op de grafiek af wanneer er 1000 microben zijn.
+     \end{enumerate}
+     \begin{opl}
+     \begin{enumerate}
+     \item $g_6=2$; $g_d=2^4=16$; $g_u=2^\frac{1}{6}=1,122462$
+     \item (i) 12u; (ii) 12 uur geleden; (iii) tussen 18 en 24u
+     \item $g_6(t)=100\cdot 2^t$; $g_d(t)=100\cdot 16^t$; $g_u(t)=100\cdot \left(2^\frac16 \right)^t$
+     \end{enumerate}
+     \end{opl}
+
+      \end{oef}
+
+\begin{oef}
+  In 2011 waren er ongeveer 7 miljard mensen. Per jaar is
+      de bevolkingstoename ongeveer \SI{1,1}{\percent}.
+      \begin{enumerate}
+          \item  Wat is de groeifactor per jaar? Per decennium? Per semester?
+          
+          \item Stel de vergelijking op van de groeifunctie die het aantal mensen $M(t)$ op tijdstip $t$ met $t$ uitgedrukt in jaren, weergeeft. 
+          
+          \item  Hoeveel mensen verwacht men in 2050 volgens dit model?
+
+          \item Maak een grafiek van de functie in Scilab. Lees op de grafiek af wanneer  de bevolking 8 miljard zal bedragen.
+
+      \end{enumerate}
+      \begin{opl}
+      \begin{enumerate}
+      \item $g_j=1,011$; $g_d=1,011^{10}$; $g_s=1,011^\frac{1}{2}$
+      \item $M(t)=7\cdot 1,011^t$ in miljard aantal en $t$ het aantal jaren verstreken sinds 2011
+      \item $M(39)=7\cdot 1,011^{39}=10,724896$
+      \end{enumerate}
+      \end{opl}
+
+      \end{oef}
+
+
+
+\begin{oef}
+ Bij een dieptetoename van \SI{32}{\meter} in de aarde vermeerdert
+    de temperatuur met \SI{1}{\celsius}.
+    \begin{enumerate}
+    \item Veronderstel dat op een diepte van \SI{25}{\meter} een temperatuur
+    van \SI{10}{\celsius} heerst.
+        \begin{enumerate}
+        \item Op welke diepte heerst een temperatuur van
+        \SI{15}{\celsius}?
+        \item Welke temperatuur heerst er op een diepte van \SI{985}{\meter}?
+        \end{enumerate}
+    \item Veronderstel dat op de grond (\SI{0}{\meter}) een temperatuur
+    van \SI{-5}{\celsius} heerst.
+        \begin{enumerate}
+        \item Op welke diepte heerst een temperatuur van
+        \SI{0}{\celsius}?
+        \item Welke temperatuur heerst er op een diepte van \SI{800}{\meter}?
+        \end{enumerate}
+    \end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item 
+$T_1(t)=10+\frac{t}{32}$ met $t$ het aantal meter grond dieper dan \SI{25}{\meter} onder de grond
+\begin{enumerate}
+\item Zoek $t$ zodat $T_1(t)=15$: op diepte van \SI{185}{\meter} onder de grond bedraagt de temperatuur \SI{15}{\celsius}.
+\item $T_1(960)=40$, dus \SI{40}{\celsius}
+\end{enumerate}
+\item $T_2(t)=-5+\frac{t}{32}$ met $t$ het aantal meter onder de grond
+\begin{enumerate}
+\item Zoek $t$ zodat $T_2(t)=0$ geeft $t=160$, dus \SI{160}{meter} onder de grond bedraagt de temperatuur \SI{0}{\celsius}
+\item $T_2(800)=20$, dus \SI{800}{meter} onder de grond is het \SI{20}{\celsius}
+\end{enumerate}
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+
+
+
+
+\begin{oef}
+ De hoeveelheid  radium halveert om de  1656 jaar.
+    \begin{enumerate}
+        \item Hoeveel vermindert de hoeveelheid radium
+            procentueel per jaar?
+        \item Schrijf de functie  die de hoeveelheid radium op tijdstip
+            $t$ weergeeft, als de initi\"ele hoeveelheid radium $y_0$
+            bedraagt, waarbij $t$ uitgedrukt is in jaren.
+        \item Hoeveel gram radium blijft er over van \SI{1}{\gram} na 20
+            jaar?
+    \end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item groeifactor per 1656 jaar: $\frac12$; groeifactor per jaar: $\left(\frac{1}{2}\right)^\frac{1}{1656}=0,9995815$ zodat de procentuele afname gelijk is aan \SI{0,0418480}{\percent}.
+\item $R(t)=y_0\cdot \left(\frac{1}{2}^\frac{1}{1656}\right)^t$
+\item $R(20)=\left(\frac{1}{2}^\frac{1}{1656}\right)^{20}=0,9916636$, dus er blijft \SI{0.9916636}{\gram} over.
+\end{enumerate}
+\end{opl}
+       \end{oef}
+
+
+\begin{oef}
+ Een auto verliest jaarlijks \SI{18}{\percent} van zijn waarde.
+    \begin{enumerate}
+\item Hoeveel \% van de oorspronkelijke waarde blijft er over na 2, 3, 6, 10 jaar?
+\item Wat zal de waarde zijn van een auto binnen 6 jaar, als de auto nu \euros{12\,500} bedraagt? 
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+\item Na 2 jaar: \SI{67}{\percent}; na 3 jaar: \SI{55}{\percent}; na 6 jaar: \SI{30}{\percent}; na 10 jaar: \SI{14}{\percent}.
+\item $12~500\cdot\frac{30}{100}=3800$
+\end{enumerate}
+\end{opl}
+\end{oef}
+
+\begin{oef}
+ Stel dat je eerste over-over-over-grootvader met Belgische nationaliteit in 1830 precies \'e\'en eurocent bij een bank zou hebben uitgezet tegen een samengestelde intrest van \SI{5}{\percent}, hoeveel zou je dan nu ontvangen?
+  \begin{opl}
+  Groeifunctie: $B(t)=1,05^t$: bedrag in eurocent, $t$ jaar na 1830\\
+  Nu is het 2012, dus bereken $B(182)=7185,42$\\
+  In 2012 zou je \euros{71,85} ontvangen.
+  \end{opl}
+   
+        
+  \end{oef}
+
+
+
+
+%\end{document}

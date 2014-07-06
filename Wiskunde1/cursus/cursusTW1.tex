@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 24/06/2013 [Greetje]: kopie voor 1314 en fouten verbeterd
+% 11/2012 [Jan]: enkele fouten gesignaleerd door collega's en studenten verbeterd
+% 9/2012 [Jan]: Nieuwe kopie op basis van vorige cursus
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{AlgemeneInstellingen}
+
+
+%\includeonly{oefeningen/explog}
+\begin{document}
+
+\includepdf{voorblad1314}
+%\include{eersteblad}
+
+\frontmatter
+\tableofcontents
+\include{cursusfiche}
+%\include{formularium} is apart document...
+%\tableofcontents
+
+\mainmatter
+\include{verzamelingenleer}
+\include{relaties}
+\include{eerstegraadsfuncties}
+\include{LP-theorie}
+\newpage 
+\include{oefeningen/oefLP}
+\newpage 
+\include{groei}
+\newpage 
+\include{oefeningen/oefgroei}
+\include{expfuncties}
+\newpage 
+\include{oefeningen/explog}
+\newcounter{tijd}
+%\include{rijen}
+%\newpage 
+%\include{oefeningen/oefrijen}
+\newpage
+\newcounter{vb}
+\include{logica}
+\newpage
+\include{PeL}
+\include{scilab}
+\chapter{Oplossingen}
+ \Closesolutionfile{ans}  
+ \input{ans1}
+\end{document}

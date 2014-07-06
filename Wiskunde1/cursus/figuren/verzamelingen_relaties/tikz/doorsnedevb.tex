@@ -1,0 +1,20 @@
+%doorsnedevoorbeeld
+\begin{tikzpicture}[thick]
+\begin{scope}
+    \clip \firstellipse;
+    \fill[fill=gray!30] \secondellipse;
+\end{scope}
+\draw \firstellipse node at (35:3.7cm) {$Y$};
+\draw \secondellipse node at (145:3.7cm) {$X$};
+\draw[fill] (-1.5,1.6) \bol node [above] {1};
+\draw[fill] (-2.3,1.4) \bol node [above] {2};
+\draw[fill] (-1.2,1) \bol node [above] {3};
+\draw[fill] (-1.3,0) \bol node [above] {4};
+\draw[fill] (-2,0.7) \bol node [above] {5};
+\draw[fill] (0,1.4) \bol node [above] {6};
+\draw[fill] (-0.4,1) \bol node [above] {7};
+\draw[fill] (0.3,0.5) \bol node [above] {8};
+\draw[fill] (1.5,1.7) \bol node [above] {9};
+\draw[fill] (2,1) \bol node [above] {10};
+\draw[fill] (1.7,0.3) \bol node [above] {\ldots};
+\end{tikzpicture} 

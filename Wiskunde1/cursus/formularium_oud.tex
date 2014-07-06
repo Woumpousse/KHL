@@ -1,0 +1,138 @@
+\documentclass[10pt]{article}
+\input kvmacros
+
+
+\textwidth16.cm \oddsidemargin-1.cm \textheight23.cm
+\topmargin-1.cm
+\newcommand{\mysection}[1]{\vspace{1.em} \noindent {\bf {\large #1}}}
+\newcommand{\im}[1]{\begin{itemize} #1 \end{itemize}}
+\newcommand{\mym}[1]{${\displaystyle #1}$}
+\newcommand{\en}{$\wedge$}
+\newcommand{\of}{$\vee$}
+\newcommand{\niet}{$\neg$}
+\newcommand{\D}{{\rm D}}
+
+\usepackage{multicol}
+\usepackage{palatino}
+\usepackage{mathpazo}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center} {\bf {\huge Formularium Wiskunde}}\end{center}
+
+\vspace{1.5em}
+
+\begin{multicols}{2}
+\mysection{Nulpunten kwadratische functie} \im{
+\item {\bf Voorschrift:} \mym{ y(x)=ax^2+bx+c}
+\item {\bf Nulpunten:} \mym{x_{1,2}=\frac{-b\pm \sqrt{b^2-4ac}}{2a}}
+}
+
+\mysection{Propositielogica \& Boolse algebra} \im{ \item {\bf
+Symbolen} \\
+\begin{tabular}{p{3.cm}p{0.5cm}c}
+Conjunctie (en):&\en&$\cdot$\\
+
+Disjunctie (of):&\of&$+$\\
+
+Negatie (niet):&\niet&$\overline x$
+\end{tabular}
+
+\item {\bf Eigenschappen} \\
+$\overline{\overline{x}}=x$ \\
+\begin{tabular}{c|c} Optelling &
+Vermenigvuldiging \\ \hline
+ $x+0=x$ & $x\cdot 1=x$ \\
+ $x+\overline x=1$ & $x\cdot \overline x =0$  \\
+  $x+1=1$ & $x \cdot 0 = 0$ \\
+  $x+x=x$ & $x \cdot x = x$ \\
+ $x+(y+z)= $ & $x \cdot (y \cdot z)=(x \cdot y) \cdot z$ \\
+ $\qquad(x+y)+z$ & \\
+ $\overline{x+y}=\overline{x} \cdot \overline{y}$ & $\overline{x \cdot y}=\overline{x}+\overline{y}$ \\
+ $x+(x \cdot y)=x$ & $x \cdot (x+y)=x$ \\
+
+\end{tabular}
+\item {\bf Distributiviteit}\\
+ $x+y\cdot z=(x+y)(x+z) $
+ \\ $x\cdot (y+z)=x\cdot y + x\cdot z$
+\item {\bf Karnaugh-afbeeldingen} \\
+\karnaughmap{3}{}{abc}{}{}\\ \karnaughmap{4}{}{abcd}{}{} }
+
+
+\mysection{Exponenti\"ele \& logaritmische functies} \im{
+\item \mym{\log_g(x)=y\Leftrightarrow g^y=x}
+\item {\bf Rekenregels:}
+\im{ \item \mym{g^{x+y}=g^x\cdot g^y}
+\item \mym{\left(g^x\right)^y=\left(g^y\right)^x=g^{x\cdot y}}
+\item \mym{g^{-x}=\frac1{g^x}}
+\item \mym{\log_g(x\cdot y)=\log_g(x)+\log_g(y)}
+\item \mym{\log_g(x^y)=y\log_g(x)}
+\item \mym{\log_g\left(\frac1x\right)=-\log_g(x)}}
+}
+
+\mysection{Rijen en financi\"ele toepassingen} \im{
+\item {\bf Rekenkundige rij}
+\im{
+\item $n^{de}$ {\it element:} \mym{t_n=t_1+(n-1)\cdot v}
+\item {\it Partieelsom:} \mym{S_n=n\cdot \frac{t_1+t_n}2}
+\item {\it Rek. gemid.:} \mym{G=\frac{t_1+t_2+\dots +t_n}n}
+}
+\item {\bf Meetkundige rij}
+\im{
+\item $n^{de}$ {\it element:} \mym{t_n=t_1\cdot r^{n-1}}
+\item {\it Partieelsom:} \mym{T_n=t_1\cdot \frac{r^n-1}{r-1}}
+\item {\it Mtk. gemid.:} \mym{G=\pm \sqrt[n]{t_1\cdot t_2\cdot\dots \cdot t_n}}
+} }
+
+\end{multicols}
+
+\newpage
+\begin{center} {\bf {\huge Formularium Euler}}\end{center}
+
+\vspace{1.5em}
+
+%\begin{multicols}{2}
+\mysection{Rekenen in Euler}
+
+\vspace{1.em}
+
+\begin{tabular}{p{4.cm}l} Vierkantswortel: & \verb/sqrt(x)/\\ Macht: &
+\verb/x^y/\\ Absolute waarde: & \verb/abs(x)/\\ Afronden naar
+beneden: & \verb/floor(x)/\\ $\ln(x)$&\verb/log(x)/\\
+\mym{e^x}&\verb/exp(x)/\\ $\pi$&\verb/pi/ \\ $x=3,3.5,4,4.5,5$ &
+\verb/x=3:0.5:5/
+\end{tabular}
+
+\mysection{Functies}
+
+\vspace{1.em}
+\begin{tabular}{p{4.cm}l}
+Instellen: &\verb/function f(x)/\\
+            & \verb/return x / \\
+            & \verb/endfunction /\\
+Tekenen:    & \verb/setplot(x1,x2,y1,y2); fplot("f")/ \\
+            & of \verb/fplot("f",x1,x2)/\\
+Meerdere functies: & \verb/hold on; hold off/\\ Functieopmaak:  &
+\verb/linewidth(x)/\\
+            & \verb/color(x)/\\
+            & \verb/linestyle("--")/\\
+\end{tabular}
+
+\mysection{Numerisch nulpunten zoeken}
+
+\vspace{1.em}
+
+\begin{tabular}{p{4.cm}l}
+Nulpunt van $f(x)$ & \verb/a=3; root("f(a)",a)/ \\
+
+Nulpunt van $x^2-3$ & \verb/a=-3; root("a^2-3",a)/\\
+
+Op grafiek & \verb/fplot("f",-10,10); mouse()/
+
+\end{tabular}
+
+\vfill
+\begin{center}  Academiejaar 2006--2007 \end{center}
+
+%\end{multicols}
+\end{document}

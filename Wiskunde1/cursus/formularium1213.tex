@@ -1,0 +1,150 @@
+\documentclass[10pt]{article}
+\input kvmacros
+\newcommand{\en}{\wedge}
+\newcommand{\of}{\vee}
+\newcommand{\niet}{\neg}
+\newcommand{\alsdan}{\rightarrow}
+\newcommand{\asa}{\leftrightarrow}
+
+
+\textwidth16.cm%\oddsidemargin-.cm 
+%\textheight23.cm
+%\topmargin-.cm
+\newcommand{\mysection}[1]{\vspace{1.em} \noindent {\bf {\large #1}}}
+\newcommand{\im}[1]{\begin{itemize} #1 \end{itemize}}
+\newcommand{\mym}[1]{${\displaystyle #1}$}
+\newcommand{\D}{{\rm D}}
+
+\usepackage{multicol}
+\usepackage{palatino}
+\usepackage{mathpazo}
+
+\begin{document}
+\renewcommand{\arraystretch}{1.5} % extra verticale ruimte in tabellen
+
+\pagestyle{empty}
+\noindent
+{\bf {\huge Formularium Wiskunde}}
+
+\vspace{1.5em}
+
+%\begin{multicols}{1}
+\mysection{Nulpunten kwadratische functie} \\
+
+\noindent
+{\bf Voorschrift:} \mym{ y(x)=ax^2+bx+c}\\ \\
+{\bf Nulpunten:} \mym{x_{1,2}=\frac{-b\pm \sqrt{b^2-4ac}}{2a}}
+\\
+
+\mysection{Exponenti\"ele \& logaritmische functies} \\
+
+\begin{tabular}{l}
+\noindent \mym{\log_g(x)=y\Leftrightarrow g^y=x} \\
+\end{tabular}\\
+
+\noindent {\bf Rekenregels}
+
+\begin{tabular}{l}
+\mym{g^{x+y}=g^x\cdot g^y}\\
+\mym{\left(g^x\right)^y=\left(g^y\right)^x=g^{x\cdot y}}\\
+\mym{g^{-x}=\frac1{g^x}}\\
+\mym{\log_g(x\cdot y)=\log_g(x)+\log_g(y)}\\
+ \mym{\log_g(x^y)=y\log_g(x)}\\
+\mym{\log_g\left(\frac1x\right)=-\log_g(x)}
+\end{tabular}\\
+
+\mysection{Meetkunde} \\
+
+\noindent
+\textbf{Omtrek cirkel:} $2\cdot \pi R$\\
+\textbf{Oppervlakte cirkel: } $\pi R^2$
+\\
+
+\mysection{Propositielogica}\\
+
+\begin{tabular}{cc}
+en & $\en$ \\  
+of & $\of$ \\ 
+niet & $\niet$ \\ 
+\end{tabular} 
+
+
+
+
+%\end{multicols}
+
+\newpage
+%\topmargin-1.cm
+%\textheight29.cm
+
+
+\noindent
+{\bf {\huge Formularium Scilab}}
+
+\vspace{0.5em}
+
+\begin{multicols}{2}
+\mysection{Rekenen in Scilab}\\
+
+\begin{tabular}{p{4.cm}l} Vierkantswortel: & \verb/sqrt(x)/\\ Macht: &
+\verb/x^y/\\ Absolute waarde: & \verb/abs(x)/\\ $\ln(x)$&\verb/log(x)/\\
+\mym{e^x}&\verb/exp(x)/\\ $\pi$&\verb/%pi/ \\
+$true,~false$&\verb/%T, %F/
+\end{tabular}
+
+\mysection{Logische operatoren}\\
+
+\begin{tabular}{|c|c|}
+\hline
+
+{\sc en, of} & \verb/*, + / of \verb/ &, |/ \\ \hline
+
+$\neq,~=$ & \verb/~=, ==/ \\ \hline
+
+$<,~>,~\leq$    & \verb/<, >, <=/ \\ \hline
+
+\end{tabular}
+
+
+\end{multicols}
+\mysection{Vectoren}\\
+
+\begin{tabular}{|p{7.3cm}|p{5.5cm}|}
+\hline
+
+definitie vector    &   \verb+V=[1,1.5,2,2.5,3]=1:0.5:3+ \\
+
+vectorelement       &   \verb+V(2)+\\
+
+vector met $4$ elementen, alle gelijk aan
+$0$   resp. $1$              & \verb+zeros(4,1)+, \verb+ones(4,1)+ \\
+
+lengte van de vector $V$ & \texttt{length(V)}\\
+
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+\mysection{Functies}\\
+
+\begin{tabular}{p{4.cm}l}
+Defini\"eren: &\verb/function y=mijnFunctie(x)/\\
+            & \verb/y=2*x / \\
+            & \verb/endfunction /\\
+Tekenen:    & \verb/clf; xgrid; x=0:10; plot(x,mijnFunctie)/ \\
+
+\end{tabular}\\
+
+\mysection{Programmeren}\\
+
+\begin{tabular}{p{4.cm}l}
+Lussen & \verb/for y=1:x ... end/ of \verb/while y<x ... end/ \\
+Voorwaardelijk statement & \verb/if x==2 ... elseif ... else ... end/ \\
+\end{tabular}\\
+
+%\vfill
+\begin{center}  Academiejaar 2012--2013 \end{center}
+
+%\end{multicols}
+\end{document}
