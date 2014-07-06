@@ -16,6 +16,7 @@ module Questions
   #
   class FillInQuestion < Question
     TOLEDO_PREFIX = 'FIB'
+    NAME = 'FILLIN'
 
     def initialize(text, answers)
       Types.check(binding, {
@@ -51,6 +52,7 @@ module Questions
   #
   class MultipleFillInQuestion < Question
     TOLEDO_PREFIX = 'FIB_PLUS'
+    NAME = 'MULTIFILLIN'
 
     def initialize(text, pairs)
       Types.check(binding, {
@@ -87,6 +89,7 @@ module Questions
   #
   class MultipleAnswerQuestion < Question
     TOLEDO_PREFIX = 'MA'
+    NAME = 'MULTIPLE ANSWER'
 
     def initialize(text, pairs)
       Types.check(binding, {
@@ -120,10 +123,25 @@ module Questions
 
 
   #
-  # MultipleAnswerQuestion
+  # TrueFalseQuestion
   #
   class TrueFalseQuestion < Question
     TOLEDO_PREFIX = 'TF'
+    NAME = 'TRUE/FALSE'
+
+    def self.parse_hash(hash)
+      Types.check(binding, { 'hash' => Hash })
+
+      text = hash['text']
+      answer = hash['answer']
+
+      Types.check(binding, {
+                    'text' => String,
+                    'answer' => Types.one_of(true, false)
+                  })
+
+      TrueFalseQuestion.new(text, answer)
+    end
 
     def initialize(text, answer)
       Types.check(binding, {
@@ -140,11 +158,11 @@ module Questions
 
     def to_s
       <<-END.unindent
-      TrueFalseQuestion
-        Text:
-        #{@text}
-        Answer:
-        #{@answer}
+TrueFalseQuestion
+  Text:
+#{@text.indent(4)}
+  Answer:
+    #{@answer}
       END
     end
 
@@ -152,10 +170,33 @@ module Questions
   end
 
 
-  def Questions.parse_hash(hash)
-    Types.check(binding, { hash => Hash })
+  def Questions.question_classes
+    Questions.classes.select do |c|
+      c.constants.member?(:NAME)
+    end
+  end
 
-    case hash[:name]
-    when 
+  def Questions.class_with_name(name)
+    Types.check(binding, { 'name' => String })
+
+    result = question_classes.select do |c|
+      c::NAME == name
+    end
+
+    raise "Unknown question type #{name}" unless result.length == 1
+
+    result[0]
+  end
+
+  def Questions.parse_hash(hash)
+    Types.check(binding, { 'hash' => Hash })
+
+    question_class = hash['question class']
+
+    if String === question_class then
+      question_class = class_with_name(hash[:name])
+    end
+
+    question_class.parse_hash(hash)
   end
 end
