@@ -253,9 +253,9 @@ X-Y=\{a\mid a\in X ~\mathbf{en}~a\not \in Y\}
 \end{equation*}
 Bijvoorbeeld
 \begin{itemize}
-\item $X=\{1,2,3,4\}$ en $Y=\{ 3,4,5,6\}$ geeft $X-Y=\{1,2\}$ (zie figuur~\ref{fig:verschil_voorbeeld})
-\item $X=\{a\mid a ~\mathrm{is~gebruikersnaam~die~voldoet~aan~voorwaarden}\}$ en \\$Y=\{a\mid a~\mathrm{is~reeds~toegewezen~gebruikersnaam}\}$ geeft 
-\\$X-Y=\{a\mid a~\mathrm{is~toegelaten~nieuwe~gebruikersnaam}\}$
+  \item $X=\{1,2,3,4\}$ en $Y=\{ 3,4,5,6\}$ geeft $X-Y=\{1,2\}$ (zie figuur~\ref{fig:verschil_voorbeeld})
+  \item $X=\{a\mid a ~\mathrm{is~gebruikersnaam~die~voldoet~aan~voorwaarden}\}$ en \\$Y=\{a\mid a~\mathrm{is~reeds~toegewezen~gebruikersnaam}\}$ geeft \\
+        $X-Y=\{a\mid a~\mathrm{is~toegelaten~nieuwe~gebruikersnaam}\}$
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -649,13 +649,99 @@ De drie Venndiagrammen van figuur~\ref{fig:Venn3} op pagina~\pageref{fig:Venn3} 
 \begin{oef}
 Gegeven de verzamelingen $A,B\subset U$. Duid aan op een venndiagram
 \begin{enumerate}
-\item $  (A^c)^c \union B$
-\item $A\intersection  B^c$
-\item $(A\intersection B)^c$
-\item $ A^c \union  B^c$
-\item $ (A\union B)^c$
-\item $ A^c \intersection  B^c$
+  \item $(A^c)^c \union B$
+  \item $A\intersection  B^c$
+  \item $(A\intersection B)^c$
+  \item $A^c \union  B^c$
+  \item $(A\union B)^c$
+  \item $A^c \intersection B^c$
 \end{enumerate}
+
+\begin{opl}
+{
+\def\labels{
+  \node[anchor=south east] at (-1.55,.6) {$A$};
+  \node[anchor=south west] at (1.55,.6) {$B$};
+}
+\def\universe{(-2.5,-1.5) rectangle +(5,3)}
+\def\ellA{(-.9,0) ellipse (1.25cm and 0.75cm)}
+\def\ellB{(.9,0) ellipse (1.25cm and 0.75cm)}
+\pgfkeys{/tikz/.cd,
+         highlight/.style={fill=gray!30},
+         empty/.style={fill=white},
+         outline/.style={fill=none}}
+
+\begin{center}
+\begin{tabular}{cc}
+  1.
+  \begin{tikzpicture}
+    \draw[thick] \universe;
+    \draw[highlight] \ellA;
+    \draw[highlight] \ellB;
+    \draw[outline] \ellA;
+    \labels
+  \end{tikzpicture}
+  &
+  2.
+  \begin{tikzpicture}
+    \draw[thick] \universe;
+    \draw[highlight] \ellA;
+    \draw[empty] \ellB;
+    \draw[outline] \ellA;
+    \labels
+  \end{tikzpicture}
+  \\
+  3.
+  \begin{tikzpicture}
+    \draw[thick,highlight] \universe;
+    \begin{scope}
+      \clip \ellA;
+      \clip \ellB;
+      \draw[empty] \ellA;
+    \end{scope}
+
+    \draw[outline] \ellA;
+    \draw[outline] \ellB;
+    \labels
+  \end{tikzpicture}
+  &
+  4.
+  \begin{tikzpicture}
+    \draw[thick,highlight] \universe;
+    \begin{scope}
+      \clip \ellA;
+      \clip \ellB;
+      \draw[empty] \ellA;
+    \end{scope}
+
+    \draw[outline] \ellA;
+    \draw[outline] \ellB;
+    \labels
+  \end{tikzpicture}
+  \\
+  5.
+  \begin{tikzpicture}
+    \draw[thick,highlight] \universe;
+    \draw[empty] \ellA;
+    \draw[empty] \ellB;
+    \draw[outline] \ellA;
+    \labels
+  \end{tikzpicture}
+  &
+  6.
+  \begin{tikzpicture}
+    \draw[thick,highlight] \universe;
+    \draw[empty] \ellA;
+    \draw[empty] \ellB;
+    \draw[outline] \ellA;
+    \labels
+  \end{tikzpicture}
+\end{tabular}
+\end{center}
+}
+\vskip2mm
+\noindent Merk op dat $(A \union B)^c = A^c \intersection B^c$ en $(A \intersection B)^c = A^c \union B^c$.
+\end{opl}
 \end{oef}
 
 
@@ -663,15 +749,15 @@ Gegeven de verzamelingen $A,B\subset U$. Duid aan op een venndiagram
 \begin{oef}
 Zij $A$,$B$,$C$ en $D$ verzamelingen. Bepaal of de volgende beweringen waar of onwaar zijn. Toon je antwoord aan met venndiagrammen.
 \begin{enumerate}
-\item Als $C\subset D^c$, dan is $D \not \subset C^c$
-\item Als $C\not \subset D$, dan is $D^c \not \subset C^c$
-\item Als $A\subset B$, dan is $A\intersection B =A$
+  \item Als $C\subset D^c$, dan is $D \not \subset C^c$
+  \item Als $C\not \subset D$, dan is $D^c \not \subset C^c$
+  \item Als $A\subset B$, dan is $A\intersection B =A$
 \end{enumerate}
 \begin{opl}
 \begin{enumerate}
-\item niet waar: als $D \not \subset C^c$, is er  een element van $D$ dat geen element is van $C^c$, dus element is van $C$. Dan hebben we een element van $C$ gevonden dat tevens element is van $D$.
-\item waar
-\item waar
+  \item niet waar: als $D \not \subset C^c$, is er  een element van $D$ dat geen element is van $C^c$, dus element is van $C$. Dan hebben we een element van $C$ gevonden dat tevens element is van $D$.
+  \item waar
+  \item waar
 \end{enumerate}
 \end{opl}
 \end{oef}
@@ -680,22 +766,22 @@ Zij $A$,$B$,$C$ en $D$ verzamelingen. Bepaal of de volgende beweringen waar of o
 \begin{oef}
 Geef door opsomming
 \begin{enumerate}
-\item $A=\{x \in \mathbb{R} | (x-1)\cdot(x-2)=6\}$
-\item $B=\{10\cdot x|x\in\mathbb{Z} \}$
-\item $C=\{ x\in \mathbb{N}| x \textrm{ is een deler van } 6\}$
-\item $U = \{(x, y) \in A \times B|y = 2\cdot x + 10\}$ waarbij $A = \{0,1,2,\cdots,6\}$ en \\$B = \{10,11,12,\dots,20\}$
-\item $V = \{(x, y) \in A \times B|y = x - 10\}$ waarbij  $A = \{10,11,12,\dots,20\}$ en \\ $B = \{0,1,2,\cdots,6\}$
-\item $W = \{(x, y) \in A \times  B|y = \sqrt{x}\}$ waarbij $A=\{-4,-1,0,1,4,9\}$ en \\ 
-$B=\{-3,-2,-1,0,1,2,3\}$
+  \item $A=\{x \in \mathbb{R} | (x-1)\cdot(x-2)=6\}$
+  \item $B=\{10\cdot x|x\in\mathbb{Z} \}$
+  \item $C=\{ x\in \mathbb{N}| x \textrm{ is een deler van } 6\}$
+  \item $U = \{(x, y) \in A \times B|y = 2\cdot x + 10\}$ waarbij $A = \{0,1,2,\cdots,6\}$ en \\$B = \{10,11,12,\dots,20\}$
+  \item $V = \{(x, y) \in A \times B|y = x - 10\}$ waarbij  $A = \{10,11,12,\dots,20\}$ en \\ $B = \{0,1,2,\cdots,6\}$
+  \item $W = \{(x, y) \in A \times  B|y = \sqrt{x}\}$ waarbij $A=\{-4,-1,0,1,4,9\}$ en \\ 
+        $B=\{-3,-2,-1,0,1,2,3\}$
 \end{enumerate}
 \begin{opl}
 \begin{enumerate}
-\item $A=\{4,-1 \}$
-\item $B=\{0,10,-10,20,-20,\dots \}$
-\item $C=\{1,2,3,6 \}$
-\item $U=\{(0,10),(1,12),(2,14),(3,16),(4,18),(5,20) \}$
-\item  $V=\{(10,0),(11,1),\dots, (16,6\}$
-\item $W=\{(0,0),(1,1),(4,2),(9,3) \}$
+  \item $A=\{4,-1\}$
+  \item $B=\{0,10,-10,20,-20,\dots\}$
+  \item $C=\{1,2,3,6\}$
+  \item $U=\{(0,10),(1,12),(2,14),(3,16),(4,18),(5,20)\}$
+  \item $V=\{(10,0),(11,1),\dots, (16,6\}$
+  \item $W=\{(0,0),(1,1),(4,2),(9,3)\}$
 \end{enumerate}
 \end{opl}
 \end{oef}
@@ -784,7 +870,7 @@ Zij $U$ de dagen van vorige week; $A$ de dagen met zon; $B$ de dagen met kou; $C
 \label{fig:dagen}
 \end{figure}
 \begin{enumerate}
-\item	Geef door omschrijving:
+\item Geef door omschrijving:
 \begin{enumerate}
 \item $A\intersection B$
 \item $(A\intersection C)-B$
