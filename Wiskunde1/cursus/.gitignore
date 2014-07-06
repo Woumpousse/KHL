@@ -1,4 +1,9 @@
 *.aux
 *.toc
-cursusTW1.pdf
+*.pdf
 *.log
+*.idx
+*.ilg
+*.ind
+*.out
+ans1.tex

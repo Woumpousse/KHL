@@ -38,7 +38,9 @@
 %\usepackage[adobe-utopia]{mathdesign}
 \usepackage[bitstream-charter]{mathdesign}
 %\usepackage[colorlinks,citecolor=spot,linkcolor=spot,urlcolor=spot]{hyperref} %Voor screenpdf
+\usepackage{makeidx}
 \usepackage{hyperref}
+
 
 
 \usetikzlibrary{patterns,topaths,arrows,calc,decorations.markings,positioning}
@@ -104,6 +106,8 @@
 \newcommand{\mysection}[1]{\vspace{1.em} \noindent {\bf {\large #1}}}
 \newcommand{\im}[1]{\begin{itemize} #1 \end{itemize}}
 \newcommand{\mym}[1]{${\displaystyle #1}$}
+\newcommand{\union}{\cup}
+\newcommand{\intersection}{\cap}
 
 \newcommand{\voorbeeld}{
 \refstepcounter{vb}%
@@ -122,3 +126,5 @@
 \lstset{language=Scilab,basicstyle=\ttfamily \footnotesize,backgroundcolor=\color{white},
 frame=single,framerule=0.5pt,rulecolor=\color{gray},tabsize=2,numbers=none,showstringspaces=false}
 \lstdefinestyle{inline} {basicstyle=\normalsize \ttfamily}
+
+\makeindex
