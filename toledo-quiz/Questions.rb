@@ -1,25 +1,5 @@
 require './Types.rb'
-
-module Enumerable
-  def intersperse(item)
-    map do |elt|
-      [ item, elt ]
-    end.flatten(1).drop(1)
-  end
-end
-
-class String
-  def unindent
-    indentation = lines.map do |line|
-      line =~ /^( *)/
-      $1.length
-    end.min
-
-    lines.map do |line|
-      line[indentation..-1]
-    end.join
-  end
-end
+require './Shared.rb'
 
 module Questions
 
@@ -135,12 +115,47 @@ module Questions
       END
     end
 
-    attr_reader :text, :answers
+    attr_reader :text, :pairs
   end
 
-end
 
-include Questions
-q1 = MultipleFillInQuestion.new("x", [ ["T1", "5"], ["T2", "8"] ])
-q2 = MultipleAnswerQuestion.new("?", [ ["x", true], ["y", false] ])
-puts q2.toledo
+  #
+  # MultipleAnswerQuestion
+  #
+  class TrueFalseQuestion < Question
+    TOLEDO_PREFIX = 'TF'
+
+    def initialize(text, answer)
+      Types.check(binding, {
+                    'text' => String,
+                    'answer' => Types.one_of(true, false)
+                  } )
+
+      @text, @answer = text, answer
+    end
+
+    def toledo
+      format_toledo(TOLEDO_PREFIX, [ text, if @answer then "waar" else "onwaar" end ])
+    end
+
+    def to_s
+      <<-END.unindent
+      TrueFalseQuestion
+        Text:
+        #{@text}
+        Answer:
+        #{@answer}
+      END
+    end
+
+    attr_reader :text, :answer
+  end
+
+
+  def Questions.parse_hash(hash)
+    Types.check(binding, { hash => Hash })
+
+    case hash[:name]
+    when 
+  end
+end
