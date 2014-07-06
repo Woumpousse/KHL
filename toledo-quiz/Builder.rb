@@ -1,3 +1,4 @@
+require './Shared.rb'
 require './Questions.rb'
 
 module Builder
@@ -38,7 +39,7 @@ module Builder
   def true_or_false(text, answer)
     scope do
       set('question class', Questions::TrueFalseQuestion)
-      set('text', text)
+      set('text', text.unindent)
       set('answer', answer)
 
       add_question

@@ -1,0 +1,39 @@
+\documentclass[a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{pxfonts}
+\usepackage{framed}
+\usepackage{booktabs}
+\usepackage{fancybox}
+
+% \newtheoremstyle{mytheoremstyle} % name
+%     {1cm}                        % Space above
+%     {1cm}                        % Space below
+%     {\rmfamily}                  % Body font
+%     {}                           % Indent amount
+%     {\scshape}                   % Theorem head font
+%     {.}                          % Punctuation after theorem head
+%     {.5em}                       % Space after theorem head
+%     {}                           % Theorem head spec (can be left empty, meaning 'normal')
+
+% \theoremstyle{mytheoremstyle}
+
+\newenvironment{exercise}{
+  \begin{framed}}{
+  \end{framed}}
+
+
+
+
+\pagestyle{empty}
+
+\begin{document}
+
+#QUESTION
+\begin{exercise}
+#[text]
+% Antwoord: #[answer]
+\end{exercise}
+\clearpage
+#END
+
+\end{document}
