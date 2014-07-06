@@ -1,1 +1,10 @@
 *~
+*.aux
+*.toc
+*.log
+*.idx
+*.ilg
+*.ind
+*.out
+*.nav
+*.snm
