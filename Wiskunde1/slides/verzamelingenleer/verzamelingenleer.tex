@@ -3,6 +3,7 @@
 \usepackage{pxfonts}
 \usepackage{tikz}
 \usepackage{calc}
+\usepackage{fourier}
 
 \usetikzlibrary{calc,shadows}
 
@@ -17,9 +18,9 @@
 \institute[KHL]{KHLeuven}
 
 
-\newcommand{\element}[2]{
-  \draw[fill=black] (#1) circle (.05);
-  \node[anchor=south west] at (#1) {#2};
+\newcommand{\element}[3][]{
+  \draw[fill=black] (#2) circle (.05);
+  \node[anchor=south west,#1] at (#2) {#3};
 }
 
 \newcommand{\AND}{\vee}
@@ -158,8 +159,9 @@
 \begin{frame}
   \frametitle{Gevolgen}
   \begin{itemize}
-    \item Lege verzameling is deelverzameling van elke verzameling
+    \item De lege verzameling is deelverzameling van elke verzameling
           \[ \emptyset \subset X \]
+          \vskip4mm
     \item Link met gelijkheid
           \[ X \subset Y \quad\textrm{en}\quad Y \subset X \qquad\iff\qquad X = Y \]
   \end{itemize}
@@ -231,6 +233,26 @@
 
 \begin{frame}
   \frametitle{Cartesisch product}
+  \begin{center}
+    \begin{tikzpicture}
+      \draw[outline] (-2,0) ellipse (1.5cm and 2cm);
+      \node[anchor=south east] at (-2.5,1.8) {A};
+      \draw[outline] (2,0) ellipse (1.5cm and 2cm);
+      \node[anchor=south west] at (2.5,1.8) {B};
+
+      \element[anchor=south east]{-2,0.5}{a}
+      \element[anchor=south east]{-2,-0.5}{b}
+      \element{2,1}{1}
+      \element{2,0}{2}
+      \element{2,-1}{3}
+
+      \foreach \x in {0.5,-0.5} {
+        \foreach \y in {1,0,-1} {
+          \draw (-2,\x) -- (2,\y);
+        }
+      }
+    \end{tikzpicture}
+  \end{center}
   \[
     \begin{array}{rcl}
       \mathrm{A} & = & \{ \mathrm{a}, \mathrm{b} \} \\
@@ -238,21 +260,56 @@
       \mathrm{A} \times \mathrm{B} & = & \{ ( \mathrm{a}, 1 ), (\mathrm{a}, 2 ), (\mathrm{a}, 3 ), ( \mathrm{b}, 1 ), (\mathrm{b}, 2 ), (\mathrm{b}, 3 ) \}
     \end{array}
   \]
-  \vskip5mm
+  \vskip2mm
   \[
     X \times Y = \{ \; (x, y) \;|\; x \in X \;\mathrm{en}\; y \in Y \}
   \]
 \end{frame}
 
 \begin{frame}
-  \frametitle{Gevolgen}
-  \begin{itemize}
-    \item $X \union \emptyset = \emptyset \union X = X$
-    \item $X \union Y = Y \union X$
-    \item $X \intersect \emptyset = \emptyset \intersect X = \emptyset$
-    \item $X \intersect Y = Y \intersect X$
+  \frametitle{Rekenregels}
+  \structure{Associativiteit}
+  \[
+    \begin{array}{rclclr}
+      X \union (Y \union Z) & = & (X \union Y) \union Z & = & X \union Y \union Z \\
+      X \intersect (Y \intersect Z) & = & (X \intersect Y) \intersect Z & = & X \intersect Y \intersect Z \\
+    \end{array}
+  \]
+  \structure{Commutativiteit}
+  \[
+    \begin{array}{rcl}
+      X \union Y & = & Y \union X \\
+      X \intersect Y & = & Y \intersect X
+    \end{array}
+  \]
+  \structure{Distributiviteit}
+  \[
+    \begin{array}{rcl}
+      X \union (Y \intersect Z) & = & (X \union Y) \intersect (X \union Z) \\
+      X \intersect (Y \union Z) & = & (X \intersect Y) \union (X \intersect Z) \\
+    \end{array}
+  \]
+\end{frame}
 
-  \end{itemize}
+\begin{frame}
+  \frametitle{Rekenregels}
+  \structure{Lege verzameling}
+  \[
+    \begin{array}{rclclr}
+      X \union \emptyset & = & X \\
+      X \intersect \emptyset & = & \emptyset \\
+      X - \emptyset & = & X \\
+      \emptyset - X & = & \emptyset \\
+    \end{array}
+  \]
+
+  \structure{Wetten van de Morgan}
+  \[
+    \begin{array}{rclclr}
+      (X \union Y)^c & = & X^c \intersect Y^c \\
+      (X \intersect Y)^c & = & X^c \union Y^c \\
+    \end{array}
+  \]
 \end{frame}
 
 
