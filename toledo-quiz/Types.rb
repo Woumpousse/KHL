@@ -33,6 +33,14 @@ module Types
       else
         tuple_of( t.map { |x| smart_predicate(x) } )
       end
+    when Hash
+      if t.size == 1 then
+        from, to = t.first
+
+        hash_of(smart_predicate(from), smart_predicate(to))
+      else
+        abort "Unrecognized predicate"
+      end
     else
       t
     end
@@ -76,6 +84,14 @@ module Types
     end
   end
 
+  def Types.hash_of(key_predicate, value_predicate)
+    predicate("{#{key_predicate.name} => #{value_predicate.name}}") do |hash|
+      Hash === hash and hash.to_a.all? do |key, val|
+        key_predicate.call(key) and value_predicate.call(val)
+      end
+    end
+  end
+
   def Types.one_of(*values)
     names = values.map do |value|
       value.to_s
@@ -83,6 +99,12 @@ module Types
 
     predicate(names) do |object|
       values.member?(object)
+    end
+  end
+
+  def Types.any
+    predicate("any") do |object|
+      true
     end
   end
 end
