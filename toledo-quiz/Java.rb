@@ -1,5 +1,6 @@
 require 'tmpdir.rb'
 require 'open3'
+require './Types.rb'
 
 module Java  
   class JavaError < StandardError
@@ -32,7 +33,53 @@ module Java
     end
   end
 
-  def self.compile(path)
+  def Java.must_compile(classes)
+    Types.check(binding, { 'classes' => {String => String} })
+
+    Dir.mktmpdir do |dir|
+      Dir.chdir(dir) do
+        write_classes_to_files(classes)
+        Java.compile('*.java')
+      end
+    end
+  end
+
+  def Java.must_not_compile(classes)
+    Types.check(binding, { 'classes' => {String => String} })
+
+    begin
+      must_compile(classes)
+      raise CompilationFailureError.new(classes)
+    rescue CompilationError
+      true
+    end
+  end      
+
+  private
+  def Java.find_class_name(code)
+    Types.check(binding, { 'code' => String })
+
+    matches = code.scan(/(class|interface) (\w+)/)
+
+    if matches.length != 1 then
+      abort "Could not find class name\n#{code}"
+    else
+      matches[0][1].strip
+    end
+  end
+
+  # Takes one string containing multiple class definitions and transforms it into a hash
+  def Java.split_in_files(code)
+    Types.check(binding, { 'code' => String })
+
+    Hash[ code.scan(/^class.*?(?=class|\z)/m).map do |class_code|
+      [ find_class_name(class_code), class_code ]      
+    end ]
+  end
+
+  def Java.compile(path)
+    Types.check(binding, { 'path' => String })
+
     Open3.popen3("javac #{path}") do |stdin, stdout, stderr, wait_thr|
       err = stderr.readlines.join
       
@@ -40,7 +87,12 @@ module Java
     end
   end
 
-  def self.run(path, main_class = "App")
+  def Java.run(path, main_class = "App")
+    Types.check(binding, {
+                  'path' => String,
+                  'main_class' => String
+                })
+
     Open3.popen3("java #{main_class}", :chdir=>path) do |stdin, stdout, stderr, wait_thr|
       err = stderr.readlines.join
 
@@ -50,47 +102,26 @@ module Java
     end
   end
 
-  def self.write_class_to_file(name, code)
-    raise "Name \"#{name}\" must be string" unless name.is_a?(String)
-    raise "Code \"#{code}\" must be string" unless code.is_a?(String)
+  def Java.write_class_to_file(name, code)
+    Types.check(binding, {
+                  'name' => String,
+                  'code' => String
+                })
 
     File.open("#{name}.java", "w") do |out|
         out.write(code)
       end
   end
 
-  def self.write_classes_to_files(classes)
+  def Java.write_classes_to_files(classes)
+    Types.check(binding, { 'classes' => {String => String} })
+
     classes.each_pair do |name, code|
       write_class_to_file(name, code)
     end
   end
 
-  # Takes a hash[filename=>code]
-  def self.must_compile(classes)
-    Dir.mktmpdir do |dir|
-      Dir.chdir(dir) do
-        write_classes_to_files(classes)
-        Java.compile('*.java')
-      end
-    end
-  end
-
-  def self.must_not_compile(classes)
-    begin
-      must_compile(classes)
-      raise CompilationFailureError.new(classes)
-    rescue CompilationError
-      true
-    end
-  end      
-
-  def self.find_class_name(code)
-    matches = code.scan(/(class|interface) (\w+)/)
-
-    if matches.length != 1 then
-      abort "Could not find class name\n#{code}"
-    else
-      matches[0][1].strip
-    end
-  end
 end
+
+
+Java.write_class_to_file(1,1)
