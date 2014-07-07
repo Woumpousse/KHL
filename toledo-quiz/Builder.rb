@@ -5,7 +5,6 @@ module Builder
   @@questions = []
   @@hash = Hash.new
 
-
   def scope
     begin
       old_hash = @@hash.clone
@@ -17,6 +16,10 @@ module Builder
 
   def set(key, val)
     @@hash[key] = val
+  end
+
+  def append(key, val)
+    @@hash[key] += val
   end
 
   def with(key, val)
@@ -32,6 +35,12 @@ module Builder
     end
   end
 
+  def difficulty(difficulty)
+    with('difficulty', difficulty) do
+      yield
+    end
+  end
+
   def add_question
     @@questions << Questions.parse_hash(@@hash)
   end
@@ -39,7 +48,28 @@ module Builder
   def true_or_false(text, answer)
     scope do
       set('question class', Questions::TrueFalseQuestion)
-      set('text', text.unindent)
+      append('text', text.unindent)
+      set('answer', answer)
+
+      add_question
+    end
+  end
+
+  def numeric(text, answer, delta=0)
+    scope do
+      set('question class', Questions::NumericQuestion)
+      append('text', text.unindent)
+      set('answer', answer)
+      set('delta', delta)
+
+      add_question
+    end
+  end
+
+  def fillin(text, answer)
+    scope do
+      set('question class', Questions::FillInQuestion)
+      append('text', text.unindent)
       set('answer', answer)
 
       add_question
@@ -48,5 +78,9 @@ module Builder
 
   def questions
     @@questions
+  end
+
+  def tex(template)
+    LaTeX.generate(questions, template)
   end
 end

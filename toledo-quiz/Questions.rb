@@ -18,6 +18,20 @@ module Questions
     TOLEDO_PREFIX = 'FIB'
     NAME = 'FILLIN'
 
+    def self.parse_hash(hash)
+      Types.check(binding, { 'hash' => Hash })
+
+      text = hash['text']
+      answers = hash['answers']
+
+      Types.check(binding, {
+                    'text' => String,
+                    'answers' => [String]
+                  })
+
+      FillInQuestion.new(text, answers)
+    end
+
     def initialize(text, answers)
       Types.check(binding, {
                     'text' => String,
@@ -53,6 +67,21 @@ module Questions
   class MultipleFillInQuestion < Question
     TOLEDO_PREFIX = 'FIB_PLUS'
     NAME = 'MULTIFILLIN'
+
+    def self.parse_hash(hash)
+      Types.check(binding, { 'hash' => Hash })
+
+      text = hash['text']
+      answers = hash['answers']
+
+      Types.check(binding, {
+                    'text' => String,
+                    'answers' => [ [String,String] ]
+                  })
+
+      MultipleFillInQuestion.new(text, answer)
+    end
+
 
     def initialize(text, pairs)
       Types.check(binding, {
@@ -90,6 +119,21 @@ module Questions
   class MultipleAnswerQuestion < Question
     TOLEDO_PREFIX = 'MA'
     NAME = 'MULTIPLE ANSWER'
+
+    def self.parse_hash(hash)
+      Types.check(binding, { 'hash' => Hash })
+
+      text = hash['text']
+      answers = hash['answers']
+
+      Types.check(binding, {
+                    'text' => String,
+                    'answers' => [ [String, Types.one_of(true, false)] ]
+                  })
+
+      MultipleAnswerQuestion.new(text, answer)
+    end
+
 
     def initialize(text, pairs)
       Types.check(binding, {
@@ -167,6 +211,59 @@ TrueFalseQuestion
     end
 
     attr_reader :text, :answer
+  end
+
+
+  #
+  # NumericQuestion
+  #
+  class NumericQuestion < Question
+    TOLEDO_PREFIX = 'NUM'
+    NAME = 'NUMERIC'
+
+    def self.parse_hash(hash)
+      Types.check(binding, { 'hash' => Hash })
+
+      text = hash['text']
+      answer = hash['answer']
+      delta = hash['delta'] or 0
+
+      Types.check(binding, {
+                    'text' => String,
+                    'answer' => Fixnum,
+                    'delta' => Fixnum
+                  })
+
+      NumericQuestion.new(text, answer)
+    end
+
+    def initialize(text, answer, delta = 0)
+      Types.check(binding, {
+                    'text' => String,
+                    'answer' => Fixnum,
+                    'delta' => Fixnum
+                  } )
+
+      @text, @answer, @delta = text, answer, delta
+    end
+
+    def toledo
+      format_toledo(TOLEDO_PREFIX, [ text, @answer, @delta ])
+    end
+
+    def to_s
+      <<-END.unindent
+NumericQuestion
+  Text:
+#{@text.indent(4)}
+  Answer:
+    #{@answer}
+  Delta:
+    #{@delta}
+      END
+    end
+
+    attr_reader :text, :answer, :delta
   end
 
 
