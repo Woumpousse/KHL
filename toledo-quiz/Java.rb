@@ -33,29 +33,42 @@ module Java
     end
   end
 
-  def Java.must_compile(classes)
+  def Java.with_files(classes)
     Types.check(binding, { 'classes' => {String => String} })
-
+    
     Dir.mktmpdir do |dir|
       Dir.chdir(dir) do
         write_classes_to_files(classes)
-        Java.compile('*.java')
+
+        yield
       end
     end
   end
 
-  def Java.must_not_compile(classes)
+  def Java.execute(classes, main_class='App')
     Types.check(binding, { 'classes' => {String => String} })
 
-    begin
-      must_compile(classes)
-      raise CompilationFailureError.new(classes)
-    rescue CompilationError
-      true
+    with_files(classes) do
+      begin
+        Java.compile('*.java')
+        Java.run(main_class)
+      end
     end
-  end      
+  end
 
-  private
+  def Java.compiles?(classes)
+    Types.check(binding, { 'classes' => {String => String} })
+    
+    with_files(classes) do
+      begin
+        Java.compile('*.java')
+        true
+      rescue CompilationError
+        false
+      end
+    end
+  end
+
   def Java.find_class_name(code)
     Types.check(binding, { 'code' => String })
 
@@ -77,7 +90,7 @@ module Java
     end ]
   end
 
-  def Java.compile(path)
+  def Java.compile(path='*.java')
     Types.check(binding, { 'path' => String })
 
     Open3.popen3("javac #{path}") do |stdin, stdout, stderr, wait_thr|
@@ -87,7 +100,7 @@ module Java
     end
   end
 
-  def Java.run(path, main_class = "App")
+  def Java.run(main_class = "App", path='.')
     Types.check(binding, {
                   'path' => String,
                   'main_class' => String
@@ -109,8 +122,8 @@ module Java
                 })
 
     File.open("#{name}.java", "w") do |out|
-        out.write(code)
-      end
+      out.write(code)
+    end
   end
 
   def Java.write_classes_to_files(classes)
@@ -120,8 +133,6 @@ module Java
       write_class_to_file(name, code)
     end
   end
-
 end
 
-
-Java.write_class_to_file(1,1)
+p Java.execute(Java.split_in_files(IO.read('bop/type-inference.question')))
