@@ -62,4 +62,5 @@ in_category('verzamelingenleer') do
   end
 end
 
-puts tex(IO.read('template.tex'))
+
+puts tex(IO.read('wiskunde1.template.tex'))

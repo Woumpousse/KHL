@@ -135,4 +135,3 @@ module Java
   end
 end
 
-p Java.execute(Java.split_in_files(IO.read('bop/type-inference.question')))

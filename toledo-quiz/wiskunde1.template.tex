@@ -1,0 +1,30 @@
+\documentclass[a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{pxfonts}
+\usepackage{framed}
+\usepackage{booktabs}
+\usepackage{fancybox}
+
+
+\newcommand{\placeholder}{\rule{2cm}{.2pt}}
+
+\newenvironment{exercise}{
+  \begin{framed}}{
+  \end{framed}}
+
+
+
+
+\pagestyle{empty}
+
+\begin{document}
+
+#QUESTION
+\begin{exercise}
+#[text]
+% Antwoord: #[answer]
+\end{exercise}
+\clearpage
+#END
+
+\end{document}

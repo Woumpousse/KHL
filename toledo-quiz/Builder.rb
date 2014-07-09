@@ -41,8 +41,14 @@ module Builder
     end
   end
 
-  def add_question
-    @@questions << Questions.parse_hash(@@hash)
+  def build_question
+    question = Questions.parse_hash(@@hash)
+
+    add_question(question)
+  end
+
+  def add_question(question)
+    @@questions << question
   end
 
   def true_or_false(text, answer)
@@ -51,7 +57,7 @@ module Builder
       append('text', text.unindent)
       set('answer', answer)
 
-      add_question
+      build_question
     end
   end
 
@@ -62,7 +68,7 @@ module Builder
       set('answer', answer)
       set('delta', delta)
 
-      add_question
+      build_question
     end
   end
 
@@ -72,7 +78,7 @@ module Builder
       append('text', text.unindent)
       set('answer', answer)
 
-      add_question
+      build_question
     end
   end
 

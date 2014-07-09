@@ -1,0 +1,20 @@
+#fill-in
+
+class Foo {
+    public void bar(__boolean__ x) {
+        if ( x ) {
+            ...
+        }
+    }
+}
+
+
+#fill-in
+
+class Foo {
+    public void bar(__boolean__ x) {
+        while ( x ) {
+            ...
+        }
+    }
+}

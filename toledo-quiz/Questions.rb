@@ -4,6 +4,11 @@ require './Shared.rb'
 module Questions
 
   class Question
+    public
+    def check
+      true
+    end
+
     protected
     def format_toledo(prefix, fields)
       ([prefix] + fields).join("\t")
