@@ -3,30 +3,48 @@ require './Questions.rb'
 
 module Builder
   @@questions = []
-  @@hash = Hash.new
+  @@postprocessor = lambda { |q| nil }
 
   def scope
     begin
-      old_hash = @@hash.clone
+      old_postprocessor = @@postprocessor
       yield
     ensure
-      @@hash = old_hash
+      @@postprocessor = old_postprocessor
     end
   end
 
-  def set(key, val)
-    @@hash[key] = val
-  end
+  def add_postprocessor
+    old_postprocessor = @@postprocessor
 
-  def append(key, val)
-    @@hash[key] += val
+    @@postprocessor = lambda do |question|
+      yield question
+      old_postprocessor[question]
+    end
   end
 
   def with(key, val)
     scope do
-      set(key, val)
+      add_postprocessor do |question|
+        message = "#{key}=".to_sym
+
+        question.send(message, val)
+      end
+
       yield
     end
+  end
+
+  def prepend(key, val)
+    add_postprocessor do |question|
+      read_message = key.to_sym
+      write_message = "#{key}=".to_sym
+
+      value = question.send(read_message)
+      question.send(write_message, val + value)
+    end
+
+    yield
   end
 
   def in_category(category)
@@ -41,44 +59,35 @@ module Builder
     end
   end
 
-  def build_question
-    question = Questions.parse_hash(@@hash)
-
-    add_question(question)
-  end
-
   def add_question(question)
+    @@postprocessor[question]
     @@questions << question
   end
 
   def true_or_false(text, answer)
     scope do
-      set('question class', Questions::TrueFalseQuestion)
-      append('text', text.unindent)
-      set('answer', answer)
+      question = Questions::TrueFalseQuestion.new(text, answer)
 
-      build_question
+      add_question(question)
     end
   end
 
   def numeric(text, answer, delta=0)
     scope do
-      set('question class', Questions::NumericQuestion)
-      append('text', text.unindent)
-      set('answer', answer)
-      set('delta', delta)
+      question = Questions::NumericQuestion.new(text, answer, delta)
 
-      build_question
+      add_question(question)
     end
   end
 
-  def fillin(text, answer)
+  def fill_in(text, *answer_groups)
     scope do
-      set('question class', Questions::FillInQuestion)
-      append('text', text.unindent)
-      set('answer', answer)
+      question = Question.FillInQuestion.new(text)
+      answer_groups.each do |answer_group|
+        question.add_answer_group(answer_group)
+      end
 
-      build_question
+      add_question(question)
     end
   end
 

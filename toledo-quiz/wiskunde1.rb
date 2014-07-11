@@ -3,48 +3,41 @@ require './LaTeX.rb'
 
 include Builder
 
-set('text', "")
 
 in_category('verzamelingenleer') do
   difficulty('1') do
     scope do
-      append('text', <<-END)
-        Is deze uitspraak waar of vals?
-      END
+      prepend('text'.unindent, "Is deze uitspraak waar of vals?\n") do
+        # Propositions which are true
+        <<-'END'.lines.map { |line| true_or_false("\\[ #{line.strip} \\]", true) }
+          \emptyset \subset \emptyset
+          \emptyset \subset \{ 1, 2, 3 \}
+          \{ 1 \} \subset \{ 1, 2, 3 \}
+          \{ 1, 2 \} = \{ 2, 1 \}
+          \{ 1, 2 \} = \{ 1, 2, 1 \}
+          \{ 1, 2, 2 \} \subset \{ 1, 2 \}
+          \emptyset \subset \{ \emptyset \}
+          \emptyset \in \{ \emptyset \}
+          X \union X = X
+          X \intersection X = X
+          X - X = \emptyset
+        END
 
-      # Propositions which are true
-      <<-'END'.lines.map { |line| true_or_false("\\[ #{line.strip} \\]", true) }
-        \emptyset \subset \emptyset
-        \emptyset \subset \{ 1, 2, 3 \}
-        \{ 1 \} \subset \{ 1, 2, 3 \}
-        \{ 1, 2 \} = \{ 2, 1 \}
-        \{ 1, 2 \} = \{ 1, 2, 1 \}
-        \{ 1, 2, 2 \} \subset \{ 1, 2 \}
-        \emptyset \subset \{ \emptyset \}
-        \emptyset \in \{ \emptyset \}
-        X \union X = X
-        X \intersection X = X
-        X - X = \emptyset
-      END
-
-      # Propositions which are false
-      <<-'END'.lines.map { |line| true_or_false("\\[ #{line.strip} \\]", false) }
-        \emptyset = \{ 1, 2, 3 \}
-        \emptyset \in \{ 1, 2, 3 \}
-        1 \subset \{ 1, 2, 3 \}
-        1 = \{ 1 \}
-        \emptyset = \{ \emptyset \}
-        X \intersection X = \emptyset
-      END
+        # Propositions which are false
+        <<-'END'.lines.map { |line| true_or_false("\\[ #{line.strip} \\]", false) }
+          \emptyset = \{ 1, 2, 3 \}
+          \emptyset \in \{ 1, 2, 3 \}
+          1 \subset \{ 1, 2, 3 \}
+          1 = \{ 1 \}
+          \emptyset = \{ \emptyset \}
+          X \intersection X = \emptyset
+        END
+      end
     end
   end
 
   difficulty('2') do
-    scope do
-      append('text', <<-END)
-        Is deze uitspraak waar of vals?
-      END
-
+    prepend('text'.unindent, "Is deze uitspraak waar of vals?\n") do
       # Propositions which are true
       <<-'END'.lines.map { |line| true_or_false("\\[ #{line.strip} \\]", true) }
         (A \union B) - A = A - (A \intersection B)

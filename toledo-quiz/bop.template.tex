@@ -4,6 +4,17 @@
 \usepackage{framed}
 \usepackage{booktabs}
 \usepackage{fancybox}
+\usepackage{listings}
+
+
+\lstdefinelanguage{MyJava}[]{java}{
+  escapeinside=\`\`,%
+  basicstyle={\ttfamily\small},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+  frame=lines,%
+  showstringspaces=false,%
+}
 
 
 \newcommand{\placeholder}{\rule{2cm}{.2pt}}
@@ -14,14 +25,16 @@
 
 
 
-
 \pagestyle{empty}
 
 \begin{document}
 
 #QUESTION
 \begin{exercise}
-#[text]
+\noindent #[text]
+\begin{lstlisting}[language=MyJava]
+#[codetex]
+\end{lstlisting}
 % Antwoord: #[answer]
 \end{exercise}
 \clearpage

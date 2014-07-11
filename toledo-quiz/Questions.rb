@@ -2,220 +2,121 @@ require './Types.rb'
 require './Shared.rb'
 
 module Questions
-
   class Question
-    public
+    def initialize(text)
+      Types.check( binding, {
+                     'text' => String
+                   } )
+
+      @text = text
+    end
+
     def check
       true
     end
 
-    protected
-    def format_toledo(prefix, fields)
-      ([prefix] + fields).join("\t")
-    end
+    attr_accessor :text, :toledo_text, :category, :difficulty
   end
 
-
-  #
-  # FillInQuestion
-  #
   class FillInQuestion < Question
-    TOLEDO_PREFIX = 'FIB'
-    NAME = 'FILLIN'
+    def initialize(text)
+      Types.check( binding, {
+                     'text' => String
+                   } )
 
-    def self.parse_hash(hash)
-      Types.check(binding, { 'hash' => Hash })
+      super(text)
 
-      text = hash['text']
-      answers = hash['answers']
-
-      Types.check(binding, {
-                    'text' => String,
-                    'answers' => [String]
-                  })
-
-      FillInQuestion.new(text, answers)
+      @answer_groups = []
     end
 
-    def initialize(text, answers)
-      Types.check(binding, {
-                    'text' => String,
-                    'answers' => [String]
-                  } )
+    def add_answer_group(variable, possible_answers)
+      Types.check( binding, {
+                     'variable' => String,
+                     'possible_answers' => [String]
+                   } )
 
-
-      @text, @answers = text, answers
+      @answer_groups << [ variable, possible_answers ]
     end
 
     def toledo
-      format_toledo(TOLEDO_PREFIX, [text] + @answers)
-    end
+      if @answer_groups.length == 1
+      then
+        question = Toledo::SingleFillInQuestion( toledo_text )
 
-    def to_s
-      <<-END.unindent
-      FillInQuestion
-        Text:
-        #{@text}
-        Answers:
-        #{@answers.join("\n")}
-      END
-    end
+        @answer_groups.each do |variable, possible_answers|
+          possible_answers.each do |possible_answer|
+            question.add_possible_answer(possible_answer)
+          end
+        end
+      else
+        question = Toledo::MultipleFillInQuestion( toledo_text )
 
-    attr_reader :text, :answers
+        @answer_groups.each do |variable, possible_answers|
+          question.add_answer_group(variable, possible_answers)
+        end
+      end        
+
+      question.to_s
+    end
   end
-
-
-
-  #
-  # MultipleFillInQuestion
-  #
-  class MultipleFillInQuestion < Question
-    TOLEDO_PREFIX = 'FIB_PLUS'
-    NAME = 'MULTIFILLIN'
-
-    def self.parse_hash(hash)
-      Types.check(binding, { 'hash' => Hash })
-
-      text = hash['text']
-      answers = hash['answers']
-
-      Types.check(binding, {
-                    'text' => String,
-                    'answers' => [ [String,String] ]
-                  })
-
-      MultipleFillInQuestion.new(text, answer)
-    end
-
-
-    def initialize(text, pairs)
-      Types.check(binding, {
-                    'text' => String,
-                    'pairs' => [ [String,String] ]
-                  } )
-
-      @text, @pairs = text, pairs
-    end
-
-    def toledo
-      answers = @pairs.intersperse([""]).flatten
-
-      format_toledo(TOLEDO_PREFIX, [text] + answers)
-    end
-
-    def to_s
-      <<-END.unindent
-      MultipleFillInQuestion
-        Text:
-        #{@text}
-        Question/Answer Pairs:
-        #{@pairs.map {|x| x.join(":")}.join("\n")}
-      END
-    end
-
-    attr_reader :text, :answers
-  end
-
-
-
-  #
-  # MultipleAnswerQuestion
-  #
-  class MultipleAnswerQuestion < Question
-    TOLEDO_PREFIX = 'MA'
-    NAME = 'MULTIPLE ANSWER'
-
-    def self.parse_hash(hash)
-      Types.check(binding, { 'hash' => Hash })
-
-      text = hash['text']
-      answers = hash['answers']
-
-      Types.check(binding, {
-                    'text' => String,
-                    'answers' => [ [String, Types.one_of(true, false)] ]
-                  })
-
-      MultipleAnswerQuestion.new(text, answer)
-    end
-
-
-    def initialize(text, pairs)
-      Types.check(binding, {
-                    'text' => String,
-                    'pairs' => [ [String, Types.one_of(true, false)] ]
-                  } )
-
-      @text, @pairs = text, pairs
-    end
-
-    def toledo
-      pairs = @pairs.map do |answer, truth|
-        [ answer, if truth then "correct" else "incorrect" end ]
-      end.flatten(1)
-
-      format_toledo(TOLEDO_PREFIX, [ text ] + pairs)
-    end
-
-    def to_s
-      <<-END.unindent
-      MultipleAnswerQuestion
-        Text:
-        #{@text}
-        Question/Answer Pairs:
-        #{@pairs.map {|x| x.join(":")}.join("\n")}
-      END
-    end
-
-    attr_reader :text, :pairs
-  end
-
 
   #
   # TrueFalseQuestion
   #
   class TrueFalseQuestion < Question
-    TOLEDO_PREFIX = 'TF'
-    NAME = 'TRUE/FALSE'
-
-    def self.parse_hash(hash)
-      Types.check(binding, { 'hash' => Hash })
-
-      text = hash['text']
-      answer = hash['answer']
-
-      Types.check(binding, {
-                    'text' => String,
-                    'answer' => Types.one_of(true, false)
-                  })
-
-      TrueFalseQuestion.new(text, answer)
-    end
-
     def initialize(text, answer)
       Types.check(binding, {
                     'text' => String,
                     'answer' => Types.one_of(true, false)
                   } )
 
-      @text, @answer = text, answer
+      super(text)
+
+      @answer = answer
+    end
+
+    attr_accessor :answer
+
+    def toledo
+      Toledo::TrueFalseQuestion.new( self[:text], self[:answer] ).to_s
+    end
+
+    attr_accessor :text, :answer
+  end
+
+
+  #
+  # MultipleAnswerQuestion
+  #
+  class MultipleAnswerQuestion < Question
+    def initialize(text)
+      Types.check(binding, {
+                    'text' => String,
+                  } )
+
+      super(text)
+
+      @claims = []
+    end
+
+    def add_claim(claim, answer)
+      Types.check( binding, {
+                     'claim' => String,
+                     'answer' => Types.one_of( true, false )
+                   } )
+      
+      @claims << [ claim, answer ]
     end
 
     def toledo
-      format_toledo(TOLEDO_PREFIX, [ text, if @answer then "waar" else "onwaar" end ])
-    end
+      question = Toledo::MultipleAnswerQuestion.new(@text)
 
-    def to_s
-      <<-END.unindent
-TrueFalseQuestion
-  Text:
-#{@text.indent(4)}
-  Answer:
-    #{@answer}
-      END
-    end
+      @claims.each do |claim, answer|
+        question.add_claim(claim, answer)
+      end
 
-    attr_reader :text, :answer
+      question.to_s
+    end
   end
 
 
@@ -223,82 +124,140 @@ TrueFalseQuestion
   # NumericQuestion
   #
   class NumericQuestion < Question
-    TOLEDO_PREFIX = 'NUM'
     NAME = 'NUMERIC'
 
-    def self.parse_hash(hash)
-      Types.check(binding, { 'hash' => Hash })
-
-      text = hash['text']
-      answer = hash['answer']
-      delta = hash['delta'] or 0
-
-      Types.check(binding, {
-                    'text' => String,
-                    'answer' => Fixnum,
-                    'delta' => Fixnum
-                  })
-
-      NumericQuestion.new(text, answer)
-    end
-
-    def initialize(text, answer, delta = 0)
+    def initialize(text, answer, delta)
       Types.check(binding, {
                     'text' => String,
                     'answer' => Fixnum,
                     'delta' => Fixnum
                   } )
 
-      @text, @answer, @delta = text, answer, delta
+      super(text)
+
+      @answer = answer
+      @delta = delta
+    end
+
+    attr_accessor :answer, :delta
+
+    def toledo
+      question = Toledo::NumericQuestion.new(@text, @answer, @delta)
+
+      question.to_s
+    end
+  end
+
+
+  class CodeFillInQuestion < Question
+    PLACEHOLDER_REGEX = /__(.*?)__/
+    
+    def initialize(text, template)
+      Types.check(binding, {
+                    'text' => String,
+                    'template' => String } )
+      
+      super(text)
+
+      @template = template
+      @variable_name = lambda { |index| "x#{index}" }
+    end
+
+    attr_accessor :template, :variable_name
+
+    def check
+      Java.compiles?(Java.split_in_files(@code))
     end
 
     def toledo
-      format_toledo(TOLEDO_PREFIX, [ text, @answer, @delta ])
+      if single_placeholder?
+      then toledo_single_placeholder
+      else toledo_multiple_placeholders
+      end
     end
 
-    def to_s
-      <<-END.unindent
-NumericQuestion
-  Text:
-#{@text.indent(4)}
-  Answer:
-    #{@answer}
-  Delta:
-    #{@delta}
-      END
+    def texified_code
+      case count_placeholders
+      when 1
+        translate_to_tex_single_placeholder
+      else
+        translate_to_tex_multiple_placeholder
+      end
     end
 
-    attr_reader :text, :answer, :delta
-  end
+    private
+    def toledo_single_placeholder
+      answer_groups = find_answer_groups
+      abort "Bug" unless answer_groups.length == 1
+      answers = answer_groups[0]
+      
+      question = Toledo::SingleFillInQuestion.new(toledo_text)
 
+      answers.each do |answer|
+        question.add_possible_answer(answer)
+      end
 
-  def Questions.question_classes
-    Questions.classes.select do |c|
-      c.constants.member?(:NAME)
-    end
-  end
-
-  def Questions.class_with_name(name)
-    Types.check(binding, { 'name' => String })
-
-    result = question_classes.select do |c|
-      c::NAME == name
+      question.to_s
     end
 
-    raise "Unknown question type #{name}" unless result.length == 1
+    def toledo_multiple_placeholders
+      answers_groups = find_answer_groups
+      abort "Bug" unless answer_groups.length > 1
 
-    result[0]
-  end
+      Types.check(binding, {
+                    'answer_groups' => [[String]]
+                  } )
+      
+      question = Toledo::MultipleFillInQuestion.new(toledo_text)
 
-  def Questions.parse_hash(hash)
-    Types.check(binding, { 'hash' => Hash })
+      answer_groups.each_with_index do |answer_group, index|
+        question.add_answer_group( variable_name(index+1), answer)
+      end
 
-    question_class = hash['question class']
-
-    if String === question_class then
-      question_class = class_with_name(hash[:name])
+      question.to_s
     end
 
-    question_class.parse_hash(hash)
+    def variable_name(index)
+      Types.check( binding, {
+                     'index' => Fixnum
+                   } )
+
+      @variable_name[index]
+    end
+    
+    def find_answer_groups
+      @template.scan(PLACEHOLDER_REGEX).each do |match_array|
+        match = match_array[0]
+        match.split('|').map { |x| x.strip }
+      end
+    end
+
+    def translate_to_java
+      code = @template.gsub(PLACEHOLDER_REGEX) do
+        $1
+      end.gsub(/\.\.\./, 'throw new RuntimeException();').strip
+    end
+
+    def translate_to_tex_single_placeholder
+      @template.gsub(PLACEHOLDER_REGEX) do
+        '`\placeholder`'
+      end.gsub(/\.\.\./, '\dots')
+    end
+
+    def translate_to_tex_multiple_placeholder
+      k = 0
+      @template.gsub(PLACEHOLDER_REGEX) do
+        "`\\placeholdern{#{k}}`"
+        k += 1
+      end
+    end
+
+    def placeholder_count
+      @template.scan(PLACEHOLDER_REGEX).length
+    end
+
+    def single_placeholder?
+      placeholder_count == 1
+    end
   end
 end

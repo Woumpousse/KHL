@@ -10,7 +10,7 @@ module Toledo
     end
   end
 
-  class FillInQuestion < Question
+  class SingleFillInQuestion < Question
     PREFIX = 'FIB'
     
     def initialize(text)
@@ -22,7 +22,7 @@ module Toledo
       @answers = []
     end
 
-    def add_answer(answer)
+    def add_possible_answer(answer)
       @answers << answer
     end
 
@@ -43,7 +43,7 @@ module Toledo
       @answers = []
     end
 
-    def add_answer(variable, possible_answers)
+    def add_answer_group(variable, possible_answers)
       Types.check( binding, {
                      'variable' => String,
                      'possible_answers' => [String]
@@ -71,7 +71,7 @@ module Toledo
       @answers = []
     end
 
-    def add_answer(claim, answer)
+    def add_claim(claim, answer)
       Types.check( binding, {
                      'claim' => String,
                      'answer' => Types.one_of( true, false )
@@ -138,9 +138,3 @@ module Toledo
   end
 end
 
-
-# q = Toledo::MultipleFillInQuestion.new("Foo")
-# q.add_answer("T1", [ "a", "b" ])
-# q.add_answer("T2", [ "c", "d" ])
-
-# puts q
