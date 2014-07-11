@@ -1,4 +1,4 @@
-#infer-type
+#infer-types
 
 class Foo {
     public void bar(__boolean__ x) {
@@ -9,7 +9,7 @@ class Foo {
 }
 
 
-#infer-type
+#infer-types
 
 class Foo {
     public void bar(__boolean__ x) {

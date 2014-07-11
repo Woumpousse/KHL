@@ -4,6 +4,10 @@ param([Parameter(Mandatory=$true)][String]$Name,
 
 ruby "$Name.rb" | out-file -encoding ascii -filepath "temp.tex"
 
+if ( -not $? ) {
+   Break
+}
+
 if ( -not $NoTeX ) {
    pdflatex "temp.tex"
 }

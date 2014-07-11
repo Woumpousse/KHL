@@ -3,10 +3,14 @@ module LaTeX
     template.gsub(/#QUESTIONS(.*?)#ENDQUESTIONS/m) do
       data = $1
 
-      templates = Hash[data.scan(/#TEMPLATE\[(.*?)\](.*?)#ENDTEMPLATE/m)]
+      question_templates = Hash[data.scan(/#TEMPLATE\[(.*?)\](.*?)#ENDTEMPLATE/m)]
 
       questions.map do |question|
-        templates[question.template].gsub(/#\[(.*?)\]/) do 
+        question_template = question_templates[question.template]
+
+        raise "No template found" unless question_template
+
+        question_template.gsub(/#\[(.*?)\]/) do 
           question.public_send($1.to_sym)
         end
       end.join
