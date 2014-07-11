@@ -56,16 +56,11 @@ module Java
     end
   end
 
-  def Java.compiles?(classes)
+  def Java.compile(classes)
     Types.check(binding, { 'classes' => {String => String} })
     
     with_files(classes) do
-      begin
-        Java.compile('*.java')
-        true
-      rescue CompilationError
-        false
-      end
+      Java.compile('*.java')
     end
   end
 

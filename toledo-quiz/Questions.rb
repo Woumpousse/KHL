@@ -12,7 +12,7 @@ module Questions
     end
 
     def check
-      true
+      []
     end
 
     attr_accessor :text, :toledo_text, :category, :difficulty
@@ -166,7 +166,12 @@ module Questions
     attr_accessor :template, :variable_name
 
     def check
-      Java.compiles?(Java.split_in_files(@code))
+      begin
+        Java.compiles?(Java.split_in_files(@template))
+        nil
+      rescue Java::CompilationError => e
+        e.to_s
+      end
     end
 
     def toledo
@@ -177,8 +182,7 @@ module Questions
     end
 
     def texified_code
-      case count_placeholders
-      when 1
+      if single_placeholder? then
         translate_to_tex_single_placeholder
       else
         translate_to_tex_multiple_placeholder
@@ -241,7 +245,9 @@ module Questions
     def translate_to_tex_single_placeholder
       @template.gsub(PLACEHOLDER_REGEX) do
         '`\placeholder`'
-      end.gsub(/\.\.\./, '\dots')
+      end.gsub(/\.\.\./) do
+        '`\dots`'
+      end
     end
 
     def translate_to_tex_multiple_placeholder

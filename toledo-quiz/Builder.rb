@@ -98,4 +98,10 @@ module Builder
   def tex(template)
     LaTeX.generate(questions, template)
   end
+
+  def check
+    questions.all? do |question|
+      question.check
+    end
+  end
 end
