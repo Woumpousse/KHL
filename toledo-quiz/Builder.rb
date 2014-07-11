@@ -100,7 +100,7 @@ module Builder
   end
 
   def check
-    questions.all? do |question|
+    questions.each do |question|
       question.check
     end
   end

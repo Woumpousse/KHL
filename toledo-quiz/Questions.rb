@@ -12,10 +12,9 @@ module Questions
     end
 
     def check
-      []
     end
 
-    attr_accessor :text, :toledo_text, :category, :difficulty
+    attr_accessor :text, :toledo_text, :category, :difficulty, :template
   end
 
   class FillInQuestion < Question
@@ -149,29 +148,28 @@ module Questions
   end
 
 
+  #
+  # CodeFillInQuestion
+  #
   class CodeFillInQuestion < Question
     PLACEHOLDER_REGEX = /__(.*?)__/
     
-    def initialize(text, template)
+    def initialize(text, code_template)
       Types.check(binding, {
                     'text' => String,
-                    'template' => String } )
+                    'code_template' => String } )
       
       super(text)
 
-      @template = template
+      @code_template = code_template
       @variable_name = lambda { |index| "x#{index}" }
     end
 
-    attr_accessor :template, :variable_name
+    attr_accessor :variable_name, :code_template
 
     def check
-      begin
-        Java.compiles?(Java.split_in_files(@template))
-        nil
-      rescue Java::CompilationError => e
-        e.to_s
-      end
+      code = translate_to_java
+      Java.compile(Java.split_in_files(code))
     end
 
     def toledo
@@ -230,20 +228,20 @@ module Questions
     end
     
     def find_answer_groups
-      @template.scan(PLACEHOLDER_REGEX).each do |match_array|
+      @code_template.scan(PLACEHOLDER_REGEX).each do |match_array|
         match = match_array[0]
         match.split('|').map { |x| x.strip }
       end
     end
 
     def translate_to_java
-      code = @template.gsub(PLACEHOLDER_REGEX) do
+      code = @code_template.gsub(PLACEHOLDER_REGEX) do
         $1
       end.gsub(/\.\.\./, 'throw new RuntimeException();').strip
     end
 
     def translate_to_tex_single_placeholder
-      @template.gsub(PLACEHOLDER_REGEX) do
+      @code_template.gsub(PLACEHOLDER_REGEX) do
         '`\placeholder`'
       end.gsub(/\.\.\./) do
         '`\dots`'
@@ -252,14 +250,14 @@ module Questions
 
     def translate_to_tex_multiple_placeholder
       k = 0
-      @template.gsub(PLACEHOLDER_REGEX) do
+      @code_template.gsub(PLACEHOLDER_REGEX) do
         "`\\placeholdern{#{k}}`"
         k += 1
       end
     end
 
     def placeholder_count
-      @template.scan(PLACEHOLDER_REGEX).length
+      @code_template.scan(PLACEHOLDER_REGEX).length
     end
 
     def single_placeholder?

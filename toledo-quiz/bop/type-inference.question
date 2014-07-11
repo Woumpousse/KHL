@@ -1,4 +1,4 @@
-#fill-in
+#infer-type
 
 class Foo {
     public void bar(__boolean__ x) {
@@ -9,7 +9,7 @@ class Foo {
 }
 
 
-#fill-in
+#infer-type
 
 class Foo {
     public void bar(__boolean__ x) {

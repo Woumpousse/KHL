@@ -50,7 +50,7 @@ module Java
 
     with_files(classes) do
       begin
-        Java.compile('*.java')
+        Java.compile_files('*.java')
         Java.run(main_class)
       end
     end
@@ -60,7 +60,7 @@ module Java
     Types.check(binding, { 'classes' => {String => String} })
     
     with_files(classes) do
-      Java.compile('*.java')
+      Java.compile_files('*.java')
     end
   end
 
@@ -85,7 +85,7 @@ module Java
     end ]
   end
 
-  def Java.compile(path='*.java')
+  def Java.compile_files(path='*.java')
     Types.check(binding, { 'path' => String })
 
     Open3.popen3("javac #{path}") do |stdin, stdout, stderr, wait_thr|
