@@ -138,7 +138,7 @@ Als de relatie een afbeelding is, kom je tot volgende veel gebruikte termen:
 
 \subsection{Voorbeelden}
 \subsubsection*{Voorbeeld 1}
-Gegeven de verzameling $B$ van alle wachtwoorden $y_i$ die in G\&T gebruikt worden om in te loggen op de PC's en $A$ de verzameling van alle gebruikersaccounts $x_i$. Beschrijf de relatie ``Account \ldots \ heeft als wachtwoord \ldots ''.
+Gegeven de verzameling $B$ van alle wachtwoorden $y_i$ die in G\&T gebruikt worden om in te loggen op de pc's en $A$ de verzameling van alle ge\-brui\-kers\-accounts~$x_i$. Beschrijf de relatie ``Account \ldots \ heeft als wachtwoord \ldots ''.
 
 Elke account heeft juist één wachtwoord en dus is deze relatie een afbeelding: uit elk element van $A$ (elke account) vertrekt juist één pijl.
 Sommige mensen hebben misschien toevallig hetzelfde wachtwoord gekozen voor hun account maar elk wachtwoord wordt zeker één keer gebruikt. Het is dus mogelijk dat er meerdere pijlen toekomen in elementen van $B$. Dit voldoet aan de voorwaarde voor een surjectieve relatie.
@@ -699,7 +699,7 @@ Definieer volgende relaties correct:
 \item 
 \begin{enumerate}
 \item bron- en beeldverzameling is  $\real^+$
-\item $U=\left\lbrace(x,y)|x,y\in \real^+\text{ en } y=
+\item $U=\left\lbrace(x,y)\;|\;x,y\in \real^+\text{ en } y=
 \begin{cases}
 0,9155\cdot x&\text{ als }x<2000\\
 0,8887\cdot x&\text{ anders }
@@ -813,7 +813,72 @@ Zelfde vraag voor elke figuur:
 \end{oef}
 
 \begin{oef}
-De volgende grafieken stellen relaties voor van \real\ naar \real.
+De volgende grafieken stellen relaties voor met als bron- en doelverzameling het interval $[0,1]$. Geef voor elk van de relaties aan of deze
+functies, afbeeldingen, injectief, surjectief en/of bijectief zijn.
+\begin{center}
+  \newcommand{\axes}{
+    \path[use as bounding box] (-.5,-.5) rectangle (4,4);
+    \draw[step=3cm,gray,thin] (-.5,-.5) grid (4,4);
+    \draw[thin,->] (-.5,0) -- (4,0);
+    \draw[thin,->] (0,-.5) -- (0,4);
+  }
+  \begin{tabular}{cc}
+    1.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) -- (3,3);
+    \end{tikzpicture}
+    &
+    2.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) to[out=90,in=-90] (3,3);
+    \end{tikzpicture}
+    \\
+    3.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (1.5,0) -- (1.5,3);
+    \end{tikzpicture}
+    &
+    4.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,1.5) -- (3,1.5);
+    \end{tikzpicture}
+    \\
+    5.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) to[out=45,in=180] (1,2) to[out=0,in=180] (2,1) to[out=0,in=225] (3,3);
+    \end{tikzpicture}
+    &
+    6.
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (1.5,1.5) circle (1cm);
+    \end{tikzpicture}
+  \end{tabular}
+\end{center}
+\begin{opl}
+  \hspace{1mm}
+  \begin{center}
+    \begin{tabular}{cccccc}
+      & \rotatebox{90}{functie}
+      & \rotatebox{90}{afbeelding}
+      & \rotatebox{90}{injectief}
+      & \rotatebox{90}{surjectief}
+      & \rotatebox{90}{bijectief} \\
+      \toprule
+      1. & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+      2. & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+      3. &            &            &            &            &            \\
+      4. & \checkmark & \checkmark &            &            &            \\
+      5. & \checkmark & \checkmark &            & \checkmark &            \\
+      6. &            &            &            &            &            \\
+    \end{tabular}
+  \end{center}
+\end{opl}
 \end{oef}
 
 
