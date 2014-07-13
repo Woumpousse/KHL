@@ -1,0 +1,317 @@
+\documentclass[a4paper,dutch]{article}
+\usepackage{babel}
+\usepackage{pxfonts}
+\usepackage{listings}
+\usepackage{answers}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\newtheorem{exercise}{Oefening}[section]
+\Newassociation{solution}{Oplossing}{answers}
+
+
+\lstdefinelanguage{MyJava}[]{java}{
+  escapeinside=\`\`,%
+  basicstyle={\ttfamily\small},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+  frame=lines,%
+  showstringspaces=false,%
+}
+
+\newcommand{\code}[2][]{
+  \lstinputlisting[language=MyJava,#1]{#2}
+}
+
+
+\begin{document}
+
+\Opensolutionfile{answers}
+
+\section{Methodes van de klasse {\tt Hint}}
+E\'en van de aspecten van het spel galgje is dat er sprake is van een te raden woord
+waarvan de letters stapsgewijs verschijnen.
+We kunnen de verantwoordelijkheid
+voor deze functionaliteit toekennen aan een klasse, dewelke we {\tt Hint} zullen noemen.
+Eeh {\tt Hint}-object moet dus bijhouden wat het te raden woord is is tezamen met welke letters ervan zichtbaar zijn.
+Een mogelijk gebruik van {\tt Hint} ziet er als volgt uit:
+\code{hint-interaction.java}
+
+\begin{exercise}
+Welk datatype gebruiken we om een woord voor te stellen?
+\begin{solution}
+\tt String
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{exercise:field}
+Welk datatype gebruiken we om voor te stellen of een letter al dan niet zichtbaar is?
+\begin{solution}
+\tt boolean
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Een {\tt Hint}-object moet onthouden welk woord er geraden moet worden. Hoe kunnen we hiervoor zorgen?
+\begin{solution}
+Veld en constructor als volgt:
+\code{hint-field-constructor.java}
+\end{solution}
+\end{exercise}
+
+We moeten aan een {\tt Hint}-object kunnen vragen om een bepaalde letter zichtbaar te maken.
+Deze methode moet tevens weten te zeggen of de gegeven letter voorkwam of niet (indien niet
+moet er immers een extra lichaamsdeel bijgetekend worden).
+
+\begin{exercise}
+Stel dat we deze methode {\tt reveal} noemen, wat is de signatuur?
+\begin{center}
+  \rule{2cm}{.5pt} {\tt reveal(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt boolean reveal(char letter)
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We moeten kunnen weten of het ganse woord zichtbaar is. Wat is de signatuur?
+\begin{center}
+  \rule{2cm}{.5pt} {\tt isFullyRevealed(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt boolean isFullyRevealed()
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Uiteindelijk moeten we ook de hint kunnen ``tonen''. We noemen deze methode {\tt show}.
+Wat is de signatuur van deze methode?
+\begin{center}
+  \rule{2cm}{.5pt} {\tt show(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt String show()
+\end{solution}
+\end{exercise}
+
+\section{Methodes hulpklasse {\tt HintBox}}
+We kunnen {\tt Hint} op veel manieren implementeren. Voor deze oefening
+voeren we een hulpklasse {\tt HintBox} in. Een {\tt HintBox}-object is gelijkaardig aan {\tt Hint} maar zal instaan
+voor slechts \'e\'en enkele letter:
+\begin{itemize}
+  \item De {\tt HintBox} moet weten welke letter het bevat.
+  \item De {\tt HintBox} moet bijhouden of de letter geraden werd of niet.
+\end{itemize}
+Een {\tt Hint} zal dus intern een lijst bijhouden van {\tt HintBox}-objecten,
+\'e\'en voor elke letter van het te raden woord. 
+\begin{center}
+  \begin{tikzpicture}
+    \node[draw,minimum width=2cm,minimum height=1cm] (Hint) at (2,1) {\tt paard};
+    \foreach \x/\c in {0/p,1/a,2/a,3/r,4/d} {
+      \node[draw,minimum width=.5cm,minimum height=1cm] (box \x) at (\x,-1) {\tt\c};
+      \draw[->] (Hint.south) -- (box \x.north);
+    }
+  \end{tikzpicture}
+\end{center}
+{\tt Hint} zal in zijn eigen methodes
+beroep doen op de methodes van {\tt HintBox}. Een mogelijke interactie gaat als volgt:
+\code{hintbox-interaction.java}
+Merk op dat {\tt HintBox} methodes bevat met dezelfde naam als {\tt Hint}:
+voor zover Java weet hebben deze, doordat de methodes in verschillende klassen zitten,
+niets met elkaar te maken. 
+Gezien beide klassen gelijkaardige
+functionaliteit aanbieden, is het ook maar normaal dat ze gelijkaardige methodes bevatten.
+We gaan nu na welke functionaliteit een {\tt HintBox} moet aanbieden
+opdat {\tt Hint} zijn werk kan doen.
+
+\begin{exercise}
+Wat is het type voor \'e\'en enkele letter?
+\begin{solution}
+\tt char
+\end{solution}
+\end{exercise}
+
+Een {\tt Hint}-object biedt een {\tt reveal}-methode aan, zoals eerder besproken.
+Het zichtbaar maken van een letter houdt in ons design in dat we aan
+elk van de {\tt HintBox}-objecten vragen diezelfde letter zichtbaar te maken.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[draw] (Hint) at (0,0) {\tt Hint};
+    \foreach \y in {-2,...,2} {
+      \node[draw] (HintBox \y) at (4,\y) {\tt HintBox};
+      \draw[->] (Hint) -- (HintBox \y.west) node [midway,sloped,above] {\tt\tiny reveal(c)};
+    }
+    \draw[->] (-2,0) -- (Hint.west) node [midway,anchor=south] {\tt\tiny reveal(c)};
+  \end{tikzpicture}
+\end{center}
+
+\begin{exercise}
+Wat is de signatuur van {\tt HintBox.reveal}? Denk eraan dat de methode ook
+een manier moet hebben om aan te geven of de letter ``juist'' was (d.i.\ om te weten
+of er een lichaamsdeel bijgetekend moet worden of niet.)
+\begin{center}
+  \rule{2cm}{.5pt} {\tt reveal(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt boolean reveal(char letter)
+\end{solution}
+\end{exercise}
+
+De informatie of een letter zichtbaar is of niet zit in {\tt HintBox}. De klasse {\tt Hint}
+heeft deze informatie nodig om zijn eigen methode {\tt isFullyRevealed()} te kunnen implementeren.
+{\tt Hint} moet dus aan een {\tt HintBox}-object kunnen vragen of de letter zichtbaar is.
+Hiervoor voeren we een methode {\tt isRevealed()} in in de klasse {\tt HintBox}.
+{\tt Hint} zal dan in zijn implementatie van {\tt isFullyRevealed()} aan elke {\tt HintBox} vragen
+of zijn letter zichtbaar is; indien ze allemaal positief antwoorden, moet {\tt isFullyRevealed} zelf ook
+{\tt true} teruggeven.
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[draw] (Hint) at (0,0) {\tt Hint};
+    \foreach \y in {-2,...,2} {
+      \node[draw] (HintBox \y) at (4,\y) {\tt HintBox};
+      \draw[->] (Hint) -- (HintBox \y.west) node [midway,sloped,above] {\tt\tiny isRevealed(c)};
+    }
+    \draw[->] (-3,0) -- (Hint.west) node [midway,anchor=south] {\tt\tiny isFullyRevealed()};
+  \end{tikzpicture}
+\end{center}
+
+
+\begin{exercise}
+Wat is de signatuur van {\tt HintBox.isRevealed}?
+\begin{center}
+  \rule{2cm}{.5pt} {\tt isRevealed(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt boolean isRevealed()
+\end{solution}
+\end{exercise}
+
+Uiteindelijk moet {\tt HintBox} ook een eigen {\tt show} methode hebben. Indien
+de letter zichtbaar is, moet deze deze letter teruggeven als resultaat;
+in het andere geval \verb'"_"'.
+
+\begin{exercise}
+Wat is de signatuur van {\tt HintBox.show}?
+\begin{center}
+  \rule{2cm}{.5pt} {\tt show(}\rule{4cm}{.5pt}{\tt)}
+\end{center}
+\begin{solution}
+\tt String show()
+\end{solution}
+\end{exercise}
+
+\section{Implementatie van {\tt HintBox}}
+We beginnen met de implementatie van de eenvoudigste klasse, nl.\ {\tt HintBox}.
+Zoals eerder vermeld, houdt deze twee dingen bij: de te raden letter, en of de letter
+zichtbaar is of niet. Hiervoor zijn dus duidelijk velden nodig.
+
+\begin{exercise}
+Welke twee velden heeft {\tt HintBox} nodig?
+\begin{solution}
+Een veld {\tt char letter} en een veld {\tt boolean isRevealed}.
+\end{solution}
+\end{exercise}
+
+Na het defini\"eren van velden implementeren we vaak de constructor.
+We stellen ons de vraag wat een {\tt HintBox} nodig heeft om zichzelf
+te initialiseren.
+
+\begin{exercise}
+Welke parameters krijgt de constructor binnen,
+wetende dat een letter in het spel galgje standaard verborgen is.
+Implementeer de constructor.
+\begin{solution}
+Onvolledige implementatie van de klasse:
+\code{hintbox-constructor.java}
+\end{solution}
+\end{exercise}
+
+We voegen nu \'e\'en na \'e\'en de methodes toe die we in de vorige paragraaf bespraken.
+We beginnen met {\tt reveal(c)}: deze methode moet, indien {\tt c} gelijk is aan de letter
+die in de {\tt HintBox} steekt, de zichtbaarheid op {\tt true} zetten.
+
+\begin{exercise}
+Implementeer {\tt HintBox.reveal}.
+\begin{solution}
+In de klasse {\tt HintBox}:
+\code{hintbox-reveal.java}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Implementeer {\tt HintBox.isRevealed}.
+\begin{solution}
+In de klasse {\tt HintBox}:
+\code{hintbox-isrevealed.java}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Implementeer {\tt HintBox.show}. Zoals in de vorige paragraaf beschreven moet deze ofwel
+de letter ofwel \verb'"_"' teruggeven, naargelang de zichtbaarheid.
+\begin{solution}
+In de klasse {\tt HintBox}:
+\code{hintbox-show.java}
+\end{solution}
+\end{exercise}
+
+\section{Implementatie van {\tt Hint}}
+We schakelen over naar de klasse {\tt Hint}. In \cref{exercise:field} waren we
+tot de conclusie gekomen dat {\tt Hint} een veld {\tt String word} moest
+bevatten om het te raden woord te kunnen onthouden; blijkt
+nu dat dit niet het geval is, omdat dezelfde informatie
+zal bijgehouden worden door {\tt HintBox}-objecten.
+
+\begin{exercise}
+Een {\tt Hint}-object bevat \'e\'en {\tt HintBox} per letter. Wat is hiervoor nodig?
+\begin{solution}
+Een veld {\tt HintBox[] hintBoxes}.
+\end{solution}
+\end{exercise}
+
+Om een {\tt Hint}-object aan te maken, geven we een woord aan de constructor.
+Met {\tt String.charAt} kan deze opvragen uit welke letters deze opgebouwd is
+en voor elke letter een overeenkomstige {\tt HintBox} maken.
+\begin{exercise}
+Schrijf de constructor van de klasse {\tt Hint}.
+\begin{solution}
+In de klasse {\tt Hint}:
+\code{hint-constructor.java}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Schrijf de methode {\tt reveal}: gegeven een letter moet de methode deze letter
+doorgeven aan elke {\tt HintBox}.
+\begin{solution}
+In de klasse {\tt Hint}:
+\code{hint-reveal.java}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Schrijf de methode {\tt isFullyRevealed}.
+\begin{solution}
+In de klasse {\tt Hint}:
+\code{hint-isfullyrevealed.java}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Schrijf de methode {\tt show}. Deze moet de {\tt show}-methode van elke {\tt HintBox}
+oproepen en de resultaten aan elkaar rijgen, maar telkens met een spatie ertussen.
+\begin{solution}
+In de klasse {\tt Hint}:
+\code{hint-show.java}
+\end{solution}
+\end{exercise}
+
+\Closesolutionfile{answers}
+\clearpage
+\section{Oplossingen}
+\input{answers}
+
+\end{document}
