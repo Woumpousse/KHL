@@ -1,5 +1,3 @@
-\input{figuren/verzamelingen_relaties/tikz/preambles.tex}
-
 %%%%%%%%%%%%%
 % 6 sept 2013 [Jan]: tekeningen herwerkt, fouten verbeterd, OPO
 %
@@ -77,11 +75,11 @@ Een verzameling\index{verzameling} is een collectie objecten die een geheel vorm
 \end{quote}
 We geven enkele voorbeelden van objecten die een verzameling vormen.
 \begin{itemize}
-\item  de kleuren van de regenboog 
-\item de positieve gehele getallen kleiner dan 10
-\item de zandkorrels van de zee
-\item de OPO's die je dit jaar opneemt in je jaarprogramma 
-\item de gebruikersnamen verbonden aan een beveiligde website
+  \item de kleuren van de regenboog 
+  \item de positieve gehele getallen kleiner dan 10
+  \item de zandkorrels van de zee
+  \item de OPO's die je dit jaar opneemt in je jaarprogramma 
+  \item de gebruikersnamen verbonden aan een beveiligde website
 \end{itemize}
 
 De objecten die de verzameling vormen noemen we \emph{elementen}\index{element}. We benoemen elementen met kleine letters en verzamelingen met hoofdletters. Als een element $a$ behoort tot de verzameling $X$ noteren we dat met $a \in X$. Het symbool $\in$\index{\ensuremath{\in}} lezen we als `behoort tot' of `is element van'. Als $a$ \emph{niet} behoort tot $X$ noteren we dat met $a\not \in X $\index{\ensuremath{\not\in}}.
@@ -133,17 +131,17 @@ Het is niet belangrijk in welke volgorde de elementen opgesomd worden. Je mag he
 \subsubsection{Omschrijving}
 De opsomming met puntjes is niet altijd eenduidig. In zo'n gevallen is het beter de verzameling te defini\"eren met een omschrijving. We geven enkele voorbeelden.
 \begin{itemize}
-\item $\{x\mid x \in \mathbb{Z} ~\mathrm{ en }~ x<0\}$: de verzameling van gehele getallen kleiner dan 0. Deze verzameling wordt soms ook kort genoteerd als $\{x \in \mathbb{Z} \mid x<0\}$
-\item $\{ 2\cdot x +1 \mid x \in \mathbb{N}\}$: de verzameling van oneven gehele getallen groter dan 0
+\item $\{x\mid x \in \integers ~\mathrm{ en }~ x<0\}$: de verzameling van gehele getallen kleiner dan 0. Deze verzameling wordt soms ook kort genoteerd als $\{x \in \integers \mid x<0\}$
+\item $\{ 2\cdot x +1 \mid x \in \nat\}$: de verzameling van oneven gehele getallen groter dan 0
 \end{itemize}
-We lezen bovenstaande notatie als `de verzameling van $x$-en \emph{waarvoor geldt} dat $x$ element is van $\mathbb{Z}$ en $x$ kleiner is dan 0'.
+We lezen bovenstaande notatie als `de verzameling van $x$-en \emph{waarvoor geldt} dat $x$ element is van $\integers$ en $x$ kleiner is dan 0'.
 
 \subsection{Gelijke verzamelingen}
 Twee verzamelingen $X$ en $Y$ zijn \emph{gelijk}\index{verzameling!gelijkheid} als elk element van $X$ ook tot $Y$ behoort en omgekeerd. We noteren $X=Y$. Voorbeelden:
 \begin{itemize}
 \item $\{1,2,3,4 \}=\{4,3,2,1 \}$
 \item $\{\mathrm{rood, geel, groen} \}=\{\mathrm{groen, rood, geel, groen} \}$
-\item $\{x\mid x \in \mathbb{Z} ~\mathrm{ en }~ x<0 ~\mathrm{ en }~ x\geqslant -4\}=\{-1,-2,-3,-4 \}$:
+\item $\{x\mid x \in \integers ~\mathrm{ en }~ x<0 ~\mathrm{ en }~ x\geqslant -4\}=\{-1,-2,-3,-4 \}$:
 \end{itemize}
 Als twee verzamelingen niet gelijk zijn, schrijven we $X \not = Y$.
 
@@ -201,7 +199,7 @@ X \union Y =\{x \mid x\in X ~\mathbf{of}~x\in Y \}
 Bijvoorbeeld
 \begin{itemize}
 \item Als $X=\{\mathrm{a},\mathrm{b},\mathrm{c}\}$ en $Y=\{\mathrm{c},\mathrm{d},\mathrm{e}\}$, dan is $X\union Y=\{\mathrm{a},\mathrm{b},\mathrm{c},\mathrm{d},\mathrm{e}\}$ (figuur~\ref{fig:unie_voorbeeld}).
-\item $X=\{a \mid a\in \mathbb{N} ~\mathrm{en}~a\leqslant 10\}$ en $Y=\{a \mid a\in \mathbb{N} ~\mathrm{en}~a>10\}$ geeft $X\union Y=\mathbb{N}$
+\item $X=\{a \mid a\in \nat ~\mathrm{en}~a\leqslant 10\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>10\}$ geeft $X\union Y=\nat$
 \end{itemize}
 \begin{figure}[htbp]
 \centering
@@ -217,7 +215,7 @@ Bijvoorbeeld
 \end{figure}
 
 
-\subsection{Doorsnede of intersectie}
+\subsection{Doorsnede of intersectie}\index{doorsnede}\index{\ensuremath{\intersection}}
 De doorsnede van twee verzamelingen $X$ en $Y$ bevat enkel die elementen die tot $X$ \emph{en} tot $Y$ behoren. We noteren de doorsnede met $X\intersection Y$ (figuur~\ref{fig:doorsnede_algemeen}).
 \begin{equation*}
 X\intersection Y =\{a \mid a\in X ~\mathbf{en}~a\in Y \}
@@ -225,7 +223,7 @@ X\intersection Y =\{a \mid a\in X ~\mathbf{en}~a\in Y \}
 
 Bijvoorbeeld
 \begin{itemize}
-\item $X=\{a \mid a\in \mathbb{N}_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \mathbb{N} ~\mathrm{en}~a>5\}$ geeft $X\intersection Y=\{6,7,8\}$ (figuur~\ref{fig:doorsnede_voorbeeld})
+\item $X=\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>5\}$ geeft $X\intersection Y=\{6,7,8\}$ (figuur~\ref{fig:doorsnede_voorbeeld})
 \item Stel dat een wachtwoord pas geldig is als het meer dan 5 karakters telt, waaronder minstens één cijfer. Dan hebben we het volgende: \\
 $X=\{a\mid a ~\mathrm{is~een~woord~langer~dan~5~karakters} \}$ en \\$Y=\{a\mid a~ \mathrm{is~een~woord~dat~ook~een~cijfer~bevat } \}$ geeft \\
 $X\intersection Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
@@ -238,7 +236,7 @@ $X\intersection Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
 \input{figuren/verzamelingen_relaties/tikz/doorsnedealgemeen}
     \label{fig:doorsnede_algemeen}
 }\qquad
-\subfloat[$\{a \mid a\in \mathbb{N}_0 ~\mathrm{en}~a\leqslant 8\}\intersection \{a \mid a\in \mathbb{N} ~\mathrm{en}~a>5\}
+\subfloat[$\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}\intersection \{a \mid a\in \nat ~\mathrm{en}~a>5\}
 	=\{6,7,8\}$]{
 \input{figuren/verzamelingen_relaties/tikz/doorsnedevb}
     \label{fig:doorsnede_voorbeeld}
@@ -271,11 +269,11 @@ Bijvoorbeeld
 \caption{Verschil van twee verzamelingen}
 \end{figure}
 
-\subsection{Complement}
+\subsection{Complement}\index{complement}
 Veronderstel dat de verzameling $X$ een deelverzameling is van een grote verzameling $U$. Het \emph{complement}  van $X$ is de verzameling van elementen van $U$ die niet tot $X$ behoren: $X^c=U-X$ (figuur~\ref{fig:complement_algemeen}). Bijvoorbeeld
 \begin{itemize}
-\item Als $X\subset \mathbb{N}$ (dus $U=\mathbb{N}$) en $X=\{100,101,102,\dots\}$, dan is $X^c=\{0,1,2,\dots,98,99\}$ (figuur~\ref{fig:complement_voorbeeld})
-\item Als $U=\mathbb{N}$ en $X$ de verzameling is van toegelaten leeftijden voor registratie op een site, uitgedrukt in aantal dagen, dan is het complement van $X$ de verzameling van geweigerde leeftijden.
+\item Als $X\subset \nat$ (dus $U=\nat$) en $X=\{100,101,102,\dots\}$, dan is $X^c=\{0,1,2,\dots,98,99\}$ (figuur~\ref{fig:complement_voorbeeld})
+\item Als $U=\nat$ en $X$ de verzameling is van toegelaten leeftijden voor registratie op een site, uitgedrukt in aantal dagen, dan is het complement van $X$ de verzameling van geweigerde leeftijden.
 \end{itemize}
 
 \begin{figure}
@@ -284,7 +282,7 @@ Veronderstel dat de verzameling $X$ een deelverzameling is van een grote verzame
     \input{figuren/verzamelingen_relaties/tikz/complementalgemeen}
     \label{fig:complement_algemeen}
 }\qquad
-\subfloat[$ \{100,101,102,\dots\}^c=\{0,1,2,\dots,98,99\}$ als $U=\mathbb{N}$]{
+\subfloat[$ \{100,101,102,\dots\}^c=\{0,1,2,\dots,98,99\}$ als $U=\nat$]{
     \input{figuren/verzamelingen_relaties/tikz/complementvb}
     \label{fig:complement_voorbeeld}
 }
@@ -305,7 +303,7 @@ Volgende eigenschappen spreken voor zich:
 \label{subsec:verzRekenregels}
 Bij bewerkingen op verzamelingen gelden enkele rekenregels.
 
-\subsubsection{Associatief}
+\subsubsection{Associatief}\index{associativiteit}
 Bij het optellen van getallen mag je de haakjes verplaatsen en weglaten:
 $(2+3)+4=2+(3+4)=2+3+4$. Bij doorsnede en unie van verzamelingen mag je dat ook doen.
 \begin{equation*}
@@ -315,7 +313,7 @@ X\union (Y\union Z)=(X\union &Y)\union Z =X\union Y\union Z
 X\intersection (Y\intersection Z)=(X\intersection &Y)\intersection Z = X\intersection Y\intersection Z
 \end{split}
 \end{equation*}
-\subsubsection{Commutatief}
+\subsubsection{Commutatief}\index{commutativiteit}
 Eveneens vergelijkbaar met het optellen (en vermenigvuldigen) van getallen mag je de verzamelingen van plaats verwisselen.
 \begin{equation*}
 A\union B=B\union A ~\mathrm{en}~A\intersection B=B\intersection A
@@ -323,7 +321,7 @@ A\union B=B\union A ~\mathrm{en}~A\intersection B=B\intersection A
 
 Het verschil van twee verzamelingen is \emph{niet} commutatief. Vergelijk met $2-3\not = 3-2$.
 
-\subsubsection{Distributief}
+\subsubsection{Distributief}\index{distributiviteit}
 In de getallenleer heb je geleerd dat `maal' distributief is ten opzichte van `plus': $a\cdot (b+c)=a\cdot b+a\cdot c$, maar `plus' niet distributief is ten opzichte van `maal': $2+(3\cdot 4)\not = (2+3)\cdot (2+4)$. 
 
 In de verzamelingenleer is de unie distributief ten opzichte van de doorsnede \emph{en} omgekeerd. 
@@ -362,7 +360,7 @@ Dit wordt verduidelijkt in figuur~\ref{fig:distr1a} en figuur~\ref{fig:distr1b}.
 \label{fig:distr2}
 \end{figure}
 
-\subsubsection{De lege verzameling}
+\subsubsection{De lege verzameling}\index{lege verzameling}\index{verzameling!leeg}
 De lege verzameling neemt dezelfde rol op zich als het element nul in de getallenleer:
 \begin{equation*}
 \begin{split}
@@ -372,7 +370,7 @@ A\intersection\emptyset=\emptyset
 \end{split}
 \end{equation*}
 
-\subsubsection{De wetten van de Morgan}
+\subsubsection{De wetten van de Morgan}\index{wetten van de Morgan}\index{de Morgan}
 De wetten van de Morgan leggen een verband tussen de 
 bewerkingen $\intersection$ en $\union$ en het complement. 
 Zij zijn genoemd naar de Britse wiskundige A. De Morgan 
@@ -395,7 +393,7 @@ De tweede wet maakt een analoge redenering voor de doorsnede:  het complement va
  (X\intersection Y)^c=X^c \union  Y^c
 \end{equation*}
 
-\section{Productverzameling, paar en geordende $n$-tallen}
+\section{Productverzameling, paar en geordende $n$-tallen}\index{productverzameling}\index{verzameling!product-}\index{\ensuremath{\times}}
 \label{sec:prodverz}
 In het voorgaande vermeldden we reeds dat de elementen van een verzameling niet noodzakelijk enkelvoudig hoeven te zijn (bijvoorbeeld een getal of een letter), maar dat een verzameling ook kan bestaan uit andere verzamelingen. Dit kunnen we gebruiken om verzamelingen met  `gecombineerde' elementen te construeren. Voor een taak die studenten per twee moeten maken bijvoorbeeld kan je een verzameling maken van alle duo's. 
 
@@ -420,15 +418,15 @@ Bijvoorbeeld:
 \begin{equation*}
 X\times Y=\{(1,a),(1,b),(2,a),(2,b),(3,a),(3,b) \}
 \end{equation*}
-\item Als $X=\mathbb{R}$ en $Y=\mathbb{R}$, dan is 
-$X \times Y=\mathbb{R}^2$, de verzameling van alle koppels 
+\item Als $X=\real$ en $Y=\real$, dan is 
+$X \times Y=\real^2$, de verzameling van alle koppels 
 re\"ele getallen $(x,y)$. Deze verzameling ken je als het twee-dimensionale vlak.
 \end{itemize}
 
 
 Een productverzameling is niet beperkt tot het product van twee verzamelingen: je kan zoveel verzamelingen met mekaar vermenigvuldigen als nodig is:
 \begin{quote}
-De  productverzameling $A_1\times A_2\times\dots\times A_n$ van de verzamelingen $A_1$, $A_2$, \dots, $A_n$ is de verzameling van \emph{geordende $n$-tallen} (\emph{tupels}) $(a_1,a_2,\dots,a_n)$ waarbij $a_1\in A_1$, $a_2\in  A_2$, \dots, $a_n \in A_n$.
+De  productverzameling $A_1\times A_2\times\dots\times A_n$ van de verzamelingen $A_1$, $A_2$, \dots, $A_n$ is de verzameling van \emph{geordende $n$-tallen} (\emph{tupels}\index{tupel}) $(a_1,a_2,\dots,a_n)$ waarbij $a_1\in A_1$, $a_2\in  A_2$, \dots, $a_n \in A_n$.
 \end{quote}
 \begin{equation*}
 A_1\times A_2\times\dots\times A_n=\{(a_1,a_2,\dots,a_n)\mid a_1\in A_1, a_2\in  A_2, \dots, a_n \in A_n\}
@@ -445,7 +443,7 @@ Stel dat $A=\{\mathrm{a}, \mathrm{b},\dots,\mathrm{z}\}$, dan is $A^5$ de verzam
 \begin{oef}
 Zijn de volgende verzamelingen goed gedefinieerd? Motiveer je antwoord.
 \begin{enumerate}
-\item De verzameling van de letters van het alfabet.
+\item De verzameling van de letters van het alfabet
 \item De verzameling van grote mensen
 \item De verzameling van re\"ele getallen waarvoor geldt $2x-9=16$
 \item De verzameling van gehele getallen waarvoor geldt $2x-9=16$
@@ -471,8 +469,8 @@ Gegeven de verzameling $A=\{2,4,6,8,10\}$ en $B=\{1,3,6,7,8\}$. Welke uitspraken
 \item $11\in B$
 \item $4 \not \in B$
 \item $\{2\}\in A$
-\item $A\in \mathbb{N}$
-\item $A=\{x\mid x\in \mathbb{N} \mathrm{~en~}x\mathrm{~is~even}\}$
+\item $A\in \nat$
+\item $A=\{x\mid x\in \nat \mathrm{~en~}x\mathrm{~is~even}\}$
 \end{enumerate}
 \begin{opl}
 \begin{enumerate}
@@ -480,8 +478,8 @@ Gegeven de verzameling $A=\{2,4,6,8,10\}$ en $B=\{1,3,6,7,8\}$. Welke uitspraken
 \item niet waar
 \item waar
 \item niet waar: $\{2\}\subset A$ of $2\in A$
-\item niet waar: $A\subset \mathbb{N}$
-\item niet waar: bijvoorbeeld $12\not \in A$. Zou wel waar zijn: $A=\{x\mid x\in \mathbb{N} \mathrm{~en~}x\text{~is~even en }x\leqslant 10\}$
+\item niet waar: $A\subset \nat$
+\item niet waar: bijvoorbeeld $12\not \in A$. Zou wel waar zijn: $A=\{x\mid x\in \nat \mathrm{~en~}x\text{~is~even en }x\leqslant 10\}$
 \end{enumerate}
 \end{opl}
 \end{oef}
@@ -492,8 +490,8 @@ Gegeven de verzameling $A=\{2,4,6,8,10\}$ en $B=\{1,3,6,7,8\}$. Welke uitspraken
 \begin{oef}
 Gegeven $A=\{4,\sqrt{2}, \frac{2}{3}, -2.5, -5,33,\sqrt{9},\pi \}$. Noteer volgende deelverzamelingen van $A$ door middel van opsomming:
 \begin{enumerate}
-\item De  getallen van $A$ die behoren tot $\mathbb{N}$
-\item De  getallen van $A$ die behoren tot $\mathbb{Z}$
+\item De  getallen van $A$ die behoren tot $\nat$
+\item De  getallen van $A$ die behoren tot $\integers$
 \item De rationale getallen van $A$
 \item De re\"ele getallen van $A$ die niet rationaal zijn
 \end{enumerate}
@@ -739,8 +737,6 @@ Gegeven de verzamelingen $A,B\subset U$. Duid aan op een venndiagram
 \end{tabular}
 \end{center}
 }
-\vskip2mm
-\noindent Merk op dat $(A \union B)^c = A^c \intersection B^c$ en $(A \intersection B)^c = A^c \union B^c$.
 \end{opl}
 \end{oef}
 
@@ -766,9 +762,9 @@ Zij $A$,$B$,$C$ en $D$ verzamelingen. Bepaal of de volgende beweringen waar of o
 \begin{oef}
 Geef door opsomming
 \begin{enumerate}
-  \item $A=\{x \in \mathbb{R} | (x-1)\cdot(x-2)=6\}$
-  \item $B=\{10\cdot x|x\in\mathbb{Z} \}$
-  \item $C=\{ x\in \mathbb{N}| x \textrm{ is een deler van } 6\}$
+  \item $A=\{x \in \real | (x-1)\cdot(x-2)=6\}$
+  \item $B=\{10\cdot x|x\in\integers \}$
+  \item $C=\{ x\in \nat| x \textrm{ is een deler van } 6\}$
   \item $U = \{(x, y) \in A \times B|y = 2\cdot x + 10\}$ waarbij $A = \{0,1,2,\cdots,6\}$ en \\$B = \{10,11,12,\dots,20\}$
   \item $V = \{(x, y) \in A \times B|y = x - 10\}$ waarbij  $A = \{10,11,12,\dots,20\}$ en \\ $B = \{0,1,2,\cdots,6\}$
   \item $W = \{(x, y) \in A \times  B|y = \sqrt{x}\}$ waarbij $A=\{-4,-1,0,1,4,9\}$ en \\ 
