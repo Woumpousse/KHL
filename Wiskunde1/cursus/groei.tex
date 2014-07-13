@@ -63,21 +63,18 @@ oppervlakte van het meer en de aangroei van de oppervlakte bedekt met algen.
 We gaan na op welke manier beide processen van mekaar verschillen.
 
 \subsection{Lineaire groei}
- We bekijken eerst de groei van de oppervlakte van het meer. Zoals we gedaan hebben in hoofdstuk~\ref{chap:eerstegraadsfuncties} stellen we eerst het wiskundig model op. 
- De oppervlakte benoemen we met de
-functie $M(t)$, met $t$ de veranderlijke tijd, uitgedrukt in weken.
+We bekijken eerst de groei van de oppervlakte van het meer. Zoals we gedaan hebben in hoofdstuk~\ref{chap:eerstegraadsfuncties} stellen we eerst het wiskundig model op. 
+De oppervlakte benoemen we met de functie $M(t)$, met $t$ de veranderlijke tijd, uitgedrukt in weken.
 Van deze functie weten we het volgende:
 
 \begin{itemize}
-    \item  Als $t=0$ dan is $M(0)=800$
-
-    \item  Als $t=1$ dan is $M(1)=800+1\cdot 550=1350$
-
-    \item  Als $t=3$ dan is $M(3)=800+3\cdot 550=2450$
-
-    \item  \ldots
+  \item  Als $t=0$ dan is $M(0)=800$
+  \item  Als $t=1$ dan is $M(1)=800+1\cdot 550=1350$
+  \item  Als $t=3$ dan is $M(3)=800+3\cdot 550=2450$
+  \item  \ldots
 \end{itemize}
- Dit wordt weergegeven in tabel~\ref{tabel:meer} (vergelijk met tabel~\ref{tbl:taxi}).
+
+Dit wordt weergegeven in tabel~\ref{tabel:meer} (vergelijk met tabel~\ref{tbl:taxi} op pagina~\pageref{tbl:taxi}).
  \begin{table}[htb]
     \centering
     \vspace{0.3cm}
@@ -107,14 +104,14 @@ Hieruit leiden we  het voorschrift voor de functie $M(t)$ af.
 \begin{displaymath}
     M(t)=800+t\cdot 550
 \end{displaymath}
-Dit is de vergelijking van  een eerstegraads- of lineaire functie. Elke week wordt  eenzelfde hoeveelheid oppervlakte \emph{opgeteld}. We spreken van \emph{lineaire groei}. We nemen aan dat de graafmachines de hele dag doorwerken (ook 's nachts). De veranderlijke $t$ hoeft dus geen geheel getal te zijn, maar kan een willekeurig positief reëel getal zijn. Het domein van de functie $M(t)$ is dus $\real^+$. 
+Dit is de vergelijking van  een eerstegraads- of lineaire functie. Elke week wordt  eenzelfde hoeveelheid oppervlakte \emph{opgeteld}. We spreken van \emph{lineaire groei}\index{lineaire groei}. We nemen aan dat de graafmachines de hele dag doorwerken (ook 's nachts). De veranderlijke $t$ hoeft dus geen geheel getal te zijn, maar kan een willekeurig positief reëel getal zijn. Het domein van de functie $M(t)$ is dus $\real^+$. 
 
 
 Het volgend verband is onmiddellijk duidelijk:
 \begin{displaymath}
     M(t)=M(t-1) +550
 \end{displaymath}
- Dit verband noemen we \emph{recursief}, omdat de hoeveelheid van deze  week $M(t)$ uitgedrukt wordt in functie van de hoeveelheid van de vorige week $M(t-1)$.
+ Dit verband noemen we \emph{recursief}\index{recursief}, omdat de hoeveelheid van deze  week $M(t)$ uitgedrukt wordt in functie van de hoeveelheid van de vorige week $M(t-1)$.
 
 De grafiek van de functie $M(t)$ is een rechte (zie figuur~\ref{fig:lingroei}). Het getal $550$ is de richtingsco\"effici\"ent van de rechte. De grafiek snijdt de verticale as in $800$ (de beginwaarde $M(0)$ van het groeiproces).   Deze grafiek is typisch voor elk lineair groeiproces (vergelijk met sectie~\ref{subsec:grafischeVoorstelling}).
 \begin{figure}[tbp]
@@ -187,8 +184,7 @@ rechteruitdrukkingen, dan vinden we als voorschrift
  \end{table}
 In tabel~\ref{tabel:algen} geven we de groei schematisch weer. 
 
-We spreken van \emph{ exponenti\"{e}le groei} omdat de oppervlakte
-bedekt met algen elke week
+We spreken van \emph{exponenti\"ele groei}\index{exponenti\"ele groei} omdat de oppervlakte bedekt met algen elke week
 \emph{vermenigvuldigd} wordt met eenzelfde factor, hier $2$. We noemen dit getal de \emph{groeifactor}. Het getal 5 geeft aan hoeveel algen er zijn op begintijdstip $t=0$. We noemen 5 dan ook de \emph{beginwaarde}.
 
 De groei van de algen gebeurt continu:  na een halve week is de hoeveelheid reeds toegenomen. Als we er vanuit gaan dat de groeifactor de eerste helft van de week dezelfde is als de tweede helft van de week (zie figuur~\ref{fig:algen_periode2}), dan blijkt dat de veranderlijke $t$ in vergelijking~\eqref{eq:algen} geen geheel getal hoeft te zijn. Het domein van de functie $A(t)$ is dus $\real^+$.
@@ -223,27 +219,28 @@ De groei van de algen gebeurt continu:  na een halve week is de hoeveelheid reed
 Het volgend verband is voor iedereen onmiddellijk duidelijk:
 \[A(t)=A(t-1)\cdot 2
 \] 
-Dit is opnieuw een \emph{recursief} voorschrift.
+Dit is opnieuw een \emph{recursief}\index{recursief} voorschrift.
 
 Zoals je ziet op figuur~\ref{fig:algen}, is de grafiek van $A(t)$ geen rechte meer. Omdat de veranderlijke $t$
 in vergelijking~\eqref{eq:algen} in de exponent staat noemen we $A(t)$  een \emph{exponenti\"{e}le
-functie}. De groeifactor $2$ is het grondtal van de exponenti\"ele functie. De beginwaarde $5$ is het snijpunt van de functie met de verticale as. In hoofdstuk~\ref{chap:expFunctie} gaan we  dieper  in op exponentiële functies.
+functie}. De groeifactor $2$ is het grondtal\index{grondtal} van de exponenti\"ele functie.
+De beginwaarde $5$ is het snijpunt van de functie met de verticale as. In hoofdstuk~\ref{chap:expFunctie} gaan we dieper in op exponentiële functies.
 \begin{figure}[tbp]
     \centering
-\begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=0.05cm]
-\draw[->] (-2.2,0) -- (5.5,0) node [at end, below] {$t$};
-\foreach \x in {-1,0,1,2,3,4,5}
-\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
-\draw[->] (0,0) -- (0,170) node [at end, left] {$A(t)$};
-\foreach \y in {20,40,...,160}
-\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
-\draw [domain=-2:5,thick] plot(\x,{5*exp(\x*ln(2))});
-\draw [dashed, gray] (2,0) |- (0,20);
-\draw [dashed, gray] (3,0) |- (0,40);
-    \filldraw [red] (2,20) circle (2pt);
-        \filldraw [blue] (3,40) circle (2pt);
-\end{tikzpicture}
-     \caption{Aangroei van de oppervlakte bedekt met algen $A(t)=5\cdot 2^{t}$}
+    \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=0.05cm]
+    \draw[->] (-2.2,0) -- (5.5,0) node [at end, below] {$t$};
+    \foreach \x in {-1,0,1,2,3,4,5}
+    \draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+    \draw[->] (0,0) -- (0,170) node [at end, left] {$A(t)$};
+    \foreach \y in {20,40,...,160}
+    \draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+    \draw [domain=-2:5,thick] plot(\x,{5*exp(\x*ln(2))});
+    \draw [dashed, gray] (2,0) |- (0,20);
+    \draw [dashed, gray] (3,0) |- (0,40);
+        \filldraw [red] (2,20) circle (2pt);
+            \filldraw [blue] (3,40) circle (2pt);
+    \end{tikzpicture}
+    \caption{Aangroei van de oppervlakte bedekt met algen $A(t)=5\cdot 2^{t}$}
     \label{fig:algen}
 \end{figure}
 
@@ -320,14 +317,14 @@ opgelost worden met de methoden van sectie~\ref{sec:exp_vgl}.  We kunnen ze alle
 
 
 \newpage
-\section{Exponenti\"{e}le groei}
+\section{Exponenti\"ele groei}
 \subsection{Definities}
 
 We veralgemenen vergelijking (\ref{eq:algen}) van sectie~\ref{subsec: exp_groei_vb}. 
 \begin{quote}
 
 Zij  $B(t)$ de functie die de exponenti\"{e}le
-aangroei van een grootheid weergeeft, waarbij $t$ uitgedrukt is in aantal \emph{perioden} (bijvoorbeeld weken, uren, meter, centimeter). De \emph{groeifactor} $g$ is de factor waarmee de functie per periode toeneemt (vermenigvuldigd wordt). Bij het begin van de meting ($t=0$) heeft de functie \emph{beginwaarde} $B(0)$. Dan is het functievoorschrift van deze functie
+aangroei van een grootheid weergeeft, waarbij $t$ uitgedrukt is in aantal \emph{perioden}\index{periode} (bijvoorbeeld weken, uren, meter, centimeter). De \emph{groeifactor}\index{groeifactor} $g$ is de factor waarmee de functie per periode toeneemt (vermenigvuldigd wordt). Bij het begin van de meting ($t=0$) heeft de functie \emph{beginwaarde}\index{beginwaarde} $B(0)$. Dan is het functievoorschrift van deze functie
 \begin{equation}
     B(t)=B(0)\cdot g^{t}
     \label{eq:eq_groei2}
@@ -588,6 +585,10 @@ procentuele afname van $p$\,\% per tijdseenheid is een dalend
 exponentieel proces met als groeifactor $ g=1-\frac{p}{100}$. Hierbij geldt voor de groeifactor:
  $0<g<1$.
 
+\input{oefeningen/oefgroei}
 
- 
-%\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "cursusTW1"
+%%% End: 

@@ -171,31 +171,51 @@ $T_1(t)=10+\frac{t}{32}$ met $t$ het aantal meter grond dieper dan \SI{25}{\mete
 
 
 \begin{oef}
- Een auto verliest jaarlijks \SI{18}{\percent} van zijn waarde.
-    \begin{enumerate}
-\item Hoeveel \% van de oorspronkelijke waarde blijft er over na 2, 3, 6, 10 jaar?
-\item Wat zal de waarde zijn van een auto binnen 6 jaar, als de auto nu \euros{12\,500} bedraagt? 
+Een auto verliest jaarlijks \SI{18}{\percent} van zijn waarde.
+\begin{enumerate}
+  \item Hoeveel \% van de oorspronkelijke waarde blijft er over na 2, 3, 6, 10 jaar?
+  \item Wat zal de waarde zijn van een auto binnen 6 jaar, als de auto nu \euros{12\,500} bedraagt? 
 \end{enumerate}
 \begin{opl}
+Het dalend groeiproces wordt beschreven door de exponenti\"ele functie
+\[
+  P(t) = (1 - \frac{18}{100})^t
+\]
 \begin{enumerate}
-\item Na 2 jaar: \SI{67}{\percent}; na 3 jaar: \SI{55}{\percent}; na 6 jaar: \SI{30}{\percent}; na 10 jaar: \SI{14}{\percent}.
-\item $12~500\cdot\frac{30}{100}=3800$
+  \item Waardes
+        \[
+          \begin{array}{cc}
+            t & P(t) \\
+            \toprule
+            2 & 0,67 \\
+            2 & 0,55 \\
+            6 & 0,30 \\
+            10 & 0,14 \\
+          \end{array}
+        \]
+  \item $12.500 \cdot P(6) = 3800$
 \end{enumerate}
 \end{opl}
 \end{oef}
 
 \begin{oef}
- Stel dat je eerste over-over-over-grootvader met Belgische nationaliteit in 1830 precies \'e\'en eurocent bij een bank zou hebben uitgezet tegen een samengestelde intrest van \SI{5}{\percent}, hoeveel zou je dan nu ontvangen?
-  \begin{opl}
-  Groeifunctie: $B(t)=1,05^t$: bedrag in eurocent, $t$ jaar na 1830\\
-  Nu is het 2012, dus bereken $B(182)=7185,42$\\
-  In 2012 zou je \euros{71,85} ontvangen.
-  \end{opl}
+Stel dat je eerste over-over-over-grootvader met Belgische nationaliteit in 1830 precies \'e\'en eurocent bij een
+bank zou hebben uitgezet tegen een samengestelde intrest van \SI{5}{\percent}, hoeveel zou je dan nu ontvangen?
+\begin{opl}
+Groeifunctie: $B(t)=1,05^t$: bedrag in eurocent, $t$ jaar na 1830\\
+Nu is het 2012, dus bereken $B(182)=7185,42$\\
+In 2012 zou je \euros{71,85} ontvangen.
+\end{opl}
    
         
-  \end{oef}
+\end{oef}
 
 
 
 
-%\end{document}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../cursusTW1"
+%%% End: 
