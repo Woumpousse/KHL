@@ -32,7 +32,7 @@
 
 
 \newpage
-\noindent Veel verbanden tussen grootheden (snelheid, prijs, massa, lengte, aantal \ldots) kunnen voorgesteld worden door een veeltermfunctie van de eerste graad, kortweg \emph{eerstegraadsfunctie}\footnote{Een veelterm van de eerste graad in de veranderlijke $x$ heeft de vorm $a+bx$. Er staat enkel een $x$ (tot de eerste macht) en dus spreken we over `\ldots van de eerste graad'.}. De grafiek hiervan is een rechte. Verder in de cursus maken we geregeld gebruik van eerstegraadsfuncties en rechten (bvb. lineaire programmatie, lineaire groei, rekenkundige rijen). We verwachten dus dat je vlot kan werken met dit type functie. Deze leerstof zag je reeds in het secundair, maar waarschijnlijk kan een herhaling geen kwaad?
+\noindent Veel verbanden tussen grootheden (snelheid, prijs, massa, lengte, aantal \ldots) kunnen voorgesteld worden door een veeltermfunctie van de eerste graad, kortweg \emph{eerstegraadsfunctie}\index{eerstegraadsfunctie}\footnote{Een veelterm van de eerste graad in de veranderlijke $x$ heeft de vorm $a+bx$. Er staat enkel een $x$ (tot de eerste macht) en dus spreken we over `\ldots van de eerste graad'.}. De grafiek hiervan is een rechte. Verder in de cursus maken we geregeld gebruik van eerstegraadsfuncties en rechten (bvb. lineaire programmatie, lineaire groei, rekenkundige rijen). We verwachten dus dat je vlot kan werken met dit type functie. Deze leerstof zag je reeds in het secundair, maar waarschijnlijk kan een herhaling geen kwaad?
 
 \section{Hoeveel kost een taxirit?}\label{sec:taxirit}
 Je plant een uitstapje naar Brussel. Alle verplaatsingen in Brussel zelf doe je met een taxi. 
@@ -45,10 +45,10 @@ Je plant een uitstapje naar Brussel. Alle verplaatsingen in Brussel zelf doe je 
 Het zou fijn zijn om op voorhand een schatting van de kostprijs te kunnen maken. Op de site van mobielbrussel\footnote{\url{http://www.mobielbrussel.irisnet.be/articles/taxi/hoeveel-kost-een-taxi}} vind je volgende informatie:
 \begin{itemize}
 \item Instapgeld: \euros{2,40}
-\item Tarief I (in de 19 gemeenten van het Brussels Hoofdstedelijk Gewest): \euros{1,66}	 per km.
+\item Tarief I (in de 19 gemeenten van het Brussels Hoofdstedelijk Gewest): \euros{1,80} per km.
 \item Tarief II (buiten de 19 gemeenten): \euros{2,70} per km.
 \item Wachtvergoeding: \euros{30} per uur.
-\item Tussen 22 en 6 uur wordt een forfaitaire meerprijs van \euros{2} gevraagd.
+\item Tussen 22 en 6 uur wordt een forfaitaire meerprijs van \euros{2,00} gevraagd.
 \end{itemize}
 Hoeveel kost een ritje van 15 km in het centrum om middernacht?  Hoever geraak je 's nachts in het centrum met \euros{20}? 
 
@@ -157,7 +157,7 @@ De omgekeerde vraag vergt iets meer werk. Hoever geraak je met \euros{20}? Merk 
 \Leftrightarrow \dfrac{15,60}{1,66}&=x\\
 \Leftrightarrow 9,3976 &= x
 \end{align*}
-Met \euros{20} geraken we dus 9,3976 km (afgerond) ver.
+Met \euros{20} geraken we dus 9,4 km (afgerond) ver.
 
 \section{Richtingscoëfficiënt}
 \subsection{Inleiding}
@@ -188,7 +188,7 @@ We hernemen figuur~\ref{fig:taxir} in figuur~\ref{fig:taxiredetail}.
 \caption{Rechte heeft rico 1,66}
     \label{fig:taxiredetail}
 \end{figure}
-Figuur~\ref{fig:taxiredetail} toont het belang van het getal 1,66. Per gereden km komt er \euros{1,66} bij de prijs bij. Als je op de grafiek in een punt van de rechte vertrekt en je tekent een horizontale rechte met lengte 1, dan is de lengte van het lijnstukje dat je verticaal naar boven moet gaan om terug op de rechte uit te komen gelijk aan 1,66. Deze afstand 1,66 wordt de \emph{richtingscoëfficiënt} van de rechte genoemd (kortweg: \emph{rico}). 
+Figuur~\ref{fig:taxiredetail} toont het belang van het getal 1,66. Per gereden km komt er \euros{1,66} bij de prijs bij. Als je op de grafiek in een punt van de rechte vertrekt en je tekent een horizontale rechte met lengte 1, dan is de lengte van het lijnstukje dat je verticaal naar boven moet gaan om terug op de rechte uit te komen gelijk aan 1,66. Deze afstand 1,66 wordt de \emph{richtingscoëfficiënt}\index{richtingsco\"effici\"ent}\index{rico} van de rechte genoemd (kortweg: \emph{rico}). 
 
 \subsection{Berekening}
 Gegeven een rechte door twee gegeven punten $(x_1, y_1)$ en $(x_2,y_2)$. De rico is dan
@@ -244,12 +244,12 @@ De coëfficiënt van $x$ (het getal $m$) vertelt iets over het stijgen en dalen 
 f(0)&=m\cdot 0 + q\\
 &= q
 \end{align*}
-Het getal $q$ is dus de functiewaarde in 0. Men noemt $q$ daarom soms ook de \emph{startwaarde} van de functie, zeker als de veranderlijke op de horizontale as de tijd is.
+Het getal $q$ is dus de functiewaarde in 0. Men noemt $q$ daarom soms ook de \emph{startwaarde}\index{startwaarde} van de functie, zeker als de veranderlijke op de horizontale as de tijd is.
 
 We zullen in het vervolg van deze tekst de begrippen \emph{functievoorschrift} en \emph{vergelijking} door elkaar gebruiken. Het verschil is ondermeer dit: $f(x)=2x+3$ is het voorschrift van een eerstegraadsfunctie (of lineaire functie). Als we $f(x)$ vervangen door $y$ spreken we liever van een vergelijking van de rechte: $y=2x+3$. Vergelijkingen van rechten kunnen we bovendien algebraïsch aanpassen, bvb. $y-2x=3$ of $2x-y+3=0$ stelt telkens dezelfde rechte voor.
 
 \subsection{Rechtevenredig verband}
-Als in vergelijking~\eqref{eq:linfunc} de waarde van $q$ gelijk gesteld wordt aan 0, gaat de rechte door de oorsprong. De rechte krijgt dan als vergelijking $f(x)=mx$. We spreken dan over een \emph{rechtevenredig verband}.
+Als in vergelijking~\eqref{eq:linfunc} de waarde van $q$ gelijk gesteld wordt aan 0, gaat de rechte door de oorsprong. De rechte krijgt dan als vergelijking $f(x)=mx$. We spreken dan over een \emph{rechtevenredig verband}\index{recht evenredig}.
 
 Deze speciale eerstegraadsfunctie komt veel voor, bvb. 
 \begin{itemize}
@@ -370,7 +370,7 @@ Figuur~\ref{fig:snijdenderechten} toont twee rechten met vergelijkingen $y=-x+5$
     \label{fig:snijdenderechten}
 \end{figure}
 
-Er zijn verschillende methodes voor het oplossen van een stelsel van twee eerstegraadsvergelijkingen. Je herinnert je waarschijnlijk nog de \emph{substitutiemethode}. Herschrijf één van beide vergelijkingen tot er staat `$\text{letter} = \ldots$'. Die letter vul je dan in (substitueren) in de andere vergelijking.
+Er zijn verschillende methodes voor het oplossen van een stelsel van twee eerstegraadsvergelijkingen. Je herinnert je waarschijnlijk nog de \emph{substitutiemethode}\index{substitutiemethode}. Herschrijf één van beide vergelijkingen tot er staat `$\text{letter} = \ldots$'. Die letter vul je dan in (substitueren) in de andere vergelijking.
 
 Hier zijn de vergelijkingen wel al in een eenvoudige vorm gegeven. We halen een letter uit één vergelijking: $y=-x+5$ (nogal evident, want de vergelijking staat al in de gewenste vorm). Die letter vul je in de andere vergelijking in:
 \begin{align*}
@@ -385,7 +385,7 @@ Deze waarde voor de onbekende $x$ vul je nu in in één van beide vergelijkingen
 
 \section{Deelsgewijs lineaire functie}\label{sec:taxisprong}
 \subsection{Definitie}
-Soms kan een verband tussen twee grootheden voorgesteld worden door een aaneenschakeling van lineaire functies. We spreken in dit verband ook over functies met \emph{meervoudig voorschrift}. In algoritmes komt dit vaak voor: afhankelijk van de waarde van inputparameter(s) kunnen er verschillende berekeningen volgen (\verb+if ... then ... else ...+ constructies enz.).
+Soms kan een verband tussen twee grootheden voorgesteld worden door een aaneenschakeling van lineaire functies. We spreken in dit verband ook over functies met \emph{meervoudig voorschrift}\index{meervoudig voorschrift}. In algoritmes komt dit vaak voor: afhankelijk van de waarde van inputparameter(s) kunnen er verschillende berekeningen volgen (\verb+if ... then ... else ...+ constructies enz.).
 
 Laten we even teruggrijpen naar het taxivoorbeeld (sectie~\ref{sec:taxirit}). We gingen ervan uit dat de meter `continu' doorloopt. Voor elke km, maar ook voor elke m, mm, \ldots \ loopt de prijs op. 
 
@@ -702,3 +702,9 @@ like(4320)
 Bij 4320 likes stort het bedrijf \euros 3656.
 \end{opl}
 \end{oef}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "cursusTW1"
+%%% End: 
