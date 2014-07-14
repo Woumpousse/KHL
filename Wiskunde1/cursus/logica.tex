@@ -49,7 +49,7 @@ We kunnen testen combineren of uitbreiden met voegwoorden zoals \emph{niet}, \em
 
  \section{Proposities}
  \subsection{Definitie}
-Een \emph{propositie} of \emph{uitspraak} is elke zin waarvan kan worden gezegd of hij waar of onwaar is.
+Een \emph{propositie}\index{propositie} of \emph{uitspraak}\index{uitspraak} is elke zin waarvan kan worden gezegd of hij waar of onwaar is.
 
 \subsection{Voorbeelden}
 %%%%puntkomma's toegevoegd
@@ -81,18 +81,18 @@ We gebruiken de letters $p, q, r, \ldots$ voor de uitspraken en geven ze de naam
 \begin{tabular}{ccc}
 \toprule
  symbool  & betekenis & benaming \\ \midrule
-  $\en$ & en & conjunctie \\
-   $\of$ & of & disjunctie \\
-   $\niet$ & niet & negatie \\
-   $\alsdan$ & als \ldots dan & implicatie \\
-   $\asa$ & als en slechts als & equivalentie \\
+  $\en$ & en & conjunctie\index{conjunctie} \\
+   $\of$ & of & disjunctie\index{disjunctie} \\
+   $\niet$ & niet & negatie\index{negatie} \\
+   $\alsdan$ & als \ldots\ dan & implicatie\index{implicatie} \\
+   $\asa$ & als en slechts als & equivalentie\index{equivalentie} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Formule}
-Een \emph{formule} is een zinvolle uitdrukking opgebouwd uit veranderlijken, voegwoorden en haakjes,
-bvb. \ $F = \niet (p \en q) \alsdan (\niet r \of p)$
+Een \emph{formule}\index{formule} is een zinvolle uitdrukking opgebouwd uit veranderlijken, voegwoorden en haakjes,
+bvb.\ $F = \niet (p \en q) \alsdan (\niet r \of p)$
 
 \subsection{Voorrangsregels}
 In volgorde van hoog naar laag: $\niet \en \of \stackrel{\alsdan}{\asa}$. Dit wil bvb.\ zeggen dat je de formule  $p \alsdan q \of r$ moet lezen als $p \alsdan (q \of r)$ , en \emph{niet} als $(p \alsdan q) \of r$.
@@ -107,7 +107,7 @@ Voor elke uitspraak zijn er 2 mogelijkheden: ze is waar, of ze is onwaar. Met el
       &  = 0 \mbox{, als de uitspraak } p \mbox{ onwaar is.}
 \end{array}
   \end{displaymath}
-We geven deze gegevens weer in een \emph{waarheidstabel}. Voor twee proposities $p$ en $q$ hebben we 4 mogelijke combinaties, weergegeven in tabel~\ref{tbl:waarheid}.
+We geven deze gegevens weer in een \emph{waarheidstabel}\index{waarheidstabel}. Voor twee proposities $p$ en $q$ hebben we 4 mogelijke combinaties, weergegeven in tabel~\ref{tbl:waarheid}.
 \begin{table}[htb]
   \centering
   \caption{Mogelijke combinaties voor twee propositieveranderlijken}\label{tbl:waarheid}
@@ -177,7 +177,7 @@ De rijen van de tabel worden niet in een willekeurige volgorde geplaatst. Voor d
 \section{Tautologie\"{e}n of wetten}
 \label{sec:logTautologie}
 %%%%%titel toegevoegd owv uniformiteit elders
-Een formule of uitspraak\footnote{We gebruiken beide begrippen min of meer als synoniemen. Bij \emph{uitspraak} denken we eerder in termen van taal, terwijl we bij het begrip \emph{formule} eerder symbolen (letters, veranderlijken) zullen gebruiken.} die \emph{waar} is \emph{on}afhankelijk van de waarheidswaarden van de veranderlijken die erin voorkomen noemen we een \emph{tautologie} (wet) of een \emph{logisch ware uitspraak}. Een voorbeeld van een logisch ware uitspraak is `Het regent \emph{of} het regent niet'.\\
+Een formule of uitspraak\footnote{We gebruiken beide begrippen min of meer als synoniemen. Bij \emph{uitspraak} denken we eerder in termen van taal, terwijl we bij het begrip \emph{formule} eerder symbolen (letters, veranderlijken) zullen gebruiken.} die \emph{waar} is \emph{on}afhankelijk van de waarheidswaarden van de veranderlijken die erin voorkomen noemen we een \emph{tautologie}\index{tautologie} (wet) of een \emph{logisch ware uitspraak}. Een voorbeeld van een logisch ware uitspraak is `Het regent \emph{of} het regent niet'.\\
 
 
 %%%% lay-out
@@ -262,7 +262,7 @@ $x\in A$ & $x\in B$ & $x\in A^c$ & $x\in B^c$ & $x\in A^c\cap B^c$ & $x\in A\cup
 \section{Propositielogica en programmastructuren}
 
 De theorie behandeld in dit hoofdstuk is belangrijk voor het schrijven van programma’s. Vaak zal men in een programma willen testen of een uitspraak waar of onwaar is en afhankelijk van dit antwoord andere instructies uitvoeren.
-Neem als voorbeeld onderstaande functie geïmplementeerd met Scilab
+Neem als voorbeeld onderstaande functie geïmplementeerd met Scilab.
 \begin{lstlisting}
 function y=isGeslaagd(score) 
   if score >= 5
@@ -457,7 +457,7 @@ $p$ & $q$ & $p\en \niet q$ & $\niet p \of q$ & $(p\en \niet q)\of (\niet p \of q
 
 
 \begin{oef}
- Een gevangene kan kiezen tussen twee deuren. Achter elke deur
+Een gevangene kan kiezen tussen twee deuren. Achter elke deur
 is een kamer met een prinses of een tijger. Het is dus mogelijk dat
 achter beide deuren een tijger zit of een prinses.
 Op elke deur hangt een bordje met daarop een mededeling (een
@@ -468,35 +468,172 @@ Verder wordt de gevangene iets verteld over de waarheid van
 deze zinnen, namelijk dat één van de twee zinnen waar is, de
 andere onwaar. \\
 Welke deur moet de gevangene kiezen? Gebruik een waarheidstabel.
+\begin{opl}
+\begin{samepage}
+We stellen beide deuren voor door $d_1$ en $d_2$. We spreken af dat
+\begin{center}
+  \begin{tabular}{r@{\ensuremath{\;\iff\;}}l}
+    deur $i$ bevat tijger & $d_i = 0$ \\
+    deur $i$ bevat prinses & $d_i = 1$ \\
+  \end{tabular}
+\end{center}
+\end{samepage}
+De uitspraak op deur 1 vertalen we naar
+\[ P_1 = d_1 \en \niet d_2 \]
+Dit heeft als waarheidstabel
+\[
+  \begin{array}{ccc}
+    d_1 & d_2 & P_1 \\
+    \toprule
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    1 & 0 & 1 \\
+    1 & 1 & 0 \\
+  \end{array}
+\]
+De uitspraak op deur 2 vertalen we naar
+\[ P_2 = (d_1 \en \niet d_2) \of (\niet d_1 \en d_2) \]
+Dit heeft als waarheidstabel
+\[
+  \begin{array}{ccc}
+    d_1 & d_2 & P_2 \\
+    \toprule
+    0 & 0 & 0 \\
+    0 & 1 & 1 \\
+    1 & 0 & 1 \\
+    1 & 1 & 0 \\
+  \end{array}
+\]
+De gevangene krijgt te horen dat
+\[
+  P = (P_1 \en \niet P_2) \of (\niet P_1 \en P_1)
+\]
+Dit heeft als waarheidstabel
+\[
+  \begin{array}{ccccc}
+    d_1 & d_2 & P_1 & P_2 & P \\
+    \toprule
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 1 & 1 \\
+    1 & 0 & 1 & 1 & 0 \\
+    1 & 1 & 0 & 0 & 0 \\
+  \end{array}
+\]
+We weten met zekerheid dat $P$ moet waar zijn, dit is enkel het geval indien $d_1 = 0$ en $d_2 = 1$, m.a.w.\ er
+is maar \'e\'en prinses en deze bevindt zich achter deur 2.
+\end{opl}
 \end{oef}
 
 \begin{oef}
- Een persoon neemt bij het eten volgende regel in acht:
+Een persoon neemt bij het eten volgende regel in acht:
 Als hij koffie drinkt, dan neemt hij geen melk.
 Hij eet beschuiten enkel en alleen als hij melk drinkt.
 Hij neemt geen soep samen met beschuiten.
 Zoek de waarheidstabel van de logische uitdrukking die hierbij hoort. 
 Als je weet dat hij koffie drinkt, kan je dan besluiten dat hij ook soep drinkt?
+\begin{opl}
+We voeren de volgende notaties in:
+\begin{center}
+  \begin{tabular}{cc}
+    koffie   & $k$ \\
+    beschuit & $b$ \\
+    melk     & $m$ \\
+    soep     & $s$
+  \end{tabular}
+\end{center}
+We vertalen de uitspraken:
+\[
+  \begin{array}{rcl}
+    P_1 & = & k \alsdan \niet m \\
+    P_2 & = & b \asa m \\
+    P_3 & = & \niet (s \en b)
+  \end{array}
+\]
+Waarheidstabel
+\[
+  \begin{array}{cccccccc}
+    k & b & m & s & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
+    \toprule
+    0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
+    1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+    1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
+    1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+    1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 \\
+    0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 1 & 0 & 1 & 0 & 0 \\
+  \end{array}
+\]
+We kijken of $k \alsdan s$ volgt uit de waarheidstabel door enkel de rijen
+te beschouwen waar de laatste kolom $1$ bevat en na te gaan of aan $k \alsdan s$ voldaan wordt.
+Dit is niet het geval: zo is het volgens de tweede rij mogelijk dat hij koffie drinkt zonder ook
+soep te nemen.
+\end{opl}
 \end{oef}
 
 \begin{oef}
- Er werd een moord gepleegd. Sherlock Holmes komt ter plaatse en stelt volgende zaken vast:
-De kok of de butler waren in de keuken.
-De kok was in de keuken of in de eetkamer.
-Als de butler een sigaar rookte, dan was hij niet in de keuken.
-Als de kok niet in de eetkamer was, dan rookte de butler geen sigaar.
-Welk eenvoudig besluit kan je trekken (gebruik een waarheidstabel).
+Er werd een moord gepleegd. Sherlock Holmes komt ter plaatse en stelt volgende zaken vast:
+\begin{itemize}
+  \item Of de kok, of de butler was in de keuken.
+  \item De kok was in de keuken of in de eetkamer.
+  \item Als de butler een sigaar rookte, dan was hij niet in de keuken.
+  \item Als de kok niet in de eetkamer was, dan rookte de butler geen sigaar.
+\end{itemize}
+Welk eenvoudig besluit kan je trekken (gebruik een waarheidstabel)?
+\begin{opl}
+We voeren de volgende notaties in:
+\begin{center}
+  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
+    kok in keuken & x \\
+    butler in keuken & y \\
+    butler rookt sigaar & z \\
+  \end{tabular}
+\end{center}
+We vertalen de uitspraken:
+\begin{itemize}
+  \item $P_1 = x \asa \niet y$
+  \item $x \of \niet x$
+  \item $P_2 = z \alsdan \niet y$
+  \item $P_3 = x \alsdan \niet z$
+\end{itemize}
+Waarheidstabel
+\[
+  \begin{array}{cccccccc}
+    x & y & z & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
+    \toprule
+    0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+    1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+    1 & 0 & 1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+    1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+  \end{array}
+\]
+We moeten enkel de rijen beschouwen waarvan de laatste kolom $1$ bevat.
+Deze rijen hebben gemeenschappelijk dat $z = 0$, m.a.w.\ het is
+zeker dat de butler niet rookte.
+\end{opl}
 \end{oef}
 
 \begin{oef}
- Controleer met een waarheidstabel of onderstaande bewering klopt.\\
+Controleer met een waarheidstabel of onderstaande bewering klopt.\\
 Als Anja ongelijk heeft, dan heeft Bert gelijk. Maar als Cindy gelijk
 heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk
 heeft. Dus heeft Cindy geen gelijk.
 \end{oef}
 
 \begin{oef}
- Bob, Jan en Koen worden verdacht van belastingontduiking. Elk van hen getuigt als volgt:
+Bob, Jan en Koen worden verdacht van belastingontduiking. Elk van hen getuigt als volgt:
 Bob: `Jan is schuldig en Koen is onschuldig'.
 Jan: `Als Bob schuldig is, dan is Koen het ook'.
 Koen: `Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig'.
@@ -654,3 +791,8 @@ $d$: student heeft zelfde punt  als linkerbuur
 \end{oef}
 
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "cursusTW1"
+%%% End: 
