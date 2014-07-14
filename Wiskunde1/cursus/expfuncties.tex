@@ -876,24 +876,24 @@ Als $z=-8$ bekomen we na de substitutie
       Bij de grafische oplossing zoeken we op een grafiek het snijpunt van de functies $f(x)=2^x$ en $g(x)=-x$.
       Op figuur~\ref{fig:snijp3} lees je af dat de oplossing ongeveer $x=\num{-0.64}$ is.
 \begin{figure}[htbp]
-    \centering
-           \begin{tikzpicture}[line cap=round,line join=round,x=1.4cm,y=1.4cm]
-\draw[->] (-2.2,0) -- (2.5,0) node [at end, below] {$x$};
-\foreach \x in {-2,-1,1,2}
-\draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
-\draw[->] (0,-1) -- (0,4.3) node [at end, left] {$y$};
-\foreach \y in {-1,1,,2,...,4}
-\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
-\node[below left] (0,0) {\footnotesize $0$};
-\draw [domain=-2:2,samples=50,thick,blue] plot(\x,{exp(\x*ln(2))}); 
-\draw[blue] (2,4.2) node {$f(x)=\num{2}^x$};
-\draw [thick,red] (-2,2) -- (1.2,-1.2) ;
-\draw[red] (2,-1) node {$g(x)=-x$};
-\draw[dashed,gray] (-0.64,0) |- (0,0.64);
+  \centering
+  \begin{tikzpicture}[line cap=round,line join=round,x=1.4cm,y=1.4cm]
+    \draw[->] (-2.2,0) -- (2.5,0) node [at end, below] {$x$};
+    \foreach \x in {-2,-1,1,2}
+    \draw[shift={(\x,0)}] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+    \draw[->] (0,-1) -- (0,4.3) node [at end, left] {$y$};
+    \foreach \y in {-1,1,,2,...,4}
+    \draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+    \node[below left] (0,0) {\footnotesize $0$};
+    \draw [domain=-2:2,samples=50,thick,blue] plot(\x,{exp(\x*ln(2))}); 
+    \draw[blue] (2,4.2) node {$f(x)=\num{2}^x$};
+    \draw [thick,red] (-2,2) -- (1.2,-1.2) ;
+    \draw[red] (2,-1) node {$g(x)=-x$};
+    \draw[dashed,gray] (-0.64,0) |- (0,0.64);
     \filldraw [] (-0.64,0.64) circle (2pt) node[left] { $(\num{-0.64};\num{0,64})$};
-\end{tikzpicture}
-    \caption{Snijpunt van de functies $f(x)=2^x$ en $g(x)=-x$}
-    \label{fig:snijp3}
+  \end{tikzpicture}
+  \caption{Snijpunt van de functies $f(x)=2^x$ en $g(x)=-x$}
+  \label{fig:snijp3}
 \end{figure}
 
 \input{oefeningen/explog}
