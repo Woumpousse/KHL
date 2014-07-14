@@ -1,42 +1,48 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 24/06/2013 [Greetje]: kopie voor 1314 en fouten verbeterd
-% 11/2012 [Jan]: enkele fouten gesignaleerd door collega's en studenten verbeterd
-% 9/2012 [Jan]: Nieuwe kopie op basis van vorige cursus
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{wiskunde}
 
-\input{AlgemeneInstellingen}
+\input{definities}
 
-%\includeonly{oefeningen/explog}
+
+
+
+%%%%%% Tellers %%%%%%
+\newcounter{tijd}
+\newcounter{vb}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+
+%%%%%%%%%%%% splitsing %%%%%%%%%%%%%%
+\hyphenation{Kar-naugh-af-beel-ding}
+
+
+
+
+
 \begin{document}
 
 \includepdf{voorblad1314}
-%\include{eersteblad}
+
+
 
 \frontmatter
 \tableofcontents
 \include{cursusfiche}
-%\include{formularium} is apart document...
 
 \mainmatter
 \include{verzamelingenleer}
-\include{relaties}
-\include{eerstegraadsfuncties}
-\include{LP-theorie}
-\include{groei}
-\include{expfuncties}
-\include{logica}
-
-\include{PeL}
-\include{scilab}
-
+% \include{relaties}
+% \include{eerstegraadsfuncties}
+% \include{LP-theorie}
+% \include{groei}
+% \include{expfuncties}
+% \include{logica}
+% \include{PeL}
+% \include{scilab}
 
 \backmatter
-\chapter{Oplossingen}
-\Closesolutionfile{ans}  
-\input{ans1}
-
+\oplossingen
 \printindex
 
 
