@@ -626,10 +626,48 @@ zeker dat de butler niet rookte.
 \end{oef}
 
 \begin{oef}
-Controleer met een waarheidstabel of onderstaande bewering klopt.\\
-Als Anja ongelijk heeft, dan heeft Bert gelijk. Maar als Cindy gelijk
-heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk
-heeft. Dus heeft Cindy geen gelijk.
+Controleer met een waarheidstabel of onderstaande bewering klopt.
+\begin{quote}
+Als Anja ongelijk heeft, dan heeft Bert gelijk.
+Maar als Cindy gelijk heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk heeft.
+Dus heeft Cindy geen gelijk.
+\end{quote}
+\begin{opl}
+Notaties
+\begin{center}
+  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
+    Anja heeft gelijk & a \\
+    Bert heeft gelijk & b \\
+    Cindy heeft gelijk & c \\
+  \end{tabular}
+\end{center}
+Vertaling
+\begin{center}
+  \begin{tabular}{rp{8cm}l}
+     $P_1$ & Als Anja ongelijk heeft, dan heeft Bert gelijk & $\niet a \alsdan b$ \\ \\
+     $P_2$ & Als Cindy gelijk heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk heeft & $c \alsdan \niet a \alsdan \niet b$ \\ \\
+     $P_3$ & Cindy heeft geen gelijk & $\niet c$ \\
+  \end{tabular}
+\end{center}
+We moeten uitmaken of $P_1 \en P_2 \alsdan P_3$. We stellen de waarheidstabel op:
+\[
+  \begin{array}{cccccccc}
+    x & y & z & P_1 & P_2 & P_3 & P_1 \en P_2 \alsdan P_3 \\
+    \toprule
+    0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+    1 & 0 & 1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 1 & 1 & 0 & 0 \\
+  \end{array}
+\]
+De laatste kolom bevat niet uitsluitend 1'tjes, wat betekent dat de conclusie
+(``Cindy heeft geen gelijk'') onjuist is. De laatste rij
+toont immers aan dat het bijvoorbeeld mogelijk is dat ze alledrie gelijk hebben.
+\end{opl}
 \end{oef}
 
 \begin{oef}
