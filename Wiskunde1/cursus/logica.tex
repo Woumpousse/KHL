@@ -72,7 +72,7 @@ Een \emph{propositie}\index{propositie} of \emph{uitspraak}\index{uitspraak} is 
 \subsection{Enkelvoudige en samengestelde uitspraken}
 \emph{Samengestelde} uitspraken zijn d.m.v. voegwoorden uit \emph{enkelvoudige} uitspraken opgebouwd. De belangrijkste voegwoorden zijn: `en', `of', `als ... dan', `niet' en `als en alleen als' (of de talloze varianten die het Nederlands rijk is).
 \subsection{Notaties}
-We gebruiken de letters $p, q, r, \ldots$ voor de uitspraken en geven ze de naam `propositieveranderlijken'. Voor de voegwoorden gebruiken we de symbolen uit tabel~\ref{tbl:voegwoorden}.
+We gebruiken de letters $p, q, r, \ldots$ voor de uitspraken en geven ze de naam `propositieveranderlijken'. Voor de voegwoorden gebruiken we de symbolen uit \cref{tbl:voegwoorden}.
 
 
 \begin{table}[htb]
@@ -107,7 +107,7 @@ Voor elke uitspraak zijn er 2 mogelijkheden: ze is waar, of ze is onwaar. Met el
       &  = 0 \mbox{, als de uitspraak } p \mbox{ onwaar is.}
 \end{array}
   \end{displaymath}
-We geven deze gegevens weer in een \emph{waarheidstabel}\index{waarheidstabel}. Voor twee proposities $p$ en $q$ hebben we 4 mogelijke combinaties, weergegeven in tabel~\ref{tbl:waarheid}.
+We geven deze gegevens weer in een \emph{waarheidstabel}\index{waarheidstabel}. Voor twee proposities $p$ en $q$ hebben we 4 mogelijke combinaties, weergegeven in \cref{tbl:waarheid}.
 \begin{table}[htb]
   \centering
   \caption{Mogelijke combinaties voor twee propositieveranderlijken}\label{tbl:waarheid}
@@ -125,7 +125,7 @@ $p$  & $q$  \\ \midrule
 Algemeen heeft een waarheidstabel met $n$ veranderlijken $n$ kolommen en $2^{n}$ rijen (zie ook verder).
 
 \subsection{De waarheidswaarde van de 5 voegwoorden}
-We defini\"{e}ren de waarheidswaarde van de 5 voegwoorden via de waarheidstabel (tabel~\ref{tbl:waarheidvoegwoorden}). De waarheidswaarde van een samengestelde uitspraak hangt af van de waarheidswaarde van de samenstellende elementaire uitspraken.
+We defini\"{e}ren de waarheidswaarde van de 5 voegwoorden via de waarheidstabel (\cref{tbl:waarheidvoegwoorden}). De waarheidswaarde van een samengestelde uitspraak hangt af van de waarheidswaarde van de samenstellende elementaire uitspraken.
 
 \begin{table}[htb]
   \centering
@@ -149,7 +149,7 @@ Onderzoek de waarheidswaarde van de formule $f = (\niet p \of q) \alsdan (r \en 
 \subsection*{Oplossing: Waarheidstabel opstellen}
 Hoe stel je op een systematische manier de waarheidstabel van de formule $f$ op? We bepalen eerst welke kolommen er zijn en vervolgens het aantal rijen van de tabel.
 
-We maken in de waarheidstabel een kolom voor elke variabele, de samenstellende onderdelen en ten slotte de gehele formule. De formule bevat 3 veranderlijken ($p$, $q$ en $r$). Haar samenstellende onderdelen zijn achtereenvolgens $\niet p$, $\niet p \of q$, $r \en p$. De tabel bestaat bijgevolg uit 7 kolommen (zie tabel~\ref{tbl:oefdrievar}).
+We maken in de waarheidstabel een kolom voor elke variabele, de samenstellende onderdelen en ten slotte de gehele formule. De formule bevat 3 veranderlijken ($p$, $q$ en $r$). Haar samenstellende onderdelen zijn achtereenvolgens $\niet p$, $\niet p \of q$, $r \en p$. De tabel bestaat bijgevolg uit 7 kolommen (zie \cref{tbl:oefdrievar}).
 
 Het aantal rijen is gelijk aan $2^3=8$.  De formule bevat immers 3 veranderlijken ($p$, $q$ en $r$). Elk van deze veranderlijken kan twee waarden hebben (0 en 1). De drie veranderlijken zijn onafhankelijk van elkaar. Voor elke veranderlijke zijn er 2 mogelijkheden. Het totaal aantal mogelijke combinaties\footnote{In kansrekenen spreekt men over de \emph{productregel}} van de veranderlijken bedraagt dus $2 \cdot 2 \cdot 2 = 8$. Elk van de drie veranderlijken $p$, $q$ of $r$ zal dus 4 keer de waarde 0 en 4 keer de waarde 1 hebben.
 
@@ -189,7 +189,7 @@ Twee uitspraken $p$ en $q$ heten \emph{logisch equivalent} als de formule $p \as
 
 
 \noindent
-In tabel~\ref{tautologie} geven we een overzicht van enkele belangrijke tautologieën.
+In \cref{tautologie} geven we een overzicht van enkele belangrijke tautologieën.
 
 
 \begin{table}[htb]
@@ -225,7 +225,7 @@ In woorden zeggen we dat  als $5\in A$ \textbf{en} $5\in B$, dan is $5\in A\pmb{
 \item neem de uitspraak $r$: $5\in A \intersect B$
 \item dan zijn de samengestelde uitspraak $p\en q$ en de uitspraak $r$ logisch equivalent.
 \end{itemize}
-Het voegwoord $\en$ uit de propositielogica en de bewerking $\intersect$ uit de verzamelingenleer kunnen gezien worden als mekaars tegenhanger. Op dezelfde manier zijn $\of$ en $\union$, $\niet$ en het complement ook mekaars tegenhanger. Dat blijkt ook uit tabel~\ref{tbl:waarheidstabelVerzamelingen}. Het symbool $x$ staat voor een element uit de verzameling $U$. In de kolommen lees je respectievelijk de waarheidswaarde van de uitspraken $x\in A$, $x\in B$, $x\in A^c$, $x\in A\intersect B$ en $x\in A\union B$. Vergelijk met tabel~\ref{tbl:waarheidvoegwoorden}.
+Het voegwoord $\en$ uit de propositielogica en de bewerking $\intersect$ uit de verzamelingenleer kunnen gezien worden als mekaars tegenhanger. Op dezelfde manier zijn $\of$ en $\union$, $\niet$ en het complement ook mekaars tegenhanger. Dat blijkt ook uit \cref{tbl:waarheidstabelVerzamelingen}. Het symbool $x$ staat voor een element uit de verzameling $U$. In de kolommen lees je respectievelijk de waarheidswaarde van de uitspraken $x\in A$, $x\in B$, $x\in A^c$, $x\in A\intersect B$ en $x\in A\union B$. Vergelijk met \cref{tbl:waarheidvoegwoorden}.
 
 \begin{table}[htb]
   \centering
@@ -242,7 +242,7 @@ Het voegwoord $\en$ uit de propositielogica en de bewerking $\intersect$ uit de 
 \end{tabular}
 \end{table}
 
-Met een waarheidstabel kan je ook de gelijkheid van verzamelingen aantonen. Zo toont tabel~\ref{tbl:gelijkeVerzamelingen} aan dat $(A\union B)^c=A^c\intersect B^c$. Deze gelijkheid (één van de wetten van de Morgan) hebben we reeds vermeld in sectie~\ref{subsec:verzRekenregels} \emph{en} in sectie~\ref{sec:logTautologie}, waaruit nogmaals de parallellen tussen verzamelingenleer en logica blijkt. 
+Met een waarheidstabel kan je ook de gelijkheid van verzamelingen aantonen. Zo toont \cref{tbl:gelijkeVerzamelingen} aan dat $(A\union B)^c=A^c\intersect B^c$. Deze gelijkheid (één van de wetten van de Morgan) hebben we reeds vermeld in \cref{subsec:verzRekenregels} \emph{en} in \cref{sec:logTautologie}, waaruit nogmaals de parallellen tussen verzamelingenleer en logica blijkt. 
 
 
 \begin{table}
@@ -284,7 +284,7 @@ Schrijf voor elke situatie een logische uitdrukking die waarheidswaarde 1 heeft 
 \end{quote}
 
 \subsubsection{Gezinnen met internet}
-De gezochte uitspraak heeft enkel waarheidswaarde 1 als zowel de boolean `gezin' als de boolean `internet' waarheidswaarde 1 hebben. Uit tabel~\ref{tbl:waarheidvoegwoorden} volgt dat beide booleans met het voegwoord `en' met mekaar verbonden moeten worden. De gezochte uitspraak is dus
+De gezochte uitspraak heeft enkel waarheidswaarde 1 als zowel de boolean `gezin' als de boolean `internet' waarheidswaarde 1 hebben. Uit \cref{tbl:waarheidvoegwoorden} volgt dat beide booleans met het voegwoord `en' met mekaar verbonden moeten worden. De gezochte uitspraak is dus
 \[
 f_1=\mathrm{gezin}\en\mathrm{internet}
 \]
@@ -300,7 +300,7 @@ Voor deze uitspraak zijn er twee oplossingen. Een gebruiker zonder gezin of inte
 \[
 f_{3a}=\niet\left(\mathrm{gezin}\of\mathrm{internet}\right)
 \]
-We controleren het antwoord met waarheidstabel~\ref{tbl:gzi}. 
+We controleren het antwoord met \cref{tbl:gzi}. 
 \begin{table}
 \caption{Waarheidstabel van de uitspraak `gebruiker zonder gezin of internet'}
 \label{tbl:gzi}
@@ -336,13 +336,14 @@ gezin&internet&$\niet\mathrm{gezin}\en\niet \mathrm{internet}$\\
 \bottomrule
 \end{tabular}
 \end{table}
-De bijhorende waarheidstabel wordt getoond in tabel~\ref{tbl:gzibis}. Je merkt dat de waarheidswaarde gelijk is aan die van formule $f_{3a}$. De uitspraken  $f_{3a}$ en $f_{3b}$ zijn dus equivalent. Dit volgt ook uit de wet van De Morgan (tabel~\ref{tautologie}). Merk op dat de $\of$ in $f_{3a}$ een $\en$ geworden is in $f_{3b}$.
+De bijhorende waarheidstabel wordt getoond in \cref{tbl:gzibis}. Je merkt dat de waarheidswaarde gelijk is aan die van formule $f_{3a}$. De uitspraken  $f_{3a}$ en $f_{3b}$ zijn dus equivalent.
+Dit volgt ook uit de wet van De Morgan (\cref{tautologie}). Merk op dat de $\of$ in $f_{3a}$ een $\en$ geworden is in $f_{3b}$.
 
 Snelle lezers interpreteren de uitspraak `zonder gezin of internet' misschien als `zonder gezin of zonder internet', wat overeenkomt met de formule
 \[
 f_{3c}=\niet\mathrm{gezin}\of\niet \mathrm{internet}
 \]
-Tabel~\ref{tbl:gzifout} toont de waarheidswaarde van deze formule. Je ziet dat dit verschillend is van hetgeen we bekwamen bij tabel~\ref{tbl:gzi}. Formule $f_{3c}$ is dus \emph{niet} equivalent met formule $f_{3a}$!
+\Cref{tbl:gzifout} toont de waarheidswaarde van deze formule. Je ziet dat dit verschillend is van hetgeen we bekwamen bij \cref{tbl:gzi}. Formule $f_{3c}$ is dus \emph{niet} equivalent met formule $f_{3a}$!
 \begin{table}
 \caption{Waarheidstabel van de uitspraak `gebruiker zonder gezin of zonder internet'}
 \label{tbl:gzifout}
@@ -359,7 +360,7 @@ gezin&internet&$\niet\mathrm{gezin}\of\niet \mathrm{internet}$\\
 \end{tabular}
 \end{table}
 
-Merk ten slotte op dat verschillende notaties worden gebruikt afhankelijk van de taal waarin je programmeert. Tabel~\ref{tab:log_op_sci_java} laat enkele verschillen zien voor het noteren van enkele logische operatoren en waarheidswaarden.
+Merk ten slotte op dat verschillende notaties worden gebruikt afhankelijk van de taal waarin je programmeert. \Cref{tab:log_op_sci_java} laat enkele verschillen zien voor het noteren van enkele logische operatoren en waarheidswaarden.
 \begin{table}
 \caption{Logische operatoren in Scilab en Java}
 \label{tab:log_op_sci_java}
@@ -377,550 +378,7 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
 \end{table}
 
 
-\newpage
-
-\section{Oefeningen}
-\begin{oef}
- Stel de waarheidstabel voor volgende samengestelde uitspraken op. Geef ook aan of de uitspraak een tautologie of een contradictie is.
-\begin{enumerate}
-\item $(p \of (q \en r)) \en \niet(p \en (q \of r))$
-\item $\niet(p \of q) \en (p \en q)$
-\item $(p \en \niet q) \of (\niet p \of q)$
-\item $(p \of q \alsdan r) \asa (p\alsdan r) \en (q\alsdan r)$
-\item $(p\en q)\alsdan q$
-\item $((\niet p \of q)\alsdan r$
-\item $(p\asa q)\alsdan (\niet p \en q)$
-\item $ (p\en q)\alsdan p $
-\item $((p\en q)\alsdan (p \of q)$
-\item $  (p \alsdan q) \of(p\alsdan \niet q) $
-\item $ (p\alsdan(q\of r))\asa((p\en \niet q)\alsdan r)  $
-\item $  ((p\alsdan q)\alsdan p)\alsdan p $
-\item $  (p \alsdan q)\of (p \alsdan \niet q) $
-\item $  (p\alsdan(q\of r))\of(p\alsdan q) $
-\end{enumerate}
-\begin{opl}
-Je vindt enkele opgeloste oefeningen in tabellen~\ref{tab:logica1} tot en met \ref{tab:logica3}.
-\begin{table}[htbp]\footnotesize
-\centering
-\caption{Oefening 7.1 - 1}
-\begin{tabular}{cccccccc}
-\toprule 
-$p$ & $q$ & $r$ & $q\en r$ & $p\of (q\en r)$ & $q\of r$ & $p\en (q\of r)$ & $(p\of (q\en r))\en \niet(p\en (q\of r))$ \\ 
-\midrule
-0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
-0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\ 
-0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\ 
-0 & 1 & 1 & 1 & 1 & 1 & 0 & 1 \\  
-1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\ 
-1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 \\  
-1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 \\ 
-1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\ 
-\bottomrule 
-\end{tabular} 
-\label{tab:logica1}
-\end{table}
-
-\begin{table}[htbp]\footnotesize
-\centering
-\caption{Oefening 7.1 - 2: contradictie}
-\begin{tabular}{cccccc}
-\toprule 
-$p$ & $q$ & $p\of q$ & $\niet(p\of q)$ & $p\en q$ & $\niet(p\of q)\en(p\en q)$ \\ 
-\midrule 
-0 & 0 & 0 & 1 & 0 & 0 \\ 
-0 & 1 & 1 & 0 & 0 & 0 \\  
-1 & 0 & 1 & 0 & 0 & 0 \\  
-1 & 1 & 1 & 0 & 1 & 0 \\  
-\bottomrule
-\end{tabular} 
-\label{tab:logica2}
-\end{table}
-
-\begin{table}[htbp]\footnotesize
-\centering
-\caption{Oefening 7.1 - 3: tautologie}
-\begin{tabular}{ccccc}
-\toprule
-$p$ & $q$ & $p\en \niet q$ & $\niet p \of q$ & $(p\en \niet q)\of (\niet p \of q)$ \\ 
-\midrule
-0 & 0 & 0 & 1 & 1 \\ 
-0 & 1 & 0 & 1 & 1 \\ 
-1 & 0 & 1 & 0 & 1 \\  
-1 & 1 & 0 & 1 & 1 \\ 
-\bottomrule
-\end{tabular} 
-\label{tab:logica3}
-\end{table}
-\end{opl}
-\end{oef}
-
-
-
-\begin{oef}
-Een gevangene kan kiezen tussen twee deuren. Achter elke deur
-is een kamer met een prinses of een tijger. Het is dus mogelijk dat
-achter beide deuren een tijger zit of een prinses.
-Op elke deur hangt een bordje met daarop een mededeling (een
-zin) die waar of onwaar kan zijn. Op deur 1 staat `In deze kamer zit
-een prinses en in de andere kamer een tijger.' Op deur 2 staat `In één van de
-kamers zit een prinses en in de andere een tijger.'
-Verder wordt de gevangene iets verteld over de waarheid van
-deze zinnen, namelijk dat één van de twee zinnen waar is, de
-andere onwaar. \\
-Welke deur moet de gevangene kiezen? Gebruik een waarheidstabel.
-\begin{opl}
-\begin{samepage}
-We stellen beide deuren voor door $d_1$ en $d_2$. We spreken af dat
-\begin{center}
-  \begin{tabular}{r@{\ensuremath{\;\iff\;}}l}
-    deur $i$ bevat tijger & $d_i = 0$ \\
-    deur $i$ bevat prinses & $d_i = 1$ \\
-  \end{tabular}
-\end{center}
-\end{samepage}
-De uitspraak op deur 1 vertalen we naar
-\[ P_1 = d_1 \en \niet d_2 \]
-Dit heeft als waarheidstabel
-\[
-  \begin{array}{ccc}
-    d_1 & d_2 & P_1 \\
-    \toprule
-    0 & 0 & 0 \\
-    0 & 1 & 0 \\
-    1 & 0 & 1 \\
-    1 & 1 & 0 \\
-  \end{array}
-\]
-De uitspraak op deur 2 vertalen we naar
-\[ P_2 = (d_1 \en \niet d_2) \of (\niet d_1 \en d_2) \]
-Dit heeft als waarheidstabel
-\[
-  \begin{array}{ccc}
-    d_1 & d_2 & P_2 \\
-    \toprule
-    0 & 0 & 0 \\
-    0 & 1 & 1 \\
-    1 & 0 & 1 \\
-    1 & 1 & 0 \\
-  \end{array}
-\]
-De gevangene krijgt te horen dat
-\[
-  P = (P_1 \en \niet P_2) \of (\niet P_1 \en P_1)
-\]
-Dit heeft als waarheidstabel
-\[
-  \begin{array}{ccccc}
-    d_1 & d_2 & P_1 & P_2 & P \\
-    \toprule
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 1 & 1 \\
-    1 & 0 & 1 & 1 & 0 \\
-    1 & 1 & 0 & 0 & 0 \\
-  \end{array}
-\]
-We weten met zekerheid dat $P$ moet waar zijn, dit is enkel het geval indien $d_1 = 0$ en $d_2 = 1$, m.a.w.\ er
-is maar \'e\'en prinses en deze bevindt zich achter deur 2.
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Een persoon neemt bij het eten volgende regel in acht:
-Als hij koffie drinkt, dan neemt hij geen melk.
-Hij eet beschuiten enkel en alleen als hij melk drinkt.
-Hij neemt geen soep samen met beschuiten.
-Zoek de waarheidstabel van de logische uitdrukking die hierbij hoort. 
-Als je weet dat hij koffie drinkt, kan je dan besluiten dat hij ook soep drinkt?
-\begin{opl}
-We voeren de volgende notaties in:
-\begin{center}
-  \begin{tabular}{cc}
-    koffie   & $k$ \\
-    beschuit & $b$ \\
-    melk     & $m$ \\
-    soep     & $s$
-  \end{tabular}
-\end{center}
-We vertalen de uitspraken:
-\[
-  \begin{array}{rcl}
-    P_1 & = & k \alsdan \niet m \\
-    P_2 & = & b \asa m \\
-    P_3 & = & \niet (s \en b)
-  \end{array}
-\]
-Waarheidstabel
-\[
-  \begin{array}{cccccccc}
-    k & b & m & s & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
-    \toprule
-    0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
-    1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
-    0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
-    1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
-    0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\
-    1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\
-    0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
-    1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
-    1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 \\
-    0 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 1 & 0 & 1 & 0 & 0 \\
-  \end{array}
-\]
-We kijken of $k \alsdan s$ volgt uit de waarheidstabel door enkel de rijen
-te beschouwen waar de laatste kolom $1$ bevat en na te gaan of aan $k \alsdan s$ voldaan wordt.
-Dit is niet het geval: zo is het volgens de tweede rij mogelijk dat hij koffie drinkt zonder ook
-soep te nemen.
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Er werd een moord gepleegd. Sherlock Holmes komt ter plaatse en stelt volgende zaken vast:
-\begin{itemize}
-  \item Of de kok, of de butler was in de keuken.
-  \item De kok was in de keuken of in de eetkamer.
-  \item Als de butler een sigaar rookte, dan was hij niet in de keuken.
-  \item Als de kok niet in de eetkamer was, dan rookte de butler geen sigaar.
-\end{itemize}
-Welk eenvoudig besluit kan je trekken (gebruik een waarheidstabel)?
-\begin{opl}
-We voeren de volgende notaties in:
-\begin{center}
-  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
-    kok in keuken & x \\
-    butler in keuken & y \\
-    butler rookt sigaar & z \\
-  \end{tabular}
-\end{center}
-We vertalen de uitspraken:
-\begin{itemize}
-  \item $P_1 = x \asa \niet y$
-  \item $x \of \niet x$
-  \item $P_2 = z \alsdan \niet y$
-  \item $P_3 = x \alsdan \niet z$
-\end{itemize}
-Waarheidstabel
-\[
-  \begin{array}{cccccccc}
-    x & y & z & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
-    \toprule
-    0 & 0 & 0 & 0 & 1 & 1 & 0 \\
-    1 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 0 & 1 & 1 & 0 \\
-    0 & 0 & 1 & 0 & 1 & 1 & 0 \\
-    1 & 0 & 1 & 1 & 1 & 0 & 0 \\
-    0 & 1 & 1 & 1 & 0 & 1 & 0 \\
-    1 & 1 & 1 & 0 & 0 & 0 & 0 \\
-  \end{array}
-\]
-We moeten enkel de rijen beschouwen waarvan de laatste kolom $1$ bevat.
-Deze rijen hebben gemeenschappelijk dat $z = 0$, m.a.w.\ het is
-zeker dat de butler niet rookte.
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Controleer met een waarheidstabel of onderstaande bewering klopt.
-\begin{quote}
-Als Anja ongelijk heeft, dan heeft Bert gelijk.
-Maar als Cindy gelijk heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk heeft.
-Dus heeft Cindy geen gelijk.
-\end{quote}
-\begin{opl}
-Notaties
-\begin{center}
-  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
-    Anja heeft gelijk & a \\
-    Bert heeft gelijk & b \\
-    Cindy heeft gelijk & c \\
-  \end{tabular}
-\end{center}
-Vertaling
-\begin{center}
-  \begin{tabular}{rp{8cm}l}
-     $P_1$ & Als Anja ongelijk heeft, dan heeft Bert gelijk & $\niet a \alsdan b$ \\ \\
-     $P_2$ & Als Cindy gelijk heeft, dan geldt dat als Anja ongelijk heeft, Bert ook ongelijk heeft & $c \alsdan \niet a \alsdan \niet b$ \\ \\
-     $P_3$ & Cindy heeft geen gelijk & $\niet c$ \\
-  \end{tabular}
-\end{center}
-We moeten uitmaken of $P_1 \en P_2 \alsdan P_3$. We stellen de waarheidstabel op:
-\[
-  \begin{array}{cccccccc}
-    a & b & c & P_1 & P_2 & P_3 & P_1 \en P_2 \alsdan P_3 \\
-    \toprule
-    0 & 0 & 0 & 0 & 1 & 1 & 1 \\
-    1 & 0 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 1 & 1 & 1 \\
-    0 & 0 & 1 & 0 & 1 & 0 & 1 \\
-    1 & 0 & 1 & 1 & 1 & 0 & 0 \\
-    0 & 1 & 1 & 1 & 0 & 0 & 1 \\
-    1 & 1 & 1 & 1 & 1 & 0 & 0 \\
-  \end{array}
-\]
-De laatste kolom bevat niet uitsluitend 1'tjes, wat betekent dat de conclusie
-(``Cindy heeft geen gelijk'') onjuist is. Zo toont de laatste rij
-immers aan dat het mogelijk is dat ze alledrie gelijk hebben.
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Bob, Jan en Koen worden verdacht van belastingontduiking. Elk van hen getuigt als volgt:
-\begin{itemize}
-  \item Bob: `Jan is schuldig en Koen is onschuldig'.
-  \item Jan: `Als Bob schuldig is, dan is Koen het ook'.
-  \item Koen: `Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig'.
-\end{itemize}
-De elementaire uitspraken die erin voorkomen zijn `een persoon is schuldig of onschuldig'. We spreken af dat de proposities $b$, $j$ en $k$ respectievelijk betekenen `Bob is onschuldig', `Jan is onschuldig', en `Koen is onschuldig'.
-\begin{enumerate}
-  \item Stel de waarheidstafels op van elk van deze getuigenissen. Plaats ze naast elkaar. Zet eerst de getuigenissen om in logische formules.
-  \item Is er \'{e}\'{e}n situatie waarin alle getuigenissen samen waar zijn? (Dit noemt men \emph{consistent}). Zo ja, wie is er dan schuldig?
-  \item Als we veronderstellen dat iedereen onschuldig is, wie liegt er dan?
-  \item Als we van de simpele redenering uitgaan dat elke schuldige liegt en elke onschuldige de waarheid spreekt, wie is dan schuldig of onschuldig?
-\end{enumerate}
-\begin{opl}
-Notaties
-\begin{center}
-  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
-    Bob is schuldig & b \\
-    Jan is schuldig & j \\
-    Koen is schuldig & k \\
-  \end{tabular}
-\end{center}
-
-Omzetting naar logische formules
-\begin{center}
-  \begin{tabular}{rp{8cm}l}
-    $P_1$ & Jan is schuldig en Koen is onschuldig & $j \en \niet k$ \\[2mm]
-    $P_2$ & Als Bob schuldig is, dan is Koen het ook & $b \alsdan k$ \\[2mm]
-    $P_3$ & \raggedright Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig & $\niet k \en (j \of b)$ \\
-  \end{tabular}
-\end{center}
-Waarheidstabellen van de getuigenissen
-\[
-  \begin{array}{cccccccc}
-    b & j & k & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
-    \toprule
-    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 & 1 & 0 \\
-    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
-    1 & 1 & 0 & 1 & 0 & 1 & 0 \\
-    0 & 0 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 1 & 0 & 0 \\
-    0 & 1 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 0 & 1 & 0 & 0 \\
-  \end{array}
-\]
-Indien iedereen de waarheid spreekt (derde rij), is Jan de schuldige.
-Indien iedereen onschuldig is (eerste rij) dan liegen Bob en Koen.
-Om ervan uit te gaan dat schuldigen liegen en onschuldigen de waarheid spreken,
-doen we beroep op de volgende logische formule:
-\[
-  P = (b \asa \niet P_1) \;\en\; (j \asa \niet P_2) \;\en\; (k \asa \niet P_3)
-\]
-Waarheidstabel voor $P$:
-\[
-  \begin{array}{cccccccc}
-    b & j & k & P_1 & P_2 & P_3 & P \\
-    \toprule
-    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 0 & 0 & 0 & 1 & 0 \\
-    0 & 1 & 0 & 1 & 1 & 1 & 0 \\
-    1 & 1 & 0 & 1 & 0 & 1 & 0 \\
-    0 & 0 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 0 & 1 & 0 & 1 & 0 & 1 \\
-    0 & 1 & 1 & 0 & 1 & 0 & 0 \\
-    1 & 1 & 1 & 0 & 1 & 0 & 0 \\
-  \end{array}
-\]
-waaruit we de schuld concluderen van Bob en Koen, terwijl Jan onschuldig is.
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Zij $n$ en $m$ twee variabelen die respectievelijk het aantal rijen en kolommen van een gegeven matrix $A$ aanduiden.
-Je mag ervan uitgaan dat deze matrix minstens 1 rij en minstens 1 kolom heeft ($n \geqslant 1$ en $m\geqslant 1$).
-Gebruik de variabelen $n$ en $m$ om een uitspraak/propositie te construeren die waarheidswaarde 1 heeft als
-
-\begin{enumerate}
-  \item $A$ een rij- of kolommatrix is
-  \item $A$ een rij- of kolommatrix is met lengte kleiner dan 4.
-\end{enumerate}
-Noteer je oplossingen op twee verschillende manieren: eenmaal met de notatie die gebruikt wordt bij propositielogica en eenmaal met de notatie van Scilab.
-\end{oef}
-
-\begin{oef}
-\begin{enumerate}
-  \item Schrijf een uitspraak in Scilab die waarheidswaarde 1 heeft als het getal $a$ verschillend is van 3 en 4, of $b$ kleiner of gelijk is aan $a$.
-  \item Definieer in de propositielogica de uitspraken die je in puntje 1 gebruikt hebt.
-  \item Herdefinieer, indien nodig, de uitspraken zodat ze geen negatie bevatten (bijv.\ `niet gelijk'). Noem die uitspraken $p$, $q$ en $r$.
-  \item Gebruik de uitspraken van puntje 3 om het equivalent van de uitspraak van 
-        puntje 1 te herschrijven in de propositielogica.
-  \item Gebruik de uitspraken van puntje 3 om het tegengestelde van puntje 1 te 
-        bekomen (dus waarheidswaarde 0 in de beschreven situatie).
-  \item Gebruik een waarheidstabel om je antwoord te controleren.
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-  \item \verb+if (a<>3 & a<>4)| (b<=a)+
-  \item $p$: \texttt{a==3}; $q$: \texttt{a==4}; $r$: \texttt{b<=a}
-  \item $(\niet p \en \niet q)\of r$, of korter: $\niet(p \of q) \of r$
-  \item $(p\of q)\en \niet r$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-\begin{oef}
-\begin{enumerate}
-  \item Schrijf een uitspraak in Scilab die waarheidswaarde 1 heeft als de som van 2 getallen $i$ en $j$ een veelvoud is van 4 maar waarbij de getallen $i$ en $j$ zelf geen veelvoud zijn van 2.
-  \item Definieer  in de propositielogica de  uitspraken die je in puntje 1 gebruikt hebt.
-  \item Herdefinieer, indien nodig, de  uitspraken zodat ze  geen negatie  bevatten (bijv.\ `geen veelvoud van 2'). Noem die uitspraken $p$, $q$ en $r$.
-  \item Gebruik de  uitspraken van puntje 3 om het equivalent van de uitspraak van 
-        puntje 1 te herschrijven in de  propositielogica.
-  \item Gebruik de  uitspraken van puntje 3 om het tegengestelde van puntje 1 te 
-        bekomen (dus waarheidswaarde 0 in de beschreven situatie).
-  \item Gebruik een waarheidstabel om je antwoord te controleren.
-\end{enumerate}
-
-\begin{opl}
-\begin{enumerate}
-  \item \verb/modulo(i+j,4)==0 & (modulo(i,2)<>0 & modulo (j,2)<>0)/
-  \item $p$: \verb/modulo(i+j,4)==0 /; $q$: \verb/modulo(i,2)==0 /; $r$: \verb/modulo (j,2)==0/
-  \item $p \en (\niet q \en \niet r)=p\en \niet (q \of r)$
-  \item $\niet p \of (q \of r)$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Schrijf een stuk code in Scilab die het volgende uitdrukt: ``Zolang je geen internetverbinding hebt, probeer het opnieuw. Doe dit maximaal 5 keer.''
-Je mag bij je implementatie gebruik maken van een functie checkVerbinding die de waarde \verb+%T+ of \verb+%F+ teruggeeft naargelang je internetverbinding hebt of niet.
-\end{oef}
-
-\begin{oef}
-Stel je klust tijdens de zomer bij aan de ingang van een pretpark. Jan wil graag een toegangsticket kopen. Als hij een volwassene is kan je hem geen korting geven, tenzij hij een trouwe bezoeker is of een goede kameraad van jou. Maak bij het oplossen van onderstaande vragen gebruik van de propositieveranderlijken $p$, $q$ en $r$ met de volgende betekenis: Jan is een volwassene~($p$), Jan is een trouwe bezoeker~($q$) en Jan is een goede kameraad~($r$).
-\begin{enumerate}
-  \item Construeer de samengestelde uitspraak die waarheidswaarde 1 heeft in het geval Jan geen korting krijgt.
-  \item Construeer de samengestelde uitspraak die waarheidswaarde 1 heeft in het geval Jan wel korting krijgt.
-  \item Stel een waarheidstabel op voor de 2 samengestelde uitspraken bekomen in (a) en (b) en controleer zo dat er zich geen enkele situatie kan voordoen waarbij beide uitspraken elkaar tegenspreken.
-  \item Schrijf een functie in Scilab \verb+korting(p,q,r)+ die bepaalt of een korting wordt toegekend of niet.
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-  \item $\niet(\niet p \of q \of r)$ wat equivalent is met $p \en \niet q \en \niet r$
-  \item $\niet p \of q \of r$
-  \item Stel
-        \[ P_1 = p \en \niet q \en \niet r \qquad P_2 = \niet p \of q \of r \]
-        \[
-          \begin{array}{cccccccc}
-            p & q & r & P_1 & P_2 & P_1 \en P_2 \\
-            \toprule
-            0 & 0 & 0 & 0 & 1 & 0 \\
-            1 & 0 & 0 & 1 & 0 & 0 \\
-            0 & 1 & 0 & 0 & 1 & 0 \\
-            1 & 1 & 0 & 0 & 1 & 0 \\
-            0 & 0 & 1 & 0 & 1 & 0 \\
-            1 & 0 & 1 & 0 & 1 & 0 \\
-            0 & 1 & 1 & 0 & 1 & 0 \\
-            1 & 1 & 1 & 0 & 1 & 0 \\            
-          \end{array}
-        \]
-  \item \begin{lstlisting}
-function R = korting(p, q, r)
-  R = ~ p | q | r
-endfunction
-        \end{lstlisting}
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-\begin{oef}
- Een gebruiker kan een iPad en/of iPhone hebben. In een databank wordt dit opgeslagen met de booleans \verb+iPad+ en \verb+iPod+. Hieronder vind je een aantal situaties. Schrijf voor elk een logische formule die waarheidswaarde 1 heeft in de beschreven situatie. Controleer je antwoord met een waarheidstabel. Zorg ervoor dat elke logische formule verschillend is.
-\\ Welke uitdrukkingen hebben dezelfde waarheidswaarde? Zoek de overeenkomende tautologie op in tabel~\ref{tautologie}.
-\begin{enumerate}
-  \item gebruiker heeft  iPad en iPhone
-  \item gebruiker heeft geen iPad en geen iPhone
-  \item gebruiker heeft geen iPad of iPhone (geen van beide)
-  \item gebruiker heeft iPad of iPhone  (een of twee toestellen) 
-  \item gebruiker heeft minstens \'e\'en van beide toestellen niet
-  \item gebruiker heeft niet beide toestellen
-  \item gebruiker heeft \'e\'en van beide toestellen,  maar niet allebei 
-\end{enumerate}
-
-\begin{opl}
-Notaties: iPad = $a$, iPod = $o$.
-\begin{enumerate}
-  \item $a \en o$
-  \item $\niet a \en \niet o$
-  \item $\niet a \en \niet o$
-  \item $\niet a \en \niet o$
-  \item $\niet a \of \niet o$
-  \item $\niet (a \en o)$
-  \item $a \asa \niet o$
-\end{enumerate}
-Uitspraak 5 en 6 zijn equivalent.
-\end{opl}
-\end{oef}
-
-\begin{oef}
- Een webpagina bevat een inlogfunctie. Als de gebruiker de pagina voor het eerst bezoekt (dus nog niet op de knop `verzend' geklikt heeft), of als hij wel op de knop `verzend' geduwd heeft maar foute gegevens ingevuld heeft, wordt het inlogformulier (opnieuw) getoond. In de andere gevallen toont het scherm een aangepaste boodschap. 
-\begin{enumerate}
-  \item Schrijf de nodige (enkelvoudige) logische uitspraken.
-  \item Schrijf een logische formule die waarheidswaarde 1 heeft in het geval dat het inlogformulier getoond moet worden.
-  \item Schrijf een logische formule die waarheidswaarde 1 heeft als de gebruiker correct ingelogd is.
-\end{enumerate}
-\end{oef}
-
-\begin{oef}
-Gegeven een array met punten van studenten die op dezelfde rij zitten en het nummer van één van die studenten. Je mag ervan uitgaan dat deze student niet eerst en niet laatst op de rij zit.\\
-Als deze student maar 1 punt verschil heeft ten opzichte van een buurman, is hij verdacht. Als deze student hetzelfde punt heeft als een buurman, is hij zwaar verdacht.
-\begin{enumerate}
-\item Welke \textit{enkelvoudige} uitspraken heb je nodig om af te leiden of de student verdacht of zwaar verdacht is?
-\item Bepaal een samengestelde uitspraak met zo weinig mogelijk voegwoorden die waarheidswaarde 1 heeft als
-\begin{enumerate}
-\item de student verdacht is
-\item de student ‘braaf’ of zwaar verdacht is
-\item de student zwaar verdacht is
-\item de student niet zwaar verdacht is
-\item de student verdacht of zwaar verdacht is
-\item de student verdacht is maar niet zwaar verdacht
-\item de student `braaf' is
-\end{enumerate}
-Controleer elke uitspraak met behulp van een waarheidstabel.
-\end{enumerate}
-
-\noindent
-Uitbreiding: welke uitspraken heb je extra nodig als je niet mag veronderstellen dat de student geen buurman heeft?
-
-\noindent
-Uitbreiding in Scilab: schrijf een functie in Scilab met als output de boodschap `student is braaf', `student is verdacht' of `student is zwaar verdacht'. Input is een vector met 10 elementen die de cijfers 1-20 bevatten én het nummer van de student die gecontroleerd moet worden.
-
-\begin{opl}
-\begin{enumerate}
-\item
-$a$: student heeft één punt verschil met linkerbuur\\
-$b$: student heeft één punt verschil met rechterbuur\\
-$c$: student heeft zelfde punt als linkerbuur\\
-$d$: student heeft zelfde punt  als linkerbuur
-\item \begin{enumerate}
-\item $a \of b$
-\item $\niet (a \of b)$
-\item $c \of d$
-\item $\niet (c \of d) $
-\item $(a\of b)\of (c\of d)$
-\item $(a\of b)\en \niet (c\of d)$
-\item $\niet (a\of b)\en \niet (c\of d)$
-\end{enumerate}
-\end{enumerate}
-\end{opl}
-\end{oef}
-
+\input{oefeningen/oeflogica}
 
 
 %%% Local Variables: 

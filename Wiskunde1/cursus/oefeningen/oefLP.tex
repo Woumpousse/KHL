@@ -169,6 +169,7 @@ Grafiek in \cref{fig:toy-story}. Optimale oplossing: 80 Woody poppen, 20 Byzz Li
 \begin{figure}[hbtp]
   \centering
   \begin{tikzpicture}
+    \draw[gray,thin,step=1cm] (-.5,-.5) grid (9.5,9.5);
     \path[use as bounding box] (-1,-1) rectangle (10,10);
     \draw[->] (0,0) -- (10,0);
     \draw[->] (0,0) -- (0,10);

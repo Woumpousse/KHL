@@ -22,67 +22,52 @@
 
 \begin{oef}    
 In tabel~\ref{tbl:6processen} vind je de functiewaarden van enkele functies. 
-     Ga na of de functies overeenkomen met een
-      exponentieel of een lineair proces of geen van
-      beide.
-      \begin{table}[htb]
-                \centering
-                \caption{6 verschillende groeiprocessen}
-          \begin{tabular}{ccccccc}
-         \toprule
-         $t$ & $f(t)$ & $g(t)$ & $h(t)$ & $k(t)$ & $m(t)$ & $w(t)$ \\
-         \midrule
-
-         1 & 10 & 105 & 12 & 1701 & 5 & \num{29.7}  \\
-
-         2 & 17 & 118 & \num{13.2} & 567 & 25 & \num{27.1}  \\
-
-         3 & 24 & 131 & \num{14.52} & 189 & 125 & \num{24.5}  \\
-
-         4 & 31 & 146 & \num{15.972} & 63 & 625 & \num{21.9}  \\
-
-         5 & 38 & 163 & \num{17.5692} & 21 & 3125 & \num{19.3}  \\
-         \bottomrule
-
-     \end{tabular}
-          \label{tbl:6processen}
-      \end{table}
-      \begin{opl}
-      \begin{itemize}
-      \item $f$: lineair groeiproces met toename gelijk aan 7
-      \item $g$: geen exponentiële en geen lineaire groei
-      \item $h$: exponentieel groeiproces met groeifactor gelijk aan 1,1
-      \item $k$: exponentieel groeiproces met groeifactor gelijk aan $\frac13$
-      \item $m$: exponentieel groeiproces met groeifactor gelijk aan 5
-      \item $w$: lineair groeiproces met toename gelijk aan $-2,6$
-      \end{itemize}
-      \end{opl}
+Ga na of de functies overeenkomen met een exponentieel of een lineair proces of geen van beide.
+\begin{table}[htb]
+  \centering
+  \caption{6 verschillende groeiprocessen}
+  \begin{tabular}{ccccccc}
+    \toprule
+    $t$ & $f(t)$ & $g(t)$ & $h(t)$ & $k(t)$ & $m(t)$ & $w(t)$ \\
+    \midrule
+    1 & 10 & 105 & 12 & 1701 & 5 & \num{29.7}  \\
+    2 & 17 & 118 & \num{13.2} & 567 & 25 & \num{27.1}  \\
+    3 & 24 & 131 & \num{14.52} & 189 & 125 & \num{24.5}  \\
+    4 & 31 & 146 & \num{15.972} & 63 & 625 & \num{21.9}  \\
+    5 & 38 & 163 & \num{17.5692} & 21 & 3125 & \num{19.3}  \\
+    \bottomrule
+  \end{tabular}
+   \label{tbl:6processen}
+\end{table}
+\begin{opl}
+\begin{itemize}
+\item $f$: lineair groeiproces met toename gelijk aan 7
+\item $g$: geen exponenti\"ele en geen lineaire groei
+\item $h$: exponentieel groeiproces met groeifactor gelijk aan 1,1
+\item $k$: exponentieel groeiproces met groeifactor gelijk aan $\frac13$
+\item $m$: exponentieel groeiproces met groeifactor gelijk aan 5
+\item $w$: lineair groeiproces met toename gelijk aan $-2,6$
+\end{itemize}
+\end{opl}
 \end{oef}
 
 \begin{oef}
- 
-    
-        Het aantal microben in een proefopstelling verdubbelt in 6
-     uren tijd.
-     \begin{enumerate}
-         \item  Wat is de groeifactor (i) per 6 uur? (ii) per dag? (iii) per uur?
-
-         \item  Veronderstel dat het aantal microben nu 100 bedraagt. Bereken zonder rekenmachine en zonder functievoorschrift, indien mogelijk, wanneer het er (i) 400 zijn, (ii) 25,  (iii) 1000.
-
-         \item  Geef het functievoorschrift voor dit groeiproces met als periode
-          (i) \'e\'en dag, (ii)  6 uur, (iii) \'{e}\'{e}n uur. Neem 100 als beginwaarde.
-          
-          \item Maak in Scilab de grafiek van \'e\'en van de functievoorschriften die je hierboven vond. Lees op de grafiek af wanneer er 1000 microben zijn.
-     \end{enumerate}
-     \begin{opl}
-     \begin{enumerate}
-     \item $g_6=2$; $g_d=2^4=16$; $g_u=2^\frac{1}{6}=1,122462$
-     \item (i) 12u; (ii) 12 uur geleden; (iii) tussen 18 en 24u
-     \item $g_6(t)=100\cdot 2^t$; $g_d(t)=100\cdot 16^t$; $g_u(t)=100\cdot \left(2^\frac16 \right)^t$
-     \end{enumerate}
-     \end{opl}
-
-      \end{oef}
+Het aantal microben in een proefopstelling verdubbelt in 6 uren tijd.
+\begin{enumerate}
+  \item Wat is de groeifactor (i) per 6 uur? (ii) per dag? (iii) per uur?
+  \item Veronderstel dat het aantal microben nu 100 bedraagt. Bereken zonder rekenmachine en zonder functievoorschrift, indien mogelijk, wanneer het er (i) 400 zijn, (ii) 25,  (iii) 1000.
+  \item Geef het functievoorschrift voor dit groeiproces met als periode
+        (i) \'e\'en dag, (ii)  6 uur, (iii) \'{e}\'{e}n uur. Neem 100 als beginwaarde.
+  \item Maak in Scilab de grafiek van \'e\'en van de functievoorschriften die je hierboven vond. Lees op de grafiek af wanneer er 1000 microben zijn.
+\end{enumerate}
+\begin{opl}
+\begin{enumerate}
+  \item $g_6=2$; $g_d=2^4=16$; $g_u=2^\frac{1}{6}=1,122462$
+  \item (i) 12u; (ii) 12 uur geleden; (iii) tussen 18 en 24u
+  \item $g_6(t)=100\cdot 2^t$; $g_d(t)=100\cdot 16^t$; $g_u(t)=100\cdot \left(2^\frac16 \right)^t$
+\end{enumerate}
+\end{opl}
+\end{oef}
 
 \begin{oef}
   In 2011 waren er ongeveer 7 miljard mensen. Per jaar is

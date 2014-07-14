@@ -294,9 +294,14 @@ het aandeel verdrievoudigd.
 In 2011 werd Japan getroffen door een zware aardbeving met bijbehorende tsunami. De kernreactoren in Fukushima konden niet meer gekoeld worden en ontploften gedeeltelijk. Op 30 maart 2011 (figuur~\ref{fig:fukushima}) bleek de hoeveelheid radioactief Jodium in het zeewater ($\text{I}^{131}$) 3355 keer de toegelaten hoeveelheid te bedragen. 
 De Japanse overheid beweerde dat er geen probleem was voor de consumptie van vis uit de zee, want de radioactiviteit zou snel verdund worden. Bereken hoelang het duurt (bij deze verontreiniging) tot de radioactiviteit van het $\text{I}^{131}$ terug gelijk is aan de toegelaten hoeveelheid. De halveringstijd van $\text{I}^{131}$ is 8 dagen.
 \begin{opl}
-$J(t)=3355\cdot J_0\cdot \left( \frac12\right)^\frac{t}{8}$\\
-Zoek $t$ zodat $J(t)=J_0$\\
-$t=8\frac{\log \frac{1}{3355}}{\log\frac12}=93,70$, dus na 93,70 dagen.
+\[
+  J(t)=3355\cdot J_0\cdot \left( \frac12\right)^\frac{t}{8}
+\]
+Zoek $t$ zodat $J(t)=J_0$
+\[
+  t=8\frac{\log \frac{1}{3355}}{\log\frac12}\approx93,70
+\]
+dus na 93,70 dagen.
 \end{opl}
 \end{oef}
 
@@ -310,18 +315,19 @@ hoeveelheid van dit isotoop jaarlijks exponentieel daalt met factor
 oorspronkelijke hoeveelheid $\text{C}^{14}$ teruggevonden. Hoe oud
 zijn de schilderingen?
 \begin{opl}
-  $C(t)=0,20\cdot C_0\cdot 0,9988^t$\\
-  Zoek $t$ zodat $C(t)=C_0$\\
-  $t=\frac{\log5}{\log0,9988}=-13411$, dus 13411 jaar geleden.
+\[ C(t)=0,20\cdot C_0\cdot 0,9988^t \]
+Zoek $t$ zodat $C(t)=C_0$\\
+\[ t=\frac{\log5}{\log0,9988}\approx-13411\]
+dus 13411 jaar geleden.
 \end{opl}
 \end{oef}
 
 \begin{oef}
-  Jan zet \euros{1900} op een spaarboekje tegen samengestelde
-      intrest van \SI{5}{\percent} per jaar en \euros{1000} op een andere rekening,
-      waarvan de verdubbelingstijd van het kapitaal 25 jaar bedraagt.
-      Wanneer zal het bedrag op het spaarboekje dubbel zo
-      groot zijn als het bedrag op de rekening?
+Jan zet \euros{1900} op een spaarboekje tegen samengestelde
+intrest van \SI{5}{\percent} per jaar en \euros{1000} op een andere rekening,
+waarvan de verdubbelingstijd van het kapitaal 25 jaar bedraagt.
+Wanneer zal het bedrag op het spaarboekje dubbel zo
+groot zijn als het bedrag op de rekening?
 \begin{opl}
 Groeifunctie van spaarboekje 1: $S_1(t)=1900\cdot 1,05^t$; \\Groeifunctie van spaarboekje 2: $S_2(t)=1000\cdot 2^\frac{t}{25}$\\
 Zoek $t$ zodat $S_1(t)=2\cdot S_2(t)$, wat geeft $t=\frac{\log(19/20)}{\log(2^{1/25}/1,05)}=2,435$.\\
@@ -329,39 +335,36 @@ Antwoord: na 2,435 jaar is het bedrag van het spaarboekje dubbel zo groot als he
 \end{opl}
 \end{oef}
 
-
-
 \begin{oef}
-  De waarde van een schilderij van Rembrandt neemt per
-      decennium (periode van 10 jaar) toe met \SI{20}{\percent}. De waarde van een schilderij
-      van Picasso stijgt in waarde met \SI{5}{\percent}  per jaar. Een
-      kunsthandelaar koopt vandaag een schilderij van Rembrandt voor
-      \euros{300\,000} en een schilderij van Picasso voor
-      \euros{225\,000}.
-      Wanneer zullen beide schilderijen evenveel waard zijn?
-      \begin{opl}
-         De waarde van de Rembrandt: $R(t)=300000\cdot 1,20^{t/10}$\\
-         De waarde van de Picasso: $P(t)=225000\cdot 1,05^t$\\
-         Zoek $t$ zodat $P(t)=R(t)$, wat geeft $t=\log(300/225)/\log(1,05/1,20^{1/10})=9,41$.\\
-         Antwoord: na 9,41 jaar zijn beide schilderijen evenveel waard.
-      \end{opl}
+De waarde van een schilderij van Rembrandt neemt per
+decennium (periode van 10 jaar) toe met \SI{20}{\percent}. De waarde van een schilderij
+van Picasso stijgt in waarde met \SI{5}{\percent} per jaar. Een
+kunsthandelaar koopt vandaag een schilderij van Rembrandt voor~\euros{300\,000}
+en een schilderij van Picasso voor~\euros{225\,000}.
+Wanneer zullen beide schilderijen evenveel waard zijn?
+\begin{opl}
+De waarde van de Rembrandt: $R(t)=300000\cdot 1,20^{t/10}$\\
+De waarde van de Picasso: $P(t)=225000\cdot 1,05^t$\\
+Zoek $t$ zodat $P(t)=R(t)$, wat geeft $t=\log(300/225)/\log(1,05/1,20^{1/10})=9,41$.\\
+Antwoord: na 9,41 jaar zijn beide schilderijen evenveel waard.
+\end{opl}
 \end{oef}
 
 \begin{oef}
- Land A heeft 80 miljoen inwoners en land B heeft er 100
-      miljoen. De bevolking van land A verdubbelt in 20 jaar en die
-      van land B groeit elk jaar aan met \SI{2,3}{\percent}.
-      \begin{enumerate}
-          \item  Bereken de groeifactor per jaar van land A.
-      \item Bereken de verdubbelingstijd voor land B.
-          \item Wanneer zal het aantal inwoners van land A gelijk zijn
-            aan dat van land B?
-      \end{enumerate}
-      \begin{opl}
-	$A(t)=80\cdot 2^{t/20}$; $B(t)=100\cdot 1,023^t$;\\
-	Zoek $t$ zodat $A(t)=B(t)$, wat geeft $t=\log(8/10)/\log(1,023/2^{1/20})=18,72$\\
-	Antwoord: na 18,72 jaar zal het aantal inwoners gelijk zijn.
-      \end{opl}
+Land A heeft 80 miljoen inwoners en land B heeft er 100
+miljoen. De bevolking van land A verdubbelt in 20 jaar en die
+van land B groeit elk jaar aan met \SI{2,3}{\percent}.
+\begin{enumerate}
+  \item Bereken de groeifactor per jaar van land A.
+  \item Bereken de verdubbelingstijd voor land B.
+  \item Wanneer zal het aantal inwoners van land A gelijk zijn
+        aan dat van land B?
+\end{enumerate}
+\begin{opl}
+$A(t)=80\cdot 2^{t/20}$; $B(t)=100\cdot 1,023^t$;\\
+Zoek $t$ zodat $A(t)=B(t)$, wat geeft $t=\log(8/10)/\log(1,023/2^{1/20})=18,72$\\
+Antwoord: na 18,72 jaar zal het aantal inwoners gelijk zijn.
+\end{opl}
 \end{oef}
 
 \begin{oef}
@@ -383,8 +386,6 @@ jaarlijkse rente van \SI{7}{\percent}.
 \end{opl}
 \end{oef}
 
-
-
 \begin{oef}
 Een vader wil nu een bedrag van \euros{10\,000} verdelen over zijn
 2 kinderen van respectievelijk 10 en \num{14,5} jaar oud. De vader wil
@@ -405,9 +406,6 @@ Antwoord: Nu wordt \euros{4244} en \euros{5755} belegd.\\
 Op zijn  \'{e}\'{e}nentwintigste verjaardag zal het kind beschikken over \euros{8934}.
 \end{opl}
 \end{oef}
-
-
-
 
 \begin{oef}
 Een kapitaal van \euros{3000} wordt uitgezet tegen samengestelde intrest
@@ -441,16 +439,21 @@ Hieruit vinden we dat het kapitaal $11$ jaar op de bank moet blijven staan voora
 %   \end{opl}
 %   \end{oef}
 
-
 \begin{oef}
-Het wordt steeds duidelijker dat de mensen wegtrekken uit de grote steden in Belgi\"e. Brussel had in 2010 nog \num{1124000} inwoners, en ziet zijn inwonertal dalen met \SI{10}{\percent} per decennium (= 10 jaar). Leuven en omstreken blijken echter zeer gegeerd. Met een inwonertal van \num{95500} in 2010 was Groot-Leuven nog een kleine stad. Het lijkt er echter op dat dit inwonertal zal verdubbelen per 8 jaar. Hoe lang duurt het vooraleer Leuven en Brussel even groot geworden zijn?
+Het wordt steeds duidelijker dat de mensen wegtrekken uit de grote steden in Belgi\"e.
+Brussel had in 2010 nog \num{1124000} inwoners, en ziet zijn inwonertal dalen met \SI{10}{\percent}
+per decennium (= 10 jaar). Leuven en omstreken blijken echter zeer gegeerd. Met een
+inwonertal van \num{95500} in 2010 was Groot-Leuven nog een kleine stad. Het lijkt
+er echter op dat dit inwonertal zal verdubbelen per 8 jaar. Hoe lang duurt het
+vooraleer Leuven en Brussel even groot geworden zijn?
 \begin{enumerate}
-\item Bereken voor het aantal inwoners van Brussel en Leuven de jaarlijkse groeifactor.
-\item	Stel de vergelijkingen op die de groei/daling van de bevolking in Brussel en Leuven simuleren.
-\item Reken uit na hoeveel jaar Leuven evenveel inwoners telt als Brussel.
+  \item Bereken voor het aantal inwoners van Brussel en Leuven de jaarlijkse groeifactor.
+  \item Stel de vergelijkingen op die de groei/daling van de bevolking in Brussel en Leuven simuleren.
+  \item Reken uit na hoeveel jaar Leuven evenveel inwoners telt als Brussel.
 \end{enumerate}
 \begin{opl}
-$B(t)=\num{1124000}\cdot 0,9^{t/10}$ en $L(t)=\num{95500}\cdot 2^{t/8}$ met $t$ uitgedrukt in jaren. Na \SI{25,37} jaren telt Leuven evenveel inwoners als Brussel. 
+$B(t)=\num{1124000}\cdot 0,9^{t/10}$ en $L(t)=\num{95500}\cdot 2^{t/8}$ met $t$ uitgedrukt in jaren.
+Na \SI{25,37} jaren telt Leuven evenveel inwoners als Brussel. 
 \end{opl}
 \end{oef}
 

@@ -27,11 +27,10 @@
 \section{Geschiedenis}
 `Verzamelingenleer' is de tak van de wiskunde die zich bezighoudt met de studie van `verzamelingen'. Een verzameling is een samenraapsel van objecten die \'e\'en geheel vormen, dingen die een zelfde eigenschap bezitten, dingen die zich op dezelfde manier onderscheiden van de rest. Zo is een klas een verzameling leerlingen die op hetzelfde tijdstip over hetzelfde vak les krijgen.
 
-
 Fundament in de verzamelingenleer is de idee van `element zijn van', `behoren tot'. De verschillende elementen vormen samen terug \'e\'en geheel, namelijk de verzameling.
 
 De grondslagen van de verzamelingenleer werden gelegd door de Duitse 
-wiskundige G. Cantor (1845--1918, figuur~\ref{fig:cantor}). 
+wiskundige G. Cantor (1845--1918, \cref{fig:cantor}). 
 Cantor ontwikkelde een formele definitie van `verzameling'. 
 Hij definieerde ook bewerkingen met verzamelingen: unie, doorsnede, 
 verschil en product. Een belangrijk deel van de moderne wiskunde is 
@@ -44,7 +43,7 @@ bijvoorbeeld een  verzameling van paren getallen.
 \caption{Georg Ferdinand Ludwig Philipp Cantor, grondlegger van de moderne verzamelingenleer}
 \label{fig:cantor}
 \end{figure}
-Ook voor computerwetenschappen is verzamelingenleer belangrijk. We geven enkele voorbeelden.  In een programmeertaal is een datatype een verzameling van elementen die op dezelfde manier in het geheugen van het systeem opgeslagen worden en waar je dezelfde bewerkingen op kan toepassen. Als je een lus programmeert, neemt de controle-variabele alle waarden aan binnen een bepaalde verzameling (figuur~\ref{fig:lusScilab}). Bij registratie op een website controleert de webserver of de gekozen gebruikersnaam reeds behoort tot de bestaande verzameling van gebruikersnamen. Bij het inloggen op je favoriete spelletjessite wordt je gebruikersnaam gekoppeld aan de verzameling resultaten die je reeds boekte. Een figuur is een verzameling punten en lijnen. Last but not least, het moderne database design is gebaseerd op de verzamelingenleer: in een tabel zijn de gegevens element van een kolom (figuur~\ref{fig:database}). 
+Ook voor computerwetenschappen is verzamelingenleer belangrijk. We geven enkele voorbeelden.  In een programmeertaal is een datatype een verzameling van elementen die op dezelfde manier in het geheugen van het systeem opgeslagen worden en waar je dezelfde bewerkingen op kan toepassen. Als je een lus programmeert, neemt de controle-variabele alle waarden aan binnen een bepaalde verzameling (\cref{fig:lusScilab}). Bij registratie op een website controleert de webserver of de gekozen gebruikersnaam reeds behoort tot de bestaande verzameling van gebruikersnamen. Bij het inloggen op je favoriete spelletjessite wordt je gebruikersnaam gekoppeld aan de verzameling resultaten die je reeds boekte. Een figuur is een verzameling punten en lijnen. Last but not least, het moderne database design is gebaseerd op de verzamelingenleer: in een tabel zijn de gegevens element van een kolom (\cref{fig:database}). 
 
 De leerstof die in dit hoofdstuk behandeld wordt, heb je expliciet nodig in de OPO's `Toegepaste wiskunde 3' (2TX), `Technieken van datamodellering' (1TX) en `Databanken' (2TX).
 
@@ -92,7 +91,7 @@ Er bestaat \emph{geen rangorde} tussen de elementen van een verzameling: er is g
 Er bestaan verschillende manieren om een verzameling voor te stellen. Je kan een verzameling grafisch voorstellen in een venndiagram, je kan de elementen \'e\'en voor \'e\'en opsommen of je kan de voorwaarden omschrijven waaraan een element moet voldoen om tot de verzameling te behoren.
 
 \subsubsection{Venndiagram}
-Venndiagrammen\index{Venndiagram} zijn genoemd naar de Engelse wiskundige J. Venn (figuur~\ref{fig:venn}), die ze omstreeks 1880 bedacht. Het is een grafische manier om een verzameling voor te stellen. De verzameling zelf wordt begrensd door een gesloten kromme (ellips, cirkel, rechthoek, \dots). De elementen worden aangeduid met punten waarbij eventueel hun naam of waarde wordt genoteerd (zie figuur~\ref{fig:venn1}). Als de verzameling te veel elementen bevat om ze allemaal te tekenen, worden er slechts enkele elementen expliciet getekend en worden de andere elementen samengevat in drie puntjes (`$\cdots$') (zie figuur~\ref{fig:venn2}).
+Venndiagrammen\index{Venndiagram} zijn genoemd naar de Engelse wiskundige J. Venn (\cref{fig:venn}), die ze omstreeks 1880 bedacht. Het is een grafische manier om een verzameling voor te stellen. De verzameling zelf wordt begrensd door een gesloten kromme (ellips, cirkel, rechthoek, \dots). De elementen worden aangeduid met punten waarbij eventueel hun naam of waarde wordt genoteerd (zie \cref{fig:venn1}). Als de verzameling te veel elementen bevat om ze allemaal te tekenen, worden er slechts enkele elementen expliciet getekend en worden de andere elementen samengevat in drie puntjes (`$\cdots$') (zie \cref{fig:venn2}).
 
 \begin{figure}[htbp]
 \centering
@@ -158,8 +157,8 @@ Omdat de lege verzameling geen element bevat, is de lege verzameling  deelverzam
 Twee verzamelingen zijn \emph{conjunct}\index{conjunct} als ze minstens \'e\'en element gemeenschappelijk hebben.
 Twee verzamelingen zijn \emph{disjunct}\index{disjunct} als ze geen enkel element gemeenschappelijk hebben. Bijvoorbeeld
 \begin{itemize}
-  \item $\{ a, b, c \}$ en $\{ b, c, d \}$ zijn conjunct want ze hebben de elementen $b$ en $c$ gemeenschappelijk (figuur~\ref{fig:conjunct}) 
-  \item  $\{ a, b, c \}$ en $\{ d, e, f \}$ zijn disjunct (figuur~\ref{fig:disjunct})
+  \item $\{ a, b, c \}$ en $\{ b, c, d \}$ zijn conjunct want ze hebben de elementen $b$ en $c$ gemeenschappelijk (\cref{fig:conjunct}) 
+  \item  $\{ a, b, c \}$ en $\{ d, e, f \}$ zijn disjunct (\cref{fig:disjunct})
 \end{itemize}
 \begin{figure}
   \centering
@@ -191,14 +190,14 @@ Immers,\\ $\{1,2,3 \}\not = \{\{ 1\},\{2 \},\{3 \} \}$.
 Bij getallen kan je  uit twee getallen een derde getal maken door ze  op te tellen en/of te  vermenigvuldigen. Ook bij verzamelingen zijn er een aantal bewerkingen. We bespreken hier unie, doorsnede, verschil en complement. Het product van verzamelingen bespreken we in de volgende sectie.
 
 \subsection{Unie of vereniging}\index{unie}\index{\ensuremath{\union}}
-Bij de unie van twee verzamelingen worden de elementen van beide verzamelingen samengevoegd tot \'e\'en nieuwe verzameling. Dubbels worden daarbij weggelaten. We noteren met $X \union Y$ (figuur~\ref{fig:unie_algemeen}). 
+Bij de unie van twee verzamelingen worden de elementen van beide verzamelingen samengevoegd tot \'e\'en nieuwe verzameling. Dubbels worden daarbij weggelaten. We noteren met $X \union Y$ (\cref{fig:unie_algemeen}). 
 \begin{equation*}
 X \union Y =\{x \mid x\in X ~\mathbf{of}~x\in Y \}
 \end{equation*}
 
 Bijvoorbeeld
 \begin{itemize}
-\item Als $X=\{\mathrm{a},\mathrm{b},\mathrm{c}\}$ en $Y=\{\mathrm{c},\mathrm{d},\mathrm{e}\}$, dan is $X\union Y=\{\mathrm{a},\mathrm{b},\mathrm{c},\mathrm{d},\mathrm{e}\}$ (figuur~\ref{fig:unie_voorbeeld}).
+\item Als $X=\{\mathrm{a},\mathrm{b},\mathrm{c}\}$ en $Y=\{\mathrm{c},\mathrm{d},\mathrm{e}\}$, dan is $X\union Y=\{\mathrm{a},\mathrm{b},\mathrm{c},\mathrm{d},\mathrm{e}\}$ (\cref{fig:unie_voorbeeld}).
 \item $X=\{a \mid a\in \nat ~\mathrm{en}~a\leqslant 10\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>10\}$ geeft $X\union Y=\nat$
 \end{itemize}
 \begin{figure}[htbp]
@@ -216,14 +215,14 @@ Bijvoorbeeld
 
 
 \subsection{Doorsnede of intersectie}\index{doorsnede}\index{\ensuremath{\intersect}}
-De doorsnede van twee verzamelingen $X$ en $Y$ bevat enkel die elementen die tot $X$ \emph{en} tot $Y$ behoren. We noteren de doorsnede met $X\intersect Y$ (figuur~\ref{fig:doorsnede_algemeen}).
+De doorsnede van twee verzamelingen $X$ en $Y$ bevat enkel die elementen die tot $X$ \emph{en} tot $Y$ behoren. We noteren de doorsnede met $X\intersect Y$ (\cref{fig:doorsnede_algemeen}).
 \begin{equation*}
 X\intersect Y =\{a \mid a\in X ~\mathbf{en}~a\in Y \}
 \end{equation*}
 
 Bijvoorbeeld
 \begin{itemize}
-\item $X=\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>5\}$ geeft $X\intersect Y=\{6,7,8\}$ (figuur~\ref{fig:doorsnede_voorbeeld})
+\item $X=\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>5\}$ geeft $X\intersect Y=\{6,7,8\}$ (\cref{fig:doorsnede_voorbeeld})
 \item Stel dat een wachtwoord pas geldig is als het meer dan 5 karakters telt, waaronder minstens één cijfer. Dan hebben we het volgende: \\
 $X=\{a\mid a ~\mathrm{is~een~woord~langer~dan~5~karakters} \}$ en \\$Y=\{a\mid a~ \mathrm{is~een~woord~dat~ook~een~cijfer~bevat } \}$ geeft \\
 $X\intersect Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
@@ -245,13 +244,13 @@ $X\intersect Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
 \end{figure}
 
 \subsection{Verschil}
-Het verschil van twee verzamelingen $X$ en $Y$ is de verzameling van elementen die wel tot $X$ behoren maar niet tot $Y$. We noteren $Z=X-Y$\footnote{Het verschil kan je ook noteren met $X\setminus Y$} (figuur~\ref{fig:verschil_algemeen}).
+Het verschil van twee verzamelingen $X$ en $Y$ is de verzameling van elementen die wel tot $X$ behoren maar niet tot $Y$. We noteren $Z=X-Y$\footnote{Het verschil kan je ook noteren met $X\setminus Y$} (\cref{fig:verschil_algemeen}).
 \begin{equation*}
 X-Y=\{a\mid a\in X ~\mathbf{en}~a\not \in Y\}
 \end{equation*}
 Bijvoorbeeld
 \begin{itemize}
-  \item $X=\{1,2,3,4\}$ en $Y=\{ 3,4,5,6\}$ geeft $X-Y=\{1,2\}$ (zie figuur~\ref{fig:verschil_voorbeeld})
+  \item $X=\{1,2,3,4\}$ en $Y=\{ 3,4,5,6\}$ geeft $X-Y=\{1,2\}$ (zie \cref{fig:verschil_voorbeeld})
   \item $X=\{a\mid a ~\mathrm{is~gebruikersnaam~die~voldoet~aan~voorwaarden}\}$ en \\$Y=\{a\mid a~\mathrm{is~reeds~toegewezen~gebruikersnaam}\}$ geeft \\
         $X-Y=\{a\mid a~\mathrm{is~toegelaten~nieuwe~gebruikersnaam}\}$
 \end{itemize}
@@ -270,9 +269,9 @@ Bijvoorbeeld
 \end{figure}
 
 \subsection{Complement}\index{complement}
-Veronderstel dat de verzameling $X$ een deelverzameling is van een grote verzameling $U$. Het \emph{complement}  van $X$ is de verzameling van elementen van $U$ die niet tot $X$ behoren: $X^c=U-X$ (figuur~\ref{fig:complement_algemeen}). Bijvoorbeeld
+Veronderstel dat de verzameling $X$ een deelverzameling is van een grote verzameling $U$. Het \emph{complement}  van $X$ is de verzameling van elementen van $U$ die niet tot $X$ behoren: $X^c=U-X$ (\cref{fig:complement_algemeen}). Bijvoorbeeld
 \begin{itemize}
-\item Als $X\subset \nat$ (dus $U=\nat$) en $X=\{100,101,102,\dots\}$, dan is $X^c=\{0,1,2,\dots,98,99\}$ (figuur~\ref{fig:complement_voorbeeld})
+\item Als $X\subset \nat$ (dus $U=\nat$) en $X=\{100,101,102,\dots\}$, dan is $X^c=\{0,1,2,\dots,98,99\}$ (\cref{fig:complement_voorbeeld})
 \item Als $U=\nat$ en $X$ de verzameling is van toegelaten leeftijden voor registratie op een site, uitgedrukt in aantal dagen, dan is het complement van $X$ de verzameling van geweigerde leeftijden.
 \end{itemize}
 
@@ -330,7 +329,7 @@ In de verzamelingenleer is de unie distributief ten opzichte van de doorsnede \e
 A\union(B\intersect C)&=(A\union B) \intersect (A\union C) \\ &\mathrm{en} \\ A\intersect (B\union C)&=(A\intersect B)\union (A\intersect C)
 \end{split}
 \end{equation*}
-Dit wordt verduidelijkt in figuur~\ref{fig:distr1a} en figuur~\ref{fig:distr1b}. 
+Dit wordt verduidelijkt in \cref{fig:distr1a} en \cref{fig:distr1b}. 
 
 \begin{figure}[htbp]
 \centering
@@ -374,7 +373,7 @@ A\intersect\emptyset=\emptyset
 De wetten van de Morgan leggen een verband tussen de 
 bewerkingen $\intersect$ en $\union$ en het complement. 
 Zij zijn genoemd naar de Britse wiskundige A. De Morgan 
-(figuur~\ref{fig:morgan}), maar waren al eerder bekend.
+(\cref{fig:morgan}), maar waren al eerder bekend.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{figuren/verzamelingen_relaties/AugustusDeMorgan}
@@ -436,473 +435,7 @@ Als alle verzamelingen $A_1$, \dots, $A_n$ gelijk zijn, schrijven we het product
 
 Stel dat $A=\{\mathrm{a}, \mathrm{b},\dots,\mathrm{z}\}$, dan is $A^5$ de verzameling van alle `woorden' (strings) die bestaan uit kleine letters a-z met lengte 5. 
  
- 
- 
-\newpage 
-\section{Oefeningen}
-\begin{oef}
-Zijn de volgende verzamelingen goed gedefinieerd? Motiveer je antwoord.
-\begin{enumerate}
-\item De verzameling van de letters van het alfabet
-\item De verzameling van grote mensen
-\item De verzameling van re\"ele getallen waarvoor geldt $2x-9=16$
-\item De verzameling van gehele getallen waarvoor geldt $2x-9=16$
-\item De verzameling van goede voetballers
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-\item Niet goed gedefinieerd: welk alfabet wordt er bedoeld? Zijn de hoofdletters ook element van de verzameling? Moet zijn: $\{\text{a},\text{b},\dots,\text{z},\text{A},\text{B},\dots,\text{Z}\}$
-\item Niet goed gedefinieerd: wat is \emph{groot}? Moet zijn: verzameling van mensen groter dan \SI{1.80}{\meter}
-\item Goed gedefinieerd
-\item Goed gedefinieerd
-\item Niet goed gedefinieerd: wat is \emph{goed}?
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-
-\begin{oef}
-Gegeven de verzameling $A=\{2,4,6,8,10\}$ en $B=\{1,3,6,7,8\}$. Welke uitspraken zijn waar? 
-\begin{enumerate}
-\item $2\in A$
-\item $11\in B$
-\item $4 \not \in B$
-\item $\{2\}\in A$
-\item $A\in \nat$
-\item $A=\{x\mid x\in \nat \mathrm{~en~}x\mathrm{~is~even}\}$
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-\item waar
-\item niet waar
-\item waar
-\item niet waar: $\{2\}\subset A$ of $2\in A$
-\item niet waar: $A\subset \nat$
-\item niet waar: bijvoorbeeld $12\not \in A$. Zou wel waar zijn: $A=\{x\mid x\in \nat \mathrm{~en~}x\text{~is~even en }x\leqslant 10\}$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-
-
-\begin{oef}
-Gegeven $A=\{4,\sqrt{2}, \frac{2}{3}, -2.5, -5,33,\sqrt{9},\pi \}$. Noteer volgende deelverzamelingen van $A$ door middel van opsomming:
-\begin{enumerate}
-\item De  getallen van $A$ die behoren tot $\nat$
-\item De  getallen van $A$ die behoren tot $\integers$
-\item De rationale getallen van $A$
-\item De re\"ele getallen van $A$ die niet rationaal zijn
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-\item $\{ 4,33,\sqrt{9}\}$
-\item $\{ 4,33,\sqrt{9},-5\}$
-\item $\{ 4,33,\sqrt{9},-5,\frac 23,-2.5\}$
-\item $\{\sqrt{2},\pi\}$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-
-\begin{oef}
-Waar of fout?
-\begin{enumerate}
-\item $\emptyset=\{0\}$
-\item $x\subset \{x\}$
-\item $\emptyset=\{\emptyset\}$
-\item $\emptyset\in \{\emptyset\}$
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-\item niet waar: $\emptyset=\{ \}$ of  $0\in \{0\}$ of $\emptyset\subset\{0\}$
-\item niet waar: $x\in \{x\}$ of $\{x\}\subset \{x\}$
-\item niet waar: $\emptyset\in\{\emptyset\}$ of $\emptyset\subset\{\emptyset\}$
-\item waar
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-
-\newpage
-\begin{oef}
-\label{oef:venndiagramoef}
-Bekijk figuur~\ref{fig:venndiagramoef}. De getallen 1,\dots,8 duiden een deelverzameling aan van $U$. Vul  tabel~\ref{tab:venndiagram} aan. Als voorbeeld vulden we reeds de eerste lijn in.
-\begin{figure}[htbp]
-\centering
-\input{figuren/verzamelingen_relaties/tikz/oefeningVenn}
-\caption{8 gebieden in een Venndiagram}
-\label{fig:venndiagramoef}
-\end{figure}
-\begin{table}[h!tbp]
-\centering
-\caption{Tabel bij figuur~\ref{fig:venndiagramoef}}
-\begin{tabular}{ccccc}
-\toprule
-$\subset A$? & $\subset B$? & $\subset C$? & Gebied & in symbolen \\ 
-\midrule
-N & N & N & 1  & $(A \union B \union C)^c$ \\ 
-N & N & J &  &   \\ 
-N & J & N &   &   \\ 
-N & J & J &   &   \\ 
-J & N & N &   &   \\ 
-J & N & J &   &   \\ 
-J & J & N &   &   \\ 
-J & J & J &   &   \\ 
-\bottomrule
-\end{tabular} 
-\label{tab:venndiagram}
-\end{table}
-
-\begin{opl}
-$\qquad$ \\
-\begin{table}[h!tbp]
-\centering
-\caption{Oplossing van oefening~\ref{oef:venndiagramoef}}
-\begin{tabular}{ccccc}
-\toprule
-$\subset A$? & $\subset B$? & $\subset C$? & Gebied & in symbolen \\ 
-\midrule
-N & N & N & 1  & $(A\union B \union C)^c$ \\ 
-N & N & J & 8 & $C-(A\union B)$  \\ 
-N & J & N &  4 & $B-(A\union C)$  \\ 
-N & J & J &7   &$(B\intersect C)-A$   \\ 
-J & N & N &  2 & $A-(B\union C)$  \\ 
-J & N & J & 5  & $(A\intersect C)-B$  \\ 
-J & J & N & 3  & $(A\intersect B)-C$  \\ 
-J & J & J & 6  & $A\intersect B\intersect C$  \\ 
-\bottomrule
-\end{tabular} 
-\label{tab:venndiagram2}
-\end{table}
-
-\end{opl}
-\end{oef}
-
-
-
-
-\begin{oef}
-\label{oef:oefvenn}
-Gegeven $U = \{1,2,3,4,5,6,7,8\}$, $P = \{3,6\}$,  $Q =\{1,3,4,5,6,8\}$ en $R = \{3,4,8\}$.
-Teken  venndiagrammen voor deze verzamelingen en plaats de elementen waar ze horen. 
-\begin{opl}
-Het Venndiagram van figuur \ref{fig:UPQ} op pagina \pageref{fig:UPQ} toont de oplossing.
-\begin{figure}[htbp]
-\centering
-\input{figuren/verzamelingen_relaties/tikz/oplUPQ}
-\caption{Oplossing bij oefening~\ref{oef:oefvenn}}
-\label{fig:UPQ}
-\end{figure}
-\end{opl}
-\end{oef}
-
-\begin{oef}
-Herneem de verzamelingen van oefening~\ref{oef:oefvenn}. Pas de bewerkingen $\intersect$, $\union$, $-$ en complement zo effici\"ent mogelijk toe op de verzamelingen $P$, $Q$ en $R$ om volgende verzamelingen te omschrijven. De eerste oefening lossen we bij wijze van voorbeeld zelf op.
-\begin{enumerate}
-  \item $\{2,7\}=Q^c$
-  \item $\{3\}$
-  \item $\{1,5\}$
-  \item $\{1,5,3\}$
-  \item $\{1,5,2,7\}$
-  \item $\{6,4,8\}$
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-  \item $\{2,7\}=Q^c$
-  \item $\{3\}=P\intersect R$
-  \item $\{1,5\}=Q-(P\union R)$ of $Q \intersect (P \union R)^c$
-  \item $\{1,5,3\}=(P\intersect R)\union (Q-(P\union R))$
-  \item $\{1,5,2,7\}=(P\union R)^c$
-  \item $\{6,4,8\}=(P\union R)- (P \intersect R)$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-\begin{oef}
-\label{oef:venndiagram3}
-Teken venndiagrammen van de verzameling $U$, de deelverzamelingen $A$ en $B$ van $U$ en het element $x$ voor volgende gevallen:
-\begin{enumerate}
-\item $x\in A$ en $A\subset B$
-\item $x\in A$ en $A$ en $B$ zijn disjunct
-\item $x\in A$, $x\not \in B$, $B\subset A$
-\end{enumerate}
-\begin{opl}
-De drie Venndiagrammen van figuur~\ref{fig:Venn3} op pagina~\pageref{fig:Venn3} tonen de oplossingen.
-\begin{figure}[h!tbp]
-\centering
-\subfloat[oef a]{\input{figuren/verzamelingen_relaties/tikz/oplVenn3-1}}\qquad
-\subfloat[oef b]{\input{figuren/verzamelingen_relaties/tikz/oplVenn3-2}}\qquad
-\subfloat[oef c]{\input{figuren/verzamelingen_relaties/tikz/oplVenn3-3}}
-\caption{Oplossingen bij oefening~\ref{oef:venndiagram3} }
-\label{fig:Venn3}
-\end{figure}
-\end{opl}
-\end{oef}
-
-
-
-\begin{oef}
-Gegeven de verzamelingen $A,B\subset U$. Duid aan op een venndiagram
-\begin{enumerate}
-  \item $(A^c)^c \union B$
-  \item $A\intersect  B^c$
-  \item $(A\intersect B)^c$
-  \item $A^c \union  B^c$
-  \item $(A\union B)^c$
-  \item $A^c \intersect B^c$
-\end{enumerate}
-
-\begin{opl}
-{
-\def\labels{
-  \node[anchor=south east] at (-1.55,.6) {$A$};
-  \node[anchor=south west] at (1.55,.6) {$B$};
-}
-\def\universe{(-2.5,-1.5) rectangle +(5,3)}
-\def\ellA{(-.9,0) ellipse (1.25cm and 0.75cm)}
-\def\ellB{(.9,0) ellipse (1.25cm and 0.75cm)}
-\pgfkeys{/tikz/.cd,
-         highlight/.style={fill=gray!30},
-         empty/.style={fill=white},
-         outline/.style={fill=none}}
-
-\begin{center}
-\begin{tabular}{cc}
-  1.
-  \begin{tikzpicture}
-    \draw[thick] \universe;
-    \draw[highlight] \ellA;
-    \draw[highlight] \ellB;
-    \draw[outline] \ellA;
-    \labels
-  \end{tikzpicture}
-  &
-  2.
-  \begin{tikzpicture}
-    \draw[thick] \universe;
-    \draw[highlight] \ellA;
-    \draw[empty] \ellB;
-    \draw[outline] \ellA;
-    \labels
-  \end{tikzpicture}
-  \\
-  3.
-  \begin{tikzpicture}
-    \draw[thick,highlight] \universe;
-    \begin{scope}
-      \clip \ellA;
-      \clip \ellB;
-      \draw[empty] \ellA;
-    \end{scope}
-
-    \draw[outline] \ellA;
-    \draw[outline] \ellB;
-    \labels
-  \end{tikzpicture}
-  &
-  4.
-  \begin{tikzpicture}
-    \draw[thick,highlight] \universe;
-    \begin{scope}
-      \clip \ellA;
-      \clip \ellB;
-      \draw[empty] \ellA;
-    \end{scope}
-
-    \draw[outline] \ellA;
-    \draw[outline] \ellB;
-    \labels
-  \end{tikzpicture}
-  \\
-  5.
-  \begin{tikzpicture}
-    \draw[thick,highlight] \universe;
-    \draw[empty] \ellA;
-    \draw[empty] \ellB;
-    \draw[outline] \ellA;
-    \labels
-  \end{tikzpicture}
-  &
-  6.
-  \begin{tikzpicture}
-    \draw[thick,highlight] \universe;
-    \draw[empty] \ellA;
-    \draw[empty] \ellB;
-    \draw[outline] \ellA;
-    \labels
-  \end{tikzpicture}
-\end{tabular}
-\end{center}
-}
-\end{opl}
-\end{oef}
-
-
-
-\begin{oef}
-Zij $A$,$B$,$C$ en $D$ verzamelingen. Bepaal of de volgende beweringen waar of onwaar zijn. Toon je antwoord aan met venndiagrammen.
-\begin{enumerate}
-  \item Als $C\subset D^c$, dan is $D \not \subset C^c$
-  \item Als $C\not \subset D$, dan is $D^c \not \subset C^c$
-  \item Als $A\subset B$, dan is $A\intersect B =A$
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-  \item niet waar: als $D \not \subset C^c$, is er  een element van $D$ dat geen element is van $C^c$, dus element is van $C$. Dan hebben we een element van $C$ gevonden dat tevens element is van $D$.
-  \item waar
-  \item waar
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-\begin{oef}
-Geef door opsomming
-\begin{enumerate}
-  \item $A=\{x \in \real | (x-1)\cdot(x-2)=6\}$
-  \item $B=\{10\cdot x|x\in\integers \}$
-  \item $C=\{ x\in \nat| x \textrm{ is een deler van } 6\}$
-  \item $U = \{(x, y) \in A \times B|y = 2\cdot x + 10\}$ waarbij $A = \{0,1,2,\cdots,6\}$ en \\$B = \{10,11,12,\dots,20\}$
-  \item $V = \{(x, y) \in A \times B|y = x - 10\}$ waarbij  $A = \{10,11,12,\dots,20\}$ en \\ $B = \{0,1,2,\cdots,6\}$
-  \item $W = \{(x, y) \in A \times  B|y = \sqrt{x}\}$ waarbij $A=\{-4,-1,0,1,4,9\}$ en \\ 
-        $B=\{-3,-2,-1,0,1,2,3\}$
-\end{enumerate}
-\begin{opl}
-\begin{enumerate}
-  \item $A=\{4,-1\}$
-  \item $B=\{0,10,-10,20,-20,\dots\}$
-  \item $C=\{1,2,3,6\}$
-  \item $U=\{(0,10),(1,12),(2,14),(3,16),(4,18),(5,20)\}$
-  \item $V=\{(10,0),(11,1),\dots, (16,6\}$
-  \item $W=\{(0,0),(1,1),(4,2),(9,3)\}$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-
-\begin{oef}
-Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van $U$. Pas de bewerkingen $-$, $\intersect$, $\union$ en complement zo effici\"ent mogelijk toe op de \emph{deel}verzamelingen van $U$ om \emph{het grijze gedeelte} te omschrijven.
-\begin{multicols}{2}
-\begin{enumerate}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf1}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf2}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf3}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf4}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf5}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf6}
-\end{minipage}
-
-\end{enumerate}
-\end{multicols}
-
-\begin{opl}
-\begin{enumerate}
-\item $\left(\left(P\union Q\right)-R\right)^c$
-\item $\left(P\union Q\right) \intersect R$
-\item $\left(\left(P\intersect Q\right)-R\right)^c$
-\item $(P\intersect R)\union Q$
-\item $P-(Q\union R)$
-\item $(P\intersect Q \intersect R)^c$
-\end{enumerate}
-\end{opl}
-\end{oef}
-
-\begin{oef}
-\label{oef:oefLeentje}
-%\begin{figure}[htb]
-%\centering
-%\includegraphics[width=0.7\textwidth]{figuren/verzamelingen_relaties/oefeningLeentje}
-%
-%\end{figure}
-Zij $U$ de dagen van vorige week; $A$ de dagen met zon; $B$ de dagen met kou; $C$ de dagen met regen (figuur~\ref{fig:dagen}).
-\begin{figure}[htbp]
-\centering
-\input{figuren/verzamelingen_relaties/tikz/oefLeentje}
-\caption{Dagen van vorige week, figuur bij oefening~\ref{oef:oefLeentje}}
-\label{fig:dagen}
-\end{figure}
-\begin{enumerate}
-\item Geef door omschrijving:
-\begin{enumerate}
-\item $A\intersect B$
-\item $(A\intersect C)-B$
-\item $(A\union C)-B$
-\item $A^c\intersect B^c$
-\item $B^c\intersect C$
-\end{enumerate}
-\item Geef door opsomming:
-\begin{enumerate}
-\item $B-(A\intersect C)$
-\item $C-(A\union B)$
-\item $(A\union C)^c-B$
-\item $(A-C)^c$
-\end{enumerate}
-\item Duid aan op het venndiagram:
-\begin{enumerate}
-\item $A^c-C$
-\item $B^c -C$
-\item $(A-C)^c$
-\end{enumerate}
-\end{enumerate}
-
-\begin{opl}
-\begin{enumerate}
-  \item \begin{enumerate}
-          \item $\{x| x \text{ is een dag met zon en kou} \}$
-          \item $\{x| x \text{ is een dag met zon en regen maar zonder kou} \}$
-          \item $\{x| x \text{ is een dag met zon of regen maar zonder kou} \}$
-          \item $\{x| x \text{ is een dag zonder zon en zonder kou} \}$
-          \item $\{x| x \text{ is een dag zonder kou en met regen} \}$
-        \end{enumerate}
-  \item \begin{enumerate}
-          \item $\{\text{di},\text{wo},\text{za} \}$
-          \item $\{\text{vr} \}$
-          \item $\{ \text{zo}\}$
-          \item $\{ \text{di},\text{do},\text{vr},\text{za},\text{zo}\}$
-        \end{enumerate}
-\end{enumerate}
-\end{opl}
-\end{oef}
+\input{oefeningen/oefverzamelingenleer} 
 
 %%% Local Variables: 
 %%% mode: latex

@@ -51,7 +51,7 @@
 %\RequirePackage[colorlinks,citecolor=spot,linkcolor=spot,urlcolor=spot]{hyperref} %Voor screenpdf
 \RequirePackage{makeidx}
 \RequirePackage{hyperref}
-\RequirePackage{cleveref} % Moet na hyperref komen!
+\RequirePackage[noabbrev,dutch]{cleveref} % Moet na hyperref komen!
 
 
 \usetikzlibrary{patterns,topaths,arrows,calc,decorations.markings,positioning}
@@ -93,7 +93,7 @@
 \theoremstyle{definition} % want anders inhoud van oefeningen cursief
 \newtheorem{oef}{Oefening}[chapter]
 \Opensolutionfile{ans}[ans1]
-%\renewenvironment{Oplossing}[1]{\begin{minipage}{.8\linewidth}\textbf{Oplossing #1}}{\end{minipage} \vskip5mm}
+\renewenvironment{Oplossing}[1]{\par\noindent\textbf{Oplossing #1}}{\bigskip}
 
 \newcommand{\oplossingen}{
   \clearpage
@@ -124,6 +124,9 @@
 
 \lstdefinestyle{inline}{basicstyle=\normalsize\ttfamily}
 
+
+%%%%%%%%%% cleveref %%%%%%%%%%
+\crefname{section}{sectie}{secties}
 
 
 %%%%%%%%%% Index %%%%%%%%%%

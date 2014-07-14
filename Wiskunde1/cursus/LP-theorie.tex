@@ -96,7 +96,7 @@ moeten een naam krijgen, bvb.\ $x$ (het aantal kippen) en $y$
 (het aantal schapen). Natuurlijk staat het je vrij andere letters
 te kiezen (bvb.\ $x_{1}$ en $x_{2}$).
 
-De informatie uit de opgave vatten we samen in tabel~\ref{tbl:opg1}.
+De informatie uit de opgave vatten we samen in \cref{tbl:opg1}.
 \begin{table}[htbp]
     \centering
     \caption{Samenvatting van de opgave}
@@ -160,10 +160,10 @@ met als beperkingen
 \end{eqnarray}
 
 
-Vergelijking (\ref{eq:doelf}) noemen we algemeen de \emph{doelfunctie}\index{doelfunctie}.
+Vergelijking \eqref{eq:doelf} noemen we algemeen de \emph{doelfunctie}\index{doelfunctie}.
 Het is een lineaire \emph{ver}gelijking
 (= vergelijking van de eerste graad).
-Ongelijkheden (\ref{eq:maxdieren}) tot (\ref{eq:minschapen}) zijn de beperkingen.
+Ongelijkheden \eqref{eq:maxdieren} tot \eqref{eq:minschapen} zijn de beperkingen.
 Het zijn lineaire \emph{on}gelijkheden
 (= ongelijkheden van de eerste graad). Ze beperken de oneindig
 grote verzameling van alle \emph{mogelijke} combinaties (bvb.\ 205
@@ -178,10 +178,10 @@ in het vlak voor. We bakenen in het vlak een gebied af waar de punten voldoen aa
 
 \subsection{Verzameling van alle geldige combinaties}
 
-\subsubsection{Beperking (\ref{eq:maxdieren})}
+\subsubsection{Beperking \eqref{eq:maxdieren}}
 
 
-We beginnen met beperking  (\ref{eq:maxdieren}) die iets zegt over het maximale
+We beginnen met beperking \eqref{eq:maxdieren} die iets zegt over het maximale
 aantal dieren. We herschrijven deze ongelijkheid tot er staat: $y \leqslant
 \ldots$ of $y \geqslant \ldots$. Dit noemen we de \emph{standaardvorm}\index{standaardvorm}
 van de ongelijkheid.
@@ -212,7 +212,7 @@ is
 De rechte gaat dus door de punten $(0,16)$ en $(10,6)$. Je merkt
 aan deze twee koppels dat de rechte \emph{daalt}: Als de $x$-waarde
 toeneemt (van 0 naar 10), daalt de $y$-waarde (van 16 naar
-6). In figuur~\ref{fig:maxdierrechte} wordt deze rechte getekend.
+6). In \cref{fig:maxdierrechte} wordt deze rechte getekend.
 
 \begin{figure}[htbp]
     \centering
@@ -262,7 +262,7 @@ kleiner dan of gelijk aan 16. Je besluit bijgevolg dat dit punt
 $(0,0)$ voldoet aan de ongelijkheid. Het is niet moeilijk om in
 te zien dat elk punt onder de rechte (of erop!) voldoet\footnote{We
 spreken af dat we de halfvlakken die \emph{niet} voldoen aan de beperkingen arceren.}
-(Figuur~\ref{fig:ongelijkheid}).
+(\cref{fig:ongelijkheid}).
 
 \begin{figure}[htbp]
     \centering
@@ -288,15 +288,15 @@ liggen op of onder de rechte met vergelijking $y=-x+16$.
 
 
 
-\subsubsection{Beperking (\ref{eq:maxkippen})}
+\subsubsection{Beperking \eqref{eq:maxkippen}}
 De lineaire ongelijkheid $x \leqslant 10$ kan niet in de standaardvorm
 geschreven worden vermits er geen $y$ in de ongelijkheid staat.
 De rechte  $x=10$ is inderdaad een buitenbeen:
 het is een \emph{verticale rechte} die gaat door de punten (10,
 0), (10, 1) (10, -75),\ldots Aangezien bij \'{e}\'{e}n $x$ oneindig
 veel verschillende $y$-waarden mogelijk zijn, stelt deze vergelijking
-\emph{geen} functie voor. Alle oplossingen van ongelijkheid (\ref{eq:maxkippen}) liggen links van, of op
-de verticale rechte (Figuur~\ref{fig:vertrechte}):
+\emph{geen} functie voor. Alle oplossingen van ongelijkheid \eqref{eq:maxkippen} liggen links van, of op
+de verticale rechte (\cref{fig:vertrechte}):
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.4]
@@ -311,13 +311,13 @@ de verticale rechte (Figuur~\ref{fig:vertrechte}):
 
 \draw[thick](10,-1) -- (10,10) node[left,very near end]{\small $x\leqslant 10$};
 \end{tikzpicture}
-    \caption{Grafische voorstelling van beperking (\ref{eq:maxkippen})}
+    \caption{Grafische voorstelling van beperking \eqref{eq:maxkippen}}
     \label{fig:vertrechte}
 \end{figure}
 
 
 
-\subsubsection{Beperking (\ref{eq:maxgeld})}
+\subsubsection{Beperking \eqref{eq:maxgeld}}
 Herschrijf deze ongelijkheid tot de standaardvorm. Je vindt:
 \begin{align*}
     10x+50y &\leqslant 600 \\
@@ -332,7 +332,7 @@ Deze ongelijkheid staat nu in de standaardvorm. Als we $\leqslant$
 vervangen door `$=$' wordt de ongelijkheid een lineaire gelijkheid,
 dus een rechte. Deze rechte heeft als vgl. $y=-\frac{1}{5}x+12$.
 Ze gaat door het punt $(0,12)$ en is dalend (rico $=-\frac{1}{5}$)
-Je bekomt het halfvlak uit figuur~\ref{fig:budget} (opnieuw onder, en op de
+Je bekomt het halfvlak uit \cref{fig:budget} (opnieuw onder, en op de
 rechte):
 \begin{figure}[tbp]
     \centering
@@ -356,12 +356,12 @@ rechte):
 
 
 
-\subsubsection{Beperkingen (\ref{eq:minkippen}) en (\ref{eq:minschapen})}
+\subsubsection{Beperkingen \eqref{eq:minkippen} en \eqref{eq:minschapen}}
 Deze twee beperkingen zijn heel gelijkaardig: allebei zeggen
 ze dat je voor deze opgave geen negatieve getallen ($-3$ schapen
 en $-7$ kippen!) kan krijgen. De ongelijkheid $x \geqslant 0$ komt overeen met het halfvlak rechts van de
 $y$-as; $y \geqslant 0$ is het halfvlak boven de $x$-as
-(figuur~\ref{fig:eenkwadrant}).
+(\cref{fig:eenkwadrant}).
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=1]
@@ -385,7 +385,7 @@ grafische oplossingen (half-vlakken). Enkel het gebied dat in
 geen van de voorgaande figuren gearceerd was, hou je over als
 geldige oplossingenverzameling. Dit gebied blijkt een vijfhoek
 -- gelegen in het eerste kwadrant --
-te zijn (figuur~\ref{fig:allebep}).
+te zijn (\cref{fig:allebep}).
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.4]
@@ -409,7 +409,7 @@ te zijn (figuur~\ref{fig:allebep}).
 
 
 \subsection{De doelfunctie}
-Vergelijking (\ref{eq:doelf}) is de doelfunctie. We zoeken die combinatie
+Vergelijking \eqref{eq:doelf} is de doelfunctie. We zoeken die combinatie
 van $x$ en $y$ die de winst $W$ zo groot mogelijk maakt.
 Vanzelfsprekend moeten we ons beperken tot alle \emph{geldige} combinaties $x$
 en $y$.
@@ -441,7 +441,7 @@ levert een winst op van $25\cdot 10 + 75\cdot 0 = 250$.
 Dit getal blijkt een realistisch
 winstcijfer te zijn. Geven we $W$ achtereenvolgens de waarde
 250,  300, 450, dan krijgen we de rechten
-uit figuur~\ref{fig:isowinstrechten}
+uit \cref{fig:isowinstrechten}
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.4]
@@ -472,7 +472,7 @@ enz\ldots
 
 \subsection{Grafische oplossing}
 We brengen nu de tekening van de geldige combinaties (de gearceerde
-veelhoek van figuur~\ref{fig:allebep}) samen met bovenstaande tekening van de isowinstrechten (figuur~\ref{fig:isowinstrechten}). Dit geeft figuur~\ref{fig:allessamengroot}. Omwille van de duidelijkheid pasten
+veelhoek van \cref{fig:allebep}) samen met bovenstaande tekening van de isowinstrechten (\cref{fig:isowinstrechten}). Dit geeft \cref{fig:allessamengroot}. Omwille van de duidelijkheid pasten
 we de schaal aan.
 \begin{figure}[htbp]
     \centering
@@ -512,7 +512,7 @@ we de schaal aan.
 Stel: de boer
 kweekt 5 kippen   en 5 schapen. Deze situatie komt in het vlak overeen met het punt $A(5,5)$. De winst die
 de boer daarmee maakt is  $W = 25\cdot 5 + 75\cdot 5 = 500$.
-Dit punt ligt zoals je kan zien op figuur~\ref{fig:allessamengroot} op de isowinstrechte
+Dit punt ligt zoals je kan zien op \cref{fig:allessamengroot} op de isowinstrechte
 van 500. Bekijk het punt $B(4, 8)$ in deze
 figuur.
 Het is een geldige combinatie
@@ -527,7 +527,7 @@ Het punt $C(3,11)$ behoort  tot de geldige oplossingenverzameling.
 Het is een punt van de isowinstrechte waarvoor $W= 900$ ($ 25\cdot
 3 + 75\cdot11=900$). Het punt $D(6,10)$ ligt op dezelfde isowinstrechte ($25\cdot 6+75\cdot 10=900$). 
 Zijn $(3, 11)$ en $(6, 10)$ nu de optimale combinaties?
-Je ziet op figuur~\ref{fig:allessamengroot} dat de isowinstrechte nog naar boven
+Je ziet op \cref{fig:allessamengroot} dat de isowinstrechte nog naar boven
 kan opschuiven binnen de geldige oplossingenverzameling. Probeer zelf met een lat of geo-driehoek
 de isowinst evenwijdig met de isowinstlijn van 700 op te
 schuiven tot je het gearceerde gebied net binnendringt.
@@ -569,7 +569,7 @@ snijpunt $E$ van twee rechten. Hier bvb.\ met de substitutie-methode:
 
 
 Je vindt uiteindelijk als co\"{o}rdinaten voor het hoekpunt $(5,
-11)$. Door dit punt gaat de isowinstrechte waarvoor $W= 950$ (figuur~\ref{fig:maxwinstrechte}).
+11)$. Door dit punt gaat de isowinstrechte waarvoor $W= 950$ (\cref{fig:maxwinstrechte}).
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.5]
@@ -612,7 +612,6 @@ gestelde voorwaarden.
 
 
 
-\newpage
 \section{Voorbeeld 2: Kostenminimalisatie}\label{sec.minprob}
 
 \begin{quote}
@@ -634,7 +633,7 @@ We volgen hier dezelfde stappen als bij het eerste voorbeeld.
 Men vraagt het aantal rode en het aantal blauwe pillen te zoeken.
 Laten we deze aantallen voorstellen door $x$ (aantal rode
 pillen per dag) en $y$ (aantal blauwe pillen per dag).
-Een schematisch overzicht (tabel~\ref{tbl:minschema})
+Een schematisch overzicht (\cref{tbl:minschema})
 kan ook hier goede diensten bewijzen:
 
 
@@ -681,7 +680,7 @@ en $y \geqslant 0$.
 
 \subsection{Verzameling geldige oplossingen}
 We schetsen  de vijf lineaire ongelijkheden  in 
-figuur~\ref{fig:minoplverz}. 
+\cref{fig:minoplverz}. 
 \begin{figure}[tbp]
     \centering
 \begin{tikzpicture}[scale=0.8]
@@ -718,7 +717,7 @@ Herwerken van de doelfunctie levert:
 \begin{displaymath}
     y=-\frac{2}{5}x+\frac{K}{50}
 \end{displaymath}
-In figuur~\ref{fig:isoK} tekenen we deze functie voor $K=210,~260,~310,~360$. 
+In \cref{fig:isoK} tekenen we deze functie voor $K=210,~260,~310,~360$. 
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.7]
@@ -745,8 +744,8 @@ lager de kost.
 
 Het komt er nu op aan die isokostenrechte te zoeken die nog net
 één of meerdere punten gemeen heeft met de verzameling van de geldige
-oplossingen. In figuur~\ref{fig:minsamen} combineren we daarom de twee vorige grafieken (figuren \ref{fig:isoK}
-en \ref{fig:minoplverz}). 
+oplossingen. In \cref{fig:minsamen} combineren we daarom de twee vorige grafieken (figuren~\ref{fig:isoK}
+en~\ref{fig:minoplverz}). 
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[scale=0.8]
@@ -800,14 +799,14 @@ Het is onmogelijk een combinatie van rode en blauwe pillen te
 vinden die goedkoper is en tezelfdertijd toch voor een voldoende
 vitamine-inname (A, B en C) zorgt.
 
-\newpage
+
 \section{Lineaire programmering: overzicht}
 Lineaire programmering is een wiskundige techniek die heel veel
 toepassingen kent in operationeel onderzoek, management en industrie.
 Uiteenlopende gebieden zoals transportplanning, productieplanning,
 stock controle,\ldots \ maken er dankbaar gebruik van. De fundamenten
 van lineaire programmering werden gelegd in 1947 door \emph{George
-B. Dantzig} (fig.~\ref{fig:dantzig}) van Stanford University, die onderzoek deed naar oplossingen
+B. Dantzig} (\cref{fig:dantzig}) van Stanford University, die onderzoek deed naar oplossingen
 voor het probleem van militaire logistiek in de U.S. Air Force.
 \begin{figure}[htbp]
     \centering
@@ -907,7 +906,7 @@ oplossingenverzameling gaat verlaten. Bepaal  de co\"{o}rdinaten van het \emph{h
 %
 %
 %\subsection{Voorbeeld 1 met de hoekpuntmethode}
-%We hernemen in figuur~\ref{fig:hoekpuntmethode} even de
+%We hernemen in \cref{fig:hoekpuntmethode} even de
 %tekening van de geldige oplossingenverzameling.
 %\begin{figure}[htbp]
 %    \centering
@@ -967,7 +966,6 @@ oplossingenverzameling gaat verlaten. Bepaal  de co\"{o}rdinaten van het \emph{h
 %door vijf kippen en elf schapen te houden (\euros 950).
 
 
-\newpage
 \section{Uitzonderlijke situaties}
 Volgende puntjes komen bij echte praktische vraagstukken zelden
 voor. Als ze dan toch de kop opsteken, wijst dit dikwijls op \emph{een
@@ -1027,7 +1025,7 @@ Met als beperkingen
 Maak de figuur en laat zien dat je $P$ zo groot kan maken als je maar wil.
 
 
-% \newpage
+
 \section{Meerdere onbekenden}
 In dit hoofdstukje beperkten we ons tot problemen met twee onbekenden
 (bvb.\ het aantal kippen en het aantal schapen).

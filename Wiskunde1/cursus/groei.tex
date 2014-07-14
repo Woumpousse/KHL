@@ -63,7 +63,7 @@ oppervlakte van het meer en de aangroei van de oppervlakte bedekt met algen.
 We gaan na op welke manier beide processen van mekaar verschillen.
 
 \subsection{Lineaire groei}
-We bekijken eerst de groei van de oppervlakte van het meer. Zoals we gedaan hebben in hoofdstuk~\ref{chap:eerstegraadsfuncties} stellen we eerst het wiskundig model op. 
+We bekijken eerst de groei van de oppervlakte van het meer. Zoals we gedaan hebben in \cref{chap:eerstegraadsfuncties} stellen we eerst het wiskundig model op. 
 De oppervlakte benoemen we met de functie $M(t)$, met $t$ de veranderlijke tijd, uitgedrukt in weken.
 Van deze functie weten we het volgende:
 
@@ -74,7 +74,7 @@ Van deze functie weten we het volgende:
   \item  \ldots
 \end{itemize}
 
-Dit wordt weergegeven in tabel~\ref{tabel:meer} (vergelijk met tabel~\ref{tbl:taxi} op pagina~\pageref{tbl:taxi}).
+Dit wordt weergegeven in \cref{tabel:meer} (vergelijk met \cref{tbl:taxi} op pagina~\pageref{tbl:taxi}).
  \begin{table}[htb]
     \centering
     \vspace{0.3cm}
@@ -113,7 +113,7 @@ Het volgend verband is onmiddellijk duidelijk:
 \end{displaymath}
  Dit verband noemen we \emph{recursief}\index{recursief}, omdat de hoeveelheid van deze  week $M(t)$ uitgedrukt wordt in functie van de hoeveelheid van de vorige week $M(t-1)$.
 
-De grafiek van de functie $M(t)$ is een rechte (zie figuur~\ref{fig:lingroei}). Het getal $550$ is de richtingsco\"effici\"ent van de rechte. De grafiek snijdt de verticale as in $800$ (de beginwaarde $M(0)$ van het groeiproces).   Deze grafiek is typisch voor elk lineair groeiproces (vergelijk met sectie~\ref{subsec:grafischeVoorstelling}).
+De grafiek van de functie $M(t)$ is een rechte (zie \cref{fig:lingroei}). Het getal $550$ is de richtingsco\"effici\"ent van de rechte. De grafiek snijdt de verticale as in $800$ (de beginwaarde $M(0)$ van het groeiproces).   Deze grafiek is typisch voor elk lineair groeiproces (vergelijk met \cref{subsec:grafischeVoorstelling}).
 \begin{figure}[tbp]
     \centering
 \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=0.0015cm]
@@ -135,8 +135,8 @@ De grafiek van de functie $M(t)$ is een rechte (zie figuur~\ref{fig:lingroei}). 
     \label{fig:lingroei}
 \end{figure}
 
-\subsection{Exponenti\"{e}le groei.}
-\label{subsec: exp_groei_vb}
+\subsection{Exponenti\"{e}le groei}
+\label{subsec:exp_groei_vb}
 We herhalen hetzelfde voor de groei van de algen. We
 noemen de groeifunctie $A(t)$,
 met $t$ de tijd uitgedrukt in weken.
@@ -182,12 +182,12 @@ rechteruitdrukkingen, dan vinden we als voorschrift
 \end{tikzpicture}
 \label{tabel:algen}
  \end{table}
-In tabel~\ref{tabel:algen} geven we de groei schematisch weer. 
+In \cref{tabel:algen} geven we de groei schematisch weer. 
 
 We spreken van \emph{exponenti\"ele groei}\index{exponenti\"ele groei} omdat de oppervlakte bedekt met algen elke week
 \emph{vermenigvuldigd} wordt met eenzelfde factor, hier $2$. We noemen dit getal de \emph{groeifactor}. Het getal 5 geeft aan hoeveel algen er zijn op begintijdstip $t=0$. We noemen 5 dan ook de \emph{beginwaarde}.
 
-De groei van de algen gebeurt continu:  na een halve week is de hoeveelheid reeds toegenomen. Als we er vanuit gaan dat de groeifactor de eerste helft van de week dezelfde is als de tweede helft van de week (zie figuur~\ref{fig:algen_periode2}), dan blijkt dat de veranderlijke $t$ in vergelijking~\eqref{eq:algen} geen geheel getal hoeft te zijn. Het domein van de functie $A(t)$ is dus $\real^+$.
+De groei van de algen gebeurt continu:  na een halve week is de hoeveelheid reeds toegenomen. Als we er vanuit gaan dat de groeifactor de eerste helft van de week dezelfde is als de tweede helft van de week (zie \cref{fig:algen_periode2}), dan blijkt dat de veranderlijke $t$ in vergelijking~\eqref{eq:algen} geen geheel getal hoeft te zijn. Het domein van de functie $A(t)$ is dus $\real^+$.
 
 \begin{figure}[htbp]
     \centering
@@ -221,10 +221,10 @@ Het volgend verband is voor iedereen onmiddellijk duidelijk:
 \] 
 Dit is opnieuw een \emph{recursief}\index{recursief} voorschrift.
 
-Zoals je ziet op figuur~\ref{fig:algen}, is de grafiek van $A(t)$ geen rechte meer. Omdat de veranderlijke $t$
+Zoals je ziet op \cref{fig:algen}, is de grafiek van $A(t)$ geen rechte meer. Omdat de veranderlijke $t$
 in vergelijking~\eqref{eq:algen} in de exponent staat noemen we $A(t)$  een \emph{exponenti\"{e}le
 functie}. De groeifactor $2$ is het grondtal\index{grondtal} van de exponenti\"ele functie.
-De beginwaarde $5$ is het snijpunt van de functie met de verticale as. In hoofdstuk~\ref{chap:expFunctie} gaan we dieper in op exponentiële functies.
+De beginwaarde $5$ is het snijpunt van de functie met de verticale as. In \cref{chap:expFunctie} gaan we dieper in op exponentiële functies.
 \begin{figure}[tbp]
     \centering
     \begin{tikzpicture}[line cap=round,line join=round,x=1.0cm,y=0.05cm]
@@ -266,7 +266,7 @@ De beginwaarde $5$ is het snijpunt van de functie met de verticale as. In hoofds
     \label{fig:linexp}
 \end{figure}
 
-In figuur~\ref{fig:linexp} vind je de grafieken van $A(t)$ en
+In \cref{fig:linexp} vind je de grafieken van $A(t)$ en
 $M(t)$ op \'{e}\'{e}n tekening. We zien duidelijk
 dat de groei van de oppervlakte bedekt met algen
 in het begin traag gaat, want er zijn weinig algen. Zodra
@@ -274,7 +274,7 @@ er meer algen zijn, groeien die veel sneller aan en zullen ze
 het ganse meer overwoekeren. Op de grafiek lezen we af dat
 tussen de $10$ en de $11$ weken het meer overwoekerd is door algen.
 Dezelfde oplossing lezen we af op
-tabel~\ref{tbl:meeralgen}, waar de resultaten per week van beide
+\cref{tbl:meeralgen}, waar de resultaten per week van beide
 groeiprocessen weergegeven worden.
 \begin{table}[htb]
     \centering
@@ -307,7 +307,7 @@ We kunnen het moment dat het meer vol algen zit ook berekenen met formules. De u
     800+550\cdot t=5\cdot 2^{t}
 \end{displaymath}
 Deze vergelijking ziet er vrij eenvoudig uit. Nochtans kan ze niet
-opgelost worden met de methoden van sectie~\ref{sec:exp_vgl}.  We kunnen ze alleen
+opgelost worden met de methoden van \cref{sec:exp_vgl}.  We kunnen ze alleen
  benaderend oplossen met de computer. Als we een algoritme zouden programmeren en dit toepassen, vinden we $t=\num{10.342}$ weken. \\
  
  \noindent
@@ -320,7 +320,7 @@ opgelost worden met de methoden van sectie~\ref{sec:exp_vgl}.  We kunnen ze alle
 \section{Exponenti\"ele groei}
 \subsection{Definities}
 
-We veralgemenen vergelijking (\ref{eq:algen}) van sectie~\ref{subsec: exp_groei_vb}. 
+We veralgemenen vergelijking \eqref{eq:algen} van \cref{subsec:exp_groei_vb}. 
 \begin{quote}
 
 Zij  $B(t)$ de functie die de exponenti\"{e}le
@@ -342,7 +342,7 @@ beginnen.
 
 
 De groeifactor is \emph{wel} afhankelijk van de
-lengte van de periode. We nemen terug het voorbeeld van sectie~\ref{subsec: exp_groei_vb}.  In het voorbeeld wordt de aangroei \emph{per week}  bekeken: week na week moet je de hoeveelheid algen vermenigvuldigen met twee (periode: 1 week; groeifactor: 2). Wat als je de aangroei van de algen per 3 weken wil meten (periode: 3 weken)? In figuur~\ref{fig:algen_periode} zie je dat in dat geval de hoeveelheid algen per periode drie keer na mekaar met 2 vermenigvuldigd moet worden, dus met $2^3=8$. Als de periode 3 weken bedraagt, is de groeifactor gelijk aan 8.
+lengte van de periode. We nemen terug het voorbeeld van \cref{subsec:exp_groei_vb}.  In het voorbeeld wordt de aangroei \emph{per week}  bekeken: week na week moet je de hoeveelheid algen vermenigvuldigen met twee (periode: 1 week; groeifactor: 2). Wat als je de aangroei van de algen per 3 weken wil meten (periode: 3 weken)? In \cref{fig:algen_periode} zie je dat in dat geval de hoeveelheid algen per periode drie keer na mekaar met 2 vermenigvuldigd moet worden, dus met $2^3=8$. Als de periode 3 weken bedraagt, is de groeifactor gelijk aan 8.
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[x=1.5cm]
@@ -369,7 +369,7 @@ lengte van de periode. We nemen terug het voorbeeld van sectie~\ref{subsec: exp_
     \label{fig:algen_periode}
 \end{figure}
 
-In het algemeen komt het op het volgende neer: als je de periode vermenigvuldigt met een factor $k$, moet je de groeifactor tot de $k$-de macht verheffen. Dit wordt schematisch weergegeven in figuur~\ref{fig:periode_factor}.
+In het algemeen komt het op het volgende neer: als je de periode vermenigvuldigt met een factor $k$, moet je de groeifactor tot de $k$-de macht verheffen. Dit wordt schematisch weergegeven in \cref{fig:periode_factor}.
 \begin{figure}[tbp]
     \centering
 \begin{tikzpicture}[x=1.5cm]
@@ -416,7 +416,7 @@ Merk op dat de veranderlijke $t$ niet steeds een tijd is. De veranderlijke kan o
 Vaak worden opeenvolgende metingen van een experiment gebruikt om de toestand van de opstelling te achterhalen  \emph{voor} het begin van de meting. Als het zinvol is, kan de veranderlijke $t$ dan een negatieve waarde aannemen. 
 
 \subsection{Stijgend groeiproces}\label{subsec:stijgendGroeiproces}
-In het voorbeeld van sectie~\ref{subsec: exp_groei_vb} neemt de grootheid $A(t)$ toe in de tijd: de
+In het voorbeeld van \cref{subsec:exp_groei_vb} neemt de grootheid $A(t)$ toe in de tijd: de
 oppervlakte bedekt met algen wordt steeds groter. We noemen dit dan
 ook een stijgend groeiproces. In wat volgt geven we nog een voorbeeld van een stijgend
 groeiproces. 
@@ -431,7 +431,7 @@ jaar?
 Is het hierboven beschreven proces inderdaad een exponentieel groeiproces? 
 We noemen de functie die het kapitaal
 weergeeft in functie van de tijd $K(t)$, met $t$ uitgedrukt in jaren.
-In tabel~\ref{tbl:groeikap} berekenen we het kapitaal voor drie opeenvolgende jaren.
+In \cref{tbl:groeikap} berekenen we het kapitaal voor drie opeenvolgende jaren.
 \begin{table}[tbp]
     \centering
     \caption{De groei van het kapitaal per jaar}
@@ -447,7 +447,7 @@ In tabel~\ref{tbl:groeikap} berekenen we het kapitaal voor drie opeenvolgende ja
 \end{tabular}
 \label{tbl:groeikap}
 \end{table}
-Als we in deze tabel alle getallen samenvatten op een tijdsas bekomen we figuur~\ref{fig:kapitaalgroei}.
+Als we in deze tabel alle getallen samenvatten op een tijdsas bekomen we \cref{fig:kapitaalgroei}.
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[x=2cm]
@@ -471,7 +471,7 @@ We merken het volgende:
 \item Uit de opgave blijkt dat de periode gelijk is aan 1 jaar.
 \item Jaar na jaar wordt het kapitaal vermenigvuldigd met $\num{1.07}$. De groeifactor $g$ is dus gelijk aan \num{1.07}.
 \end{enumerate}
-Het hierboven beschreven proces is inderdaad een exponentieel groeiproces. Uit vergelijking~(\ref{eq:exp_groei}) volgt dat het voorschrift gegeven is door 
+Het hierboven beschreven proces is inderdaad een exponentieel groeiproces. Uit vergelijking~\eqref{eq:exp_groei} volgt dat het voorschrift gegeven is door 
 \begin{equation}
      K(t)=K(0)\cdot g^{t}=1000\cdot \num{1.07}^{t}
     \label{eq:si}
@@ -482,7 +482,7 @@ Om het kapitaal na 10 jaar te berekenen, hoeven we enkel $K(10)=1000\cdot \num{1
 \subsubsection{Procentuele toename}
 Hoe verandert de absolute toename $V(t)=K(t)-K(t-1)$ per periode (tijdseenheid) in een
 exponentieel groeiproces?  We berekenen enkele van die toenamen in
-tabel~\ref{tbl:samgesint} (derde kolom). 
+\cref{tbl:samgesint} (derde kolom). 
 \begin{table}[htb]
     \centering
     \caption{De \emph{toename} van het kapitaal per jaar}
@@ -504,12 +504,12 @@ tabel~\ref{tbl:samgesint} (derde kolom).
     \label{tbl:samgesint}
 \end{table}
 
-Uit tabel~\ref{tbl:samgesint}  blijkt dat de absolute toename jaar na jaar toeneemt. Dit is typisch voor een exponentieel groeiproces. 
+Uit \cref{tbl:samgesint}  blijkt dat de absolute toename jaar na jaar toeneemt. Dit is typisch voor een exponentieel groeiproces. 
  Bij lineaire groei is deze absolute toename constant. Daardoor is de grafiek van een lineair groeiproces een rechte en die van een exponentieel groeiproces niet.
  
  Berekenen we echter de
  \emph{procentuele jaarlijkse toename} $P(t)$,  de verhouding van de
- absolute toename $V(t)$ tot het kapitaal dat er was bij het vorige tijdstip $K(t-1)$ (vierde kolom in tabel~\ref{tbl:samgesint})
+ absolute toename $V(t)$ tot het kapitaal dat er was bij het vorige tijdstip $K(t-1)$ (vierde kolom in \cref{tbl:samgesint})
  \begin{displaymath}
      P(t)=\frac{V(t)}{K(t-1)}
  \end{displaymath}
@@ -517,37 +517,36 @@ We zien dat de procentuele toename per periode wel
 constant is. De procentuele toename blijkt gelijk te zijn aan de groeifactor $g=\num{1.07}$ verminderd met 1.
 
 We besluiten: een groeiproces met procentuele toename van $p$\,\%
- per periode, heeft per
- tijdseenheid een groeifactor 
- \begin{equation}
- g=1+\frac{p}{100}
- \label{eq:groeifactor_procent}
- \end{equation}
+per periode, heeft per tijdseenheid een groeifactor 
+\begin{equation}
+g=1+\frac{p}{100}
+\label{eq:groeifactor_procent}
+\end{equation}
 
- \subsection{Dalend groeiproces}\label{subsec.ballon}
- Tot nog toe zagen we enkel voorbeelden van stijgende groeiprocessen: de bijbehorende groeifunties waren steeds stijgend. In wat volgt bespreken we een dalend groeiproces.
- \begin{quote}
-     Een luchtballon verliest  \SI{5}{\percent} van zijn
- draaggas per dag omdat het omhulsel wat poreus is. Bepaal de functie die weergeeft welke de hoeveelheid draaggas is in functie van de tijd, uitgedrukt in dagen. Nu is er \SI{1000}{\milli\litre} gas aanwezig in de luchtballon.
-  \end{quote}
+\subsection{Dalend groeiproces}\label{subsec.ballon}
+Tot nog toe zagen we enkel voorbeelden van stijgende groeiprocessen: de bijbehorende groeifunties waren steeds stijgend. In wat volgt bespreken we een dalend groeiproces.
+\begin{quote}
+    Een luchtballon verliest  \SI{5}{\percent} van zijn
+    draaggas per dag omdat het omhulsel wat poreus is. Bepaal de functie die weergeeft welke de hoeveelheid draaggas is in functie van de tijd, uitgedrukt in dagen. Nu is er \SI{1000}{\milli\litre} gas aanwezig in de luchtballon.
+\end{quote}
 
 
 Stel $t$ de tijd, uitgedrukt in dagen gerekend
- vanaf nu. De hoeveelheid draaggas op het tijdstip $t$ noemen we $D(t)$.
- Elke dag moeten we \SI{5}{\percent}  van de aanwezige hoeveelheid gas
- aftrekken, dus
- \begin{equation}
-     D(t)  =  D(t-1)-D(t-1)\cdot \frac{5}{100}  
-     \end{equation}
- Dit geeft, na wat rekenwerk
-  \begin{equation}
-     D(t)  =   D(t-1)\cdot (1-\frac{5}{100}) 
-       =  D(t-1)\cdot \num{0.95}
-       \label{eq:draaggas}
- \end{equation}
+vanaf nu. De hoeveelheid draaggas op het tijdstip $t$ noemen we $D(t)$.
+Elke dag moeten we \SI{5}{\percent}  van de aanwezige hoeveelheid gas
+aftrekken, dus
+\begin{equation}
+  D(t) = D(t-1)-D(t-1)\cdot \frac{5}{100}  
+\end{equation}
+Dit geeft, na wat rekenwerk
+\begin{equation}
+   D(t)  =   D(t-1)\cdot (1-\frac{5}{100}) 
+     =  D(t-1)\cdot \num{0.95}
+     \label{eq:draaggas}
+\end{equation}
 Hieruit blijkt dat de groeifactor per  dag gelijk is aan $1-\frac{5}{100}=\num{0.95}$.  
 Enkele berekende waarden van $D(t)$ en $V(t)=D(t)-D(t-1)$ vind je in
- tabel~\ref{tbl:gas}. We zien dat de absolute afname elke dag verder \emph{daalt.}
+ \cref{tbl:gas}. We zien dat de absolute afname elke dag verder \emph{daalt.}
  \begin{table}[htb]
     \centering
     \caption{De \emph{toename} van het draaggas per dag}
@@ -566,24 +565,24 @@ Enkele berekende waarden van $D(t)$ en $V(t)=D(t)-D(t-1)$ vind je in
     \label{tbl:gas}
 \end{table}
 
- Het groeiproces dat de hoeveelheid draaggas in de luchtballon beschrijft wordt dus gekenmerkt door de volgende elementen:
- \begin{enumerate}
-\item beginwaarde $D(0)=1000$
-\item periode $p=1$ dag
-\item groeifactor $g=\num{0.95}$
+Het groeiproces dat de hoeveelheid draaggas in de luchtballon beschrijft wordt dus gekenmerkt door de volgende elementen:
+\begin{enumerate}
+  \item beginwaarde $D(0)=1000$
+  \item periode $p=1$ dag
+  \item groeifactor $g=\num{0.95}$
 \end{enumerate}
-Uit vergelijking~(\ref{eq:exp_groei}) volgt  dat de functie die de hoeveelheid draaggas op tijdstip $t$ beschrijft, gegeven wordt door 
- \begin{equation}
-     D(t)=1000\cdot \num{0.95}^{t} \qquad\mbox{ met $t$ uitgedrukt in dagen}
-     \label{eq:ballon}
- \end{equation}
+Uit vergelijking~\eqref{eq:exp_groei} volgt  dat de functie die de hoeveelheid draaggas op tijdstip $t$ beschrijft, gegeven wordt door 
+\begin{equation}
+  D(t)=1000\cdot \num{0.95}^{t} \qquad\mbox{ met $t$ uitgedrukt in dagen}
+  \label{eq:ballon}
+\end{equation}
 
 
- \subsubsection{Besluit}
+\subsubsection{Besluit}
 Een groeiproces met een constante
 procentuele afname van $p$\,\% per tijdseenheid is een dalend
-exponentieel proces met als groeifactor $ g=1-\frac{p}{100}$. Hierbij geldt voor de groeifactor:
- $0<g<1$.
+exponentieel proces met als groeifactor $ g=1-\frac{p}{100}$.
+Hierbij geldt voor de groeifactor: $0<g<1$.
 
 \input{oefeningen/oefgroei}
 
