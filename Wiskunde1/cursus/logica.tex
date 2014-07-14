@@ -215,24 +215,24 @@ $(p \alsdan q) \asa (\niet q \alsdan \niet p)$ & contrapositie \\
 \end{table}
 
 \section{Propositielogica en verzamelingenleer}
-Propositielogica en verzamelingenleer zijn nauw met mekaar verbonden door de parallellen tussen $\en$ en $\cap$, $\of$ en $\cup$, $\niet$ en het complement.
+Propositielogica en verzamelingenleer zijn nauw met mekaar verbonden door de parallellen tussen $\en$ en $\intersect$, $\of$ en $\union$, $\niet$ en het complement.
 
 Neem de verzamelingen $A=\{1,2,3,4,5\}$, $B=\{4,5,6,7\}$ en $U=\{1,2,\dots,9,10\}$. 
-In woorden zeggen we dat  als $5\in A$ \textbf{en} $5\in B$, dan is $5\in A\pmb{\pmb{\cap}} B$. Ook het omgekeerde is waar: als $5\in A\cap B$, dan is $5\in A$ en $5\in B$. We kunnen deze uitspraak  als volgt formaliseren in de propositielogica:
+In woorden zeggen we dat  als $5\in A$ \textbf{en} $5\in B$, dan is $5\in A\pmb{\pmb{\intersect}} B$. Ook het omgekeerde is waar: als $5\in A\intersect B$, dan is $5\in A$ en $5\in B$. We kunnen deze uitspraak  als volgt formaliseren in de propositielogica:
 \begin{itemize}
 \item neem de uitspraak $p$: $5\in A$
 \item neem de uitspraak $q$: $5\in B$
-\item neem de uitspraak $r$: $5\in A\cap B$
+\item neem de uitspraak $r$: $5\in A \intersect B$
 \item dan zijn de samengestelde uitspraak $p\en q$ en de uitspraak $r$ logisch equivalent.
 \end{itemize}
-Het voegwoord $\en$ uit de propositielogica en de bewerking $\cap$ uit de verzamelingenleer kunnen gezien worden als mekaars tegenhanger. Op dezelfde manier zijn $\of$ en $\cup$, $\niet$ en het complement ook mekaars tegenhanger. Dat blijkt ook uit tabel~\ref{tbl:waarheidstabelVerzamelingen}. Het symbool $x$ staat voor een element uit de verzameling $U$. In de kolommen lees je respectievelijk de waarheidswaarde van de uitspraken $x\in A$, $x\in B$, $x\in A^c$, $x\in A\cap B$ en $x\in A\cup B$. Vergelijk met tabel~\ref{tbl:waarheidvoegwoorden}.
+Het voegwoord $\en$ uit de propositielogica en de bewerking $\intersect$ uit de verzamelingenleer kunnen gezien worden als mekaars tegenhanger. Op dezelfde manier zijn $\of$ en $\union$, $\niet$ en het complement ook mekaars tegenhanger. Dat blijkt ook uit tabel~\ref{tbl:waarheidstabelVerzamelingen}. Het symbool $x$ staat voor een element uit de verzameling $U$. In de kolommen lees je respectievelijk de waarheidswaarde van de uitspraken $x\in A$, $x\in B$, $x\in A^c$, $x\in A\intersect B$ en $x\in A\union B$. Vergelijk met tabel~\ref{tbl:waarheidvoegwoorden}.
 
 \begin{table}[htb]
   \centering
   \caption{Verband propositielogica en verzamelingenleer}\label{tbl:waarheidstabelVerzamelingen}
 \begin{tabular}{ccccc}
 \toprule
- $x\in A$  & $x\in B$ & $x\in A^c$ & $x\in A\cap B$ & $x\in A\cup B$  \\
+ $x\in A$  & $x\in B$ & $x\in A^c$ & $x\in A\cap B$ & $x\in A\union B$  \\
 \midrule
   0 & 0 & & 0 & 0 \\
   0 & 1 & 1 & 0 & 1 \\
@@ -242,14 +242,14 @@ Het voegwoord $\en$ uit de propositielogica en de bewerking $\cap$ uit de verzam
 \end{tabular}
 \end{table}
 
-Met een waarheidstabel kan je ook de gelijkheid van verzamelingen aantonen. Zo toont tabel~\ref{tbl:gelijkeVerzamelingen} aan dat $(A\cup B)^c=A^c\cap B^c$. Deze gelijkheid (één van de wetten van de Morgan) hebben we reeds vermeld in sectie~\ref{subsec:verzRekenregels} \emph{en} in sectie~\ref{sec:logTautologie}, waaruit nogmaals de parallellen tussen verzamelingenleer en logica blijkt. 
+Met een waarheidstabel kan je ook de gelijkheid van verzamelingen aantonen. Zo toont tabel~\ref{tbl:gelijkeVerzamelingen} aan dat $(A\union B)^c=A^c\intersect B^c$. Deze gelijkheid (één van de wetten van de Morgan) hebben we reeds vermeld in sectie~\ref{subsec:verzRekenregels} \emph{en} in sectie~\ref{sec:logTautologie}, waaruit nogmaals de parallellen tussen verzamelingenleer en logica blijkt. 
 
 
 \begin{table}
-\caption{$(A\cup B)^c=A^c\cap B^c$} \label{tbl:gelijkeVerzamelingen}
+\caption{$(A \union B)^c=A^c \intersect B^c$} \label{tbl:gelijkeVerzamelingen}
 \begin{tabular}{ccccccc}
 \toprule
-$x\in A$ & $x\in B$ & $x\in A^c$ & $x\in B^c$ & $x\in A^c\cap B^c$ & $x\in A\cup B$ & $x\in (A\cup B)^c$ \\ 
+$x\in A$ & $x\in B$ & $x\in A^c$ & $x\in B^c$ & $x\in A^c\intersect B^c$ & $x\in A \union B$ & $x\in (A \union B)^c$ \\ 
 \midrule
 0 & 0 & 1 & 1 & 1 & 0 & 1 \\ 
 0 & 1 & 1 & 0 & 0 & 1 & 0 \\ 
@@ -871,11 +871,10 @@ Uitspraak 5 en 6 zijn equivalent.
 \begin{oef}
  Een webpagina bevat een inlogfunctie. Als de gebruiker de pagina voor het eerst bezoekt (dus nog niet op de knop `verzend' geklikt heeft), of als hij wel op de knop `verzend' geduwd heeft maar foute gegevens ingevuld heeft, wordt het inlogformulier (opnieuw) getoond. In de andere gevallen toont het scherm een aangepaste boodschap. 
 \begin{enumerate}
-\item Schrijf de nodige (enkelvoudige) logische uitspraken.
-\item Schrijf een logische formule die waarheidswaarde 1 heeft in het geval dat het inlogformulier getoond moet worden.
-\item Schrijf een logische formule die waarheidswaarde 1 heeft als de gebruiker correct ingelogd is.
+  \item Schrijf de nodige (enkelvoudige) logische uitspraken.
+  \item Schrijf een logische formule die waarheidswaarde 1 heeft in het geval dat het inlogformulier getoond moet worden.
+  \item Schrijf een logische formule die waarheidswaarde 1 heeft als de gebruiker correct ingelogd is.
 \end{enumerate}
-
 \end{oef}
 
 \begin{oef}

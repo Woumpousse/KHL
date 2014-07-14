@@ -46,6 +46,7 @@
 \usetikzlibrary{patterns,topaths,arrows,calc,decorations.markings,positioning}
 \frenchspacing
 
+
 % Kleuren. Voor het printen in enkel zwart en wit
 % kan je kleuren herdefiniëren. Dit wordt dan automatisch
 % aangepast, zowel in \textcolor commando's, als in
@@ -69,8 +70,12 @@
 
 
 %%%%%% Tellers %%%%%%
+\newcounter{tijd}
+\newcounter{vb}
+
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}
+
 
 %%%%%% Environments %%%%%%
 \newenvironment{bewijs}{\noindent{\textbf{Bewijs}} \\}{\proofend}
@@ -97,5 +102,7 @@
 \lstset{language=Scilab,basicstyle=\ttfamily \footnotesize,backgroundcolor=\color{white},
 frame=single,framerule=0.5pt,rulecolor=\color{gray},tabsize=2,numbers=none,showstringspaces=false}
 \lstdefinestyle{inline} {basicstyle=\normalsize \ttfamily}
+
+
 
 \makeindex

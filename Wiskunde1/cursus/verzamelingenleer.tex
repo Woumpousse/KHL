@@ -215,18 +215,18 @@ Bijvoorbeeld
 \end{figure}
 
 
-\subsection{Doorsnede of intersectie}\index{doorsnede}\index{\ensuremath{\intersection}}
-De doorsnede van twee verzamelingen $X$ en $Y$ bevat enkel die elementen die tot $X$ \emph{en} tot $Y$ behoren. We noteren de doorsnede met $X\intersection Y$ (figuur~\ref{fig:doorsnede_algemeen}).
+\subsection{Doorsnede of intersectie}\index{doorsnede}\index{\ensuremath{\intersect}}
+De doorsnede van twee verzamelingen $X$ en $Y$ bevat enkel die elementen die tot $X$ \emph{en} tot $Y$ behoren. We noteren de doorsnede met $X\intersect Y$ (figuur~\ref{fig:doorsnede_algemeen}).
 \begin{equation*}
-X\intersection Y =\{a \mid a\in X ~\mathbf{en}~a\in Y \}
+X\intersect Y =\{a \mid a\in X ~\mathbf{en}~a\in Y \}
 \end{equation*}
 
 Bijvoorbeeld
 \begin{itemize}
-\item $X=\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>5\}$ geeft $X\intersection Y=\{6,7,8\}$ (figuur~\ref{fig:doorsnede_voorbeeld})
+\item $X=\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}$ en $Y=\{a \mid a\in \nat ~\mathrm{en}~a>5\}$ geeft $X\intersect Y=\{6,7,8\}$ (figuur~\ref{fig:doorsnede_voorbeeld})
 \item Stel dat een wachtwoord pas geldig is als het meer dan 5 karakters telt, waaronder minstens één cijfer. Dan hebben we het volgende: \\
 $X=\{a\mid a ~\mathrm{is~een~woord~langer~dan~5~karakters} \}$ en \\$Y=\{a\mid a~ \mathrm{is~een~woord~dat~ook~een~cijfer~bevat } \}$ geeft \\
-$X\intersection Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
+$X\intersect Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
 
 \end{itemize}
 
@@ -236,7 +236,7 @@ $X\intersection Y=\{a \mid a~\mathrm{is~een~geldig~wachtwoord} \}$
 \input{figuren/verzamelingen_relaties/tikz/doorsnedealgemeen}
     \label{fig:doorsnede_algemeen}
 }\qquad
-\subfloat[$\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}\intersection \{a \mid a\in \nat ~\mathrm{en}~a>5\}
+\subfloat[$\{a \mid a\in \nat_0 ~\mathrm{en}~a\leqslant 8\}\intersect \{a \mid a\in \nat ~\mathrm{en}~a>5\}
 	=\{6,7,8\}$]{
 \input{figuren/verzamelingen_relaties/tikz/doorsnedevb}
     \label{fig:doorsnede_voorbeeld}
@@ -292,7 +292,7 @@ Volgende eigenschappen spreken voor zich:
 \begin{equation*}
 \begin{split}
 &X\union X^c=U \\
-&X\intersection X^c=\emptyset\\
+&X\intersect X^c=\emptyset\\
 &(X^c)^c=X\\
 & U^c=\emptyset \\
 &\emptyset^c=U
@@ -310,13 +310,13 @@ $(2+3)+4=2+(3+4)=2+3+4$. Bij doorsnede en unie van verzamelingen mag je dat ook 
 \begin{split}
 X\union (Y\union Z)=(X\union &Y)\union Z =X\union Y\union Z 
 \\ &\mathrm{en}\\
-X\intersection (Y\intersection Z)=(X\intersection &Y)\intersection Z = X\intersection Y\intersection Z
+X\intersect (Y\intersect Z)=(X\intersect &Y)\intersect Z = X\intersect Y\intersect Z
 \end{split}
 \end{equation*}
 \subsubsection{Commutatief}\index{commutativiteit}
 Eveneens vergelijkbaar met het optellen (en vermenigvuldigen) van getallen mag je de verzamelingen van plaats verwisselen.
 \begin{equation*}
-A\union B=B\union A ~\mathrm{en}~A\intersection B=B\intersection A
+A\union B=B\union A ~\mathrm{en}~A\intersect B=B\intersect A
 \end{equation*}
 
 Het verschil van twee verzamelingen is \emph{niet} commutatief. Vergelijk met $2-3\not = 3-2$.
@@ -327,18 +327,18 @@ In de getallenleer heb je geleerd dat `maal' distributief is ten opzichte van `p
 In de verzamelingenleer is de unie distributief ten opzichte van de doorsnede \emph{en} omgekeerd. 
 \begin{equation*}
 \begin{split}
-A\union(B\intersection C)&=(A\union B) \intersection (A\union C) \\ &\mathrm{en} \\ A\intersection (B\union C)&=(A\intersection B)\union (A\intersection C)
+A\union(B\intersect C)&=(A\union B) \intersect (A\union C) \\ &\mathrm{en} \\ A\intersect (B\union C)&=(A\intersect B)\union (A\intersect C)
 \end{split}
 \end{equation*}
 Dit wordt verduidelijkt in figuur~\ref{fig:distr1a} en figuur~\ref{fig:distr1b}. 
 
 \begin{figure}[htbp]
 \centering
-\subfloat[$A\union(B\intersection C)$]{
+\subfloat[$A\union(B\intersect C)$]{
     \input{figuren/verzamelingen_relaties/tikz/distributief1a}
     \label{fig:distr1a}
 }\qquad
-\subfloat[$(A\union B) \intersection (A\union C)$]{
+\subfloat[$(A\union B) \intersect (A\union C)$]{
     \input{figuren/verzamelingen_relaties/tikz/distributief1b}
     \label{fig:distr1b}
 }
@@ -348,11 +348,11 @@ Dit wordt verduidelijkt in figuur~\ref{fig:distr1a} en figuur~\ref{fig:distr1b}.
 
 \begin{figure}
 \centering
-\subfloat[$A\intersection(B\union C)$]{
+\subfloat[$A\intersect(B\union C)$]{
     \input{figuren/verzamelingen_relaties/tikz/distributief2a}
     \label{fig:distr2a}
 }\qquad
-\subfloat[$(A\intersection B) \union (A\intersection C)$]{
+\subfloat[$(A\intersect B) \union (A\intersect C)$]{
     \input{figuren/verzamelingen_relaties/tikz/distributief2b}
     \label{fig:distr2b}
 }
@@ -366,13 +366,13 @@ De lege verzameling neemt dezelfde rol op zich als het element nul in de getalle
 \begin{split}
 A\union \emptyset=A \\
 A-\emptyset=A\\
-A\intersection\emptyset=\emptyset 
+A\intersect\emptyset=\emptyset 
 \end{split}
 \end{equation*}
 
 \subsubsection{De wetten van de Morgan}\index{wetten van de Morgan}\index{de Morgan}
 De wetten van de Morgan leggen een verband tussen de 
-bewerkingen $\intersection$ en $\union$ en het complement. 
+bewerkingen $\intersect$ en $\union$ en het complement. 
 Zij zijn genoemd naar de Britse wiskundige A. De Morgan 
 (figuur~\ref{fig:morgan}), maar waren al eerder bekend.
 \begin{figure}[htbp]
@@ -384,13 +384,13 @@ Zij zijn genoemd naar de Britse wiskundige A. De Morgan
 
 Er zijn twee wetten van de Morgan. De eerste wet stelt dat het complement van de unie van twee verzamelingen de doorsnede van de complementen is 
 \begin{equation*}
-\mathrm{Als~}X\subset U \mathrm{~en~} Y\subset U \mathrm{~dan~is~}  (X\union Y)^c=X^c \intersection  Y^c 
+\mathrm{Als~}X\subset U \mathrm{~en~} Y\subset U \mathrm{~dan~is~}  (X\union Y)^c=X^c \intersect  Y^c 
 \end{equation*}
 Als een element behoort tot de unie van twee verzamelingen $X$ en $Y$, hoort het tot $X$ \emph{of} tot $Y$. Als het element behoort tot het complement van de unie, behoort het \emph{niet} tot `$X$ of $Y$', dus hoort het niet tot $X$ \emph{en} niet tot $Y$. 
 
 De tweede wet maakt een analoge redenering voor de doorsnede:  het complement van de doorsnede van twee verzamelingen is de unie van de complementen 
 \begin{equation*}
- (X\intersection Y)^c=X^c \union  Y^c
+ (X\intersect Y)^c=X^c \union  Y^c
 \end{equation*}
 
 \section{Productverzameling, paar en geordende $n$-tallen}\index{productverzameling}\index{verzameling!product-}\index{\ensuremath{\times}}
@@ -569,11 +569,11 @@ $\subset A$? & $\subset B$? & $\subset C$? & Gebied & in symbolen \\
 N & N & N & 1  & $(A\union B \union C)^c$ \\ 
 N & N & J & 8 & $C-(A\union B)$  \\ 
 N & J & N &  4 & $B-(A\union C)$  \\ 
-N & J & J &7   &$(B\intersection C)-A$   \\ 
+N & J & J &7   &$(B\intersect C)-A$   \\ 
 J & N & N &  2 & $A-(B\union C)$  \\ 
-J & N & J & 5  & $(A\intersection C)-B$  \\ 
-J & J & N & 3  & $(A\intersection B)-C$  \\ 
-J & J & J & 6  & $A\intersection B\intersection C$  \\ 
+J & N & J & 5  & $(A\intersect C)-B$  \\ 
+J & J & N & 3  & $(A\intersect B)-C$  \\ 
+J & J & J & 6  & $A\intersect B\intersect C$  \\ 
 \bottomrule
 \end{tabular} 
 \label{tab:venndiagram2}
@@ -601,7 +601,7 @@ Het Venndiagram van figuur \ref{fig:UPQ} op pagina \pageref{fig:UPQ} toont de op
 \end{oef}
 
 \begin{oef}
-Herneem de verzamelingen van oefening~\ref{oef:oefvenn}. Pas de bewerkingen $\intersection$, $\union$, $-$ en complement zo efficiënt mogelijk toe op de verzamelingen $P$, $Q$ en $R$ om volgende verzamelingen te omschrijven. De eerste oefening lossen we bij wijze van voorbeeld zelf op.
+Herneem de verzamelingen van oefening~\ref{oef:oefvenn}. Pas de bewerkingen $\intersect$, $\union$, $-$ en complement zo efficiënt mogelijk toe op de verzamelingen $P$, $Q$ en $R$ om volgende verzamelingen te omschrijven. De eerste oefening lossen we bij wijze van voorbeeld zelf op.
 \begin{enumerate}
 \item $\{2,7\}=Q^c$
 \item $\{3\}$
@@ -612,11 +612,11 @@ Herneem de verzamelingen van oefening~\ref{oef:oefvenn}. Pas de bewerkingen $\in
 \end{enumerate}
 \begin{opl}
 \item $\{2,7\}=Q^c$
-\item $\{3\}=P\intersection R$
-\item $\{1,5\}=Q-(P\union R)$ of $Q \intersection (P \union R)^c$
-\item $\{1,5,3\}=(P\intersection R)\union (Q-(P\union R))$
+\item $\{3\}=P\intersect R$
+\item $\{1,5\}=Q-(P\union R)$ of $Q \intersect (P \union R)^c$
+\item $\{1,5,3\}=(P\intersect R)\union (Q-(P\union R))$
 \item $\{1,5,2,7\}=(P\union R)^c$
-\item $\{6,4,8\}=(P\union R)- (P \intersection R)$
+\item $\{6,4,8\}=(P\union R)- (P \intersect R)$
 \end{opl}
 \end{oef}
 
@@ -648,11 +648,11 @@ De drie Venndiagrammen van figuur~\ref{fig:Venn3} op pagina~\pageref{fig:Venn3} 
 Gegeven de verzamelingen $A,B\subset U$. Duid aan op een venndiagram
 \begin{enumerate}
   \item $(A^c)^c \union B$
-  \item $A\intersection  B^c$
-  \item $(A\intersection B)^c$
+  \item $A\intersect  B^c$
+  \item $(A\intersect B)^c$
   \item $A^c \union  B^c$
   \item $(A\union B)^c$
-  \item $A^c \intersection B^c$
+  \item $A^c \intersect B^c$
 \end{enumerate}
 
 \begin{opl}
@@ -747,7 +747,7 @@ Zij $A$,$B$,$C$ en $D$ verzamelingen. Bepaal of de volgende beweringen waar of o
 \begin{enumerate}
   \item Als $C\subset D^c$, dan is $D \not \subset C^c$
   \item Als $C\not \subset D$, dan is $D^c \not \subset C^c$
-  \item Als $A\subset B$, dan is $A\intersection B =A$
+  \item Als $A\subset B$, dan is $A\intersect B =A$
 \end{enumerate}
 \begin{opl}
 \begin{enumerate}
@@ -787,7 +787,7 @@ Geef door opsomming
 
 \newpage
 \begin{oef}
-Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van $U$. Pas de bewerkingen $-$, $\intersection$, $\union$ en complement zo effici\"ent mogelijk toe op de \emph{deel}verzamelingen van $U$ om \emph{het grijze gedeelte} te omschrijven.
+Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van $U$. Pas de bewerkingen $-$, $\intersect$, $\union$ en complement zo effici\"ent mogelijk toe op de \emph{deel}verzamelingen van $U$ om \emph{het grijze gedeelte} te omschrijven.
 \begin{multicols}{2}
 \begin{enumerate}
 
@@ -839,11 +839,11 @@ Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van
 \begin{opl}
 \begin{enumerate}
 \item $\left(\left(P\union Q\right)-R\right)^c$
-\item $\left(P\union Q\right) \intersection R$
-\item $\left(\left(P\intersection Q\right)-R\right)^c$
-\item $(P\intersection R)\union Q$
+\item $\left(P\union Q\right) \intersect R$
+\item $\left(\left(P\intersect Q\right)-R\right)^c$
+\item $(P\intersect R)\union Q$
 \item $P-(Q\union R)$
-\item $(P\intersection Q \intersection R)^c$
+\item $(P\intersect Q \intersect R)^c$
 \end{enumerate}
 \end{opl}
 \end{oef}
@@ -868,15 +868,15 @@ Zij $U$ de dagen van vorige week; $A$ de dagen met zon; $B$ de dagen met kou; $C
 \begin{enumerate}
 \item Geef door omschrijving:
 \begin{enumerate}
-\item $A\intersection B$
-\item $(A\intersection C)-B$
+\item $A\intersect B$
+\item $(A\intersect C)-B$
 \item $(A\union C)-B$
-\item $A^c\intersection B^c$
-\item $B^c\intersection C$
+\item $A^c\intersect B^c$
+\item $B^c\intersect C$
 \end{enumerate}
 \item Geef door opsomming:
 \begin{enumerate}
-\item $B-(A\intersection C)$
+\item $B-(A\intersect C)$
 \item $C-(A\union B)$
 \item $(A\union C)^c-B$
 \item $(A-C)^c$
