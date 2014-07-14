@@ -109,8 +109,7 @@ Los de volgende vergelijkingen op naar $x$.
             \iff & x & = & 1
           \end{array}
         \]
-  \item $9^{x+1} - 2\cdot 3^{x+2}-27=0$
-        \[
+  \item \[
           \begin{array}{rrclcl}
                  & 9^{x+1}-2 \cdot 3^{x+2}-27 & = & 0 \\
             \iff & 9 \cdot (3^x)^2 - 18 \cdot 3^x - 27 & = & 0
@@ -132,12 +131,47 @@ Los de volgende vergelijkingen op naar $x$.
         \[
           3 = 3^x \iff x = 1
         \]
-  \item $5^{x+1}=5^{3x+1}$
-  \item $2^{x+3}=16^{x-3}$
-  \item $3^x=59049$
-  \item $\left(\frac12\right)^x=2048$
-  \item $7^x=2\cdot 8^x$
-  \item $2^{x+3}=16^{x-3}$
+  \item \[
+          \begin{array}{rrclcl}
+                 & 5^{x+1} & = & 5^{3x+1} \\
+            \iff & 5^x & = & 5^{3x} \\
+            \iff & x & = & 3x \\
+            \iff & x & = & 0
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 2^{x+3} & = & 16^{x-3} \\
+            \iff & 2^x \cdot 2^3 & = & 2^{3x} \cdot 2^{-9} \\
+            \iff & 2^{10} & = & 2^{2x} \\
+            \iff & 10 & = & 2x \\
+            \iff & x & = & 5
+          \end{array}
+        \]
+  \item $3^x=59049 \iff x = \log_3(59049) = 10$
+  \item \[
+          \begin{array}{rrclcl}
+                 & \displaystyle \left(\frac12\right)^x & = & 2048 \\[2mm]
+            \iff & 2^{-x} & = & 2^{11} \\
+            \iff & x & = & -11
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 7^x & = & 2 \cdot 8^x \\[2mm]
+            \iff & \displaystyle\left(\frac78\right)^x & = & 2 \\[2mm]
+            \iff & \displaystyle x \cdot \log(\frac78) & = & \log(2) \\[2mm]
+            \iff & x & = & \displaystyle \frac{\log(2)}{\log(7) - 3 \log(2)}
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 2^{x+3} & = & 16^{x-3} \\
+            \iff & 2^x \cdot 2^3 & = & 2^{4x} \cdot 2^{-12} \\
+            \iff & 2^{15} & = & 2^{3x} \\
+            \iff & x & = & 5
+          \end{array}
+        \]
   \item $100 \cdot 1,05^x=2000\cdot 1,025^x$
   \item $15\cdot 3^{x+1}-243\cdot 5^{x-2}=0$
   \item $3^{4x+5}=5^{x-1}$
