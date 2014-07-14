@@ -31,7 +31,7 @@ Los de volgende vergelijkingen op naar $x$.
   \item $100 \cdot 1,05^x=2000\cdot 1,025^x$
   \item $15\cdot 3^{x+1}-243\cdot 5^{x-2}=0$
   \item $3^{4x+5}=5^{x-1}$
-  \item $5^{(2^x)} = 25^{(8^x)}$
+  \item $512 + 2^{2x} = 2^{4+x}+2^{5+x}$
 \end{enumerate}
 \end{multicols}
 \begin{opl}
@@ -172,10 +172,59 @@ Los de volgende vergelijkingen op naar $x$.
             \iff & x & = & 5
           \end{array}
         \]
-  \item $100 \cdot 1,05^x=2000\cdot 1,025^x$
-  \item $15\cdot 3^{x+1}-243\cdot 5^{x-2}=0$
-  \item $3^{4x+5}=5^{x-1}$
-  \item $5^{(2^x)} = 25^{(8^x)}$
+  \item \[
+          \begin{array}{rrclcl}
+                 & 100 \cdot 1,05^x & = & 2000\cdot 1,025^x \\[2mm]
+            \iff & \displaystyle\left(\frac{1.05}{1.025}\right)^x & = & 20 \\[2mm]
+            \iff & x & = & \displaystyle \frac{\log(20)}{\log(1.05)-\log(1.025)} & \approx & 124.3
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 15 \cdot 3^{x+1}-243 \cdot 5^{x-2} & = & 0 \\ 
+            \iff & 15 \cdot 3^x \cdot 3 & = & 243 \cdot 5^x \cdot 25^{-1} \\[2mm]
+            \iff & 3^x \cdot 5^{-x} & = & \displaystyle \frac{243}{15 \cdot 3 \cdot 25} \\[2mm]
+            \iff & \displaystyle \left(\frac{3}{5}\right)^x & = & \displaystyle \frac{27}{125} \\[2mm]
+            \iff & \displaystyle x \cdot \log\left(\frac{3}{5}\right) & = & \displaystyle \log\left(\frac{27}{125}\right) \\[2mm]
+            \iff & \displaystyle x \cdot \log\left(\frac{3}{5}\right) & = & \displaystyle \log\left(\frac{3^3}{5^3}\right) \\[2mm]
+            \iff & \displaystyle x \cdot \log\left(\frac{3}{5}\right) & = & \displaystyle 3 \cdot \log\left(\frac{3}{5}\right) \\[2mm]
+            \iff & x & = & 3 
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 3^{4x+5} & = & 5^{x-1} \\
+            \iff & 3^{4x} \cdot 3^5 & = & 5^{x} \cdot 5^{-1} \\[2mm]
+            \iff & \left(3^4 \cdot 5^{-1}\right)^x & = & 5^{-1} \cdot 3^{-5} \\[2mm]
+            \iff & x \cdot \log\left(3^4 \cdot 5^{-1}\right) & = & \log(5^{-1} \cdot 3^{-5}) \\[2mm]
+            \iff & x & = & \displaystyle \frac{\log(5^{-1} \cdot 3^{-5})}{\log\left(3^4 \cdot 5^{-1}\right)} \\[3mm]
+            \iff & x & = & \displaystyle \frac{-\log(5) - 5 \log(3)}{4\log(3) - \log(5)} & \approx & -2.55
+          \end{array}
+        \]
+  \item \[
+          \begin{array}{rrclcl}
+                 & 512 + 2^{2x} & = & 2^{4+x}+2^{5+x} \\
+            \iff & 2^9 + (2^x)^2 & = & (2^4 + 2^5) \cdot 2^x \\
+            \iff & (2^x)^2 - (2^4 + 2^5) \cdot 2^x + 2^9 & = & 0 \\
+            \iff & (2^x)^2 - 48 \cdot 2^x + 512 & = & 0
+          \end{array}
+        \]
+        Substitutie $z = 2^x$.
+        \[
+          z^2 - 48 z + 512 = 0
+        \]
+        Dit is een vierkantsvergelijking met
+        \[
+          D = 48^2 - 4 \cdot 1 \cdot 512 = 256 \qquad \sqrt{D} = 16
+        \]
+        en oplossingen
+        \[
+          z_1 = \frac{48 - 16}{2} = 16 \qquad z_2 = \frac{48+16}{2} = 32
+        \]
+        Dit geeft voor $x$
+        \[
+          2^{x_1} = 16 \iff x_1 = 4 \qquad 2^{x_2} = 32 \iff x_2 = 5
+        \]
 \end{enumerate}
 \end{opl}
 \end{oef}
