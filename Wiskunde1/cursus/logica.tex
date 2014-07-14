@@ -652,7 +652,7 @@ Vertaling
 We moeten uitmaken of $P_1 \en P_2 \alsdan P_3$. We stellen de waarheidstabel op:
 \[
   \begin{array}{cccccccc}
-    x & y & z & P_1 & P_2 & P_3 & P_1 \en P_2 \alsdan P_3 \\
+    a & b & c & P_1 & P_2 & P_3 & P_1 \en P_2 \alsdan P_3 \\
     \toprule
     0 & 0 & 0 & 0 & 1 & 1 & 1 \\
     1 & 0 & 0 & 1 & 1 & 1 & 1 \\
@@ -665,24 +665,82 @@ We moeten uitmaken of $P_1 \en P_2 \alsdan P_3$. We stellen de waarheidstabel op
   \end{array}
 \]
 De laatste kolom bevat niet uitsluitend 1'tjes, wat betekent dat de conclusie
-(``Cindy heeft geen gelijk'') onjuist is. De laatste rij
-toont immers aan dat het bijvoorbeeld mogelijk is dat ze alledrie gelijk hebben.
+(``Cindy heeft geen gelijk'') onjuist is. Zo toont de laatste rij
+immers aan dat het mogelijk is dat ze alledrie gelijk hebben.
 \end{opl}
 \end{oef}
 
 \begin{oef}
 Bob, Jan en Koen worden verdacht van belastingontduiking. Elk van hen getuigt als volgt:
-Bob: `Jan is schuldig en Koen is onschuldig'.
-Jan: `Als Bob schuldig is, dan is Koen het ook'.
-Koen: `Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig'.
+\begin{itemize}
+  \item Bob: `Jan is schuldig en Koen is onschuldig'.
+  \item Jan: `Als Bob schuldig is, dan is Koen het ook'.
+  \item Koen: `Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig'.
+\end{itemize}
 De elementaire uitspraken die erin voorkomen zijn `een persoon is schuldig of onschuldig'. We spreken af dat de proposities $b$, $j$ en $k$ respectievelijk betekenen `Bob is onschuldig', `Jan is onschuldig', en `Koen is onschuldig'.
 \begin{enumerate}
-\item Stel de waarheidstafels op van elk van deze getuigenissen. Plaats ze naast elkaar. Zet eerst de getuigenissen om in logische formules.
-\item Is er \'{e}\'{e}n situatie waarin alle getuigenissen samen waar zijn? (Dit noemt men \emph{consistent}). Zo ja, wie is er dan schuldig?
-\item Als we veronderstellen dat iedereen onschuldig is, wie liegt er dan?
-\item Als we van de simpele redenering uitgaan dat elke schuldige liegt en elke onschuldige de waarheid spreekt, wie is dan schuldig of onschuldig?
+  \item Stel de waarheidstafels op van elk van deze getuigenissen. Plaats ze naast elkaar. Zet eerst de getuigenissen om in logische formules.
+  \item Is er \'{e}\'{e}n situatie waarin alle getuigenissen samen waar zijn? (Dit noemt men \emph{consistent}). Zo ja, wie is er dan schuldig?
+  \item Als we veronderstellen dat iedereen onschuldig is, wie liegt er dan?
+  \item Als we van de simpele redenering uitgaan dat elke schuldige liegt en elke onschuldige de waarheid spreekt, wie is dan schuldig of onschuldig?
 \end{enumerate}
+\begin{opl}
+Notaties
+\begin{center}
+  \begin{tabular}{r@{\ensuremath{\quad\iff\quad}}l}
+    Bob is schuldig & b \\
+    Jan is schuldig & j \\
+    Koen is schuldig & k \\
+  \end{tabular}
+\end{center}
 
+Omzetting naar logische formules
+\begin{center}
+  \begin{tabular}{rp{8cm}l}
+    $P_1$ & Jan is schuldig en Koen is onschuldig & $j \en \niet k$ \\[2mm]
+    $P_2$ & Als Bob schuldig is, dan is Koen het ook & $b \alsdan k$ \\[2mm]
+    $P_3$ & \raggedright Ik ben onschuldig, maar ten minste \'{e}\'{e}n van de anderen is schuldig & $\niet k \en (j \of b)$ \\
+  \end{tabular}
+\end{center}
+Waarheidstabellen van de getuigenissen
+\[
+  \begin{array}{cccccccc}
+    b & j & k & P_1 & P_2 & P_3 & P_1 \en P_2 \en P_3 \\
+    \toprule
+    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 1 & 1 & 1 & 1 \\
+    1 & 1 & 0 & 1 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 0 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 0 & 1 & 0 & 0 \\
+  \end{array}
+\]
+Indien iedereen de waarheid spreekt (derde rij), is Jan de schuldige.
+Indien iedereen onschuldig is (eerste rij) dan liegen Bob en Koen.
+Om ervan uit te gaan dat schuldigen liegen en onschuldigen de waarheid spreken,
+doen we beroep op de volgende logische formule:
+\[
+  P = (b \asa \niet P_1) \;\en\; (j \asa \niet P_2) \;\en\; (k \asa \niet P_3)
+\]
+Waarheidstabel voor $P$:
+\[
+  \begin{array}{cccccccc}
+    b & j & k & P_1 & P_2 & P_3 & P \\
+    \toprule
+    0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+    1 & 1 & 0 & 1 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+    0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 0 & 1 & 0 & 0 \\
+  \end{array}
+\]
+waaruit we de schuld concluderen van Bob en Koen, terwijl Jan onschuldig is.
+\end{opl}
 \end{oef}
 
 \begin{oef}
