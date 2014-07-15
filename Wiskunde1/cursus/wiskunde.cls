@@ -124,6 +124,13 @@
 
 \lstdefinestyle{inline}{basicstyle=\normalsize\ttfamily}
 
+\newcommand{\code}[2][]{
+  \begin{center}
+    \begin{minipage}{.8\linewidth}
+      \lstinputlisting[#1]{#2}
+    \end{minipage}
+  \end{center}
+}
 
 %%%%%%%%%% cleveref %%%%%%%%%%
 \crefname{section}{sectie}{secties}
