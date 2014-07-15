@@ -131,7 +131,7 @@ Het is niet belangrijk in welke volgorde de elementen opgesomd worden. Je mag he
 De opsomming met puntjes is niet altijd eenduidig. In zo'n gevallen is het beter de verzameling te defini\"eren met een omschrijving. We geven enkele voorbeelden.
 \begin{itemize}
 \item $\{x\mid x \in \integers ~\mathrm{ en }~ x<0\}$: de verzameling van gehele getallen kleiner dan 0. Deze verzameling wordt soms ook kort genoteerd als $\{x \in \integers \mid x<0\}$
-\item $\{ 2\cdot x +1 \mid x \in \nat\}$: de verzameling van oneven gehele getallen groter dan 0
+\item $\{ 2x +1 \mid x \in \nat\}$: de verzameling van oneven gehele getallen groter dan 0
 \end{itemize}
 We lezen bovenstaande notatie als `de verzameling van $x$-en \emph{waarvoor geldt} dat $x$ element is van $\integers$ en $x$ kleiner is dan 0'.
 
@@ -432,9 +432,22 @@ A_1\times A_2\times\dots\times A_n=\{(a_1,a_2,\dots,a_n)\mid a_1\in A_1, a_2\in 
 \end{equation*}
 
 Als alle verzamelingen $A_1$, \dots, $A_n$ gelijk zijn, schrijven we het product van de verzamelingen als $A^n$.
+Stel dat $A=\{\mathrm{a}, \mathrm{b},\dots,\mathrm{z}\}$, dan is $A^5$ de verzameling van alle `woorden' (strings) die bestaan uit exact vijf kleine letters a--z.
 
-Stel dat $A=\{\mathrm{a}, \mathrm{b},\dots,\mathrm{z}\}$, dan is $A^5$ de verzameling van alle `woorden' (strings) die bestaan uit kleine letters a-z met lengte 5. 
+\section{Samenvatting}
+\paragraph{Operatoren}
+\begin{center}
+  \begin{longtable}{clp{7cm}}
+    $X \subset Y$ & deelverzameling & Elk element van $X$ is ook een element van $Y$ \\[2mm]
+    $X \union Y$ & unie & $X \union Y = \{ x \;|\; x \in X \text{ of } x \in Y \}$ \\[2mm]
+    $X \intersect Y$ & doorsnede & $X \intersect Y = \{ x \;|\; x \in X \text{ en } x \in Y \}$ \\[2mm]
+    $X - Y$ & verschil & $X - Y = \{ x \;|\; x \in X \text{ en } x \notin Y \}$ \\[2mm]
+    $X^c$ & complement & $X^c = \{ x \;|\; x \in U \text{ en } x \notin X \}$ \\
+  \end{longtable}
+\end{center}
  
+\paragraph{Rekenregels}
+
 \input{oefeningen/oefverzamelingenleer} 
 
 %%% Local Variables: 
