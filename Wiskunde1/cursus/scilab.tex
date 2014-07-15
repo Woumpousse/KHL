@@ -49,7 +49,7 @@ even op papier,' zei hij.}}
 
 \section{Inleiding}
 
-Het (freeware)-pakket Scilab\footnote{Download en documentatie op www.scilab.org.} is geschikt om numerieke problemen op te lossen. Het beschikt daarvoor over een omvangrijke ingebouwde functieset. Je kan deze set uitbreiden en aanpassen aan je eigen behoeften door gebruik te maken van de programmeermogelijkheid die Scilab biedt.
+Het (freeware-)pakket Scilab\footnote{Download en documentatie op www.scilab.org.} is geschikt om numerieke problemen op te lossen. Het beschikt daarvoor over een omvangrijke ingebouwde functieset. Je kan deze set uitbreiden en aanpassen aan je eigen behoeften door gebruik te maken van de programmeermogelijkheid die Scilab biedt.
 
 De aangewezen  manier om te leren programmeren in Scilab is experimenteren en voorbeelden bekijken (\texttt{.sci} en \texttt{.sce} bestanden).
 
@@ -465,8 +465,12 @@ Met de functie \verb+disp+ kan je verzorgde output leveren. De functie \verb+str
 \label{sec:grafiek}
 De grafiek van een functie is --\,naast de tabel en het functievoorschrift\,-- een handig middel om het verloop (nulpunten, stijgend en dalend, \dots) van de functie te beschrijven. De grafiek geeft een globaal beeld van de functie op een bepaald interval.
 
-De ingebouwde functie \verb+plot(vec,function)+ genereert eenvoudig grafieken van functies. De veranderlijke \verb+vec+ is een vector. Voor alle elementen van deze vector wordt de functiewaarde berekend en in het grafisch venster geplot (zie figuur~\ref{figg:functie1}):
+De ingebouwde functie \verb+plot(vec,function)+ genereert eenvoudig grafieken van functies.
+De veranderlijke \verb+vec+ is een vector. Voor alle elementen van deze vector wordt de
+functiewaarde berekend en in het grafisch venster geplot (zie figuur~\ref{figg:functie1}):
 
+\begin{center}
+\begin{minipage}{.95\linewidth}
 \begin{lstlisting}[caption={Functiedefinitie en plot}, label={Functiedefinitieenplot1}]	
 function y=f(x)
   y=(x^2+2*x)*exp(-x)
@@ -474,6 +478,8 @@ endfunction
 x=-2:0.2:5;
 plot(x,f)
 \end{lstlisting}
+\end{minipage}
+\end{center}
 
 \begin{figure}[h!t]
    \begin{center}

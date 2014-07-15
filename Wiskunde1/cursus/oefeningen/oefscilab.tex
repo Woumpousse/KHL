@@ -24,11 +24,35 @@
 \begin{oef}
 Definieer de functie $opp(z)$ die de totale oppervlakte berekent 
 van een kubus met zijde $z$. Bereken nu de oppervlakte 
-als $z$ gelijk is aan \num{2.5} of \num{3.125}. 
+als $z$ gelijk is aan \num{2.5} of \num{3.125}.
+\begin{opl}
+\begin{lstlisting}
+function r = opp(z)
+  r = z * z
+end
+
+opp(2.5)
+opp(3.125)
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
+
+
 \begin{oef}
-      Een rol behangpapier is \SI{10}{\meter} lang. Stel de veranderlijke  $t$ gelijk aan de hoeveelheid behangpapier die je nodig hebt, uitgedrukt in meter. Stel \verb/aantalrollen/ het aantal rollen dat je moet kopen om aan de  hoeveelheid $t$ te voldoen. Teken de grafiek van de functie \verb/aantalrollen/.
+Een rol behangpapier is \SI{10}{\meter} lang. Stel de veranderlijke~$t$
+gelijk aan de hoeveelheid behangpapier die je nodig hebt, uitgedrukt in meter.
+Stel \verb/aantalrollen/ het aantal rollen dat je moet kopen om aan de
+hoeveelheid $t$ te voldoen. Teken de grafiek van de functie \verb/aantalrollen/.
+\begin{opl}
+\begin{lstlisting}
+function r = aantalrollen(t)
+  r = ceil(t / 10)
+end
+
+plot(0:100, aantalrollen)
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 
@@ -38,6 +62,20 @@ De studentenkring organiseert een voetbalwedstrijd. De materiaalmeester heeft \S
 \item Teken de grafiek van de functie \verb/breedte/ die de breedte $b$ van het terrein in functie van de lengte $l$ weergeeft.
 \item Teken de grafiek van de functie \verb/opp/ die de oppervlakte $o$ van het terrein in functie van de lengte $l$ weergeeft. Voor welke lengte is de oppervlakte maximaal?
 \end{enumerate}
+\begin{opl}
+\begin{lstlisting}
+function b = breedte(l)
+  b = 50 - l
+end
+
+function r = opp(l)
+  r = breedte(l) * l
+end
+
+plot(0:50, opp)
+\end{lstlisting}
+Maximumoppervlakte bij \verb'l' = 25.
+\end{opl}
 \end{oef}
 
 \begin{oef}
@@ -47,6 +85,20 @@ De studentenkring organiseert een voetbalwedstrijd. De materiaalmeester heeft \S
 \item Teken deze functie.
 \item Wat zijn de afmetingen van cirkel en vierkant opdat de afgespannen oppervlakte minimaal is?
 \end{enumerate}
+\begin{opl}
+\begin{lstlisting}
+function r = straal(z)
+  r = (60 - 3 * z) / (2 * %pi)
+end
+
+function r = oppervlakte(z)
+  r = z * z + %pi * straal(z)^2
+end
+
+plot(0:50, oppervlakte)
+\end{lstlisting}
+Bij minimale oppervlakte: $z = 8.35$ en $r = 5.56$.
+\end{opl}
 \end{oef}
 
 \begin{oef}
@@ -61,46 +113,116 @@ Herschrijf de functie van listing~\ref{fac} waarbij je te werk gaat zoals in lis
 \end{oef}
 
 \begin{oef}
-    Schrijf de functie  \verb/sommeetk(a,r,n)/, 
-    die de som berekent van opeenvolgende elementen van een meetkundige rij. De veranderlijke  $a$ is de 
-    eerste term van de som, $v$ is de reden van de meetkundige rij en de som 
-    bevat $n$ termen. Geef als output  de som en de laatste term van de som.
-    (meervoudige output). Gebruik eerst de \verb/for/-lus , daarna  de \verb/while/-lus.
-    \end{oef} 
-
+Schrijf de functie  \verb/sommeetk(a,r,n)/, die de som berekent van opeenvolgende elementen van een meetkundige rij.
+De veranderlijke $a$ is de eerste term van de som, $v$ is de reden van de meetkundige rij en de som 
+bevat $n$ termen. Geef als output  de som en de laatste term van de som.
+(meervoudige output). Gebruik eerst de \verb/for/-lus , daarna  de \verb/while/-lus.
+\begin{opl}
+\begin{samepage}
+Met een {\tt for}-lus:
+\begin{lstlisting}
+function [som, term] = sommeetk(a, r, n)
+  som = 0
+  term = a
+  for k = 1:n
+    som = som + term
+    term = term * r
+  end
+  term = term / r
+endfunction
+\end{lstlisting}
+\end{samepage}
+\begin{samepage}
+Met een {\tt while}-lus:
+\begin{lstlisting}
+function [som, term] = sommeetk(a, r, n)
+  som = 0
+  term = a
+  k = 1
+  while k <= n,
+    som = som + term
+    term = term * r
+    k = k + 1
+  end
+  term = term / r
+endfunction
+\end{lstlisting}
+\end{samepage}
+\end{opl}
+\end{oef}
 
 
 \begin{oef}
 Definieer in Scilab volgende matrices en vectoren:
 \begin{enumerate}
-\item $\displaystyle 
-	A=\begin{bmatrix}1&2&3\\4&5&6\\7&8&9\end{bmatrix}$
-\item $B=\begin{bmatrix}1&2&3&4&\ldots&19&20\end{bmatrix}$
-\item $C=\begin{bmatrix}1\\2\\3\\ \ldots \\19\\20\end{bmatrix}$
-\item $D=\begin{bmatrix}2\\4\\6\\\ldots\\38\\40\end{bmatrix}$
+  \item $\displaystyle A=\begin{bmatrix}1&2&3\\4&5&6\\7&8&9\end{bmatrix}$
+  \item $B=\begin{bmatrix}1&2&3&4&\ldots&19&20\end{bmatrix}$
+  \item $C=\begin{bmatrix}1\\2\\3\\ \ldots \\19\\20\end{bmatrix}$
+  \item $D=\begin{bmatrix}2\\4\\6\\\ldots\\38\\40\end{bmatrix}$
 \end{enumerate}
+\begin{opl}
+\begin{lstlisting}
+A = [1,2,3;4,5,6;7,8,9]
+B = [1:20]
+C = B'
+D = C * 2
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 
 \begin{oef}
 Bepaal het element van $A$ op de tweede rij, derde kolom.
+\begin{opl}
+\begin{lstlisting}
+A(2,3)
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
 Definieer de submatrix $E$ die bestaat uit de eerste 5 kolommen van $B$.
+\begin{opl}
+\begin{lstlisting}
+E = B(:,1:5)
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
 Voeg de matrices $C$ en $D$ samen tot een matrix met 2 kolommen en 20 rijen.
+\begin{opl}
+\begin{lstlisting}
+[C,D]
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 \begin{oef}
 Schrijf de functie \texttt{vermenigvuldigMatrix(M,a)} die elk element van de matrix $M$ vermenigvuldigt met $a$.
+\begin{opl}
+\begin{lstlisting}
+function R = vermenigvuldigMatrix(M, a)
+  R = M * a
+end
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
 Schrijf de functie \texttt{kolomNaarRij(V)} die de kolomvector $V$ herschrijft tot een rijvector.
+\begin{opl}
+\begin{lstlisting}
+function R = kolomNaarRij(V)
+  R = V'
+end
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
 Schrijf de functie \texttt{keerOm(V)} die de rijvector $V$ ``omkeert'': eerste element wordt het laatste enz.
-\begin{opl}Eén van de vele mogelijke oplossingen:
+\begin{opl}E\'en van de vele mogelijke oplossingen:
 \begin{lstlisting}[caption={Een vector omkeren}, label=vectoromkeren]
 function W=keerom(V)
   // schrijft vector V in omgekeerde volgorde
@@ -113,27 +235,26 @@ endfunction
 \end{lstlisting}
 \end{opl}
 \end{oef}
+
 \begin{oef}
-Schrijf de functie \texttt{maakMatrix(n)} die een vierkante matrix met $n$ e\-le\-menten genereert. Indien $n$ geen kwadraat is van een geheel getal, toont de functie een foutboodschap en geeft ze {\sc false} (\texttt{\%F}) terug.
+Schrijf de functie \texttt{maakMatrix(n)} die een vierkante matrix met $n$ elementen genereert.
+Indien $n$ geen kwadraat is van een geheel getal, toont de functie een foutboodschap en geeft ze {\sc false} (\texttt{\%F}) terug.
 \end{oef}
    
 \begin{oef}
-   Schrijf de functie \func{aantal(K,r,T)}, die volgend probleem oplost:
-   \begin{quote}
-     Er staat nu \euro $K$  op een rekening met  rente $r$  per periode.
+Schrijf de functie \func{aantal(K,r,T)}, die volgend probleem oplost:
+\begin{quote}
+  Er staat nu \euro $K$  op een rekening met  rente $r$  per periode.
 Elke periode wordt er \euro ${T}$ van de  rekening afgehaald. 
 Na 1 periode haal je voor de eerste keer \euro ${T}$ af.
 \begin{enumerate}
-    \item  Zoek hoeveel keren 
-je het bedrag $T$ kan afhalen zonder dat de rekening in onder nul komt.
-
-
+    \item Zoek hoeveel keren je het bedrag $T$ kan afhalen zonder dat de rekening in onder nul komt.
     \item Als output geef je het aantal keren dat je een bedrag 
-    $T$ afhaalde en het bedrag dat nog op de rekening overblijft na 
-    de laatste $T$ af te halen.
+          $T$ afhaalde en het bedrag dat nog op de rekening overblijft na 
+          de laatste $T$ af te halen.
 \end{enumerate}  
-   \end{quote}
-   \end{oef}
+\end{quote}
+\end{oef}
 
 \begin{oef}
 Schrijf de functie \func{posnegvector(n)} die een vector $V$ 
