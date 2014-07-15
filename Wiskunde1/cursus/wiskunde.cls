@@ -40,6 +40,7 @@
 \RequirePackage[output-decimal-marker={,},quotient-mode = fraction,per-mode=symbol]{siunitx}
 \RequirePackage{listings}
 \RequirePackage{booktabs}
+\RequirePackage{longtable}
 \RequirePackage{multirow} 
 \RequirePackage{multicol} 
 \RequirePackage{wrapfig}
@@ -49,7 +50,7 @@
 %\RequirePackage[adobe-utopia]{mathdesign}
 \RequirePackage[bitstream-charter]{mathdesign}
 %\RequirePackage[colorlinks,citecolor=spot,linkcolor=spot,urlcolor=spot]{hyperref} %Voor screenpdf
-\RequirePackage{makeidx}
+\RequirePackage{imakeidx}
 \RequirePackage{hyperref}
 \RequirePackage[noabbrev,dutch]{cleveref} % Moet na hyperref komen!
 

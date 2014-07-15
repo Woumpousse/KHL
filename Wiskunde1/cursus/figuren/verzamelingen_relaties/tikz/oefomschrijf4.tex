@@ -1,11 +1,11 @@
-    \begin{tikzpicture}[scale=0.7,thick]
-    \draw (-4,-2.7) rectangle (4,3.5) node [above] {$U$};
-    \begin{scope}
-    	\clip \secondellipse;
-    	\fill[gray!30] \thirdellipse;
-    \end{scope}
-    \fill[gray!30] \firstellipse;
-    \draw \firstellipse node at (35:3.7cm) {$Q$};
-    \draw \secondellipse node at (145:3.7cm) {$P$};
-    \draw \thirdellipse node at (270:2.3cm) {$R$};
-    \end{tikzpicture}
+\begin{tikzpicture}[scale=0.7,thick]
+  \draw (-4,-3) rectangle (4,3.5) node [above] {$U$};
+  \begin{scope}
+    \clip \secondellipse;
+    \fill[gray!30] \thirdellipse;
+  \end{scope}
+  \fill[gray!30] \firstellipse;
+  \draw \firstellipse node at (35:3.7cm) {$Q$};
+  \draw \secondellipse node at (145:3.7cm) {$P$};
+  \draw \thirdellipse node at (270:2.3cm) {$R$};
+\end{tikzpicture}

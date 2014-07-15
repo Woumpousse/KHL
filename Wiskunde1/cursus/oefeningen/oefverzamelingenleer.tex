@@ -86,7 +86,7 @@ Waar of fout?
 
 
 
-\newpage
+
 \begin{oef}
 \label{oef:venndiagramoef}
 Bekijk figuur~\ref{fig:venndiagramoef}. De getallen 1,\dots,8 duiden een deelverzameling aan van $U$. Vul  tabel~\ref{tab:venndiagram} aan. Als voorbeeld vulden we reeds de eerste lijn in.
@@ -343,56 +343,20 @@ Geef door opsomming
 \end{opl}
 \end{oef}
 
-
 \begin{oef}
-Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van $U$. Pas de bewerkingen $-$, $\intersect$, $\union$ en complement zo effici\"ent mogelijk toe op de \emph{deel}verzamelingen van $U$ om \emph{het grijze gedeelte} te omschrijven.
-\begin{multicols}{2}
-\begin{enumerate}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf1}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf2}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf3}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf4}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf5}
-\end{minipage}
-
-\begin{minipage}{\columnwidth}
-\item
-\centering
-%\vspace{-0.4cm}
-\input{figuren/verzamelingen_relaties/tikz/oefomschrijf6}
-\end{minipage}
-
-\end{enumerate}
-\end{multicols}
+Hieronder vind je de verzameling $U$ en de deelverzamelingen $P$, $Q$ en $R$ van $U$.
+Pas de bewerkingen $-$, $\intersect$, $\union$ en complement zo effici\"ent mogelijk
+toe op de \emph{deel}verzamelingen van $U$ om \emph{het grijze gedeelte} te omschrijven.
+{
+\newcommand{\OEF}[1]{#1.\ \parbox[t]{.45\textwidth}{\input{figuren/verzamelingen_relaties/tikz/oefomschrijf#1}}}
+\begin{center}
+\begin{longtable}{cc}
+  \OEF1 & \OEF2 \\
+  \OEF3 & \OEF4 \\
+  \OEF5 & \OEF6 \\
+\end{longtable}
+\end{center}
+}
 
 \begin{opl}
 \begin{enumerate}
