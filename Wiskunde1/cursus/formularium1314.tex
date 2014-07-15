@@ -3,9 +3,11 @@
 \usepackage{multicol}
 \usepackage{palatino}
 \usepackage{mathpazo}
+\usepackage{listings}
+\usepackage{array}
 
+\lstset{language=scilab,basicstyle=\tt}
 
-\input kvmacros
 
 \newcommand{\en}{\wedge}
 \newcommand{\of}{\vee}
@@ -40,8 +42,7 @@
 \end{center}
 
 
-\mysection{Exponenti\"ele \& logaritmische functies} \\
-
+\mysection{Exponenti\"ele \& logaritmische functies}
 \[
   \log_g(x)=y\Leftrightarrow g^y=x
 \]
@@ -94,7 +95,7 @@
     $\ln(x)$ & \verb'log(x)' \\
     \mym{e^x} &\verb'exp(x)' \\
     $\pi$ & \verb'%pi' \\
-    $\mathit{true}, \mathit{false}$ & \verb'%T, %F'
+    $\mathrm{true}, \mathrm{false}$ & \verb'%T, %F'
   \end{tabular}
 \end{center}
 \begin{center}
@@ -119,40 +120,60 @@
 
 
 \mysection{Vectoren}\\
-
 \begin{tabular}{|p{7.3cm}|p{5.5cm}|}
-\hline
-
-definitie vector    &   \verb+V=[1,1.5,2,2.5,3]=1:0.5:3+ \\
-
-vectorelement       &   \verb+V(2)+\\
-
-vector met $4$ elementen, alle gelijk aan
-$0$   resp. $1$              & \verb+zeros(4,1)+, \verb+ones(4,1)+ \\
-
-lengte van de vector $V$ & \texttt{length(V)}\\
-
-\hline
+  \hline
+  definitie vector    &   \verb+V=[1,1.5,2,2.5,3]=1:0.5:3+ \\
+  vectorelement       &   \verb+V(2)+\\
+  vector met $4$ elementen, alle gelijk aan $0$ resp. $1$ & \verb+zeros(4,1)+, \verb+ones(4,1)+ \\
+  lengte van de vector $V$ & \texttt{length(V)}\\
+  \hline
 \end{tabular}
 
 \vspace{0.5cm}
 
-\mysection{Functies}\\
+\paragraph{Functiedefinitie}
+\begin{center}
+\begin{minipage}{.6\linewidth}
+\begin{lstlisting}
+function y=mijnFunctie(x)
+  y=2*x
+endfunction
+\end{lstlisting}
+\end{minipage}
+\end{center}
 
-\begin{tabular}{p{4.cm}l}
-Defini\"eren: &\verb/function y=mijnFunctie(x)/\\
-            & \verb/y=2*x / \\
-            & \verb/endfunction /\\
-Tekenen:    & \verb/clf; xgrid; x=0:10; plot(x,mijnFunctie)/ \\
 
-\end{tabular}\\
+\paragraph{Tekenen}
+\begin{center}
+\begin{minipage}{.6\linewidth}
+\begin{lstlisting}
+clf; xgrid; x=0:10; plot(x,mijnFunctie)
+\end{lstlisting}
+\end{minipage}
+\end{center}
 
-\mysection{Programmeren}\\
 
-\begin{tabular}{p{4.cm}l}
-Lussen & \verb/for y=1:x ... end/ of \verb/while y<x ... end/ \\
-Voorwaardelijk statement & \verb/if x==2 ... elseif ... else ... end/ \\
-\end{tabular}\\
+\paragraph{Lussen}
+\begin{center}
+\begin{minipage}{.6\linewidth}
+\begin{lstlisting}
+for i = 1:n ... end
+while i < n ... end
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\paragraph{Voorwaardelijk statement}
+\begin{center}
+\begin{minipage}{.6\linewidth}
+\begin{lstlisting}
+if x == 2 then ...
+elseif ... then ...
+else ...
+end
+\end{lstlisting}
+\end{minipage}
+\end{center}
 
 \vfill
 \begin{center}  Academiejaar 2013--2014 \end{center}

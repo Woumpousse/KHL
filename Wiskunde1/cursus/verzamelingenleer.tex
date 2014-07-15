@@ -435,18 +435,33 @@ Als alle verzamelingen $A_1$, \dots, $A_n$ gelijk zijn, schrijven we het product
 Stel dat $A=\{\mathrm{a}, \mathrm{b},\dots,\mathrm{z}\}$, dan is $A^5$ de verzameling van alle `woorden' (strings) die bestaan uit exact vijf kleine letters a--z.
 
 \section{Samenvatting}
-\paragraph{Operatoren}
 \begin{center}
-  \begin{longtable}{clp{7cm}}
+  \begin{tabular}{clp{7cm}}
+    $\emptyset$ & lege verzameling & \\[2mm]
     $X \subset Y$ & deelverzameling & Elk element van $X$ is ook een element van $Y$ \\[2mm]
     $X \union Y$ & unie & $X \union Y = \{ x \;|\; x \in X \text{ of } x \in Y \}$ \\[2mm]
     $X \intersect Y$ & doorsnede & $X \intersect Y = \{ x \;|\; x \in X \text{ en } x \in Y \}$ \\[2mm]
     $X - Y$ & verschil & $X - Y = \{ x \;|\; x \in X \text{ en } x \notin Y \}$ \\[2mm]
+    $X \times Y$ & product & $X \times Y = \{ (x, y) \;|\; x \in X \text{ en } y \in Y \}$ \\[2mm]
     $X^c$ & complement & $X^c = \{ x \;|\; x \in U \text{ en } x \notin X \}$ \\
-  \end{longtable}
+  \end{tabular}
 \end{center}
  
-\paragraph{Rekenregels}
+\[
+  \begin{array}{rclcl}
+    X \union (Y \union Z) &=& (X \union Y) \union Z &=& X \union Y \union Z \\
+    X \intersect (Y \intersect Z) &=& (X \intersect Y) \intersect Z &=& X \intersect Y \intersect Z \\[2mm]
+    X \union Y &=& \multicolumn{3}{l}{Y \union X} \\
+    X \intersect Y &=& \multicolumn{3}{l}{Y \intersect X} \\[2mm]
+    X \union (Y \intersect Z) &=& \multicolumn{3}{l}{(X \union Y) \intersect (X \union Z)} \\
+    X \intersect (Y \union Z) &=& \multicolumn{3}{l}{(X \intersect Y) \union (X \intersect Z)} \\[2mm]
+    (X \union Y)^c &=& \multicolumn{3}{l}{X^c \intersect Y^c} \\
+    (X \intersect Y)^c &=& \multicolumn{3}{l}{X^c \union Y^c} \\[2mm]
+    A \union \emptyset &=& \multicolumn{3}{l}{A} \\
+    A \intersect \emptyset &=& \multicolumn{3}{l}{\emptyset} \\
+    A - \emptyset &=& \multicolumn{3}{l}{A} \\
+  \end{array}
+\]
 
 \input{oefeningen/oefverzamelingenleer} 
 
