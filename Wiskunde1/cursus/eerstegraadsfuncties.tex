@@ -450,6 +450,23 @@ P(x)= 1,66\cdot \mathtt{floor}(x+1)+4,40
 \end{equation}
 De functie $\mathtt{floor}(x)$ is het grootste geheel getal niet groter dan $x$. We gebruiken hier de notatie van Scilab (en veel andere programmeertalen). In wiskunde noteert men deze \verb+floor+-functie als $\lfloor x \rfloor$.
 
+\section{Samenvatting}
+\begin{center}
+  \begin{tikzpicture}
+    \draw[gray,ultra thin] (-1.1,-1.1) grid (5.1,5.1);
+    \draw[->] (-1.1,0) -- (5.1,0);
+    \draw[->] (0,-1.1) -- (0,5.1);
+
+    \draw[thick] (-1,0) -- (5,3) node [above,very near end,sloped] {$\scriptstyle mx+q$};
+
+    \draw[thin,dashed] (1,1) -- (2,1) -- (2,1.5);
+    \draw[<->,thin,yshift=-1mm] (1,1) -- (2,1) node [below,midway] {$\scriptstyle 1$};
+    \draw[<->,thin,xshift=1mm] (2,1) -- (2,1.5) node [right,midway] {$\scriptstyle m$};
+    \draw[<->,thin,xshift=1mm] (0,0) -- (0,0.5) node [right,midway] {$\scriptstyle q$};
+  \end{tikzpicture}
+\end{center}
+
+
 \input{oefeningen/oefeerstegraadsfuncties}
 
 %%% Local Variables: 
