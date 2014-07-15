@@ -1,82 +1,84 @@
 \documentclass[10pt]{article}
+\usepackage{a4wide}
+\usepackage{multicol}
+\usepackage{palatino}
+\usepackage{mathpazo}
+
+
 \input kvmacros
+
 \newcommand{\en}{\wedge}
 \newcommand{\of}{\vee}
 \newcommand{\niet}{\neg}
 \newcommand{\alsdan}{\rightarrow}
 \newcommand{\asa}{\leftrightarrow}
 
-
-\textwidth16.cm%\oddsidemargin-.cm 
-%\textheight23.cm
-%\topmargin-.cm
 \newcommand{\mysection}[1]{\vspace{1.em} \noindent {\bf {\large #1}}}
-\newcommand{\im}[1]{\begin{itemize} #1 \end{itemize}}
 \newcommand{\mym}[1]{${\displaystyle #1}$}
+\newcommand{\di}{\displaystyle}
 \newcommand{\D}{{\rm D}}
 
-\usepackage{multicol}
-\usepackage{palatino}
-\usepackage{mathpazo}
-
-\begin{document}
 \renewcommand{\arraystretch}{1.5} % extra verticale ruimte in tabellen
 
 \pagestyle{empty}
+
+
+\begin{document}
+
 \noindent
 {\bf {\huge Formularium Wiskunde}}
 
 \vspace{1.5em}
 
-%\begin{multicols}{1}
 \mysection{Nulpunten kwadratische functie} \\
 
-\noindent
-{\bf Voorschrift:} \mym{ y(x)=ax^2+bx+c}\\ \\
-{\bf Nulpunten:} \mym{x_{1,2}=\frac{-b\pm \sqrt{b^2-4ac}}{2a}}
-\\
+\begin{center}
+  \begin{tabular}{rc}
+    \bf Voorschrift & $y(x)=ax^2+bx+c$ \\[2mm]
+    \bf Nulpunten & $\di x_{1,2}=\frac{-b\pm \sqrt{b^2-4ac}}{2a}$ \\
+  \end{tabular}
+\end{center}
+
 
 \mysection{Exponenti\"ele \& logaritmische functies} \\
 
-\begin{tabular}{l}
-\noindent \mym{\log_g(x)=y\Leftrightarrow g^y=x} \\
-\end{tabular}\\
+\[
+  \log_g(x)=y\Leftrightarrow g^y=x
+\]
 
 \noindent {\bf Rekenregels}
+\[
+  \begin{array}{r@{\;=\;}l}
+    g^{x+y}              & g^x\cdot g^y \\[2mm]
+    \left(g^x\right)^y  & \left(g^y\right)^x=g^{x\cdot y} \\[2mm]
+    g^{-x}               & \di \frac1{g^x} \\[2mm]
+    \log_g(x \cdot y)   & \log_g(x)+\log_g(y) \\[2mm]
+    \log_g(x^y)          & y \cdot \log_g(x) \\[2mm]
+    \di \log_g\left(\frac1x\right) & -\log_g(x)
+  \end{array}
+\]
 
-\begin{tabular}{l}
-\mym{g^{x+y}=g^x\cdot g^y}\\
-\mym{\left(g^x\right)^y=\left(g^y\right)^x=g^{x\cdot y}}\\
-\mym{g^{-x}=\frac1{g^x}}\\
-\mym{\log_g(x\cdot y)=\log_g(x)+\log_g(y)}\\
- \mym{\log_g(x^y)=y\log_g(x)}\\
-\mym{\log_g\left(\frac1x\right)=-\log_g(x)}
-\end{tabular}\\
 
 \mysection{Meetkunde} \\
+\begin{center}
+  \begin{tabular}{rc}
+    \bf Omtrek cirkel & $2 \pi R$ \\[2mm]
+    \bf Oppervlakte cirkel & $\pi R^2$ \\
+  \end{tabular}
+\end{center}
 
-\noindent
-\textbf{Omtrek cirkel:} $2\cdot \pi R$\\
-\textbf{Oppervlakte cirkel: } $\pi R^2$
-\\
 
 \mysection{Propositielogica}\\
 
-\begin{tabular}{cc}
-en & $\en$ \\  
-of & $\of$ \\ 
-niet & $\niet$ \\ 
-\end{tabular} 
+\begin{center}
+  \begin{tabular}{cc}
+  \sc en & $\en$ \\  
+  \sc of & $\of$ \\ 
+  \sc niet & $\niet$ \\ 
+  \end{tabular} 
+\end{center}
 
-
-
-
-%\end{multicols}
-
-\newpage
-%\topmargin-1.cm
-%\textheight29.cm
-
+\clearpage
 
 \noindent
 {\bf {\huge Formularium Scilab}}
@@ -84,29 +86,38 @@ niet & $\niet$ \\
 \vspace{0.5em}
 
 \begin{multicols}{2}
-\mysection{Rekenen in Scilab}\\
-
-\begin{tabular}{p{4.cm}l} Vierkantswortel: & \verb/sqrt(x)/\\ Macht: &
-\verb/x^y/\\ Absolute waarde: & \verb/abs(x)/\\ $\ln(x)$&\verb/log(x)/\\
-\mym{e^x}&\verb/exp(x)/\\ $\pi$&\verb/%pi/ \\
-$true,~false$&\verb/%T, %F/
-\end{tabular}
-
-\mysection{Logische operatoren}\\
-
-\begin{tabular}{|c|c|}
-\hline
-
-{\sc en, of} & \verb/*, + / of \verb/ &, |/ \\ \hline
-
-$\neq,~=$ & \verb/~=, ==/ \\ \hline
-
-$<,~>,~\leq$    & \verb/<, >, <=/ \\ \hline
-
-\end{tabular}
-
-
+\begin{center}
+  \begin{tabular}{p{4.cm}l}
+    \multicolumn{2}{c}{\large\bfseries Rekenen in Scilab} \\
+    Vierkantswortel & \verb'sqrt(x)' \\
+    Macht & \verb'x^y' \\ Absolute waarde & \verb'abs(x)' \\
+    $\ln(x)$ & \verb'log(x)' \\
+    \mym{e^x} &\verb'exp(x)' \\
+    $\pi$ & \verb'%pi' \\
+    $\mathit{true}, \mathit{false}$ & \verb'%T, %F'
+  \end{tabular}
+\end{center}
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \multicolumn{2}{c}{\large\bfseries Logische operatoren} \\
+    \hline
+    {\sc en} & \verb'&' \\
+    \hline
+    {\sc of} & \verb'|' \\
+    \hline
+    $=$ & \verb'==' \\
+    \hline
+    $\neq$ & \verb'~=' \\
+    \hline
+    $\leq$ & \verb'<=' \\
+    \hline
+    $\geq$ & \verb'>=' \\ 
+    \hline
+  \end{tabular}
+\end{center}
 \end{multicols}
+
+
 \mysection{Vectoren}\\
 
 \begin{tabular}{|p{7.3cm}|p{5.5cm}|}
@@ -143,7 +154,7 @@ Lussen & \verb/for y=1:x ... end/ of \verb/while y<x ... end/ \\
 Voorwaardelijk statement & \verb/if x==2 ... elseif ... else ... end/ \\
 \end{tabular}\\
 
-%\vfill
+\vfill
 \begin{center}  Academiejaar 2013--2014 \end{center}
 
 %\end{multicols}
