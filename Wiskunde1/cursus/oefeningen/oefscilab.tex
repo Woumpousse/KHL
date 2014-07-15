@@ -244,7 +244,7 @@ Indien $n$ geen kwadraat is van een geheel getal, toont de functie een foutboods
 \begin{oef}
 Schrijf de functie \func{aantal(K,r,T)}, die volgend probleem oplost:
 \begin{quote}
-  Er staat nu \euro $K$  op een rekening met  rente $r$  per periode.
+Er staat nu \euro $K$  op een rekening met  rente $r$  per periode.
 Elke periode wordt er \euro ${T}$ van de  rekening afgehaald. 
 Na 1 periode haal je voor de eerste keer \euro ${T}$ af.
 \begin{enumerate}
@@ -254,6 +254,24 @@ Na 1 periode haal je voor de eerste keer \euro ${T}$ af.
           de laatste $T$ af te halen.
 \end{enumerate}  
 \end{quote}
+\begin{opl}E\'en van de vele mogelijke oplossingen:
+\begin{lstlisting}
+function K = intrest(K, r)
+    K = K * (1 + r/100)
+endfunction
+
+function [n,K] = aantal(K, r, T)
+    n = 0
+    K2 = intrest(K, r) - T
+    
+    while K2 >= 0,
+        K = K2
+        K2 = intrest(K, r) - T
+        n = n + 1
+    end
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 \begin{oef}
