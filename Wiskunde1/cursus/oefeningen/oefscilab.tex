@@ -254,7 +254,7 @@ Na 1 periode haal je voor de eerste keer \euro ${T}$ af.
           de laatste $T$ af te halen.
 \end{enumerate}  
 \end{quote}
-\begin{opl}E\'en van de vele mogelijke oplossingen:
+\begin{opl}
 \begin{lstlisting}
 function K = intrest(K, r)
     K = K * (1 + r/100)
@@ -281,30 +281,109 @@ een geheel getal opgevraagd (gebruik het commando \emph{a=input(`  \ldots')}):
 indien dit getal positief is geef je  het element van de vector de waarde 1, 
 indien het getal negatief is dan wordt het element van de vector gelijk aan -1.
 De vector eindigt als de opgevraagde input =0.
+\begin{opl}
+\begin{lstlisting}
+function R = posnegvector(n)
+    R = []
+    x = 1
+    k = 0
+    while k < n & x <> 0,
+        x = input('Geef getal in: ')
+        if x < 0 then
+            x = -1
+        end
+        
+        if x <> 0 then
+          R = [R, x]
+          k = k + 1
+        end
+    end
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
+
 \begin{oef}
 Definieer de samengestelde functie \func{g(x)} met
     als voorschrift:
 $g(x)=2*x-3$ als $x<2$ en $g(x)=(x-3)+2$ als $x>=2$. 
 Teken die functie op het
 interval $[-5,5]$.
+\begin{opl}
+\begin{lstlisting}
+function y = g(x)
+    if x < 2 then
+        y = 2*x-3
+    else
+        y = x-3+2
+    end
+endfunction
+
+plot(-5:5, g)
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 \begin{oef}
-    Schrijf de functie \func{zoekdelers(x,v),} met $x$ een 
-    geheel getal kleiner dan  $10000$, en $V$, een vector met een 
-    aantal priemgetallen. De output van de functie is een nieuwe 
-    vector $W$ die alleen die priemgetallen uit $V$ bevat die deler 
-    zijn van $x$.\\
-    \textbf{Uitbreiding} De output is nu een matrix met 2 rijen. De 
-    eerste rij is de vector $W$ zoals hierboven vermeld. De tweede 
-    rij geeft voor elke priemdeler uit $W$ aan, hoe dikwijls die voorkomt in 
-    de ontbinding van $x$.
-    \end{oef}
+Schrijf de functie \func{zoekdelers(x,v),} met $x$ een 
+geheel getal kleiner dan  $10000$, en $V$, een vector met een 
+aantal priemgetallen. De output van de functie is een nieuwe 
+vector $W$ die alleen die priemgetallen uit $V$ bevat die deler 
+zijn van $x$.\\
+\textbf{Uitbreiding} De output is nu een matrix met 2 rijen. De 
+eerste rij is de vector $W$ zoals hierboven vermeld. De tweede 
+rij geeft voor elke priemdeler uit $W$ aan, hoe dikwijls die voorkomt in 
+de ontbinding van $x$.
+\begin{opl}
+\begin{lstlisting}
+function [x, m] = multipliciteit(x, k)
+    m = 0
+    
+    while modulo(x, k) == 0,
+        x = x / k
+        m = m + 1
+    end
+endfunction
+
+function [ps, ms] = zoekdelers(x, v)
+    ps = []
+    ms = []    
+    
+    for p = v
+        [x, m] = multipliciteit(x, p)
+        
+        if m > 0 then
+            ps = [ ps, p ]
+            ms = [ ms, m ]
+        end
+    end
+endfunction
+\end{lstlisting}
+\end{opl}
+\end{oef}
+
+
 \begin{oef}
 Het algoritme van Euclides dient  om de grootste gemene delers van 2 gehele getallen
 te vinden. Zoek het algoritme op op internet. Schrijf nu de functie 
 \func{ggd(D,d)} die dit algoritme toepast en als output de grootste gemene deler van de gehele getallen \verb+D+ en \verb+d+ weergeeft.
+
+\begin{opl}
+\begin{lstlisting}
+function [y, x] = swap(x, y)
+endfunction
+
+function r = ggd(D,d)
+    while d <> 0
+        D = modulo(D, d)
+        [D, d] = swap(D, d)
+    end
+    
+    r = D
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 \begin{oef}
@@ -313,6 +392,20 @@ waarbij de elementen van $V$ in omgekeerde volgorde voorkomen.\\
 \textbf{Uitbreiding  \func{reverse(V,n})}. De elementen van $V$ 
 moeten niet alleen in omgekeerde volgorde voorkomen maar elk element 
 moet $n$ keren herhaald worden.
+
+\begin{opl}
+\begin{lstlisting}
+function W = reverse(V, n)
+    W = []
+    
+    for x = V
+        for k = 1:n
+            W = [x, W]
+        end
+    end
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 \begin{oef}
@@ -329,34 +422,148 @@ genereren. Input is de integer \verb+n+. Als \verb+n+ geen kwadraat is, genereer
 
 \begin{oef}
 Kerstmis 2003 kochten we een kerstboom van \SI{1}{\meter}. Nadien plantten we hem in de tuin. Hij groeit jaarlijks \SI{30}{\centi\meter}. Met Kerstmis zetten we hem elk jaar weer binnen. Onze living is \SI{2,30}{\meter} hoog. Tot welk jaar kunnen wij onze kerstboom gebruiken zonder er een stukje af te moeten snijden? Schrijf de functie \verb/y=kerstboom()/ die volgende boodschap doet verschijnen op het scherm: ``Met kerstmis in het jaar y zult u een nieuwe kerstboom moeten kopen.'' Vervang \verb/y/ door het berekende jaartal.
+\begin{opl}
+\begin{lstlisting}
+function y = kerstboom()
+    y = 2003
+    lengte = 1
+    
+    while lengte <= 2.30,
+        y = y + 1
+        lengte = lengte + 0.3
+    end
+    
+    printf("Met kerstmis in het jaar %d zult u " +
+           "een nieuwe kerstboom moeten kopen.", y)
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 
+\begin{oef}
+\begin{itemize}
+  \item Schrijf de functie \verb/EuroNaarEurocent(V)/. Input is de vector \verb/V/ met twee elementen (aantal euro, aantal eurocent). Output is het totaal aantal eurocent.
+  \item Schrijf de functie \verb/EurocentNaarEuro(x)/ die het omgekeerde doet van de vorige functie.
+  \item Schrijf de functie \verb/GeefTerug(V,W)/. Input is het bedrag dat overhandigd werd, genoteerd door de vector \verb/V/ (euros en eurocenten), en het bedrag dat moet betaald worden, eveneens als vector.
+\end{itemize}
+\begin{opl}
+\begin{lstlisting}
+function R = EuroNaarEurocent(V)
+    R = V(1) * 100 + V(2)
+endfunction
+
+function R = EurocentNaarEuro(x)
+    R = [ floor(x / 100), modulo(x, 100) ]
+endfunction
+
+function R = GeefTerug(V,W)
+    x = EuroNaarEurocent(V)
+    y = EuroNaarEurocent(W)
+    R = EurocentNaarEuro(x - y)
+endfunction
+\end{lstlisting}
+\end{opl}
+\end{oef}
 
 \begin{oef}
-Schrjif de functie \verb/EuroNaarEurocent(V)/. Input is de vector \verb/V/ met twee elementen (aantal euro, aantal eurocent). Output is het totaal aantal eurocent.
+Schrijf de functie \verb/MaxSom(V)/. Input is de vector \verb/V/. Output is de positie van de grootste som
+van 3 opeenvolgende elementen (begin- en eindindex) \'en de waarde van die som. Test de functie ook met negatieve getallen!
+\begin{opl}
+\begin{lstlisting}
+function [maxFrom,maxTo,maxSum] = MaxSom(V)
+    maxFrom = 1
+    maxSum = sum(V(1:3))
+    s = maxSum
+    [h, w] = size(V)
+
+    for i = 2:w-2
+        s = s - V(i-1) + V(i+2)
+        
+        if s > maxSum then
+            maxSum = s
+            maxFrom = i
+        end
+    end
+ 
+    maxTo = maxFrom + 2   
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
-Schrijf de functie \verb/EurocentNaarEuro(x)/ die het omgekeerde doet van de vorige functie.
-\item Schrijf de functie \verb/GeefTerug(V,W)/. Input is het bedrag dat overhandigd werd, genoteerd door de vector \verb/V/ (euros en eurocenten), en het bedrag dat moet betaald worden, eveneens als vector.
+\begin{itemize}
+  \item Schrijf de functie \verb/gemiddelde(V)/: output is het gemiddelde van de vector \verb/V/.
+  \item Schrijf de functie \verb/aantalElementenGroterDanGemiddelde(V)/: input vector \verb/V/, output aantal elementen van \verb/V/ die groter zijn dan het gemiddelde van de elementen van \verb/V/.
+  \item Schrijf de functie \verb/elementenGroterDanGemiddelde(V)/. Output is de vector \verb/W/ die alle elementen bevat die groter zijn dan het gemiddelde van \verb/V/. Breid daarna uit naar een matrix.
+\end{itemize}
+\begin{opl}
+\begin{lstlisting}
+function R = gemiddelde(M)
+    [h, w] = size(M)
+    
+    R = sum(M) / (h*w)
+endfunction
+
+function n = aantalElementenGroterDanGemiddelde(V)
+    g = gemiddelde(V)
+    n = 0
+    
+    for col = V
+        for x = col'
+            if x > g then
+                n = n + 1
+            end
+        end
+    end
+endfunction
+
+function R = elementenGroterDanGemiddelde(M)
+    g = gemiddelde(M)
+    R = []
+    
+    for col = M
+        for x = col'
+            if x > g then
+                R = [R, x]
+            end
+        end
+    end
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
+
 \begin{oef}
-Schrijf de functie \verb/MaxSom(V)/. Input is de vector \verb/V/. Output is de positie van de grootste som van 3 opeenvolgende elementen (begin- en eindindex) én de waarde van die som. Test de functie ook met negatieve getallen!
-\end{oef}
-\begin{oef}
-Schrijf de functie \verb/gemiddelde(V)/: output is het gemiddelde van de vector \verb/V/.
-\end{oef}
-\begin{oef}
-Schrijf de functie \verb/aantalElementenGroterDanGemiddelde(V)/: input vector \verb/V/, output aantal elementen van \verb/V/ die groter zijn dan het gemiddelde van de elementen van \verb/V/.
-\end{oef}
-\begin{oef}
-Schrijf de functie \verb/ElementenGroterDanGemiddelde(V)/. Output is de vector \verb/W/ die alle elementen bevat die groter zijn dan het gemiddelde van \verb/V/. Breid daarna uit naar een matrix.
-\end{oef}
-\begin{oef}
-Schrijf de functie \verb/equals(V,W)/ die controleert of de vectoren \verb/V/ en \verb/W/ gelijk zijn aan mekaar.
-\end{oef}
-\begin{oef}
-Schrijf de functie \verb/equalsMatrix(M,N)/ die controleert of de matrices \verb/M/ en \verb/N/ gelijk zijn aan mekaar.
+\begin{itemize}
+  \item Schrijf de functie \verb/equals(V,W)/ die controleert of de vectoren \verb/V/ en \verb/W/ gelijk zijn aan mekaar.
+  \item Schrijf de functie \verb/equalsMatrix(M,N)/ die controleert of de matrices \verb/M/ en \verb/N/ gelijk zijn aan mekaar.
+\end{itemize}
+\begin{opl}
+\begin{lstlisting}
+function R = equalsMatrix(M, N)
+    [h,w] = size(M)
+    [h2,w2] = size(N)
+    
+    if w <> w2 | h <> h2 then
+        R = %f
+    else
+        R = %t
+        
+        for i = 1:h
+            for j = 1:w
+                R = R & M(i,j) == N(i,j)
+            end
+        end
+    end
+endfunction
+
+function R = equals(V, W)
+    equalsMatrix(V,W)
+endfunction
+\end{lstlisting}
+\end{opl}
 \end{oef}
 
 
