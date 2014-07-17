@@ -453,9 +453,9 @@ De functie $\mathtt{floor}(x)$ is het grootste geheel getal niet groter dan $x$.
 \section{Samenvatting}
 \begin{center}
   \begin{tikzpicture}
-    \draw[gray,ultra thin] (-1.1,-1.1) grid (5.1,5.1);
-    \draw[->] (-1.1,0) -- (5.1,0);
-    \draw[->] (0,-1.1) -- (0,5.1);
+    \draw[gray,ultra thin] (-.9,-.9) grid (4.9,4.9);
+    \draw[->] (-1.1,0) -- (5.1,0) node [pos=1,above] {$X$};
+    \draw[->] (0,-1.1) -- (0,5.1) node [pos=1,right] {$Y$};
 
     \draw[thick] (-1,0) -- (5,3) node [above,very near end,sloped] {$\scriptstyle mx+q$};
 
@@ -465,7 +465,20 @@ De functie $\mathtt{floor}(x)$ is het grootste geheel getal niet groter dan $x$.
     \draw[<->,thin,xshift=1mm] (0,0) -- (0,0.5) node [right,midway] {$\scriptstyle q$};
   \end{tikzpicture}
 \end{center}
-
+Gegeven de eerstegraadsfunctie
+\[
+  f(x) = mx+q
+\]
+\begin{itemize}
+  \item $m$ is de richtingsco\"effici\"ent:
+        \[
+          f(x+1) - f(x) = m
+        \]
+  \item $q$ is waar de rechte beschreven door $f(x)$ de $Y$-as snijdt:
+        \[
+          f(0) = q
+        \]
+\end{itemize}
 
 \input{oefeningen/oefeerstegraadsfuncties}
 
