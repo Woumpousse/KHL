@@ -1,0 +1,100 @@
+%\documentclass[a4paper]{khltoets}
+\documentclass[a4paper,solution]{khltoets}
+
+
+\begin{document}
+
+\HEADER{\large Beginselen van Objectgericht Programmeren}{Test 1}{6}
+
+\BEGINASSIGNMENT
+\textbf{Belangrijk}: deze opgave bevat uit meerdere delen.
+Lees per blad eerst de \emph{volledige} opgave voordat je begint aan je ant\-woord.
+Soms wordt immers slechts een vereenvoudigde implementatie gevraagd en staan  de details pas vermeld op het einde.
+De enige toegelaten container is de array, je mag dus
+geen {\tt ArrayList}s gebruiken noch andere containerklassen.
+\vskip4mm
+Een persoon heeft de volgende kenmerken:
+\begin{itemize}
+  \item Een persoon heeft een voornaam.
+  \item Een persoon heeft een familienaam.
+\end{itemize}
+Schrijf een klasse {\tt Person} die de volgende functionaliteit aanbiedt:
+\begin{itemize}
+  \item We moeten {\tt Person}-objecten kunnen aanmaken.
+        Bij aanmaak van een {\tt Person}-object moeten zowel voor- als familienaam
+        gegeven worden. Indien \'e\'en van beide (of beide) {\tt null} is,
+        moet er een fout gemeld worden: dit gebeurt met {\tt abort();}.
+  \item Schrijf de nodige getters en setters om de voor- en familienaam
+        op te vragen en te wijzigen. Bij wijzigen moet er gecheckt worden
+        dat de nieuwe gegevens geldig zijn (d.i.\ niet {\tt null}).
+\end{itemize}
+\ENDASSIGNMENT
+
+\BEGINSOLUTION
+\INLINECODE[basicstyle=\small]{Person.java}
+\ENDSOLUTION
+
+
+\BEGINASSIGNMENT
+Een film heeft de volgende kenmerken:
+\begin{itemize}
+  \item Een film heeft een titel.
+  \item Een film heeft een regisseur.
+  \item In een film spelen acteurs mee.
+  \item Een film kan een sequel zijn op een andere film.
+  \item Een film is gelijkaardig aan andere films.
+\end{itemize}
+Schrijf de klasse {\tt Movie} die de volgende functionaliteit aanbiedt:
+\begin{itemize}
+  \item Een eerste constructor heeft als parameters de titel en de regisseur. Voor de andere
+        waarden worden dan redelijke standaardwaarden ingevuld.
+  \item Een tweede constructor heeft als parameters de titel, de regisseur en de voorloper van de film.
+        Voor de andere waarden worden dan redelijke standaardwaarden ingevuld.
+  \item Een derde constructor heeft per veld een overeenkomstige parameter.
+  \item Schrijf een methode {\tt addSimilarMovie} die een {\tt Movie} object verwacht:
+        \begin{center} \tt public void addSimilarMovie(Movie movie) \{ ... \} \end{center}
+        Een methodeoproep {\tt m1.addSimilarMovie(m2)} doet twee dingen:
+        \begin{itemize}
+          \item {\tt m2} wordt toegevoegd aan de lijst van gelijkaardige films van {\tt m1};
+          \item {\tt m1} wordt toegevoegd aan de lijst van gelijkaardige films van {\tt m2}.
+        \end{itemize}
+        Met andere woorden, indien een film X gelijkaardig is aan een film Y, moet
+        film Y ook gelijkaardig zijn aan film X.
+  \item Schrijf de methodeheader (dus niet het stuk tussen accolades) op voor een {\tt addActor} methode die een acteur
+        toevoegt aan de lijst acteurs.
+\end{itemize}
+Voor deze klasse hoef je de argumenten niet te checken op geldigheid. Vergeet niet dat je gebruik kunt maken van de klasse
+{\tt Person} uit het vorige deel van deze vraag.
+\ENDASSIGNMENT
+
+\BEGINSOLUTION
+\INLINECODE[basicstyle=\small]{Movie.java}
+\ENDSOLUTION
+
+
+\clearpage
+
+\BEGINASSIGNMENT
+Je krijgt de volgende extra code:
+\INLINECODE[basicstyle=\small]{code.java}
+Teken een klassendiagramma voor {\tt Person}, {\tt Movie}, {\tt Media} en {\tt MovieCollection}.
+\ENDASSIGNMENT
+
+
+\BEGINASSIGNMENT
+Sergio Leone is mijn favoriete regisseur. Hij maakte o.a.\ de Dollars Trilogy, bestaande uit de films
+``A Fistful of Dollars'', ``For a Few Dollars More'' en ``The Good, the Bad and the Ugly''.
+Clint Eastwood is de hoofdrolspeler in de drie films. Lee Van Cleef speelt
+in de tweede en derde film, terwijl Eli Wallach enkel in de laatste een rol heeft.
+De drie films heb ik op DVD. The Good, the Bad and the Ugly heb ik ook op BluRay.
+
+Schrijf de code op die de nodige klassen instantieert en methodes oproept om deze
+informatie te modelleren in Java. Maak ook een UML objectdiagramma.
+\ENDASSIGNMENT
+
+\BEGINSOLUTION
+\INLINECODE[basicstyle=\small]{modelling.java}
+\ENDSOLUTION
+
+
+\end{document}
