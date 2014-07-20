@@ -78,16 +78,17 @@ We gebruiken de letters $p, q, r, \ldots$ voor de uitspraken en geven ze de naam
 \begin{table}[htb]
   \centering
   \caption{De vijf belangrijkste voegwoorden}\label{tbl:voegwoorden}
-\begin{tabular}{ccc}
-\toprule
- symbool  & betekenis & benaming \\ \midrule
-  $\en$ & en & conjunctie\index{conjunctie} \\
-   $\of$ & of & disjunctie\index{disjunctie} \\
-   $\niet$ & niet & negatie\index{negatie} \\
-   $\alsdan$ & als \ldots\ dan & implicatie\index{implicatie} \\
-   $\asa$ & als en slechts als & equivalentie\index{equivalentie} \\
-\bottomrule
-\end{tabular}
+  \begin{tabular}{ccc}
+  \toprule
+   symbool  & betekenis & benaming \\
+   \midrule
+    $\en$ & en & conjunctie\index{conjunctie} \\
+     $\of$ & of & disjunctie\index{disjunctie} \\
+     $\niet$ & niet & negatie\index{negatie} \\
+     $\alsdan$ & als \ldots\ dan & implicatie\index{implicatie} \\
+     $\asa$ & als en slechts als & equivalentie\index{equivalentie} \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
 \subsection{Formule}
@@ -130,16 +131,16 @@ We defini\"{e}ren de waarheidswaarde van de 5 voegwoorden via de waarheidstabel 
 \begin{table}[htb]
   \centering
   \caption{Waarheidswaarde van samengestelde uitspraken}\label{tbl:waarheidvoegwoorden}
-\begin{tabular}{ccccccc}
-\toprule
- $p$  & $q$ & $\niet p$ & $p \en q$ & $p \of q$ & $p \alsdan q$ & $p \asa q$ \\
-\midrule
-  0 & 0 & & 0 & 0 & 1 & 1\\
-  0 & 1 & 1 & 0 & 1 & 1 & 0\\
-  1 & 0 & 0 & 0 & 1 & 0 & 0\\
-  1 & 1 &  & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
+  \begin{tabular}{ccccccc}
+    \toprule
+     $p$  & $q$ & $\niet p$ & $p \en q$ & $p \of q$ & $p \alsdan q$ & $p \asa q$ \\
+    \midrule
+      0 & 0 & & 0 & 0 & 1 & 1\\
+      0 & 1 & 1 & 0 & 1 & 1 & 0\\
+      1 & 0 & 0 & 0 & 1 & 0 & 0\\
+      1 & 1 &  & 1 & 1 & 1 & 1\\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
 \subsection{Oefening}
@@ -194,21 +195,20 @@ In \cref{tautologie} geven we een overzicht van enkele belangrijke tautologieën
 
 \begin{table}[htb]
 \centering
-\begin{tabular}{|ll|}
-\hline
-$(p \of q)\asa (q\of p)$ & commutativiteit  \\
-$(p \en q)\asa (q\en p)$ & commutativiteit\\
-$\left[\left(p\of q\right)\of r\right]\asa\left[p\of\left(q\of r\right)\right]$ &associativiteit \\
-$\left[\left(p\en q\right)\en r\right]\asa\left[p\en\left(q\en r\right)\right]$& \\
-$\left[  p\en(q\of r) \right]\asa\left[ (p\en q)\of(p\en r) \right] $& distributiviteit \\
-$\left[  p\of(q\en r) \right]\asa\left[ (p\of q)\en(p\of r) \right] $& \\
-$\niet \niet p \asa p$ & dubbele ontkenning \\
-$ \niet (p \of q) \asa (\niet p \en \niet q) $ & wetten van De Morgan \\
-$ \niet (p \en q) \asa (\niet p \of \niet q) $ & \\
-$ (p\alsdan q) \asa (\niet p \of q) $ & uitdrukking van pijl in $\niet,~\of$ \\
-$(p \alsdan q) \asa (\niet q \alsdan \niet p)$ & contrapositie \\
-
-\hline
+\begin{tabular}{|r@{\ensuremath{\;\asa\;}}ll|}
+  \hline
+  $(p \of q)$ & $(q\of p)$ & commutativiteit \\
+  $(p \en q)$ & $(q\en p)$ & commutativiteit \\
+  $\left[\left(p\of q\right)\of r\right]$ & $\left[p\of\left(q\of r\right)\right]$ & associativiteit \\
+  $\left[\left(p\en q\right)\en r\right]$ & $\left[p\en\left(q\en r\right)\right]$& \\
+  $\left[ p\en(q\of r) \right]$ & $\left[ (p\en q)\of(p\en r) \right] $ & distributiviteit \\
+  $\left[ p\of(q\en r) \right]$ & $\left[ (p\of q)\en(p\of r) \right]$ & \\
+  $\niet \niet p$ & $p$ & dubbele ontkenning \\
+  $ \niet (p \of q)$ & $(\niet p \en \niet q)$ & wetten van De Morgan \\
+  $ \niet (p \en q)$ & $(\niet p \of \niet q)$ & \\
+  $ (p\alsdan q)$ & $(\niet p \of q)$ & uitdrukking van pijl in $\niet,~\of$ \\
+  $(p \alsdan q)$ & $(\niet q \alsdan \niet p)$ & contrapositie \\
+  \hline
 \end{tabular}
 \caption{Enkele belangrijke tautologieën}
 \label{tautologie}
@@ -376,6 +376,53 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+
+\section{Samenvatting}
+\begin{center}
+  \begin{tabular}{ccc}
+  \toprule
+   symbool  & betekenis & benaming \\
+   \midrule
+    $\en$ & en & conjunctie\index{conjunctie} \\
+     $\of$ & of & disjunctie\index{disjunctie} \\
+     $\niet$ & niet & negatie\index{negatie} \\
+     $\alsdan$ & als \ldots\ dan & implicatie\index{implicatie} \\
+     $\asa$ & als en slechts als & equivalentie\index{equivalentie} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{ccccccc}
+    \toprule
+     $p$  & $q$ & $\niet p$ & $p \en q$ & $p \of q$ & $p \alsdan q$ & $p \asa q$ \\
+    \midrule
+      0 & 0 & & 0 & 0 & 1 & 1\\
+      0 & 1 & 1 & 0 & 1 & 1 & 0\\
+      1 & 0 & 0 & 0 & 1 & 0 & 0\\
+      1 & 1 &  & 1 & 1 & 1 & 1\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\[
+  \begin{array}{r@{\quad\asa\quad}l}
+    \toprule
+    (p \of q) & (q\of p) \\
+    (p \en q) & (q\en p) \\
+    \left[\left(p\of q\right)\of r\right] & \left[p\of\left(q\of r\right)\right] \\
+    \left[\left(p\en q\right)\en r\right] & \left[p\en\left(q\en r\right)\right] \\
+    \left[ p\en(q\of r) \right] & \left[ (p\en q)\of(p\en r) \right] \\
+    \left[ p\of(q\en r) \right] & \left[ (p\of q)\en(p\of r) \right] \\
+    \niet \niet p & p \\
+    \niet (p \of q) & (\niet p \en \niet q) \\
+    \niet (p \en q) & (\niet p \of \niet q) \\
+    (p\alsdan q) & (\niet p \of q) \\
+    (p \alsdan q) & (\niet q \alsdan \niet p) \\
+    \bottomrule
+  \end{array}
+\]
 
 
 \input{oefeningen/oeflogica}
