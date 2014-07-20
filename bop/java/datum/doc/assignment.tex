@@ -1,0 +1,32 @@
+\documentclass[a4paper]{article}
+\usepackage{listings}
+
+\lstdefinelanguage{MyJava}[]{java}{
+  escapechar=@,%
+  basicstyle={\ttfamily},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+}
+
+\newcommand{\codefigure}[5][]{\begin{figure}[#5]\lstinputlisting[language=MyJava,caption=#3,label=#4,#1]{#2}\end{figure}}
+
+
+\begin{document}
+\section{Opgave}
+\begin{itemize}
+  \item Maak een nieuw project aan, genaamd {\tt Datum}.
+  \item Importeer het bestand {\tt DateTests.java} door het vanuit Explorer te droppen op de {\tt src} folder in Eclipse.
+  \item Open dit bestand.
+  \item Plaats je muis over de fout op de eerste lijn (niet klikken!), wacht tot het menu verschijnt en kies ``Fix Project Setup''. Kies de optie om JUnit 4 aan de build path toe te voegen.
+  \item Maak een nieuwe klasse {\tt Date}.
+  \item Schrijf velden en methodes om de tests te doen slagen. Bekijk hiervoor de tests, lees de foutmelding en tracht af te leiden waar je klasse {\tt Date} aan moet voldoen.
+  \item Soms krijg je te maken met foutieve invoer (bv. 13de maand). Gebruik voor deze gevallen {\tt throw new RuntimeException();}. Bijvoorbeeld:
+\begin{verbatim}
+if ( month < 1 || month > 12 ) {
+    throw new RuntimeException();
+}
+\end{verbatim}
+\end{itemize}
+
+
+\end{document}
