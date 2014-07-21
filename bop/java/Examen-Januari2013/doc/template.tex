@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{khluml}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \node[/uml/class] {
+    \umlclass{Kind}{
+      \umlmember[access=private]{voornaam:String}
+      \umlmember[access=private]{familieNaam:String}
+      \umlmember[access=private]{geboorteDatum:Datum}
+    }{
+      \umlmember[access=public]{Kind(voornaam:String, familieNaam:String, geboorteDatum:Datum}
+      \umlmember[access=public]{getVoornaam():String}
+      \umlmember[access=public]{getFamilieNaam():String}
+      \umlmember[access=public]{getGeboorteDatum():Datum}
+      \umlmember[access=public]{getLeeftijd(datum:Datum):Datum}
+      \umlmember[access=private]{setVoornaam(voornaam:String)}
+      \umlmember[access=private]{setFamilieNaam(familieNaam:String)}
+      \umlmember[access=private]{setGeboorteDatum(datum:Datum)}
+    }
+  };
+\end{tikzpicture}
+
+
+\end{document}

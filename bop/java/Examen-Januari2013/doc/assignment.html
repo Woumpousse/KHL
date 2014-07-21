@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kinderdagverblijf</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="assignment.js"></script>
+    <link rel="stylesheet" href="assignment.css">
+  </head>
+  <body>
+    <header>
+      <h1>Kinderdagverblijf</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#overzicht">Hint</a></li>
+      </ul>
+    </nav>
+    <section>
+      <h2 id="overzicht">Overzicht</h2>
+      <p>
+        Voor deze opgave moet je een programma schrijven voor een kinderdagverblijf.
+        Het moet mogelijk zijn om kinderen in te schrijven op bepaalde dagen
+        en uit te rekenen hoeveel gefactureerd moet worden. We bouwen de functionaliteit stapsgewijs op.
+      </p>
+      <p>
+        Je krijgt van ons een klasse Datum; deze bevat belangrijke functionaliteit
+        waar je zal op moeten steunen om deze opgave uit te werken.
+      </p>
+      <section>
+        <h2>Kind</h2>
+        <p>
+          We beginnen met een klasse voor het voorstellen van kinderen.
+        </p>
+        <div class="question">
+          <p>
+            Een kind heeft de volgende kenmerken; vul bij elk het type in:
+          </p>
+          <ul>
+            <li>
+              Voornaam
+              <input class="input-box" style="width:100px" type="text" data-solution="String" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Een voornaam kan het best voorgesteld worden d.m.v. een String.</span>
+            </li>
+            <li>
+              Familienaam
+              <input class="input-box" style="width:100px" type="text" data-solution="String" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Een familienaam kan het best voorgesteld worden d.m.v. een String.</span>
+            </li>
+            <li>
+              Geboortedatum
+              <input class="input-box" style="width:100px" type="text" data-solution="Datum" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">De meegeleverde Datum klasse kan hier van pas komen.</span>
+            </li>
+            <li>
+              Leeftijd
+              <input class="input-box" style="width:100px" type="text" data-solution="int" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Een double zou hier kunnen werken, maar we kiezen hier voor een int.</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="question multiple-choice-question">
+          <p>
+            Hoewel we hier vier kenmerken opsomden, zullen we slechts drie velden nodig hebben vermits
+            &eacute;&eacute;n dan de kenmerken berekenbaar is. Welke?
+          </p>
+          <div class="question-choices">
+            <button class="choice" data-show="fout">Naam</button>
+            <button class="choice" data-show="fout">Voornaam</button>
+            <button class="choice" data-show="fout-geboortedatum">Geboortedatum</button>
+            <button class="choice" data-show="juist">Leeftijd</button>
+          </div>
+          <p class="feedback wrong" data-feedback-to="fout">
+            Fout...
+          </p>
+          <p class="feedback wrong" data-feedback-to="fout-geboortedatum">
+            Kan men iemand zijn geboortedatum afleiden uit zijn leeftijd?
+          </p>
+          <p class="feedback right" data-feedback-to="juist">
+            Juist: gegeven de geboortedatum kan men de leeftijd uitrekenen.
+          </p>
+        </div>
+        <p>
+          Schrijf de klasse Datum zodat de tests slagen.
+        </p>
+        <ul>
+          <li>
+            De methode die de leeftijd opvraagt, verwacht een Datum-argument:
+            de methode geeft dan terug welke leeftijd het kind heeft op die gegeven datum.
+          </li>
+          <li>
+            Hou de setters private.
+          </li>
+          <li>
+            Check overal op ongeldige argumenten. Gebruik
+            <code>throw new IllegalArgumentException();</code>
+            bij foute invoer.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Inschrijving</h2>
+        <p>
+          Het is mogelijk om een kind in te schrijven in het kinderdagverblijf voor een specifieke dag.
+          We kunnen daarbij kiezen voor opvang in de voormiddag, namiddag of beide.
+          Een inschrijving kost geld: &euro;29.95 indien het om een halve dag gaat, &euro;49.95 voor een volledige dag.
+        </p>
+        <div class="question">
+          <p>
+            Vul de types in voor de volgende kenmerken van een inschrijving:
+          </p>
+          <ul>
+            <li>
+              Kind
+              <input class="input-box" style="width:100px" type="text" data-solution="Kind" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">We herbruiken hier de klasse Kind die we daarnet gemaakt hebben.</span>
+            </li>
+            <li>
+              Datum
+              <input class="input-box" style="width:100px" type="text" data-solution="Datum" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Datum.</span>
+            </li>
+            <li>
+              Voormiddag en/of namiddag
+              <input class="input-box" style="width:100px" type="text" data-solution="boolean" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Een boolean is de meest voor de hand liggende manier om aan te geven of we het kind al dan niet inschrijven voor de voor- of namiddag.</span>
+            </li>
+            <li>
+              Kost
+              <input class="input-box" style="width:100px" type="text" data-solution="double" placeholder="type">
+              <span class="hint-revealer">?</span>
+              <span class="hint">Het gaaat om kommagetallen, dus we kiezen voor double.</span>
+            </li>
+          </ul>
+        </div>
+
+        <p>
+          Schrijf de klasse Inschrijving zodat de tests slagen.
+        </p>
+        <ul>
+          <li>
+            Hou de setters private.
+          </li>
+          <li>
+            Check overal op ongeldige argumenten. Gebruik
+            <code>throw new IllegalArgumentException();</code>
+            bij foute invoer.
+          </li>
+        </ul>
+      </section>
+
+    </section>
+  </body>
+</html>
