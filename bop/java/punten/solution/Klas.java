@@ -6,7 +6,7 @@ public class Klas
     {
         if ( capaciteit <= 0 )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -49,7 +49,7 @@ public class Klas
     {
         if ( bevatStudentMetNaam( student.getNaam() ) )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -57,7 +57,7 @@ public class Klas
 
             if ( idx == -1 )
             {
-                throw new RuntimeException();
+                throw new IllegalArgumentException();
             }
             else
             {

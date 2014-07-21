@@ -42,7 +42,7 @@ public class Student
         }
         else
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
     }
 
@@ -57,7 +57,7 @@ public class Student
 
         if ( index == -1 )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -74,7 +74,7 @@ public class Student
     {
         if ( heeftVakMetNaam( vak.getNaam() ) )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {

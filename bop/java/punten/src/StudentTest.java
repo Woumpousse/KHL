@@ -29,7 +29,7 @@ public class StudentTest
         assertEquals( 2, student.aantalVakken() );
     }
 
-    @Test(expected=RuntimeException.class) public void toevoegenPuntenReedsBestaandVak()
+    @Test(expected=IllegalArgumentException.class) public void toevoegenPuntenReedsBestaandVak()
     {
         Student student = new Student( "Jan" );
 
@@ -50,7 +50,7 @@ public class StudentTest
         assertEquals( 19, vak.getPunten() );
     }
 
-    @Test(expected=RuntimeException.class) public void opvragenPuntenOnbekendVak()
+    @Test(expected=IllegalArgumentException.class) public void opvragenPuntenOnbekendVak()
     {
         Student student = new Student( "Jan" );
         student.voegPuntenToe( new Vak( ALGO, 19 ) );
@@ -71,7 +71,7 @@ public class StudentTest
         assertSame( bop, student.vindVak( 1 ) );
     }
 
-    @Test(expected=RuntimeException.class) public void opvragenVakMetOngeldigeIndex()
+    @Test(expected=IllegalArgumentException.class) public void opvragenVakMetOngeldigeIndex()
     {
         Student student = new Student( "Jan" );
         Vak algo = new Vak( ALGO, 17 );

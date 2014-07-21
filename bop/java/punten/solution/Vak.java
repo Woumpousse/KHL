@@ -1,13 +1,37 @@
 public class Vak
 {
-    private final String naam;
+    private String naam;
 
-    private final int punten;
+    private int punten;
 
     public Vak( String naam, int punten )
     {
-        this.naam = naam;
-        this.punten = punten;
+        setNaam(naam);
+        setPunten(punten);        
+    }
+    
+    private void setNaam(String naam)
+    {
+        if ( naam == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.naam = naam;
+        }
+    }
+    
+    private void setPunten(int punten)
+    {
+        if ( punten < 0 )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.punten = punten;
+        }
     }
 
     public String getNaam()

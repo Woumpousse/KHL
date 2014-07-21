@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class KlasTest
 {
-    @Test(expected=RuntimeException.class) public void aanmaakKlasMetNegatieveCapaciteit_WerptException()
+    @Test(expected=IllegalArgumentException.class) public void aanmaakKlasMetNegatieveCapaciteit_WerptException()
     {
         new Klas( -1 );
     }
@@ -42,7 +42,7 @@ public class KlasTest
         assertEquals( "Jan", namen[0] );
     }
     
-    @Test(expected=RuntimeException.class) public void toevoegenStudentAanVolleKlasGeeftFout()
+    @Test(expected=IllegalArgumentException.class) public void toevoegenStudentAanVolleKlasGeeftFout()
     {
         Klas klas = new Klas( 2 );
 
@@ -51,7 +51,7 @@ public class KlasTest
         klas.voegStudentToe( new Student( "Jef" ));
     }
 
-    @Test(expected=RuntimeException.class) public void toevoegenStudentMetZelfdeNaamGeeftFout()
+    @Test(expected=IllegalArgumentException.class) public void toevoegenStudentMetZelfdeNaamGeeftFout()
     {
         Klas klas = new Klas( 5 );
 
