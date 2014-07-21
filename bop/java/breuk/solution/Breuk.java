@@ -8,7 +8,7 @@ public class Breuk
     {
         if ( noemer == 0 )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -33,7 +33,7 @@ public class Breuk
     {
         if ( that == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -48,7 +48,7 @@ public class Breuk
     {
         if ( that == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -68,7 +68,7 @@ public class Breuk
     {
         if ( that == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -80,7 +80,7 @@ public class Breuk
     {
         if ( that == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {

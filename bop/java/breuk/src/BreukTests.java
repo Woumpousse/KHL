@@ -20,7 +20,7 @@ public class BreukTests {
         assertEquals(2, a.getNoemer());
     }
     
-    @Test(expected=RuntimeException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void constructor_NoemerMagNietNulZijn()
     {
         new Breuk(1, 0);
@@ -55,7 +55,7 @@ public class BreukTests {
         assertEquals(3, r.getNoemer());
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void vermenigvuldigingMetNull()
     {
         new Breuk(1,2).vermenigvuldig( null );
@@ -81,7 +81,7 @@ public class BreukTests {
         assertEquals(6, r.getNoemer());
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void optellingMetNull()
     {
         new Breuk(1,2).telOp( null );
@@ -97,7 +97,7 @@ public class BreukTests {
         assertEquals(1, b.getNoemer());
     }
     
-    @Test(expected=RuntimeException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void inverteerNul()
     {
         Breuk a = new Breuk(0, 1);
@@ -126,7 +126,7 @@ public class BreukTests {
         assertEquals(2, r.getNoemer());
     }
     
-    @Test(expected=RuntimeException.class) public void delingDoorNull()
+    @Test(expected=IllegalArgumentException.class) public void delingDoorNull()
     {
         new Breuk(1, 3).deel( null );
     }
@@ -147,7 +147,7 @@ public class BreukTests {
         assertTrue(a.isGelijkAan( b ));
     }
     
-    @Test(expected=RuntimeException.class) public void isGelijkAan_null()
+    @Test(expected=IllegalArgumentException.class) public void isGelijkAan_null()
     {
         new Breuk(1, 3).isGelijkAan( null );
     }
