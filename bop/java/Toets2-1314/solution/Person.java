@@ -23,19 +23,23 @@ public class Person
     {
         if ( firstName == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
-
-        this.firstName = firstName;
+        else
+        {
+            this.firstName = firstName;
+        }
     }
 
     public void setLastName(String lastName)
     {
         if ( lastName == null )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
-
-        this.lastName = lastName;
+        else
+        {
+            this.lastName = lastName;
+        }
     }
 }

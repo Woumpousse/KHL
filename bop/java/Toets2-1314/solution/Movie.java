@@ -8,11 +8,11 @@ public class Movie
 
     public Movie(String title, Movie directSequelTo, Movie[] similarTo, Person director, Person[] actors)
     {
-        this.title = title;
-        this.directSequelTo = directSequelTo;
-        this.similarTo = similarTo;
-        this.director = director;
-        this.actors = actors;
+        setTitle(title);
+        setDirectSequelTo(  directSequelTo );
+        setSimilarTo(similarTo);
+        setDirector(director);
+        setActors( actors );
     }
 
     public Movie(String title, Person director)
@@ -23,6 +23,66 @@ public class Movie
     public Movie(String title, Movie sequelTo, Person director)
     {
         this( title, sequelTo, new Movie[0], director, new Person[0] );
+    }
+    
+    private void setTitle(String title)
+    {
+        if ( title == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.title = title;
+        }
+    }
+    
+    private void setDirectSequelTo(Movie directSequelTo)
+    {
+        if ( directSequelTo == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.directSequelTo = directSequelTo;
+        }
+    }
+    
+    private void setSimilarTo(Movie[] similarTo)
+    {
+        if ( similarTo == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.similarTo = similarTo;
+        }
+    }
+    
+    private void setDirector(Person director)
+    {
+        if ( director == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.director = director;
+        }
+    }
+    
+    private void setActors(Person[] actors)
+    {
+        if ( actors == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.actors = actors;
+        }
     }
 
     private void registerSimilarMovie(Movie movie) {
@@ -39,4 +99,29 @@ public class Movie
         this.registerSimilarMovie( movie );
         movie.registerSimilarMovie( this );
     }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public Movie getDirectSequelTo()
+    {
+        return directSequelTo;
+    }
+
+    public Movie[] getSimilarTo()
+    {
+        return similarTo;
+    }
+
+    public Person getDirector()
+    {
+        return director;
+    }
+
+    public Person[] getActors()
+    {
+        return actors;
+    }    
 }
