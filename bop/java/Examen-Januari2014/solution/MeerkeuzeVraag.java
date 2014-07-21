@@ -17,7 +17,7 @@ public class MeerkeuzeVraag
     private void setVraagstelling(String vraagstelling)
     {
         if ( vraagstelling == null ){
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -35,7 +35,7 @@ public class MeerkeuzeVraag
     {
         if ( antwoorden == null || antwoorden.length < 2 || antwoorden.length > 10 || correctAntwoord < 0 || correctAntwoord >= antwoorden.length )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {

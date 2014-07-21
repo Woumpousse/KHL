@@ -30,7 +30,7 @@ public class Examen
     {
         if ( vraag == null || aantalVragen == vragen.length || bevatVraagMetVraagstelling( vraag.getVraagstelling() ))
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
@@ -96,7 +96,7 @@ public class Examen
     public int score(int[] antwoorden, boolean gisCorrectie)
     {
         if ( antwoorden == null ) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         else
         {
