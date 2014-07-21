@@ -1,5 +1,4 @@
 
-
 public class Date
 {
     private int day;
@@ -10,7 +9,7 @@ public class Date
     {
         if ( !isValidDate( day, month, year ) )
         {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
 
         this.day = day;
@@ -162,7 +161,14 @@ public class Date
 
     public boolean isSameDate(Date that)
     {
-        return this.day == that.day && this.month == that.month && this.year == that.year;
+        if ( that == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            return this.day == that.day && this.month == that.month && this.year == that.year;
+        }
     }
 
     public void goBackSingleDay()
@@ -196,7 +202,7 @@ public class Date
         else
         {
             nDays = -nDays;
-            
+
             for ( int i = 0; i != nDays; ++i )
             {
                 goBackSingleDay();

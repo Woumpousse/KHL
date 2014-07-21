@@ -56,7 +56,7 @@ public class DateTest
         assertEquals( 31, Date.numberOfDaysInMonth( 12, 2008 ) ); // December
     }
 
-    @Test(expected = RuntimeException.class) public void numberOfDaysInMonthInvalidMonthTests()
+    @Test(expected = IllegalArgumentException.class) public void numberOfDaysInMonthInvalidMonthTests()
     {
         Date.numberOfDaysInMonth( 13, 2000 );
     }
@@ -95,19 +95,19 @@ public class DateTest
         assertEquals( 2000, date.getYear() );
     }
 
-    @Test(expected = RuntimeException.class) public void constructorWithInvalidMonthTests()
+    @Test(expected = IllegalArgumentException.class) public void constructorWithInvalidMonthTests()
     {
         // Moet falen wegens ongeldige maand
         new Date( 1, 13, 2001 );
     }
 
-    @Test(expected = RuntimeException.class) public void constructorWithInvalidDayTests1()
+    @Test(expected = IllegalArgumentException.class) public void constructorWithInvalidDayTests1()
     {
         // Moet falen wegens ongeldige dag
         new Date( 32, 12, 2001 );
     }
 
-    @Test(expected = RuntimeException.class) public void constructorWithInvalidDayTests2()
+    @Test(expected = IllegalArgumentException.class) public void constructorWithInvalidDayTests2()
     {
         // Moet falen wegens ongeldige dag
         new Date( 29, 2, 2001 );
@@ -121,13 +121,13 @@ public class DateTest
         assertEquals( 2, date.getDay() );
     }
 
-    @Test(expected = RuntimeException.class) public void setDayTestsInvalid1()
+    @Test(expected = IllegalArgumentException.class) public void setDayTestsInvalid1()
     {
         Date date = new Date( 1, 1, 2000 );
         date.setDay( 0 );
     }
 
-    @Test(expected = RuntimeException.class) public void setDayTestsInvalid2()
+    @Test(expected = IllegalArgumentException.class) public void setDayTestsInvalid2()
     {
         Date date = new Date( 1, 2, 2001 );
         date.setDay( 29 );
@@ -141,13 +141,13 @@ public class DateTest
         assertEquals( 2, date.getMonth() );
     }
 
-    @Test(expected = RuntimeException.class) public void setMonthsInvalidTests1()
+    @Test(expected = IllegalArgumentException.class) public void setMonthsInvalidTests1()
     {
         Date date = new Date( 1, 1, 2000 );
         date.setMonth( 13 );
     }
 
-    @Test(expected = RuntimeException.class) public void setMonthsInvalidTests2()
+    @Test(expected = IllegalArgumentException.class) public void setMonthsInvalidTests2()
     {
         Date date = new Date( 31, 12, 2000 );
         date.setMonth( 2 );
@@ -161,7 +161,7 @@ public class DateTest
         assertEquals( 2001, date.getYear() );
     }
 
-    @Test(expected = RuntimeException.class) public void setYearInvalidTests1()
+    @Test(expected = IllegalArgumentException.class) public void setYearInvalidTests1()
     {
         Date date = new Date( 29, 2, 2000 );
         date.setYear( 2003 );
@@ -187,7 +187,7 @@ public class DateTest
         assertFalse( new Date( 9, 10, 2000 ).isBefore( new Date( 8, 10, 2000 ) ) );
     }
 
-    @Test(expected = RuntimeException.class) public void isBeforeInvalidTests()
+    @Test(expected = IllegalArgumentException.class) public void isBeforeInvalidTests()
     {
         new Date( 1, 1, 2000 ).isBefore( null );
     }
@@ -222,7 +222,7 @@ public class DateTest
         assertFalse( new Date( 1, 1, 2000 ).isSameDate( new Date( 2, 1, 2000 ) ) );
     }
 
-    @Test(expected = RuntimeException.class) public void isSameDateInvalidTests()
+    @Test(expected = IllegalArgumentException.class) public void isSameDateInvalidTests()
     {
         new Date( 1, 1, 2000 ).isSameDate( null );
     }
