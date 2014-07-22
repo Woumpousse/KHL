@@ -1,8 +1,8 @@
 body {
-    font-family:verdana;
-    margin-left:auto;
-    margin-right:auto;
-    width:50%;
+    font-family: verdana;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 h1, h2 {
@@ -11,25 +11,32 @@ h1, h2 {
 }
 
 .input-box {
-    text-align:center;
-    background:#FFAAAA;
+    text-align: center;
+    background: #FFAAAA;
 }
 
 .correct {
-    background:#AAFFAA;
+    background: #AAFFAA;
 }
 
 .question-choices {
-    text-align:center;
+    text-align: center;
 }
 
 .question-choices > button {
-    width:150px;
-    padding:10px;
+    width: 150px;
+    padding: 10px;
 }
 
-p.feedback {
-    display:none;
+.figure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.revealed {
+    display: none;
 }
 
 .hint {

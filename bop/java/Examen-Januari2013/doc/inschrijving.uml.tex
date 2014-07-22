@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{khluml}
+
+\input{shared}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \node[/uml/class] (kind) {
+    \Kind
+  };
+  \node[/uml/class,anchor=south,yshift=2cm] (inschrijving) at (kind.north) {
+    \Inschrijving
+  };
+  \draw[/uml/association] (inschrijving.south) -- (kind.north)
+                          node [at end,left,anchor=south east] {1}
+                          node [at end,right,anchor=south west] {-kind};
+\end{tikzpicture}
+
+\end{document}

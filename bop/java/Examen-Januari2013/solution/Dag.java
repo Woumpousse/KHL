@@ -2,27 +2,27 @@ import java.util.ArrayList;
 
 public class Dag
 {
-    public int maximaalInschrijvingenPerHalveDag;
+    public int capaciteit;
     private Datum datum;
     private ArrayList<Inschrijving> inschrijvingen;
 
-    public Dag(Datum datum, int maximaalInschrijvingPerHalveDag)
+    public Dag(Datum datum, int capaciteit)
     {
         setDatum( datum );
-        setMaximaalInschrijvingenPerHalveDag( maximaalInschrijvingPerHalveDag );
+        setCapaciteit( capaciteit );
 
         inschrijvingen = new ArrayList<Inschrijving>();
     }
 
-    private void setMaximaalInschrijvingenPerHalveDag(int maximaalInschrijvingPerHalveDag)
+    private void setCapaciteit(int capaciteit)
     {
-        if ( maximaalInschrijvingPerHalveDag < 1 )
+        if ( capaciteit < 1 )
         {
             throw new IllegalArgumentException();
         }
         else
         {
-            this.maximaalInschrijvingenPerHalveDag = maximaalInschrijvingPerHalveDag;
+            this.capaciteit = capaciteit;
         }
     }
 
@@ -75,12 +75,12 @@ public class Dag
 
     private boolean plaatsVrijInVoormiddag()
     {
-        return aantalInschrijvingenInVoormiddag() < maximaalInschrijvingenPerHalveDag;
+        return aantalInschrijvingenInVoormiddag() < capaciteit;
     }
 
     private boolean plaatsVrijInNamiddag()
     {
-        return aantalInschrijvingenInNamiddag() < maximaalInschrijvingenPerHalveDag;
+        return aantalInschrijvingenInNamiddag() < capaciteit;
     }
 
     public boolean plaatsVrijVoor(Inschrijving inschrijving)

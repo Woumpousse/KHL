@@ -8,13 +8,14 @@
 
 \pgfkeys{
   /uml/.cd,
-  class/.style={inner sep=0mm,draw,drop shadow,fill=white}
+  class/.style={inner sep=0mm,draw,drop shadow,fill=white,thick},
+  association/.style={-latex,thick}
 }
 
 \pgfkeys{
   /uml/member/.cd,
-  @access/.code={\umlsymbol{private}},
-  access/.code={\pgfkeys{/uml/field/@access/.code={\umlsymbol{#1}}}},
+  @access/.code={\errmessage{Missing access}},
+  access/.code={\pgfkeys{/uml/member/@access/.code={\umlsymbol{#1}}}},
   access/.value required,
   @static/.initial=0,
   static/.style={/uml/member/@static=1}

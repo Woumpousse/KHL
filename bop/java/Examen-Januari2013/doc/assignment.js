@@ -21,24 +21,23 @@ function setupInputBoxes() {
     } );
 }
 
-function setupButtonQuestions() {
-    $(".multiple-choice-question").each( function() {
-        var question = $(this);
+function setupRevealers() {
+    $(".revealer-group").each( function() {
+        var group = $(this);
 
-        question.find("button.choice").click( function () {
+        group.find("button.revealer").click( function () {
             var button = $(this);
-            var shows = button.attr('data-show');
+            var shows = button.attr('data-reveals');
 
-            question.find("p.feedback").css({"display":"none"});
-
-            question.find("p[data-feedback-to=" + shows + "]").css({"display":"block"});
+            group.find(".revealed").css({"display":"none"});
+            group.find("[data-revealed-by=" + shows + "]").css({"display":"block"});
         } );
     } );
 }
 
 function setup() {
     setupInputBoxes();
-    setupButtonQuestions();
+    setupRevealers();
 }
 
 $(document).ready( setup );

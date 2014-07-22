@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.util.*;
+
 import org.junit.*;
 
 public class DagTest
@@ -102,6 +104,20 @@ public class DagTest
 
         Inschrijving inschrijving2 = new Inschrijving( kind, new Datum( 2, 1, 2001 ), true, true );
         dag.voegInschrijvingToe( inschrijving2 );
+    }
+ 
+    @Test
+    public void getInschrijvingen()
+    {
+        Dag dag = dag();
+
+        ArrayList<Inschrijving> inschrijvingen = dag.getInschrijvingen();
+        assertEquals(0, inschrijvingen.size());
+        
+        dag.voegInschrijvingToe( inschrijving( true, false ) );
+        assertEquals(0, inschrijvingen.size());
+        inschrijvingen = dag.getInschrijvingen();
+        assertEquals(1, inschrijvingen.size());
     }
 
     private Dag dag(int max)

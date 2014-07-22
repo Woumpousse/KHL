@@ -1,0 +1,58 @@
+\newcommand{\Kind}{
+  \umlclass{Kind}{
+       \umlmember[access=private]{voornaam:String}
+       \umlmember[access=private]{familieNaam:String}
+       \umlmember[access=private]{geboorteDatum:Datum}
+     }{
+       \umlmember[access=public]{Kind(voornaam:String, familieNaam:String, geboorteDatum:Datum)}
+       \umlmember[access=public]{getVoornaam():String}
+       \umlmember[access=public]{getFamilieNaam():String}
+       \umlmember[access=public]{getGeboorteDatum():Datum}
+       \umlmember[access=public]{getLeeftijd(datum:Datum):Datum}
+       \umlmember[access=private]{setVoornaam(voornaam:String)}
+       \umlmember[access=private]{setFamilieNaam(familieNaam:String)}
+       \umlmember[access=private]{setGeboorteDatum(datum:Datum)}
+     }
+}
+
+\newcommand{\Inschrijving}{
+  \umlclass{Inschrijving}{
+    \umlmember[access=private]{datum:Datum}
+    \umlmember[access=private]{voormiddag:boolean}
+    \umlmember[access=private]{namiddag:boolean}
+  }{
+    \umlmember[access=public]{Inschrijving(kind:Kind, datum:Datum, vmiddag:boolean, nmiddag:boolean)}
+    \umlmember[access=public]{getKind():Kind}
+    \umlmember[access=public]{isVoormiddag():boolean}
+    \umlmember[access=public]{isNamiddag():boolean}
+    \umlmember[access=public]{getDatum():Datum}
+    \umlmember[access=public]{kostprijs():double}
+    \umlmember[access=private]{setKind(kind:Kind)}
+    \umlmember[access=private]{setDatum(datum:Datum)}
+    \umlmember[access=private]{setHalveDagen(vmiddag:boolean, nmiddag:boolean)}
+  }
+}
+
+\newcommand{\Dag}{
+  \umlclass{Dag}{
+    \umlmember[access=private]{capaciteit:int}
+    \umlmember[access=private]{datum:Datum}
+  }{
+    \umlmember[access=public]{Dag(datum:Datum, capaciteit:int)}
+    \umlmember[access=public]{getDatum():Datum}
+    \umlmember[access=public]{getInschrijvingen():ArrayList$<$Inschrijving$>$}
+    \umlmember[access=public]{voegInschrijvingToe(inschrijving:Inschrijving)}
+    \umlmember[access=public]{kost(kind:Kind):double}
+    \umlmember[access=private]{setDatum(datum:Datum)}
+    \umlmember[access=private]{setCapaciteit(capaciteit:int)}
+  }
+}
+
+\newcommand{\Verblijf}{
+  \umlclass{Verblijf}{
+  }{
+    \umlmember[access=public]{Verblijf()}
+    \umlmember[access=public]{schrijfIn(inschrijving:Inschrijving)}
+    \umlmember[access=public]{kost(kind:Kind):double}
+  }
+}

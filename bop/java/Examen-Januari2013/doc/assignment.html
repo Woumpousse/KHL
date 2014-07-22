@@ -6,6 +6,29 @@
     <script src="jquery.js"></script>
     <script src="assignment.js"></script>
     <link rel="stylesheet" href="assignment.css">
+    <style>
+      .inschrijving tr th {
+        border-bottom: 1px solid black;
+        padding: 0px 5px 0px 5px;
+      }
+
+      .inschrijving .center {
+        text-align: center;
+      }
+
+      table {
+        margin: 10px auto 10px auto;
+        border-collapse: collapse;      
+      }
+
+      table tr th {
+        border-bottom: 1px solid black;
+      }
+
+      table tr th, table tr td {
+        padding: 0px 5px 0px 5px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -64,24 +87,24 @@
           </ul>
         </div>
         
-        <div class="question multiple-choice-question">
+        <div class="question revealer-group">
           <p>
             Hoewel we hier vier kenmerken opsomden, zullen we slechts drie velden nodig hebben vermits
             &eacute;&eacute;n dan de kenmerken berekenbaar is. Welke?
           </p>
           <div class="question-choices">
-            <button class="choice" data-show="fout">Naam</button>
-            <button class="choice" data-show="fout">Voornaam</button>
-            <button class="choice" data-show="fout-geboortedatum">Geboortedatum</button>
-            <button class="choice" data-show="juist">Leeftijd</button>
+            <button class="revealer" data-reveals="fout">Naam</button>
+            <button class="revealer" data-reveals="fout">Voornaam</button>
+            <button class="revealer" data-reveals="fout-geboortedatum">Geboortedatum</button>
+            <button class="revealer" data-reveals="juist">Leeftijd</button>
           </div>
-          <p class="feedback wrong" data-feedback-to="fout">
+          <p class="revealed wrong" data-revealed-by="fout">
             Fout...
           </p>
-          <p class="feedback wrong" data-feedback-to="fout-geboortedatum">
+          <p class="revealed wrong" data-revealed-by="fout-geboortedatum">
             Kan men iemand zijn geboortedatum afleiden uit zijn leeftijd?
           </p>
-          <p class="feedback right" data-feedback-to="juist">
+          <p class="revealed right" data-revealed-by="juist">
             Juist: gegeven de geboortedatum kan men de leeftijd uitrekenen.
           </p>
         </div>
@@ -102,6 +125,15 @@
             bij foute invoer.
           </li>
         </ul>
+        <div class="question revealer-group">
+          <p>
+            Teken het UML diagram van de klasse <code>Kind</code>.
+          </p>
+          <div class="question-choices">
+            <button class="revealer" data-reveals="kind-uml">Toon</button>
+          </div>
+          <img class="revealed figure" data-revealed-by="kind-uml" src="kind.uml.png" width="80%">
+        </div>
       </section>
 
       <section>
@@ -110,6 +142,7 @@
           Het is mogelijk om een kind in te schrijven in het kinderdagverblijf voor een specifieke dag.
           We kunnen daarbij kiezen voor opvang in de voormiddag, namiddag of beide.
           Een inschrijving kost geld: &euro;29.95 indien het om een halve dag gaat, &euro;49.95 voor een volledige dag.
+          Ook kunnen kinderen enkel ingeschreven worden op weekdagen.
         </p>
         <div class="question">
           <p>
@@ -144,9 +177,15 @@
         </div>
 
         <p>
-          Schrijf de klasse Inschrijving zodat de tests slagen.
+          Schrijf de klasse <code>Inschrijving</code> zodat de tests slagen.
         </p>
         <ul>
+          <li>
+            Een inschrijving mag niet vallen op een zaterdag of zondag.
+          </li>
+          <li>
+            Een inschrijving moet minstens voor een halve dag gebeuren.
+          </li>
           <li>
             Hou de setters private.
           </li>
@@ -156,8 +195,224 @@
             bij foute invoer.
           </li>
         </ul>
+        <div class="question revealer-group">
+          <p>
+            Vul het UML diagram aan met de klasse <code>Inschrijving</code>.
+          </p>
+          <div class="question-choices">
+            <button class="revealer" data-reveals="kind-uml">Toon</button>
+          </div>
+          <img class="revealed figure" data-revealed-by="kind-uml" src="inschrijving.uml.png" width="80%">
+        </div>
       </section>
 
+      <section>
+        <h2>Dag</h2>
+        <p>
+          We voeren nu een klasse <code>Dag</code> in met als verantwoordelijkheid
+          alle inschrijvingen bij te houden die vallen op die dag en ervoor
+          te zorgen dat de capaciteit van het kinderdagverblijf
+          niet overschreden wordt.
+        </p>
+        <p>
+          Stel dat de capaciteit gelijk is aan drie en de volgende
+          inschrijvingen reeds plaatsvonden:
+        </p>
+        <table class="inschrijving">
+          <tr>
+            <th></th>
+            <th>Voormiddag</th>
+            <th>Namiddag</th>
+          </tr>
+          <tr>
+            <td>Inschrijving #1</td>
+            <td class="center">&#10003;</td>
+            <td class="center">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Inschrijving #2</td>
+            <td class="center">&#10003;</td>
+            <td class="center"></td>
+          </tr>
+          <tr>
+            <td>Inschrijving #3</td>
+            <td class="center"></td>
+            <td class="center">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Inschrijving #4</td>
+            <td class="center">&#10003;</td>
+            <td class="center"></td>
+          </tr>
+        </table>
+        <p>
+          Er is nu nog slechts plaats voor &eacute;&eacute;n
+          inschrijving die enkel de namiddag reserveert.
+        </p>
+
+        <p>
+          Een <code>Dag</code>-object biedt de volgende functionaliteit:
+        </p>
+        <ul>
+          <li>
+            Een dag valt op een bepaalde datum; een <code>Dag</code> moet deze datum bijhouden.
+          </li>
+          <li>
+            Een dag houdt een lijst inschrijvingen bij. Je mag hier een <code>ArrayList</code> voor gebruiken.
+          </li>
+          <li>
+            Een dag heeft een bepaalde capaciteit: op een halve dag mogen er een maximum aantal kinderen
+            ingeschreven worden.
+          </li>
+          <li>
+            Men kan een inschrijving toevoegen aan een bepaalde dag. Hierop gelden de volgende restricties:
+            <ul>
+              <li>
+                De datum in het <code>Inschrijving</code>-object moet overeenkomen met de datum van het <code>Dag</code>-object.
+                Men kan dus niet een inschrijving die valt op 1/1/2000 toevoegen aan de dag 2/2/2002.
+              </li>
+              <li>
+                Er moet nagegaan worden of er nog plaats vrij is voor de nieuwe inschrijving.
+              </li>
+              <li>
+                Hetzelfde kind mag niet tweemaal ingeschreven worden op dezelfde dag.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Men moet kunnen vragen wat de kostprijs is voor een gegeven kind.
+            Dit houdt dit dat er naar inschrijvingen voor dat kind gezocht worden op die dag;
+            indien er zo een inschrijving bestaat, wordt de kost van die inschrijving teruggegeven.
+            In het andere geval is de kost voor dat kind op die dag &euro;0.
+          </li>
+        </ul>
+        <p>
+          Schrijf de klasse <code>Dag</code> zodat alle tests slagen.
+        </p>
+        <div class="question revealer-group">
+          <p>
+            Vul het UML diagram aan met de klasse <code>Dag</code>.
+          </p>
+          <div class="question-choices">
+            <button class="revealer" data-reveals="dag-uml">Toon</button>
+          </div>
+          <img class="revealed figure" data-revealed-by="dag-uml" src="dag.uml.png" width="80%">
+        </div>
+      </section>
+
+      <section>
+        <h2>Verblijf</h2>
+        <p>
+          Als laatste klasse blijft <code>Verblijf</code> over. Een <code>Verblijf</code>-object
+          houdt een agenda bij als een <code>ArrayList&lt;Dag&gt;</code>. Initieel is deze lijst leeg
+          en worden er <code>Dag</code>-objecten toegevoegd naargelang wat nodig blijkt. De functionaliteit bestaat uit:
+        </p>
+        <ul>
+          <li>
+            Je kan een inschrijving toevoegen met <code>verblijf.voegToe(inschrijving)</code>.
+            Deze methode werkt als volgt:
+            <ol>
+              <li>
+                De inschrijving heeft een datum, deze wordt opgevraagd.
+              </li>
+              <li>
+                Er wordt in de agenda gezocht naar een <code>Dag</code>-object
+                met die datum. Bestaat er zo geen object, dan wordt er een aangemaakt en toegevoegd aan de agenda.
+                Voor de eenvoud heeft elke dag dezelfde capaciteit, nl. 7.
+              </li>
+              <li>
+                De inschrijving wordt aan dit <code>Dag</code>-object toegevoegd.
+              </li>
+            </ol>
+          </li>
+          <li>
+            Je kan de totale kost voor een gegeven kind opvragen met <code>verblijft.kost(kind)</code>.
+            Deze methode gaat alle <code>Dag</code>-objecten af in de agenda en vraagt die om beurt
+            naar de kost voor dat kind. De som van al deze kostprijzen is het resultaat.
+          </li>
+        </ul>
+        <p>
+          Schrijf de klasse <code>Verblijf</code> zodat alle tests slagen.
+        </p>
+        <div class="question revealer-group">
+          <p>
+            Vul het UML diagram aan met de klasse <code>Verblijf</code>.
+          </p>
+          <div class="question-choices">
+            <button class="revealer" data-reveals="verblijf-uml">Toon</button>
+          </div>
+          <img class="revealed figure" data-revealed-by="verblijf-uml" src="verblijf.uml.png" width="80%">
+        </div>
+      </section>
+
+      <section>
+        <h2>Main methode</h2>
+        <p>
+          Maak een <code>main</code>-methode en maak de nodige objecten aan
+          om volgende situatie te modelleren:
+        </p>
+        <ul>
+          <li>
+            Kinderen
+            <table>
+              <tr>
+                <th>Voornaam</th>
+                <th>Familienaam</th>
+                <th>Geboortedatum</th>
+              </tr>
+              <tr>
+                <td>Jan</td>
+                <td>Janssens</td>
+                <td>1/1/2014</td>
+              </tr>
+              <tr>
+                <td>Piet</td>
+                <td>Peeters</td>
+                <td>2/2/2014</td>
+              </tr>
+              <tr>
+                <td>An</td>
+                <td>Willems</td>
+                <td>3/3/2014</td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            Inschrijvingen
+            <table>
+              <tr>
+                <th>Kind</th>
+                <th>Datum</th>
+                <th>Voormiddag</th>
+                <th>Namiddag</th>
+              </tr>
+              <tr>
+                <td>Jan Janssens</td>
+                <td>1/1/2015</td>
+                <td>&#10003;</td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>Jan Janssens</td>
+                <td>2/1/2015</td>
+                <td>&#10003;</td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>Piet Peeters</td>
+                <td>1/1/2015</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>An Willems</td>
+                <td>1/1/2015</td>
+                <td></td>
+                <td>&#10003;</td>
+              </tr>
+            </table>
+          </li>
+      </section>
     </section>
   </body>
 </html>
