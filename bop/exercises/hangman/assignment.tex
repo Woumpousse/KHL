@@ -172,7 +172,7 @@ of zijn letter zichtbaar is; indien ze allemaal positief antwoorden, moet {\tt i
     \node[draw] (Hint) at (0,0) {\tt Hint};
     \foreach \y in {-2,...,2} {
       \node[draw] (HintBox \y) at (4,\y) {\tt HintBox};
-      \draw[->] (Hint) -- (HintBox \y.west) node [midway,sloped,above] {\tt\tiny isRevealed(c)};
+      \draw[->] (Hint) -- (HintBox \y.west) node [midway,sloped,above] {\tt\tiny isRevealed()};
     }
     \draw[->] (-3,0) -- (Hint.west) node [midway,anchor=south] {\tt\tiny isFullyRevealed()};
   \end{tikzpicture}
