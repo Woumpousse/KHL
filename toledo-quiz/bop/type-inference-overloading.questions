@@ -118,3 +118,42 @@ class Qux {
         ...
     }
 }
+
+#infer-types[template=infer]
+
+class Foo {
+    public Foo(int x) {
+        ...
+    }
+
+    public Foo(String x, __int__ y) {
+        this(y);
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public Foo(int x, String y) { ... }
+
+    public Foo(__int__ x) {
+        this(x, null);
+    }
+
+    public Foo(__String__ x) {
+        this(0, x);
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(__int__ x) {
+        new Bar(x);
+    }
+}
+
+class Bar {
+    public Bar(int x) { ... }
+    private Bar(String y) { ... }
+}

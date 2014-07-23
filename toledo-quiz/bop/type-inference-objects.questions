@@ -141,3 +141,43 @@ class Bar {
         a = new Foo(y);
     }
 }
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(__String__ x) {
+        new Bar(x);
+    }
+}
+
+class Bar {
+    public Bar(String y) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(double x) {
+        new Bar(x);
+    }
+}
+
+class Bar {
+    public Bar(__double__ x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo() {
+        new Bar(true);
+    }
+}
+
+class Bar {
+    public Bar(__boolean__ x) { ... }
+}

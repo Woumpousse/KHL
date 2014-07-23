@@ -1,0 +1,54 @@
+#<
+  Level 4 Type Inference
+
+  Introduces arrays
+>#
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int__ foo(int[] xs, __int__ y) {
+        return xs[y];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __String__ foo(String[] xs) {
+        return xs[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int__ foo(double[] xs) {
+        return xs.length;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public boolean foo(boolean[] x) {
+        return x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public boolean foo(__boolean[]__ x) {
+        return x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public boolean foo(double[][] x) {
+        return x[0];
+    }
+}
+
