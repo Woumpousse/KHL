@@ -1,2 +1,5 @@
 *.class
 *.pdf
+*.aux
+*.out
+*.zip
