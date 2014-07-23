@@ -40,6 +40,10 @@ class String
     end.join
   end
 
+  def remove_comments
+    gsub(/#<.*?>#/m, "")
+  end
+
   def strip_empty_lines
     lines.drop_while do |line|
       line.strip.empty?
@@ -60,5 +64,23 @@ class Module
     class_names.map do |name|
       const_get(name)
     end
+  end
+end
+
+class Lazy
+  def initialize(&block)
+    @evaluator = block
+    @value = nil
+    @evaluated = false
+  end
+
+  def value
+    if not @evaluated
+    then
+      @value = @evaluator[]
+      @evaluated = true
+    end
+
+    @value
   end
 end

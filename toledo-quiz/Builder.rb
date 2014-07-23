@@ -1,5 +1,6 @@
 require './Shared.rb'
 require './Questions.rb'
+require './LaTeX.rb'
 
 module Builder
   @@questions = []
@@ -23,13 +24,17 @@ module Builder
     end
   end
 
+  def set(key, val)
+    add_postprocessor do |question|
+      message = "#{key}=".to_sym
+
+      question.send(message, val)
+    end
+  end
+
   def with(key, val)
     scope do
-      add_postprocessor do |question|
-        message = "#{key}=".to_sym
-
-        question.send(message, val)
-      end
+      set(key, val)
 
       yield
     end
@@ -97,6 +102,12 @@ module Builder
 
   def tex(template)
     LaTeX.generate(questions, template)
+  end
+
+  def toledo
+    Toledo.generate(questions) do |index|
+      yield index
+    end
   end
 
   def check

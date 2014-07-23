@@ -1,0 +1,120 @@
+#<
+  Level 3 Type Inference
+
+  Introduces overloading and same method names in different classes
+  No arrays
+>#
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo() {
+        __String__ a = null;
+
+        bar(a);
+    }
+
+    public void bar(int x) {
+        ...
+    }
+
+    public void bar(String x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(__boolean__ x, __String__ y) {
+        int a = bar(x)
+        boolean b = bar(y);
+    }
+
+    public int bar(boolean x) {
+        ...
+    }
+
+    public boolean bar(String x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo() {
+        __int__ x = bar();
+        __String__ y = bar(0);
+        __double__ y = bar(0, 1);
+    }
+
+    public int bar() { ... }
+    public String bar(int a) { ... }
+    public double bar(int a, int b) { ... }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void baz(__Bar__ x) {
+        x.foo(5);
+    }    
+}
+
+class Bar {
+    public void foo(double x) {
+        ...
+    }
+}
+
+class Qux {
+    public void foo(String x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void baz(__Qux__ x) {
+        x.foo("abc");
+    }    
+}
+
+class Bar {
+    public void foo(double x) {
+        ...
+    }
+}
+
+class Qux {
+    public void foo(String x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void m(__Bar__ x) {
+        x.foo();
+        x.bar();
+    }    
+}
+
+class Bar {
+    public void foo() {
+        ...
+    }
+
+    public void bar() {
+        ...
+    }
+}
+
+class Qux {
+    public void foo() {
+        ...
+    }
+}

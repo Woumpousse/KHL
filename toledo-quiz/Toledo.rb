@@ -6,7 +6,7 @@ module Toledo
   class Question
     protected
     def join(fields)
-      fields.join("|")
+      fields.join("\t")
     end
   end
 
@@ -129,11 +129,10 @@ module Toledo
     end
   end
 
-  def self.generate(questions)
+  def Toledo.generate(questions)
     questions.each_with_index.map do |question, index|
-      text = yield index
-
-      question.format(text)
+      question.toledo_text = yield index
+      question.toledo
     end.join("\n")
   end
 end

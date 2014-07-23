@@ -1,0 +1,143 @@
+#<
+  Level 2 Type Inference
+
+  Dealing with classes/object
+  No overloading
+  No arrays
+>#
+
+#infer-types[template=infer]
+
+class Foo {
+    public __Foo__ bar() {
+        return new Foo();
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __Foo__ bar() {
+        return new Foo();
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__int__ x) {
+        qux(x);
+    }
+
+    public void qux(int y) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(__boolean__ x) {
+        new Bar(x);
+    }
+}
+
+class Bar {
+    public Bar(boolean y) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __String__ a;
+
+    public void bar(__String__ x) {
+        a = x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(Bar x, __String__ y) {
+        x.foo(y);
+    }
+}
+
+class Bar {
+    public void foo(String x) {
+        ...
+    }
+}
+
+class Qux {
+    public void foo(int x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(Qux x, __int__ y) {
+        x.foo(y);
+    }
+}
+
+class Bar {
+    public void foo(String x) {
+        ...
+    }
+}
+
+class Qux {
+    public void foo(int x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__Bar__ x) {
+        x.foo(null);
+    }
+}
+
+class Bar {
+    public void foo(String x) {
+        ...
+    }
+}
+
+class Qux {
+    public void foo(int x) {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __boolean__ bar(Foo x, __Foo__ y) {
+        return x == y;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public Foo(String x) {
+        ...
+    }
+}
+
+class Bar {
+    private __Foo__ a;
+
+    public Bar(__String__ y) {
+        a = new Foo(y);
+    }
+}

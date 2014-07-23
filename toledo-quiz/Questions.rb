@@ -1,5 +1,7 @@
 require './Types.rb'
 require './Shared.rb'
+require './Toledo.rb'
+require './Java.rb'
 
 module Questions
   class Question
@@ -157,7 +159,8 @@ module Questions
     def initialize(text, code_template)
       Types.check(binding, {
                     'text' => String,
-                    'code_template' => String } )
+                    'code_template' => String
+                  } )
       
       super(text)
 
@@ -168,8 +171,9 @@ module Questions
     attr_accessor :variable_name, :code_template
 
     def check
-      code = translate_to_java
-      Java.compile(Java.split_in_files(code))
+      translate_to_java.each do |code|
+        Java.compile(Java.split_in_files(code))
+      end
     end
 
     def toledo
@@ -203,7 +207,7 @@ module Questions
     end
 
     def toledo_multiple_placeholders
-      answers_groups = find_answer_groups
+      answer_groups = find_answer_groups
       abort "Bug" unless answer_groups.length > 1
 
       Types.check(binding, {
@@ -213,7 +217,7 @@ module Questions
       question = Toledo::MultipleFillInQuestion.new(toledo_text)
 
       answer_groups.each_with_index do |answer_group, index|
-        question.add_answer_group( variable_name(index+1), answer)
+        question.add_answer_group( variable_name(index+1), answer_group )
       end
 
       question.to_s
@@ -235,9 +239,22 @@ module Questions
     end
 
     def translate_to_java
-      code = @code_template.gsub(PLACEHOLDER_REGEX) do
-        $1
-      end.gsub(/\.\.\./, 'throw new RuntimeException();').strip
+      expand_placeholders(replace_ellipses(@code_template.strip))
+    end
+
+    def replace_ellipses(code)
+      code.gsub(/\.\.\./, 'throw new RuntimeException();')
+    end
+
+    def expand_placeholders(code)
+      if code =~ PLACEHOLDER_REGEX then
+        pre, match, post = $`, $1, $'
+        match.split("|").map do |alternative|
+          expand_placeholders("#{pre}#{alternative}#{post}")
+        end.flatten
+      else
+        [ code ]
+      end
     end
 
     def translate_to_tex_single_placeholder
@@ -251,8 +268,8 @@ module Questions
     def translate_to_tex_multiple_placeholder
       k = 0
       @code_template.gsub(PLACEHOLDER_REGEX) do
-        "`\\placeholdern{#{k}}`"
         k += 1
+        "`\\placeholdern{#{k}}`"
       end
     end
 
@@ -262,6 +279,39 @@ module Questions
 
     def single_placeholder?
       placeholder_count == 1
+    end
+  end
+
+
+  class InterpretCodeQuestion < Question
+    def initialize(text, code)
+      Types.check(binding, {
+                    'text' => String,
+                    'code' => String
+                  } )
+
+      super(text)
+
+      @code = code
+      @output = Lazy.new do
+        classes = Java.split_in_files(code)
+        Java.execute(classes)
+      end
+    end
+
+    def check
+      classes = Java.split_in_files(code)
+      Java.compile(classes)
+    end
+
+    def toledo
+      question = Toledo.SingleFillInQuestion(text)
+      question.add_possible_answer(@output.value)
+      question.to_s
+    end
+
+    def texified_code
+      @code
     end
   end
 end

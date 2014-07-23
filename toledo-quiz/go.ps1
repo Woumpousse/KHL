@@ -1,6 +1,6 @@
 param([Parameter(Mandatory=$true)][String]$Name,
       [Switch]$Convert,
-      [Switch]$NoTeX)
+      [Switch]$TeX)
 
 ruby "$Name.rb" | out-file -encoding ascii -filepath "temp.tex"
 
@@ -8,7 +8,7 @@ if ( -not $? ) {
    Break
 }
 
-if ( -not $NoTeX ) {
+if ( $TeX ) {
    pdflatex "temp.tex"
 }
 
