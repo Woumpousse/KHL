@@ -1,21 +1,16 @@
-.SUFFIXES: .png .pdf .tex
+all: @assignment @solution
 
-TEXS = dag.uml.tex inschrijving.uml.tex kind.uml.tex verblijf.uml.tex
-PDFS = $(TEX:tex=pdf)
-PNGS = $(TEX:tex=png)
+@assignment: @doc
+	7z a assignment.zip doc\opgave.zip src tests
 
-all: $(PDFS) $(PNGS)
+@solution: @doc
+	7z a solution.zip doc\opgave.zip src tests solution
 
-.pdf.png:
-	convert -quality 90 -density 300 -trim $** $@
-
-.tex.pdf:
-	pdflatex $**
+@doc:
+	pushd doc & nmake all
 
 clean:
-	del *~
-	del *.aux
-	del *.pdf
-	del *.png
-	del *.log
+	del /s /q bin
+	rmdir bin
+	pushd doc & nmake clean
 
