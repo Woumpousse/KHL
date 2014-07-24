@@ -181,3 +181,11 @@ class Foo {
 class Bar {
     public Bar(__boolean__ x) { ... }
 }
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo() {
+        __Foo__ x = this;
+    }
+}
