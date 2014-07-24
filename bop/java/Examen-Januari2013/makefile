@@ -1,16 +1,20 @@
-all: @assignment @solution
+.PHONY: assignment solution doc clean
 
-@assignment: @doc
-	7z a assignment.zip doc\opgave.zip src tests
+ZIP = 7z
 
-@solution: @doc
-	7z a solution.zip doc\opgave.zip src tests solution
+all: assignment solution
 
-@doc:
-	pushd doc & nmake all
+assignment: doc
+	$(ZIP) a assignment.zip doc\opgave.zip src tests
+
+solution: doc
+	$(ZIP) a solution.zip doc\opgave.zip src tests solution
+
+doc:
+	$(MAKE) -C doc
 
 clean:
 	del /s /q bin
 	rmdir bin
-	pushd doc & nmake clean
+	cd doc & make clean
 
