@@ -1,7 +1,9 @@
-all: @assignment @solution
+.PHONY: all assignment solution
 
-@assignment:
+all: assignment solution
+
+assignment:
 	7z a assignment.zip doc src
 
-@solution:
+solution:
 	7z a solution.zip doc src solution

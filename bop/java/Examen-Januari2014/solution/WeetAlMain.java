@@ -12,7 +12,7 @@ public class WeetAlMain
         examen.voegVraagToe( vraag1 );
 
         // Voeg de tweede vraag toe aan het examen
-        MeerkeuzeVraag vraag2 = new MeerkeuzeVraag( "Bla bla bla?", new String[] { "a", "b", "c" }, 3 );
+        MeerkeuzeVraag vraag2 = new MeerkeuzeVraag( "Bla bla bla?", new String[] { "a", "b", "c" }, 0 );
         examen.voegVraagToe( vraag2 );
 
         // Wijzig de vraagvolgorde en bij elke vraag de antwoordvolgorde
