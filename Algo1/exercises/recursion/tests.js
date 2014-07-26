@@ -50,6 +50,19 @@ var solutions = ( function() {
     }
 
     function subarrays(xs) {
+        if ( xs.length === 0 ) {
+            return [ [] ];
+        }
+        else {
+            var subresult = subarrays( xs.slice(1) );
+            var result = subresult.slice(0);
+
+            for ( var i = 0; i !== subresult.length; ++i ) {
+                 result.push( [ xs[0] ].concat( subresult[i] ) );
+            }
+
+            return result;
+        }
     }
 
     function permutations(xs) {
@@ -59,13 +72,13 @@ var solutions = ( function() {
         else {
             var result = [];
 
-            for ( var i = 0; i != xs.length; ++i ) {
+            for ( var i = 0; i !== xs.length; ++i ) {
                 var picked = xs[i];
                 var rest = xs.slice(0, i).concat( xs.slice(i+1) );
 
                 var restPermutations = permutations( rest );
 
-                for ( var j = 0; j != restPermutations.length; ++j ) {
+                for ( var j = 0; j !== restPermutations.length; ++j ) {
                     result.push( [picked].concat( restPermutations[j] ) );
                 }
             }
@@ -78,12 +91,13 @@ var solutions = ( function() {
              countZeros: countZeros,
              removeZeros: removeZeros,
              range: range,
-             permutations: permutations
+             subarrays: subarrays,
+             permutations: permutations,
            };
 })();
 
-// var student = solutions;
-var student = this;
+var student = solutions;
+// var student = this;
 
 
 tests = { sum: { inputs: [ [ [] ],
@@ -123,6 +137,13 @@ tests = { sum: { inputs: [ [ [] ],
                              [2,4],
                              [1,10] ]
                  },
+          subarrays: { inputs: [ [ [] ],
+                                 [ [1] ],
+                                 [ [1,2] ],
+                                 [ [1,2,3] ]
+                               ],
+                       checker: permutationChecker
+                     },
           permutations: { inputs: [ [ [] ],
                                     [ [1] ],
                                     [ [1,2] ],
@@ -134,24 +155,37 @@ tests = { sum: { inputs: [ [ [] ],
         };
 
 for ( functionName in tests ) {
-    (function () {
+    (function () { // New scope is necessary, since tests are not ran immediately
         QUnit.module(functionName);
 
+        // Get function to be tested
         var tested = student[functionName];
 
+        // Check if student implemented test
         QUnit.test( "Checking for existence of {0}".format(functionName), function (assert) {
             assert.ok( tested !== undefined );
         } );
 
+        // Only go further if student implemented test
         if ( tested !== undefined ) {
+            // Get reference implementation
             var solution = solutions[functionName];
+
+            // Get test data
             var testData = tests[functionName];
+
+            // Get specialized checker
             var checker = testData.checker ? testData.checker : deepEqualChecker;
 
+            // For each test case
             _.each(testData.inputs, function (input) {
+                // Get the student result
                 var result = tested.apply( null, input );
+
+                // Get the reference implementation's result
                 var expectedResult = solution.apply( null, input );
 
+                // Check for correctness using the checker
                 QUnit.test( "Input: {0}, Expected: {1}".format(input, expectedResult), function (assert) {
                     checker( assert, result, expectedResult, "Got {0}".format(result) );
                 } );
