@@ -59,13 +59,13 @@ Array.initialize = function (length, f) {
     return result;
 };
 
-Array.prototype.isPermutationOf = function(that, eq) {
+Array.prototype.isPermutationOf = function (that, eq) {
     if ( this.length != that.length ) {
         return false;
     }
     else {
         var eq = eq ? eq : function (x, y) { return x === y; };
-        var visited = Array.initialize( this.length, function() { return false; } );
+        var visited = Array.initialize( this.length, function () { return false; } );
         var i = 0;
         var j;
         
@@ -84,5 +84,24 @@ Array.prototype.isPermutationOf = function(that, eq) {
         }
 
         return true;
+    }
+}
+
+Array.prototype.sum = function () {
+    return _.reduce(this, function (acc, x) { return acc + x; }, 0);
+}
+
+Array.prototype.removeAt = function(idx) {
+    return this.slice(0, idx).concat(this.slice(idx + 1));
+}
+
+Array.prototype.isSubsetOf = function (that) {
+    if ( this.length === 0 ) {
+        return true;
+    }
+    else {
+        var idx = _.indexOf(that, this[0]);
+
+        return idx !== -1 && this.slice(1).isSubsetOf( that.removeAt(idx) );
     }
 }
