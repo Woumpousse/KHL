@@ -52,3 +52,70 @@ class Foo {
     }
 }
 
+#infer-types[template=infer]
+
+class Foo {
+    public __String__ foo(String[][] x) {
+        return x[0][0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public char foo(__char[][]__ x) {
+        return x[0][0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public int[] foo(__int[][]__ x) {
+        return x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __Foo[]__ foo(Foo[][] x) {
+        return x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __Foo[]__ foo(Foo[][] x) {
+        return x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void foo(__Foo[]__ x) {
+        x[0].foo();
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __boolean[]__ x;
+
+    public Foo() {
+        x = new boolean[5];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __double[]__ x;
+
+    public void foo() {
+        x[0] = 1.0;
+    }
+}

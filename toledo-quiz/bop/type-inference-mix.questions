@@ -1,0 +1,104 @@
+#<
+  Level 5 Type Inference
+>#
+
+#infer-types[template=infer]
+
+class Foo {
+    private __int__ x;
+
+    public __void__ foo() {
+        x = 5;
+    }
+
+    public __void__ bar(__int[]__ x) {
+        this.x = x[0];
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __boolean__ x;
+
+    public __boolean__ foo() {
+        return x;
+    }
+
+    public __void__ bar( x) {
+        this.x = (x[0] == 5);
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __Foo__ foo() {
+        return bar();
+    }
+
+    public __Foo__ bar() {
+        return qux();
+    }
+
+    public __Foo__ qux() {
+        __Foo__ x = foo();
+        return x.foo();
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int|double__ foo() {
+        return foo() + 1;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __void__ foo(__Bar__ x) {
+        x.bar();
+    }
+}
+
+class Bar {
+    public __void__ bar(__Foo__ x) {
+        x.foo();
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __boolean__ x;
+
+    public Foo(__Bar__ x) {
+        x = x.qux();
+    }
+}
+
+class Bar {
+    public __boolean__ qux() {
+        return this == null;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    private __Foo__ a;
+
+    public Foo() {
+        a == this;
+    }
+
+    public __void__ foo(__Foo__ x) {
+        bar();
+    }
+
+    public __void__ bar() {
+        foo(this);
+    }
+}
