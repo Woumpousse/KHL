@@ -68,6 +68,16 @@ var tests = ( function() {
         return result;
     }
 
+    function reverse(xs) {
+        for ( var i = 0; 2 * i < xs.length; ++i ) {
+            var j = xs.length - i - 1;
+
+            var temp = xs[i];
+            xs[i] = xs[j];
+            xs[j] = temp;
+        }
+    }
+
     return { contains: { referenceImplementation: contains,
                          inputs: [ [ [], 1 ],
                                    [ [1], 1 ],
@@ -132,7 +142,17 @@ var tests = ( function() {
                                 [2,4],
                                 [1,10]
                               ]
-                    }
+                    },
+             reverse: { referenceImplementation: reverse,
+                        inputs: [ [ [] ],
+                                  [ [1] ],
+                                  [ [1,2] ],
+                                  [ [1,2,3] ],
+                                  [ [1,2,3,4] ],
+                                  [ [1,2,3,4,5] ],
+                                  [ [1,1,2,3,3,4,5,5,6] ]
+                                ]
+                        }
            };
 })();
 

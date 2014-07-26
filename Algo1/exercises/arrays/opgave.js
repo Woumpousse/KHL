@@ -38,6 +38,41 @@
 
 
 
+
+
+/*
+  incrementEachItem
+
+  Parameters
+  xs: array of numbers
+
+  Result
+  Returns nothing
+
+  Side effects
+  Each item in xs has been incremented
+*/
+
+
+
+
+/*
+  reverse
+
+  Parameters
+  xs: array
+
+  Result
+  Returns nothing
+
+  Side effects
+  The array xs has been reversed
+*/
+
+
+
+
+
 /*
   countZeros
 

@@ -182,7 +182,7 @@ function unitTests(tests, student) {
                     var expectedResult = solution.apply( null, refInput );
 
                     // Check for correctness
-                    QUnit.test( "Input: {0}, Expected: {1}".format(input, expectedResult), function (assert) {
+                    QUnit.test( "Input: {0}, Expected input modification: {1}, Expected return value: {2}".format(input, refInput, expectedResult), function (assert) {
                         assert.deepEqual( refInput, studentInput, "Inputs must be modified in the same way" );
                         checker( assert, input, result, expectedResult, "Got {0}".format(result) );
                     } );
