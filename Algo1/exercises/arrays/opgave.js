@@ -1,4 +1,18 @@
 /*
+  contains
+
+  Parameters
+  xs: an array
+  x: a value
+
+  Result
+  True if x is an element of xs, false otherwise
+*/
+
+
+
+
+/*
   sum
 
   Parameters

@@ -1,8 +1,18 @@
 var tests = ( function() {
+    function contains(xs, x) {
+        for ( var i = 0; i !== xs.length; ++i ) {
+            if ( xs[i] === x ) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
     function sum(xs) {
         var result = 0;
 
-        for ( var i = 0; i != xs.length; ++i ) {
+        for ( var i = 0; i !== xs.length; ++i ) {
             result += xs[i];
         }
 
@@ -12,17 +22,23 @@ var tests = ( function() {
     function product(xs) {
         var result = 1;
 
-        for ( var i = 0; i != xs.length; ++i ) {
+        for ( var i = 0; i !== xs.length; ++i ) {
             result *= xs[i];
         }
 
         return result;
     }
 
+    function incrementEachItem(xs) {
+        for ( var i = 0; i !== xs.length; ++i ) {
+            xs[i]++;
+        }
+    }
+
     function countZeros(xs) {
         var result = 0;
 
-        for ( var i = 0; i != xs.length; ++i ) {
+        for ( var i = 0; i !== xs.length; ++i ) {
             if ( xs[i] === 0 ) {
                 ++result;
             }
@@ -32,7 +48,7 @@ var tests = ( function() {
     }
 
     function firstIndexOf(x, xs) {
-        for ( var i = 0; i != xs.length; ++i ) {
+        for ( var i = 0; i !== xs.length; ++i ) {
             if ( xs[i] === x ) {
                 return i;
             }
@@ -52,7 +68,15 @@ var tests = ( function() {
         return result;
     }
 
-    return { sum: { referenceImplementation: sum,
+    return { contains: { referenceImplementation: contains,
+                         inputs: [ [ [], 1 ],
+                                   [ [1], 1 ],
+                                   [ [0], 1 ],
+                                   [ [1,2,3], 1],
+                                   [ [1,2,3], 2],
+                                   [ [1,2,3], 3] ]
+                       },
+             sum: { referenceImplementation: sum,
                     inputs: [ [ [] ],
                               [ [0] ],
                               [ [1] ],
@@ -71,6 +95,13 @@ var tests = ( function() {
                                   [ [1,2,3,4,0] ]
                              ]
                       },
+             incrementEachItem: { referenceImplementation: incrementEachItem,
+                                  inputs: [ [ [] ],
+                                            [ [0] ],
+                                            [ [0,0,0] ],
+                                            [ [1,2,3] ]
+                                          ]
+                                },
              countZeros: { referenceImplementation: countZeros,
                            inputs: [ [ [] ],
                                      [ [0] ],
@@ -101,8 +132,9 @@ var tests = ( function() {
                                 [2,4],
                                 [1,10]
                               ]
-                    }             
+                    }
            };
 })();
+
 
 unitTests( tests, this );

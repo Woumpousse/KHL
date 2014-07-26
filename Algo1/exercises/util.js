@@ -169,14 +169,21 @@ function unitTests(tests, student) {
 
                 // For each test case
                 _.each(testData.inputs, function (input) {
+                    // Clone the input for the student
+                    var studentInput = clone(input);
+
                     // Get the student result
-                    var result = tested.apply( null, input );
+                    var result = tested.apply( null, studentInput );
+
+                    // Clone the input for the reference implementation
+                    var refInput = clone(input);
 
                     // Get the reference implementation's result
-                    var expectedResult = solution.apply( null, input );
+                    var expectedResult = solution.apply( null, refInput );
 
-                    // Check for correctness using the checker
+                    // Check for correctness
                     QUnit.test( "Input: {0}, Expected: {1}".format(input, expectedResult), function (assert) {
+                        assert.deepEqual( refInput, studentInput, "Inputs must be modified in the same way" );
                         checker( assert, input, result, expectedResult, "Got {0}".format(result) );
                     } );
                 } );
