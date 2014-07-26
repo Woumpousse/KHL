@@ -1,3 +1,8 @@
+/*
+  If false, no test cases are shown for X if no function for X has been defined.
+*/
+var forceShow = true;
+
 function deepEqualChecker(assert, expected, received, message) {
     assert.deepEqual(expected, received, message);
 }
@@ -6,7 +11,7 @@ function permutationChecker(assert, expected, received, message) {
     assert.ok( expected !== undefined && expected.isPermutationOf(received), message );
 }
 
-var solutions = ( function() {
+var tests = ( function() {
     function sum(xs) {
          if ( xs.length === 0 ) {
             return 0;
@@ -33,7 +38,7 @@ var solutions = ( function() {
             return [];
         }
         else if ( xs[0] === 0 ) {
-            return solutions.removeZeros( xs.slice(1) );
+            return removeZeros( xs.slice(1) );
         }
         else {
             return [ xs[0] ].concat( removeZeros( xs.slice(1) ) );
@@ -87,92 +92,96 @@ var solutions = ( function() {
         }
     }
 
-    return { sum: sum,
-             countZeros: countZeros,
-             removeZeros: removeZeros,
-             range: range,
-             subarrays: subarrays,
-             permutations: permutations,
-           };
-})();
-
-var student = solutions;
-// var student = this;
-
-
-tests = { sum: { inputs: [ [ [] ],
-                           [ [0] ],
-                           [ [1] ],
-                           [ [1,2] ],
-                           [ [1,2,3] ],
-                           [ [1,2,3,4,5,6,7,8,9,10] ]
+    return { sum: { referenceImplementation: sum,
+                    inputs: [ [ [] ],
+                              [ [0] ],
+                              [ [1] ],
+                              [ [1,2] ],
+                              [ [1,2,3] ],
+                              [ [1,2,3,4,5,6,7,8,9,10] ]
                          ]
-               },
-          countZeros: { inputs: [ [ [] ],
-                                  [ [0] ],
-                                  [ [1] ],
-                                  [ [0,0] ],
-                                  [ [1,1] ],
-                                  [ [1,0,1] ],
-                                  [ [0,1,0] ],
-                                  [ [1,0,0] ],
-                                  [ [2,3,4] ]
+                  },
+             countZeros: { referenceImplementation: countZeros,
+                           inputs: [ [ [] ],
+                                     [ [0] ],
+                                     [ [1] ],
+                                     [ [0,0] ],
+                                     [ [1,1] ],
+                                     [ [1,0,1] ],
+                                     [ [0,1,0] ],
+                                     [ [1,0,0] ],
+                                     [ [2,3,4] ]
                                 ]
-                      },
-          removeZeros: { inputs: [ [ [] ],
-                                   [ [0] ],
-                                   [ [1] ],
-                                   [ [0,0] ],
-                                   [ [1,1] ],
-                                   [ [1,0,1] ],
-                                   [ [0,1,0] ],
-                                   [ [1,0,0] ],
-                                   [ [2,3,4] ]
-                                 ],
-                       },
-          range: { inputs: [ [1,1],
-                             [1,2],
-                             [1,3],
-                             [2,2],
-                             [2,4],
-                             [1,10] ]
-                 },
-          subarrays: { inputs: [ [ [] ],
-                                 [ [1] ],
-                                 [ [1,2] ],
-                                 [ [1,2,3] ]
-                               ],
-                       checker: permutationChecker
-                     },
-          permutations: { inputs: [ [ [] ],
+                         },
+             removeZeros: { referenceImplementation: removeZeros,
+                            inputs: [ [ [] ],
+                                      [ [0] ],
+                                      [ [1] ],
+                                      [ [0,0] ],
+                                      [ [1,1] ],
+                                      [ [1,0,1] ],
+                                      [ [0,1,0] ],
+                                      [ [1,0,0] ],
+                                      [ [2,3,4] ]
+                                 ]
+                          },
+             range: { referenceImplementation: range,
+                      inputs: [ [1,1],
+                                [1,2],
+                                [1,3],
+                                [2,2],
+                                [2,4],
+                                [1,10]
+                              ]
+                    },
+             subarrays: { referenceImplementation: subarrays,
+                          inputs: [ [ [] ],
                                     [ [1] ],
                                     [ [1,2] ],
-                                    [ [1,2,3] ],
-                                    [ [1,2,3,4] ]
+                                    [ [1,2,3] ]
                                   ],
                           checker: permutationChecker
                         },
-        };
+             permutations: { referenceImplementation: permutations,
+                             inputs: [ [ [] ],
+                                       [ [1] ],
+                                       [ [1,2] ],
+                                       [ [1,2,3] ],
+                                       [ [1,2,3,4] ]
+                                     ],
+                             checker: permutationChecker
+                           }
+           };
+})();
+
+var student = this;
+
+
 
 for ( functionName in tests ) {
     (function () { // New scope is necessary, since tests are not ran immediately
         QUnit.module(functionName);
 
+        // Check if student implemented test
+        QUnit.test( "Checking for existence of {0}".format(functionName), function (assert) {
+            assert.ok( student[functionName] !== undefined ); // (Cannot use local "tested" here because execution is postponed and "tested" might be assigned to later, making this test succeed undeservedly)
+        } );
+
         // Get function to be tested
         var tested = student[functionName];
 
-        // Check if student implemented test
-        QUnit.test( "Checking for existence of {0}".format(functionName), function (assert) {
-            assert.ok( tested !== undefined );
-        } );
+        // Use dummy implementation if necessary
+        if ( forceShow ) {
+            tested = tested || function() { };
+        }
 
         // Only go further if student implemented test
         if ( tested !== undefined ) {
-            // Get reference implementation
-            var solution = solutions[functionName];
-
             // Get test data
             var testData = tests[functionName];
+
+            // Get reference implementation
+            var solution = testData.referenceImplementation;
 
             // Get specialized checker
             var checker = testData.checker ? testData.checker : deepEqualChecker;
