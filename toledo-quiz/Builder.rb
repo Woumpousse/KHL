@@ -104,10 +104,16 @@ module Builder
     LaTeX.generate(questions, template)
   end
 
-  def toledo
-    Toledo.generate(questions) do |index|
-      yield index
+  def set_toledo_text
+    @@questions.each_with_index do |question, index|
+      question.toledo_text = yield question, index
     end
+  end
+
+  def toledo
+    @@questions.map do |question|
+      question.toledo
+    end.join("\n")
   end
 
   def check

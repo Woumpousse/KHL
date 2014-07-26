@@ -79,7 +79,7 @@ module Questions
     attr_accessor :answer
 
     def toledo
-      Toledo::TrueFalseQuestion.new( self[:text], self[:answer] ).to_s
+      Toledo::TrueFalseQuestion.new( toledo_text, answer ).to_s
     end
 
     attr_accessor :text, :answer
@@ -110,7 +110,7 @@ module Questions
     end
 
     def toledo
-      question = Toledo::MultipleAnswerQuestion.new(@text)
+      question = Toledo::MultipleAnswerQuestion.new(toledo_text)
 
       @claims.each do |claim, answer|
         question.add_claim(claim, answer)
@@ -143,7 +143,7 @@ module Questions
     attr_accessor :answer, :delta
 
     def toledo
-      question = Toledo::NumericQuestion.new(@text, @answer, @delta)
+      question = Toledo::NumericQuestion.new(toledo_text, answer, delta)
 
       question.to_s
     end
@@ -305,7 +305,7 @@ module Questions
     end
 
     def toledo
-      question = Toledo.SingleFillInQuestion(text)
+      question = Toledo.SingleFillInQuestion(toledo_text)
       question.add_possible_answer(@output.value)
       question.to_s
     end

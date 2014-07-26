@@ -2,7 +2,7 @@ require 'tmpdir.rb'
 require 'open3'
 require './Types.rb'
 
-module Java  
+module Java
   class JavaError < StandardError
     def initialize(message)
       super(message)
@@ -49,10 +49,8 @@ module Java
     Types.check(binding, { 'classes' => {String => String} })
 
     with_files(classes) do
-      begin
-        Java.compile_files('*.java')
-        Java.run(main_class)
-      end
+      Java.compile_files('*.java')
+      Java.run(main_class)
     end
   end
 

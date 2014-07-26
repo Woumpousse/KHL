@@ -1,0 +1,53 @@
+\documentclass[a4paper]{article}
+\usepackage[dutch]{babel}
+\usepackage{pxfonts}
+\usepackage{framed}
+\usepackage{booktabs}
+\usepackage{fancybox}
+\usepackage{listings}
+
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return,
+            null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+
+\newcommand{\placeholder}{\rule{2cm}{.2pt}}
+\newcommand{\placeholdern}[1]{\ensuremath{T_{#1}}}
+
+\newenvironment{exercise}{
+  \begin{framed}}{
+  \end{framed}}
+
+
+
+\pagestyle{empty}
+
+\begin{document}
+
+#QUESTIONS
+#TEMPLATE[interpret]
+\begin{exercise}
+\noindent #[text]
+\begin{lstlisting}[language=JavaScript]
+#[texified_code]
+\end{lstlisting}
+% Antwoord: #[output]
+\end{exercise}
+\clearpage
+#ENDTEMPLATE
+#ENDQUESTIONS
+
+\end{document}

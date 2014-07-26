@@ -1,0 +1,76 @@
+function foo(x) {
+    if ( x == 0 ) {
+        return "ignition";
+    }
+    else {
+        return foo(x - 1);
+    }
+}
+
+console.log( foo(10) );
+---
+function foo(x) {
+    if ( x == 0 ) {
+        return 0;
+    }
+    else {
+        return 1 + foo(x - 1);
+    }
+}
+
+console.log( foo(10) );
+---
+function foo(x) {
+    if ( x == 0 ) {
+        return 0;
+    }
+    else {
+        return 2 + foo(x - 1);
+    }
+}
+
+console.log( foo(10) );
+---
+function foo(x) {
+    if ( x == 0 ) {
+        return 0;
+    }
+    else {
+        return 2 * foo(x - 1);
+    }
+}
+
+console.log( foo(10) );
+---
+function foo(x) {
+    if ( x == 0 ) {
+        return 1;
+    }
+    else {
+        return 2 * foo(x - 1);
+    }
+}
+
+console.log( foo(3) );
+---
+function foo(x) {
+    if ( x == 1 ) {
+        return 0;
+    }
+    else {
+        return 1 + foo(Math.floor(x / 2));
+    }
+}
+
+console.log( foo(8) );
+---
+function foo(xs) {
+    if ( xs.length == 0 ) {
+        return 0;
+    }
+    else {
+        return 1 + foo( xs.slice(1) );
+    }
+}
+
+console.log( foo([1,2,3]) );

@@ -129,11 +129,11 @@ module Toledo
     end
   end
 
-  def Toledo.generate(questions)
-    questions.each_with_index.map do |question, index|
-      question.toledo_text = yield index
-      question.toledo
-    end.join("\n")
-  end
+  # def Toledo.generate(questions)
+  #   questions.each_with_index.map do |question, index|
+  #     question.toledo_text = yield index
+  #     question.toledo
+  #   end.join("\n")
+  # end
 end
 
