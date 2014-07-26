@@ -7,15 +7,7 @@ String.prototype.format = function() {
     }
 	
     return result;
-}
-
-if ( !("forEach" in Array.prototype) ) {
-    Array.prototype.forEach = function( func ) {
-        for ( var i = 0; i != this.length; ++i ) {
-            func( this[i] );
-        }
-    };
-}
+};
 
 Array.prototype.toString = function() {
     var result = "[";
@@ -26,4 +18,71 @@ Array.prototype.toString = function() {
     result += "]";
 
     return result;
+};
+
+function lexicographical(suborder) {
+    return function ( xs, ys ) {
+        var i = 0;
+        var j = 0;
+
+        while ( i < xs.length && j < ys.length ) {
+            var cmp = suborder(xs[i], ys[i]);
+
+            if ( cmp < 0 ) {
+                return -1;
+            }
+            else if ( cmp > 0 ) {
+                return 1;
+            }
+
+            ++i;
+            ++j;
+        }
+
+        return xs.length - ys.length;
+    };
+}
+
+Array.prototype.eachIndex = function (f) {
+    for ( var i = 0; i != length; ++i ) {
+        f(i);
+    }
+};
+
+Array.initialize = function (length, f) {
+    var result = new Array(length);
+
+    result.eachIndex( function (index) {
+        result[index] = f(index);
+    } );
+
+    return result;
+};
+
+Array.prototype.isPermutationOf = function(that, eq) {
+    if ( this.length != that.length ) {
+        return false;
+    }
+    else {
+        var eq = eq ? eq : function (x, y) { return x === y; };
+        var visited = Array.initialize( this.length, function() { return false; } );
+        var i = 0;
+        var j;
+        
+        while ( i < this.length ) {
+            while ( j < that.length && visited[j] && !eq(this[i], that[j]) ) {
+                ++j;
+            }
+
+            if ( j == that.length ) {
+                return false;
+            }
+            else {
+                visited[j] = true;
+                ++i;
+            }
+        }
+
+        return true;
+    }
 }

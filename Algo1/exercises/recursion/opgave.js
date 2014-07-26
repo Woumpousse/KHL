@@ -1,20 +1,67 @@
 /*
-  xs: array getallen
-  resultaat: som van getallen in xs
+  sum
+
+  Parameters
+  xs: array of numbers
+
+  Result
+  Sum of all numbers
 */
-function sum(xs) {
-}
+
+
+
 
 /*
-  xs: array getallen
-  resultaat: aantal nullen in xs
+  countZeros
+
+  Parameters
+  xs: array of numbers
+
+  Result
+  Number of zeros in xs
 */
-function countZeros(xs) {
-}
+
+
+
+
 
 /*
-  xs: array getallen
-  resultaat: nieuwe array gelijk aan xs zonder nullen
+  removeZeros
+
+  Parameters
+  xs: array of numbers
+
+  Result
+  Copy of xs with zeros removed
 */
-function countZeros(xs) {
-}
+
+
+
+
+
+/*
+  range
+
+  Parameters
+  a: starting number
+  b: ending number
+
+  Result
+  An array containing the numbers from a to b (inclusive)
+*/
+
+
+
+
+
+
+
+/*
+  permutations (challenge)
+
+  Parameters
+  xs: an array
+
+  Result
+  an array of all permutations of xs
+*/
