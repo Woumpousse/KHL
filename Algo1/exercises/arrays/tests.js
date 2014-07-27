@@ -58,11 +58,10 @@ var tests = ( function() {
     }
 
     function range(a, b) {
-        var result = [];
+        var result = new Array(b - a + 1);
 
-        while ( a <= b ) {
-            result.push(a);
-            ++a;
+        for ( var i = 0; i !== result.length; ++i ) {
+            result[i] = a + i;
         }
 
         return result;
