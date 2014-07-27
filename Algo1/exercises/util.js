@@ -26,7 +26,16 @@ Array.prototype.toString = function() {
     var result = "[";
     for ( var i = 0; i != this.length; ++i ) {
         if ( i !== 0 ) result += ",";
-        result += this[i].toString();
+
+        if ( this[i] === null ) {
+            result += "null";
+        }
+        else if ( this[i] === undefined ) {
+            result += "undefined";
+        }
+        else {
+            result += this[i].toString();
+        }
     }
     result += "]";
 

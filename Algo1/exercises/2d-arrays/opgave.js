@@ -63,3 +63,15 @@
   Result
   An array containing the elements of the <row>-th row
 */
+
+
+/*
+  getColumn
+
+  Parameters
+  xss: a 2d-array
+  col: a positive integer
+
+  Result
+  An array containing the elements of the <col>-th column
+*/

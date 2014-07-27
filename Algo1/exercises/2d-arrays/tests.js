@@ -51,6 +51,18 @@ var tests = ( function() {
         return result;
     }
 
+    function getColumn(xss, col) {
+        var result = new Array( height(xss) );
+
+        for ( var row = 0; row !== result.length; ++row ) {
+            result[row] = xss[col][row];
+        }
+
+        return result;
+    }
+
+    
+
     return { createGrid: { referenceImplementation: createGrid,
                            inputs: [ [ 1, 1, 1 ],
                                      [ 1, 2, 0 ],
@@ -61,18 +73,18 @@ var tests = ( function() {
                          },
              width: { referenceImplementation: width,
                       inputs: [ [ createGrid(1,1,0) ],
-                                [ createGrid(1,2,0) ],
-                                [ createGrid(2,1,0) ],
-                                [ createGrid(2,2,1) ],
-                                [ createGrid(5,3,9) ]
+                                [ createGrid(1,2,1) ],
+                                [ createGrid(2,1,2) ],
+                                [ createGrid(2,2,3) ],
+                                [ createGrid(5,3,4) ]
                               ]
                     },
              height: { referenceImplementation: height,
                        inputs: [ [ createGrid(1,1,0) ],
-                                 [ createGrid(1,2,0) ],
-                                 [ createGrid(2,1,0) ],
-                                 [ createGrid(2,2,1) ],
-                                 [ createGrid(5,3,9) ]
+                                 [ createGrid(1,2,1) ],
+                                 [ createGrid(2,1,2) ],
+                                 [ createGrid(2,2,3) ],
+                                 [ createGrid(5,3,4) ]
                                ]
                      },
              zigZag: { referenceImplementation: zigZag,
@@ -100,7 +112,20 @@ var tests = ( function() {
                                  [ zigZag(5, 5), 3 ],
                                  [ zigZag(5, 5), 4 ]
                                ]
-                     }
+                     },
+             getColumn: { referenceImplementation: getColumn,
+                          inputs: [ [ zigZag(1, 1), 0 ],
+                                    [ zigZag(2, 2), 0 ],
+                                    [ zigZag(2, 1), 0 ],
+                                    [ zigZag(2, 2), 0 ],
+                                    [ zigZag(2, 2), 1 ],
+                                    [ zigZag(5, 5), 0 ],
+                                    [ zigZag(5, 5), 1 ],
+                                    [ zigZag(5, 5), 2 ],
+                                    [ zigZag(5, 5), 3 ],
+                                    [ zigZag(5, 5), 4 ]
+                                  ]
+                        }
            };
 })();
 
