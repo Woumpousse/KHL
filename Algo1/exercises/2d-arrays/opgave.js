@@ -75,3 +75,29 @@
   Result
   An array containing the elements of the <col>-th column
 */
+
+
+/*
+  rowSums
+
+  Parameters
+  xss: a 2d-array filled with integers
+  row: a positive integer
+
+  Result
+  The sum of the integers on the <row>-th row of <xss>
+*/
+
+
+/*
+  columnSums
+
+  Parameters
+  xss: a 2d-array filled with integers
+  col: a positive integer
+
+  Result
+  The sum of the integers on the <col>-th column of <xss>
+*/
+
+

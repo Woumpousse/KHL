@@ -61,7 +61,32 @@ var tests = ( function() {
         return result;
     }
 
-    
+    function sum(xs) {
+        var result = 0;
+
+        for ( var i = 0; i !== xs.length; ++i ) {
+            result += xs[i];
+        }
+
+        return result;
+    }
+
+    function rowSums(xss, row) {
+        return sum( getRow(xss, row) );
+    }
+
+    function columnSums(xss, col) {
+        return sum( getColumn(xss, col) );
+    }
+
+    gridInputs = [ zigZag(1, 1),
+                   zigZag(1, 2),
+                   zigZag(2, 1),
+                   zigZag(2, 2),
+                   zigZag(3, 1),
+                   zigZag(3, 2),
+                   zigZag(3, 3)
+                 ];
 
     return { createGrid: { referenceImplementation: createGrid,
                            inputs: [ [ 1, 1, 1 ],
@@ -72,20 +97,10 @@ var tests = ( function() {
                                    ]
                          },
              width: { referenceImplementation: width,
-                      inputs: [ [ createGrid(1,1,0) ],
-                                [ createGrid(1,2,1) ],
-                                [ createGrid(2,1,2) ],
-                                [ createGrid(2,2,3) ],
-                                [ createGrid(5,3,4) ]
-                              ]
+                      inputs: _.zip( gridInputs )
                     },
              height: { referenceImplementation: height,
-                       inputs: [ [ createGrid(1,1,0) ],
-                                 [ createGrid(1,2,1) ],
-                                 [ createGrid(2,1,2) ],
-                                 [ createGrid(2,2,3) ],
-                                 [ createGrid(5,3,4) ]
-                               ]
+                       inputs: _.zip( gridInputs )
                      },
              zigZag: { referenceImplementation: zigZag,
                        inputs: [ [1, 1],
@@ -125,9 +140,17 @@ var tests = ( function() {
                                     [ zigZag(5, 5), 3 ],
                                     [ zigZag(5, 5), 4 ]
                                   ]
-                        }
+                        },
+             rowSums: { referenceImplementation: rowSums,
+                        inputs: _.zip(gridInputs, [0, 1, 0, 1, 0, 1, 2])
+                      },
+             columnSums: { referenceImplementation: columnSums,
+                           inputs: _.zip(gridInputs, [0,0,1,1,2,2,2])
+                         }
+
            };
 })();
+
 
 
 unitTests( tests, this );
