@@ -1,5 +1,5 @@
 /*
-  Important: keep grid's as an array of colums, not as an array of rows
+  Important: represent grids as an array of colums, not as an array of rows
 */
 
 /*
