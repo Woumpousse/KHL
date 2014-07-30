@@ -451,11 +451,6 @@ function preprocessTestData(allTestData)
 }
 
 
-function knapsack(n, ns) {
-    return null;
-}
-
-
 $(document).ready( function() {
     preprocessTestData(tests);
     collectStudentImplementations(tests, window);
