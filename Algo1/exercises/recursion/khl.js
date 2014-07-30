@@ -136,28 +136,17 @@ function populateTestCaseViews(testData)
 
         function generateTestCaseBlock(input)
         {
-            function generateBlockHeaderRow()
+            function generateOutputRowCells(implementation)
             {
-                var row = newElement('tr');
-                row.addClass('block-header');
-
-                row.append( generateArgumentCells(input) );
-
-                return row;
-            }
-
-            function generateBlockOutputRow(implementation)
-            {
-                var row = newElement('tr');
-
                 if ( implementation !== undefined )
                 {
                     var output = runImplementation( implementation, input );
+                    var result;
 
-                    row.append( generateArgumentCells(output.transformedInputs) );
-                    row.append( generateResultCell(output.returnValue) );
+                    result = generateArgumentCells(output.transformedInputs);
+                    result.push( generateResultCell(output.returnValue) );
 
-                    return row;
+                    return result;
                 }
                 else
                 {
@@ -165,25 +154,43 @@ function populateTestCaseViews(testData)
                     cell.attr('colspan', input.length + 1);
                     cell.append("Undefined implementation");
 
-                    row.append(cell);
-
-                    return row;
+                    return [ cell ];
                 }
             }
 
-            function generateBlockReferenceOutputRow()
+            function generateHeaderRow()
             {
-                return generateBlockOutputRow(refImpl);
+                var row = newElement('tr');
+
+                row.addClass('block-header');
+                row.append( generateArgumentCells(input) );
+
+                return row;
             }
 
-            function generateBlockReceivedOutputRow()
+            function generateExpectedOutputRow()
             {
-                return generateBlockOutputRow(impl);
+                var row = newElement('tr');
+
+                row.addClass('block-expected');
+                row.append( generateOutputRowCells(refImpl) );
+
+                return row;
             }
 
-            return [ generateBlockHeaderRow(),
-                     generateBlockReferenceOutputRow(),
-                     generateBlockReceivedOutputRow()
+            function generateReceivedOutputRow()
+            {
+                var row = newElement('tr');
+
+                row.addClass('block-received');
+                row.append( generateOutputRowCells(impl) );
+
+                return row;
+            }
+
+            return [ generateHeaderRow(),
+                     generateExpectedOutputRow(),
+                     generateReceivedOutputRow()
                    ];
         }
 
