@@ -137,6 +137,7 @@ function populateTestCaseViews(testData)
         {
             var expected = runImplementation( refImpl, input );
             var received = runImplementation( impl, input );
+            var correct = matchingResults(expected, received);
 
             function generateArgumentCells(arguments)
             {
@@ -220,10 +221,16 @@ function populateTestCaseViews(testData)
                 return row;
             }
 
-            return [ generateHeaderRow(),
-                     generateExpectedOutputRow(),
-                     generateReceivedOutputRow()
-                   ];
+            var rows = [ generateHeaderRow(),
+                         generateExpectedOutputRow(),
+                         generateReceivedOutputRow()
+                       ];
+
+            _.each( rows, function (row) {
+                row.attr('correct', correct ? 'true' : 'false');
+            } );
+
+            return rows;
         }
 
         return _.flatten( _.map( testData.inputs, generateTestCaseBlock ), true );

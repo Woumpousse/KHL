@@ -39,6 +39,14 @@ h2 {
     padding-right: 10px;
 }
 
+.test-case-view table [correct=true] {
+    border-left: 10px green solid;
+}
+
+.test-case-view table [correct=false] {
+    border-left: 10px red solid;
+}
+
 span.viewer:after {
     position: absolute;
     display: block;
