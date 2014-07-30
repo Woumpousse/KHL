@@ -315,7 +315,7 @@ var tests = ( function() {
                                        [ [1,2,3] ],
                                        [ [1,2,3,4] ]
                                      ],
-                             validator: permutationChecker
+                             validator: validators.io( equality.deep, equality.permutation(equality.deep) )
                            },
              knapsack: { referenceImplementation: knapsack,
                          inputs: [ [ 0, [] ],
@@ -328,18 +328,27 @@ var tests = ( function() {
                                    [ 84, [1,2,4,8,16,32,64] ],
                                    [ 94, [1,2,4,8,16,32,64] ],
                                    [ 97, [1,2,4,8,16,32,64] ],
-                                   [ 127, [1,2,4,8,16,32,64] ]
+                                   [ 127, [1,2,4,8,16,32,64] ],
+                                   [ 128, [1,2,4,8,16,32,64] ]
                                  ],
-                         validator: function (assert, input, expected, received, message) {
-                             var n = input[0];
-                             var ns = input[1];
+                         validator: function (input, expected, received) {
+                             var expectedResult = expected.returnValue;
+                             var receivedResult = received.returnValue;
 
-                             if ( expected === null ) {
-                                 assert.strictEqual( received, null, "Must be null" );
+                             if ( expectedResult === null )
+                             {
+                                 return receivedResult === null;
                              }
-                             else {
-                                 assert.strictEqual( received.sum(), n, "Sum must be correct" );
-                                 assert.ok( received.isSubsetOf(ns), "Selection {0} must be subset of input {1}".format(received, ns) );
+                             else if ( receivedResult === null )
+                             {
+                                 return false;
+                             }
+                             else
+                             {
+                                 var n = input[0];
+                                 var ns = input[1];                                 
+
+                                 return receivedResult.sum() === n && receivedResult.isSubsetOf(ns);
                              }
                          }
                        }

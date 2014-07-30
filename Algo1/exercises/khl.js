@@ -18,14 +18,14 @@ var equality = ( function () {
 } )();
 
 var validators = ( function () {
-    function identical(x, y)
+    function identical(input, expected, received)
     {
-        return equality.deep(x, y);
+        return equality.deep(expected, received);
     }
 
     function io( inputComparer, outputComparer)
     {
-        return function (expected, received) {
+        return function (input, expected, received) {
             return inputComparer( expected.transformedInputs, received.transformedInputs ) &&
                 outputComparer( expected.returnValue, received.returnValue );
         };
@@ -135,9 +135,15 @@ function runImplementation(implementation, inputs)
     }
 }
 
-function validateResults(expected, received, validator)
+function validateResults(input, expected, received, validator)
 {
-    return validator(expected, received);
+    if ( received instanceof runResult.Success ) {
+        return validator(input, expected, received);
+    }
+    else
+    {
+        return false;
+    }
 }
 
 function generatePage()
@@ -225,7 +231,7 @@ function generatePage()
             {
                 var expected = runImplementation( testData.referenceImplementation, input );
                 var received = runImplementation( testData.implementation, input );
-                var correct = validateResults( expected, received, testData.validator );
+                var correct = validateResults( input, expected, received, testData.validator );
 
                 function generateArgumentCells(arguments)
                 {
@@ -445,8 +451,8 @@ function preprocessTestData(allTestData)
 }
 
 
-function subarrays(xs) {
-    return [ [], [1], [2], [1,2] ];
+function knapsack(n, ns) {
+    return null;
 }
 
 
