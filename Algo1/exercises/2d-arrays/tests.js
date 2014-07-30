@@ -151,6 +151,3 @@ var tests = ( function() {
            };
 })();
 
-
-
-unitTests( tests, this );

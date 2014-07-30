@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../assignment.css">
+    <style>
+      .center {
+        margin: 10px auto;
+      }
+
+      .grid td {
+        width: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>2D Arrays</h1>
+      </header>
+      <nav></nav>
+
+      <section>
+        <p style='font-size: 150%; text-align: center'>
+          Note: all grids must be represented as arrays of columns, not arrays of rows.
+        </p>
+      </section>
+      
+      <section class="testcase" data-subject="createGrid">
+        <p>
+          Write a function <code>createGrid(width, height, value)</code> that
+          creates a 2D-array representing a grid with dimensions <code>width</code> by <code>height</code>.
+          Each cell in the grid must contain the value <code>value</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="width">
+        <p>
+          Write a function <code>width(xss)</code> that returns the width of the grid <code>xss</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="height">
+        <p>
+          Write a function <code>height(xss)</code> that returns the height of the grid <code>xss</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="zigZag">
+        <p>
+          Write a function <code>zigZag(width, height)</code> that returns a
+          grid with size <code>width</code> by <code>height</code> and containing
+          numbers in zig-zag pattern.
+        </p>
+        <table class="grid center">
+          <tr><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+          <tr><td>7</td><td>6</td><td>5</td><td>4</td></tr>
+          <tr><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+        </table>
+      </section>
+
+      <section class="testcase" data-subject="getRow">
+        <p>
+          Write a function <code>getRow(xss, row)</code> that returns a copy of
+          the <code>row</code>-th row of the grid <code>xss</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="getColumn">
+        <p>
+          Write a function <code>getRow(xss, col)</code> that returns a copy of
+          the <code>col</code>-th column of the grid <code>xss</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="rowSums">
+        <p>
+          Write a function <code>rowSums(xss)</code> that returns an array
+          whose i-th item corresponds to the sum of the values of the i-th row of <code>xss</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="columnSums">
+        <p>
+          Write a function <code>columnSums(xss)</code> that returns an array
+          whose i-th item corresponds to the sum of the values of the i-th column of <code>xss</code>.
+        </p>
+      </section>
+    </div>
+
+    <script src="../underscore.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../clone.js"></script>
+    <script src="../util.js"></script>
+    <script src="../test-framework.js"></script>
+    <script src="tests.js"></script>
+    <script src="student.js"></script>
+  </body>
+</html>
