@@ -1,3 +1,39 @@
+var equality = ( function () {
+    function deep(x, y)
+    {
+        return _.isEqual(x, y);
+    }
+
+    function permutation(eq)
+    {
+        return function (xs, ys) {
+            return xs.isPermutationOf(ys, eq);
+        }
+    }
+
+    return {
+        deep: deep,
+        permutation: permutation
+    };
+} )();
+
+var validators = ( function () {
+    function identical(x, y)
+    {
+        return equality.deep(x, y);
+    }
+
+    function io( inputComparer, outputComparer)
+    {
+        return function (expected, received) {
+            return inputComparer( expected.transformedInputs, received.transformedInputs ) &&
+                outputComparer( expected.returnValue, received.returnValue );
+        };
+    }
+
+    return { identical: identical, io: io };
+} )();
+
 function deepEqualChecker(assert, input, expected, received, message) {
     assert.deepEqual(expected, received, message);
 }
@@ -63,17 +99,17 @@ function collectStudentImplementations(allTestData, studentImplementations)
     }
 }
 
-var Result = { success: function ( transformedInputs, returnValue )
-               {
-                   this.transformedInputs = transformedInputs;
-                   this.returnValue = returnValue;
-               },
-               unimplemented: function () { },
-               error: function ( e )
-               {
-                   this.exception = e;
-               }
-             };
+var runResult = { Success: function ( transformedInputs, returnValue )
+                  {
+                      this.transformedInputs = transformedInputs;
+                      this.returnValue = returnValue;
+                  },
+                  Unimplemented: function () { },
+                  Error: function ( e )
+                  {
+                      this.exception = e;
+                  }
+                };
                
 
 function runImplementation(implementation, inputs)
@@ -86,22 +122,22 @@ function runImplementation(implementation, inputs)
         {
             var result = implementation.apply(null, clonedInputs);
 
-            return new Result.success( clonedInputs, result );
+            return new runResult.Success( clonedInputs, result );
         }
         catch ( err )
         {
-            return new Result.error( err );
+            return new runResult.Error( err );
         }
     }
     else
     {
-        return new Result.unimplemented();
+        return new runResult.Unimplemented();
     }
 }
 
-function matchingResults(expected, received)
+function validateResults(expected, received, validator)
 {
-    return _.isEqual(expected, received);
+    return validator(expected, received);
 }
 
 function generatePage()
@@ -185,14 +221,11 @@ function generatePage()
 
         function generateTestCaseBlocks(testData)
         {
-            var refImpl = testData.referenceImplementation;
-            var impl = testData.implementation;
-
             function generateTestCaseBlock(input)
             {
-                var expected = runImplementation( refImpl, input );
-                var received = runImplementation( impl, input );
-                var correct = matchingResults(expected, received);
+                var expected = runImplementation( testData.referenceImplementation, input );
+                var received = runImplementation( testData.implementation, input );
+                var correct = validateResults( expected, received, testData.validator );
 
                 function generateArgumentCells(arguments)
                 {
@@ -214,7 +247,7 @@ function generatePage()
 
                 function generateOutputRowCells(output)
                 {
-                    if ( output instanceof Result.success )
+                    if ( output instanceof runResult.Success )
                     {
                         var result;
 
@@ -223,7 +256,7 @@ function generatePage()
 
                         return result;
                     }
-                    else if ( output instanceof Result.unimplemented )
+                    else if ( output instanceof runResult.Unimplemented )
                     {
                         var cell = newElement('td');
                         cell.attr('colspan', input.length + 1);
@@ -232,7 +265,7 @@ function generatePage()
 
                         return [ cell ];
                     }
-                    else if ( output instanceof Result.error )
+                    else if ( output instanceof runResult.Error )
                     {
                         var cell = newElement('td');
                         cell.attr('colspan', input.length + 1);
@@ -397,11 +430,29 @@ function generatePage()
     generateTestCaseViews(tests);
 }
 
-function isOdd(n) { return x % 2 == 1; }
+function preprocessTestData(allTestData)
+{
+    function preprocess( testData )
+    {
+        function setupValidator(testData) {
+            testData.validator = testData.validator ? testData.validator : validators.identical;
+        }
 
-var doc = this;
+        setupValidator(testData);
+    }
+
+    _.each( allTestData, preprocess );
+}
+
+
+function subarrays(xs) {
+    return [ [], [1], [2], [1,2] ];
+}
+
+
 $(document).ready( function() {
-    collectStudentImplementations(tests, doc);
+    preprocessTestData(tests);
+    collectStudentImplementations(tests, window);
     generatePage();
 } );
 

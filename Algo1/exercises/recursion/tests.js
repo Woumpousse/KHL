@@ -306,7 +306,7 @@ var tests = ( function() {
                                     [ [1,2] ],
                                     [ [1,2,3] ]
                                   ],
-                          checker: permutationChecker
+                          validator: validators.io( equality.deep, equality.permutation(equality.deep) )
                         },
              permutations: { referenceImplementation: permutations,
                              inputs: [ [ [] ],
@@ -315,7 +315,7 @@ var tests = ( function() {
                                        [ [1,2,3] ],
                                        [ [1,2,3,4] ]
                                      ],
-                             checker: permutationChecker
+                             validator: permutationChecker
                            },
              knapsack: { referenceImplementation: knapsack,
                          inputs: [ [ 0, [] ],
@@ -330,7 +330,7 @@ var tests = ( function() {
                                    [ 97, [1,2,4,8,16,32,64] ],
                                    [ 127, [1,2,4,8,16,32,64] ]
                                  ],
-                         checker: function (assert, input, expected, received, message) {
+                         validator: function (assert, input, expected, received, message) {
                              var n = input[0];
                              var ns = input[1];
 
