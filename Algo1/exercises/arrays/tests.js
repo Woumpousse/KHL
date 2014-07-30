@@ -57,6 +57,16 @@ var tests = ( function() {
         return -1;
     }
 
+    function lastIndexOf(x, xs) {
+        for ( var i = xs.length - 1; i >= 0; --i ) {
+            if ( xs[i] === x ) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     function range(a, b) {
         var result = new Array(b - a + 1);
 
@@ -91,6 +101,7 @@ var tests = ( function() {
                               [ [1] ],
                               [ [1,2] ],
                               [ [1,2,3] ],
+                              [ [1,1,1] ],
                               [ [1,2,3,4,5,6,7,8,9,10] ]
                          ]
                   },
@@ -130,7 +141,19 @@ var tests = ( function() {
                                        [ 2, [2] ],
                                        [ 2, [1,2,3] ],
                                        [ 3, [1,2,3] ],
-                                       [ 4, [1,2,3] ]
+                                       [ 4, [1,2,3] ],
+                                       [ 1, [0,1,0,1,0,1,0] ]
+                                     ]
+                           },
+             lastIndexOf: { referenceImplementation: lastIndexOf,
+                             inputs: [ [ 1, [] ],
+                                       [ 1, [1] ],
+                                       [ 1, [2] ],
+                                       [ 2, [2] ],
+                                       [ 2, [1,2,3] ],
+                                       [ 3, [1,2,3] ],
+                                       [ 4, [1,2,3] ],
+                                       [ 1, [0,1,0,1,0,1,0] ]
                                      ]
                            },
              range: { referenceImplementation: range,
@@ -149,7 +172,8 @@ var tests = ( function() {
                                   [ [1,2,3] ],
                                   [ [1,2,3,4] ],
                                   [ [1,2,3,4,5] ],
-                                  [ [1,1,2,3,3,4,5,5,6] ]
+                                  [ [1,1,2,3,3,4,5,5,6] ],
+                                  [ [1,3,5,7,9,8,4,6,2] ]
                                 ]
                         }
            };

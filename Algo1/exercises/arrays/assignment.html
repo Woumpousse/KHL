@@ -6,103 +6,74 @@
   <body>
     <div id="container">
       <header>
-        <h1>Recursion</h1>
+        <h1>Arrays</h1>
       </header>
       <nav></nav>
 
-      <section class="testcase" data-subject="isOdd">
+      <section class="testcase" data-subject="contains">
         <p>
-          Write a recursive function <code>isOdd(n)</code> that checks whether the given integer <code>n</code>
-          is odd or not. An odd number is one that is not divisible by 2.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="factorial">
-        <p>
-          Write a recursive function <code>factorial(n)</code> that computes the factorial of its argument <code>n</code>.
-          The factorial of n is defined as 1 * 2 * ... * n.
+          Write a function <code>contains(xs, x)</code> that checks whether the given value <code>x</code>
+          appears somewhere in the array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="sum">
         <p>
-          Write a recursive function <code>sum(xs)</code> that computes the sum of the numbers in the array <code>xs</code>.
+          Write a function <code>sum(xs)</code> that computes the sum of all integers
+          in the array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="product">
         <p>
-          Write a recursive function <code>product(xs)</code> that computes the product of the numbers in the array <code>xs</code>.
+          Write a function <code>product(xs)</code> that computes the product of all integers
+          in the array <code>xs</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="incrementEachItem">
+        <p>
+          Write a function <code>incrementEachItem(xs)</code> that adds one
+          to each value in the array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="countZeros">
         <p>
-          Write a recursive function <code>countZeros(xs)</code> that counts the number of zeros appearing in the array <code>xs</code>.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="removeZeros">
-        <p>
-          Write a recursive function <code>removeZeros(xs)</code> that returns a new array equal to the given array <code>xs</code>
-          but with all zeros removed.
+          Write a function <code>countZeros(xs)</code> that returns the number
+          of zeros appearing in the array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="firstIndexOf">
         <p>
-          Write a recursive function <code>firstIndexOf(x, xs)</code> that looks for the value <code>x</code> in the array <code>xs</code> and returns its
-          index within that array. If the value <code>x</code> does not appear in the array <code>xs</code>, <code>-1</code> is returned.
+          Write a function <code>firstIndexOf(x, xs)</code> that looks for
+          the first appearance of <code>x</code> in the array <code>xs</code> and
+          returns its index. Return <code>-1</code> if <code>x</code> does
+          not appear in <code>xs</code>.
         </p>
       </section>
 
-      <section class="testcase" data-subject="removeAt">
+      <section class="testcase" data-subject="lastIndexOf">
         <p>
-          Write a recursive function <code>removeAt(xs, index)</code> that returns a new array equal to the given array <code>xs</code>
-          but with the element at the given <code>index</code> removed.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="isSubsetOf">
-        <p>
-          Write a recursive function <code>isSubsetOf(xs, ys)</code> that checks whether all elements of <code>xs</code>
-          appear at least as often in <code>ys</code>.
+          Write a function <code>lastIndexOf(x, xs)</code> that looks for
+          the last appearance of <code>x</code> in the array <code>xs</code> and
+          returns its index. Return <code>-1</code> if <code>x</code> does
+          not appear in <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="range">
         <p>
-          Write a recursive function <code>range(a, b)</code> that returns an array containing the
-          numbers <code>a</code> until (and including) <code>b</code>.
+          Write a function <code>range(a, b)</code> that constructs an array containing
+          the numbers <code>a</code>, <code>a+1</code>, ..., <code>b</code>.
         </p>
       </section>
 
-      <section class="testcase" data-subject="duplicateEachItem">
+      <section class="testcase" data-subject="reverse">
         <p>
-          Write a recursive function <code>duplicateEachItem(xs)</code> that creates a new array
-          where each item of <code>xs</code> appears twice in a row.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="subarrays">
-        <p>
-          Write a recursive function <code>subarrays(xs)</code> that lists all possible subarrays of <code>xs</code>.
-          An array A is a subarray of an array B if each item from A appears in B, in the same order.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="permutations">
-        <p>
-          Write a recursive function <code>permutations(xs)</code> that creates a new array
-          containing all permutations of <code>xs</code>. An array A is a permutation of an array B
-          if A and B contain the same items, but not necessarily in the same order.
-        </p>
-      </section>
-
-      <section class="testcase" data-subject="knapsack">
-        <p>
-          Write a recursive function <code>knapsack(n, ns)</code> that looks for a subarray of <code>ns</code>
-          such that its sum equals <code>n</code>. If no such subarrays exists, <code>null</code> must be returned.
+          Write a function <code>reverse(xs)</code> that modifies the given array <code>xs</code>
+          so that its contains its items in reverse order.
         </p>
       </section>
     </div>
@@ -111,7 +82,7 @@
     <script src="../jquery.js"></script>
     <script src="../clone.js"></script>
     <script src="../util.js"></script>
-    <script src="../khl.js"></script>
+    <script src="../test-framework.js"></script>
     <script src="tests.js"></script>
     <script src="student.js"></script>
   </body>
