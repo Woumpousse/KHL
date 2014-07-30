@@ -1,16 +1,31 @@
+function deepEqualChecker(assert, input, expected, received, message) {
+    assert.deepEqual(expected, received, message);
+}
+
+function permutationChecker(assert, input, expected, received, message) {
+    assert.ok( expected !== undefined && expected.isPermutationOf(received), message );
+}
+
 function newElement(tag) {
     return $(document.createElement(tag));
+}
+
+function createView( contents, extended )
+{
+    var span = newElement('span');
+
+    span.addClass('viewer');
+    span.attr('data-full', extended);
+    span.append(contents);
+
+    return span;
 }
 
 function newViewer(x) {
     x = stringOf(x);
 
     if ( x.length > 40 ) {
-        var span = newElement('span');
-        span.append(x.trimLength(40));
-        span.addClass('viewer');
-        span.attr('data-full', x);
-        return span;
+        return createView( x.trimLength(40), x );
     }
     else {
         return stringOf(x);
@@ -48,20 +63,39 @@ function collectStudentImplementations(allTestData, studentImplementations)
     }
 }
 
+var Result = { success: function ( transformedInputs, returnValue )
+               {
+                   this.transformedInputs = transformedInputs;
+                   this.returnValue = returnValue;
+               },
+               unimplemented: function () { },
+               error: function ( e )
+               {
+                   this.exception = e;
+               }
+             };
+               
+
 function runImplementation(implementation, inputs)
 {
     if ( implementation !== undefined )
     {
         var clonedInputs = clone(inputs);
-        var result = implementation.apply(null, clonedInputs);
 
-        return { transformedInputs: clonedInputs,
-                 returnValue: result
-               };
+        try
+        {
+            var result = implementation.apply(null, clonedInputs);
+
+            return new Result.success( clonedInputs, result );
+        }
+        catch ( err )
+        {
+            return new Result.error( err );
+        }
     }
     else
     {
-        return undefined;
+        return new Result.unimplemented();
     }
 }
 
@@ -69,7 +103,6 @@ function matchingResults(expected, received)
 {
     return _.isEqual(expected, received);
 }
-
 
 function generatePage()
 {
@@ -166,7 +199,7 @@ function generatePage()
                     return _.map( arguments, function (argument) {
                         var cell = newElement('td');
                         cell.addClass('argument');
-                        cell.append(argument.toString());
+                        cell.append( newViewer(argument) );
                         return cell;
                     } );
                 }
@@ -181,7 +214,7 @@ function generatePage()
 
                 function generateOutputRowCells(output)
                 {
-                    if ( output !== undefined )
+                    if ( output instanceof Result.success )
                     {
                         var result;
 
@@ -190,12 +223,21 @@ function generatePage()
 
                         return result;
                     }
-                    else
+                    else if ( output instanceof Result.unimplemented )
                     {
                         var cell = newElement('td');
                         cell.attr('colspan', input.length + 1);
                         cell.addClass('missing-implementation');
                         cell.append("missing implementation");
+
+                        return [ cell ];
+                    }
+                    else if ( output instanceof Result.error )
+                    {
+                        var cell = newElement('td');
+                        cell.attr('colspan', input.length + 1);
+                        cell.addClass('error');
+                        cell.append( createView( "error", output.exception.toString() ) );
 
                         return [ cell ];
                     }
@@ -355,5 +397,11 @@ function generatePage()
     generateTestCaseViews(tests);
 }
 
-collectStudentImplementations(tests, this);
-generatePage();
+function isOdd(n) { return x % 2 == 1; }
+
+var doc = this;
+$(document).ready( function() {
+    collectStudentImplementations(tests, doc);
+    generatePage();
+} );
+

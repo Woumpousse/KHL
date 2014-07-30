@@ -95,6 +95,7 @@ span.viewer:after {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    width: 300px;
 }
 
 span.viewer {
@@ -111,10 +112,9 @@ a.focus {
     float: right;
 }
 
-td.missing-implementation {
+td.missing-implementation, td.error {
     text-align: center;
-     font-style: italic;
-
+    font-style: italic;
 }
 
 section.testcase {
