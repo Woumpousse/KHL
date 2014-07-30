@@ -17,6 +17,25 @@ function newViewer(x) {
     }
 }
 
+function allTestCaseSections()
+{
+    return $('section.testcase');
+}
+
+function activeTestCaseSections()
+{
+    var vars = getUrlVars();
+
+    if ( 'testcase' in vars )
+    {
+        return $('section.testcase[data-subject={0}]'.format(vars.testcase));
+    }
+    else
+    {
+        return allTestCaseSections();
+    }
+}
+
 function collectStudentImplementations(allTestData, studentImplementations)
 {
     for ( var id in allTestData ) {
@@ -175,7 +194,8 @@ function generatePage()
                     {
                         var cell = newElement('td');
                         cell.attr('colspan', input.length + 1);
-                        cell.append("Undefined implementation");
+                        cell.addClass('missing-implementation');
+                        cell.append("missing implementation");
 
                         return [ cell ];
                     }
@@ -251,7 +271,7 @@ function generatePage()
             divElement.append(table);
         }        
 
-        $('section.testcase').each( function () {
+        activeTestCaseSections().each( function () {
             var section = $(this);
             var subject = section.attr('data-subject');
 
@@ -274,10 +294,16 @@ function generatePage()
             header.append(subject);
             header.attr('id', subject);
 
+            var link = newElement('a');
+            link.append("[focus]");
+            link.addClass('focus');
+            link.attr('href', '?testcase={0}'.format(subject));
+            header.append(link);
+
             section.prepend(header);
         }
 
-        $('section.testcase').each( function () {
+        activeTestCaseSections().each( function () {
             generateHeader($(this));
         } );
     }
@@ -299,7 +325,7 @@ function generatePage()
             list.append(" ");
         }
 
-        $('section.testcase').each( function () {
+        activeTestCaseSections().each( function () {
             addNavigation( $(this) );
         } );
 
@@ -312,6 +338,4 @@ function generatePage()
 }
 
 collectStudentImplementations(tests, this);
-
 generatePage();
-
