@@ -325,13 +325,31 @@ function generatePage()
             list.append(" ");
         }
 
-        activeTestCaseSections().each( function () {
-            addNavigation( $(this) );
-        } );
+        var sections = activeTestCaseSections();
 
-        $('nav').append(list);
+        if ( sections.length > 1 )
+        {
+            sections.each( function () {
+                addNavigation( $(this) );
+            } );
+
+            $('nav').append(list);
+        }
+        else
+        {
+            var link = newElement('a');
+            link.append('[show all]');
+            link.attr('href', window.location.href.split("?")[0]);
+            $('nav').append(link);
+        }
     }
 
+    function showActiveSections()
+    {
+        activeTestCaseSections().attr('active', 'true');
+    }
+
+    showActiveSections();
     generateHeaders();
     generateNav();
     generateTestCaseViews(tests);
