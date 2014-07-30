@@ -131,7 +131,7 @@ var tests = ( function() {
             var result = subresult.slice(0);
 
             for ( var i = 0; i !== subresult.length; ++i ) {
-                 result.push( [ xs[0] ].concat( subresult[i] ) );
+                 result.unshift( [ xs[0] ].concat( subresult[i] ) );
             }
 
             return result;

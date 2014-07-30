@@ -1,0 +1,56 @@
+body {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    background-color: #CCCCFF;
+    padding: 10px;
+}
+
+h2 {
+    background-color: #CCCCFF;
+    padding: 5px;
+}
+
+.test-case-view table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.test-case-view table tr:nth-child(3n+1) {
+    border-bottom: thin solid black;
+}
+
+.test-case-view table tr:first-child {
+    border-bottom: thick solid black;
+}
+
+.test-case-view table td {
+    padding: 5px;
+    min-width: 50px;
+}
+
+span.viewer:after {
+    position: absolute;
+    display: block;
+    visibility: hidden;
+    content: attr(data-full);
+    z-index: 999;
+    background-color: #8888FF;
+    padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+span.viewer {
+    position: relative;
+    display: inline;
+}
+
+span.viewer:hover:after {
+    visibility: visible;
+}
