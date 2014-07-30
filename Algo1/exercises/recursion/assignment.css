@@ -118,9 +118,9 @@ td.missing-implementation {
 }
 
 section.testcase {
-    visibility: hidden;
+    display: none;
 }
 
 section.testcase[active=true] {
-    visibility: visible;
+    display: initial;
 }
