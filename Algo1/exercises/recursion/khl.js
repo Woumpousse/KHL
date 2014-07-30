@@ -134,46 +134,56 @@ function populateTestCaseViews(testData)
             return cell;
         }
 
-        function generateBlockHeaderRow(input)
-        {
-            var row = newElement('tr');
-            row.addClass('block-header');
-
-            row.append( generateArgumentCells(input) );
-
-            return row;
-        }
-
-        function generateBlockOutputRow(implementation, input)
-        {
-            var row = newElement('tr');
-
-            if ( implementation !== undefined )
-            {
-                var output = runImplementation( implementation, input );
-
-                row.append( generateArgumentCells(output.transformedInputs) );
-                row.append( generateResultCell(output.returnValue) );
-
-                return row;
-            }
-            else
-            {
-                var cell = newElement('td');
-                cell.attr('colspan', input.length + 1);
-                cell.append("Undefined implementation");
-
-                row.append(cell);
-
-                return row;
-            }
-        }
-
         function generateTestCaseBlock(input)
         {
-            return [ generateBlockHeaderRow(input),
-                     generateBlockOutputRow(refImpl, input),
-                     generateBlockOutputRow(impl, input)
+            function generateBlockHeaderRow()
+            {
+                var row = newElement('tr');
+                row.addClass('block-header');
+
+                row.append( generateArgumentCells(input) );
+
+                return row;
+            }
+
+            function generateBlockOutputRow(implementation)
+            {
+                var row = newElement('tr');
+
+                if ( implementation !== undefined )
+                {
+                    var output = runImplementation( implementation, input );
+
+                    row.append( generateArgumentCells(output.transformedInputs) );
+                    row.append( generateResultCell(output.returnValue) );
+
+                    return row;
+                }
+                else
+                {
+                    var cell = newElement('td');
+                    cell.attr('colspan', input.length + 1);
+                    cell.append("Undefined implementation");
+
+                    row.append(cell);
+
+                    return row;
+                }
+            }
+
+            function generateBlockReferenceOutputRow()
+            {
+                return generateBlockOutputRow(refImpl);
+            }
+
+            function generateBlockReceivedOutputRow()
+            {
+                return generateBlockOutputRow(impl);
+            }
+
+            return [ generateBlockHeaderRow(),
+                     generateBlockReferenceOutputRow(),
+                     generateBlockReceivedOutputRow()
                    ];
         }
 
