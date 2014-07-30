@@ -31,12 +31,24 @@ function collectStudentImplementations(allTestData, studentImplementations)
 
 function runImplementation(implementation, inputs)
 {
-    var clonedInputs = clone(inputs);
-    var result = implementation.apply(null, clonedInputs);
+    if ( implementation !== undefined )
+    {
+        var clonedInputs = clone(inputs);
+        var result = implementation.apply(null, clonedInputs);
 
-    return { transformedInputs: clonedInputs,
-             returnValue: result
-           };
+        return { transformedInputs: clonedInputs,
+                 returnValue: result
+               };
+    }
+    else
+    {
+        return undefined;
+    }
+}
+
+function matchingResults(expected, received)
+{
+    return _.isEqual(expected, received);
 }
 
 function populateTestCaseViews(testData)
@@ -88,12 +100,17 @@ function populateTestCaseViews(testData)
         {
             var parameterNames = extractParameterNamesFromTestData(testData);
             
-            return _.map( parameterNames, function (parameterName) {
+            var parameterCells = _.map( parameterNames, function (parameterName) {
                 var cell = newElement('th');
                 cell.append(parameterName);
                 
                 return cell;
             } );
+
+            var result = parameterCells;
+            result.unshift( newElement('td') );
+
+            return result;
         }
 
         function generateReturnHeader()
@@ -116,31 +133,33 @@ function populateTestCaseViews(testData)
         var refImpl = testData.referenceImplementation;
         var impl = testData.implementation;
 
-        function generateArgumentCells(arguments)
-        {
-            return _.map( arguments, function (argument) {
-                var cell = newElement('td');
-                cell.addClass('argument');
-                cell.append(argument.toString());
-                return cell;
-            } );
-        }
-
-        function generateResultCell(result)
-        {
-            var cell = newElement('td');
-            cell.addClass('result');
-            cell.append( newViewer(result) );
-            return cell;
-        }
-
         function generateTestCaseBlock(input)
         {
-            function generateOutputRowCells(implementation)
+            var expected = runImplementation( refImpl, input );
+            var received = runImplementation( impl, input );
+
+            function generateArgumentCells(arguments)
             {
-                if ( implementation !== undefined )
+                return _.map( arguments, function (argument) {
+                    var cell = newElement('td');
+                    cell.addClass('argument');
+                    cell.append(argument.toString());
+                    return cell;
+                } );
+            }
+
+            function generateResultCell(result)
+            {
+                var cell = newElement('td');
+                cell.addClass('result');
+                cell.append( newViewer(result) );
+                return cell;
+            }
+
+            function generateOutputRowCells(output)
+            {
+                if ( output !== undefined )
                 {
-                    var output = runImplementation( implementation, input );
                     var result;
 
                     result = generateArgumentCells(output.transformedInputs);
@@ -158,11 +177,22 @@ function populateTestCaseViews(testData)
                 }
             }
 
+            function generateRowCaption(caption)
+            {
+                var cell = newElement('td');
+
+                cell.addClass("block-row-caption");
+                cell.append(caption);
+
+                return cell;
+            }
+
             function generateHeaderRow()
             {
                 var row = newElement('tr');
 
                 row.addClass('block-header');
+                row.append( generateRowCaption('Input') );
                 row.append( generateArgumentCells(input) );
 
                 return row;
@@ -173,7 +203,8 @@ function populateTestCaseViews(testData)
                 var row = newElement('tr');
 
                 row.addClass('block-expected');
-                row.append( generateOutputRowCells(refImpl) );
+                row.append( generateRowCaption('Expected') );
+                row.append( generateOutputRowCells(expected) );
 
                 return row;
             }
@@ -183,7 +214,8 @@ function populateTestCaseViews(testData)
                 var row = newElement('tr');
 
                 row.addClass('block-received');
-                row.append( generateOutputRowCells(impl) );
+                row.append( generateRowCaption('Received') );
+                row.append( generateOutputRowCells(received) );
 
                 return row;
             }

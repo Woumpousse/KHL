@@ -33,6 +33,12 @@ h2 {
     min-width: 50px;
 }
 
+.test-case-view table td.block-row-caption {
+    font-style: italic;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
 span.viewer:after {
     position: absolute;
     display: block;
