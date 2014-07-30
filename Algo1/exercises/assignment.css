@@ -51,36 +51,36 @@ nav ul li {
     padding: 5px;
 }
 
-.testcase-view table {
+.testcase-table {
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
 }
 
-.testcase-view table tr:nth-child(3n+1) {
+.testcase-table > tbody > tr:nth-child(3n+1) {
     border-bottom: thin solid black;
 }
 
-.testcase-view table tr:first-child {
+.testcase-table > tbody > tr:first-child {
     border-bottom: thick solid black;
 }
 
-.testcase-view table td {
+.testcase-table > tbody > tr > td {
     padding: 5px;
     min-width: 50px;
 }
 
-.testcase-view table td.block-row-caption {
+.testcase-table > tbody > tr > td.block-row-caption {
     font-weight: bold;
     font-variant: small-caps;
     padding-right: 10px;
 }
 
-.testcase-view table [correct=true] {
+.testcase-table [correct=true] {
     border-left: 10px green solid;
 }
 
-.testcase-view table [correct=false] {
+.testcase-table [correct=false] {
     border-left: 10px red solid;
 }
 
@@ -115,6 +115,7 @@ a.focus {
 td.missing-implementation, td.error {
     text-align: center;
     font-style: italic;
+    background-color: #FFCCCC;
 }
 
 section.testcase {
@@ -123,4 +124,21 @@ section.testcase {
 
 section.testcase[active=true] {
     display: initial;
+}
+
+table.matrix {
+    border-collapse: collapse;
+}
+
+table.matrix > tbody > tr:nth-child(n+2) td {
+    border-top: thin black solid;
+}
+
+table.matrix > tbody > tr > td:nth-child(n+2) {
+    border-left: thin black solid;
+}
+
+table.matrix td {
+    padding: 2px;
+    text-align: center;
 }

@@ -145,11 +145,11 @@ Array.prototype.isPermutationOf = function (that, eq) {
 
 Array.prototype.sum = function () {
     return _.reduce(this, function (acc, x) { return acc + x; }, 0);
-}
+};
 
 Array.prototype.removeAt = function(idx) {
     return this.slice(0, idx).concat(this.slice(idx + 1));
-}
+};
 
 Array.prototype.isSubsetOf = function (that) {
     if ( this.length === 0 ) {
@@ -160,77 +160,8 @@ Array.prototype.isSubsetOf = function (that) {
 
         return idx !== -1 && this.slice(1).isSubsetOf( that.removeAt(idx) );
     }
-}
+};
 
-
-
-
-// /*
-//   If false, no test cases are shown for X if no function for X has been defined.
-// */
-// var forceShow = getUrlVars()['showall'] === 'true';
-
-// function deepEqualChecker(assert, input, expected, received, message) {
-//     assert.deepEqual(expected, received, message);
-// }
-
-// function permutationChecker(assert, input, expected, received, message) {
-//     assert.ok( expected !== undefined && expected.isPermutationOf(received), message );
-// }
-
-
-// function unitTests(tests, student) {
-//     for ( var testFunctionName in tests ) {
-//         (function () { // New scope is necessary, since tests are not ran immediately
-//             var functionName = testFunctionName;
-//             QUnit.module(functionName);
-
-//             // Check if student implemented test
-//             QUnit.test( "Checking for existence of {0}".format(functionName), function (assert) {
-//                 // (Cannot use local "tested" here because execution is postponed and "tested" might be assigned to later, making this test succeed undeservedly)
-//                 assert.ok( student[functionName] !== undefined, "Function {0} does not exist".format(functionName) );
-//             } );
-
-//             // Get function to be tested
-//             var tested = student[functionName];
-
-//             // Use dummy implementation if necessary
-//             if ( forceShow ) {
-//                 tested = tested || function() { };
-//             }
-
-//             // Only go further if student implemented test
-//             if ( tested !== undefined ) {
-//                 // Get test data
-//                 var testData = tests[functionName];
-
-//                 // Get reference implementation
-//                 var solution = testData.referenceImplementation;
-
-//                 // Get specialized checker
-//                 var checker = testData.checker ? testData.checker : deepEqualChecker;
-
-//                 // For each test case
-//                 _.each(testData.inputs, function (input) {
-//                     // Clone the input for the student
-//                     var studentInput = clone(input);
-
-//                     // Get the student result
-//                     var result = tested.apply( null, studentInput );
-
-//                     // Clone the input for the reference implementation
-//                     var refInput = clone(input);
-
-//                     // Get the reference implementation's result
-//                     var expectedResult = solution.apply( null, refInput );
-
-//                     // Check for correctness
-//                     QUnit.test( "Input: {0}, Expected input modification: {1}, Expected return value: {2}".format(input, refInput, expectedResult), function (assert) {
-//                         assert.deepEqual( refInput, studentInput, "Inputs must be modified in the same way" );
-//                         checker( assert, input, result, expectedResult, "Got {0}".format(result) );
-//                     } );
-//                 } );
-//             }
-//         } )();
-//     }
-// }
+Array.prototype.transpose = function () {
+    return _.zip.apply(_, this);
+};

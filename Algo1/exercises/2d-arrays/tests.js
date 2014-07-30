@@ -1,3 +1,6 @@
+// isRectangularGrid
+// isSquareGrid
+
 var tests = ( function() {
     function createGrid(width, height, value) {
         var result = new Array(width);
@@ -88,66 +91,78 @@ var tests = ( function() {
                    zigZag(3, 3)
                  ];
 
-    return { createGrid: { referenceImplementation: createGrid,
-                           inputs: [ [ 1, 1, 1 ],
-                                     [ 1, 2, 0 ],
-                                     [ 2, 1, "a" ],
-                                     [ 2, 2, [0] ],
-                                     [ 10, 10, 0 ]
-                                   ]
-                         },
-             width: { referenceImplementation: width,
-                      inputs: _.zip( gridInputs )
-                    },
-             height: { referenceImplementation: height,
-                       inputs: _.zip( gridInputs )
-                     },
-             zigZag: { referenceImplementation: zigZag,
-                       inputs: [ [1, 1],
-                                 [1, 2],
-                                 [1, 3],
-                                 [2, 1],
-                                 [3, 1],
-                                 [2, 2],
-                                 [2, 3],
-                                 [3, 2],
-                                 [3, 3]
-                               ]
-                     },
-             getRow: { referenceImplementation: getRow,
-                       inputs: [ [ zigZag(1, 1), 0 ],
-                                 [ zigZag(1, 2), 0 ],
-                                 [ zigZag(1, 2), 1 ],
-                                 [ zigZag(2, 1), 0 ],
-                                 [ zigZag(2, 2), 0 ],
-                                 [ zigZag(2, 2), 1 ],
-                                 [ zigZag(5, 5), 0 ],
-                                 [ zigZag(5, 5), 1 ],
-                                 [ zigZag(5, 5), 2 ],
-                                 [ zigZag(5, 5), 3 ],
-                                 [ zigZag(5, 5), 4 ]
-                               ]
-                     },
-             getColumn: { referenceImplementation: getColumn,
-                          inputs: [ [ zigZag(1, 1), 0 ],
-                                    [ zigZag(2, 2), 0 ],
-                                    [ zigZag(2, 1), 0 ],
-                                    [ zigZag(2, 2), 0 ],
-                                    [ zigZag(2, 2), 1 ],
-                                    [ zigZag(5, 5), 0 ],
-                                    [ zigZag(5, 5), 1 ],
-                                    [ zigZag(5, 5), 2 ],
-                                    [ zigZag(5, 5), 3 ],
-                                    [ zigZag(5, 5), 4 ]
-                                  ]
-                        },
-             rowSums: { referenceImplementation: rowSums,
-                        inputs: _.zip(gridInputs, [0, 1, 0, 1, 0, 1, 2])
-                      },
-             columnSums: { referenceImplementation: columnSums,
-                           inputs: _.zip(gridInputs, [0,0,1,1,2,2,2])
-                         }
+    var result = { createGrid: { referenceImplementation: createGrid,
+                                 inputs: [ [ 1, 1, 1 ],
+                                           [ 1, 2, 0 ],
+                                           [ 2, 1, "a" ],
+                                           [ 2, 2, [0] ],
+                                           [ 10, 10, 0 ]
+                                         ]
+                               },
+                   width: { referenceImplementation: width,
+                            inputs: _.zip( gridInputs )
+                          },
+                   height: { referenceImplementation: height,
+                             inputs: _.zip( gridInputs )
+                           },
+                   zigZag: { referenceImplementation: zigZag,
+                             inputs: [ [1, 1],
+                                       [1, 2],
+                                       [1, 3],
+                                       [2, 1],
+                                       [3, 1],
+                                       [2, 2],
+                                       [2, 3],
+                                       [3, 2],
+                                       [3, 3]
+                                     ]
+                           },
+                   getRow: { referenceImplementation: getRow,
+                             inputs: [ [ zigZag(1, 1), 0 ],
+                                       [ zigZag(1, 2), 0 ],
+                                       [ zigZag(1, 2), 1 ],
+                                       [ zigZag(2, 1), 0 ],
+                                       [ zigZag(2, 2), 0 ],
+                                       [ zigZag(2, 2), 1 ],
+                                       [ zigZag(5, 5), 0 ],
+                                       [ zigZag(5, 5), 1 ],
+                                       [ zigZag(5, 5), 2 ],
+                                       [ zigZag(5, 5), 3 ],
+                                       [ zigZag(5, 5), 4 ]
+                                     ]
+                           },
+                   getColumn: { referenceImplementation: getColumn,
+                                inputs: [ [ zigZag(1, 1), 0 ],
+                                          [ zigZag(2, 2), 0 ],
+                                          [ zigZag(2, 1), 0 ],
+                                          [ zigZag(2, 2), 0 ],
+                                          [ zigZag(2, 2), 1 ],
+                                          [ zigZag(5, 5), 0 ],
+                                          [ zigZag(5, 5), 1 ],
+                                          [ zigZag(5, 5), 2 ],
+                                          [ zigZag(5, 5), 3 ],
+                                          [ zigZag(5, 5), 4 ]
+                                        ]
+                              },
+                   rowSums: { referenceImplementation: rowSums,
+                              inputs: _.zip(gridInputs, [0, 1, 0, 1, 0, 1, 2])
+                            },
+                   columnSums: { referenceImplementation: columnSums,
+                                 inputs: _.zip(gridInputs, [0,0,1,1,2,2,2])
+                               }
+               };
 
-           };
+
+    var F = formatters;
+    var P = predicates;
+
+    var formatter = F.byType( [ P.isMatrix, F.matrix ],
+                              [ P.any, F.simple ] );
+
+    _.each(result, function (testCase) {
+        testCase.formatter = formatter;
+    });
+
+    return result;
 })();
 

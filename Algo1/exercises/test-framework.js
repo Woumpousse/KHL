@@ -34,13 +34,88 @@ var validators = ( function () {
     return { identical: identical, io: io };
 } )();
 
-function deepEqualChecker(assert, input, expected, received, message) {
-    assert.deepEqual(expected, received, message);
-}
+var predicates = ( function () {
+    function isArray(x)
+    {
+        return x instanceof Array;
+    }
 
-function permutationChecker(assert, input, expected, received, message) {
-    assert.ok( expected !== undefined && expected.isPermutationOf(received), message );
-}
+    function isMatrix(x)
+    {
+        return isArray(x) && _.every( x, function (item) {
+            return isArray(item);
+        } );
+    }
+
+    function constant( r )
+    {
+        return function( x ) { return r; }
+    }
+
+    return { isArray: isArray,
+             isMatrix: isMatrix,
+             any: constant(true),
+             none: constant(false)
+           };
+} )();
+
+var formatters = ( function () {
+    function simple(x)
+    {
+        return newViewer(x);
+    }
+
+    function matrix(x)
+    {
+        var table = newElement('table');
+        var tbody = newElement('tbody');
+
+        table.addClass('matrix');
+        table.append(tbody);
+
+        var rows = x.transpose();
+
+        _.each(rows, function (row) {
+            var tr = newElement('tr');
+
+            _.each(row, function (item) {
+                var td = newElement('td');
+                td.append(item);
+                tr.append(td);
+            });
+
+            tbody.append(tr);
+        });
+
+        return table;
+    }
+
+    function byType()
+    {
+        var pairs = arguments;
+
+        return function (x) {
+            for ( var i = 0; i !== pairs.length; ++i )
+            {
+                var pair = pairs[i];
+                var predicate = pair[0];
+                var formatter = pair[1];
+
+                if ( predicate(x) )
+                {
+                    return formatter(x);
+                }    
+            }
+
+            console.log("No formatter found");
+        };
+    }
+
+    return { simple: simple,
+             matrix: matrix,
+             byType: byType
+           };
+} )();
 
 function newElement(tag) {
     return $(document.createElement(tag));
@@ -60,10 +135,12 @@ function createView( contents, extended )
 function newViewer(x) {
     x = stringOf(x);
 
-    if ( x.length > 40 ) {
+    if ( x.length > 40 )
+    {
         return createView( x.trimLength(40), x );
     }
-    else {
+    else
+    {
         return stringOf(x);
     }
 }
@@ -233,12 +310,19 @@ function generatePage()
                 var received = runImplementation( testData.implementation, input );
                 var correct = validateResults( input, expected, received, testData.validator );
 
+                function formatValue(x)
+                {
+                    var formatter = testData.formatter;
+
+                    return formatter(x);
+                }
+
                 function generateArgumentCells(arguments)
                 {
                     return _.map( arguments, function (argument) {
                         var cell = newElement('td');
                         cell.addClass('argument');
-                        cell.append( newViewer(argument) );
+                        cell.append( formatValue(argument) );
                         return cell;
                     } );
                 }
@@ -247,7 +331,7 @@ function generatePage()
                 {
                     var cell = newElement('td');
                     cell.addClass('result');
-                    cell.append( newViewer(result) );
+                    cell.append( formatValue(result) );
                     return cell;
                 }
 
@@ -345,9 +429,12 @@ function generatePage()
             var target = divElement.attr('data-target');
             var myTestData = testData[target];
             var table = newElement('table');
+            var tbody = newElement('tbody');
 
-            table.append( generateHeaderRow(myTestData) );
-            table.append( generateTestCaseBlocks(myTestData) );
+            table.addClass('testcase-table');
+            table.append( tbody );
+            tbody.append( generateHeaderRow(myTestData) );
+            tbody.append( generateTestCaseBlocks(myTestData) );
 
             divElement.append(table);
         }        
@@ -444,7 +531,12 @@ function preprocessTestData(allTestData)
             testData.validator = testData.validator ? testData.validator : validators.identical;
         }
 
+        function setupFormatter(testData) {
+            testData.formatter = testData.formatter ? testData.formatter : formatters.simple;
+        }
+
         setupValidator(testData);
+        setupFormatter(testData);
     }
 
     _.each( allTestData, preprocess );
