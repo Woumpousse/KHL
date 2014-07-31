@@ -152,7 +152,7 @@ var tests = ( function() {
         {
             var last = xs[0];
 
-            for ( var i = 0; i !=== xs.length; ++i )
+            for ( var i = 0; i !== xs.length; ++i )
             {
                 if ( xs[i] < last )
                 {
@@ -178,7 +178,7 @@ var tests = ( function() {
         {
             var last = xs[0];
 
-            for ( var i = 0; i !=== xs.length; ++i )
+            for ( var i = 0; i !== xs.length; ++i )
             {
                 if ( xs[i] > last )
                 {
@@ -307,11 +307,11 @@ var tests = ( function() {
                                   [ [0,1] ],
                                   [ [1,0] ],
                                   [ [1,2,3,4,5] ],
-                                  [ [1,3,5,4,2] ],b
+                                  [ [1,3,5,4,2] ],
                                   [ [1,3,0,5,4,2] ]
                                 ]
                       },
-             isIncreasing: { referenceImplementation: isIncreasing;
+             isIncreasing: { referenceImplementation: isIncreasing,
                              inputs: [ [ [] ],
                                        [ [0] ],
                                        [ [0,1] ],
@@ -323,7 +323,7 @@ var tests = ( function() {
                                        [ [1,1,2,3,3] ]
                                      ]
                            },
-             isDecreasing: { referenceImplementation: isDecreasing;
+             isDecreasing: { referenceImplementation: isDecreasing,
                              inputs: [ [ [] ],
                                        [ [0] ],
                                        [ [0,1] ],
