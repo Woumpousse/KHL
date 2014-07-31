@@ -35,11 +35,14 @@ var tests = ( function() {
         }
     }
 
-    function countZeros(xs) {
+    function countZeros(xs)
+    {
         var result = 0;
 
-        for ( var i = 0; i !== xs.length; ++i ) {
-            if ( xs[i] === 0 ) {
+        for ( var i = 0; i !== xs.length; ++i )
+        {
+            if ( xs[i] === 0 )
+            {
                 ++result;
             }
         }
@@ -47,9 +50,12 @@ var tests = ( function() {
         return result;
     }
 
-    function firstIndexOf(x, xs) {
-        for ( var i = 0; i !== xs.length; ++i ) {
-            if ( xs[i] === x ) {
+    function firstIndexOf(x, xs)
+    {
+        for ( var i = 0; i !== xs.length; ++i )
+        {
+            if ( xs[i] === x )
+            {
                 return i;
             }
         }
@@ -57,9 +63,12 @@ var tests = ( function() {
         return -1;
     }
 
-    function lastIndexOf(x, xs) {
-        for ( var i = xs.length - 1; i >= 0; --i ) {
-            if ( xs[i] === x ) {
+    function lastIndexOf(x, xs)
+    {
+        for ( var i = xs.length - 1; i >= 0; --i )
+        {
+            if ( xs[i] === x )
+            {
                 return i;
             }
         }
@@ -67,7 +76,8 @@ var tests = ( function() {
         return -1;
     }
 
-    function range(a, b) {
+    function range(a, b)
+    {
         var result = new Array(b - a + 1);
 
         for ( var i = 0; i !== result.length; ++i ) {
@@ -77,8 +87,10 @@ var tests = ( function() {
         return result;
     }
 
-    function reverse(xs) {
-        for ( var i = 0; 2 * i < xs.length; ++i ) {
+    function reverse(xs)
+    {
+        for ( var i = 0; 2 * i < xs.length; ++i )
+        {
             var j = xs.length - i - 1;
 
             var temp = xs[i];
@@ -87,9 +99,12 @@ var tests = ( function() {
         }
     }
 
-    function isPalindrome(xs) {
-	for ( var i = 0; i < xs.length / 2; ++i ) {
-	    if ( xs[i] !== xs[xs.length - i - 1] ) {
+    function isPalindrome(xs)
+    {
+	for ( var i = 0; i < xs.length / 2; ++i )
+        {
+	    if ( xs[i] !== xs[xs.length - i - 1] )
+            {
 		return false;
 	    }
 	}
@@ -97,11 +112,14 @@ var tests = ( function() {
 	return true;
     }
 
-    function minimum(xs) {
+    function minimum(xs)
+    {
 	var result = xs[0];
 
-	for ( var i = 1; i < xs.length; ++i ) {
-	    if ( xs[i] < result ) {
+	for ( var i = 1; i < xs.length; ++i )
+        {
+	    if ( xs[i] < result )
+            {
 		result = xs[i];
 	    }
 	}
@@ -109,16 +127,71 @@ var tests = ( function() {
 	return result;
     }
 
-    function maximum(xs) {
+    function maximum(xs)
+    {
         var result = xs[0];
 
-        for ( var i = 1; i < xs.length; ++i ) {
-            if ( xs[i] > result ) {
+        for ( var i = 1; i < xs.length; ++i )
+        {
+            if ( xs[i] > result )
+            {
                 result = xs[i];
             }
         }
 
         return result;
+    }
+
+    function isIncreasing(xs)
+    {
+        if ( xs.length === 0 )
+        {
+            return true;
+        }
+        else
+        {
+            var last = xs[0];
+
+            for ( var i = 0; i !=== xs.length; ++i )
+            {
+                if ( xs[i] < last )
+                {
+                    return false;
+                }
+                else
+                {
+                    last = xs[i];
+                }
+            }
+
+            return true;
+        }
+    }
+
+    function isDecreasing(xs)
+    {
+        if ( xs.length === 0 )
+        {
+            return true;
+        }
+        else
+        {
+            var last = xs[0];
+
+            for ( var i = 0; i !=== xs.length; ++i )
+            {
+                if ( xs[i] > last )
+                {
+                    return false;
+                }
+                else
+                {
+                    last = xs[i];
+                }
+            }
+
+            return true;
+        }
     }
 
     return { contains: { referenceImplementation: contains,
@@ -234,10 +307,33 @@ var tests = ( function() {
                                   [ [0,1] ],
                                   [ [1,0] ],
                                   [ [1,2,3,4,5] ],
-                                  [ [1,3,5,4,2] ],
+                                  [ [1,3,5,4,2] ],b
                                   [ [1,3,0,5,4,2] ]
                                 ]
                       },
+             isIncreasing: { referenceImplementation: isIncreasing;
+                             inputs: [ [ [] ],
+                                       [ [0] ],
+                                       [ [0,1] ],
+                                       [ [0,1,2] ],
+                                       [ [1,0] ],
+                                       [ [0,1,2,3,4,5,0] ],
+                                       [ [5,4,3,2,1] ],
+                                       [ [1,1,1] ],
+                                       [ [1,1,2,3,3] ]
+                                     ]
+                           },
+             isDecreasing: { referenceImplementation: isDecreasing;
+                             inputs: [ [ [] ],
+                                       [ [0] ],
+                                       [ [0,1] ],
+                                       [ [0,1,2] ],
+                                       [ [1,0] ],
+                                       [ [0,1,2,3,4,5,0] ],
+                                       [ [5,4,3,2,1] ],
+                                       [ [1,1,1] ],
+                                       [ [1,1,2,3,3] ]
+                                     ]
+                           },
            };
 })();
-
