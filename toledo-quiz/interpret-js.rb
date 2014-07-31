@@ -62,5 +62,7 @@ when "tex"
 then puts tex(IO.read('algo1.template.tex'))
 when "toledo"
 then puts( toledo { |idx| to_s } )
+when "stats"
+then puts "Number of questions: #{questions.length}"
 else abort "Unrecognized command"
 end
