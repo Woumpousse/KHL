@@ -87,6 +87,40 @@ var tests = ( function() {
         }
     }
 
+    function isPalindrome(xs) {
+	for ( var i = 0; i < xs.length / 2; ++i ) {
+	    if ( xs[i] !== xs[xs.length - i - 1] ) {
+		return false;
+	    }
+	}
+
+	return true;
+    }
+
+    function minimum(xs) {
+	var result = xs[0];
+
+	for ( var i = 1; i < xs.length; ++i ) {
+	    if ( xs[i] < result ) {
+		result = xs[i];
+	    }
+	}
+
+	return result;
+    }
+
+    function maximum(xs) {
+        var result = xs[0];
+
+        for ( var i = 1; i < xs.length; ++i ) {
+            if ( xs[i] > result ) {
+                result = xs[i];
+            }
+        }
+
+        return result;
+    }
+
     return { contains: { referenceImplementation: contains,
                          inputs: [ [ [], 1 ],
                                    [ [1], 1 ],
@@ -175,7 +209,35 @@ var tests = ( function() {
                                   [ [1,1,2,3,3,4,5,5,6] ],
                                   [ [1,3,5,7,9,8,4,6,2] ]
                                 ]
-                        }
+                        },
+             isPalindrome: { referenceImplementation: isPalindrome,
+                             inputs: [ [ [] ],
+                                       [ [1] ],
+                                       [ [1,2] ],
+                                       [ [1,2,3] ],
+                                       [ [1,2,1] ],
+                                       [ [1,2,2] ],
+                                       [ [1,2,2,1] ]
+                                     ]
+                           },
+             minimum: { referenceImplementation: minimum,
+                        inputs: [ [ [0] ],
+                                  [ [0,1] ],
+                                  [ [1,0] ],
+                                  [ [1,2,3,4,5] ],
+                                  [ [1,3,5,4,2] ],
+                                  [ [1,3,0,5,4,2] ]
+                                ]
+                      },
+             maximum: { referenceImplementation: maximum,
+                        inputs: [ [ [0] ],
+                                  [ [0,1] ],
+                                  [ [1,0] ],
+                                  [ [1,2,3,4,5] ],
+                                  [ [1,3,5,4,2] ],
+                                  [ [1,3,0,5,4,2] ]
+                                ]
+                      },
            };
 })();
 
