@@ -53,15 +53,17 @@ end.each do |code|
   end
 end
 
-set_toledo_text do |question, index|
-  "Question #{index}"
-end
 
 case ARGV[0]
 when "tex"
 then puts tex(IO.read('algo1.template.tex'))
 when "toledo"
-then puts( toledo { |idx| to_s } )
+then
+  set_toledo_text do |question, index|
+    sprintf("<img src=\"#{ARGV[1]}\">", index)
+  end
+
+  puts toledo
 when "stats"
 then puts "Number of questions: #{questions.length}"
 else abort "Unrecognized command"
