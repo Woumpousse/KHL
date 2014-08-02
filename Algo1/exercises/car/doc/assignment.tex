@@ -1,0 +1,404 @@
+\documentclass[a4paper]{article}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pxfonts}
+
+\newcommand{\newexercise}[1]{\clearpage\begin{center}\Huge\bf #1\end{center}}
+\newcommand{\exercisemap}[1]{\begin{center}\includegraphics[height=8cm]{#1}\end{center}}
+\newcommand{\exercisemaps}[2]{\begin{center}\includegraphics[height=5cm]{#1} \hspace{4mm} \includegraphics[height=5cm]{#2}\end{center}}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return,
+            null, catch, switch, var, if, in, for, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  basicstyle=\tt,
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  escapeinside=\`\`,
+  frame=lines
+}
+
+\lstset{language=JavaScript}
+
+\newcommand{\code}[1]{
+  \begin{center}
+    \begin{minipage}{.8\linewidth}
+      \lstinputlisting{#1}
+    \end{minipage}
+  \end{center}
+}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\newexercise{Inleiding}
+\begin{itemize}
+  \item Plaats de gegeven bestanden ergens op je home-schijf, in een directory naar keuze.
+  \item Start de browser Chrome op\footnote{Om het even welke browser
+        die het canvas element ondersteunt is goed. Op de pc's van de KHL
+        staat momenteel IE9 als standaardbrowser geconfigureerd, dewelke
+        Canvas spijtig genoeg niet ondersteunt.}.
+  \item Open \verb'car.html' in de browser. Je moet nu
+        \exercisemap{ex1} te zien krijgen. Als dit niet het geval is,
+        meld dit meteen.
+  \item Voor elk van deze oefeningen zal je het bestand \verb'instructions.js' moeten aanpassen.
+  \item Er is een functie \verb'drive' gedefinieerd met een lege body (= het stuk tussen accolades).
+        \code{drive.js}
+        De functie heeft een enkele parameter genaamd \verb'car': deze
+        stelt de auto voor die je zal moeten besturen en zonder ongelukken
+        naar de eindbestemming (het groene vakje) brengen.
+\end{itemize}
+
+
+\newexercise{Oefening 1}
+\exercisemap{ex1}
+
+\begin{itemize}
+  \item De auto is \'e\'en vakje verwijderd van zijn eindbestemming.
+  \item Je kan de auto vooruit laten gaan m.b.v.\ de volgende code:
+        \code{forward.js}
+  \item Om je instructies uit te voeren, ga naar de browser en refresh (snelkoppeling F5).
+  \item Je moet nu het wagentje zien vooruitrijden. Hierna komt
+        een boodschap die je feliciteert met het uitmuntende werk dat je geleverd
+        hebt. Bij latere (moeilijkere) oefeningen zal dit minder neerbuigend overkomen :-).
+\end{itemize}
+
+
+\newexercise{Oefening 2}
+\exercisemap{ex2}
+
+\begin{itemize}
+  \item Selecteer de tweede oefening.
+  \item Deze keer is de bestemming twee vakjes ver.
+  \item E\'en van de basiselementen van algoritmes is ``sequentie'':
+        dit houdt simpelweg in dat instructies na elkaar
+        kunnen uitgevoerd worden.
+  \item Om een sequentie van opdrachten neer te schrijven
+        moet je de opdrachten gewoon na elkaar in te typen.
+\end{itemize}
+
+
+\newexercise{Oefening 3}
+\exercisemap{ex3}
+
+\begin{itemize}
+  \item Het wordt alsmaar moeilijker: de bestemming is nu \emph{drie} vakjes weg.
+  \item Je zal wel een vermoeden hebben hoe dit probleem op te lossen.
+\end{itemize}
+
+
+
+\newexercise{Oefening 4}
+\exercisemap{ex4}
+
+\begin{itemize}
+  \item Surprise, surprise\dots De eindbestemming is vier vakjes weg.
+  \item We willen voorgoed van zulke idiote opdrachten afraken.
+  \item We moeten een manier vinden om automatisch een aantal keer
+        dezelfde opdracht te herhalen.
+  \item Hiervoor bieden talen \emph{lussen}.
+  \item JavaScript biedt een aantal soorten lussen. We focussen hier op de \verb'for'-lus.
+  \item We kunnen de \verb'for'-lus als volgt gebruiken:
+        \code{for.js}
+  \item In de les zullen we de \verb'for'-lus in detail bespreken.
+  \item Een korte uitleg: er wordt een lokale variabele \verb'i' aangemaakt
+        dewelke ge\"initialiseerd wordt op op \verb'0'.
+        Zolang \verb'i' niet gelijk is aan \verb'4' wordt
+        de body herhaald en \verb'i' ge\"incrementeerd (\verb'i = i + 1').
+        In bovenstaande lus betekent dit dus dat de body
+        van de lus 4x herhaald wordt (voor \verb'i = 0', \verb'i = 1',
+        \verb'i = 2' en \verb'i = 3'; wanneer \verb'i' gelijk wordt aan \verb'4',
+        wordt de lus stopgezet).
+\end{itemize}
+
+
+\newexercise{Oefening 5}
+\exercisemap{ex5}
+
+\begin{itemize}
+  \item Dankzij onze \verb'for' lus kunnen we gemakkelijk willekeurig ver rijden.
+\end{itemize}
+
+
+
+\newexercise{Oefening 6}
+\exercisemap{ex6}
+
+\begin{itemize}
+  \item Nu zijn ze ons gewoon aan het tergen. Onze machtige lus is hier niet tegen opgewassen.
+  \item We zijn verplicht gebruik te maken van een nieuwe feature van onze wagen: draaien.
+  \item Gebruik \verb'car.turnRight()' om de auto ter plekke naar rechts te draaien.
+\end{itemize}
+
+
+\newexercise{Oefening 7}
+\exercisemap{ex7}
+
+\begin{itemize}
+  \item Het ziet ernaar uit dat we twee lussen zullen nodig hebben\dots
+\end{itemize}
+
+
+\newexercise{Oefening 8}
+\exercisemap{ex8}
+
+\begin{itemize}
+  \item Ha, dit is geen uitdaging meer.
+\end{itemize}
+
+
+\newexercise{Oefening 9}
+\exercisemap{ex9}
+
+\begin{itemize}
+  \item Altijd weer dat tellen\dots
+  \item Hier moeten we iets op vinden.
+  \item Blijkt dat onze auto een sensor heeft!
+  \item De sensor kan gebruikt worden om te zien of er een muur juist voor de auto staat.
+  \item Gebruik maken van de sensor gaat met \verb'car.sensor()'.
+        De methode geeft \verb'true' terug als er een obstakel is, \verb'false' in het andere geval.
+  \item We kunnen onze \verb'for'-lus aanpassen om iets te herhalen zolang er geen muur in de weg is:
+        \code{for-sensor.js}
+  \item het uitroepteken \verb'!' is de logische negatie: we willen immers
+        iets herhalen zolang er \emph{niet} iets in de weg is.
+\end{itemize}
+
+
+\newexercise{oefening 10}
+\exercisemap{ex10}
+
+\begin{itemize}
+  \item haha! we hoeven onze code niet eens wijzigen! ons programma werkt
+        ongeacht hoe lang de doorgangen zijn.
+  \item het is een goed idee om af en toe de code op te kuisen.
+        opkuisen doen we best als de code werkt: indien
+        het opkuisen een bug invoert, dan merken we dit meteen.
+  \item de \verb'for'-lus ziet er enorm lelijk uit.
+  \item javascript biedt een eenvoudigere \verb'while'-lus aan.
+        we kunnen hetzelfde schrijven als voorheen:
+        \code{while.js}
+  \item De \verb'while'-lus is de ``basislus''. Elke andere lus
+        kan vertaald worden naar een \verb'while'-variant.
+  \item De \verb'for'-lus is een gespecialiseerde versie van de
+        \verb'while'-lus. Indien een \verb'while'-lus voldoet aan een bepaald
+        patroon, kan het leesbaarder zijn een \verb'for'-lus te gebruiken in de plaats.
+        Meer details hierover tijdens de les.
+\end{itemize}
+
+
+\newexercise{Oefening 11}
+\exercisemap{ex11}
+
+\begin{itemize}
+  \item Och, dit is gewoon smerig\dots
+  \item E\'en enkele \verb'while'-lus kan ons tot aan het einde van een straat brengen.
+  \item Hier zijn acht straten.
+  \item We willen vermijden dat we acht keer de \verb'while'-lus moeten herhalen; daar zijn we te lui voor.
+  \item We hebben eerder een \verb'for'-lus gebruikt om iets een aantal keer te herhalen.
+        We kunnen deze nu gebruiken om de \verb'while'-lus acht maal te herhalen.
+  \item We hebben hier dus te maken met \emph{geneste lussen}: een lus in een lus.
+\end{itemize}
+
+
+\newexercise{Oefening 12}
+\exercisemap{ex12}
+
+\begin{itemize}
+  \item De sensor-optie voor de wagen was vrij duur\dots
+  \item We hebben daarom enkele toegevingen moeten maken\dots
+  \item E\'en ervan is dat we niet naar links kunnen draaien.
+  \item Hoe lossen we dit toch op\dots
+\end{itemize}
+
+
+\newexercise{Oefening 13}
+\exercisemap{ex13}
+
+\begin{itemize}
+  \item Ok, dit lijkt veel op een vorige oefening.
+\end{itemize}
+
+
+\newexercise{Oefening 14}
+\exercisemap{ex14}
+
+\begin{itemize}
+  \item We willen onze code wat opkuisen.
+  \item We weten dat we naar links kunnen draaien door drie keer naar rechts te draaien.
+  \item We weten ook hoe we door een straat heen moeten rijden tot we niet meer kunnen.
+  \item Stel dat we op een gigantisch plan rondrijden en het aantal nodige
+        instructies zeer groot wordt. Het zou dan leesbaarder zijn om rechtstreeks
+        \verb'turnLeft' te kunnen gebruiken i.p.v.\ drie maal \verb'turnRight', etc.
+  \item JavaScript (en zo goed als alle programmeertalen) laten dit toe:
+        algemeen heet dit \emph{abstractie}: we verbergen ``complexe'' operaties
+        achter een eenvoudige facade.
+  \item We defini\"eren zelf een functie als volgt:
+        \code{turnleft.js}
+  \item We kunnen voortaan naar links draaien. De syntax is echter lichtjes anders:
+        \verb'car.turnLeft()' zal niet werken, vermits de nieuwe functie geen deel
+        uitmaakt van het auto-object. De juiste syntax is \verb'turnLeft(car)'.
+  \item Definieer nu ook een functie \verb'straightAhead' die een straat tot op het einde doorrijdt.
+  \item Pas je instructies aan door gebruik te maken van deze nieuwe functies.
+\end{itemize}
+
+
+\newexercise{Oefening 15}
+\exercisemap{ex15}
+\begin{itemize}
+  \item We willen voortaan zo abstract mogelijk werken.
+  \item Maak een functie \verb'backward' die de auto \'e\'en vakje naar achter rijdt.
+  \item Let er ook op dat de auto zijn oorspronkelijke richting herstelt. Met andere
+        woorden, indien de auto naar het noorden gericht staat, moet na een
+        oproep naar \verb'backward' de auto weer naar het noorden kijken.
+  \item Als je het programma uitvoert, zal je zien dat je de tijd niet krijgt
+        om je terug goed te zetten; dit is ok. De simulator onderbreekt je
+        programma automatisch van zodra je de eindbestemming bereikt hebt.
+\end{itemize}
+
+
+\newexercise{Oefening 16}
+\exercisemap{ex16}
+\begin{itemize}
+  \item Maak een functie \verb'turn' die de auto 180 graden draait.
+  \item De functie \verb'backward' moet als volgt geschreven kunnen worden:
+        \code{backward.js}
+  \item Voeg de functie \verb'backSensor' toe die checkt of er iets \emph{achter} de auto staat:
+        \code{backsensor.js}
+  \item Deze functie moet het resultaat van \verb'car.sensor()' bewaren in een variable,
+        hier \verb'result' genaamd (om het even welke naam had gekund).
+  \item \verb'return' wordt gebruikt om een resultaat terug te geven aan de oproeper van de functie.
+  \item Schrijf een functie \verb'fullBackward' die de auto achteruit laat rijden
+        (door herhaaldelijk \verb'backward' op te roepen) tot er een muur staat achter de wagen.
+\end{itemize}
+
+
+\newexercise{Oefening 17}
+\exercisemap{ex17}
+\begin{itemize}
+  \item Hoewel het programma van de vorige oefening werkt voor deze kaart,
+        is het niet echt effici\"ent. Waarom draait de auto zo veel ter plekke?
+  \item Dit is een voorbeeld waar abstractie kan leiden tot oneffici\"ent gedrag.
+        Het voordeel van functies is dat je eerst een eenvoudige, traag werkende implementatie kan
+        maken, om deze --- indien nodig --- te herschrijven.
+  \item Stel dat de auto plots uitgerust wordt met de mogelijkheid om rechtstreeks
+        maar links te draaien, dan hoeven we enkel de functie \verb'turnLeft' aan te passen
+        om hier gebruik van te maken. Dankzij abstractie kunnen we dan
+        met \'e\'en enkele wijziging het programma laten genieten van deze nieuwe feature van onze auto.
+  \item Idem dito voor indien onze wagen een tweede sensor achteraan krijgt ge\"installeerd:
+        weeral zouden we met minimale moeite (\verb'backSensor') ons programma hiervan kunnen laten profiteren.
+  \item In de praktijk is het dus zeer belangrijk om de juiste abstracties te ontwikkelen.
+  \item Optimiseer de functie \verb'fullBackward' zodat de auto
+        slechts twee maal 180 graden hoeft te draaien.
+\end{itemize}
+
+
+\newexercise{Oefening 18+19}
+\exercisemaps{ex18}{ex19}
+\begin{itemize}
+  \item We willen ons programma wat slimmer maken en het wat autonomer laten werken.
+  \item We willen dat \'e\'enzelfde programma op beide kaarten de eindbestemming haalt.
+  \item Op de linkerkaart zal men dus naar links moeten draaien, op de rechterkaart naar rechts.
+  \item Het enige dat je ter beschikking hebt is de autosensor.
+  \item Baseer je op \verb'backSensor' uit een vorige oefening om nu
+        \verb'leftSensor' te schrijven.
+  \item Implementeer nu hetvolgende algoritme:
+        \begin{itemize}
+          \item Rij eerst vooruit tot het einde van de doorgang
+          \item Kijk dan of er naar links een doorgang is. Zo ja, draai links en rij vooruit.
+          \item Zo niet, draai naar rechts en rij vooruit.
+        \end{itemize}
+  \item Je hebt hier \emph{voorwaardelijke uitvoering} nodig: je wilt
+        eerst checken of er aan een bepaalde voorwaarde voldaan wordt eer
+        je bepaalde instructies uitvoert. Hiervoor gebruik je het \verb'if'-statement:
+        \code{if.js}
+\end{itemize}
+
+
+\newexercise{Oefening 20}
+\exercisemap{ex20}
+\begin{itemize}
+  \item Je kan de \verb'if'-statement uit de vorige oefening plaatsen in een lus
+        om snel tot bij de eindbestemming van deze kaart te geraken.
+  \item De gouden regel bij programmeren: laat zoveel mogelijk door de computer zelf doen.
+\end{itemize}
+
+
+\newexercise{Oefening 21}
+\exercisemap{ex21}
+\begin{itemize}
+  \item Deze kaart zou je programma moeten kunnen oplossen zonder enige wijziging aan te brengen.
+\end{itemize}
+
+
+\newexercise{Oefening 22}
+\exercisemap{ex22}
+\begin{itemize}
+  \item Je subliem algoritme dat zo goed werkte blijkt hier zijn weg te verliezen.
+  \item We moeten de auto de derde straat links laten nemen.
+  \item Om dit te doen zonder zelf vakjes te tellen (herinner je: we willen
+        zo weinig mogelijk werk zelf verrichten), maken we gebruik van de sensor:
+        \begin{itemize}
+          \item Rij een vakje vooruit.
+          \item Zolang vrij niet links is, rij vooruit.
+          \item Rij voorbij deze straat.
+          \item Zolang vrij niet links is, rij vooruit.
+          \item Rij voorbij deze straat.
+          \item Zolang vrij niet links is, rij vooruit.
+        \end{itemize}
+  \item Dit algoritme zorgt er dus voor dat de auto
+        stilstaat aan de 3de straat naar links.
+        Deze straat inrijden houdt dan in dat er links gedraaid en vooruit gereden moet worden.
+  \item Implementeer dit in een functie \verb'thirdLeft'.
+\end{itemize}
+
+\newexercise{Oefening 23}
+\exercisemap{ex23}
+\begin{itemize}
+  \item Implementeer een functie \verb'fourthLeft'.
+\end{itemize}
+
+
+\newexercise{Oefening 24}
+\exercisemap{ex24}
+\begin{itemize}
+  \item Oh nee, 't is weer van dat\dots
+  \item Implementeer een functie \verb'secondLeft'.
+  \item Het geoefend oog zal opmerken dat deze functies (\verb'secondLeft', \verb'thirdLeft', \verb'fourthLeft')
+        allen verdacht veel op elkaar lijken. Dit moeten we kunnen uitbuiten om minder werk te hoeven verrichten!
+        Hoe kunnen we gebruik maken van deze gelijkenissen?
+  \item We willen een enkele functie \verb'nthLeft' die als \emph{parameter} meekrijgt
+        de hoeveelste straat links we moeten hebben. \verb'secondLeft(car)' wordt
+        dan \verb'nthLeft(car, 2)', \verb'thirdLeft(car)' wordt \verb'nthLeft(car, 3)', enz.
+  \item De implementatie van deze functie ziet er zo uit:
+        \code{nthleft.js}
+  \item De \verb'for'-lus herhaalt de body voor \verb'i' gaande van \verb'0' en \verb'n', m.a.w.\
+        de body wordt \verb'n' keer herhaald. De waarde van \verb'n' kiezen we zelf wanneer
+        we de functie \verb'nthLeft' oproepen.
+  \item Herschrijf de oplossingen van de drie laatste oefeningen met \verb'nthLeft'.
+\end{itemize}
+
+
+\newexercise{Oefening 25}
+\exercisemap{ex25}
+\begin{itemize}
+  \item Schrijf (op basis van \verb'nthLeft') de functie \verb'nthRight'.
+  \item Gebruik deze om deze oefening op te lossen.
+  \item Merk op dat \verb'nthLeft' en \verb'nthRight' weeral veel op elkaar lijken.
+        Hoe zou je deze twee functies kunnen samenvoegen tot een enkele?
+\end{itemize}
+
+
+\end{document}
+
+\end{documentclass}
