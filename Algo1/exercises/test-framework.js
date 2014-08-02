@@ -570,6 +570,10 @@ function defineTests(addTestReceiver) {
 
             setFormatter: function (formatter) {
                 testUnderConstruction.formatter = formatter;
+            },
+
+            setValidator: function (validator) {
+                testUnderConstruction.validator = validator;
             }
         };
 
