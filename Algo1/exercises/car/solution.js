@@ -4,141 +4,141 @@ function drive(car) {
 }
 
 function drive1(car) {
-    car.forward();
+    forward(car);
 }
 
 function drive2(car) {
-    car.forward();
-    car.forward();
+    forward(car);
+    forward(car);
 }
 
 function drive3(car) {
-    car.forward();
-    car.forward();
-    car.forward();
+    forward(car);
+    forward(car);
+    forward(car);
 }
 
 function drive4(car) {
     for ( var i = 0; i != 4; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function drive5(car) {
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function drive6(car) {
-    car.turnRight();
-    car.forward();
+    turnRight(car);
+    forward(car);
 }
 
 function drive7(car) {
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function drive8(car) {
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
     
-    car.turnRight();
+    turnRight(car);
 
     for ( var i = 0; i != 7; i = i + 1 ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function drive9(car) {
-    for ( ; !car.sensor(); ) {
-        car.forward();
+    for ( ; !sensor(car); ) {
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
-    for ( ; !car.sensor(); ) {
-        car.forward();
+    for ( ; !sensor(car); ) {
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
-    for ( ; !car.sensor(); ) {
-        car.forward();
+    for ( ; !sensor(car); ) {
+        forward(car);
     }
 }
 
 function drive10(car) {
-    while ( !car.sensor() ) {
-        car.forward();
+    while ( !sensor(car) ) {
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
-    while ( !car.sensor() ) {
-        car.forward();
+    while ( !sensor(car) ) {
+        forward(car);
     }
 
-    car.turnRight();
+    turnRight(car);
 
-    while ( !car.sensor() ) {
-        car.forward();
+    while ( !sensor(car) ) {
+        forward(car);
     }
 }
 
 function drive11(car) {
     for ( var i = 0; i != 8; i = i + 1 ) {
-        while ( !car.sensor() ) {
-            car.forward();
+        while ( !sensor(car) ) {
+            forward(car);
         }
 
-        car.turnRight();
+        turnRight(car);
     }
 }
 
 function drive12(car) {
-    car.turnRight();
-    car.turnRight();
-    car.turnRight();
-    car.forward();
+    turnRight(car);
+    turnRight(car);
+    turnRight(car);
+    forward(car);
 }
 
 function drive13(car) {
     for ( var i = 0; i != 8; i = i + 1 ) {
-        while ( !car.sensor() ) {
-            car.forward();
+        while ( !sensor(car) ) {
+            forward(car);
         }
 
-        car.turnRight();
-        car.turnRight();
-        car.turnRight();
+        turnRight(car);
+        turnRight(car);
+        turnRight(car);
     }
 }
 
 function turnLeft(car) {
-    car.turnRight();
-    car.turnRight();
-    car.turnRight();    
+    turnRight(car);
+    turnRight(car);
+    turnRight(car);    
 }
 
 function straightAhead(car) {
-    while ( !car.sensor() ) {
-        car.forward();
+    while ( !sensor(car) ) {
+        forward(car);
     }
 }
 
@@ -150,13 +150,13 @@ function drive14(car) {
 }
 
 function turn(car) {
-    car.turnRight();
-    car.turnRight();
+    turnRight(car);
+    turnRight(car);
 }
 
 function backward(car) {
     turn(car);
-    car.forward();
+    forward(car);
     turn(car);
 }
 
@@ -166,7 +166,7 @@ function drive15(car) {
 
 function backsensor(car) {
     turn(car);
-    var result = car.sensor();
+    var result = sensor(car);
     turn(car);
     return result;
 }
@@ -193,14 +193,14 @@ function drive17(car) {
 
 function leftSensor(car) {
     turnLeft(car);
-    var result = car.sensor();
-    car.turnRight();
+    var result = sensor(car);
+    turnRight(car);
     return result;
 }
 
 function rightSensor(car) {
-    car.turnRight();
-    var result = car.sensor();
+    turnRight(car);
+    var result = sensor(car);
     turnLeft(car);
     return result;
 }
@@ -212,7 +212,7 @@ function drive18(car) {
         turnLeft(car);
     }
     else {
-        car.turnRight();
+        turnRight(car);
     }
 
     straightAhead(car);
@@ -226,77 +226,77 @@ function drive20(car) {
             turnLeft(car);
         }
         else {
-            car.turnRight();
+            turnRight(car);
         }
     }        
 }
 
 function firstLeft(car) {
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function secondLeft(car) {
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function thirdLeft(car) {
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
 }
 
 
 function fourthLeft(car) {
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-        car.forward();
+        forward(car);
     }
 }
 
 function nthLeft(car, n) {
   for ( var i = 0; i != n; i = i + 1 ) {
-    car.forward();
+    forward(car);
     while ( leftSensor(car) ) {
-      car.forward();
+      forward(car);
     }
   }
 }
 
 function nthRight(car, n) {
   for ( var i = 0; i != n; i = i + 1 ) {
-    car.forward();
+    forward(car);
     while ( rightSensor(car) ) {
-      car.forward();
+      forward(car);
     }
   }
 }
@@ -321,6 +321,6 @@ function drive24(car) {
 
 function drive25(car) {
     nthRight(car, 4);
-    car.turnRight();
+    turnRight(car);
     straightAhead(car);
 }

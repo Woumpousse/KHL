@@ -710,36 +710,46 @@ function createNavBar()
     nav.append(list);
 }
 
-function startSimulation()
+function setup()
 {
-    createNavBar();
-
     SVG = SVG( Raphael("svg-holder", 1000, 1000) );
 
     var configuration = getExercise();
-    var result = simulate(configuration);
-
     configuration.map.draw();
-    var svgCar = SVG.drawCar();
 
-    visualizeHistory( svgCar, result.history, function() {
-        if ( result.outcome == global.crashed )
-        {
-            alert("You crashed the car!");
-        }
-        else if ( result.outcome == global.goalNotReached )
-        {
-            alert("You failed to reach your destination");
-        }
-        else if ( result.outcome == global.goalReached )
-        {
-            alert("Congratulations! Proceed with next exercise.");
-        }
-        else
-        {
-            alert("You encountered a bug... " + result.outcome);
-        }
+    var svgCar = SVG.drawCar();
+    svgCar.update( configuration.initialCarState );
+
+    $('#go').click( function () {        
+        var result = simulate(configuration);
+
+        visualizeHistory( svgCar, result.history, function() {
+            if ( result.outcome == global.crashed )
+            {
+                alert("You crashed the car!");
+            }
+            else if ( result.outcome == global.goalNotReached )
+            {
+                alert("You failed to reach your destination");
+            }
+            else if ( result.outcome == global.goalReached )
+            {
+                alert("Congratulations! Proceed with next exercise.");
+            }
+            else
+            {
+                alert("You encountered a bug... " + result.outcome);
+            }
+        } );
     } );
 }
 
-$( startSimulation );
+function forward(car) { car.forward(); }
+function turnRight(car) { car.turnRight(); }
+function sensor(car) { return car.sensor(); }
+
+
+$( function () {
+    createNavBar();
+    setup();
+});

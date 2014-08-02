@@ -1,8 +1,8 @@
 function nthLeft(car, n) {
   for ( var i = 0; i != n; i = i + 1 ) {
-    car.forward();
+    forward(car);
     while ( !leftSensor(car) ) {
-      car.forward();
+      forward(car);
     }
   }
 }

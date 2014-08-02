@@ -1,4 +1,4 @@
-while ( !car.sensor() ) {
+while ( !sensor(car) ) {
     // Blijft herhaald worden zolang
     // er niets in de weg is
 }

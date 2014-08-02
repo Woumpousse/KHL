@@ -68,7 +68,7 @@
   \item De auto is \'e\'en vakje verwijderd van zijn eindbestemming.
   \item Je kan de auto vooruit laten gaan m.b.v.\ de volgende code:
         \code{forward.js}
-  \item Om je instructies uit te voeren, ga naar de browser en refresh (snelkoppeling F5).
+  \item Om je instructies uit te voeren, ga naar de browser, refresh (snelkoppeling F5) en druk op de ``Go!'' knop.
   \item Je moet nu het wagentje zien vooruitrijden. Hierna komt
         een boodschap die je feliciteert met het uitmuntende werk dat je geleverd
         hebt. Bij latere (moeilijkere) oefeningen zal dit minder neerbuigend overkomen :-).
@@ -138,7 +138,7 @@
 \begin{itemize}
   \item Nu zijn ze ons gewoon aan het tergen. Onze machtige lus is hier niet tegen opgewassen.
   \item We zijn verplicht gebruik te maken van een nieuwe feature van onze wagen: draaien.
-  \item Gebruik \verb'car.turnRight()' om de auto ter plekke naar rechts te draaien.
+  \item Gebruik \verb'turnRight(car)' om de auto ter plekke naar rechts te draaien.
 \end{itemize}
 
 
@@ -166,11 +166,11 @@
   \item Hier moeten we iets op vinden.
   \item Blijkt dat onze auto een sensor heeft!
   \item De sensor kan gebruikt worden om te zien of er een muur juist voor de auto staat.
-  \item Gebruik maken van de sensor gaat met \verb'car.sensor()'.
-        De methode geeft \verb'true' terug als er een obstakel is, \verb'false' in het andere geval.
+  \item Gebruik maken van de sensor gaat met \verb'sensor(car)'.
+        De functie geeft \verb'true' terug als er een obstakel is, \verb'false' in het andere geval.
   \item We kunnen onze \verb'for'-lus aanpassen om iets te herhalen zolang er geen muur in de weg is:
         \code{for-sensor.js}
-  \item het uitroepteken \verb'!' is de logische negatie: we willen immers
+  \item Het uitroepteken \verb'!' is de logische negatie: we willen immers
         iets herhalen zolang er \emph{niet} iets in de weg is.
 \end{itemize}
 
@@ -179,17 +179,17 @@
 \exercisemap{ex10}
 
 \begin{itemize}
-  \item haha! we hoeven onze code niet eens wijzigen! ons programma werkt
+  \item Aha! We hoeven onze code niet eens wijzigen! Ons programma werkt
         ongeacht hoe lang de doorgangen zijn.
-  \item het is een goed idee om af en toe de code op te kuisen.
-        opkuisen doen we best als de code werkt: indien
+  \item Het is een goed idee om af en toe de code op te kuisen.
+        Opkuisen doen we best als de code werkt: indien
         het opkuisen een bug invoert, dan merken we dit meteen.
-  \item de \verb'for'-lus ziet er enorm lelijk uit.
-  \item javascript biedt een eenvoudigere \verb'while'-lus aan.
-        we kunnen hetzelfde schrijven als voorheen:
+  \item De \verb'for'-lus ziet er enorm lelijk uit.
+  \item Javascript biedt een eenvoudigere \verb'while'-lus aan.
+        We kunnen hetzelfde schrijven als voorheen:
         \code{while.js}
   \item De \verb'while'-lus is de ``basislus''. Elke andere lus
-        kan vertaald worden naar een \verb'while'-variant.
+        kan vertaald worden naar een \verb'while'.
   \item De \verb'for'-lus is een gespecialiseerde versie van de
         \verb'while'-lus. Indien een \verb'while'-lus voldoet aan een bepaald
         patroon, kan het leesbaarder zijn een \verb'for'-lus te gebruiken in de plaats.
@@ -245,9 +245,6 @@
         achter een eenvoudige facade.
   \item We defini\"eren zelf een functie als volgt:
         \code{turnleft.js}
-  \item We kunnen voortaan naar links draaien. De syntax is echter lichtjes anders:
-        \verb'car.turnLeft()' zal niet werken, vermits de nieuwe functie geen deel
-        uitmaakt van het auto-object. De juiste syntax is \verb'turnLeft(car)'.
   \item Definieer nu ook een functie \verb'straightAhead' die een straat tot op het einde doorrijdt.
   \item Pas je instructies aan door gebruik te maken van deze nieuwe functies.
 \end{itemize}
@@ -275,7 +272,7 @@
         \code{backward.js}
   \item Voeg de functie \verb'backSensor' toe die checkt of er iets \emph{achter} de auto staat:
         \code{backsensor.js}
-  \item Deze functie moet het resultaat van \verb'car.sensor()' bewaren in een variable,
+  \item Deze functie moet het resultaat van \verb'sensor(car)' bewaren in een variable,
         hier \verb'result' genaamd (om het even welke naam had gekund).
   \item \verb'return' wordt gebruikt om een resultaat terug te geven aan de oproeper van de functie.
   \item Schrijf een functie \verb'fullBackward' die de auto achteruit laat rijden

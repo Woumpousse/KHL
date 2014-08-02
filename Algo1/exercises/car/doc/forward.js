@@ -1,4 +1,4 @@
 function drive(car)
 {
-    car.forward();
+    forward(car);
 }

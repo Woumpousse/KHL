@@ -4,9 +4,10 @@
     <script src="../jquery.js"></script>
     <script src="../underscore.js"></script>
     <script src="../util.js"></script>
-    <script src="raphael-min.js"></script>
+    <script src="../raphael-min.js"></script>
     <script src="instructions.js"></script>
     <script src="car.js"></script>
+    <script src="solution.js"></script>
     <style>
       #svg-holder
       {
@@ -48,6 +49,15 @@
           display: inline;
           padding: 5px;
       }
+
+      #go {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 40px;
+          width: 80%;
+          height: 50px;
+      }
     </style>
   </head>
   <body>
@@ -55,6 +65,7 @@
       <h1>SimCar</h1>
     </header>
     <nav></nav>
+    <button type="button" id="go">Go!</button>
     <div id="svg-holder"></div>
   </body>
 </html>

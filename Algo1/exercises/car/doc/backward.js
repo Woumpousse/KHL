@@ -1,5 +1,5 @@
 function backward(car) {
     turn(car);
-    car.forward();
+    forward(car);
     turn(car);
 }
