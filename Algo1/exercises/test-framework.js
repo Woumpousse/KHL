@@ -229,7 +229,7 @@ function generatePage()
     {
         function extractParameterNamesFromFunctionDefinition(code)
         {    
-            var pattern = /function .*?\((.*?)\)/g;
+            var pattern = /function .*?\((.*?)\)/;
             var matches = pattern.exec(code);
             var parameterString = matches[1];
 
@@ -238,7 +238,7 @@ function generatePage()
 
         function extractFunctionCallSyntaxFromFunctionDefinition(code)
         {
-            var pattern = /function (.*?\(.*?\))/g;
+            var pattern = /function (.*?\(.*?\))/;
             var matches = pattern.exec(code);
             var result = matches[1];
 
@@ -540,6 +540,43 @@ function preprocessTestData(allTestData)
     }
 
     _.each( allTestData, preprocess );
+}
+
+function extractFunctionName(func) {
+    var code = func.toString();
+    var pattern = /function (.*?)\(/;
+    var matches = pattern.exec(code);
+    var result = matches[1];
+
+    return result;
+}
+
+
+var tests = {};
+
+function defineTests(addTestReceiver) {
+    function addTest(testedFunction, builderReceiver) {
+        var testUnderConstruction = {};
+        tests[extractFunctionName(testedFunction)] = testUnderConstruction;
+        testUnderConstruction['referenceImplementation'] = testedFunction;
+        testUnderConstruction['inputs'] = [];
+
+        var builder = {
+            addInput: function () {
+                var copy = Array.prototype.slice.call( arguments, 0 );
+
+                testUnderConstruction['inputs'].push(copy);
+            },
+
+            setFormatter: function (formatter) {
+                testUnderConstruction.formatter = formatter;
+            }
+        };
+
+        builderReceiver(builder);
+    }
+
+    addTestReceiver(addTest);
 }
 
 
