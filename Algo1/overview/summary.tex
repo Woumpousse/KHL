@@ -74,6 +74,56 @@
 
 \begin{document}
 
+\clearpage
+\SECTION{Operators}
+\SUBSECTION{Comparison}
+\begin{center}
+  \begin{tikzpicture}
+    \path[use as bounding box] (-5,.5) rectangle (5,-3);
+    \node[anchor=east,item,minimum width=5cm] at (0,0) {Equality};
+    \node[anchor=west] at (0.1,0) {\tt ===};
+    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Inequality};
+    \node[anchor=west] at (0.1,-1) {\tt !==};
+    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Comparison};
+    \node[anchor=west] at (0.1,-2) {\tt <, <=, >=, >};
+  \end{tikzpicture}
+\end{center}
+
+\SUBSECTION{Arithmetic Operators}
+\begin{center}
+  \begin{tikzpicture}
+    \path[use as bounding box] (-5,.5) rectangle (5,-7);
+    \node[anchor=east,item,minimum width=5cm] at (0,0) {Addition};
+    \node[anchor=west] at (0.1,0) {\tt +};
+    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Subtraction};
+    \node[anchor=west] at (0.1,-1) {\tt -};
+    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Multiplication};
+    \node[anchor=west] at (0.1,-2) {\tt *};
+    \node[anchor=east,item,minimum width=5cm] at (0,-3) {Division};
+    \node[anchor=west] at (0.1,-3) {\tt /};
+    \node[anchor=east,item,minimum width=5cm] at (0,-4) {Modulo};
+    \node[anchor=west] at (0.1,-4) {\tt \%};
+    \node[anchor=east,item,minimum width=5cm] at (0,-5) {Exponentiation};
+    \node[anchor=west] at (0.1,-5) {\tt Math.pow(a, b)};
+    \node[anchor=east,item,minimum width=5cm] at (0,-6) {Square root};
+    \node[anchor=west] at (0.1,-6) {\tt Math.sqrt(x)};
+  \end{tikzpicture}
+\end{center}
+
+\SUBSECTION{Logical Operators}
+\begin{center}
+  \begin{tikzpicture}
+    \path[use as bounding box] (-5,.5) rectangle (5,-3);
+    \node[anchor=east,item,minimum width=5cm] at (0,0) {Conjunction (AND)};
+    \node[anchor=west] at (0.1,0) {\tt \&\&};
+    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Disjunction (OR)};
+    \node[anchor=west] at (0.1,-1) {\tt ||};
+    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Negation (NOT)};
+    \node[anchor=west] at (0.1,-2) {\tt !};
+  \end{tikzpicture}
+\end{center}
+
+\clearpage
 \SECTION{{\tt if}-statement}
 
 \SUBSECTION{Syntax}
@@ -202,56 +252,6 @@
   \item Objects are optional: you don't need to know them for the exam, but they
     can considerably simplify your life.
 \end{itemize}
-
-
-\clearpage
-\SECTION{Operators}
-\SUBSECTION{Comparison}
-\begin{center}
-  \begin{tikzpicture}
-    \path[use as bounding box] (-5,.5) rectangle (5,-3);
-    \node[anchor=east,item,minimum width=5cm] at (0,0) {Equality};
-    \node[anchor=west] at (0.1,0) {\tt ===};
-    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Inequality};
-    \node[anchor=west] at (0.1,-1) {\tt !==};
-    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Comparison};
-    \node[anchor=west] at (0.1,-2) {\tt <, <=, >=, >};
-  \end{tikzpicture}
-\end{center}
-
-\SUBSECTION{Arithmetic Operators}
-\begin{center}
-  \begin{tikzpicture}
-    \path[use as bounding box] (-5,.5) rectangle (5,-7);
-    \node[anchor=east,item,minimum width=5cm] at (0,0) {Addition};
-    \node[anchor=west] at (0.1,0) {\tt +};
-    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Subtraction};
-    \node[anchor=west] at (0.1,-1) {\tt -};
-    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Multiplication};
-    \node[anchor=west] at (0.1,-2) {\tt *};
-    \node[anchor=east,item,minimum width=5cm] at (0,-3) {Division};
-    \node[anchor=west] at (0.1,-3) {\tt /};
-    \node[anchor=east,item,minimum width=5cm] at (0,-4) {Modulo};
-    \node[anchor=west] at (0.1,-4) {\tt \%};
-    \node[anchor=east,item,minimum width=5cm] at (0,-5) {Exponentiation};
-    \node[anchor=west] at (0.1,-5) {\tt Math.pow(a, b)};
-    \node[anchor=east,item,minimum width=5cm] at (0,-6) {Square root};
-    \node[anchor=west] at (0.1,-6) {\tt Math.sqrt(x)};
-  \end{tikzpicture}
-\end{center}
-
-\SUBSECTION{Logical Operators}
-\begin{center}
-  \begin{tikzpicture}
-    \path[use as bounding box] (-5,.5) rectangle (5,-3);
-    \node[anchor=east,item,minimum width=5cm] at (0,0) {Conjunction (AND)};
-    \node[anchor=west] at (0.1,0) {\tt \&\&};
-    \node[anchor=east,item,minimum width=5cm] at (0,-1) {Disjunction (OR)};
-    \node[anchor=west] at (0.1,-1) {\tt ||};
-    \node[anchor=east,item,minimum width=5cm] at (0,-2) {Negation (NOT)};
-    \node[anchor=west] at (0.1,-2) {\tt !};
-  \end{tikzpicture}
-\end{center}
 
 
 
