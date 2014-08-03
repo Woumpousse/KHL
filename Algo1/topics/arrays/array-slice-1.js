@@ -1,1 +1,1 @@
-var ys = xs.slice(0, 3);
+var ys = xs.slice(1, 3);

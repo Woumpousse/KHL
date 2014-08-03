@@ -209,11 +209,6 @@
     \CODE{1}
     \CODE{2}
     \CODE{3}
-    \CODE{4}
-    \CODE{5}
-    \CODE{6}
-    \CODE{7}
-    \CODE{8}
   \end{overprint}
 
   \begin{center}
@@ -231,14 +226,9 @@
         \draw[->] (xs) to (cell 1.west);
       \end{scope}
       \begin{scope}[yshift=-1.25cm]
-        \ARRAY{1}{1,2,3}
-        \ARRAY{2}{2,3,4}
+        \ARRAY{1}{2,3,4}
+        \ARRAY{2}{0,1}
         \ARRAY{3}{3,4,5}
-        \ARRAY{4}{1}
-        \ARRAY{5}{1,2}
-        \ARRAY{6}{1,2,3}
-        \ARRAY{7}{1,2,3,4}
-        \ARRAY{8}{1,2,3,4,5}
         \node (ys) at ($ (cell 1.west) + (-1,0) $) {ys};
         \draw[->] (ys) to (cell 1.west);
       \end{scope}
