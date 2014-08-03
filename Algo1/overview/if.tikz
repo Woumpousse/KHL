@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+  \node[flowchart/node] (if) at (0,3) {evaluatie \PLACEHOLDER{conditie}};
+  \node[flowchart/node] (then) at (-2, 0) {execute \PLACEHOLDER{A}};
+  \node[flowchart/node] (else) at (2, 0) {execute \PLACEHOLDER{B}};
+
+  \draw[flowchart/arrow] ($ (if.north) + (0,1) $) -- (if.north);
+  \draw[flowchart/arrow] (if.south) -- (0,2) -- ($ (then.north) + (0,0.5) $) -- (then.north);
+  \draw[flowchart/arrow] (0,2) -- ($ (else.north) + (0,0.5) $) -- (else.north);
+  \path[flowchart/arrow,decorate,decoration={text along path,text={true},text align={align=center},reverse path}] (0, 2.1) -- ($ (then.north) + (0,0.6) $);
+  \path[flowchart/arrow,decorate,decoration={text along path,text={false},text align={align=center}}] (0, 2.1) -- ($ (else.north) + (0,0.6) $);
+
+  \draw[flowchart/arrow] (then.south) -- ($ (then.south) - (0,0.5) $) -- (0,-2) -- (0,-3);
+  \draw[flowchart/arrowline] (else.south) -- ($ (else.south) - (0,0.5) $) -- (0,-2);
+\end{tikzpicture}

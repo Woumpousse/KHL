@@ -556,6 +556,11 @@ var tests = {};
 
 function defineTests(addTestReceiver) {
     function addTest(testedFunction, builderReceiver) {
+        if ( !testedFunction )
+        {
+            throw "Missing function";
+        }
+
         var testUnderConstruction = {};
         tests[extractFunctionName(testedFunction)] = testUnderConstruction;
         testUnderConstruction['referenceImplementation'] = testedFunction;

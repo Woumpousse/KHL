@@ -1,17 +1,24 @@
-.PHONY: cleantemp arrays recursion 2d-arrays car
+.PHONY: cleantemp arrays recursion 2d-arrays car conditionals
 
 SHARED = *.js *.css
 
-all: 2d-arrays arrays recursion car
+all: conditionals 2d-arrays arrays recursion car
+
+conditionals: cleantemp
+	make -C conditionals
+	7z a conditionals.zip $(SHARED) conditionals/*.html conditionals/*.js
 
 arrays: cleantemp
-	7z a arrays.zip $(SHARED) arrays
+	make -C arrays
+	7z a arrays.zip $(SHARED) arrays/*.html arrays/*.js
 
 2d-arrays: cleantemp
-	7z a arrays.zip $(SHARED) 2d-arrays
+	make -C 2d-arrays
+	7z a 2d-arrays.zip $(SHARED) 2d-arrays/*.html 2d-arrays/*.js
 
 recursion: cleantemp
-	7z a arrays.zip $(SHARED) recursion
+	make -C recursion
+	7z a recursion.zip $(SHARED) recursion/*.html recursion/*.js
 
 car: cleantemp
 	make -C car all

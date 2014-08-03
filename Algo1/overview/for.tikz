@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+  \node[flowchart/node] (init) {evaluate \PLACEHOLDER{init}};
+  \node (loop) at ($ (init.south) + (0,-0.25) $) {};
+  \node[flowchart/node] (cond) at ($ (init.south) + (0,-1) $) {evaluate \PLACEHOLDER{cond}};
+  \node (split) at ($ (cond.south) + (0,-0.5) $) {};
+  \node[flowchart/node] (body) at ($ (split.center) + (2,-1.5) $) {evaluate \PLACEHOLDER{body}};
+  \node[flowchart/node] (inc) at ($ (body.south) + (0,-1) $) {evaluate \PLACEHOLDER{inc}};
+
+  \draw[flowchart/arrow] ($ (init.north) + (0,0.5) $) -- (init.north);
+  \draw[flowchart/arrow] (init.south) -- (cond.north);
+  \draw[flowchart/arrow] (cond.south) -- (split.center) -- ++(-2,-0.5) -- ++(0,-3.5);
+  \draw[flowchart/arrow] (split.center) -- ++(2,-0.5) -- (body.north);
+  \draw[flowchart/arrow] (body.south) -- (inc.north);
+  \draw[flowchart/arrowline] (inc.south) -- ++(0,-0.5) -- ++(2,0) |- (loop.center);
+
+  \path[flowchart/arrow,decorate,decoration={text along path,text={false},text align={align=center},reverse path}] ($ (split.center) + (0,.1) $) -- ++(-2,-0.5);
+  \path[flowchart/arrow,decorate,decoration={text along path,text={true},text align={align=center}}] ($ (split.center) + (0,.1) $) -- ++(2,-0.5);
+\end{tikzpicture}
