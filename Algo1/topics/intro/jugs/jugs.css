@@ -1,0 +1,53 @@
+body {
+    max-width: 1000px;
+}
+
+#go {
+    display: block;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#output {
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#svg {
+    margin-top: 20px;
+    padding: 20px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+}
+
+th {
+    font-size: 200%;
+}
+
+input {
+    font-size: 200%;
+    text-align: center;
+}
+
+#output {
+    border-collapse: collapse;
+}
+
+#output td {
+    font-size: 200%;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
+    text-align: center;
+    width: 50px;
+}
+
+#output td:first-child {
+    text-align: left;
+    width: 500px;
+}
