@@ -1,61 +1,3 @@
-var formatters = ( function () {
-    function simple(x)
-    {
-        return newViewer(x);
-    }
-
-    function matrix(x)
-    {
-        var table = newElement('table');
-        var tbody = newElement('tbody');
-
-        table.addClass('matrix');
-        table.append(tbody);
-
-        var rows = x.transpose();
-
-        _.each(rows, function (row) {
-            var tr = newElement('tr');
-
-            _.each(row, function (item) {
-                var td = newElement('td');
-                td.append(item);
-                tr.append(td);
-            });
-
-            tbody.append(tr);
-        });
-
-        return table;
-    }
-
-    function byType()
-    {
-        var pairs = arguments;
-
-        return function (x) {
-            for ( var i = 0; i !== pairs.length; ++i )
-            {
-                var pair = pairs[i];
-                var predicate = pair[0];
-                var formatter = pair[1];
-
-                if ( predicate(x) )
-                {
-                    return formatter(x);
-                }    
-            }
-
-            console.log("No formatter found");
-        };
-    }
-
-    return { simple: simple,
-             matrix: matrix,
-             byType: byType
-           };
-} )();
-
 function newElement(tag) {
     return $(document.createElement(tag));
 }
@@ -406,3 +348,8 @@ function generatePage()
     generateNav();
     generateTestCaseViews(tests);
 }
+
+$(document).ready( function() {
+    collectStudentImplementations(tests, window);
+    generatePage();
+} );

@@ -1,3 +1,61 @@
+var formatters = ( function () {
+    function simple(x)
+    {
+        return newViewer(x);
+    }
+
+    function matrix(x)
+    {
+        var table = newElement('table');
+        var tbody = newElement('tbody');
+
+        table.addClass('matrix');
+        table.append(tbody);
+
+        var rows = x.transpose();
+
+        _.each(rows, function (row) {
+            var tr = newElement('tr');
+
+            _.each(row, function (item) {
+                var td = newElement('td');
+                td.append(item);
+                tr.append(td);
+            });
+
+            tbody.append(tr);
+        });
+
+        return table;
+    }
+
+    function byType()
+    {
+        var pairs = arguments;
+
+        return function (x) {
+            for ( var i = 0; i !== pairs.length; ++i )
+            {
+                var pair = pairs[i];
+                var predicate = pair[0];
+                var formatter = pair[1];
+
+                if ( predicate(x) )
+                {
+                    return formatter(x);
+                }    
+            }
+
+            console.log("No formatter found");
+        };
+    }
+
+    return { simple: simple,
+             matrix: matrix,
+             byType: byType
+           };
+} )();
+
 var equality = ( function () {
     function deep(x, y)
     {
@@ -23,7 +81,7 @@ var validators = ( function () {
         return equality.deep(expected, received);
     }
 
-    function io( inputComparer, outputComparer)
+    function io(inputComparer, outputComparer)
     {
         return function (input, expected, received) {
             return inputComparer( expected.transformedInputs, received.transformedInputs ) &&
@@ -118,36 +176,38 @@ function validateResults(input, expected, received, validator)
     }
 }
 
-
-function extractFunctionName(func) {
-    var code = func.toString();
-    var pattern = /function (.*?)\(/;
-    var matches = pattern.exec(code);
-    var result = matches[1];
-
-    return result;
+function Test(testedFunction)
+{
+    this.referenceImplementation = testedFunction;
+    this.inputs = [];
+    this.validator = validators.identical;
+    this.formatter = formatters.simple;
 }
-
 
 var tests = {};
 
 function defineTests(addTestReceiver) {
+    function extractFunctionName(func) {
+        var code = func.toString();
+        var pattern = /function (.*?)\(/;
+        var matches = pattern.exec(code);
+        var result = matches[1];
+
+        return result;
+    }
+
     function addTest(testedFunction, builderReceiver) {
         if ( !testedFunction )
         {
             throw "Missing function";
         }
 
-        var testUnderConstruction = {
-            referenceImplementation: testedFunction,
-            inputs: [],
-            validator: validators.identical,
-            formatter: formatters.simple
-        };
+        // Fill in defaults
+        var testUnderConstruction = new Test(testedFunction);
 
         tests[extractFunctionName(testedFunction)] = testUnderConstruction;
 
-
+        // Create builder
         var builder = {
             addInput: function () {
                 var copy = Array.prototype.slice.call( arguments, 0 );
@@ -164,15 +224,11 @@ function defineTests(addTestReceiver) {
             }
         };
 
+        // Collect tests
         builderReceiver(builder);
+
+
     }
 
     addTestReceiver(addTest);
 }
-
-
-$(document).ready( function() {
-    collectStudentImplementations(tests, window);
-    generatePage();
-} );
-
