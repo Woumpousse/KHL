@@ -270,6 +270,8 @@ function generatePage()
         }
 
         function generateHeaderRow(testData) {
+            if ( !testData ) { throw "Missing test data"; }
+
             function generateParameterHeaderCells()
             {
                 var parameterNames = extractParameterNamesFromTestData(testData);
@@ -304,6 +306,8 @@ function generatePage()
 
         function generateTestCaseBlocks(testData)
         {
+            if ( !testData ) { throw "Undefined testdata"; }
+
             function generateTestCaseBlock(input)
             {
                 var expected = runImplementation( testData.referenceImplementation, input );
@@ -523,25 +527,6 @@ function generatePage()
     generateTestCaseViews(tests);
 }
 
-function preprocessTestData(allTestData)
-{
-    function preprocess( testData )
-    {
-        function setupValidator(testData) {
-            testData.validator = testData.validator ? testData.validator : validators.identical;
-        }
-
-        function setupFormatter(testData) {
-            testData.formatter = testData.formatter ? testData.formatter : formatters.simple;
-        }
-
-        setupValidator(testData);
-        setupFormatter(testData);
-    }
-
-    _.each( allTestData, preprocess );
-}
-
 function extractFunctionName(func) {
     var code = func.toString();
     var pattern = /function (.*?)\(/;
@@ -561,10 +546,15 @@ function defineTests(addTestReceiver) {
             throw "Missing function";
         }
 
-        var testUnderConstruction = {};
+        var testUnderConstruction = {
+            referenceImplementation: testedFunction,
+            inputs: [],
+            validator: validators.identical,
+            formatter: formatters.simple
+        };
+
         tests[extractFunctionName(testedFunction)] = testUnderConstruction;
-        testUnderConstruction['referenceImplementation'] = testedFunction;
-        testUnderConstruction['inputs'] = [];
+
 
         var builder = {
             addInput: function () {
@@ -590,7 +580,6 @@ function defineTests(addTestReceiver) {
 
 
 $(document).ready( function() {
-    preprocessTestData(tests);
     collectStudentImplementations(tests, window);
     generatePage();
 } );
