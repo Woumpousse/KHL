@@ -12,6 +12,56 @@ function average(a, b)
 }
 
 
+function cost1(n)
+{
+    var result;
+
+    // Write code here that computes the price of n books.
+
+    return result;
+}
+
+
+function cost2(n, k)
+{
+    var result;
+
+    // Write code here that computes the price of n books and k DVDs.
+
+    return result;
+}
+
+
+function cost3(n, k)
+{
+    var result;
+
+    // Write code here that computes the price of n books and k DVDs.
+
+    return result;
+}
+
+
+function cost4(n, k)
+{
+    var result;
+
+    // Write code here that computes the price of n books and k DVDs.
+
+    return result;
+}
+
+
+function cost5(n, k)
+{
+    var result;
+
+    // Write code here that computes the price of n books and k DVDs.
+
+    return result;
+}
+
+
 function isOdd(n)
 {
     var result;

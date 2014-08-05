@@ -98,4 +98,51 @@ defineTests(function (test) {
         builder.addInput(9, 9, 8);
         builder.addInput(45, 80, 79);
     });
+
+    test(Solutions.cost1, function (builder) {
+        builder.addInput(0);
+        builder.addInput(1);
+        builder.addInput(2);
+        builder.addInput(10);
+    });
+    
+    test(Solutions.cost2, function (builder) {
+        builder.addInput(0, 0);
+        builder.addInput(1, 0);
+        builder.addInput(0, 1);
+        builder.addInput(1, 1);
+        builder.addInput(3, 5);
+    });
+
+    test(Solutions.cost3, function (builder) {
+        builder.addInput(0, 0);
+        builder.addInput(1, 0);
+        builder.addInput(0, 1);
+        builder.addInput(1, 1);
+        builder.addInput(3, 5);
+    });
+
+    test(Solutions.cost4, function (builder) {
+        builder.addInput(0, 0);
+        builder.addInput(1, 0);
+        builder.addInput(0, 1);
+        builder.addInput(1, 1);
+        builder.addInput(1, 2);
+        builder.addInput(2, 2);
+        builder.addInput(3, 0);
+        builder.addInput(0, 3);
+        builder.addInput(3, 5);
+    });
+
+    test(Solutions.cost5, function (builder) {
+        builder.addInput(0, 0);
+        builder.addInput(1, 0);
+        builder.addInput(0, 1);
+        builder.addInput(1, 1);
+        builder.addInput(1, 2);
+        builder.addInput(2, 2);
+        builder.addInput(3, 0);
+        builder.addInput(0, 3);
+        builder.addInput(3, 5);
+    });
 });

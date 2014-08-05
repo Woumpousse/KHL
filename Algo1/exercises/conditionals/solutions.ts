@@ -179,4 +179,59 @@ module Solutions
               
         return [x, y, z];
     }            
+
+    export function cost1(n : number) : number
+    {
+        var result;
+
+        result = n * 5;
+
+        return result;
+    }
+
+    export function cost2(n : number, k : number) : number
+    {
+        var result;
+
+        result = n * 5 + k * 7;
+
+        return result;
+    }
+
+    export function cost3(n : number, k : number) : number
+    {
+        var result;
+
+        result = n * 5 + k * 7 + 0.5 * (n + k);
+
+        return result;
+    }
+
+    export function cost4(n : number, k : number) : number
+    {
+        var result;
+
+        result = n * 5 + k * 7;
+
+        if ( result < 20 )
+        {
+            result += 0.5 * (n + k);
+        }
+
+        return result;
+    }
+
+    export function cost5(n : number, k : number) : number
+    {
+        var result;
+
+        result = n * 5 + k * 7;
+
+        if ( result < 20 && n + k < 3 )
+        {
+            result += 0.5 * (n + k);
+        }
+
+        return result;
+    }
 }
