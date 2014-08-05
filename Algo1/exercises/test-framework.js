@@ -202,10 +202,12 @@ function defineTests(addTestReceiver) {
             throw "Missing function";
         }
 
+        var testedFunctionName = extractFunctionName(testedFunction);
+
         // Fill in defaults
         var testUnderConstruction = new Test(testedFunction);
 
-        tests[extractFunctionName(testedFunction)] = testUnderConstruction;
+        tests[testedFunctionName] = testUnderConstruction;
 
         // Create builder
         var builder = {
