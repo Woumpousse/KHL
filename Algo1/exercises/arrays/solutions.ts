@@ -37,6 +37,11 @@ module Solutions
         return result;
     }
 
+    export function average(xs : Array<number>) : number
+    {
+        return sum(xs) / xs.length;
+    }
+
     export function incrementEachItem(xs : Array<number>) : void
     {
         for ( var i = 0; i !== xs.length; ++i )
@@ -197,6 +202,26 @@ module Solutions
                 else
                 {
                     last = xs[i];
+                }
+            }
+
+            return true;
+        }
+    }
+
+    export function areEqual<T>(xs : Array<T>, ys : Array<T>) : boolean
+    {
+        if ( xs.length !== ys.length )
+        {
+            return false;
+        }
+        else
+        {
+            for ( var i = 0; i !== xs.length; ++i )
+            {
+                if ( xs[i] !== ys[i] )
+                {
+                    return false;
                 }
             }
 

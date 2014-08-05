@@ -28,6 +28,16 @@ defineTests(function (test) {
         builder.addInput([1, 2, 3, 4, 0]);
     });
 
+    test(Solutions.average, function (builder) {
+        builder.addInput([]);
+        builder.addInput([0]);
+        builder.addInput([1]);
+        builder.addInput([1, 2]);
+        builder.addInput([1, 2, 3]);
+        builder.addInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        builder.addInput([1, 2, 3, 4, 0]);
+    });
+
     test(Solutions.incrementEachItem, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
@@ -138,5 +148,14 @@ defineTests(function (test) {
         builder.addInput([5, 4, 3, 2, 1]);
         builder.addInput([1, 1, 1]);
         builder.addInput([1, 1, 2, 3, 3]);
+    });
+
+    test(Solutions.areEqual, function (builder) {
+        builder.addInput([], []);
+        builder.addInput([], [1]);
+        builder.addInput([1], []);
+        builder.addInput([1], [1]);
+        builder.addInput([1,2,3], [1,2,3]);
+        builder.addInput([1,2,3], [3,2,1]);
     });
 });
