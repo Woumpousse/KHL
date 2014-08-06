@@ -176,9 +176,11 @@ function validateResults(input, expected, received, validator)
     }
 }
 
-function Test(testedFunction)
+function Test(referenceImplementation)
 {
-    this.referenceImplementation = testedFunction;
+    var me = this;
+
+    this.referenceImplementation = referenceImplementation;
     this.inputs = [];
     this.validator = validators.identical;
     this.formatter = formatters.simple;
@@ -196,25 +198,25 @@ function defineTests(addTestReceiver) {
         return result;
     }
 
-    function addTest(testedFunction, builderReceiver) {
-        if ( !testedFunction )
+    function addTest(referenceImplementation, builderReceiver) {
+        if ( !referenceImplementation )
         {
             throw "Missing function";
         }
 
-        var testedFunctionName = extractFunctionName(testedFunction);
+        var functionName = extractFunctionName(referenceImplementation);
 
         // Fill in defaults
-        var testUnderConstruction = new Test(testedFunction);
+        var testUnderConstruction = new Test(referenceImplementation);
 
-        tests[testedFunctionName] = testUnderConstruction;
+        tests[functionName] = testUnderConstruction;
 
         // Create builder
         var builder = {
             addInput: function () {
                 var copy = Array.prototype.slice.call( arguments, 0 );
 
-                testUnderConstruction['inputs'].push(copy);
+                testUnderConstruction.inputs.push(copy);
             },
 
             setFormatter: function (formatter) {
@@ -228,8 +230,6 @@ function defineTests(addTestReceiver) {
 
         // Collect tests
         builderReceiver(builder);
-
-
     }
 
     addTestReceiver(addTest);
