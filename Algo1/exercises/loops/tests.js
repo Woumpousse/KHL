@@ -31,6 +31,16 @@ defineTests(function (test) {
         builder.addInput(13 * 3, 13 * 5);
     });
 
+    test(Solutions.lcm, function (builder) {
+        builder.addInput(1, 5);
+        builder.addInput(2, 2);
+        builder.addInput(2, 4);
+        builder.addInput(15, 20);
+        builder.addInput(25, 50);
+        builder.addInput(50, 25);
+        builder.addInput(13 * 3, 13 * 5);
+    });
+
     test(Solutions.countTrailingZeros, function (builder) {
         builder.addInput(0);
         builder.addInput(1);

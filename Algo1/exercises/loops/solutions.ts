@@ -50,6 +50,19 @@ module Solutions
         return result;            
     }
 
+    export function lcm(a : number, b : number) : number
+    {
+        var result;
+        
+        result = a;
+        while ( result % a !== 0 || result % b !== 0 )
+        {
+            result++;
+        }
+
+        return result;
+    }
+
     export function countTrailingZeros(n : number) : number
     {
         var result;

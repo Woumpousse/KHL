@@ -27,6 +27,17 @@ function gcd(a, b)
     return result;
 }
 
+
+function lcm(a, b)
+{
+    var result;
+
+    // Put solution here
+
+    return result;
+}
+
+
 function countDigits(n)
 {
     var result;
