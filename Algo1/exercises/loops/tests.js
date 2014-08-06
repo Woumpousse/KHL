@@ -11,6 +11,26 @@ defineTests(function (test) {
         builder.addInput(10, 20);
     });
 
+    test(Solutions.factorial, function (builder) {
+        builder.addInput(0);
+        builder.addInput(1);
+        builder.addInput(2);
+        builder.addInput(3);
+        builder.addInput(4);
+        builder.addInput(5);
+        builder.addInput(6);
+    });
+
+    test(Solutions.gcd, function (builder) {
+        builder.addInput(1, 5);
+        builder.addInput(2, 2);
+        builder.addInput(2, 4);
+        builder.addInput(15, 20);
+        builder.addInput(25, 50);
+        builder.addInput(50, 25);
+        builder.addInput(13 * 3, 13 * 5);
+    });
+
     test(Solutions.countTrailingZeros, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
@@ -31,6 +51,17 @@ defineTests(function (test) {
         builder.addInput(708060);
         builder.addInput(70800);
         builder.addInput(-70800);
+    });
+
+    test(Solutions.countDigits, function (builder) {
+        builder.addInput(0);
+        builder.addInput(1);
+        builder.addInput(12);
+        builder.addInput(123);
+        builder.addInput(1234);
+        builder.addInput(1000);
+        builder.addInput(-1);
+        builder.addInput(-135);
     });
 
     test(Solutions.isPrime, function (builder) {

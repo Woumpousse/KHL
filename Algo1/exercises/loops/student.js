@@ -8,6 +8,35 @@ function rangeSum(a, b)
 }
 
 
+function factorial(n)
+{
+    var result;
+
+    // Put solution here
+
+    return result;
+}
+
+
+function gcd(a, b)
+{
+    var result;
+
+    // Put solution here
+
+    return result;
+}
+
+function countDigits(n)
+{
+    var result;
+
+    // Put solution here
+
+    return result;
+}
+
+
 function countTrailingZeros(n)
 {
     var result;

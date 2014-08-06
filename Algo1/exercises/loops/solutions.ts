@@ -1,5 +1,55 @@
 module Solutions
 {
+    export function factorial(n : number) : number
+    {
+        var result = 1;
+
+        for ( var i = 1; i <= n; ++i ) {
+            result *= i;
+        }
+
+        return result;
+    }
+
+    export function countDigits(n : number) : number
+    {
+        var result;
+
+        if ( n === 0 )
+        {
+            result = 1;
+        }
+        else
+        {
+            result = 0;
+            if ( n < 0 )
+            {
+                n = -n;
+            }
+            
+            while ( n > 0 )
+            {
+                n = Math.floor( n / 10 );
+                result++;
+            }
+        }
+
+        return result;
+    }
+
+    export function gcd(a : number, b : number) : number
+    {
+        var result;
+
+        result = a;
+        while ( a % result !== 0 || b % result !== 0 )
+        {
+            result--;
+        }
+
+        return result;            
+    }
+
     export function countTrailingZeros(n : number) : number
     {
         var result;
