@@ -13,6 +13,8 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 
+\usetikzlibrary{shadows,calc}
+
 
 \mode<presentation>
 \usetheme[height=.75cm]{Rochester}
@@ -22,7 +24,6 @@
 \logo{\includegraphics[height=0.5cm]{../KHL.jpg}}
 
 
-\usetikzlibrary{shadows,calc}
 
 \lstdefinelanguage{JavaScript}{
   keywords={typeof, new, true, false, catch, function, return,
@@ -80,4 +81,12 @@
   \begin{frame}
     \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
   \end{frame}
+}
+
+
+\setbeamertemplate{title page}{%
+  \begin{center}
+    Algoritmen en Datastructuren 1 \\[5mm]
+    {\sc\Huge \inserttitle}
+  \end{center}
 }
