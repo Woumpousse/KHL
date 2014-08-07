@@ -228,4 +228,16 @@ module Solutions
             return true;
         }
     }
+
+    export function alternates<T>(xs : Array<T>) : Array<Array<T>>
+    {
+        var result = [ [], [] ];
+
+        for ( var i = 0; i !== xs.length; ++i )
+        {
+            result[ i % 2 ].push( xs[i] );
+        }
+
+        return result;
+    }
 }
