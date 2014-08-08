@@ -22,56 +22,59 @@
 
       <section>
         <p style='font-size: 150%; text-align: center'>
-          Note: all grids must be represented as arrays of columns, not arrays of rows.
+          Opmerking: alle 2D-arrays moeten bijgehouden worden als een lijst van kolommen, niet als een lijst van rijen.
         </p>
       </section>
       
-      <section class="testcase" data-subject="createGrid">
-        <p>
-          Write a function <code>createGrid(width, height, value)</code> that
-          creates a 2D-array representing a grid with dimensions <code>width</code> by <code>height</code>.
-          Each cell in the grid must contain the value <code>value</code>.
-        </p>
-      </section>
-
       <section class="testcase" data-subject="arrayLengths">
         <p>
-          Write a function <code>arrayLengths(xss)</code> that, given an array of arrays <code>xss</code>,
-          determines the length of each array in <code>xss</code>.
+          Schrijf een functie <code>arrayLengths(xss)</code> die, gegeven een array van arrays <code>xss</code>,
+          de lengte van elk van de arrays teruggeeft in een array. Bijvoorbeeld,
+          de array <code>[ [1], [1,2], [1,2,3] ]</code> bevat drie arrays. De eerste heeft
+          lengte <code>1</code>, de tweede lengte <code>2</code> en de derde lengte <code>3</code>.
+          Deze drie lengtes moeten teruggegeven worden als een nieuwe array: <code>[1,2,3]</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="isRectangular">
         <p>
-          An array can contain other arrays. If all these arrays have the same length, it is easy to interpret
-          it as a grid or matrix. Write a function <code>isRectangular(xss)</code> that, given an array of arrays <code>xss</code>,
-          checks whether all arrays inside <code>xss</code> have the same length.
+          Een array kan zelf andere arrays bevatten. Indien deze arrays allemaal dezelfde lengte hebben,
+          kan met de array-van-arrays interpreteren als een rooster of een matrix. Schrijf de functie <code>isRectangular(xss)</code>
+          die, gegeven een array van arrays <code>xss</code>, nagaat of elke array dezelfde lengte heeft.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="createGrid">
+        <p>
+          Schrijf een functie <code>createGrid(width, height, value)</code> die
+          een 2D-array aanmaakt met breedte <code>width</code> en hoogte <code>height</code>.
+          Elk element moet ge&iuml;nitialiseerd worden op <code>value</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="width">
         <p>
-          Write a function <code>width(xss)</code> that returns the width of the grid <code>xss</code>. You can assume that <code>xss</code> is rectangular.
+          Schrijf een functie <code>width(xss)</code> die gegeven een 2D-array <code>xss</code> de breedte ervan teruggeeft.
         </p>
       </section>
 
       <section class="testcase" data-subject="height">
         <p>
-          Write a function <code>height(xss)</code> that returns the height of the grid <code>xss</code>. You can assume that <code>xss</code> is rectangular.
+          Schrijf een functie <code>height(xss)</code> die gegeven een 2D-array <code>xss</code> de hoogte ervan teruggeeft.
         </p>
       </section>
 
       <section class="testcase" data-subject="isSquare">
         <p>
-          Write a function <code>isSquare(xss)</code> that determines whether <code>xss</code> represents a square matrix, i.e. that its width and height are equal.
+          Schrijf een functie <code>isSquare(xss)</code> die nagaat of de gegeven 2D-array <code>xss</code> vierkant is.
         </p>
       </section>
 
       <section class="testcase" data-subject="zigZag">
         <p>
-          Write a function <code>zigZag(width, height)</code> that returns a
-          grid with size <code>width</code> by <code>height</code> and containing
-          numbers in zig-zag pattern.
+          Schrijf een functie <code>zigZag(width, height)</code> die een
+          2D-array teruggeeft met de gegeven dimensies. De waarden
+          erin moeten een zigzag vorm maken, zoals hieronder getoond wordt.
         </p>
         <table class="center matrix">
           <tr><td>0</td><td>1</td><td>2</td><td>3</td></tr>
@@ -82,29 +85,33 @@
 
       <section class="testcase" data-subject="getRow">
         <p>
-          Write a function <code>getRow(xss, row)</code> that returns a copy of
-          the <code>row</code>-th row of the grid <code>xss</code>.
+          Schrijf een functie <code>getRow(xss, row)</code>
+          die gegeven een 2D-array <code>xss</code> een kopie
+          geeft van de rij met index <code>row</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="getColumn">
         <p>
-          Write a function <code>getRow(xss, col)</code> that returns a copy of
-          the <code>col</code>-th column of the grid <code>xss</code>.
+          Schrijf een functie <code>getColumn(xss, column)</code>
+          die gegeven een 2D-array <code>xss</code> een kopie
+          geeft van de kolom met index <code>column</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="rowSums">
         <p>
-          Write a function <code>rowSums(xss)</code> that returns an array
-          whose i-th item corresponds to the sum of the values of the i-th row of <code>xss</code>.
+          Schrijf een functie <code>rowSums(xss)</code> die
+          gegeven een 2D array <code>xss</code> voor elke rij
+          de som uitrekent en deze in een nieuwe array plaatst.
         </p>
       </section>
 
       <section class="testcase" data-subject="columnSums">
         <p>
-          Write a function <code>columnSums(xss)</code> that returns an array
-          whose i-th item corresponds to the sum of the values of the i-th column of <code>xss</code>.
+          Schrijf een functie <code>columnSums(xss)</code> die
+          gegeven een 2D array <code>xss</code> voor elke kolom
+          de som uitrekent en deze in een nieuwe array plaatst.
         </p>
       </section>
     </div>

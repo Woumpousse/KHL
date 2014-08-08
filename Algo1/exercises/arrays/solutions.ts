@@ -241,7 +241,6 @@ module Solutions
         return result;
     }
 
-    // TODO
     export function lengthOfLongestIncreasingSubarray(xs : Array<number>) : number
     {
         if ( xs.length === 0 )
@@ -271,10 +270,11 @@ module Solutions
                 {
                     currentMaximalLength = 1;
                 }
-
+                
                 lastValue = currentValue;
             }
-
+            
             return result;
+        }
     }
 }
