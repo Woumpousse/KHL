@@ -1,0 +1,2 @@
+Omzetten lus naar recursie en omgekeerd
+Minimum/maximum digit

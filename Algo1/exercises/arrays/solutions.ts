@@ -240,4 +240,41 @@ module Solutions
 
         return result;
     }
+
+    // TODO
+    export function lengthOfLongestIncreasingSubarray(xs : Array<number>) : number
+    {
+        if ( xs.length === 0 )
+        {
+            return 0;
+        }
+        else
+        {
+            var result = 1;
+            var currentMaximalLength = 1;
+            var lastValue = xs[0];
+            
+            for ( var i = 1; i < xs.length; ++i )
+            {
+                var currentValue = xs[i];
+                
+                if ( currentValue >= lastValue )
+                {
+                    currentMaximalLength++;
+
+                    if ( currentMaximalLength > result )
+                    {
+                        result = currentMaximalLength;
+                    }
+                }
+                else
+                {
+                    currentMaximalLength = 1;
+                }
+
+                lastValue = currentValue;
+            }
+
+            return result;
+    }
 }
