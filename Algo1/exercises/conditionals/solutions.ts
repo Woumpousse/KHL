@@ -234,4 +234,43 @@ module Solutions
 
         return result;
     }
+
+    // TODO
+    export function bookOrder(n : number) : number
+    {
+        var result;
+
+        var price;
+        if ( n < 100 ) price = 50;
+        else if ( n < 250 ) price = 45;
+        else if ( n < 500 ) price = 40;
+        else if ( n < 1000 ) price = 30;
+
+        result = n * price;
+
+        return result;
+    }
+
+    // TODO
+    export function taxes(n : number) : number
+    {
+        var result;
+
+        result = 0;
+        
+        n -= 1000;
+        if ( n > 0 )
+        {
+            result += (n % 500) * 0.25;
+            n -= 500;
+
+            if ( n > 500 )
+            {
+                result += n * 0.50;
+            }
+        }
+
+
+        return result;
+    }
 }
