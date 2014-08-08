@@ -112,7 +112,7 @@ function minimumOfTwo(a, b)
 }
 
 
-function abs(a)
+function abs(n)
 {
     var result;
 
