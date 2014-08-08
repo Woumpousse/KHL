@@ -130,4 +130,28 @@ defineTests(function (originalTest) {
             builder.addInput(input);
         });
     });
+
+    test(Solutions.matrixAddition, function (builder) {
+        builder.addInput( [[1]], [[1]] );
+        builder.addInput( [[1]], [[2]] );
+        builder.addInput( [[1,2]], [[1,2]] );
+        builder.addInput( [[1,2,3]], [[3,2,1]] );
+        builder.addInput( [[1,2,3],[4,5,6]], [[3,2,1],[6,5,4]] );
+        builder.addInput( [[1,2,3],[4,5,6],[7,8,9]], [[3,2,1],[6,5,4],[9,8,7]] );
+        builder.addInput( [[1,0,2],[4,2,0],[1,4,7]], [[7,5,3],[1,5,9],[0,1,3]] );
+    });
+
+    test(Solutions.matrixMultiplication, function (builder) {
+        builder.addInput( [[1]], [[1]] );
+        builder.addInput( [[1]], [[2]] );
+        builder.addInput( [[1],[1]], [[1,1]] );
+        builder.addInput( [[0],[1]], [[1,1]] );
+        builder.addInput( [[0],[1]], [[1,1]] );
+        builder.addInput( [[1,1],[1,1]], [[1,1]] );
+        builder.addInput( [[1,1],[1,1]], [[0,1]] );
+        builder.addInput( [[1,2],[3,4]], [[2,3]] );
+        builder.addInput( [[1,2,7],[3,4,4]], [[2,3]] );
+        builder.addInput( [[1,2,7],[3,4,4],[8,7,6]], [[2,3,1]] );
+        builder.addInput( [[1,2,7],[3,4,4],[8,7,6]], [[2,3,1],[0,0,0],[2,5,6]] );
+    });
 });

@@ -148,4 +148,37 @@ module Solutions
 
         return result;
     }
+
+    export function matrixAddition(xss : Array<Array<number>>, yss : Array<Array<number>>) : Array<Array<number>>
+    {
+        var result = createGrid( width(xss), height(xss), 0 );
+
+        for ( var y = 0; y !== height(result); ++y )
+        {
+            for ( var x = 0; x !== width(result); ++x )
+            {
+                result[x][y] = xss[x][y] + yss[x][y];
+            }
+        }
+
+        return result;
+    }
+
+    export function matrixMultiplication(xss : Array<Array<number>>, yss : Array<Array<number>>) : Array<Array<number>>
+    {
+        var result = createGrid( width(yss), height(xss), 0 );
+
+        for ( var row = 0; row !== height(result); ++row )
+        {
+            for ( var col = 0; col !== width(result); ++col )
+            {
+                for ( var i = 0; i !== width(xss); ++i )
+                {
+                    result[col][row] += xss[i][row] * yss[col][i];
+                }
+            }
+        }
+
+        return result;
+    }
 }
