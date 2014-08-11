@@ -7,7 +7,7 @@ public class StudentTest
 {
     private static final String geldigeVoornaam = "Foo";
     private static final String geldigeNaam = "Bar";
-    private static final int geldigeCode = 1;
+    private static final int geldigeCode = 555555;
     
     @Test
     public void constructor()

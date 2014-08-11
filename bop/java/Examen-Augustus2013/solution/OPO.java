@@ -22,6 +22,16 @@ public class OPO
         this(code, naam, studiePunten, false);
     }
     
+    public OPO(int code, String naam )
+    {
+        this(code, naam, 3, false);
+    }
+    
+    public OPO(int code, String naam, boolean engels )
+    {
+        this(code, naam, 3, engels);
+    }
+
     private void setCode(int code)
     {
         this.code = code;

@@ -56,7 +56,7 @@ public class Student
     
     private boolean isValidCode(int code)
     {
-        return code >= 0;
+        return code >= 100000 && code <= 999999;
     }
 
     public String getNaam()

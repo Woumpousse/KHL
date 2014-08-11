@@ -21,7 +21,7 @@ public class OPOTest
     }
     
     @Test
-    public void constructor2()
+    public void constructor_zonderTaal()
     {
         OPO opo = new OPO(geldigeCode, geldigeNaam, geldigeStudiePunten);
         
@@ -30,7 +30,29 @@ public class OPOTest
         assertEquals( geldigeStudiePunten, opo.getStudiePunten() );
         assertFalse( opo.isEngels() );
     }
+
+    @Test
+    public void constructor_zonderStudiepunten()
+    {
+        OPO opo = new OPO(geldigeCode, geldigeNaam, false );
+        
+        assertEquals( geldigeCode, opo.getCode() );
+        assertEquals( geldigeNaam, opo.getNaam() );
+        assertEquals( 3, opo.getStudiePunten() );
+        assertFalse( opo.isEngels() );
+    }
     
+    @Test
+    public void constructor_zonderStudiepuntenEnZonderTaal()
+    {
+        OPO opo = new OPO(geldigeCode, geldigeNaam );
+        
+        assertEquals( geldigeCode, opo.getCode() );
+        assertEquals( geldigeNaam, opo.getNaam() );
+        assertEquals( 3, opo.getStudiePunten() );
+        assertFalse( opo.isEngels() );
+    }
+
     @Test(expected=IllegalArgumentException.class)
     public void constructor_nullNaam()
     {
@@ -41,6 +63,12 @@ public class OPOTest
     public void constructor_negatieveStudiePunten()
     {
         new OPO(0, geldigeNaam, -1);
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void constructor_teVeelStudiePunten()
+    {
+        new OPO(0, geldigeNaam, 21);
     }
     
     @Test

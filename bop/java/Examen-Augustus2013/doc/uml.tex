@@ -1,0 +1,99 @@
+\documentclass{standalone}
+\usepackage{khluml}
+
+\usetikzlibrary{calc}
+
+\newcommand{\Student}{
+  \umlclass{Student}{
+       \umlmember[access=private]{naam:String}
+       \umlmember[access=private]{voornaam:String}
+       \umlmember[access=private]{code:int}
+     }{
+       \umlmember[access=public]{Student(voornaam:String, naam:String, code:int)}
+       \umlmember[access=public]{getNaam():String}
+       \umlmember[access=public]{getVoornaam():String}
+       \umlmember[access=public]{getCode():int}
+       \umlmember[access=private]{setNaam(naam:String)}
+       \umlmember[access=private]{setVoornaam(voornaam:String)}
+       \umlmember[access=private]{setCode(code:int)}
+     }
+}
+
+\newcommand{\OPO}{
+  \umlclass{OPO}{
+    \umlmember[access=private]{code:int}
+    \umlmember[access=private]{naam:String}
+    \umlmember[access=private]{studiePunten:int}
+    \umlmember[access=private]{engels:boolean}
+  }{
+    \umlmember[access=public]{OPO(code:int, naam:String, sp:int, engels:boolean)}
+    \umlmember[access=public]{OPO(code:int, naam:String, sp:int)}
+    \umlmember[access=public]{getCode():int}
+    \umlmember[access=public]{getNaam():String}
+    \umlmember[access=public]{getStudiePunten():int}
+    \umlmember[access=public]{isEngels():boolean}
+    \umlmember[access=private]{setCode(code:Code)}
+    \umlmember[access=private]{setNaam(naam:String)}
+    \umlmember[access=private]{setStudiePunten(sp:int)}
+    \umlmember[access=private]{setEngels(engels:boolean)}
+  }
+}
+
+\newcommand{\Inschrijving}{
+  \umlclass{Inschrijving}{
+    \umlmember[access=private]{datum:Datum}
+  }{
+    \umlmember[access=public]{Inschrijving(opo:OPO, datum:Datum)}
+    \umlmember[access=public]{getOPO():OPO}
+    \umlmember[access=public]{getDatum():Datum}
+    \umlmember[access=private]{setOPO(opo:OPO)}
+    \umlmember[access=private]{setDatum(datum:Datum)}
+  }
+}
+
+\newcommand{\Jaarprogramma}{
+  \umlclass{Jaarprogramma}{
+  }{
+    \umlmember[access=public]{JaarProgramma(student:Student)}
+    \umlmember[access=public]{getStudent():student}
+    \umlmember[access=public]{voegInschrijvingToe(inschrijving:Inschrijving)}
+    \umlmember[access=public]{voegInschrijvingToe(dag:int,maand:int,jaar:int,opo:OPO)}
+    \umlmember[access=public]{geefTotaalAantalStudiePunten():int}
+    \umlmember[access=public]{geefFactuur():String}
+    \umlmember[access=private]{setStudent(student:Student)}
+  }
+}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+  \node[/uml/class] (student) {
+    \Student
+  };
+
+  \node[/uml/class,anchor=west] (opo) at ($ (student.east) + (3,0) $) {
+    \OPO
+  };
+
+  \node[/uml/class,anchor=north] (inschrijving) at ($ (opo.south) + (0,-2) $) {
+    \Inschrijving
+  };
+
+  \path let \p1 = (student.south), \p2 = (inschrijving.west) in
+        node[/uml/class] (jaarprogramma) at (\x1, \y2) {
+    \Jaarprogramma
+  };
+  
+  \draw[/uml/association] (inschrijving.north) -- (opo.south)
+                          node [at end,left,anchor=north east] {1}
+                          node [at end,right,anchor=north west] {-opo};
+  \draw[/uml/association] (jaarprogramma.north) -- (student.south)
+                          node [at end,left,anchor=north east] {1}
+                          node [at end,right,anchor=north west] {-student};
+  \draw[/uml/association] (jaarprogramma.east) -- (inschrijving.west)
+                          node [at end,left,anchor=north east] {$0\dots *$}
+                          node [at end,right,anchor=south east] {-inschrijvingen};
+\end{tikzpicture}
+
+\end{document}

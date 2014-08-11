@@ -106,7 +106,7 @@ public class JaarprogrammaTest
 
     private Student geldigeStudent()
     {
-        return new Student( "x", "y", 1 );
+        return new Student( "x", "y", 444444 );
     }
     
     private OPO opo(int id, int studiepunten)
