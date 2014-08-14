@@ -142,6 +142,14 @@ function initialize()
             return element.removeClass('selected');
         }
 
+        function clearAllSelections(question)
+        {
+            findSelectableChildren(question).each( function () {
+                var selectable = $(this);
+                deselect(selectable);
+            } );
+        }
+
         function shouldBeSelected(element)
         {
             return element.attr('data-solution') === 'true';
@@ -202,6 +210,27 @@ function initialize()
             } );
         }
 
+        function revealSolution(element)
+        {
+            if ( shouldBeSelected(element) )
+            {
+                select(element);
+            }
+            else
+            {
+                deselect(element);
+            }
+        }
+
+        function revealAllSolutions(question)
+        {
+            findSelectableChildren(question).each( function () {
+                var child = $(this);
+
+                revealSolution(child);
+            } );
+        }
+
         function isCorrect(element)
         {
             return isSelected(element) === shouldBeSelected(element);
@@ -227,6 +256,7 @@ function initialize()
                 }
 
                 var button = newElement("button");
+                button.addClass('question-control');
                 button.addClass('verify');
                 button.append('Verifieer');
                 button.click(verify);
@@ -234,10 +264,56 @@ function initialize()
                 return button;
             }
 
+            function createResetButton(question)
+            {
+                function reset()
+                {
+                    clearAllFeedback(question);
+                    clearAllSelections(question);
+                }
+
+                var button = newElement("button");
+                button.addClass('question-control');
+                button.addClass('reset');
+                button.append('Reset');
+                button.click(reset);
+
+                return button;
+            }
+
+            function createSolutionButton(question)
+            {
+                function reveal()
+                {
+                    revealAllSolutions(question);
+                    showAllFeedback(question);
+                }
+
+                var button = newElement("button");
+                button.addClass('question-control');
+                button.addClass('reveal');
+                button.append('Oplossing');
+                button.click(reveal);
+
+                return button;
+            }
+
+            function createButtonBox(question)
+            {
+                var box = newElement('div');
+                box.addClass('question-controls');
+
+                box.append( createVerifyButton(question) );
+                box.append( createResetButton(question) );
+                box.append( createSolutionButton(question) );
+
+                return box;
+            }
+
             $('[data-question="selection"]').each( function () {
                 var question = $(this);
 
-                question.append( createVerifyButton(question) );
+                question.append( createButtonBox(question) );
             } );
         }
 

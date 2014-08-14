@@ -44,7 +44,7 @@ input {
     margin: 10px auto 10px auto;
     border: black solid thin;
     border-radius: 5px;
-    padding: 5px;
+    padding: 20px;
     box-shadow: 2px 2px 2px #000;
     position: relative;
 }
@@ -125,16 +125,24 @@ a.hint-button:hover {
     border: thin gray solid;
 }
 
-button.verify {
-    display: block;
-    width: 50%;
-    margin: 0px auto;
+button.question-control {
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    margin: 20px 5px;
 }
 
 .selectable.correct {
-    background: green;
+    background: #AFA;
 }
 
 .selectable.incorrect {
-    background: red;
+    background: #FAA;
 }
+
+.question-controls {
+    width: 80%;
+    margin: 5px auto;
+    text-align: center;
+}
+
