@@ -118,9 +118,23 @@ a.hint-button:hover {
 }
 
 .selectable:hover {
-    border: thin gray dotted;
+    background: #AAA;
 }
 
 .selected {
-    background: #AAA;
+    border: thin gray solid;
+}
+
+button.verify {
+    display: block;
+    width: 50%;
+    margin: 0px auto;
+}
+
+.selectable.correct {
+    background: green;
+}
+
+.selectable.incorrect {
+    background: red;
 }

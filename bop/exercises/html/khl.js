@@ -125,35 +125,130 @@ function initialize()
         transformHintsToPopups();
     }
 
-    function isSelected(element)
+    function processSelectionQuestions()
     {
-        return element.hasClass('selected');
-    }
-
-    function addSelectableHandlers()
-    {
-        function toggleSelection(selectableElement)
+        function isSelected(element)
         {
-            if ( isSelected(selectableElement) )
+            return element.hasClass('selected');
+        }
+
+        function select(element)
+        {
+            return element.addClass('selected');
+        }
+
+        function deselect(element)
+        {
+            return element.removeClass('selected');
+        }
+
+        function shouldBeSelected(element)
+        {
+            return element.attr('data-solution') === 'true';
+        }
+
+        function toggleSelection(element)
+        {
+            if ( isSelected(element) )
             {
-                selectableElement.removeClass('selected');
+                deselect(element);
             }
             else
             {
-                selectableElement.addClass('selected');
+                select(element);
             }
         }
 
-        $('.selectable').click( function() {
-            var selectableElement = $(this);
+        function clearFeedback(element)
+        {
+            element.removeClass('correct');
+            element.removeClass('incorrect');
+        }
 
-            toggleSelection(selectableElement);
-        } );
+        function showFeedback(element)
+        {
+            var received = isSelected(element);
+            var expected = shouldBeSelected(element);
+
+            if ( received && expected )
+            {
+                element.addClass('correct');
+            }
+            else if ( received || expected )
+            {
+                element.addClass('incorrect');
+            }
+        }
+
+        function findSelectableChildren(question)
+        {
+            return question.find('.selectable');
+        }
+
+        function showAllFeedback(question)
+        {
+            findSelectableChildren(question).each( function() {
+                var child = $(this);
+                showFeedback(child);
+            } );
+        }
+
+        function clearAllFeedback(question)
+        {
+            findSelectableChildren(question).each( function () {
+                var child = $(this);
+
+                clearFeedback(child);
+            } );
+        }
+
+        function isCorrect(element)
+        {
+            return isSelected(element) === shouldBeSelected(element);
+        }
+
+        function addSelectableHandlers()
+        {
+            $('.selectable').click( function() {
+                var selectableElement = $(this);
+
+                toggleSelection(selectableElement);
+            } );
+        }
+
+        function addButtons()
+        {
+            function createVerifyButton(question)
+            {
+                function verify()
+                {
+                    clearAllFeedback(question);
+                    showAllFeedback(question);
+                }
+
+                var button = newElement("button");
+                button.addClass('verify');
+                button.append('Verifieer');
+                button.click(verify);
+
+                return button;
+            }
+
+            $('[data-question="selection"]').each( function () {
+                var question = $(this);
+
+                question.append( createVerifyButton(question) );
+            } );
+        }
+
+        addSelectableHandlers();
+        addButtons();
     }
 
     processQuestions();
-    addInputCheckers();
-    addSelectableHandlers();
+    processSelectionQuestions();
+    
+    addInputCheckers();    
     setupHints();
 }
 
