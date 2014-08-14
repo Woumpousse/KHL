@@ -3,7 +3,6 @@ require './Java.rb'
 
 
 module Exercises
-
   class TypeInference1 < Questions::Java::TypeInference
     def initialize
       super( <<-END.unindent.strip )
@@ -15,7 +14,6 @@ module Exercises
              END
     end
   end
-  
 end
 
 def produce_html

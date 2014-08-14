@@ -10,8 +10,15 @@ body {
 }
 
 h1 {
+    background-color: #88F;
+    padding: 15px;
+    text-align: center;
+}
+
+h2 {
     background-color: #AAF;
-    padding: 10px;
+    padding: 15px;
+    text-align: center;
 }
 
 input {
@@ -59,7 +66,7 @@ input {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    cursor: default;
+    cursor: help;
     -moz-box-shadow: 1px 1px 3px #000;
     -webkit-box-shadow: 1px 1px 3px #000;
     box-shadow: 1px 1px 3px #000;
@@ -103,4 +110,17 @@ a.hint-button:hover {
     background: -moz-linear-gradient(#fff, #999);
     background: -webkit-linear-gradient(#fff, #999);
     background: -o-linear-gradient(#fff, #999); 
+}
+
+.selectable {
+    cursor: pointer;
+    border: thin transparent solid;
+}
+
+.selectable:hover {
+    border: thin gray dotted;
+}
+
+.selected {
+    background: #AAA;
 }
