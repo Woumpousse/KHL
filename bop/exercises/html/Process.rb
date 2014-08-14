@@ -8,10 +8,21 @@ module Exercises
       super( <<-END.unindent.strip )
                class Foo {
                    public __void__ foo() {
-                       // NOP
+                     // NOP
+                   }
+                 }
+                 END
+    end
+  end
+
+  class Scopes1 < Questions::SelectCodeFragments
+    def initialize
+      super( <<-END.unindent.strip )
+               class Foo {
+                   public %void foo() {
                    }
                }
-             END
+               END
     end
   end
 end

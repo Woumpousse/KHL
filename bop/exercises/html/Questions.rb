@@ -67,6 +67,56 @@ module Questions
     end
   end
 
+  class SelectCodeFragments
+    def initialize(code)
+      @code = code
+    end
+
+    def html
+      find_fragments(@code) do |fragment|
+        process_fragment(fragment)
+      end
+    end
+
+    protected
+    def find_fragments(code)
+      code.gsub(/(%?\w+)/) do
+        data = $1
+
+        yield data
+      end
+    end
+
+    def process_fragment(fragment)
+      if fragment.start_with?("%")
+      then
+        fragment = fragment[1..-1]
+        solution = 'true'
+      else
+        solution = 'false'
+      end
+
+      attributes = {
+        'class' => 'selectable',
+        'data-solution' => solution
+      }
+
+      generate_html_element(fragment, attributes)
+    end
+
+    def generate_html_element(fragment, attributes)
+      Types.check( binding, { :attributes => { String => String } } )
+
+      attributeString = attributes.to_a.map do |name, value|
+        unescaped_data = CGI.unescapeHTML(value)
+
+        "#{name}=\"#{unescaped_data}\""
+      end.join(" ")
+
+      "<span #{attributeString}>#{fragment}</span>"
+    end
+  end
+
   module Java
     class FillInBlanksInCode < Questions::FillInBlanksInCode
       def initialize(data)
