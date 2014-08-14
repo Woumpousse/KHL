@@ -1,6 +1,7 @@
 require './Shared.rb'
 require './HTML.rb'
 require './Types.rb'
+require './Java.rb'
 
 module Questions
   class FillInBlanksInCode
@@ -27,6 +28,7 @@ module Questions
       html_code_fragments.merge_alternates_with(html_input_fragments).join
     end
 
+    protected
     def format_code_fragment(fragment)
       Types.check( binding, { :fragment => String } )
 
@@ -36,10 +38,15 @@ module Questions
     def format_input_element(data)
       Types.check( binding, { :data => String } )
 
-      generate_input_element( { 'data-solution' => data } )
+      generate_input_element( extract_attributes_from_data(data) )
     end
 
-    protected
+    def extract_attributes_from_data(data)
+      Types.check( binding, { :data => String } )
+
+      { 'data-solution' => data }
+    end
+
     def generate_input_element(attributes)
       Types.check( binding, { :attributes => { String => String } } )
 
@@ -67,10 +74,25 @@ module Questions
       end
 
       def verify
-        bundle = Java::Bundle.from_string( without_placeholders )
+        bundle = ::Java::Bundle.from_string( without_placeholders )
 
-        Java::compile( bundle )
+        ::Java::compile( bundle )
       end
     end
+
+    class TypeInference < FillInBlanksInCode
+      def initialize(data)
+        super(data)
+      end
+
+      def extract_attributes_from_data(data)
+        attributes = super
+
+        attributes['placeholder'] = 'type'
+
+        attributes
+      end
+    end
+
   end
 end
