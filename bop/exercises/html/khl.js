@@ -328,7 +328,7 @@ function initialize()
                 var box = newElement('div');
                 box.addClass('question-control-box');
 
-                question.append(box);
+                question.prepend(box);
             } );
         }
 

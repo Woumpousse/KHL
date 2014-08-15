@@ -98,12 +98,15 @@ input {
     border: thin black solid;
     padding: 2px;
     margin: 20px 5px;
-    border-radius: 5px;
+    border-radius: 32px;
     background: #AAA;
+    background: linear-gradient(to bottom, #AAA 0%, #FFF 25%, #AAA 100%);
+    cursor: default;
+    box-shadow: 2px 2px 2px black;
 }
 
 .question-control:hover {
-    background: #AFA;
+    background: linear-gradient(to bottom, #AFA 0%, #FFF 25%, #AFA 100%);
 }
 
 .selectable.correct {
@@ -115,8 +118,9 @@ input {
 }
 
 .question-control-box {
-    width: 80%;
+    position: absolute;
     margin: 5px auto;
     text-align: center;
-    border: solid thin gray;
+    right: 0px;
+    top: -40px;
 }
