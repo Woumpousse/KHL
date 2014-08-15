@@ -48,6 +48,15 @@ var buttons = ( function () {
         return button;
     }
 
+    function createHintButton()
+    {
+        var button = createButton('hint');
+        button.addClass('hint');
+        button.attr('title', 'Hint');
+
+        return button;
+    }
+
     return { createVerifyButton: createVerifyButton,
              createResetButton: createResetButton,
              createRevealButton: createRevealButton
@@ -229,8 +238,7 @@ function initialize()
 
                 function createButtonBox(question)
                 {
-                    var box = newElement('div');
-                    box.addClass('question-controls');
+                    var box = findQuestionControlBox(question);
 
                     box.append( createVerifyButton(question) );
                     box.append( createResetButton(question) );
@@ -309,7 +317,25 @@ function initialize()
             addInputCheckers();
         }
 
+        function addControlBoxesToAllQuestions()
+        {
+            findQuestions().each( function () {
+                var question = $(this);
+
+                var box = newElement('div');
+                box.addClass('question-controls');
+
+                question.append(box);
+            } );
+        }
+
+        function findQuestionControlBox(question)
+        {
+            return question.find(".question-controls").first();
+        }
+
         addClassAndIdToAllQuestions();
+        addControlBoxesToAllQuestions();
         processSelectionQuestions();
         processFillInBlankQuestions();
     }
@@ -382,4 +408,4 @@ function initialize()
 
 $(initialize);
 
-// <div>Icon made by Zurb from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a></div>
+

@@ -35,6 +35,8 @@ module Exercises
     def initialize
       super( <<-END.unindent.strip )
                class Foo {
+                   
+
                    public Foo() {  <<
                    }               <<
 
