@@ -44,7 +44,7 @@ input {
     margin: 10px auto 10px auto;
     border: black solid thin;
     border-radius: 5px;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 2px 2px 2px #000;
     position: relative;
 }
@@ -57,18 +57,13 @@ input {
     background: #AAA;
     position: absolute;
     text-align: center;
+    font-weight: bold;
     width: 20px;
     right: -10px;
     top: -10px;
     line-height: 20px;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
     user-select: none;
-    cursor: help;
-    -moz-box-shadow: 1px 1px 3px #000;
-    -webkit-box-shadow: 1px 1px 3px #000;
+    cursor: default;
     box-shadow: 1px 1px 3px #000;
 }
 
@@ -84,9 +79,7 @@ a.hint-button:hover {
     bottom: 0;
     left: 0;
     background: #000;
-    background: -moz-linear-gradient(#111, #999);
-    background: -webkit-linear-gradient(#111, #999);
-    background: -o-linear-gradient(#111, #999); 
+    background: linear-gradient(#111, #999); 
     opacity: 0;
     transition: opacity 200ms ease-in;
     z-index: 999;
@@ -107,9 +100,7 @@ a.hint-button:hover {
     border: white 2px solid;
     text-align: center;
     background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999); 
+    background: linear-gradient(#fff, #999);
 }
 
 .selectable {
@@ -125,11 +116,17 @@ a.hint-button:hover {
     border: thin gray solid;
 }
 
-button.question-control {
-    width: 150px;
-    height: 30px;
+.question-control {
+    display: inline-block;
+    border: thin black solid;
     padding: 2px;
     margin: 20px 5px;
+    border-radius: 5px;
+    background: #AAA;
+}
+
+.question-control:hover {
+    background: #AFA;
 }
 
 .selectable.correct {

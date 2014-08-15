@@ -62,7 +62,10 @@ class String
     end
 
     lines.map do |line|
-      line[indentation..-1]
+      if line.strip.length > 0
+      then line[indentation..-1]
+      else line
+      end
     end.join
   end
 

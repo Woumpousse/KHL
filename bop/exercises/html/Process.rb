@@ -10,27 +10,35 @@ module Exercises
                    public __void__ foo() {
                      // NOP
                    }
+
+                   public __int__ bar(__boolean__ x) {
+                     if ( x ) { return 0; }
+                     else { return 1; }
+                   }
                  }
                  END
     end
   end
 
-  # class Scopes1 < Questions::Java::SelectTokens
-  #   def initialize
-  #     super( <<-END.unindent.strip )
-  #              class Foo {
-  #                  public %void foo() {
-  #                  }
-  #              }
-  #              END
-  #   end
-  # end
+  class Scopes1 < Questions::Java::SelectTokens
+    def initialize
+      super( <<-END.unindent.strip )
+                class Foo {
+                   public %void foo() {
+                   }
+               }
+               END
+    end
+  end
 
-  class Scopes1 < Questions::Java::SelectLines
+  class Lines1 < Questions::Java::SelectLines
     def initialize
       super( <<-END.unindent.strip )
                class Foo {
-                   public void foo() {     <<
+                   public Foo() {  <<
+                   }               <<
+
+                   public void foo() {
                    }
                }
                END
