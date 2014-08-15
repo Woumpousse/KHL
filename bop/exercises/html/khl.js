@@ -355,9 +355,9 @@ function initialize()
 
         function addHintButtons()
         {
-            function containsHintData(questionId)
+            function containsHintData(question)
             {
-                return $('#' + questionId + ' .hint').length !== 0;
+                return question.find('.hint').length > 0;
             }
 
             function createHintButton(questionId)
@@ -378,7 +378,7 @@ function initialize()
                 var question = $(this);                
                 var questionId = question.attr('id');
 
-                if ( containsHintData(questionId) )
+                if ( containsHintData(question) )
                 {
                     var hintButton = createHintButton(questionId);
                     question.prepend(hintButton);
