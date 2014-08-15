@@ -12,7 +12,7 @@ module Questions
       @formatter = formatter
     end
 
-    def html
+    def code
       fragments = @data.split(/__(.*?)__/)
       
       code_fragments, input_fragments = fragments.partition_alternates
@@ -73,7 +73,7 @@ module Questions
       @regex = regex
     end
 
-    def html
+    def code
       find_fragments do |fragment|
         process_fragment(fragment)
       end
