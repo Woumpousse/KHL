@@ -15,11 +15,22 @@ module Exercises
     end
   end
 
-  class Scopes1 < Questions::SelectCodeFragments
+  # class Scopes1 < Questions::Java::SelectTokens
+  #   def initialize
+  #     super( <<-END.unindent.strip )
+  #              class Foo {
+  #                  public %void foo() {
+  #                  }
+  #              }
+  #              END
+  #   end
+  # end
+
+  class Scopes1 < Questions::Java::SelectLines
     def initialize
       super( <<-END.unindent.strip )
                class Foo {
-                   public %void foo() {
+                   public void foo() {     <<
                    }
                }
                END

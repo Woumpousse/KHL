@@ -68,19 +68,20 @@ module Questions
   end
 
   class SelectCodeFragments
-    def initialize(code)
+    def initialize(code, regex)
       @code = code
+      @regex = regex
     end
 
     def html
-      find_fragments(@code) do |fragment|
+      find_fragments do |fragment|
         process_fragment(fragment)
       end
     end
 
     protected
-    def find_fragments(code)
-      code.gsub(/(%?\w+)/) do
+    def find_fragments
+      @code.gsub(@regex) do
         data = $1
 
         yield data
@@ -88,20 +89,26 @@ module Questions
     end
 
     def process_fragment(fragment)
-      if fragment.start_with?("%")
-      then
-        fragment = fragment[1..-1]
-        solution = 'true'
-      else
-        solution = 'false'
-      end
+      solution = if should_be_selected? fragment then 'true' else 'false' end
+      stripped = strip_metadata(fragment)
 
       attributes = {
         'class' => 'selectable',
         'data-solution' => solution
       }
 
-      generate_html_element(fragment, attributes)
+      generate_html_element(stripped, attributes)
+    end
+
+    def should_be_selected?(fragment)
+      fragment.start_with?('%')
+    end
+
+    def strip_metadata(fragment)
+      if fragment.start_with?('%')
+      then fragment[1..-1]
+      else fragment
+      end
     end
 
     def generate_html_element(fragment, attributes)
@@ -144,5 +151,27 @@ module Questions
       end
     end
 
+    class SelectTokens < SelectCodeFragments
+      def initialize(code)
+        super(code, /(%?\w+)/)
+      end
+    end
+
+    class SelectLines < SelectCodeFragments
+      def initialize(code)
+        super(code, /^(%?.+)$/)
+      end
+
+      def should_be_selected?(fragment)
+        fragment.end_with?('<<')
+      end
+
+      def strip_metadata(fragment)
+        if fragment =~ /\s*<<$/
+        then $`
+        else fragment
+        end
+      end
+    end
   end
 end
