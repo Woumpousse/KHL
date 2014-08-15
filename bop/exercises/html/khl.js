@@ -193,7 +193,7 @@ function initialize()
                 } );
             }
 
-            function addButtons()
+            function addQuestionControls()
             {
                 function createVerifyButton(question)
                 {
@@ -251,12 +251,13 @@ function initialize()
                 $('[data-question="selection"]').each( function () {
                     var question = $(this);
 
+                    // CHECK THIS
                     question.append( addButtonsToControlBox(question) );
                 } );
             }
 
             addSelectableHandlers();
-            addButtons();
+            addQuestionControls();
         }
 
         function addClassToAllQuestions()
@@ -275,26 +276,86 @@ function initialize()
 
         function processFillInBlankQuestions()
         {
+            function findInputs(question)
+            {
+                return question.find('input[data-solution]');
+            }
+
+            function showFeedback(input)
+            {
+                var expected = input.attr('data-solution');
+                var given = input.val();
+
+                if ( expected === given ) {
+                    input.addClass('correct');
+                }
+                else {
+                    input.removeClass('correct');
+                }
+            }
+
+            function showAllFeedback(question)
+            {
+                findInputs(question).each( function () {
+                    var input = $(this);
+
+                    showFeedback(input);
+                } );
+            }
+
             function addInputCheckers()
             {
                 $('input').each( function () {
                     var input = $(this);
 
                     input.change( function () {
-                        var expected = input.attr('data-solution');
-                        var given = input.val();
-
-                        if ( expected === given ) {
-                            input.addClass('correct');
-                        }
-                        else {
-                            input.removeClass('correct');
-                        }
+                        showFeedback(input);
                     } );
                 } );
             }
 
+            function revealSolution(input)
+            {
+                var solution = input.attr('data-solution');
+
+                input.val(solution);
+            }
+
+            function revealAllSolutions(question)
+            {
+                question.find('input[data-solution]').each( function () {
+                    var input = $(this);
+
+                    revealSolution(input);
+                } );
+            }
+
+            function addQuestionControls()
+            {
+                function createSolutionButton(question)
+                {
+                    function reveal()
+                    {
+                        revealAllSolutions(question);
+                        showAllFeedback(question);
+                    }
+
+                    var button = buttons.createRevealButton();
+                    button.click(reveal);
+
+                    return button;
+                }
+
+                $('[data-question="fill-in-blanks"]').each( function () {
+                    var question = $(this);
+                    var controlBox = findQuestionControlBox(question);
+                    
+                    controlBox.append( createSolutionButton(question) );
+                } );
+            }
+
             addInputCheckers();
+            addQuestionControls();
         }
 
         function addControlBoxesToAllQuestions()
@@ -311,7 +372,13 @@ function initialize()
 
         function findQuestionControlBox(question)
         {
-            return question.find(".question-control-box").first();
+            var result = question.find(".question-control-box").first();
+
+            if ( !result ) {
+                console.log("Warning: no control box found for " + question.toString());
+            }
+
+            return result;
         }
 
         function setupHints()
