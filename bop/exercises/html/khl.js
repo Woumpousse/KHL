@@ -4,9 +4,11 @@ function newElement(tag)
 }
 
 var buttons = ( function () {
-    function createButton(iconName)
+    function createButton(iconName, tag)
     {
-        var button = newElement('div');
+        tag = tag ? tag : 'div';
+
+        var button = newElement(tag);
         button.addClass('question-control');
         button.css('width', '32px');
         button.css('height', '32px');
@@ -24,7 +26,7 @@ var buttons = ( function () {
     function createVerifyButton()
     {
         var button = createButton('verify');
-        button.addClass('verify');
+        button.addClass('verify-control');
         button.attr('title', 'Verifieer');
 
         return button;
@@ -33,7 +35,7 @@ var buttons = ( function () {
     function createResetButton()
     {
         var button = createButton('reset');
-        button.addClass('reset');
+        button.addClass('reset-control');
         button.attr('title', 'Reset');
 
         return button;
@@ -42,7 +44,7 @@ var buttons = ( function () {
     function createRevealButton()
     {
         var button = createButton('reveal');
-        button.addClass('reveal');
+        button.addClass('reveal-control');
         button.attr('title', 'Toon oplossing');
 
         return button;
@@ -50,8 +52,8 @@ var buttons = ( function () {
 
     function createHintButton()
     {
-        var button = createButton('hint');
-        button.addClass('hint');
+        var button = createButton('hint', 'a');
+        button.addClass('hint-control');
         button.attr('title', 'Hint');
 
         return button;
@@ -59,7 +61,8 @@ var buttons = ( function () {
 
     return { createVerifyButton: createVerifyButton,
              createResetButton: createResetButton,
-             createRevealButton: createRevealButton
+             createRevealButton: createRevealButton,
+             createHintButton: createHintButton
            };
 } )();
 
@@ -236,7 +239,7 @@ function initialize()
                     return button;
                 }
 
-                function createButtonBox(question)
+                function addButtonsToControlBox(question)
                 {
                     var box = findQuestionControlBox(question);
 
@@ -250,7 +253,7 @@ function initialize()
                 $('[data-question="selection"]').each( function () {
                     var question = $(this);
 
-                    question.append( createButtonBox(question) );
+                    question.append( addButtonsToControlBox(question) );
                 } );
             }
 
@@ -323,7 +326,7 @@ function initialize()
                 var question = $(this);
 
                 var box = newElement('div');
-                box.addClass('question-controls');
+                box.addClass('question-control-box');
 
                 question.append(box);
             } );
@@ -331,79 +334,84 @@ function initialize()
 
         function findQuestionControlBox(question)
         {
-            return question.find(".question-controls").first();
+            return question.find(".question-control-box").first();
         }
+
+        function setupHints()
+        {
+            function hintButtonIdForQuestion(questionId)
+            {
+                return questionId + '-hintbutton';
+            }
+
+            function hintBoxIdForQuestion(questionId)
+            {
+                return questionId + '-hintbox';
+            }
+
+            function addHintButtons()
+            {
+                function containsHintData(question)
+                {
+                    return question.find('.hint').length > 0;
+                }
+
+                function createHintButton(question)
+                {
+                    var questionId = question.attr('id');
+                    var buttonId = hintButtonIdForQuestion(questionId);
+                    var boxId = hintBoxIdForQuestion(questionId);
+
+                    // var hintButton = newElement("a");
+                    // hintButton.attr('id', buttonId);
+                    // hintButton.attr('href', '#' + boxId);
+                    // hintButton.append('?');
+
+                    var hintButton = buttons.createHintButton();
+                    hintButton.attr('href', '#' + boxId);
+                    
+                    return hintButton;
+                }
+
+                findQuestions().each( function () {
+                    var question = $(this);                
+                    var questionId = question.attr('id');
+
+                    if ( containsHintData(question) )
+                    {
+                        var controlBox = findQuestionControlBox(question);
+                        var hintButton = createHintButton(question);
+
+                        controlBox.prepend(hintButton);
+                    }
+                } );
+            }
+
+            function transformHintsToPopups()
+            {
+                $('.hint').wrap( function() {
+                    var hint = $(this);
+                    var question = hint.parents('.question').first();
+                    var questionId = question.attr('id');
+                    var hintBoxId = hintBoxIdForQuestion(questionId);
+
+                    return "<div class=\"popup\" id=\"" + hintBoxId + "\"></div>";
+                } );
+            }
+
+            addHintButtons();
+            transformHintsToPopups();
+        }
+
 
         addClassAndIdToAllQuestions();
         addControlBoxesToAllQuestions();
         processSelectionQuestions();
         processFillInBlankQuestions();
-    }
-
-    
-    function setupHints()
-    {
-        function hintButtonIdForQuestion(questionId)
-        {
-            return questionId + '-hintbutton';
-        }
-
-        function hintBoxIdForQuestion(questionId)
-        {
-            return questionId + '-hintbox';
-        }
-
-        function addHintButtons()
-        {
-            function containsHintData(question)
-            {
-                return question.find('.hint').length > 0;
-            }
-
-            function createHintButton(questionId)
-            {
-                var buttonId = hintButtonIdForQuestion(questionId);
-                var boxId = hintBoxIdForQuestion(questionId);
-                
-                var hintButton = newElement("a");
-                hintButton.addClass('hint-button');
-                hintButton.attr('id', buttonId);
-                hintButton.attr('href', '#' + boxId);
-                hintButton.append('?');
-
-                return hintButton;
-            }
-
-            findQuestions().each( function () {
-                var question = $(this);                
-                var questionId = question.attr('id');
-
-                if ( containsHintData(question) )
-                {
-                    var hintButton = createHintButton(questionId);
-                    question.prepend(hintButton);
-                }
-            } );
-        }
-
-        function transformHintsToPopups()
-        {
-            $('.hint').wrap( function() {
-                var hint = $(this);
-                var question = hint.parents('.question').first();
-                var questionId = question.attr('id');
-                var hintBoxId = hintBoxIdForQuestion(questionId);
-
-                return "<div class=\"popup\" id=\"" + hintBoxId + "\"></div>";
-            } );
-        }
-
-        addHintButtons();
-        transformHintsToPopups();
+        setupHints();
     }
 
     processQuestions();
-    setupHints();
 }
 
 $(initialize);

@@ -49,29 +49,6 @@ input {
     position: relative;
 }
 
-.hint-button {
-    border-radius: 20px;
-    border: thin solid black;
-    padding: 2px;
-    text-decoration: none;
-    background: #AAA;
-    position: absolute;
-    text-align: center;
-    font-weight: bold;
-    width: 20px;
-    right: -10px;
-    top: -10px;
-    line-height: 20px;
-    user-select: none;
-    cursor: default;
-    box-shadow: 1px 1px 3px #000;
-}
-
-a.hint-button:hover {
-    background: #AFA;
-    transition: background 200ms ease-in;
-}
-
 .popup {
     position: fixed;
     top: 0;
@@ -137,9 +114,9 @@ a.hint-button:hover {
     background: #FAA;
 }
 
-.question-controls {
+.question-control-box {
     width: 80%;
     margin: 5px auto;
     text-align: center;
+    border: solid thin gray;
 }
-
