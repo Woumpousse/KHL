@@ -303,6 +303,34 @@ function initialize()
                 } );
             }
 
+            function clearInput(input)
+            {
+                input.val('');
+            }
+
+            function clearAllInputs(question)
+            {
+                findInputs(question).each( function () {
+                    var input = $(this);
+
+                    clearInput(input);
+                } );
+            }
+
+            function clearFeedback(input)
+            {
+                input.removeClass('correct');
+            }
+
+            function clearAllFeedback(question)
+            {
+                findInputs(question).each( function () {
+                    var input = $(this);
+
+                    clearFeedback(input);
+                } );
+            }
+
             function addInputCheckers()
             {
                 $('input').each( function () {
@@ -332,6 +360,20 @@ function initialize()
 
             function addQuestionControls()
             {
+                function createResetButton(question)
+                {
+                    function reset()
+                    {
+                        clearAllFeedback(question);
+                        clearAllInputs(question);
+                    }
+
+                    var button = buttons.createResetButton();
+                    button.click(reset);
+                    
+                    return button;
+                }
+
                 function createSolutionButton(question)
                 {
                     function reveal()
@@ -350,6 +392,7 @@ function initialize()
                     var question = $(this);
                     var controlBox = findQuestionControlBox(question);
                     
+                    controlBox.append( createResetButton(question) );
                     controlBox.append( createSolutionButton(question) );
                 } );
             }
