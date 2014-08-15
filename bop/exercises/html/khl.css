@@ -41,43 +41,22 @@ input {
 
 .question {
     width: 80%;
-    margin: 10px auto 10px auto;
+    margin: 25px auto 10px auto;
     border: black solid thin;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 15px;
     box-shadow: 2px 2px 2px #000;
     position: relative;
 }
 
-.popup {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: #000;
-    background: linear-gradient(#111, #999); 
-    opacity: 0;
-    transition: opacity 200ms ease-in;
-    z-index: 999;
-    pointer-events: none;
-}
-
-.popup:target {
-    opacity: .95;
-    pointer-events: auto;
-}
-
 .hint {
+    display: none;
     width: 600px;
-    position: relative;
-    margin: 10% auto;
+    margin: 10px auto;
     padding: 20px;
-    border-radius: 20px;
-    border: white 2px solid;
+    border-radius: 5px;
     text-align: center;
-    background: #fff;
-    background: linear-gradient(#fff, #999);
+    background: #AAF;
 }
 
 .selectable {
@@ -121,6 +100,14 @@ input {
     position: absolute;
     margin: 5px auto;
     text-align: center;
-    right: 0px;
-    top: -40px;
+    right: 5px;
+    top: -45px;
+}
+
+.code {
+    border-top: solid black thin;
+    border-bottom: solid black thin;
+    width: 80%;
+    margin: 0px auto;
+    padding: 0px 10px;
 }

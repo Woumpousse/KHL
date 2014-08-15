@@ -4,11 +4,9 @@ function newElement(tag)
 }
 
 var buttons = ( function () {
-    function createButton(iconName, tag)
+    function createButton(iconName)
     {
-        tag = tag ? tag : 'div';
-
-        var button = newElement(tag);
+        var button = newElement('div');
         button.addClass('question-control');
         button.css('width', '32px');
         button.css('height', '32px');
@@ -52,7 +50,7 @@ var buttons = ( function () {
 
     function createHintButton()
     {
-        var button = createButton('hint', 'a');
+        var button = createButton('hint');
         button.addClass('hint-control');
         button.attr('title', 'Hint');
 
@@ -261,28 +259,8 @@ function initialize()
             addButtons();
         }
 
-        function addClassAndIdToAllQuestions()
+        function addClassToAllQuestions()
         {
-            var assignIdToQuestion = ( function () {
-                var counter = 1;
-
-                function nextId()
-                {
-                    return "question" + counter++;
-                }
-
-                return function (element) {
-                    var id = element.attr('id');
-
-                    if ( !id )
-                    {
-                        id = nextId();
-                    }
-
-                    element.attr('id', id);
-                };                
-            } )();
-
             function assignClassToQuestion(element)
             {
                 element.addClass('question');
@@ -292,7 +270,6 @@ function initialize()
                 var element = $(this);
 
                 assignClassToQuestion(element);
-                assignIdToQuestion(element);
             } );
         }
 
@@ -358,17 +335,13 @@ function initialize()
 
                 function createHintButton(question)
                 {
-                    var questionId = question.attr('id');
-                    var buttonId = hintButtonIdForQuestion(questionId);
-                    var boxId = hintBoxIdForQuestion(questionId);
-
-                    // var hintButton = newElement("a");
-                    // hintButton.attr('id', buttonId);
-                    // hintButton.attr('href', '#' + boxId);
-                    // hintButton.append('?');
+                    function showHint()
+                    {
+                        question.find('.hint').show();
+                    }
 
                     var hintButton = buttons.createHintButton();
-                    hintButton.attr('href', '#' + boxId);
+                    hintButton.click( showHint );
                     
                     return hintButton;
                 }
@@ -387,27 +360,23 @@ function initialize()
                 } );
             }
 
-            function transformHintsToPopups()
-            {
-                $('.hint').wrap( function() {
-                    var hint = $(this);
-                    var question = hint.parents('.question').first();
-                    var questionId = question.attr('id');
-                    var hintBoxId = hintBoxIdForQuestion(questionId);
-
-                    return "<div class=\"popup\" id=\"" + hintBoxId + "\"></div>";
-                } );
-            }
-
             addHintButtons();
-            transformHintsToPopups();
         }
 
+        function formatCode()
+        {
+            $('pre').wrap( function() {
+                return "<div class=\"code\"></div>";
+            } );
+        }
 
-        addClassAndIdToAllQuestions();
+        addClassToAllQuestions();
         addControlBoxesToAllQuestions();
+        formatCode();
+
         processSelectionQuestions();
         processFillInBlankQuestions();
+
         setupHints();
     }
 
