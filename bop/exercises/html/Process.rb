@@ -15,6 +15,9 @@ def get(label)
   $data[label]
 end
 
+def labels
+  $data.keys
+end
 
 add( 'infer-types-1', Questions::Java::TypeInference.new( <<END.strip ) )
 class Foo {
@@ -31,7 +34,7 @@ END
 
 
 add( 'scopes-1', Questions::Java::SelectTokens.new( <<END.strip ) )
- class Foo {
+class Foo {
     public %void foo() {
     }
 }
@@ -52,21 +55,40 @@ class Foo {
 END
 
 
-def produce_html
-  output = IO.read('test.html').gsub(/#\{(.*?)\.(.*?)\}/) do
-    label, member = $1, $2
+add( 'interpret-1', Questions::Java::InterpretCode.new( <<END.strip ) )
+class App {
+    public static void main(String[] args) {
+        System.out.println("a");
+    }
+}
+END
 
-    get($1).send($2.to_sym)
+
+
+def substitute(selector)
+  abort "Invalid selector #{selector}" unless selector =~ /^([^.]+)\.([^.]+)$/
+
+  label, member = $1, $2
+  get(label).send(member.to_sym)
+end
+
+def produce_html
+  output = IO.read('test.html').gsub(/#\{(.+?)\}/) do
+    selector = $1
+
+    substitute(selector)
+  end.gsub(/^\s*#<\{(.+?)\}/) do
+    selector = $1
+
+    substitute(selector)
   end
   
   puts output
 end
 
 def verify_all
-  Exercises.constants.each do |constant|
-    exercise = Exercises.const_get(constant)
-
-    exercise.new.verify
+  labels.each do |label|
+    get(label).verify
   end
 end
 

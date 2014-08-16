@@ -124,10 +124,23 @@ module Questions
     end
   end
 
+  class InterpretCode
+    def initialize(code, formatter)
+      Types.check( binding, { :code => String, :formatter => HTML::Formatters::Formatter } )
+
+      @code = code
+      @formatter = formatter
+    end
+
+    def code
+      @formatter.apply(@code)
+    end
+  end
+
   module Java
     class FillInBlanksInCode < Questions::FillInBlanksInCode
       def initialize(data)
-        super(data, HTML::Formatters::JavaToHTML.new)
+        super(data, HTML::Formatters::JavaFormatter.new)
       end
 
       def verify
@@ -155,6 +168,9 @@ module Questions
       def initialize(code)
         super(code, /(%?\w+)/)
       end
+
+      def verify
+      end
     end
 
     class SelectLines < SelectCodeFragments
@@ -162,6 +178,10 @@ module Questions
         super(code, /^(%?.+)$/)
       end
 
+      def verify
+      end
+
+      protected
       def should_be_selected?(fragment)
         fragment.end_with?('<<')
       end
@@ -171,6 +191,17 @@ module Questions
         then $`
         else fragment
         end
+      end
+    end
+
+    class InterpretCode < ::Questions::InterpretCode
+      def initialize(code)
+        super(code, HTML::Formatters::JavaFormatter.new)
+      end
+
+      def result
+        bundle = Java::Bundle.from_string(@code)
+        Java::run(bundle)
       end
     end
   end

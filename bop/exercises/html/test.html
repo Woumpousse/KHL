@@ -9,50 +9,65 @@
   </head>
   <body>
     <div id="contents">
-    <h1>Oefeningen</h1>
-    <section>
-      <h2>Fill In Blanks</h2>
-      <div data-question="fill-in-blanks">
-        <p>
-          Vul types in zodat de code compileert.
-        </p>
-        <pre>
-#{infer-types-1.code}
-        </pre>
-
-        <div class="hint">
+      <h1>Oefeningen</h1>
+      <section>
+        <h2>Fill In Blanks</h2>
+        <div data-question="fill-in-blanks">
           <p>
-            Er staat nergens een <code>return</code> statement.
-            Het returntype moet dus uitdrukken dat de methode geen waarde teruggeeft.
+            Vul types in zodat de code compileert.
           </p>
-        </div>
-      </div>
-    </section>
+          <pre>
+            #<{infer-types-1.code}
+          </pre>
 
-    <section>
-      <h2>Token Selection</h2>
-      <div data-question="selection">
-        <p>Selecteer alle types.</p>
-        <pre>
-#{scopes-1.code}
-        </pre>        
-      </div>
-    </section>
-
-    <section>
-      <h2>Line Selection</h2>
-      <div data-question="selection">
-        <p>Selecteer de constructor volledig.</p>
-        <pre>
-#{lines-1.code}
-        </pre>        
-        <div class="hint">
-          <p>
-            Een constructor heeft altijd dezelfde naam als de klasse.
-          </p>
+          <div class="hint">
+            <p>
+              Er staat nergens een <code>return</code> statement.
+              Het returntype moet dus uitdrukken dat de methode geen waarde teruggeeft.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section>
+        <h2>Token Selection</h2>
+        <div data-question="selection">
+          <p>Selecteer alle types.</p>
+          <pre>
+            #<{scopes-1.code}
+          </pre>        
+        </div>
+      </section>
+
+      <section>
+        <h2>Line Selection</h2>
+        <div data-question="selection">
+          <p>Selecteer de constructor volledig.</p>
+          <pre>
+            #<{lines-1.code}
+          </pre>        
+          <div class="hint">
+            <p>
+              Een constructor heeft altijd dezelfde naam als de klasse.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Interpret</h2>
+        <div data-question="selection">
+          <p>Wat is de uitvoer van volgend programma?</p>
+          <pre>
+            #<{interpret-1.code}
+          </pre>        
+          <div class="hint">
+            <p>
+              Een constructor heeft altijd dezelfde naam als de klasse.
+            </p>
+          </div>
+        </div>
+      </section>
 
     </div>
 
