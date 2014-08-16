@@ -244,15 +244,12 @@ function initialize()
                     box.append( createVerifyButton(question) );
                     box.append( createResetButton(question) );
                     box.append( createSolutionButton(question) );
-
-                    return box;
                 }
 
                 $('[data-question="selection"]').each( function () {
                     var question = $(this);
 
-                    // CHECK THIS
-                    question.append( addButtonsToControlBox(question) );
+                    addButtonsToControlBox(question);
                 } );
             }
 
@@ -499,5 +496,3 @@ function initialize()
 }
 
 $(initialize);
-
-
