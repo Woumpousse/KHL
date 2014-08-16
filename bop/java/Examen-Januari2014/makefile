@@ -1,9 +1,12 @@
 .PHONY: all assignment solution
 
+ZIP = 7z
+
+
 all: assignment solution
 
 assignment:
-	7z a assignment.zip doc src
+	$(ZIP) a opgave.zip doc src
 
 solution:
-	7z a solution.zip doc src solution
+	$(ZIP) a opgave-met-oplossingen.zip doc src solution

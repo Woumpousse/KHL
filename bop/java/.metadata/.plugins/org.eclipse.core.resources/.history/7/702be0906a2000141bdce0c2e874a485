@@ -1,0 +1,33 @@
+
+public class OPO
+{
+    private int code;
+    
+    private String naam;
+    
+    private int studiePunten;
+    
+    private boolean engels;
+    
+    private int setCode(int code)
+    {
+        this.code = code;
+    }
+    
+    private String setNaam(String naam)
+    {
+        if ( !isNonEmptyString(naam) )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.naam = naam;
+        }
+    }
+    
+    private boolean isNonEmptyString(String string)
+    {
+        return naam != null && naam.trim().length() > 0;
+    }
+}

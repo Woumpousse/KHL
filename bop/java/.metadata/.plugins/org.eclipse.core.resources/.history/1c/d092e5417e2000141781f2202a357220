@@ -1,0 +1,18 @@
+import static org.junit.Assert.*;
+
+import org.junit.*;
+
+
+public class JaarprogrammaTest
+{
+    @Test
+    public void constructor()
+    {
+        fail( "Not yet implemented" );
+    }
+
+    private Student geldigeStudent()
+    {
+        return new Student("x", "y", 1);
+    }
+}

@@ -1,0 +1,43 @@
+
+public class Jaarprogramma
+{
+    private Student student;
+    
+    private Inschrijving[] inschrijvingen;
+    
+    public Jaarprogramma(Student student)
+    {
+        setStudent(student);
+        
+        inschrijvingen = new Inschrijving[20];
+    }
+    
+    private void setStudent(Student student)
+    {
+        if ( student == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            this.student = student;
+        }
+    }
+    
+    public void voegInschrijvingToe(Inschrijving inschrijving)
+    {
+        if ( !kanInschrijvingToevoegen(inschrijving) )
+        {
+            throw new IllegalArgumentException();
+        }
+        else
+        {
+            
+        }
+    }
+    
+    private boolean kanInschrijvingToevoegen(Inschrijving inschrijving)
+    {
+        return inschrijving != null && aantalInschrijvingen() < 20 && !bevatInschrijvingVoorOPO(inschrijving.getOpo());
+    }
+}

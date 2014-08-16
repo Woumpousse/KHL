@@ -1,0 +1,19 @@
+import static org.junit.Assert.*;
+
+import org.junit.*;
+
+
+public class InschrijvingTest
+{
+    @Test
+    public void constructor()
+    {
+        Inschrijving inschrijving = new Inschrijving( geldigeOPO(), new Datum(1,9,2013 ));
+        
+    }
+    
+    private OPO geldigeOPO()
+    {
+        return new OPO(1, "x", 1);
+    }
+}
