@@ -200,8 +200,8 @@ module Questions
       end
 
       def result
-        bundle = Java::Bundle.from_string(@code)
-        Java::run(bundle)
+        bundle = ::Java::Bundle.from_string(@code)
+        ::Java::run(bundle).strip
       end
     end
   end

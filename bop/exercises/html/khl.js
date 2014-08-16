@@ -281,12 +281,17 @@ function initialize()
                 return question.find('input[data-solution]');
             }
 
-            function showFeedback(input)
+            function hasCorrectInput(input)
             {
                 var expected = input.attr('data-solution');
                 var given = input.val();
 
-                if ( expected === given ) {
+                return expected === given;
+            }
+
+            function showFeedback(input)
+            {
+                if ( hasCorrectInput(input) ) {
                     input.addClass('correct');
                 }
                 else {

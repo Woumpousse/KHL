@@ -58,7 +58,7 @@ END
 add( 'interpret-1', Questions::Java::InterpretCode.new( <<END.strip ) )
 class App {
     public static void main(String[] args) {
-        System.out.println("a");
+        System.out.print("a");
     }
 }
 END
