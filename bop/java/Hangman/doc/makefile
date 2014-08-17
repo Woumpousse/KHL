@@ -1,3 +1,5 @@
+.SECONDEXPANSION:
+
 CONVERT = convert.exe
 IMAGE_OPTIONS = -quality 90 -density 300 -trim
 ICON_OPTIONS = -quality 90 -density 100 -trim -bordercolor white -border 10x10 -transparent white
@@ -25,41 +27,11 @@ guess-figures: guess.tex
 
 button-figures: hint.png verify.png next.png previous.png reveal.png reset.png
 
-hint.pdf: hint.tex
-	pdflatex hint.tex
+hint.pdf verify.pdf next.pdf previous.pdf reveal.pdf reset.pdf: $$(subst pdf,tex,$$@)
+	$(LATEX) $<
 
-verify.pdf: verify.tex
-	pdflatex verify.tex
-
-next.pdf: next.tex
-	pdflatex next.tex
-
-previous.pdf: previous.tex
-	pdflatex previous.tex
-
-reveal.pdf: reveal.tex
-	pdflatex reveal.tex
-
-reset.pdf: reset.tex
-	pdflatex reset.tex
-
-hint.png: hint.pdf
-	$(CONVERT_ICON) hint.pdf hint.png
-
-verify.png: verify.pdf
-	$(CONVERT_ICON) verify.pdf verify.png
-
-next.png: next.pdf
-	$(CONVERT_ICON) next.pdf next.png
-
-previous.png: previous.pdf
-	$(CONVERT_ICON) previous.pdf previous.png
-
-reveal.png: reveal.pdf
-	$(CONVERT_ICON) reveal.pdf reveal.png
-
-reset.png: reset.pdf
-	$(CONVERT_ICON) reset.pdf reset.png
+hint.png verify.png next.png previous.png reveal.png reset.png: $$(subst png,pdf,$$@)
+	$(CONVERT_ICON) $< $@
 
 clean:
 	rm -f *~ *.aux *.pdf *.png *.log
