@@ -7,7 +7,7 @@
     <script src="khl.js"></script>
     <link rel="stylesheet" href="khl.css">
     <style>
-      [data-slideshow] img {
+       .slideshow img {
         width: 80%;
       }
     </style>
@@ -92,7 +92,60 @@
             Een <code>HintBox</code> houdt dus de status bij van &eacute;&eacute;n enkele letter.
           </li>
         </ul>
-        <div data-slideshow="guess-[0-6].png"></div>
+
+        <p>
+          Als voorbeeld bespreken we kort hoe het raden van een letter behandeld wordt.
+        </p>
+        <div class="slideshow">
+          <div class="slide">
+            <img src="guess-0.png">
+            <p>
+              We roepen de <code>guess</code>-methode op van het <code>Game</code>-object. Deze krijgt als argument
+              mee welke letter geraden werd (hier dus <code>e</code>).
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-1.png">
+            <p>
+              Het <code>Game</code>-object delegeert het aan het <code>Hint</code>-object.
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-2.png">
+            <p>
+              Het <code>Hint</code>-object geeft de boodschap door aan elke <code>HintBox</code> om beurt.
+              Het eerste <code>HintBox</code>-object krijgt te horen dat de speler een
+              <code>'e'</code> heeft gegokt; deze <code>HintBox</code> is echter enkel ge&iuml;nteresseerd
+              in <code>'z'</code>, dus het negeert de gok.              
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-3.png">
+            <p>
+              De tweede <code>HintBox</code> moet echter wel reageren: dit doet het
+              door intern bij te houden dat de letter geraden werd door
+              het veld <code>revealed</code> te updaten naar <code>true</code>.
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-4.png">
+            <p>
+              De derde <code>HintBox</code> negeert de oproep.
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-5.png">
+            <p>
+              De vierde <code>HintBox</code> negeert de oproep.
+            </p>
+          </div>
+          <div class="slide">
+            <img src="guess-6.png">
+            <p>
+              De vijfde <code>HintBox</code> negeert de oproep.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section>

@@ -96,6 +96,16 @@ function initialize()
         return $('[data-question]');
     }
 
+    function addControlBox(receiver)
+    {
+        var box = newElement('div');
+        box.addClass('control-box');
+        
+        receiver.prepend(box);
+
+        return box;
+    }
+
     function processQuestions()
     {
         function processSelectionQuestions()
@@ -433,16 +443,13 @@ function initialize()
             findQuestions().each( function () {
                 var question = $(this);
 
-                var box = newElement('div');
-                box.addClass('question-control-box');
-
-                question.prepend(box);
+                addControlBox(question);
             } );
         }
 
         function findQuestionControlBox(question)
         {
-            var result = question.find(".question-control-box").first();
+            var result = question.find(".control-box").first();
 
             if ( !result ) {
                 console.log("Warning: no control box found for " + question.toString());
@@ -521,107 +528,59 @@ function initialize()
     {
         function findSlideshows()
         {
-            return $('[data-slideshow]');
+            return $('.slideshow');
         }
 
         function processSlideshow(slideshow)
         {
-            function extractDataFromPattern(filenamePattern)
+            function findSlides()
             {
-                var regex = /^(.*)\[(\d+)-(\d+)\](.*)$/;
-                var match = regex.exec(filenamePattern);
+                return slideshow.find('.slide');
+            }
 
-                if ( !match )
+            function numberSlides()
+            {
+                var slides = findSlides();
+
+                for ( var i = 0; i !== slides.length; ++i )
                 {
-                    console.log("Failed to recognize pattern in " + filenamePattern);
-                    throw "Slideshow pattern error";
-                }
-                else
-                {
-                    var prefix = match[1];
-                    var from = parseInt(match[2]);
-                    var to = parseInt(match[3]);
-                    var postfix = match[4];
-                    var filenames = [];
-
-                    for ( var i = from; i <= to; ++i )
-                    {
-                        filenames.push( prefix + i + postfix );
-                    }
-
-                    return { filenames: filenames,
-                             from: from,
-                             to: to,
-                             slideCount: to - from + 1
-                           };
+                    var slide = $(slides.get(i));
+                    slide.attr('data-slide', i);
                 }
             }
 
-            function createImageElement(filename, index)
+            function countSlides()
             {
-                var img = newElement('img');
-                img.attr('src', filename);
-                img.addClass('slideshow-image');
-                img.attr('data-slide-index', index);
-
-                return img;
-            }
-
-            function findImages()
-            {
-                return slideshow.find('img.slideshow-image');
+                return findSlides().length;
             }
 
             function showSlide(indexOfSlideToShow)
             {
-                var images = findImages();
+                var slides = findSlides();
 
-                for ( var i = 0; i !== images.length; ++i )
+                for ( var i = 0; i !== slides.length; ++i )
                 {
-                    var image = $(images.get(i));
-                    var slideIndex = parseInt( image.attr('data-slide-index') );
+                    var slide = $(slides.get(i));
+                    var slideIndex = parseInt( slide.attr('data-slide') );
 
                     if ( slideIndex === indexOfSlideToShow )
                     {
-                        image.show();
+                        slide.show();
                     }
                     else
                     {
-                        image.hide();
+                        slide.hide();
                     }
                 }
             }
 
-            function createImageElements(imageFilenames)
-            {
-                var pattern = slideshow.attr('data-slideshow');
-
-                for ( var i = 0; i !== imageFilenames.length; ++i )
-                {
-                    var imageFilename = imageFilenames[i];
-                    
-                    var img = createImageElement(imageFilename, i);
-                    slideshow.append(img);
-                }
-
-                showSlide(0);
-            }
-
-            function createNavigationButtons(slideCount)
+            function createNavigationButtons()
             {
                 var currentSlide = 0;
 
                 function showCurrentSlide()
                 {
                     showSlide(currentSlide);
-                }
-
-                function createNavigationBox()
-                {
-                    var box = newElement('div');
-                    box.addClass('slideshow-navigation-box');
-
-                    return box;
                 }
 
                 function disableButton(button)
@@ -638,6 +597,7 @@ function initialize()
                 {
                     var previousButton = buttons.createPreviousButton();
                     var nextButton = buttons.createNextButton();
+                    var maximumSlideIndex = countSlides() - 1;
 
                     function updateButtonStatus()
                     {
@@ -646,7 +606,7 @@ function initialize()
                             disableButton(previousButton);
                             enableButton(nextButton);
                         }
-                        else if ( currentSlide + 1 === slideCount )
+                        else if ( currentSlide === maximumSlideIndex )
                         {
                             enableButton(previousButton);
                             disableButton(nextButton);
@@ -671,7 +631,7 @@ function initialize()
 
                     function next()
                     {
-                        if ( currentSlide + 1 < slideCount )
+                        if ( currentSlide  < maximumSlideIndex )
                         {
                             currentSlide++;
                             showCurrentSlide();
@@ -689,20 +649,15 @@ function initialize()
                              next: nextButton };
                 }
 
-                var box = createNavigationBox();
+                var box = addControlBox(slideshow);
                 var navigationButtons = createPreviousAndNextButton();
                 box.append( navigationButtons.previous );
                 box.append( navigationButtons.next );
-
-                slideshow.append(box);
             }
 
-            var pattern = slideshow.attr('data-slideshow');
-            var slideshowData = extractDataFromPattern(pattern);
-
-            createImageElements(slideshowData.filenames);
-            createNavigationButtons(slideshowData.slideCount);
-            
+            numberSlides();
+            showSlide(0);
+            createNavigationButtons();
         }
 
         findSlideshows().each( function () {

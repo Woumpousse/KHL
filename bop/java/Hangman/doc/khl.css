@@ -100,7 +100,7 @@ input {
     background: #FAA;
 }
 
-.question-control-box {
+.control-box {
     position: absolute;
     margin: 5px auto;
     text-align: center;
@@ -116,7 +116,8 @@ input {
     padding: 0px 10px;
 }
 
-[data-slideshow] {
+.slideshow {
+    position: relative;
     text-align: center;
     border: solid thin black;
     width: 90%;
