@@ -60,36 +60,46 @@ class Game {
 }
 END
 
+add( 'hintbox-types', Questions::Java::TypeInference.new( <<END.strip ) )
+class HintBox {
+    /*
+      De letter in de HintBox.
+    */
+    private __char__ letter;
 
-add( 'scopes-1', Questions::Java::SelectTokens.new( <<END.strip ) )
-class Foo {
-    public %void foo() {
-    }
+    /*
+      Houdt bij of de letter zichtbaar is of niet.
+    */
+    private __boolean__ revealed;
+
+    /*
+      Constructor.
+    */
+    public Game( __char__ letter ) { ... }
+
+    /*
+      Deze methode oproepen stelt het raden van een letter voor.
+      Geeft als resultaat terug of de geraden letter
+      overeenkwam met de letter in de HintBox.
+    */
+    public __boolean__ guess(__char__ letter) { ... }
+
+    /*
+      Geeft terug of de letter zichtbaar is of niet.
+    */
+    public __boolean__ isRevealed() { ... }
+
+    /*
+      Geeft de letter terug indien de letter geraden werd,
+      '_' in het andere geval.
+    */
+    public __char__ show() { ... }
 }
 END
 
 
-add( 'lines-1', Questions::Java::SelectLines.new( <<END.strip ) )
-class Foo {
-    private int x = 0;
-
-    public Foo() {  <<
-        this.x = 0; <<
-    }               <<
-
-    public void foo() {
-    }
-}
-END
 
 
-add( 'interpret-1', Questions::Java::InterpretCode.new( <<END.strip ) )
-class App {
-    public static void main(String[] args) {
-        System.out.print("a");
-    }
-}
-END
 
 
 

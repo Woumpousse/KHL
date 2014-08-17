@@ -160,9 +160,47 @@
             deze letter verborgen voor de speler; dit feit moet de <code>HintBox</code> ook onthouden.
           </li>
           <li>
-            
+            Het <code>Hint</code>-object moet de geraden letter kunnen doorgeven aan <code>HintBox</code>-objecten.
+            Hiervoor voorzien we een <code>guess</code>-methode. Merk op dat zowel <code>Game</code>,
+            <code>Hint</code> als <code>HintBox</code> zullen beschikken over een <code>guess</code>-methode.
+          </li>
+          <li>
+            De <code>guess</code>-methode ontvangt een letter als argument, maar moet deze ook iets teruggeven
+            als resultaat? Het antwoord hierop is ja: we willen immers kunnen weten of de speler
+            een juiste letter heeft geraden, om te weten of hij al dan niet een leven verliest.
+            We kunnen dit uiteraard implementeren op veel manieren; voor deze opgave
+            kiezen we ervoor dat de <code>guess</code>-methode als resultaat oplevert
+            of de gok correct was of niet.
+          </li>
+          <li>
+            We moeten kunnen weten of het ganse woord geraden werd. Dit is een vraag die men
+            aan een <code>Hint</code>-object zal moeten vragen, vermits deze
+            een overzicht heeft van alle letters. Het al dan niet zichtbaar zijn van een letter
+            wordt echter bijgehouden door <code>HintBox</code>-objecten. Om zijn
+            werk te kunnen uitvoeren zal <code>Hint</code> dus moeten kunnen opvragen
+            aan zijn <code>HintBox</code>en wat de zichtbaarheid is van de letter.
+          </li>
+          <li>
+            De speler moet de huidige toestand (bv. "_ _ r t") te zien krijgen.
+            <code>Game</code> biedt hiervoor de <code>show</code>-methode.
+            Deze zal beroep moeten doen op <code>Hint</code>, dewelke
+            op zijn beurt zal moeten vragen aan elke <code>HintBox</code> hoe
+            deze gevisualiseerd moet worden. <code>HintBox</code> zal
+            daarom een eigen <code>show</code>-methode moeten aanbieden:
+            indien de letter geraden werd, wordt de letter zelf teruggegeven;
+            in het andere geval moet de <code>HintBox</code> een underscore <code>_</code> teruggeven
+            als resultaat.
           </li>
         </ul>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul de juiste types in.
+          </p>
+          <pre>
+            #<{hintbox-types.code}
+          </pre>
+        </div>
+
       </section>
     </div>
   </body>
