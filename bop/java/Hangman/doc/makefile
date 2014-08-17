@@ -21,7 +21,7 @@ game-design.pdf : game-design.tex
 
 guess-figures: guess.tex
 	$(LATEX) guess.tex
-	$(CONVERT_IMAGE) guess.pdf guess-%d.png
+	$(CONVERT_IMAGE) -shave 3x3 guess.pdf guess-%d.png
 
 button-figures: hint.png verify.png next.png previous.png reveal.png reset.png
 

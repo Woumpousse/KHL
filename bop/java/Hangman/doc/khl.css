@@ -76,7 +76,7 @@ input {
     border: thin gray solid;
 }
 
-.question-control {
+.control-button {
     display: inline-block;
     border: thin black solid;
     padding: 2px;
@@ -88,7 +88,7 @@ input {
     box-shadow: 2px 2px 2px black;
 }
 
-.question-control:hover {
+.control-button:hover {
     background: linear-gradient(to bottom, #AFA 0%, #FFF 25%, #AFA 100%);
 }
 
@@ -118,4 +118,19 @@ input {
 
 [data-slideshow] {
     text-align: center;
+    border: solid thin black;
+    width: 90%;
+    margin: 0px auto;
+    box-shadow: 3px 3px 3px black;
+}
+
+img.control {
+    width: auto;
+    height: auto;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.control-button.disabled {
+    opacity: .2;
 }

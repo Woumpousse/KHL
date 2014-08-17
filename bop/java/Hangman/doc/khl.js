@@ -1,3 +1,5 @@
+
+
 function newElement(tag)
 {
     return $(document.createElement(tag));
@@ -7,16 +9,13 @@ var buttons = ( function () {
     function createButton(iconName)
     {
         var button = newElement('div');
-        button.addClass('question-control');
+        button.addClass("control-button");
         button.css('width', '32px');
         button.css('height', '32px');
 
         var img = newElement('img');
         img.attr('src', iconName + '.png');
-//        img.attr('width', 32);
-        img.attr('height', 32);
-        img.css('style', 'vertical-align: middle');
-        img.css('display', 'display: inline-block');
+        img.addClass('control');
 
         button.append(img);
 
@@ -26,6 +25,7 @@ var buttons = ( function () {
     function createVerifyButton()
     {
         var button = createButton('verify');
+        button.addClass('question-control');
         button.addClass('verify-control');
         button.attr('title', 'Verifieer');
 
@@ -35,6 +35,7 @@ var buttons = ( function () {
     function createResetButton()
     {
         var button = createButton('reset');
+        button.addClass('question-control');
         button.addClass('reset-control');
         button.attr('title', 'Reset');
 
@@ -44,6 +45,7 @@ var buttons = ( function () {
     function createRevealButton()
     {
         var button = createButton('reveal');
+        button.addClass('question-control');
         button.addClass('reveal-control');
         button.attr('title', 'Toon oplossing');
 
@@ -53,8 +55,27 @@ var buttons = ( function () {
     function createHintButton()
     {
         var button = createButton('hint');
+        button.addClass('question-control');
         button.addClass('hint-control');
         button.attr('title', 'Hint');
+
+        return button;
+    }
+
+    function createPreviousButton()
+    {
+        var button = createButton('previous');
+        button.addClass('previous-control');
+        button.attr('title', 'Vorige');
+
+        return button;
+    }
+
+    function createNextButton()
+    {
+        var button = createButton('next');
+        button.addClass('next-control');
+        button.attr('title', 'Volgende');
 
         return button;
     }
@@ -62,7 +83,9 @@ var buttons = ( function () {
     return { createVerifyButton: createVerifyButton,
              createResetButton: createResetButton,
              createRevealButton: createRevealButton,
-             createHintButton: createHintButton
+             createHintButton: createHintButton,
+             createPreviousButton: createPreviousButton,
+             createNextButton: createNextButton,
            };
 } )();
 
@@ -503,7 +526,7 @@ function initialize()
 
         function processSlideshow(slideshow)
         {
-            function imageFilenamesFromPattern(filenamePattern)
+            function extractDataFromPattern(filenamePattern)
             {
                 var regex = /^(.*)\[(\d+)-(\d+)\](.*)$/;
                 var match = regex.exec(filenamePattern);
@@ -519,39 +542,46 @@ function initialize()
                     var from = parseInt(match[2]);
                     var to = parseInt(match[3]);
                     var postfix = match[4];
-                    var result = [];
+                    var filenames = [];
 
                     for ( var i = from; i <= to; ++i )
                     {
-                        result.push( prefix + i + postfix );
+                        filenames.push( prefix + i + postfix );
                     }
 
-                    return result;
+                    return { filenames: filenames,
+                             from: from,
+                             to: to,
+                             slideCount: to - from + 1
+                           };
                 }
             }
 
-            function createImageElement(filename)
+            function createImageElement(filename, index)
             {
                 var img = newElement('img');
                 img.attr('src', filename);
+                img.addClass('slideshow-image');
+                img.attr('data-slide-index', index);
 
                 return img;
             }
 
             function findImages()
             {
-                return slideshow.find('img');
+                return slideshow.find('img.slideshow-image');
             }
 
-            function showImage(index)
+            function showSlide(indexOfSlideToShow)
             {
                 var images = findImages();
 
                 for ( var i = 0; i !== images.length; ++i )
                 {
                     var image = $(images.get(i));
+                    var slideIndex = parseInt( image.attr('data-slide-index') );
 
-                    if ( i === index )
+                    if ( slideIndex === indexOfSlideToShow )
                     {
                         image.show();
                     }
@@ -562,30 +592,116 @@ function initialize()
                 }
             }
 
-            function createImageElements()
+            function createImageElements(imageFilenames)
             {
                 var pattern = slideshow.attr('data-slideshow');
-                var imageFilenames = imageFilenamesFromPattern(pattern);
 
                 for ( var i = 0; i !== imageFilenames.length; ++i )
                 {
                     var imageFilename = imageFilenames[i];
                     
-                    var img = createImageElement(imageFilename);
+                    var img = createImageElement(imageFilename, i);
                     slideshow.append(img);
                 }
 
-                showImage(0);
+                showSlide(0);
             }
 
-            function createNavigationButtons()
+            function createNavigationButtons(slideCount)
             {
-                
-                
+                var currentSlide = 0;
+
+                function showCurrentSlide()
+                {
+                    showSlide(currentSlide);
+                }
+
+                function createNavigationBox()
+                {
+                    var box = newElement('div');
+                    box.addClass('slideshow-navigation-box');
+
+                    return box;
+                }
+
+                function disableButton(button)
+                {
+                    button.addClass('disabled');
+                }
+
+                function enableButton(button)
+                {
+                    button.removeClass('disabled');
+                }
+
+                function createPreviousAndNextButton()
+                {
+                    var previousButton = buttons.createPreviousButton();
+                    var nextButton = buttons.createNextButton();
+
+                    function updateButtonStatus()
+                    {
+                        if ( currentSlide === 0 )
+                        {
+                            disableButton(previousButton);
+                            enableButton(nextButton);
+                        }
+                        else if ( currentSlide + 1 === slideCount )
+                        {
+                            enableButton(previousButton);
+                            disableButton(nextButton);
+                        }
+                        else
+                        {
+                            enableButton(previousButton);
+                            enableButton(nextButton);
+                        }
+                    }
+
+                    function previous()
+                    {
+                        if ( currentSlide > 0 )
+                        {
+                            currentSlide--;
+                            showCurrentSlide();
+                        }
+
+                        updateButtonStatus();
+                    }
+
+                    function next()
+                    {
+                        if ( currentSlide + 1 < slideCount )
+                        {
+                            currentSlide++;
+                            showCurrentSlide();
+                        }
+                        
+                        updateButtonStatus();
+                    }
+
+                    previousButton.click( previous );
+                    nextButton.click( next );
+
+                    updateButtonStatus();
+
+                    return { previous: previousButton,
+                             next: nextButton };
+                }
+
+                var box = createNavigationBox();
+                var navigationButtons = createPreviousAndNextButton();
+                box.append( navigationButtons.previous );
+                box.append( navigationButtons.next );
+
+                slideshow.append(box);
             }
 
-            createImageElements();
-            createNavigationButtons();
+            var pattern = slideshow.attr('data-slideshow');
+            var slideshowData = extractDataFromPattern(pattern);
+
+            createImageElements(slideshowData.filenames);
+            createNavigationButtons(slideshowData.slideCount);
             
         }
 
