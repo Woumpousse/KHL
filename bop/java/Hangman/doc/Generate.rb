@@ -20,7 +20,7 @@ def labels
 end
 
 
-add( 'game-types', Questions::Java::TypeInference.new( <<END.strip ) )
+add( 'game-types', Questions::Java::FillInTypes.new( <<END.strip ) )
 class Game {
     /*
       Constructor. Initialiseert het spel met een te raden woord.
@@ -60,47 +60,128 @@ class Game {
 }
 END
 
-add( 'hintbox-types', Questions::Java::TypeInference.new( <<END.strip ) )
+add( 'game-test', Questions::Java::FillInLiterals.new( <<END.strip ) )
+// Nieuw spel begint met 7 levens.
+Game game = new Game( "jazz" );
+
+assertEquals( __false__, game.isGameOver() );
+assertEquals( __7__, game.getLivesLeft() );
+assertEquals( "_ _ _ _", game.show() );
+
+/*
+  De speler gokt een juiste letter.
+  Aantal levens blijft onveranderd, letter wordt getoond.
+*/
+game.guess('a');
+
+assertEquals( __false__, game.isGameOver() );
+assertEquals( __7__, game.getLivesLeft() );
+assertEquals( __"_ a _ _"__, game.show() );
+
+/*
+  De speler gokt een verkeerde letter.
+  Een leven gaat verloren.
+*/
+game.guess('q');
+
+assertEquals( __false__, game.isGameOver() );
+assertEquals( __6__, game.getLivesLeft() );
+assertEquals( __"_ a _ _"__, game.show() );
+
+/*
+  Koppige speler.
+*/
+game.guess('x');
+assertEquals( __5__, game.getLivesLeft() );
+game.guess('x');
+assertEquals( __4__, game.getLivesLeft() );
+game.guess('x'); game.guess('x'); game.guess('x');
+assertEquals( __1__, game.getLivesLeft() );
+game.guess('x');
+assertEquals( __0__, game.getLivesLeft() );
+assertEquals( __true__, game.isGameOver() );
+assertEquals( __false__, game.isGameWon() );
+assertEquals( __true__, game.isGameLost() );
+END
+
+add( 'hintbox-types', Questions::Java::FillInBlanks.new( <<END.strip ) )
 class HintBox {
     /*
       De letter in de HintBox.
     */
-    private __char__ letter;
+    __access modifier:private__  __type:char__ letter;
 
     /*
       Houdt bij of de letter zichtbaar is of niet.
     */
-    private __boolean__ revealed;
+    __access modifier:private__ __type:boolean__ revealed;
 
     /*
       Constructor.
     */
-    public Game( __char__ letter ) { ... }
+    public __identifier:HintBox__( __type:char__ letter ) { ... }
 
     /*
       Deze methode oproepen stelt het raden van een letter voor.
       Geeft als resultaat terug of de geraden letter
       overeenkwam met de letter in de HintBox.
     */
-    public __boolean__ guess(__char__ letter) { ... }
+    public __type:boolean__ guess(__type:char__ letter) { ... }
 
     /*
       Geeft terug of de letter zichtbaar is of niet.
     */
-    public __boolean__ isRevealed() { ... }
+    public __type:boolean__ isRevealed() { ... }
 
     /*
       Geeft de letter terug indien de letter geraden werd,
       '_' in het andere geval.
     */
-    public __char__ show() { ... }
+    public __type:char__ show() { ... }
+}
+END
+
+add( 'hint-types', Questions::Java::FillInTypes.new( <<END.strip ) )
+class Hint {
+    /*
+      De HintBox-objecten
+    */
+    private __HintBox[]__ hintboxes;
+
+    /*
+      Constructor.
+    */
+    public Hint( __String__ word ) { ... }
+
+    /*
+      Deze methode oproepen stelt het raden van een letter voor.
+      Geeft als resultaat terug of de geraden letter
+      in minstens een van de HintBoxes voorkwam.
+    */
+    public __boolean__ guess(__char__ letter) { ... }
+
+    /*
+      Geeft na of de letters in alle HintBox-objecten zichtbaar zijn.
+    */
+    public __boolean__ isFullyRevealed() { ... }
+
+    /*
+      Roept de show-methode op van alle HintBoxes en voegt
+      de resultaten samen met telkens een spatie ertussen.
+    */
+    public __String__ show() { ... }
 }
 END
 
 
+add( 'game-types-fields', Questions::Java::FillInBlanks.new( <<END.strip ) )
+class Game {
+    __access modifier:private__ __type:Hint__ hint;
+    __access modifier:private__ __type:int__ livesLeft;
 
-
-
+    /* Rest van de klasse */
+}
+END
 
 
 def substitute(selector)

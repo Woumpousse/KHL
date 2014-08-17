@@ -59,6 +59,16 @@
             #<{game-types.code}
           </pre>
         </div>
+        <div data-question="fill-in-blanks">
+          <p>
+            We bestuderen hoe een <code>Game</code>-object hoort te reageren. Vul de verwachte waarden in.
+            Merk op hoe de uitvoer van de <code>show</code>-methode eruitziet:
+            de letters worden telkens gescheiden door een spatie.
+          </p>
+          <pre>
+            #<{game-test.code}
+          </pre>
+        </div>
       </section>
 
       <section>
@@ -194,7 +204,7 @@
         </ul>
         <div data-question="fill-in-blanks">
           <p>
-            Vul de juiste types in.
+            Vul in.
           </p>
           <pre>
             #<{hintbox-types.code}
@@ -202,7 +212,8 @@
         </div>
         <div data-question="extern">
           <p>
-            Implementeer de klasse volledig en doe de tests slagen. Er zijn enkele adders onder het gras:                    </p>
+            Implementeer de klasse <code>HintBox</code> volledig en doe de tests slagen. Er zijn enkele adders onder het gras:                   
+          </p>
           <ul>
             <li>Een <code>HintBox</code> mag niet hoofdlettergevoelig zijn.
           </ul>
@@ -210,6 +221,57 @@
             <li>
               De tests bepalen wat er moet gebeuren indien een speler tweemaal
               eenzelfde letter gokt.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Klasse <code>Hint</code></h2>
+        <p>
+          De klasse <code>Hint</code> biedt min of meer dezelfde functionaliteit aan
+          als <code>HintBox</code>, met als verschil dat deze inwerkt op een gans
+          woord i.p.v. een enkele letter.
+        </p>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul de juiste types in.
+          </p>
+          <pre>
+            #<{hint-types.code}
+          </pre>
+        </div>
+        <div data-question="extern">
+          <p>
+            Implementeer de klasse <code>Hint</code> volledig en doe de tests slagen. Hou rekening met foute invoer.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Klasse <code>Game</code></h2>
+        <p>
+          We keren terug naar onze <code>Game</code>-klasse.
+        </p>
+        <div data-question="fill-in-blanks">
+          <p>
+            We focussen op de velden. Vul in.
+          </p>
+          <pre>
+            #<{game-types-fields.code}
+          </pre>
+        </div>
+        <div data-question="extern">
+          <p>
+            Implementeer de klasse <code>Game</code> volledig en doe de tests slagen.
+          </p>
+          <ul>
+            <li>
+              Let op ongeldige invoer.
+            </li>
+            <li>
+              E&eacute;nmaal het spel voorbij is mag de <code>guess</code> niet meer opgeroepen worden.
+              Indien dit toch gebeurt, hoort <code>guess</code> een <code>IllegalStateException</code> op te werpen.
             </li>
           </ul>
         </div>

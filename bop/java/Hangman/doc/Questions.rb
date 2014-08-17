@@ -51,7 +51,7 @@ module Questions
       Types.check( binding, { :attributes => { String => String } } )
 
       attributeString = attributes.to_a.map do |name, value|
-        unescaped_data = CGI.unescapeHTML(value)
+        unescaped_data = CGI.unescapeHTML(value).gsub('"', '&quot;');
 
         "#{name}=\"#{unescaped_data}\""
       end.join(" ")
@@ -138,7 +138,7 @@ module Questions
   end
 
   module Java
-    class FillInBlanksInCode < Questions::FillInBlanksInCode
+    class FillInBlanks < Questions::FillInBlanksInCode
       def initialize(data)
         super(data, HTML::Formatters::JavaFormatter.new)
       end
@@ -148,19 +148,35 @@ module Questions
 
         ::Java::compile( bundle )
       end
+
+      def extract_attributes_from_data(data)
+        abort "Invalid data #{data}" unless data =~ /^([^:]*):([^:]+)$/
+        meta, solution = $1, $2
+
+        { 'data-solution' => solution,
+          'placeholder' => meta }
+      end
     end
 
-    class TypeInference < FillInBlanksInCode
+    class FillInTypes < FillInBlanks
       def initialize(data)
         super(data)
       end
 
       def extract_attributes_from_data(data)
-        attributes = super
+        { 'data-solution' => data,
+          'placeholder' => 'type' }
+      end
+    end
 
-        attributes['placeholder'] = 'type'
+    class FillInLiterals < FillInBlanks
+      def initialize(data)
+        super(data)
+      end
 
-        attributes
+      def extract_attributes_from_data(data)
+        { 'data-solution' => data,
+          'placeholder' => 'literal' }
       end
     end
 
