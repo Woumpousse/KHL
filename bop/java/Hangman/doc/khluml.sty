@@ -1,0 +1,57 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{khluml}[2014/7/21]
+\RequirePackage{tikz}
+\RequirePackage{booktabs}
+
+
+\usetikzlibrary{shadows}
+
+\pgfkeys{
+  /uml/.cd,
+  class/.style={inner sep=0mm,draw,fill=white,thick},
+  object/.style={inner sep=0mm,draw,fill=white,thick},
+  association/.style={-latex,thick},
+  object association/.style={-latex,thick},
+  message/.style={->,thin,red}
+}
+
+\pgfkeys{
+  /uml/member/.cd,
+  @access/.code={\errmessage{Missing access}},
+  access/.code={\pgfkeys{/uml/member/@access/.code={\umlsymbol{#1}}}},
+  access/.value required,
+  @static/.initial=0,
+  static/.style={/uml/member/@static=1}
+}
+
+\newcommand{\umlsymbol}[1]{\csname umlsymbol@#1\endcsname}
+\newcommand{\umlsymbol@private}{-}
+\newcommand{\umlsymbol@public}{+}
+\newcommand{\umlsymbol@protected}{\#}
+
+\newcommand{\umlclass}[4][]{%
+  \begin{tabular}{c@{\hspace{1pt}}l}
+    \multicolumn{2}{c}{\bf #2} \\
+    \toprule
+    #3
+    \midrule
+    #4
+  \end{tabular}%
+}
+
+\newcommand{\umlobject}[3]{%
+  \begin{tabular}{r@{=}l}
+    \multicolumn{2}{c}{\bf\underline{#1:#2}} \\
+    \toprule
+    #3
+  \end{tabular}%
+}
+
+\newcommand{\umlmember}[2][]{%
+  \pgfkeys{/uml/member/.cd,#1}\pgfkeys{/uml/member/@access} & 
+  \pgfkeys{/uml/member/.cd,#1}\pgfkeys{/uml/member/@static/.get=\@static}\ifnum\@static=0{#2}\else\underline{#2}\fi \\
+}
+
+\newcommand{\umlobjfield}[2]{
+  #1 & #2 \\
+}

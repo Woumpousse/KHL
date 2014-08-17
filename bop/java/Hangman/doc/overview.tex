@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\usepackage{khluml}
+
+\usetikzlibrary{calc}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+  \node[/uml/class] (Game) {
+    \umlclass{Game}{}{}
+  };
+
+  \node[/uml/class,anchor=north] at ($ (Game.south) + (0,-1.5) $) (Hint) {
+    \umlclass{Hint}{}{}
+  };
+
+  \node[/uml/class,anchor=north] at ($ (Hint.south) + (0,-1.5) $) (HintBox) {
+    \umlclass{HintBox}{}{}
+  };
+
+  \draw[/uml/association] (Game.south) -- (Hint.north)
+                          node [at end,above,anchor=south east] {1}
+                          node [at end,below,anchor=south west] {-hint};
+
+  \draw[/uml/association] (Hint.south) -- (HintBox.north)
+                          node [at end,above,anchor=south east] {0..*}
+                          node [at end,below,anchor=south west] {-hintboxes};
+\end{tikzpicture}
+
+
+
+\end{document}

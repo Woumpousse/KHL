@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Galgje</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+    <style>
+      [data-slideshow] img {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Galgje</h1>
+      <section>
+        <h2>Spelregels</h2>
+        <p>
+          In deze opgave maken we het spel galgje. We herhalen de spelregels in het kort:
+          er wordt een willekeurig woord gekozen dat de speler moet vinden.
+          Hiervoor mag de speler telkens een letter raden. Indien deze letter voorkomt in het woord, worden
+          de posities van alle voorkomens bekendgemaakt. Indien het letter niet voorkomt in het woord of reeds
+          geraden werd, verliest de speler een leven. Initieel heeft de speler zeven levens.
+          De speler verliest het spel indien hij geen levens meer overheeft. De speler wint
+          het spel indien hij alle letters van het woord gevonden heeft voordat hij al zijn levens kwijtgeraakt is.
+        </p>
+      </section>
+
+      <section>
+        <h2>Klasse <code>Game</code></h2>
+        <p>
+          We ontwerpen eerst de klasse <code>Game</code>. Deze moet een galgje-spel modelleren
+          en moet voor elke mogelijke interactie een methode bevatten. We sommen de nodige
+          functionaliteit even op:
+        </p>
+        <ul>
+          <li>
+            De speler moet een letter kunnen raden.
+          </li>
+          <li>
+            We moeten kunnen opvragen wat de huidige toestand van het spel is, m.a.w.
+            welke letters reeds correct geraden waren. Dit neemt de vorm "_ _ e r _" aan:
+            correct geraden letters worden getoond, ongeraden letters met een underscore _.
+          </li>
+          <li>
+            We moeten kunnen opvragen hoeveel levens de speler nog overheeft.
+          </li>
+          <li>
+            We moeten kunnen opvragen of het spel voorbij is, en of de speler gewonnen of verloren heeft.
+          </li>
+        </ul>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul de juiste types in.
+          </p>
+          <pre>
+            #<{game-types.code}
+          </pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Overzicht Design</h2>
+        <p>
+          Het is mogelijk om alle functionaliteit in de klasse <code>Game</code> zelf te plaatsen;
+          dit zou de klasse omvangrijk en complex maken. We willen functionaliteit zoveel mogelijk
+          opsplitsen en verspreiden zodat elke component klein en gemakkelijk te begrijpen is.
+          Voor deze opgave stellen we het volgende ontwerp voor.
+        </p>
+        <div style="text-align:center; margin: 10px">
+          <img src="game-design.png" width="500">
+        </div>
+        <p>
+          Er is sprake van drie klassen:
+        </p>
+        <ul>
+          <li>
+            De <code>Game</code> klasse hebben we reeds vermeld. Naar de buitenwereld
+            toe draagt deze de volledige verantwoordelijkheid om het spel in goede banen te leiden.
+            Intern zal die wel zijn taak deels uitbesteden aan een hulpobject, nl. het <code>Hint</code>-object.
+          </li>
+          <li>
+            Het <code>Hint</code>-object heeft als doel het beheren van de letters over te nemen.
+            <code>Game</code> zal hierop steunen om bij te houden welke letters er reeds
+            werden onthuld.
+          </li>
+          <li>
+            Een <code>Hint</code>-object moet een gans woord beheren. Ook hier wordt gedelegeerd:
+            <code>Hint</code> zal voor elke letter van het woord beroep doen op een <code>HintBox</code>.
+            Een <code>HintBox</code> houdt dus de status bij van &eacute;&eacute;n enkele letter.
+          </li>
+        </ul>
+        <div data-slideshow="guess-[0-6].png"></div>
+      </section>
+
+      <section>
+        <h2>Klasse <code>HintBox</code></h2>
+        <p>
+          We zullen eerst de klasse <code>HintBox</code> implementeren.
+          We zetten de nodige functionaliteit even op een rijtje:
+        </p>
+        <ul>
+          <li>
+            Een nieuwe <code>HintBox</code> krijgt een letter toegewezen. Initieel is
+            deze letter verborgen voor de speler; dit feit moet de <code>HintBox</code> ook onthouden.
+          </li>
+          <li>
+            
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
