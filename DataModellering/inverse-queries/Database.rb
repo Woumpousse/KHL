@@ -8,15 +8,24 @@ module Database
 
   end
 
+  class SimpleTable
+    def initialize(headers, rows)
+      @headers = headers
+      @rows = rows
+    end
+
+    attr_reader :headers, :rows
+  end
+
   def self.execute(sql)
     begin
       @@db.execute2(sql)
     rescue SQLite3::Exception => e
-      puts( <<END )
-#{e.to_s.indent}
-while executing
-#{sql.indent}
-END
+      puts( <<-END.unindent )
+        #{e.to_s.indent}
+        while executing
+        #{sql.indent}
+        END
       raise DatabaseError
     end
   end
@@ -24,7 +33,7 @@ END
   def self.query(sql)
     headers, *rows = execute(sql)
 
-    Table.new(headers, rows)
+    SimpleTable.new(headers, rows)
   end
 
   def self.get_table(table_name)
@@ -35,14 +44,4 @@ END
   def self.drop_table(table_name)
     execute("DROP TABLE #{table_name}")
   end
-
-  class Table
-    def initialize(headers, rows)
-      @headers = headers
-      @rows = rows
-    end
-
-    attr_reader :headers, :rows
-  end
 end
-
