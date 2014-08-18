@@ -21,7 +21,7 @@ module LaTeX
           \\begin{center}
             \\begin{tabular}{c}
               \\begin{lstlisting}
-                #{query}
+#{query}
               \\end{lstlisting}
            \\end{tabular}
           \\end{center}
@@ -31,8 +31,8 @@ module LaTeX
   end
 
   def self.format_input_tables(tables)
-    formatted_tables = tables.map do |table_name, table|
-      format_named_table(table_name, table)
+    formatted_tables = tables.map do |table|
+      format_named_table(table.name, table)
     end.join
 
     <<-END
