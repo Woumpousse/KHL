@@ -2,6 +2,7 @@ body {
     max-width: 1000px;
     margin: 0px auto 0px auto;
     background-color: gray;
+    font-size: 120%;
 }
 
 #contents {
@@ -23,6 +24,7 @@ h2 {
 
 p {
     margin: 5px;
+    padding: 5px;
 }
 
 input {
@@ -59,7 +61,6 @@ input {
     margin: 10px auto;
     padding: 20px;
     border-radius: 5px;
-    text-align: center;
     background: #AAF;
 }
 

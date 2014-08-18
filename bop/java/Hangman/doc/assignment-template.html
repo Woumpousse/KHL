@@ -104,7 +104,7 @@
         </ul>
 
         <p>
-          Als voorbeeld bespreken we kort hoe het raden van een letter behandeld wordt.
+          Als voorbeeld tonen we hoe het raden van een letter behandeld wordt.
         </p>
         <div class="slideshow">
           <div class="slide">
@@ -273,8 +273,40 @@
               E&eacute;nmaal het spel voorbij is mag de <code>guess</code> niet meer opgeroepen worden.
               Indien dit toch gebeurt, hoort <code>guess</code> een <code>IllegalStateException</code> op te werpen.
             </li>
+            <li>
+              Het spel is gewonnen (<code>isGameWon</code>) indien alle letters geraden werd. <code>Game</code> kan dit te weten komen
+              via de <code>isFullyRevealed</code>-methode van <code>Hint</code>.
+            </li>
+            <li>
+              Het spel is verloren (<code>isGameLost</code>) indien het aantal levens op <code>0</code> staat.
+            </li>
+            <li>
+              Het spel is voorbij (<code>isGameOver</code>) indien het spel ofwel gewonnen ofwel verloren is.
+            </li>
           </ul>
         </div>
+      </section>
+      <section>
+        <h2>Klasse <code>App</code></h2>
+        <div data-question="extern">
+          <p>
+            Schrijf een klasse <code>App</code> aan met een <code>main</code>-methode.
+            Maak hierin een <code>Game</code>-object aan ge&iuml;nitaliseerd met een
+            woord naar keuze. Schrijf vervolgens code die gebruik maakt
+            van de meegeleverde klasse <code>UI</code> om het spel speelbaar te
+            maken.
+          </p>
+          <div class="hint">
+            <p>In pseudocode:</p>
+            <pre>
+zolang spel niet voorbij (!isGameOver) {
+  vraag letter aan gebruiker (ui.askChar)
+  geef letter door aan Game-object (game.guess)
+}
+
+spel is voorbij; toon geschikte boodschap</pre>
+          </div>
+        </div>        
       </section>
     </div>
   </body>
