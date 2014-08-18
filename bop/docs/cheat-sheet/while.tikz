@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+  \node[flowchart/node] (while) {evalueren \PLACEHOLDER{conditie}};
+  \node (loop entry) at ($ (while.north) + (0,0.5) $) {};
+  \node[flowchart/node] (body) at ($ (while.south) + (2,-2) $) {\parbox{1.5cm}{\centering uitvoeren \PLACEHOLDER{body}}};
+  \node (split) at ($ (while.south) + (0,-0.5) $) {};
+
+  \draw[flowchart/arrow] ($ (while.north) + (0,1) $) -- (while.north);
+  \draw[flowchart/arrow] (while.south) -- (split.center) -- ++(-2,-0.5) -- ++(0,-2.5);
+  \draw[flowchart/arrow] (split.center) -- ++(2,-0.5) -- (body.north);
+  \draw[flowchart/arrowline] (body.south) -- ++(0,-0.5) -- ++(1.5,0) |- (loop entry.center);
+
+  \path[flowchart/arrow,decorate,decoration={text along path,text={false},text align={align=center},reverse path}] ($ (while.south) + (0,-0.4) $) -- ++(-2,-0.5);
+  \path[flowchart/arrow,decorate,decoration={text along path,text={true},text align={align=center}}] ($ (while.south) + (0,-0.4) $) -- ++(2,-0.5);
+\end{tikzpicture}
