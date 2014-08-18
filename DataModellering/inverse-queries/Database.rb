@@ -12,7 +12,7 @@ module Database
     begin
       @@db.execute2(sql)
     rescue SQLite3::Exception => e
-      Log.error( <<END )
+      puts( <<END )
 #{e.to_s.indent}
 while executing
 #{sql.indent}
