@@ -1,12 +1,25 @@
-.PHONY: all assignment solution
+.PHONY: assignment solution doc clean
 
 ZIP = 7z
+ASSIGNMENT = opgave.zip
+SOLUTION = opgave-met-oplossingen.zip
 
 
-all: assignment solution
 
-assignment:
-	$(ZIP) a opgave.zip doc src
+all: $(ASSIGNMENT) $(SOLUTION)
 
-solution:
-	$(ZIP) a opgave-met-oplossingen.zip doc src solution
+$(ASSIGNMENT): doc
+	$(ZIP) a $(ASSIGNMENT) src
+	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) a $(ASSIGNMENT)
+
+$(SOLUTION): doc
+	$(ZIP) a $(SOLUTION) src solution
+	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs 7z a $(SOLUTION)
+
+doc:
+
+
+clean:
+	rm -f $(ASSIGNMENT) $(SOLUTION)
+	rm -r -f bin
+

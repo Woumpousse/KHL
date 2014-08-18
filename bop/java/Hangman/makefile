@@ -1,7 +1,6 @@
 .PHONY: assignment solution doc clean
 
 ZIP = 7z
-DOCS = doc/*.html doc/*.css doc/*.png doc/*.js
 ASSIGNMENT = opgave.zip
 SOLUTION = opgave-met-oplossingen.zip
 
@@ -24,5 +23,3 @@ clean:
 	rm -f $(ASSIGNMENT) $(SOLUTION)
 	rm -r -f bin
 	make -C doc clean
-
-
