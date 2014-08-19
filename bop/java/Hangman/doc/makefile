@@ -1,6 +1,6 @@
 .SECONDEXPANSION:
 
-CONVERT = convert.exe
+CONVERT = convert
 IMAGE_OPTIONS = -quality 90 -density 300 -trim
 ICON_OPTIONS = -quality 90 -density 100 -trim -bordercolor white -border 10x10 -transparent white
 CONVERT_IMAGE = $(CONVERT) $(IMAGE_OPTIONS)
