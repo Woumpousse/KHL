@@ -2,6 +2,16 @@ require './Shared.rb'
 
 
 module LaTeX
+  def self.format_bundle(template, exercises)
+    formatted_exercises = exercises.map do |exercise|
+      format_exercise(exercise)
+    end.join("\n\n")
+
+    template.gsub(/%TEMPLATE%/) do
+      formatted_exercises
+    end
+  end
+
   def self.format_exercise(exercise)
     formatted_input_tables = format_input_tables(exercise.tables)
     formatted_query = format_query(exercise.query)
@@ -62,7 +72,7 @@ module LaTeX
     end.join(" & ")
 
     formattedRows = rows.map do |row|
-      row.join(" & ") + " \\\\"
+      row.join(" & ") + ' \\\\'
     end.join("\n")
 
     <<-END
