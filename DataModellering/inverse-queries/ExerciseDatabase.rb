@@ -60,10 +60,18 @@ module ExerciseDatabase
     @@exercise_postprocessor = old_postprocessor
   end
 
-  def self.difficulty(n)
+  def self.metadata(hash)
     postprocess_exercise( lambda do |exercise|
-                            exercise[:difficulty] = n
+                            hash.each do |k, v|
+                              exercise[k] = v
+                            end
                           end ) do
+      yield
+    end
+  end
+
+  def self.difficulty(n)
+    metadata( { :difficulty => n } ) do
       yield
     end
   end
