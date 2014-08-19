@@ -75,4 +75,10 @@ module ExerciseDatabase
       yield
     end
   end
+
+  def self.category(str)
+    metadata( { :category => str } ) do
+      yield
+    end
+  end
 end
