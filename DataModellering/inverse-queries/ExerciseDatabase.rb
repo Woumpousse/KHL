@@ -6,6 +6,7 @@ module ExerciseDatabase
   @@exercises = []
   @@current_exercise = nil
   @@current_table = nil
+  @@exercise_postprocessor = lambda { |exercise| }
 
   def self.exercises
     @@exercises
@@ -16,6 +17,7 @@ module ExerciseDatabase
 
     @@current_exercise = Exercise.new
     yield
+    @@exercise_postprocessor[@@current_exercise]
     @@current_exercise.finalize
     @@exercises.push( @@current_exercise )
     @@current_exercise = nil
@@ -43,5 +45,26 @@ module ExerciseDatabase
     abort "Query not allowed inside table" if @@current_table
 
     @@current_exercise.query = string.unindent  
+  end
+
+  def self.postprocess_exercise(processor)
+    old_postprocessor = @@exercise_postprocessor
+
+    @@exercise_postprocessor = lambda do |exercise|
+      old_postprocessor[exercise]
+      processor[exercise]
+    end
+
+    yield
+
+    @@exercise_postprocessor = old_postprocessor
+  end
+
+  def self.difficulty(n)
+    postprocess_exercise( lambda do |exercise|
+                            exercise[:difficulty] = n
+                          end ) do
+      yield
+    end
   end
 end

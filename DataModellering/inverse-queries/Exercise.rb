@@ -7,6 +7,15 @@ class Exercise
     @tables = []
     @query = nil
     @solution = nil
+    @metadata = {}
+  end
+
+  def [](key)
+    @metadata[key]
+  end
+
+  def []=(key, value)
+    @metadata[key] = value
   end
 
   def finalize
