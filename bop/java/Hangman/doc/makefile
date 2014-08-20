@@ -1,5 +1,7 @@
 .SECONDEXPANSION:
 
+.PHONY: export
+
 CONVERT = convert
 IMAGE_OPTIONS = -quality 90 -density 300 -trim
 ICON_OPTIONS = -quality 90 -density 100 -trim -bordercolor white -border 10x10 -transparent white
@@ -35,3 +37,6 @@ hint.png verify.png next.png previous.png reveal.png reset.png: $$(subst png,pdf
 
 clean:
 	rm -f *~ *.aux *.pdf *.png *.log
+
+export:
+	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
