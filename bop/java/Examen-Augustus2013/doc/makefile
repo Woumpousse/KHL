@@ -7,7 +7,7 @@ TEXS = uml.tex
 PDFS = $(TEXS:tex=pdf)
 PNGS = $(TEXS:tex=png)
 
-all: figures
+all: figures export
 
 figures: $(PDFS) $(PNGS)
 

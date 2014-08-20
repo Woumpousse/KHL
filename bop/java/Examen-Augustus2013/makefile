@@ -12,12 +12,12 @@ SOLUTION = opgave-met-oplossingen.zip
 all: $(ASSIGNMENT) $(SOLUTION)
 
 $(ASSIGNMENT): doc
-	$(ZIP) a $(ASSIGNMENT) src tests
-	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) a $(ASSIGNMENT)
+	$(ZIP) $(ASSIGNMENT) src tests
+	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) $(ASSIGNMENT)
 
 $(SOLUTION): doc
 	$(ZIP) a $(SOLUTION) src tests solution
-	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs 7z a $(SOLUTION)
+	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) $(SOLUTION)
 
 doc:
 	$(MAKE) -C doc

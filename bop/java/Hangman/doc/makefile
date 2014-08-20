@@ -10,7 +10,7 @@ CONVERT_ICON = $(CONVERT) $(ICON_OPTIONS)
 LATEX = pdflatex
 
 
-all: assignment.html
+all: assignment.html export
 
 assignment.html: assignment-template.html *.rb figures
 	ruby Generate.rb html > assignment.html
