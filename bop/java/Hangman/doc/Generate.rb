@@ -50,7 +50,7 @@ class Exercises
   end
 
   def game_test
-    Questions::Java::FillInLiterals.new( <<-END.strip.unindent )
+    Questions::Java::FillInLiterals.new( <<-END.unindent.strip )
       // Nieuw spel begint met 7 levens.
       Game game = new Game( "jazz" );
 
@@ -96,7 +96,7 @@ class Exercises
   end
 
   def hintbox_types
-    Questions::Java::FillInBlanks.new( <<-END.strip.unindent )
+    Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
       class HintBox {
           /*
             De letter in de HintBox.
@@ -135,7 +135,7 @@ class Exercises
   end
 
   def hint_types
-    Questions::Java::FillInTypes.new( <<-END.strip.unindent )
+    Questions::Java::FillInTypes.new( <<-END.unindent.strip )
       class Hint {
           /*
             De HintBox-objecten
@@ -169,7 +169,7 @@ class Exercises
   end
 
   def game_types_fields
-    Questions::Java::FillInBlanks.new( <<-END.strip.unindent )
+    Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
       class Game {
           __access modifier:private__ __type:Hint__ hint;
           __access modifier:private__ __type:int__ livesLeft;
@@ -179,10 +179,10 @@ class Exercises
     END
   end
 
-  def produce_html(template)
+  def process_template(template)
     template = ERB.new template
 
-    puts( template.result binding )
+    template.result binding
   end
 end
 
@@ -201,7 +201,7 @@ else
 
   case command
   when "html"
-  then Exercises.new.produce_html( IO.read(HTML_TEMPLATE) )
+  then puts (Exercises.new.process_template( IO.read(HTML_TEMPLATE)))
   when "check"
   then verify_all
   else abort "Unrecognized command #{command}"
