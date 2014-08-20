@@ -28,6 +28,3 @@ clean:
 	rm -f $(ASSIGNMENT) $(SOLUTION)
 	rm -r -f bin
 	make -C doc clean
-
-test:
-	echo $(ZIP)

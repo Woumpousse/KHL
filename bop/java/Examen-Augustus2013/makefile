@@ -1,6 +1,11 @@
 .PHONY: assignment solution doc clean
 
-ZIP = 7z
+ifeq ($(OS),Windows_NT)
+ZIP = 7z a
+else
+ZIP = zip
+endif
+
 ASSIGNMENT = opgave.zip
 SOLUTION = opgave-met-oplossingen.zip
 

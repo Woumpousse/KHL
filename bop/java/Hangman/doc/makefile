@@ -36,7 +36,7 @@ hint.png verify.png next.png previous.png reveal.png reset.png: $$(subst png,pdf
 	$(CONVERT_ICON) $< $@
 
 clean:
-	rm -f *~ *.aux *.pdf *.png *.log
+	rm -f *~ *.aux *.pdf *.png *.log export
 
 export:
 	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
