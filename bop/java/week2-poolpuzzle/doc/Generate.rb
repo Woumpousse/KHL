@@ -28,12 +28,12 @@ public class VoerUit {
 	int x = 0;
 	while(__vergelijking:x<3__ ) {
 		e1.hello();
-                __:e1.add(1)__
-		if(__vergelijking:x<3__) {
+                __statement:e1.add(1)__
+		if(__expressie:x<3__) {
 			e2.add(1);
 		}
-		if(__vergelijking:x>1__) {
-			e2.add(e1.__method:getCount()__)
+		if(__expressie:x>1__) {
+			e2.add(e1.getCount())
 		}
 		x++;
 	}
@@ -42,7 +42,7 @@ public class VoerUit {
 }
 public class Echo {
     /* Houdt een getal bij */
-    private int __variabele naam:count__ = 0;
+    private int __identifier:count__ = 0;
 
     /* Print enkel hellooo uit */
     public void __methode naam:hello__() {
