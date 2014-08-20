@@ -162,7 +162,7 @@ module Questions
           placeholder = placeholder[0]
           abort "Invalid placeholder #{placeholder}" unless placeholder =~ /^([^:]*):([^:]+)$/
           $2
-        end
+        end.sort
       end
 
       def ul_pool
