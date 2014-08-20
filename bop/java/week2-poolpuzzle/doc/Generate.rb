@@ -24,15 +24,15 @@ add( 'pool_puzzle', Questions::Java::FillInBlanks.new( <<END.strip ) )
 public class VoerUit {
     public static void main(String[] args) {
 	Echo e1 = new Echo();
-	__Echo e2 = new Echo();__
+	__statement:Echo e2 = new Echo();__
 	int x = 0;
-	while(__x<3__ ) {
+	while(__vergelijking:x<3__ ) {
 		e1.hello();
                 __e1.add(1)__
-		if(%x<3) {
+		if(__x<3__) {
 			e2.add(1);
 		}
-		if(%x>1) {
+		if(__x>1__) {
 			e2.add(e1.getCount())
 		}
 		x++;
@@ -42,10 +42,10 @@ public class VoerUit {
 }
 public class Echo {
     /* Houdt een getal bij */
-    private int %count = 0;
+    private int __count__ = 0;
 
     /* Print enkel hellooo uit */
-    public void %hello() {
+    public void __hello__() {
 	System.out.println("helloooo..");
     }
 
