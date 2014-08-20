@@ -1,13 +1,13 @@
 .SUFFIXES: .png .pdf .tex
 
-CONVERT = convert.exe
+CONVERT = convert
 LATEX = pdflatex
 
 TEXS = dag.uml.tex inschrijving.uml.tex kind.uml.tex verblijf.uml.tex
 PDFS = $(TEXS:tex=pdf)
 PNGS = $(TEXS:tex=png)
 
-all: figures
+all: figures export
 
 figures: $(PDFS) $(PNGS)
 
@@ -18,4 +18,8 @@ figures: $(PDFS) $(PNGS)
 	$(LATEX) $<
 
 clean:
-	rm -f *~ *.aux *.pdf *.png *.log
+	rm -f *~ *.aux *.pdf *.png *.log export
+
+export:
+	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
+

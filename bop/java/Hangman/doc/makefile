@@ -1,5 +1,7 @@
 .SECONDEXPANSION:
 
+.PHONY: export
+
 CONVERT = convert
 IMAGE_OPTIONS = -quality 90 -density 300 -trim
 ICON_OPTIONS = -quality 90 -density 100 -trim -bordercolor white -border 10x10 -transparent white
@@ -8,7 +10,7 @@ CONVERT_ICON = $(CONVERT) $(ICON_OPTIONS)
 LATEX = pdflatex
 
 
-all: assignment.html
+all: assignment.html export
 
 assignment.html: assignment-template.html *.rb figures
 	ruby Generate.rb html > assignment.html
@@ -34,4 +36,7 @@ hint.png verify.png next.png previous.png reveal.png reset.png: $$(subst png,pdf
 	$(CONVERT_ICON) $< $@
 
 clean:
-	rm -f *~ *.aux *.pdf *.png *.log
+	rm -f *~ *.aux *.pdf *.png *.log export
+
+export:
+	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export

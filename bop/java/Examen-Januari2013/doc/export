@@ -1,4 +1,8 @@
-*.css
-*.png
+assignment.css
+dag.uml.png
+inschrijving.uml.png
+kind.uml.png
+verblijf.uml.png
 assignment.html
-*.js
+assignment.js
+jquery.js
