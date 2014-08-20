@@ -15,7 +15,7 @@ class Array
     self[index..-1]
   end  
 
-  def partition_alternates
+  def unthread
     result = [ [], [] ]
 
     each_with_index do |x, i|
@@ -25,7 +25,7 @@ class Array
     result
   end
 
-  def merge_alternates_with(ys)
+  def thread(ys)
     xs = self
     result = []
 
@@ -82,20 +82,6 @@ class String
   end
 end
 
-class Module
-  def class_names
-    constants.select do |constant|
-      Class === const_get(constant)
-    end
-  end
-
-  def classes
-    class_names.map do |name|
-      const_get(name)
-    end
-  end
-end
-
 class Lazy
   def initialize(&block)
     @evaluator = block
@@ -114,3 +100,59 @@ class Lazy
   end
 end
 
+class ComposedString
+  def self.from_string(string)
+    ComposedString.new([string])
+  end
+
+  def initialize(components)
+    @components = components.dup
+  end
+
+  # IMPORTANT
+  # regex must have one capturing group encompassing the entire match
+  # otherwise split will not work correctly
+  # Noncapturing groups: (?:regex)
+  def gsub(regex)
+    result = @components.map do |component|
+      if component.is_a? String
+      then
+        strings, captured = component.split(regex).unthread
+        transformed_captured = captured.map { |x| yield x }
+        strings.thread(transformed_captured)
+      else
+        [component]
+      end
+    end.flatten(1)
+    
+    ComposedString.new(result)
+  end
+  
+  def join(infix='')
+    @components.map do |component|
+      if component.is_a? String
+      then component
+      else yield component
+      end
+    end.join(infix)
+  end
+  
+  def to_a
+    @components.dup
+  end
+end
+
+class Token
+  def initialize(str)
+    @str = str
+  end
+  
+  def to_s
+    @str
+  end
+end
+
+$cs = ComposedString.from_string('Hello world there')
+$cs2 = $cs.gsub(/(\w+)/) do |match|
+  Token.new(match)
+end

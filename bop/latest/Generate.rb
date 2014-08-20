@@ -3,7 +3,7 @@ require './Questions.rb'
 require './Controller.rb'
 
 
-VERSION = 1
+VERSION = 2
 
 def parse_command_line_arguments
   options = {}

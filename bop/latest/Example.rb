@@ -6,6 +6,7 @@ class Exercises
   include Controller
 
   def fill_in_blanks
+    # Syntax: __placeholder:solution__
     Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
       class Foo
       {
@@ -16,6 +17,40 @@ class Exercises
               System.out.println(x);
           }
       }   
-      END
+    END
   end
+
+
+  def select_types
+    # Syntax: __must-be-selected__
+    Questions::Java::SelectTokens.new( <<-END.unindent.strip )
+      class Foo
+      {
+          public static __void__ main(__String[]__ args)
+          {
+              __int__ x = 5;
+
+              System.out.println(x);
+          }
+      }   
+    END
+  end
+
+
+  def select_lines
+    # Syntax: lines to be selected must end on <<
+    Questions::Java::SelectLines.new( <<-END.unindent.strip )
+      class Foo
+      {
+          public Foo() <<
+          {            <<
+          }            <<
+
+          public void bar()
+          {
+          }
+      }
+    END
+  end
+
 end

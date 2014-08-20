@@ -20,10 +20,37 @@
         <h2>Invuloefening</h2>
         <div data-question="fill-in-blanks">
           <p>
-            Vul de juiste types in.
+            Vul in.
           </p>
           <pre>
 <%= fill_in_blanks.code %>
+          </pre>
+          <div class="hint">
+            <p>Dit is de hint</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Tokenselectie</h2>
+        <div data-question="selection">
+          <p>
+            Selecteer de types.
+          </p>
+          <pre>
+<%= select_types.code %>
+          </pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Lijnselectie</h2>
+        <div data-question="selection">
+          <p>
+            Selecteer de constructor.
+          </p>
+          <pre>
+<%= select_lines.code %>
           </pre>
         </div>
       </section>
@@ -33,9 +60,11 @@
         <div class="slideshow">
           <div class="slide">
             <img src="slides-example-0.png">
+            <p>Eerste prentje</p>
           </div>
           <div class="slide">
             <img src="slides-example-1.png">
+            <p>Tweede prentje</p>
           </div>
           <div class="slide">
             <img src="slides-example-2.png">

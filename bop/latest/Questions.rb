@@ -15,7 +15,7 @@ module Questions
     def code
       fragments = @data.split(/__(.*?)__/)
       
-      code_fragments, input_fragments = fragments.partition_alternates
+      code_fragments, input_fragments = fragments.unthread
       
       html_code_fragments = code_fragments.map do |code_fragment|
         format_code_fragment(code_fragment)
@@ -25,7 +25,7 @@ module Questions
         format_input_element(input_fragment)
       end
       
-      html_code_fragments.merge_alternates_with(html_input_fragments).join
+      html_code_fragments.thread(html_input_fragments).join
     end
 
     protected
@@ -67,30 +67,33 @@ module Questions
     end
   end
 
+  class CodeFragment
+    def initialize(string)
+      @string = string
+    end
+
+    attr_reader :string
+  end
+
   class SelectCodeFragments
-    def initialize(code, regex)
+    def initialize(code)
       @code = code
-      @regex = regex
     end
 
     def code
-      find_fragments do |fragment|
+      fragments.join do |fragment|
         process_fragment(fragment)
       end
     end
 
     protected
-    def find_fragments
-      @code.gsub(@regex) do
-        data = $1
-
-        yield data
-      end
+    def fragments
+      abort "Left undefined; should be overriden in subclasses"
     end
 
     def process_fragment(fragment)
       solution = if should_be_selected? fragment then 'true' else 'false' end
-      stripped = strip_metadata(fragment)
+      stripped = strip(fragment)
 
       attributes = {
         'class' => 'selectable',
@@ -101,14 +104,11 @@ module Questions
     end
 
     def should_be_selected?(fragment)
-      fragment.start_with?('%')
+      abort "Left undefined; should be overriden in subclasses"
     end
 
-    def strip_metadata(fragment)
-      if fragment.start_with?('%')
-      then fragment[1..-1]
-      else fragment
-      end
+    def strip(fragment)
+      abort "Left undefined; should be overriden in subclasses"
     end
 
     def generate_html_element(fragment, attributes)
@@ -150,7 +150,7 @@ module Questions
       end
 
       def extract_attributes_from_data(data)
-        abort "Invalid data #{data}" unless data =~ /^([^:]*):([^:]+)$/
+        abort "Invalid data \"#{data}\"\nMust have form __placeholder:solution__" unless data =~ /^([^:]*):([^:]+)$/
         meta, solution = $1, $2
 
         { 'data-solution' => solution,
@@ -182,30 +182,66 @@ module Questions
 
     class SelectTokens < SelectCodeFragments
       def initialize(code)
-        super(code, /(%?\w+)/)
-      end
-
-      def verify
-      end
-    end
-
-    class SelectLines < SelectCodeFragments
-      def initialize(code)
-        super(code, /^(%?.+)$/)
+        super(code) # , /\w+(\[\])?(__)?*/)
       end
 
       def verify
       end
 
       protected
-      def should_be_selected?(fragment)
-        fragment.end_with?('<<')
+      def fragments
+        result = ComposedString.from_string(@code)
+
+        result = result.gsub(/(__.*?__)/) do |fragment|
+          CodeFragment.new(fragment)
+        end
+
+        result = result.gsub(/(\w+(?:\[\])*)/) do |fragment|
+          CodeFragment.new(fragment)
+        end
+
+        result
       end
 
-      def strip_metadata(fragment)
-        if fragment =~ /\s*<<$/
-        then $`
-        else fragment
+      def should_be_selected?(fragment)
+        fragment.string.start_with?('__') and fragment.string.end_with?('__')
+      end
+
+      def strip(fragment)
+        if should_be_selected? fragment
+        then fragment.string[2..-3]
+        else fragment.string
+        end
+      end
+    end
+
+    class SelectLines < SelectCodeFragments
+      def initialize(code)
+        super(code)
+      end
+
+      def verify
+      end
+
+      protected
+      def fragments
+        result = ComposedString.from_string(@code)
+
+        result = result.gsub(/(^.*$)/) do |fragment|
+          CodeFragment.new(fragment)
+        end
+
+        result
+      end
+
+      def should_be_selected?(fragment)
+        fragment.string.end_with?('<<')
+      end
+
+      def strip(fragment)
+        if should_be_selected? fragment
+        then fragment.string[0..-3]
+        else fragment.string
         end
       end
     end
