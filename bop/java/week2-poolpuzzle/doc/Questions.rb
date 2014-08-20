@@ -156,6 +156,22 @@ module Questions
         { 'data-solution' => solution,
           'placeholder' => meta }
       end
+
+      def pool
+        @data.scan(/__(.*?)__/).map do |placeholder|
+          placeholder = placeholder[0]
+          abort "Invalid placeholder #{placeholder}" unless placeholder =~ /^([^:]*):([^:]+)$/
+          $2
+        end
+      end
+
+      def ul_pool
+        entries = pool.map do |entry|
+          "<li>#{entry}</li>"
+        end.join("\n")
+
+        "<ul>#{entries}</ul>"
+      end
     end
 
     class FillInTypes < FillInBlanks

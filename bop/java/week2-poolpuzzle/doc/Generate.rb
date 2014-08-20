@@ -28,11 +28,11 @@ public class VoerUit {
 	int x = 0;
 	while(__vergelijking:x<3__ ) {
 		e1.hello();
-                __e1.add(1)__
-		if(__x<3__) {
+                __statement:e1.add(1)__
+		if(__expressie:x<3__) {
 			e2.add(1);
 		}
-		if(__x>1__) {
+		if(__expressie:x>1__) {
 			e2.add(e1.getCount())
 		}
 		x++;
@@ -42,15 +42,15 @@ public class VoerUit {
 }
 public class Echo {
     /* Houdt een getal bij */
-    private int __count__ = 0;
+    private int __identifier:count__ = 0;
 
     /* Print enkel hellooo uit */
-    public void __hello__() {
+    public void __identifier:hello__() {
 	System.out.println("helloooo..");
     }
 
     /* Telt de waarde van i op bij zijn getal */
-    public void add(int i) {
+    public void add(int i){ 
 	this.%count = this.%count + %i;
     }
     public int getCount() {
