@@ -37,6 +37,22 @@ class Exercises
   end
 
 
+  def interpret
+    # Classes must have no access modifier!
+    Questions::Java::InterpretCode.new( <<-END.unindent.strip )
+      class App
+      {
+          public static void main(String[] args)
+          {
+              int x = 5;
+
+              System.out.print( x );
+          }
+      }
+    END
+  end
+
+
   def select_lines
     # Syntax: lines to be selected must end on <<
     Questions::Java::SelectLines.new( <<-END.unindent.strip )
