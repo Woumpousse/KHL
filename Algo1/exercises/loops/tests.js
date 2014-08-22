@@ -88,4 +88,35 @@ defineTests(function (test) {
         builder.addInput(100);
         builder.addInput(101);
     });
+
+    test(Solutions.sumDigits, function (builder) {
+        builder.addInput(1);
+        builder.addInput(11);
+        builder.addInput(111);
+        builder.addInput(123);
+        builder.addInput(0);
+        builder.addInput(12345);
+        builder.addInput(54321);
+    });
+
+    test(Solutions.greatestDigitProduct, function (builder) {
+        builder.addInput(10);
+        builder.addInput(20);
+        builder.addInput(304);
+        builder.addInput(23045);
+        builder.addInput(10203);
+        builder.addInput(23033024);
+        builder.addInput(23033025);
+        builder.addInput(93033025);
+    });
+
+    test(Solutions.greatestSumOfDigitTriples, function (builder) {
+        builder.addInput(1000);
+        builder.addInput(10203);
+        builder.addInput(12345);
+        builder.addInput(999111111);
+        builder.addInput(111111999);
+        builder.addInput(111999111);
+        builder.addInput(16782469);
+    });
 });

@@ -1,4 +1,4 @@
-.PHONY: cleantemp arrays recursion 2d-arrays car conditionals loops
+.PHONY: cleantemp arrays recursion 2d-arrays car conditionals loops solutions
 
 ifeq ($(OS),Windows_NT)
 ZIP = 7z a
@@ -6,20 +6,23 @@ else
 ZIP = zip
 endif
 
+EXERCISES = conditionals 2d-arrays arrays recursion loops
 SHARED = *.js *.css
 
 ZIP_SHARED = $(ZIP) $(1).zip $(SHARED)
 ZIP_EXPORT = cat $(1)/export | awk '{printf "$(1)/%s\n", $$0}' | xargs $(ZIP) $(1).zip
 
 
-all: conditionals 2d-arrays arrays recursion car loops
+all: $(EXERCISES) car
 
-conditionals arrays 2d-arrays recursion car loops:
+$(EXERCISES) car:
 	make -C $@
 	rm -f $@.zip
 	$(call ZIP_SHARED,$@)
 	$(call ZIP_EXPORT,$@)
 
+solutions:
+	echo $(EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} solutions.js
 
 lazy.js: lazy.ts
 	tsc -t ES5 lazy.ts

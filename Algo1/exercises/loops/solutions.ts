@@ -153,4 +153,69 @@ module Solutions
 
         return result;
     }
+
+    export function sumDigits(n : number) : number
+    {
+        var total = 0;
+
+        while ( n > 0 )
+        {
+            total += n % 10;
+            n = Math.floor(n / 10);
+        }
+
+        return total;
+    }
+
+    export function greatestDigitProduct(n : number) : number
+    {
+        var best = 0;
+        var product = 1;
+
+        while ( n > 0 )
+        {
+            var digit = n % 10;
+            n = Math.floor(n / 10);
+
+            if ( digit === 0 )
+            {
+                best = Math.max(best, product);
+                product = 1;
+            }
+            else
+            {
+                product *= digit;
+            }
+        }
+
+        best = Math.max(best, product);
+
+        return best;
+    }
+
+    export function greatestSumOfDigitTriples(n : number) : number
+    {
+        var best = 0;
+        var d1, d2, d3;
+
+        d1 = n % 10;
+        n = Math.floor(n / 10);
+        d2 = n % 10;
+        n = Math.floor(n / 10);
+        d3 = n % 10;
+
+        best = d1 + d2 + d3;
+
+        while ( n > 0 )
+        {
+            d1 = d2;
+            d2 = d3;
+            d3 = n % 10;
+            n = Math.floor(n / 10);
+
+            best = Math.max( d1 + d2 + d3, best );
+        }
+
+        return best;
+    }
 }
