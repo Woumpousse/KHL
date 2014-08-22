@@ -1,3 +1,3 @@
 /*
-  Put solutions here
+  Schrijf je code hier
 */

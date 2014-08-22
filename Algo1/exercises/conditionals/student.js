@@ -1,11 +1,11 @@
-// This is a line of comment
-// Everything that follows // is ignored
+// Dit is commentaar
+// Alles wat volgt op // is commentaar
 function average(a, b)
 {    
     var result;
 
-    // The following line attempts to compute the average of a and b
-    // However, it does contain a bug which you must correct
+    // De volgende lijn heeft als doel het gemiddelde te berekenen
+    // van a en b. Het bevat echter een bug; verbeter deze.
     result = (a + b) / 4;
 
     return result;
@@ -16,7 +16,7 @@ function cost1(n)
 {
     var result;
 
-    // Write code here that computes the price of n books.
+    // Schrijf hier de code die de prijs berekent van n boeken
 
     return result;
 }
@@ -26,7 +26,7 @@ function cost2(n, k)
 {
     var result;
 
-    // Write code here that computes the price of n books and k DVDs.
+    // Schrijf hier de code die de prijs berekent van n boeken en k DVDs
 
     return result;
 }
@@ -36,7 +36,7 @@ function cost3(n, k)
 {
     var result;
 
-    // Write code here that computes the price of n books and k DVDs.
+    // Schrijf hier de code
 
     return result;
 }
@@ -46,7 +46,7 @@ function cost4(n, k)
 {
     var result;
 
-    // Write code here that computes the price of n books and k DVDs.
+    // Schrijf hier de code
 
     return result;
 }
@@ -56,7 +56,7 @@ function cost5(n, k)
 {
     var result;
 
-    // Write code here that computes the price of n books and k DVDs.
+    // Schrijf hier de code
 
     return result;
 }
@@ -66,7 +66,7 @@ function isOdd(n)
 {
     var result;
 
-    // Write code here that assigns true to result if n is odd, or false if n is not odd
+    // Schrijf hier de code
 
     return result;
 }
@@ -76,7 +76,7 @@ function isEven(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf hier de code
 
     return result;
 }
@@ -86,7 +86,7 @@ function endsInZero(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf hier de code
 
     return result;
 }
@@ -96,7 +96,7 @@ function endsInThreeZeros(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf hier de code
 
     return result;
 }
@@ -106,7 +106,7 @@ function minimumOfTwo(a, b)
 {
     var result;
 
-    // Put solution here
+    // Schrijf hier de code
 
     return result;
 }
@@ -116,7 +116,16 @@ function abs(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf hier de code
+
+    return result;
+}
+
+function maximumOfThree(a, b, c)
+{
+    var result;
+
+    // Schrijf hier de code
 
     return result;
 }
@@ -126,17 +135,7 @@ function maximumOfThree(a, b, c)
 {
     var result;
 
-    // Put solution here
-
-    return result;
-}
-
-
-function maximumOfThree(a, b, c)
-{
-    var result;
-
-    // Put solution here
+    // Schrijf hier de code
 
     return result;
 }
@@ -146,10 +145,10 @@ function sort(a, b, c)
 {
     var x, y, z;
 
-    // Put solution here
-    // x must be assigned the least number
-    // y the middel
-    // z the greatest
+    // Schrijf hier de code
+    // Ken het kleinste getal toe aan x,
+    // het middelste aan y,
+    // het grootste aan z
 
     return [x, y, z];
 }
