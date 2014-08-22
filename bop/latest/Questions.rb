@@ -13,19 +13,34 @@ module Questions
     end
 
     def code
-      fragments = @data.split(/__(.*?)__/)
-      
-      code_fragments, input_fragments = fragments.unthread
-      
-      html_code_fragments = code_fragments.map do |code_fragment|
-        format_code_fragment(code_fragment)
+      str = ComposedString.from_string(@data)
+
+      str = str.gsub(/(__(?:.*?)__)/) do |fragment|
+        Cell.new( format_input_element(fragment[2..-3]) )
       end
 
-      html_input_fragments = input_fragments.map do |input_fragment|
-        format_input_element(input_fragment)
+      str = str.gsub(/(.*)/) do |code|
+        Cell.new( format_code_fragment(code) )
       end
+
+      str.join do |cell|
+        cell.contents
+      end
+
+#      fragments = @data.split(/__(.*?)__/) 
+
       
-      html_code_fragments.thread(html_input_fragments).join
+      # code_fragments, input_fragments = fragments.unthread
+      
+      # html_code_fragments = code_fragments.map do |code_fragment|
+      #   format_code_fragment(code_fragment)
+      # end
+
+      # html_input_fragments = input_fragments.map do |input_fragment|
+      #   format_input_element(input_fragment)
+      # end
+      
+      # html_code_fragments.thread(html_input_fragments).join
     end
 
     protected

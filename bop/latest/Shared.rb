@@ -142,17 +142,10 @@ class ComposedString
   end
 end
 
-class Token
-  def initialize(str)
-    @str = str
+class Cell
+  def initialize(contents)
+    @contents = contents
   end
-  
-  def to_s
-    @str
-  end
-end
 
-$cs = ComposedString.from_string('Hello world there')
-$cs2 = $cs.gsub(/(\w+)/) do |match|
-  Token.new(match)
+  attr_reader :contents
 end
