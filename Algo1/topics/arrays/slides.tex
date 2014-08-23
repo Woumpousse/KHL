@@ -33,7 +33,9 @@
 
 \begin{document}
 
-\maketitle
+\begin{frame}
+  \titlepage
+\end{frame}
 
 {
 \newcommand{\CODE}[1]{
@@ -56,12 +58,12 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} before};
+      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
       \ARRAY{2}{,,,,}
       \ARRAY{3}{5,,,,}
       \ARRAY{4}{5,4,,,}
       \ARRAY{5}{5,4,5,,}
-      \ARRAY{5}{5,4,5,4,}
+      \ARRAY{6}{5,4,5,4,}
     \end{tikzpicture}
   \end{center}
 
@@ -82,7 +84,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} after};
+      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
       \ARRAY{1}{,,,,}
       \ARRAY{2}{5,,,,}
       \ARRAY{3}{5,4,,,}
@@ -93,7 +95,6 @@
   \end{center}
 \end{frame}
 }
-
 
 
 {
@@ -121,7 +122,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} before};
+      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
       \ARRAY{2}{1,2,3}
       \ARRAY{3}{1,2,3,4}
       \ARRAY{4}{1,2,3}
@@ -145,7 +146,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} after};
+      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
       \ARRAY{1}{1,2,3}
       \ARRAY{2}{1,2,3,4}
       \ARRAY{3}{1,2,3}
@@ -198,7 +199,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} before};
+      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
       \ARRAY{1-}{1,2,3,4,5}
       \node (xs) at ($ (cell 1.west) + (-1,0) $) {xs};
       \draw[->] (xs) to (cell 1.west);
@@ -219,7 +220,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} after};
+      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
       \begin{scope}[yshift=.25cm]
         \ARRAY{1-}{1,2,3,4,5}
         \node (xs) at ($ (cell 1.west) + (-1,0) $) {xs};
@@ -248,7 +249,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} before};
+      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
 
       \begin{scope}[yshift=.25cm]
         \drawarray{1,2,3}
@@ -275,7 +276,7 @@
       \coordinate (lower right) at (lower left -| upper right);
 
       \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} after};
+      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
       \begin{scope}[yshift=.25cm]
         \drawarray{1,2,3}
         \node (xs) at ($ (cell 1.west) + (-1,0) $) {xs};

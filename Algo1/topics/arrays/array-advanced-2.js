@@ -1,2 +1,2 @@
-// Add element at end
+// Voeg element toe aan einde
 xs.push(4);

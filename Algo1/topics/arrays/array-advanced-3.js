@@ -1,2 +1,2 @@
-// Remove item at end
+// Verwijder element aan einde
 xs.pop();

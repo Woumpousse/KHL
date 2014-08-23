@@ -1,5 +1,5 @@
-// Read from first position
+// Lees uit eerste positie
 var x = xs[0];
 
-// Write to third position
+// Schrijf naar derde positie
 xs[2] = x;

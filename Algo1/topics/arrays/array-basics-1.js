@@ -1,2 +1,2 @@
-// Creation array of size 5
+// Aanmaak array met lengte 5
 var xs = new Array(5);
