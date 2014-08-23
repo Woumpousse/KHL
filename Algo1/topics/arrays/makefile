@@ -1,6 +1,6 @@
 all: slides.pdf
 
-slides.pdf: slides.tex *.js
+slides.pdf: *.tex *.js
 	pdflatex slides.tex
 
 clean:
