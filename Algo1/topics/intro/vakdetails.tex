@@ -1,0 +1,117 @@
+\section{Introductie}
+
+\frame{ \tableofcontents[currentsection] }
+
+\begin{frame}
+  \frametitle{Studiebelasting}
+  \begin{columns}
+    \column{.5\textwidth}
+    \begin{center}
+      \begin{tikzpicture}
+        \pgfkeys{/mylib/segpie/.cd, inner radius=1.5, outer radius=2.5}
+        \only<1>{
+          \segpie[fill=white]{0}{74}{74}
+        }
+        \only<2>{
+          \segpie[fill=red]{0}{11}{74}
+          \segpie[fill=white]{12}{74}{74}
+        }
+        \only<3>{
+          \segpie[fill=red]{0}{11}{74}
+          \segpie[fill=blue]{12}{29}{74}
+          \segpie[fill=white]{30}{74}{74}
+        }
+        \only<4>{
+          \segpie[fill=red]{0}{11}{74}
+          \segpie[fill=blue]{12}{29}{74}
+          \segpie[fill=green]{30}{74}{74}          
+        }
+      \end{tikzpicture}
+    \end{center}
+    \column{.5\textwidth}
+      \begin{itemize}
+        \item<1-> 3 studiepunten
+        \item<1-> 25 uur per studiepunt
+        \item<1-> 12 weken
+        \item<1-> $\Rightarrow$ 75 uren in totaal
+        \item<1-> $\Rightarrow$ 6.25 uur/week
+        \item<2-> {\color{red} 1 uur/week theorie}
+        \item<3-> {\color{blue} 1.5 uur/week oefeningen}
+        \item<4-> {\color{green} 3.75 uur/week zelfstudie}
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Puntenverdeling}
+%   \begin{columns}
+%     \column{.5\textwidth}
+%     \begin{itemize}
+%       \item {\color{red} 40\%: opdrachten}
+%              \begin{itemize}
+%                \item {\color{red} Toetsen}
+%              \end{itemize}
+%              \vskip4mm
+%       \item {\color{blue} 60\%: examen}
+%              \begin{itemize}
+%                \item {\color{blue} 10\% mondeling contactexamen}
+%                \item {\color{blue} 50\% schriftelijk contactexamen}
+%              \end{itemize}
+%     \end{itemize}
+%     \column{.5\textwidth}
+%     \begin{center}
+%       \begin{tikzpicture}
+%         \pgfkeys{/mylib/segpie/.cd, inner radius=1.5, outer radius=2.5}
+%         \segpie[fill=red]{0}{3}{10}
+%         \segpie[fill=blue]{4}{9}{10}
+%       \end{tikzpicture}
+%     \end{center}
+%   \end{columns}
+%   \vskip5mm
+%   {\tiny (Offici\"ele informatie te vinden op studiewijzer)}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Plaatsing}
+  \begin{center}
+    \begin{tikzpicture}[vak/.style={rectangle,draw=black,fill=blue!25,thin,minimum size=12mm},
+                        arr/.style={->,thick},
+                        sem/.style={left color=blue!75, right color=blue!25,drop shadow},
+                        semc/.style={rotate=90,fill=blue!75,rectangle,drop shadow},
+                        lang/.style={circle,fill=red!50,circular drop shadow},
+                        langarr/.style={ultra thick,->,red!50}]
+      \path[use as bounding box] (-3,0) rectangle (3,5);
+      \node[semc] at (-2.25,3.75) {S1};
+      \node[semc] at (-2.25,1.75) {S2};
+      \node[semc] at (-2.25,-0.25) {S3};
+      \shade[sem] (-2,4.75) rectangle (2, 3.25);
+      \shade[sem] (-2,2.75) rectangle (2, 1.25);
+      \shade[sem] (-2,0.75) rectangle (2, -0.75);
+      \node[vak] (bop)    at (-1,4)   {BOP};
+      \node[vak] (algo1)  at (1,4)    {Algo1};
+      \node[vak] (oop)    at (-1,2)   {OOP};
+      \node[vak] (algo2)  at (1,2)    {Algo2};
+      \node[vak] (ooo)    at (-1,0)   {OOO};
+      \draw[arr] (algo1) -- (bop);
+      \draw[arr] (bop) -- (oop);
+      \draw[arr] (oop) -- (ooo);
+      \draw[arr] (algo1) -- (algo2);
+      \draw[arr] (bop) -- (algo2);
+
+      \only<2>{
+        \node[lang] (java) at (-4,2.5) {Java};
+        \node[lang] (javascript) at (3.75,4) {JavaScript};
+        \draw[langarr] (java) to [bend left=45] (bop);
+        \draw[langarr] (java) to [bend left=45] (algo2);
+        \draw[langarr] (java) to [bend left=45] (oop);
+        \draw[langarr] (java) to [bend left=45] (ooo);
+        \draw[langarr] (javascript) to [bend right=45] (algo1);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "intro"
+%%% End: 
