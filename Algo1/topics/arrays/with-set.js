@@ -1,12 +1,12 @@
 function gelukkig(n) {
-    var bezocht = nieuweVerzameling();
+    var `\NODE{bezocht}{visited}` = `\NODE{\color{darkgreen}nieuweVerzameling}{new set}`();
 
-    while ( !elementVan(n, bezocht) &&
+    while ( !`\NODE{\color{darkgreen}elementVan}{element}`(n, bezocht) &&
             n !== 1 )
     {
-        voegToe(bezocht, n);
+        `\NODE{\color{darkgreen}voegToe}{insert}`(n, bezocht);
         n = opvolger(n);
     }
 
-    return n === 1;
+    return `\NODE{n === 1}{result}`;
 }

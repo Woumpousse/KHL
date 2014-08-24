@@ -1,121 +1,169 @@
 {
-\newcommand{\CODE}[1]{
-  \onslide<#1>
-  \begin{minipage}[c][2cm]{\linewidth}
-    \code{array-basics-#1.js}
-  \end{minipage}
-}
-\newcommand{\ARRAY}[2]{
-  \only<#1>{\drawarray{#2}}
+  \newcommand{\CODE}[1]{
+    \onslide<#1>
+    \begin{minipage}[c][2cm]{\linewidth}
+      \code[width=.8\linewidth]{array-basics-#1.js}
+    \end{minipage}
+  }
+  \newcommand{\ARRAY}[2]{
+    \only<#1>{\drawarray{#2}}
+  }
+
+  \begin{frame}
+    \frametitle{Arrays}
+    \begin{center}
+      \begin{tikzpicture}
+        \coordinate (lower left) at (-.5,-.5);
+        \coordinate (upper right) at (6,1.5);
+        \coordinate (upper left) at (lower left |- upper right);
+        \coordinate (lower right) at (lower left -| upper right);
+
+        \draw[use as bounding box,box] (lower left) rectangle (upper right);
+        \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
+        \ARRAY{2}{,,,,}
+        \ARRAY{3}{5,,,,}
+        \ARRAY{4}{5,4,,,}
+        \ARRAY{5}{5,4,5,,}
+        \ARRAY{6}{5,4,5,4,}
+      \end{tikzpicture}
+    \end{center}
+
+    \begin{overprint}
+      \CODE{1}
+      \CODE{2}
+      \CODE{3}
+      \CODE{4}
+      \CODE{5}
+      \CODE{6}
+    \end{overprint}
+
+    \begin{center}
+      \begin{tikzpicture}
+        \coordinate (lower left) at (-.5,-.5);
+        \coordinate (upper right) at (6,1.5);
+        \coordinate (upper left) at (lower left |- upper right);
+        \coordinate (lower right) at (lower left -| upper right);
+
+        \draw[use as bounding box,box] (lower left) rectangle (upper right);
+        \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
+        \ARRAY{1}{,,,,}
+        \ARRAY{2}{5,,,,}
+        \ARRAY{3}{5,4,,,}
+        \ARRAY{4}{5,4,5,,}
+        \ARRAY{5}{5,4,5,4,}
+        \ARRAY{6}{5,4,5,4,18}
+      \end{tikzpicture}
+    \end{center}
+  \end{frame}
 }
 
 \begin{frame}
-  \frametitle{Arrays}
-  \begin{center}
-    \begin{tikzpicture}
-      \coordinate (lower left) at (-.5,-.5);
-      \coordinate (upper right) at (6,1.5);
-      \coordinate (upper left) at (lower left |- upper right);
-      \coordinate (lower right) at (lower left -| upper right);
+  \frametitle{Itereren over Array}
+  \vskip1cm
+  \code[width=.95\linewidth]{iteration.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=south] (note init) at ($ (init) + (0,1) $) {
+        \parbox{5cm}{
+          Eerste element heeft index 0.
+        }
+      };
+      \draw[/khl/note arrow] (note init) -- (init);
+    }
+    \only<3>{
+      \node[/khl/note,anchor=south] (note cond) at ($ (cond) + (0,1) $) {
+        \parbox{7cm}{
+          Index moet gaan van 0 t.e.m.\ {\tt length-1}!
+        }
+      };
+      \draw[/khl/note arrow] (note cond) -- (cond);
+    }
+  \end{tikzpicture}
 
-      \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
-      \ARRAY{2}{,,,,}
-      \ARRAY{3}{5,,,,}
-      \ARRAY{4}{5,4,,,}
-      \ARRAY{5}{5,4,5,,}
-      \ARRAY{6}{5,4,5,4,}
-    \end{tikzpicture}
-  \end{center}
-
-  \begin{overprint}
-    \CODE{1}
-    \CODE{2}
-    \CODE{3}
-    \CODE{4}
-    \CODE{5}
-    \CODE{6}
-  \end{overprint}
-
-  \begin{center}
-    \begin{tikzpicture}
-      \coordinate (lower left) at (-.5,-.5);
-      \coordinate (upper right) at (6,1.5);
-      \coordinate (upper left) at (lower left |- upper right);
-      \coordinate (lower right) at (lower left -| upper right);
-
-      \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
-      \ARRAY{1}{,,,,}
-      \ARRAY{2}{5,,,,}
-      \ARRAY{3}{5,4,,,}
-      \ARRAY{4}{5,4,5,,}
-      \ARRAY{5}{5,4,5,4,}
-      \ARRAY{6}{5,4,5,4,18}
-    \end{tikzpicture}
-  \end{center}
+  \visible<3>{
+    \begin{center}
+      \begin{tikzpicture}
+        \drawarray{,,,,}
+        \draw[|-|] ($ (cell 1.south west) + (0,-.2) $) -- ($ (cell 5.south east) + (0,-.2) $)
+          node[midway,below] {lengte 5};
+      \end{tikzpicture}
+    \end{center}   
+  }
 \end{frame}
-}
+
+\begin{frame}
+  \frametitle{Oefening}
+  \begin{center} \Large
+    Schrijf een functie {\tt verdubbel} die een array ontvangt en elk element ervan verdubbelt.
+  \end{center}
+  \vskip4mm
+  \code[width=.95\linewidth]{iteration.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oplossing}
+  \code[width=.95\linewidth]{double.js}
+\end{frame}
 
 
 {
-\pgfkeys{/tikz/.cd,
-         cell/.style={drop shadow,fill=blue!50,minimum size=.8cm},
-         index/.style={fill=white,draw},
-         box/.style={fill=red!10,drop shadow}}
-\newcommand{\CODE}[1]{
-  \onslide<#1>
-  \begin{minipage}[c][2cm]{\linewidth}
-    \code{array-advanced-#1.js}
-  \end{minipage}
-}
-\newcommand{\ARRAY}[2]{
-  \only<#1>{\drawarray{#2}}
-}
+  \pgfkeys{/tikz/.cd,
+           cell/.style={drop shadow,fill=blue!50,minimum size=.8cm},
+           index/.style={fill=white,draw},
+           box/.style={fill=red!10,drop shadow}}
+  \newcommand{\CODE}[1]{
+    \onslide<#1>
+    \begin{minipage}[c][2cm]{\linewidth}
+      \code{array-advanced-#1.js}
+    \end{minipage}
+  }
+  \newcommand{\ARRAY}[2]{
+    \only<#1>{\drawarray{#2}}
+  }
 
-\begin{frame}
-  \frametitle{Array Modification}
-  \begin{center}
-    \begin{tikzpicture}
-      \coordinate (lower left) at (-.5,-.5);
-      \coordinate (upper right) at (6,1.5);
-      \coordinate (upper left) at (lower left |- upper right);
-      \coordinate (lower right) at (lower left -| upper right);
+  \begin{frame}
+    \frametitle{Array Modification}
+    \begin{center}
+      \begin{tikzpicture}
+        \coordinate (lower left) at (-.5,-.5);
+        \coordinate (upper right) at (6,1.5);
+        \coordinate (upper left) at (lower left |- upper right);
+        \coordinate (lower right) at (lower left -| upper right);
 
-      \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
-      \ARRAY{2}{1,2,3}
-      \ARRAY{3}{1,2,3,4}
-      \ARRAY{4}{1,2,3}
-      \ARRAY{5}{0,1,2,3}
-    \end{tikzpicture}
-  \end{center}
+        \draw[use as bounding box,box] (lower left) rectangle (upper right);
+        \node[anchor=south] at ($ (upper left) !.5! (upper right) $) {\sc \Large \color{gray} voor};
+        \ARRAY{2}{1,2,3}
+        \ARRAY{3}{1,2,3,4}
+        \ARRAY{4}{1,2,3}
+        \ARRAY{5}{0,1,2,3}
+      \end{tikzpicture}
+    \end{center}
 
-  \begin{overprint}
-    \CODE{1}
-    \CODE{2}
-    \CODE{3}
-    \CODE{4}
-    \CODE{5}
-  \end{overprint}
+    \begin{overprint}
+      \CODE{1}
+      \CODE{2}
+      \CODE{3}
+      \CODE{4}
+      \CODE{5}
+    \end{overprint}
 
-  \begin{center}
-    \begin{tikzpicture}
-      \coordinate (lower left) at (-.5,-.5);
-      \coordinate (upper right) at (6,1.5);
-      \coordinate (upper left) at (lower left |- upper right);
-      \coordinate (lower right) at (lower left -| upper right);
+    \begin{center}
+      \begin{tikzpicture}
+        \coordinate (lower left) at (-.5,-.5);
+        \coordinate (upper right) at (6,1.5);
+        \coordinate (upper left) at (lower left |- upper right);
+        \coordinate (lower right) at (lower left -| upper right);
 
-      \draw[use as bounding box,box] (lower left) rectangle (upper right);
-      \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
-      \ARRAY{1}{1,2,3}
-      \ARRAY{2}{1,2,3,4}
-      \ARRAY{3}{1,2,3}
-      \ARRAY{4}{0,1,2,3}
-      \ARRAY{5}{1,2,3}
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
+        \draw[use as bounding box,box] (lower left) rectangle (upper right);
+        \node[anchor=north] at ($ (lower left) !.5! (lower right) $) {\sc \Large \color{gray} na};
+        \ARRAY{1}{1,2,3}
+        \ARRAY{2}{1,2,3,4}
+        \ARRAY{3}{1,2,3}
+        \ARRAY{4}{0,1,2,3}
+        \ARRAY{5}{1,2,3}
+      \end{tikzpicture}
+    \end{center}
+  \end{frame}
 }
 
 \begin{frame}
@@ -225,9 +273,7 @@
     \end{tikzpicture}
   \end{center}
 
-  \begin{overprint}
-    \code{concat.js}
-  \end{overprint}
+  \code{concat.js}
 
   \begin{center}
     \begin{tikzpicture}[scale=.9,transform shape]
@@ -262,5 +308,5 @@
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "slides"
+%%% TeX-master: "arrays"
 %%% End: 

@@ -1,2 +1,2 @@
-// Lees uit tweede en schrijf dit naar vierde
+// Kopieer tweede naar vierde plaats
 xs[3] = xs[1];

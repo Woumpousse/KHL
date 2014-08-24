@@ -106,39 +106,47 @@
 \end{frame}
 
 {
-\newcommand{\drawgraph}[1]{{
-  \let\activenode#1
-  \foreach[count=\i] \c in {5,25,29,85} { 
-    \pgfmathparse{\i*1.25}\let\x\pgfmathresult
-    \pgfmathparse{ifthenelse(equal(\i,\activenode),"selected node","node")}\let\s\pgfmathresult
-    \node[\s] (node \i) at (\x,0) {\c};
-  }
-  \foreach[count=\i] \c in {89,145,42,20,4,16,37,58} {
-    \pgfmathparse{int(\i+4)}\let\j\pgfmathresult
-    \pgfmathparse{180-360/8*(\i-1)}\let\angle\pgfmathresult
-    \pgfmathparse{ifthenelse(equal(\j,\activenode),"selected node","node")}\let\s\pgfmathresult
-    \node[\s,xshift=8.25cm] (node \j) at (\angle:2cm) {\c};
-  }
-  \foreach \i in {1,...,11} {
-    \pgfmathparse{int(\i+1)}\let\j\pgfmathresult
-    \draw[arrow] (node \i) to [bend left=30] (node \j);
-  }
-  \draw[arrow] (node 12) to [bend left=30] (node 5);
-}}
+  \newcommand{\drawgraph}[1]{{
+    \let\activenode#1
+    \foreach[count=\i] \c in {5,25,29,85} { 
+      \pgfmathparse{\i*1.25}\let\x\pgfmathresult
+      \pgfmathparse{ifthenelse(equal(\i,\activenode),"selected node","node")}\let\s\pgfmathresult
+      \node[\s] (node \i) at (\x,0) {\c};
+    }
+    \foreach[count=\i] \c in {89,145,42,20,4,16,37,58} {
+      \pgfmathparse{int(\i+4)}\let\j\pgfmathresult
+      \pgfmathparse{180-360/8*(\i-1)}\let\angle\pgfmathresult
+      \pgfmathparse{ifthenelse(equal(\j,\activenode),"selected node","node")}\let\s\pgfmathresult
+      \node[\s,xshift=8.25cm] (node \j) at (\angle:2cm) {\c};
+    }
+    \foreach \i in {1,...,11} {
+      \pgfmathparse{int(\i+1)}\let\j\pgfmathresult
+      \draw[arrow] (node \i) to [bend left=30] (node \j);
+    }
+    \draw[arrow] (node 12) to [bend left=30] (node 5);
+  }}
 
-\begin{frame}
-  \begin{center}
-    \begin{tikzpicture}[node/.style={ball color=blue!50,circle,minimum size=1cm},
-                        selected node/.style={node,ball color=green!50},
-                        arrow/.style={-latex}]
-      \foreach[count=\slideindex] \i in {1,...,12,5,6,...,12} {
-        \only<\slideindex>{
-          \drawgraph{\i}
+  \begin{frame}
+    \frametitle{Oneindige Lus Bij Ongelukkige Getallen}
+    \begin{center}
+      \begin{tikzpicture}[node/.style={ball color=blue!50,circle,minimum size=1cm},
+                          selected node/.style={node,ball color=green!50},
+                          arrow/.style={-latex}]
+        \path[use as bounding box] (0.5,-3) rectangle (11,3);
+
+        \foreach[count=\slideindex] \i in {1,...,12,5,6,...,12} {
+          \only<\slideindex>{
+            \drawgraph{\i}
+          }
         }
-      }
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
+
+        \only<20>{
+          \node[/khl/note,anchor=east] (note) at ($ (node 12) + (-1,0) $) {\parbox{3cm}{\raggedright Lus blijft maar rondjes draaien}};
+          \draw[/khl/note arrow] (note) -- (node 12);
+        }
+      \end{tikzpicture}
+    \end{center}
+  \end{frame}
 }
 
 \begin{frame}
@@ -148,49 +156,117 @@
 \end{frame}
 
 {
-\newcommand{\drawgraph}[1]{{
-  \let\activenode#1
-  \foreach[count=\i] \c in {5,25,29,85} { 
-    \pgfmathparse{\i*1.25}\let\x\pgfmathresult
-    \pgfmathparse{ifthenelse(\i<\activenode,"visited node",ifthenelse(equal(\i,\activenode),"selected node", "node"))}\let\s\pgfmathresult
-    \node[\s] (node \i) at (\x,0) {\c};
-  }
-  \foreach[count=\i] \c in {89,145,42,20,4,16,37,58} {
-    \pgfmathparse{int(\i+4)}\let\j\pgfmathresult
-    \pgfmathparse{180-360/8*(\i-1)}\let\angle\pgfmathresult
-    \pgfmathparse{ifthenelse(\j<\activenode,"visited node",ifthenelse(equal(\j,\activenode),"selected node", "node"))}\let\s\pgfmathresult
-    \node[\s,xshift=8.25cm] (node \j) at (\angle:2cm) {\c};
-  }
-  \foreach \i in {1,...,11} {
-    \pgfmathparse{int(\i+1)}\let\j\pgfmathresult
-    \draw[arrow] (node \i) to [bend left=30] (node \j);
-  }
-  \draw[arrow] (node 12) to [bend left=30] (node 5);
-}}
+  \newcommand{\drawgraph}[1]{{
+    \let\activenode#1
+    \foreach[count=\i] \c in {5,25,29,85} { 
+      \pgfmathparse{\i*1.25}\let\x\pgfmathresult
+      \pgfmathparse{ifthenelse(\i<\activenode,"visited node",ifthenelse(equal(\i,\activenode),"selected node", "node"))}\let\s\pgfmathresult
+      \node[\s] (node \i) at (\x,0) {\c};
+    }
+    \foreach[count=\i] \c in {89,145,42,20,4,16,37,58} {
+      \pgfmathparse{int(\i+4)}\let\j\pgfmathresult
+      \pgfmathparse{180-360/8*(\i-1)}\let\angle\pgfmathresult
+      \pgfmathparse{ifthenelse(\j<\activenode,"visited node",ifthenelse(equal(\j,\activenode),"selected node", "node"))}\let\s\pgfmathresult
+      \node[\s,xshift=8.25cm] (node \j) at (\angle:2cm) {\c};
+    }
+    \foreach \i in {1,...,11} {
+      \pgfmathparse{int(\i+1)}\let\j\pgfmathresult
+      \draw[arrow] (node \i) to [bend left=30] (node \j);
+    }
+    \draw[arrow] (node 12) to [bend left=30] (node 5);
+  }}
 
-\begin{frame}
-  \begin{center}
-    \begin{tikzpicture}[node/.style={ball color=blue!50,circle,minimum size=1cm},
-                        selected node/.style={node,ball color=green!50},
-                        visited node/.style={node,ball color=red!50},
-                        arrow/.style={-latex}]
-      \foreach[count=\slideindex] \i in {1,...,12} {
-        \only<\slideindex>{
-          \drawgraph{\i}
+  \begin{frame}
+    \frametitle{Bijhouden van Bezochte Getallen}
+    \begin{center}
+      \begin{tikzpicture}[node/.style={ball color=blue!50,circle,minimum size=1cm},
+                          selected node/.style={node,ball color=green!50},
+                          visited node/.style={node,ball color=red!50},
+                          arrow/.style={-latex}]
+        \path[use as bounding box] (0.5,-3) rectangle (11,3);
+
+        \foreach[count=\slideindex] \i in {1,...,12} {
+          \only<\slideindex>{
+            \drawgraph{\i}
+          }
         }
-      }
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
+
+        \only<2>{
+          \node[/khl/note,anchor=north] (note) at ($ (node 1) + (0,-1) $) {\parbox{3cm}{\raggedright We onthouden waar we reeds geweest zijn}};
+          \draw[/khl/note arrow] (note) -- (node 1);
+        }
+
+        \only<12>{
+          \node[/khl/note,anchor=east] (note) at ($ (node 12) + (-1,0) $) {\parbox{3cm}{\raggedright Algoritme stopt hier}};
+          \draw[/khl/note arrow] (note) -- (node 12);
+        }
+
+      \end{tikzpicture}
+    \end{center}
+  \end{frame}
 }
 
 \begin{frame}
-  \frametitle{Gebruik makend van verzamelingen}
+  \frametitle{Datastructuur Verzameling}
+  Stel dat deze functies zouden bestaan:
+  \begin{itemize}
+    \item {\tt nieuweVerzameling}: maakt een lege verzameling $\emptyset$ aan
+          \vskip2mm
+    \item {\tt elementVan}: kijkt of een element in de verzameling zit
+          \vskip2mm
+    \item {\tt voegToe}: voegt een element toe aan de verzameling
+  \end{itemize}
+
+  \vskip4mm
+  \structure{Voorbeeldgebruik}
+  \code{sets.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Gebruik Makend van Verzamelingen}
   \code[width=.9\linewidth]{with-set.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=south west] (note visited) at ($ (visited) + (-1,1) $) {
+        \parbox{5cm}{\raggedright Houdt bij welke getallen reeds bezocht werden}
+      };
+      \draw[/khl/note arrow] (note visited) -- (visited);
+    }
+
+    \only<3>{
+      \node[/khl/note,anchor=south west] (note element) at ($ (element) + (-1,1) $) {
+        \parbox{5cm}{\raggedright Lus stopt indien getal reeds bezocht werd}
+      };
+      \draw[/khl/note arrow] (note element) -- (element);
+    }
+
+    \only<4>{
+      \node[/khl/note,anchor=south west] (note insert) at ($ (insert) + (-1,1) $) {
+        \parbox{5cm}{\raggedright Registreert getal als bezocht zijnde}
+      };
+      \draw[/khl/note arrow] (note insert) -- (insert);
+    }
+
+    \only<5>{
+      \node[/khl/note,anchor=south west] (note result) at ($ (result) + (-1,1) $) {
+        \parbox{5cm}{\raggedright Indien {\tt n === 1} dan was het een gelukkig getal}
+      };
+      \draw[/khl/note arrow] (note result) -- (result);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Arrays}
+  \begin{center} \Large
+    Bestaan verzamelingen in JavaScript? \\[4mm]
+    \visible<2->{Nee\dots} \\[4mm]
+    \visible<3->{\dots maar wel iets gelijkaardigs!}
+  \end{center}
 \end{frame}
 
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "slides"
+%%% TeX-master: "arrays"
 %%% End: 

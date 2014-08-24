@@ -1,2 +1,2 @@
-// Schrijf 5 naar eerste positie in array
+// Schrijf 5 naar eerste positie
 xs[0] = 5;
