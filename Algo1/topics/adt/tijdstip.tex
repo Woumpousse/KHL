@@ -1,0 +1,187 @@
+\begin{frame}
+  \frametitle{Terug naar Tijdstip}
+  \begin{center} \Large
+    Wat willen we kunnen doen met tijdstippen?
+  \end{center}
+  \vskip5mm
+  \structure{Mogelijke operaties}
+  \begin{itemize}
+    \item Een tijdstip aanmaken \only<2>{$\rightarrow$ functie {\tt maakTijdstip}}
+    \item Uur opvragen \only<2>{$\rightarrow$ functie {\tt getUur}}
+    \item Minuten opvragen \only<2>{$\rightarrow$ functie {\tt getMinuten}}
+    \item Seconden opvragen \only<2>{$\rightarrow$ functie {\tt getSeconden}}
+    \item Tijdstippen vergelijken \only<2>{$\rightarrow$ functies {\tt vroeger}, {\tt later}, {\tt gelijk}}
+    \item Verschil uitrekenen (tijdsduur) \only<2>{$\rightarrow$ functie {\tt tijdsduur}}
+    \item \dots
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Basisoperaties}
+  \begin{center}
+    \begin{tabular}{rcl}
+      \tt getUur(maakTijdstip(8,30,0)) & = & \begin{overprint} \onslide<1> ? \onslide<2-> 8 \end{overprint} \\[2mm]
+      \tt getMinuten(maakTijdstip(8,30,0)) & = & \begin{overprint} \onslide<1-2> ? \onslide<3-> 30 \end{overprint} \\[2mm]
+      \tt getSeconden(maakTijdstip(8,30,0)) & = & \begin{overprint} \onslide<1-3> ? \onslide<4-> 0 \end{overprint} \\[4mm]
+      \visible<5->{
+        \tt getUur(maakTijdstip($h$,$m$,$s$)) & = & $h$ \\[2mm]
+        \tt getMinuten(maakTijdstip($h$,$m$,$s$)) & = & $m$ \\[2mm]
+        \tt getSeconden(maakTijdstip($h$,$m$,$s$)) & = & $s$
+      }
+    \end{tabular}
+  \end{center}
+  \visible<6->{
+    Functies {\tt maakTijdstip}, {\tt getUur}, {\tt getMinuten} en {\tt getSeconden} moeten ge\"implementeerd
+    worden zodat ze aan bovenstaande regels voldoen.
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Mogelijke Implementatie}
+  \code[width=.9\linewidth]{time-hms.js}
+  \begin{tikzpicture}[overlay,remember picture,arrow/.style={-latex,ultra thick,opacity=.5}]
+    \only<2>{
+      \draw[arrow] (hour index) to[bend left=30] (init hour);
+    }
+    \only<3>{
+      \draw[arrow] (minute index) to[bend left=30] (init min);
+    }
+    \only<4>{
+      \draw[arrow] (second index) to[bend right=30] (init sec);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Andere Operaties}
+  \code{time-earlier-hms.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Andere Operaties}
+  \code[width=.7\linewidth]{time-duration-hms.js}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Structuur}
+  \begin{center}
+    \begin{tikzpicture}[operation/.style={draw,fill=green!50},
+                        implementation/.style={draw,fill=red!50}]
+      \path[use as bounding box] (-5,-2) rectangle (6,3);
+
+      \path[fill=green!25] (-5,0) rectangle (6,3);
+      \path[fill=red!25] (-5,0) rectangle (6,-2);
+      \path[fill=blue!25] (-5,3) rectangle (6,4);
+      \node[operation] (maakTijd) at (-4,1) {\tt maakTijd};
+      \node[operation] (getUur) at (-2.5,2) {\tt getUur};
+      \node[operation] (getMinuten) at (-1,1) {\tt getMinuten};
+      \node[operation] (getSeconden) at (.5,2) {\tt getSeconden};
+      \node[operation] (vroeger) at (2,1) {\tt vroeger};
+      \node[operation] (later) at (3.5,2) {\tt later};
+      \node[operation] (tijdsduur) at (4.9,1) {\tt tijdsduur};
+      \draw[thick] (-5,0) -- (6,0)
+         node[midway,above] {\sc operaties}
+         node[midway,below] {\sc implementatie};
+      \draw[thick] (-5,3) -- (6,3)
+         node[midway,above] {\sc rest van het programma};
+      \node[implementation] (array) at (0.5, -1) {{\tt [uur, minuten, seconden]}};
+
+      \only<2>{
+        \foreach \c in {maakTijd,getUur,getMinuten,getSeconden,vroeger,later,tijdsduur} {
+          \draw[-latex,blue] (.5,3.5) -- (\c);
+          \draw[-latex,darkgreen] (\c) -- (array);
+        }
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Alternatieve Implementatie}
+  \begin{center}
+    \begin{tikzpicture}[operation/.style={draw,fill=green!50},
+                        implementation/.style={draw,fill=red!50}]
+      \path[use as bounding box] (-5,-2) rectangle (6,3);
+
+      \path[fill=green!25] (-5,0) rectangle (6,3);
+      \path[fill=red!25] (-5,0) rectangle (6,-2);
+      \path[fill=blue!25] (-5,3) rectangle (6,4);
+      \node[operation] (maakTijd) at (-4,1) {\tt maakTijd};
+      \node[operation] (getUur) at (-2.5,2) {\tt getUur};
+      \node[operation] (getMinuten) at (-1,1) {\tt getMinuten};
+      \node[operation] (getSeconden) at (.5,2) {\tt getSeconden};
+      \node[operation] (vroeger) at (2,1) {\tt vroeger};
+      \node[operation] (later) at (3.5,2) {\tt later};
+      \node[operation] (tijdsduur) at (4.9,1) {\tt tijdsduur};
+      \draw[thick] (-5,0) -- (6,0)
+         node[midway,above] {\sc operaties}
+         node[midway,below] {\sc implementatie};
+      \draw[thick] (-5,3) -- (6,3)
+         node[midway,above] {\sc rest van het programma};
+      \node[cross out,implementation] (array) at (0.5, -1) {{\tt [uur, minuten, seconden]}};
+      \node[implementation] (array) at (0.5, -1.5) {{\tt [seconden, minuten, uur]}};
+
+      \only<2>{
+        \foreach \c in {maakTijd,getUur,getMinuten,getSeconden,vroeger,later,tijdsduur} {
+          \node[fill=red,opacity=.75,text opacity=1,rotate=15] (note \c) at (\c) {\tiny moet aangepast worden};
+        }
+        \node[fill=green,opacity=.75,text opacity=1] at (0.5,3.5) {\tiny moet niet aangepast worden};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Betere Structuur}
+  \begin{center}
+    \begin{tikzpicture}[operation/.style={draw,fill=green!50},
+                        implementation/.style={draw,fill=red!50}]
+      \path[use as bounding box] (-5,-2) rectangle (6,3);
+
+      \path[fill=green!25] (-5,0) rectangle (6,1.7);
+      \path[fill=darkgreen!50] (-5,1.5) rectangle (6,3);
+      \path[fill=red!25] (-5,0) rectangle (6,-2);
+      \path[fill=blue!25] (-5,3) rectangle (6,4);
+      \node[operation] (maakTijd) at (-4,.8) {\tt maakTijd};
+      \node[operation] (getUur) at (-1,.8) {\tt getUur};
+      \node[operation] (getMinuten) at (2,.8) {\tt getMinuten};
+      \node[operation] (getSeconden) at (4.75,.8) {\tt\small getSeconden};
+      \node[operation] (vroeger) at (-2.5,2.4) {\tt vroeger};
+      \node[operation] (later) at (0.5,2.4) {\tt later};
+      \node[operation] (tijdsduur) at (3.5,2.4) {\tt tijdsduur};
+      \draw[thick] (-5,0) -- (6,0)
+         node[midway,above] {\sc basisoperaties}
+         node[midway,below] {\sc implementatie};
+      \draw[thick] (-5,1.5) -- (6,1.5)
+         node[midway,above] {\sc afgeleide operaties};
+      \draw[thick] (-5,3) -- (6,3)
+         node[midway,above] {\sc rest van het programma};
+      \node[implementation] (array) at (0.5, -1) {{\tt [seconden, minuten, uur]}};
+
+      \only<2>{
+        \foreach \c in {maakTijd,getUur,getMinuten,getSeconden} {
+          \draw[-latex,darkgreen] (\c) -- (array);
+          \draw[-latex,blue] (.5,3.5) -- (\c);
+          \foreach \d in {vroeger,later,tijdsduur} {
+            \draw[-latex,red] (\d) -- (\c);
+          }
+        }
+        \foreach \d in {vroeger,later,tijdsduur} {
+          \draw[-latex,blue] (.5,3.5) -- (\d);
+        }
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "adt"
+%%% End: 
