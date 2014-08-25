@@ -1,0 +1,262 @@
+\documentclass{../khlslides}
+
+\usetikzlibrary{arrows.meta}
+
+\title[Fundamenten]{Fundamenten}
+\author{Fr\'ed\'eric Vogels}
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wat is een Computer?}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={fill=blue!60,minimum size=1cm,opacity=.75,text opacity=1,drop shadow},
+                        arc/.style={blue!75,ultra thick},
+                        -->/.style={-latex,arc},
+                        <--/.style={latex-,arc},
+                        <-->/.style={latex-latex,arc}
+                       ]
+      
+      \only<1>{
+        \node {\includegraphics[width=10cm]{cpu.jpg}};
+      }
+
+      \only<2>{
+        \node[opacity=.5] {\includegraphics[width=10cm]{cpu.jpg}};
+
+        \foreach[count=\i] \c in {toetsenbord,muis,netwerk,geluidskaart,gpu,printer} {
+          \pgfmathparse{\i*60}\let\angle\pgfmathresult
+          \node[node] (\c) at (\angle:3.5cm) {\c};
+        }
+
+        \node[node,minimum width=2cm] (cpu) {\sc\Huge cpu};
+
+        \draw[-->] (muis) -- (cpu);
+        \draw[-->] (toetsenbord) -- (cpu);
+        \draw[<--] (printer) -- (cpu);
+        \draw[<--] (gpu) -- (cpu);
+        \draw[<--] (geluidskaart) -- (cpu);
+        \draw[<-->] (netwerk) -- (cpu);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wat is een Computer?}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={fill=blue!60,minimum size=1cm,opacity=.75,text opacity=1,drop shadow},
+                        arc/.style={blue!75,ultra thick,-latex},]
+      \node[node] (cpu) {\sc\Huge cpu};
+      \draw[arc] ($ (cpu.west) + (-3,0) $) -- (cpu.west)
+                 node[midway,above] {input}
+                 node[midway,below] {\color{black}\tiny\tt10110110110101111};
+      \draw[arc] (cpu.east) -- ($ (cpu.east) + (3,0) $)
+                 node[midway,above] {output}
+                 node[midway,below] {\color{black}\tiny\tt00101101110101010};
+
+      \node[/khl/note] (note) at ($ (cpu.south) + (0,-2) $) {Veredelde rekenmachine};
+      \draw[/khl/note arrow] (note) -- (cpu);      
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cijfertjes}
+  \begin{center} \small
+    \begin{tabular}{llll}
+      Jaar & Platform & \$/GFLOP (met inflatie) & GFLOP \\
+      \toprule
+      1961 & \NODE{IBM 1620}{ibm 1620} & 8,300,000,000,000 \\
+      1984 & Cray X-MP/48 & 42,780,000 & 0.8 \\
+      2000 & Playstation 2 & 63.2 & 6.2 \\
+      2006 & Playstation 3 & 2.35 & 230.4 \\
+      2011 & HPU4Science & 1.80 & 20,000 \\
+      2013 & Playstation 4 & 0.22 & 1840 \\
+      2014 & Sempron 145 + GTX 760 & 0.16 & 6771 \\
+    \end{tabular}
+  \end{center}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=south] (note ibm 1620) at ($ (ibm 1620) + (1,1) $) {\parbox{6cm}{\raggedright Voerde 50 vermenigvuldigingen per seconden uit!}};
+      \draw[/khl/note arrow] (note ibm 1620) -- (ibm 1620);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operaties op Getallen}
+  \begin{center}
+    \begin{tabular}{cl}
+      {\bf Operator} & {\bf Beschrijving} \\
+      \toprule
+      {\tt a + b} & Optelling \\
+      {\tt a - b} & Aftrekking \\
+      {\tt a * b} & Vermenigvuldiging \\
+      {\tt a / b} & Deling \\
+      {\tt a \% b} & Rest bij deling \\
+      {\tt Math.pow(a, b)} & Machtsverheffing \\
+      {\tt Math.sqrt(a)} & Vierkantswortel \\[2mm]
+      {\tt \^{}} & \alert{Niet} de machtsverheffing \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Expressies}
+  \begin{itemize}
+    \item Expressies worden stap voor stap ge\"evalueerd
+    \item Expressies leiden uiteindelijk tot een waarde
+  \end{itemize}
+
+  \vskip5mm
+  \structure{Voorbeeld van stapsgewijze evaluatie}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \path[fill=green!25] (-4,-1) rectangle (4, 1);
+      \path[fill=blue!25] (-4,-1) rectangle (4, -2);
+
+      \visible<1>{
+        \node {$\displaystyle \frac{ (5+3) \times (\sqrt9-1)}{4^2}$};
+        \node at (0,-1.5) {\tt ((5+3)*(Math.sqrt(9)-1))/Math.pow(4,2)};
+      }      
+
+      \visible<2>{
+        \node {$\displaystyle \frac{ 8 \times (\sqrt9-1)}{4^2}$};
+        \node at (0,-1.5) {\tt (8*(Math.sqrt(9)-1))/Math.pow(4,2)};
+      }      
+
+      \visible<3>{
+        \node {$\displaystyle \frac{ 8 \times (3-1)}{4^2}$};
+        \node at (0,-1.5) {\tt (8*(3-1))/Math.pow(4,2)};
+      }      
+
+      \visible<4>{
+        \node {$\displaystyle \frac{8\times 2}{4^2}$};
+        \node at (0,-1.5) {\tt (8*2)/Math.pow(4,2)};
+      }      
+
+      \visible<5>{
+        \node {$\displaystyle \frac{16}{4^2}$};
+        \node at (0,-1.5) {\tt 16/Math.pow(4,2)};
+      }      
+
+      \visible<6>{
+        \node {$\displaystyle \frac{16}{16}$};
+        \node at (0,-1.5) {\tt 16/16};
+      }      
+
+      \visible<7>{
+        \node {$\displaystyle 1$};
+        \node at (0,-1.5) {\tt 1};
+      }      
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Probleem}
+  \[
+    a \cdot x^2 + b \cdot x + c = 0
+  \]
+  heeft als oplossingen
+  \[
+    x_1 = \frac{-b-\sqrt{b^2-4 \cdot a\cdot c}}{2 \cdot a}
+    \qquad
+    x_2 = \frac{-b+\sqrt{b^2-4 \cdot a\cdot c}}{2 \cdot a}
+  \]
+  \vskip4mm
+  \begin{itemize}
+    \item Vrij onoverzichtelijk
+    \item Deelexpressie $\sqrt{b^2-4 \cdot a\cdot c}$ wordt $2\times$ uitgevoerd
+  \end{itemize}
+\end{frame}
+
+{
+  \newcommand{\STEP}[1]{
+    \onslide<#1>
+    \code[width=.95\linewidth,font size=\small]{quadratic#1.js}
+  }
+  \begin{frame}
+    \frametitle{Variabelen}
+    \structure{Variabelen}
+    \begin{itemize}
+      \item We kunnen resultaten bewaren in \emph{variabelen}
+      \item Variabelen krijgen een naam mee
+      \item Leesbaarder \& effici\"enter
+    \end{itemize}
+    \vskip4mm
+    \structure{Voorbeeld}
+    \[ x^2+x-6=0 \]
+    \begin{overprint}
+      \STEP1
+      \STEP2
+      \STEP3
+      \STEP4
+      \STEP5
+      \STEP6
+      \STEP7
+      \STEP8
+      \STEP9
+      \STEP{10}
+      \STEP{11}
+      \STEP{12}
+      \STEP{13}
+      \STEP{14}
+      \STEP{15}
+      \STEP{16}
+      \STEP{17}
+      \STEP{18}
+      \STEP{19}
+      \STEP{20}
+      \STEP{21}
+      \STEP{22}
+    \end{overprint}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Basiselementen van Algoritmes}
+  Algoritmes bestaat uit een reeks basiselementen
+  \begin{itemize}
+    \item Basisberekeningen {\tt +}, {\tt -}, {\tt *}, {\tt /}, \dots
+    \item Sequentie: berekeningen die elkaar opvolgen
+    \item Selectie: berekeningen overslaan naargelang een conditie
+    \item Iteratie: herhalen van bepaalde berekeningen
+  \end{itemize}
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Vergelijken van Getallen}
+%   \begin{center}
+%     \begin{tabular}{cl}
+%       {\bf Operator} & {\bf Beschrijving} \\
+%       \toprule
+%       {\tt ===} & Gelijk aan \\
+%       {\tt !==} & Niet gelijk aan \\
+%       {\tt <} & Kleiner dan \\
+%       {\tt <=} & Kleiner dan of gelijk aan \\
+%       {\tt >} & Groter dan \\
+%       {\tt >=} & Groter dan of gelijk aan \\
+%     \end{tabular}
+%   \end{center}
+% \end{frame}
+
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
