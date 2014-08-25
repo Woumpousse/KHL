@@ -71,7 +71,7 @@
   \frametitle{Cijfertjes}
   \begin{center} \small
     \begin{tabular}{llll}
-      Jaar & Platform & \$/GFLOP (met inflatie) & GFLOP \\
+      Jaar & Platform & \$/GFLOP & GFLOP \\
       \toprule
       1961 & \NODE{IBM 1620}{ibm 1620} & 8,300,000,000,000 \\
       1984 & Cray X-MP/48 & 42,780,000 & 0.8 \\
@@ -224,31 +224,220 @@
 
 \begin{frame}
   \frametitle{Basiselementen van Algoritmes}
-  Algoritmes bestaat uit een reeks basiselementen
+  Algoritmes bestaat uit een reeks basiselementen:
+  \vskip2mm
   \begin{itemize}
-    \item Basisberekeningen {\tt +}, {\tt -}, {\tt *}, {\tt /}, \dots
-    \item Sequentie: berekeningen die elkaar opvolgen
-    \item Selectie: berekeningen overslaan naargelang een conditie
+    \item Basisberekeningen {\tt +}, {\tt -}, {\tt *}, {\tt /}, \dots \vskip2mm
+    \item Sequentie: berekeningen die elkaar opvolgen \vskip2mm
+    \item Selectie: berekeningen overslaan naargelang een conditie \vskip2mm
     \item Iteratie: herhalen van bepaalde berekeningen
   \end{itemize}
 \end{frame}
 
 
-% \begin{frame}
-%   \frametitle{Vergelijken van Getallen}
-%   \begin{center}
-%     \begin{tabular}{cl}
-%       {\bf Operator} & {\bf Beschrijving} \\
-%       \toprule
-%       {\tt ===} & Gelijk aan \\
-%       {\tt !==} & Niet gelijk aan \\
-%       {\tt <} & Kleiner dan \\
-%       {\tt <=} & Kleiner dan of gelijk aan \\
-%       {\tt >} & Groter dan \\
-%       {\tt >=} & Groter dan of gelijk aan \\
-%     \end{tabular}
-%   \end{center}
-% \end{frame}
+\begin{frame}
+  \frametitle{Vergelijken van Getallen}
+  \begin{center}
+    \begin{tabular}{cl}
+      {\bf Operator} & {\bf Beschrijving} \\
+      \toprule
+      {\tt ===} & Gelijk aan \\
+      {\tt !==} & Niet gelijk aan \\
+      {\tt <} & Kleiner dan \\
+      {\tt <=} & Kleiner dan of gelijk aan \\
+      {\tt >} & Groter dan \\
+      {\tt >=} & Groter dan of gelijk aan \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+
+{
+  \newcommand{\STEP}[1]{
+    \onslide<#1>
+    \code[width=.3\linewidth,font size=\small]{comparison#1.js}
+  }
+  \begin{frame}
+    \frametitle{Booleans}
+    \structure{Voorbeeld}
+    \vskip2mm
+    \begin{overprint}
+      \STEP1
+      \STEP2
+      \STEP3
+      \STEP4
+      \STEP5
+      \STEP6
+    \end{overprint}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Booleans}
+  \begin{itemize}
+    \item Booleans drukken waarheidswaarden uit
+          \begin{itemize}
+            \item {\tt true}
+            \item {\tt false}
+          \end{itemize}
+    \item Zijn het resultaat van vergelijkingen {\tt ===}, {\tt !==}, {\tt <}, \dots
+    \item Hebben hun eigen operatoren
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{cl}
+      {\bf Operator} & {\bf Beschrijving} \\
+      \toprule
+      {\tt \&\&} & Conjunctie (en) \\
+      {\tt ||} & Disjunctie (of) \\
+      {\tt !} & Negatie (niet) \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+{
+  \newcommand{\STEP}[1]{
+    \onslide<#1>
+    \code[width=.55\linewidth,font size=\small]{conj-example#1.js}
+  }
+
+  \begin{frame}
+    \frametitle{Conjunctie (en)}
+    \begin{center}
+      \begin{tabular}{ccc}
+        {\tt\bfseries a} & {\tt\bfseries b} & {\tt\bfseries a \&\& b} \\
+        \toprule
+        {\tt false} & {\tt false} & {\tt false} \\
+        {\tt false} & {\tt true} & {\tt false} \\
+        {\tt true} & {\tt false} & {\tt false} \\
+        {\tt true} & {\tt true} & {\tt true} \\
+      \end{tabular}
+    \end{center}
+
+    \vskip4mm
+
+    \structure{Voorbeeld}
+    \begin{overprint}
+      \STEP1
+      \STEP2
+      \STEP3
+      \STEP4
+      \STEP5
+      \STEP6
+    \end{overprint}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Andere Logische Operatoren}
+  \structure{Disjunctie (of)}
+  \begin{center}
+    \begin{tabular}{ccc}
+      {\tt\bfseries a} & {\tt\bfseries b} & {\tt\bfseries a || b} \\
+      \toprule
+      {\tt false} & {\tt false} & {\tt false} \\
+      {\tt false} & {\tt true} & {\tt true} \\
+      {\tt true} & {\tt false} & {\tt true} \\
+      {\tt true} & {\tt true} & {\tt true} \\
+    \end{tabular}
+  \end{center}
+
+  \vskip5mm
+
+  \structure{Negatie (niet)}
+  \begin{center}
+    \begin{tabular}{ccc}
+      {\tt\bfseries a} & {\tt\bfseries !a} \\
+      \toprule
+      {\tt false} & {\tt true} \\
+      {\tt true} & {\tt false} \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+{
+  \newcommand{\STEP}[1]{
+    \onslide<#1>
+    \code[width=.3\linewidth,font size=\small]{ltlt#1.js}
+  }
+
+  \begin{frame}
+    \frametitle{Veelgemaakte Fout}
+    \structure{Tot wat evalueert de volgende expressie?}
+    \vskip4mm
+    \begin{overprint}
+      \STEP1
+      \STEP2
+
+      \onslide<3->
+      \code[width=.3\linewidth,font size=\small]{ltlt3.js}
+    \end{overprint}
+    \visible<4>{
+      \begin{itemize}
+        \item Typefout!
+        \item Men kan een boolean niet vergelijken ({\tt <}) met een getal
+        \item Juiste manier: {\tt 3 < 5 \&\& 5 < 8}
+        \item Idem voor andere operatoren
+              \begin{itemize}
+                \item {\tt a === b \&\& b === c}
+                \item {\tt a > b \&\& b > c}
+                \item \dots
+              \end{itemize}
+      \end{itemize}
+    }
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Shortcircuiting}
+  \structure{Tot wat evalueert de volgende expressie?}
+  \vskip4mm
+  \begin{overprint}
+    \onslide<1>
+    \code[width=.41\linewidth,font size=\small]{shortcircuit1.js}
+
+    \onslide<2>
+    \code[width=.41\linewidth,font size=\small]{shortcircuit2.js}
+
+    \onslide<3>
+    \code[width=.41\linewidth,font size=\small]{shortcircuit3.js}
+  \end{overprint}
+  \begin{itemize}
+    \item Problematische rechteroperand
+          \begin{itemize}
+            \item Deling 0 door 0: mag niet
+            \item Vergelijking tussen getal en 
+          \end{itemize}
+    \item Shortcircuiting
+          \begin{itemize}
+            \item {\tt false \&\& b} zal altijd {\tt false} opleveren
+            \item Moeite wordt niet gedaan om rechteroperand te evalueren
+          \end{itemize}
+  \end{itemize}
+  \visible<2->{
+    \begin{center}
+      \begin{tabular}{ccc}
+        {\tt\bfseries a} & {\tt\bfseries b} & {\tt\bfseries a \&\& b} \\
+        \toprule
+        {\tt false} & {\tt false} & {\tt false} \\
+        {\tt false} & {\tt true} & {\tt false} \\
+        {\tt true} & {\tt false} & {\tt false} \\
+        {\tt true} & {\tt true} & {\tt true} \\
+      \end{tabular}
+    \end{center}
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Shortcircuiting}
+  \begin{itemize}
+    \item Minimaal aantal operanden wordt ge\"evalueerd
+    \item {\tt true || b} leidt meteen tot {\tt true}
+    \item {\tt false \&\& b} leidt meteen tot {\tt false}
+    \item Shortcircuiting \emph{enkel} met {\tt \&\&} en {\tt ||}
+    \item {\tt 0 * (0/0)} crasht dus wel!
+  \end{itemize}
+\end{frame}
 
 
 
