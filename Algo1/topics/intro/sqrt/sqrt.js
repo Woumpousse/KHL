@@ -3,11 +3,10 @@ function sqrt(n, precision)
     var acc = [];
     var a = 0;
     var b = n;
-    var c;
+    var c = (a + b) / 2;
 
-    while ( b - a > precision )
+    while ( Math.abs(c * c - n) > precision )
     {
-        c = (a + b) / 2;
         acc.push( [a, c, b] );
 
         if ( c * c > n )
@@ -18,6 +17,8 @@ function sqrt(n, precision)
         {
             a = c;
         }
+
+        c = (a + b) / 2;
     }
 
     acc.push( [a, c, b] );
