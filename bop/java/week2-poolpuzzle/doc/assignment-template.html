@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gebruiken van Objecten vanuit een main methode</title>
+    <title>Gebruiken van twee objecten uit een klasse vanuit een main methode</title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
     <script src="khl.js"></script>
@@ -14,41 +14,73 @@
   </head>
   <body>
     <div id="contents">
-      <h1>Vervolledig de puzzel</h1>
+       <h1>Instantievariabelen en opvraagmethodes</h1>
       <section>
-        <h2>Opgave</h2>
-        <p>
-      	Selecteer de juiste instructie om Java code te krijgen die compileert en die volgende uitvoer geeft:
-        #{pool_puzzle.ul_pool}
-	</p>
-        <p> TODO: hoe kunnen we sysouts weergeven? </p>
-	<ul>
-          <li>
-            helloooo..
-          </li>
- <li>
-            helloooo..
-          </li>
- <li>
-            helloooo..
-          </li>
- <li>
-            helloooo..
-          </li>
- <li>
-            24
-          </li>
-        </ul>
+        <div data-question="select-correctly">
+          <h2>Vul de types van de instantievariabelen in de klasse Persoon aan</h2>
+           <div class="hint"><p>
+        	Mogelijkheden:
+           </p>
+           #{fill_in_types_persoon.ul_pool}</div>
+            <pre>
+              #<{fill_in_types_persoon.code}
+            </pre>
+	</div>
+      </section>
 
-	
+     <section>
+        <div data-question="select-correctly">
+          <h2>Vervolledig de getters van de klasse Persoon</h2>
+           <div class="hint"><p>
+                Mogelijkheden:
+           </p>
+           #{fill_in_types_getters_persoon.ul_pool}</div>
+            <pre>
+              #<{fill_in_types_getters_persoon.code}
+            </pre>
+        </div>
+      </section>
+
+
+      <h1>Java code lezen</h1>
+      <section>
 	<div data-question="select-correctly">
-	 <p>
-            TODO: wat is de data-question waarde voor select from list?
-	    Selecteer de correcte instructies.
-          </p>
-	 <pre>
-            #<{pool_puzzle.code}>
-          </pre>
+	  <h2>Vervolledig VoerUit die de klasse Echo gebruikt</h2>
+        <div class="left">
+	<p>
+        Gegeven de onderstaande uitvoer:
+        </p>
+        <pre class="console">
+%java VoerUit
+helloooo..
+helloooo..
+helloooo..
+helloooo..
+24
+        </pre>
+	</div>
+	<div class="right">
+	<p>
+	Gegeven de instructies:
+	</p>
+	#{pool_puzzle.ul_pool}
+	</div>
+	<div class="endcolumns" /> 
+	<p> Vervolledig de code door te kiezen uit de instructies zodat je dezelfde uitvoer krijgt.</p>
+	<pre>
+            #<{pool_puzzle.code}
+        </pre>
+      </section>
+
+      <section>
+        <div data-question="select-correctly">
+          <h2>Wie ben ik?</h2>
+        <p>
+        Kies uit klasse, class, java, methode, object of instantie variabele.
+	</p>
+        <pre>
+            #<{who_am_i.code}
+        </pre>
       </section>
     </div>
   </body>
