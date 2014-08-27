@@ -1,2 +1,2 @@
-// Write something to first position
+// Schrijf 5 naar eerste positie
 xs[0] = 5;

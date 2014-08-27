@@ -1,0 +1,307 @@
+\begin{frame}
+  \frametitle{Tijdstip}
+  \structure{Probleemstelling} \\
+  Een \emph{tijdstip} wordt gekenmerkt door
+  \begin{itemize}
+    \item Uur: een getal tussen 0 en 23
+    \item Minuten: een getal tussen 0 en 59
+    \item Seconden: een getal tussen 0 en 59
+  \end{itemize}
+  \vskip4mm
+  \structure{Vraag} \\
+  Hoe stellen we een tijdstip voor in JavaScript?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Tijdstip}
+  \begin{center}
+    \begin{tikzpicture}
+      \drawarray{14,33,52}
+      \node (tijdstip) at (-2,1) {tijdstip};
+      \draw[->] (tijdstip) to [bend right=30] (cell 1);
+    \end{tikzpicture}
+  \end{center}
+  \vskip5mm
+  \code[width=.55\linewidth]{time.js}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Datum}
+  \structure{Probleemstelling} \\
+  Een \emph{datum} wordt gekenmerkt door
+  \begin{itemize}
+    \item Dag: een getal tussen 1 en 31
+    \item Maand: een getal tussen 1 en 12
+    \item Jaar: een getal
+  \end{itemize}
+  \vskip4mm
+  \structure{Vraag} \\
+  Hoe stellen we een datum voor in JavaScript?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Datum}
+  \begin{center}
+    \begin{tikzpicture}
+      \drawarray{18,12,1980}
+      \node (datum) at (-2,1) {datum};
+      \draw[->] (datum) to [bend right=30] (cell 1);
+    \end{tikzpicture}
+  \end{center}
+  \vskip5mm
+  \code[width=.6\linewidth]{date.js}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Tijdsinterval}
+  \structure{Probleemstelling} \\
+  Een \emph{tijdsinterval} wordt gekenmerkt door
+  \begin{itemize}
+    \item Dag: een datum
+    \item Beginuur: een tijdstip
+    \item Einduur: een tijdstip
+  \end{itemize}
+  \vskip4mm
+  \structure{Vraag} \\
+  Hoe stellen we een datum tijdsinterval voor in JavaScript?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Tijdsinterval}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{scope}
+        \drawarray[cell name=date]{26,9,2014}
+      \end{scope}
+
+      \begin{scope}[yshift=-2cm]
+        \drawarray[cell name=start]{9,0,0}
+      \end{scope}
+
+      \begin{scope}[yshift=-4cm]
+        \drawarray[cell name=end]{10,30,0}
+      \end{scope}
+
+      \begin{scope}[xshift=-3cm,yshift=-1cm]
+        \drawvarray[cell name=interval]{,,}
+      \end{scope}
+
+      \draw[->] (interval 1.center) -- (date 1);
+      \draw[->] (interval 2.center) -- (start 1);
+      \draw[->] (interval 3.center) -- (end 1);
+
+      \node (var) at (-5,0) {interval};
+      \draw[->] (var) to [bend right=30] (interval 1);
+    \end{tikzpicture}
+  \end{center}
+  \vskip5mm
+  \code[width=.65\linewidth]{interval.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Les}
+  \structure{Probleemstelling} \\
+  Een \emph{les} wordt gekenmerkt door
+  \begin{itemize}
+    \item Een vak: een string
+    \item Een lokaal: een string
+    \item Een tijdsinterval
+  \end{itemize}
+  \vskip4mm
+  \structure{Vraag} \\
+  Hoe stellen we een les voor in JavaScript?
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Les}
+  \code[width=.8\linewidth]{lesson.js}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Student}
+  \structure{Probleemstelling} \\
+  Een \emph{student} wordt gekenmerkt door
+  \begin{itemize}
+    \item Een naam: een string
+    \item Een r-nummer: een string
+    \item Een uurrooster: een lijst lessen
+  \end{itemize}
+  \vskip4mm
+  \structure{Vraag} \\
+  Hoe stellen we een student voor in JavaScript?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Student}
+  \code[width=.8\linewidth]{student.js}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Enzovoort}
+  Een \emph{reeks} wordt gekenmerkt door
+  \begin{itemize}
+    \item Een naam: een string
+    \item Een lijst studenten
+  \end{itemize}
+
+  \vskip5mm
+
+  Een \emph{studierichting} wordt gekenmerkt door
+  \begin{itemize}
+    \item Een naam: een string
+    \item Een lijst reeksen
+  \end{itemize}
+
+  \vskip5mm
+
+  Een \emph{hogeschool} wordt gekenmerkt door
+  \begin{itemize}
+    \item Een naam: een string
+    \item Een lijst studierichtingen
+  \end{itemize}
+
+  \vskip5mm
+
+  Een \emph{associatie} wordt gekenmerkt door \dots
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Zoek op!}
+  Hoe lang duurt de eerste les van de 14de student van reeks 5
+  in de 8ste studierichting van deze hogeschool?
+
+  \vskip10mm
+
+  \visible<2>{
+    \code[width=.9\linewidth]{select.js}
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Problemen}
+  \begin{center} 
+    {\Huge Probleem \#1} \\[4mm]
+    {\Large Verwarrende indices}
+  \end{center}
+  \begin{itemize}
+    \item Onleesbaar: geen duidelijke informatie
+    \item Zeer gemakkelijk om fouten te maken
+    \item Werken met namen zou gemakkelijker zijn
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Dubbelzinnige Datastructuren}
+  Beschouw de array
+  \begin{center}
+    \begin{tikzpicture}
+      \drawarray{12,3,52}
+    \end{tikzpicture}
+  \end{center}
+  Wat is dit?
+  \begin{itemize}
+    \item Is het de datum 12 maart 52?
+    \item Is het het tijdstip 12:3:52?
+    \item Zijn het 3D-co\"ordinaten $(12,3,52)$?
+    \item Is het gewoon een lijst getallen?
+    \item Of nog iets anders?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Problemen}
+  \begin{center} 
+    {\Huge Probleem \#2} \\[4mm]
+    {\Large Dubbelzinnige data}
+  \end{center}
+  \begin{itemize}
+    \item Dezelfde data kan meerdere dingen voorstellen
+    \item Computer maakt het verschil niet
+    \item Zou het vectorieel product van datums uitrekenen
+    \item We willen \emph{metadata}
+          \begin{itemize}
+            \item Een etiket op data
+            \item ``Dit is een datum'' of ``Dit is een tijdstip''
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Fragiliteit}
+  \structure{Probleem} \\
+  We willen van elke hogeschool ook het adres bijhouden.
+
+  \vskip4mm
+  \begin{center}
+    \begin{minipage}{.7\linewidth}
+      Een \emph{hogeschool} wordt gekenmerkt door
+      \begin{itemize}
+        \item Een naam: een string
+        \item \alert{Een adres}
+        \item Een lijst studierichtingen
+      \end{itemize}
+    \end{minipage}
+  \end{center}
+
+  \vskip4mm
+  \structure{Gevolgen}
+  \begin{itemize}
+    \item Code moet overal aangepast worden
+    \item Kan niet automatisch gebeuren
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Problemen}
+  \begin{center} 
+    {\Huge Probleem \#3} \\[4mm]
+    {\Large Fragiel programma}
+  \end{center}
+  \begin{itemize}
+    \item Gebrek aan modulariteit
+          \begin{itemize}
+            \item Kleine wijzingen hebben grote gevolgen
+            \item Beter: wijzigingen leiden altijd kleine gevolgen
+          \end{itemize}
+    \item Mogelijke wijzigingen
+          \begin{itemize}
+            \item Andere voorstelling (datum omkeren naar jaar, maand, dag)
+            \item Uitbreiden (adres toevoegen aan hogeschool)
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Stand van Zaken}
+  \structure{Problemen}
+  \begin{itemize}
+    \item Leesbaarheid
+    \item Metadata
+    \item Modulariteit
+  \end{itemize}
+  \vskip4mm
+  \structure{Oplossing?}
+  \begin{itemize}
+    \visible<2>{\item ADTs: Abstract Data Types}
+  \end{itemize}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "adt"
+%%% End: 

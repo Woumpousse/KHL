@@ -1,0 +1,55 @@
+\documentclass{../khlslides}
+
+\usetikzlibrary{arrows.meta}
+
+\title[Arrays]{Arrays}
+\author{Fr\'ed\'eric Vogels}
+
+
+
+\newcommand{\drawarray}[1]{
+  \foreach[count=\i] \val in {#1} {
+    \pgfmathparse{int(\i-1)}\let\idx\pgfmathresult
+    \pgfmathparse{(\i-1)*1.2}\let\x\pgfmathresult
+    \node[anchor=south west,cell] (cell \i) at (\x, 0) {\val};
+    \node[index] at (cell \i.north west) {\tiny\idx};
+  }
+}
+
+\newcommand{\drawheterogeneousarray}[1]{
+  \foreach[count=\i] \val/\cell in {#1} {
+    \pgfmathparse{int(\i-1)}\let\idx\pgfmathresult
+    \pgfmathparse{(\i-1)*1.2}\let\x\pgfmathresult
+    \node[anchor=south west,\cell] (cell \i) at (\x, 0) {\val};
+    \node[index] at (cell \i.north west) {\tiny\idx};
+  }
+}
+
+\pgfkeys{/tikz/.cd,
+         cell/.style={drop shadow,fill=blue!50,minimum size=.8cm},
+         cell/.style={drop shadow,fill=blue!50,minimum size=.8cm},
+         highlighted cell/.style={drop shadow,fill=green!50,minimum size=.8cm},
+         index/.style={fill=white,draw},
+         box/.style={fill=red!10,drop shadow}}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\input{intro.tex}
+\input{reference.tex}
+\input{exercises.tex}
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

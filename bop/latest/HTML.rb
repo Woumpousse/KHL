@@ -83,4 +83,7 @@ module HTML
     end
   end
 
+  def HTML::inputbox(solution, placeholder="")
+    "<input data-solution=\"#{solution}\" placeholder=\"#{placeholder}\">"
+  end
 end

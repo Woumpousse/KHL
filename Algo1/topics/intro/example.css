@@ -1,0 +1,19 @@
+body {
+    background: green;
+    color: white;
+}
+
+h1 {
+    background: blue;
+    text-align: center;
+    padding: 5px;
+}
+
+h2 {
+    font-size: 150%;
+    color: red;
+}
+
+p {
+    font-family: monospace;
+}

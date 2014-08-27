@@ -2,7 +2,7 @@ function rangeSum(a, b)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -12,7 +12,7 @@ function factorial(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -22,7 +22,7 @@ function gcd(a, b)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -32,7 +32,7 @@ function lcm(a, b)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -42,7 +42,7 @@ function countDigits(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -52,7 +52,7 @@ function countTrailingZeros(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -62,7 +62,7 @@ function countZeros(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }
@@ -72,7 +72,7 @@ function isPrime(n)
 {
     var result;
 
-    // Put solution here
+    // Schrijf je oplossing hier
 
     return result;
 }

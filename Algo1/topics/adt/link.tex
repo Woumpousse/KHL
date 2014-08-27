@@ -1,0 +1,110 @@
+\begin{frame}
+  \frametitle{Link met Java}
+  \begin{center}
+    \begin{tikzpicture}[remember picture,header/.style={minimum width=4cm,fill=blue!50}]
+      \path[use as bounding box] (-5,0) rectangle (5,5);
+
+      \node[header] at (-3, 5) {\sc\Large javascript};
+      \node[header] at (3, 5) {\sc\Large java};
+
+      \only<1-2>{
+        \node at (-3,4) {Array met waarden};
+        \node at (3,4) {Velden};
+
+        \begin{scope}[xshift=-3.5cm,yshift=2cm]
+          \drawvarray{h,m,s}
+        \end{scope}
+
+        \path let \p1=(cell 1.north) in
+              node[anchor=north] at (3,\y1) {
+                \inlinecode[width=4cm,language=myjava,font size=\small]{fields.java}
+              };
+      }
+
+      \only<2>{
+        \draw[-latex] (cell 1) -- (field h.west);
+        \draw[-latex] (cell 2) -- (field m.west);
+        \draw[-latex] (cell 3) -- (field s.west);
+      }
+
+      \only<3-4>{
+        \node at (-3,4) {\tt maakTijdstip};
+        \node at (3,4) {Constructor};
+
+        \node[anchor=north] at (-3,3.5) {
+          \inlinecode[language=javascript,font size=\tiny,width=4cm]{makeTime.js}
+        };
+
+        \node[anchor=north] at (3,3.5) {
+          \inlinecode[language=java,font size=\tiny,width=4cm]{constructor.java}
+        };
+      }
+
+      \only<4>{
+        \draw[-latex] (init h) |- (set hour);
+        \draw[-latex] (init m) |- (set minutes);
+        \draw[-latex] (init s) |- (set seconds);
+      }
+
+      \only<5-6>{
+        \node at (-3,4) {Basisoperaties};
+        \node at (3,4) {Getters/setters};
+
+        \node[anchor=north] at (-3,3.5) {
+          \inlinecode[language=javascript,font size=\tiny,width=4cm]{getters.js}
+        };
+
+        \node[anchor=north] at (3,3.5) {
+          \inlinecode[language=java,font size=\tiny,width=4cm]{getters.java}
+        };
+      }
+
+      \only<6>{
+        \draw[-latex] (get h) -- (get h 2);
+        \draw[-latex] (get m) -- (get m 2);
+        \draw[-latex] (get s) -- (get s 2);
+      }
+
+      \only<7-8>{
+        \node at (-3,4) {Ontvangend object};
+        \node at (3,4) {{\tt this}-variabele};
+
+        \node[anchor=north] at (-3,3.5) {
+          \inlinecode[language=javascript,font size=\tiny,width=4cm]{getUur.js}
+        };
+
+        \node[anchor=north] at (3,3.5) {
+          \inlinecode[language=java,font size=\tiny,width=4cm]{getUur.java}
+        };
+      }
+
+      \only<8>{
+        \draw[-latex] (arg t) -- (this);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Link met Java}
+  \structure{Access modifiers}
+  \begin{itemize}
+    \item Java biedt {\tt public} en {\tt private}
+    \item Java dwingt af externe code niet aan de interne voorstelling komt
+    \item JavaScript kan dit ook wel, zij het anders en complexer      
+  \end{itemize}
+
+  \vskip5mm
+
+  \structure{Types}
+  \begin{itemize}
+    \item Een Java-klasse vormt een ``etiket'': het type
+    \item Twee klassen met identieke velden kunnen dus onderscheiden worden dankzij het type
+  \end{itemize}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "adt"
+%%% End: 

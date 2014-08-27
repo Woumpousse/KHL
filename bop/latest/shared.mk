@@ -1,2 +1,2 @@
-IMAGEMAGICK = convert.exe
+IMAGEMAGICK = convert
 LATEX = pdflatex

@@ -1,0 +1,61 @@
+\documentclass{../khlslides}
+
+\usetikzlibrary{arrows.meta}
+
+\title[ADTs]{ADTs}
+\author{Fr\'ed\'eric Vogels}
+
+% Probleem: tijd en datum zijn beide arrays van drie getallen
+
+\newcommand{\drawarray}[2][]{
+  \pgfkeys{/tikz/.cd,#1,cell name/.get=\cellname}
+  \foreach[count=\i] \val in {#2} {
+    \pgfmathparse{int(\i-1)}\let\idx\pgfmathresult
+    \pgfmathparse{(\i-1)*1.2}\let\x\pgfmathresult
+    \node[anchor=south west,cell] (\cellname\space\i) at (\x,0) {\val};
+    \node[index] at (\cellname\space\i.north west) {\tiny\idx};
+  }
+}
+
+\newcommand{\drawvarray}[2][]{
+  \pgfkeys{/tikz/.cd,#1,cell name/.get=\cellname}
+  \foreach[count=\i] \val in {#2} {
+    \pgfmathparse{int(\i-1)}\let\idx\pgfmathresult
+    \pgfmathparse{(\i-1)*-1.2}\let\y\pgfmathresult
+    \node[anchor=south west,cell] (\cellname\space\i) at (0,\y) {\val};
+    \node[index] at (\cellname\space\i.north west) {\tiny\idx};
+  }
+}
+
+\pgfkeys{
+  /tikz/.cd,
+  cell/.style={drop shadow,fill=blue!50,minimum size=.8cm},
+  highlighted cell/.style={drop shadow,fill=green!50,minimum size=.8cm},
+  index/.style={fill=white,draw},
+  box/.style={fill=red!10,drop shadow},
+  cell name/.initial=cell
+}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\input{intro}
+\input{tijdstip}
+\input{link}
+
+
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

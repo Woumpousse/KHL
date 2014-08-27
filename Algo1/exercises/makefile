@@ -1,34 +1,31 @@
-.PHONY: cleantemp arrays recursion 2d-arrays car conditionals
+.PHONY: cleantemp arrays recursion 2d-arrays car conditionals loops solutions
 
+ifeq ($(OS),Windows_NT)
+ZIP = 7z a
+else
+ZIP = zip
+endif
+
+EXERCISES = conditionals 2d-arrays arrays recursion loops
 SHARED = *.js *.css
 
-all: conditionals 2d-arrays arrays recursion car lazy.js
+ZIP_SHARED = $(ZIP) $(1).zip $(SHARED)
+ZIP_EXPORT = cat $(1)/export | awk '{printf "$(1)/%s\n", $$0}' | xargs $(ZIP) $(1).zip
 
-conditionals: cleantemp $(SHARED)
-	make -C conditionals
-	7z a conditionals.zip $(SHARED) conditionals/*.html conditionals/*.js
 
-arrays: cleantemp $(SHARED)
-	make -C arrays
-	7z a arrays.zip $(SHARED) arrays/*.html arrays/*.js
+all: $(EXERCISES) car
 
-2d-arrays: cleantemp $(SHARED)
-	make -C 2d-arrays
-	7z a 2d-arrays.zip $(SHARED) 2d-arrays/*.html 2d-arrays/*.js
+$(EXERCISES) car:
+	make -C $@
+	rm -f $@.zip
+	$(call ZIP_SHARED,$@)
+	$(call ZIP_EXPORT,$@)
 
-recursion: cleantemp $(SHARED)
-	make -C recursion
-	7z a recursion.zip $(SHARED) recursion/*.html recursion/*.js
-
-car: cleantemp
-	make -C car all
-	7z a car.zip $(SHARED) car/*.html car/*.png car/*.js car/doc/assignment.pdf
+solutions:
+	echo $(EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} solutions.js
 
 lazy.js: lazy.ts
 	tsc -t ES5 lazy.ts
-
-cleantemp:
-	rm -f */*~ lazy.js
 
 clean: cleantemp
 	rm -f *.zip
