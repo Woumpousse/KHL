@@ -69,21 +69,47 @@ module Questions
     def parse(string)
       Types.check( binding, { :string => String } )
 
+      composed_string = decompose_string(string)
+
+
+      ::Questions.build_question do |q|
+        q.code =  composed_string.join do |fragment|
+          process_fragment(fragment)
+        end
+
+        q.answers = collect_answers(composed_string)
+      end
+    end
+
+    protected
+    # Turns the string into a composed string built out of Blank and NonBlanks
+    def decompose_string(string)
+      Types.check( binding, { :string => String } )
+
       str = ComposedString.from_string(string)
 
       str = extract_blanks str
       str = extract_nonblanks str
 
-      html = str.join do |fragment|
-        process_fragment(fragment)
-      end
+      str
+    end
 
-      ::Questions.build_question do |q|
-        q.code = html
+    def collect_blanks(composed_string)
+      Types.check( binding, { :composed_string => ComposedString } )
+
+      composed_string.to_a.select do |part|
+        Blank === part
       end
     end
 
-    protected
+    def collect_answers(composed_string)
+      Types.check( binding, { :composed_string => ComposedString } )
+
+      collect_blanks(composed_string).map do |blank|
+        blank.solution
+      end
+    end
+
     # Finds the blanks in str and replaces them by Blank objects
     def extract_blanks(str)
       Types.check( binding, { :str => ComposedString } )

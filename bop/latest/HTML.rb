@@ -82,24 +82,42 @@ module HTML
     end
   end
 
-  def HTML::string_of_attributes(attributes)
+  def HTML.unescape(value)
+    CGI.unescapeHTML(value.to_s).gsub('"', '&quot;');
+  end
+
+  def HTML.string_of_attributes(attributes)
     Types.check( binding, { :attributes => { String => Types.any } } )
 
     attributes.keys.map do |key|
       value = attributes[key]
-      value_string = CGI.unescapeHTML(value.to_s).gsub('"', '&quot;');
+      value_string = unescape(value)
 
       "#{key}=\"#{value_string}\""
     end.join(" ")
   end
 
-  def HTML::inputbox(attributes = {})
+  def HTML.inputbox(attributes = {})
     attributes_string = string_of_attributes(attributes)
 
     "<input #{attributes_string}>"
   end
 
-  def HTML::blank_inputbox(solution, placeholder="")
+  def HTML.blank_inputbox(solution, placeholder="")
     HTML::inputbox( { 'data-solution' => solution, 'placeholder' => placeholder } )
+  end
+
+  def HTML.unordered_list(items, attributes = {})
+    items_string = items.map do |item|
+      "<li>#{unescape(item)}</li>"
+    end.join("\n")
+
+    attributes_string = string_of_attributes(attributes)
+
+    <<-END
+    <ul #{attributes_string}>
+      #{items_string}
+    </ul>
+    END
   end
 end

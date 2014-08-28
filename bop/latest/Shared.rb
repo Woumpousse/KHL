@@ -141,11 +141,3 @@ class ComposedString
     @components.dup
   end
 end
-
-class Cell
-  def initialize(contents)
-    @contents = contents
-  end
-
-  attr_reader :contents
-end

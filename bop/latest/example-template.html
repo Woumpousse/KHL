@@ -62,6 +62,22 @@
       </section>
 
       <section>
+        <h2>Invuloefening met pool</h2>
+        <div data-question="fill-in-blanks">
+          <p>
+            Illustreert het gebruik van FillInBlanks met pool.
+          </p>
+          <%= HTML::unordered_list( fill_in_blanks_pooled.answers.sort.uniq ) %>
+          <pre>
+<%= fill_in_blanks_pooled.code %>
+          </pre>
+          <div class="hint">
+            <p>Dit is de hint</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
         <h2>Tokenselectie</h2>
         <div data-question="selection">
           <p>

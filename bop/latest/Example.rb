@@ -21,6 +21,27 @@ class Exercises
   end
 
 
+  def fill_in_blanks_pooled
+    # Syntax: __placeholder:solution__
+    Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
+      class Foo
+      {
+          __access modifier:public__ static void __identifier:main__(String[] args)
+          {
+              __type:int__ x = 5;
+
+              System.out.println(x);
+          }
+
+          private __type:int__ foo()
+          {
+              return 0;
+          }
+      }   
+    END
+  end
+
+
   def fill_in_types
     # Syntax: __solution__
     Questions::Java::FillInTypes.new.parse( <<-END.unindent.strip )
@@ -69,7 +90,6 @@ class Exercises
       }   
     END
   end
-
 
 
   def select_types
