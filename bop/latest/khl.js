@@ -158,6 +158,8 @@ function initialize()
 
             function showFeedback(element)
             {
+                clearFeedback(element);
+                
                 var received = isSelected(element);
                 var expected = shouldBeSelected(element);
 
