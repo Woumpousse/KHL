@@ -68,7 +68,7 @@ module Questions
         str = extract_nonblanks str
 
         str.join do |fragment|
-          process_fragment(str)
+          process_fragment(fragment)
         end
       end
 
@@ -92,7 +92,7 @@ module Questions
         Types.check( binding, { :str => ComposedString } )
 
         str.gsub(/(.*)/) do |text|
-          NonBlank(text)
+          NonBlank.new(text)
         end
       end
 
@@ -115,7 +115,7 @@ module Questions
       def process_nonblank(nonblank)
         Types.check( binding, { :nonblank => NonBlank } )
 
-        @formatter.apply(nonblank, text)
+        @formatter.apply(nonblank.text)
       end
     end
   end
@@ -256,7 +256,7 @@ module Questions
   end
 
   module Java
-    class FillInBlanks < Questions::FillInBlanksInCode
+    class FillInBlanks < Questions::FillInBlanksInCodeM::Question
       def initialize(data)
         super(data, HTML::Formatters::JavaFormatter.new)
       end
@@ -265,14 +265,6 @@ module Questions
         bundle = ::Java::Bundle.from_string( without_placeholders )
 
         ::Java::compile( bundle )
-      end
-
-      def extract_attributes_from_data(data)
-        abort "Invalid data \"#{data}\"\nMust have form __placeholder:solution__" unless data =~ /^([^:]*):([^:]+)$/
-        meta, solution = $1, $2
-
-        { 'data-solution' => solution,
-          'placeholder' => meta }
       end
     end
 
