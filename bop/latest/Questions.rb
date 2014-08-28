@@ -29,8 +29,8 @@ module Questions
   class Question < Expandable
   end
 
-  def Questions::build_question
-    question = Question.new
+  def Questions::build_question(question=nil)
+    question = (question or Question.new)
     yield question
     question
   end
@@ -198,18 +198,23 @@ module Questions
   end
 
 
-  class InterpretCode
-    def initialize(code, formatter)
-      Types.check( binding, { :code => String, :formatter => HTML::Formatters::Formatter } )
 
-      @code = code
+  class InterpretCode
+    def initialize(formatter)
+      Types.check( binding, { :formatter => HTML::Formatters::Formatter } )
+
       @formatter = formatter
     end
 
-    def code
-      @formatter.apply(@code)
+    def parse(code)
+      Types.check( binding, { :code => String } )
+
+      ::Questions.build_question do |q|
+        q.code = @formatter.apply(code)
+      end
     end
   end
+
 
   module Java
     # Basic Fill-In-Blanks question
@@ -306,12 +311,19 @@ module Questions
     end
 
     class InterpretCode < ::Questions::InterpretCode
-      def initialize(code)
-        super(code, HTML::Formatters::JavaFormatter.new)
+      def initialize
+        super(HTML::Formatters::JavaFormatter.new)
       end
 
-      def result
-        bundle = ::Java::Bundle.from_string(@code)
+      def parse(code)
+        ::Questions::build_question(super(code)) do |q|
+          q.result = compute_result(code)
+        end
+      end
+
+      protected
+      def compute_result(code)
+        bundle = ::Java::Bundle.from_string(code)
         ::Java::run(bundle).strip
       end
     end

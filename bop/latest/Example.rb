@@ -90,7 +90,7 @@ class Exercises
 
   def interpret
     # Classes must have no access modifier!
-    Questions::Java::InterpretCode.new( <<-END.unindent.strip )
+    Questions::Java::InterpretCode.new.parse( <<-END.unindent.strip )
       class App
       {
           public static void main(String[] args)
