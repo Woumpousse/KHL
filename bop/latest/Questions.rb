@@ -78,12 +78,19 @@ module Questions
         Types.check( binding, { :str => ComposedString } )
 
         str.gsub(/(__(?:.*?)__)/) do |fragment|
-          if not fragment =~ /^__([^:]*):([^:]*)__$/
-          then abort "Invalid blank specification: #{fragment}"
-          else
-            blank = Blank.new($1, $2)
-          end
+          create_blank(fragment[2..-3])
         end       
+      end
+
+      # Receives text between __ __ and wraps it into a Blank object
+      def create_blank(data)
+        Types.check( binding, { :data => String } )
+
+        if not data =~ /^([^:]*):([^:]*)$/
+        then abort "Invalid blank specification: #{fragment}"
+        else
+          Blank.new($1, $2)
+        end
       end
 
       # Called after extract_blanks. Is given the rest of the string
@@ -256,6 +263,9 @@ module Questions
   end
 
   module Java
+    # Basic Fill-In-Blanks question
+    # Each input field has its own placeholder
+    # Template syntax: __placeholder:solution__
     class FillInBlanks < Questions::FillInBlanksInCodeM::Question
       def initialize(data)
         super(data, HTML::Formatters::JavaFormatter.new)
@@ -268,25 +278,34 @@ module Questions
       end
     end
 
-    class FillInTypes < FillInBlanks
-      def initialize(data)
+    # Fill-In-Blanks question
+    # Each input field has the same placeholder
+    # Template syntax: __solution__
+    class HomogeneousFillInBlanks < FillInBlanks
+      def initialize(data, placeholder)
+        Types.check( binding, { :placeholder => String } )
+
         super(data)
+        @placeholder = placeholder
       end
 
-      def extract_attributes_from_data(data)
-        { 'data-solution' => data,
-          'placeholder' => 'type' }
+      protected
+      def create_blank(data)
+        Types.check( binding, { :data => String } )
+
+        Blank.new(@placeholder, data)
+      end     
+    end
+
+    class FillInTypes < FillInBlanks
+      def initialize(data)
+        super(data, "type")
       end
     end
 
     class FillInLiterals < FillInBlanks
       def initialize(data)
-        super(data)
-      end
-
-      def extract_attributes_from_data(data)
-        { 'data-solution' => data,
-          'placeholder' => 'literal' }
+        super(data, "literal")
       end
     end
 
