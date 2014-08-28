@@ -1,5 +1,3 @@
-
-
 function newElement(tag)
 {
     return $(document.createElement(tag));
@@ -310,6 +308,45 @@ function initialize()
 
         function processFillInBlankQuestions()
         {
+            var validators = ( function () {
+                function compare(input_element, normalizer)
+                {
+                    return function () {
+                        var expected = input_element.attr('data-solution');
+                        var received = input_element.val();
+
+                        return normalizer(expected) === normalizer(received);
+                    };
+                }
+
+                function exact(input_element)
+                {
+                    return compare(input_element, function (str) {
+                        return str;
+                    });
+                }
+
+                function case_insensitive(input_element)
+                {
+                    return compare(input_element, function (str) {
+                        return str.toLowerCase();
+                    });
+                }
+
+                function ignore_whitespace(input_element)
+                {
+                    return compare(input_element, function (str) {
+                        return str.replace(/\s+/g, "");
+                    });
+                }
+
+                return { 
+                    exact: exact,
+                    case_insensitive: case_insensitive,
+                    ignore_whitespace: ignore_whitespace
+                };
+            } )();            
+
             function findInputs(question)
             {
                 return question.find('input[data-solution]');
@@ -317,10 +354,10 @@ function initialize()
 
             function hasCorrectInput(input)
             {
-                var expected = input.attr('data-solution');
-                var given = input.val();
+                var validator_id = input.attr('data-validator') || 'exact';
+                var validator = validators[validator_id](input);
 
-                return expected === given;
+                return validator();
             }
 
             function showFeedback(input)

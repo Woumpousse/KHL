@@ -103,8 +103,11 @@ module HTML
     "<input #{attributes_string}>"
   end
 
-  def HTML.blank_inputbox(solution, placeholder="")
-    HTML::inputbox( { 'data-solution' => solution, 'placeholder' => placeholder } )
+  def HTML.blank_inputbox(solution, placeholder="", validator="exact")
+    HTML::inputbox( { 'data-solution' => solution,
+                      'placeholder' => placeholder,
+                      'data-validator' => validator
+                    } )
   end
 
   def HTML.unordered_list(items, attributes = {})

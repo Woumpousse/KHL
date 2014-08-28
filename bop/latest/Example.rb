@@ -6,13 +6,13 @@ class Exercises
   include Controller
 
   def fill_in_blanks
-    # Syntax: __placeholder:solution__
+    # Syntax: __placeholder`solution`validator__
     Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
       class Foo
       {
-          __access modifier:public__ static void __identifier:main__(String[] args)
+          __access modifier`public`__ static void __identifier`main`__(String[] args)
           {
-              __type:int__ x = 5;
+              __type`int`__ x = 5;
 
               System.out.println(x);
           }
@@ -22,18 +22,18 @@ class Exercises
 
 
   def fill_in_blanks_pooled
-    # Syntax: __placeholder:solution__
+    # Syntax: __placeholder`solution`validator__
     Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
       class Foo
       {
-          __access modifier:public__ static void __identifier:main__(String[] args)
+          __access modifier`public`__ static void __identifier`main`__(String[] args)
           {
-              __type:int__ x = 5;
+              __type`int`__ x = 5;
 
               System.out.println(x);
           }
 
-          private __type:int__ foo()
+          private __type`int`__ foo()
           {
               return 0;
           }
@@ -77,17 +77,26 @@ class Exercises
 
 
   def fill_in_blanks_with_pool
-    # Syntax: __placeholder:solution__
-    Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
+    # Syntax: __placeholder`solution`validator__
+    Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
       class Foo
       {
-          __access modifier:public__ static void __identifier:main__(String[] args)
+          __access modifier`public`__ static void __identifier`main`__(String[] args)
           {
-              __type:int__ x = 5;
+              __type`int`__ x = 5;
 
               System.out.println(x);
           }
       }   
+    END
+  end
+
+  def fill_in_blanks_validators
+    # Syntax: __placeholder`solution`validator__
+    Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
+        String s1 = "__literal`abc`exact__"; // abc exact
+        String s2 = "__literal`abc`case_insensitive__"; // abc case insensitive
+        String s3 = "__literal`abc`ignore_whitespace__"; // abc ignore whitespace
     END
   end
 

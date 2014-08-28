@@ -40,14 +40,15 @@ module Questions
     end
 
     class Blank < Fragment
-      def initialize(placeholder, solution)
-        Types.check( binding, { :placeholder => String, :solution => String } )
+      def initialize(placeholder, solution, validator)
+        Types.check( binding, { :placeholder => String, :solution => String, :validator => String } )
 
         @placeholder = placeholder
         @solution    = solution
+        @validator   = validator
       end
 
-      attr_reader :placeholder, :solution
+      attr_reader :placeholder, :solution, :validator
     end
 
     class NonBlank < Fragment
@@ -123,10 +124,17 @@ module Questions
     def create_blank(data)
       Types.check( binding, { :data => String } )
 
-      if not data =~ /^([^:]*):([^:]*)$/
-      then raise "Invalid blank specification: #{data}"
-      else
-        Blank.new($1, $2)
+      case data
+      when /^([^`]*)`([^`]*)`([^`]*)$/
+      then 
+        placeholder, solution, validator = $1, $2, $3
+
+        if validator == ''
+        then validator = 'exact'
+        end
+
+        Blank.new(placeholder, solution, validator)
+      else raise "Invalid blank specification: #{data}"
       end
     end
 
@@ -153,7 +161,7 @@ module Questions
     def process_blank(blank)
       Types.check( binding, { :blank => Blank } )
 
-      HTML::blank_inputbox( blank.solution, blank.placeholder )
+      HTML::blank_inputbox( blank.solution, blank.placeholder, blank.validator )
     end
 
     def process_nonblank(nonblank)
@@ -252,31 +260,32 @@ module Questions
     # Each input field has the same placeholder
     # Template syntax: __solution__
     class HomogeneousFillInBlanks < FillInBlanks
-      def initialize(placeholder)
+      def initialize(placeholder, validator)
         super()
 
-        Types.check( binding, { :placeholder => String } )
+        Types.check( binding, { :placeholder => String, :validator => String } )
 
         @placeholder = placeholder
+        @validator   = validator
       end
 
       protected
       def create_blank(data)
         Types.check( binding, { :data => String } )
 
-        ::Questions::FillInBlanksInCode::Blank.new(@placeholder, data)
+        ::Questions::FillInBlanksInCode::Blank.new(@placeholder, data, @validator)
       end     
     end
 
     class FillInTypes < HomogeneousFillInBlanks
       def initialize
-        super("type")
+        super("type", 'exact')
       end
     end
 
     class FillInAccessModifiers < HomogeneousFillInBlanks
       def initialize
-        super("access modifier")
+        super("access modifier", 'exact')
       end
     end
 
