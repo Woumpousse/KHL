@@ -83,7 +83,24 @@ module HTML
     end
   end
 
-  def HTML::inputbox(solution, placeholder="")
-    "<input data-solution=\"#{solution}\" placeholder=\"#{placeholder}\">"
+  def HTML::string_of_attributes(attributes)
+    Types.check( binding, { :attributes => { String => Types.any } } )
+
+    attributes.keys.map do |key|
+      value = attributes[key]
+      value_string = CGI.unescapeHTML(value.to_s).gsub('"', '&quot;');
+
+      "#{key}=\"#{value_string}\""
+    end.join(" ")
+  end
+
+  def HTML::inputbox(attributes = {})
+    attributes_string = string_of_attributes(attributes)
+
+    "<input #{attributes_string}>"
+  end
+
+  def HTML::blank_inputbox(solution, placeholder="")
+    HTML::inputbox( { 'data-solution' => solution, 'placeholder' => placeholder } )
   end
 end

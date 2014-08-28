@@ -14,6 +14,7 @@ clean_example:
 	rm -f slides-example-?.png slides-example.aux
 
 clean: clean_icons clean_example
+	rm -f *~
 
 export:
 	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export

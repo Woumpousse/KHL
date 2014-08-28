@@ -21,6 +21,23 @@ class Exercises
   end
 
 
+  def fill_in_blanks_with_pool
+    # Syntax: __placeholder:solution__
+    Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
+      class Foo
+      {
+          __access modifier:public__ static void __identifier:main__(String[] args)
+          {
+              __type:int__ x = 5;
+
+              System.out.println(x);
+          }
+      }   
+    END
+  end
+
+
+
   def select_types
     # Syntax: __must-be-selected__
     Questions::Java::SelectTokens.new( <<-END.unindent.strip )

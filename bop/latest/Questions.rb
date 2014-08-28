@@ -4,6 +4,124 @@ require './Types.rb'
 require './Java.rb'
 
 module Questions
+
+  class Expandable
+    def initialize
+      @properties = Hash.new
+    end
+
+    def method_missing(symbol, *args)
+      Types.check( binding, { :symbol => Symbol } )
+
+      if symbol.to_s.end_with? '='
+      then
+        abort unless args.length == 0
+        arg = args[0]
+
+        @properties[symbol] = arg
+      else
+        abort unless @properties.has_key? symbol
+
+        @properties[symbol]
+      end
+    end
+  end
+
+  module FillInBlanksInCodeM
+    class Fragment < Expandable
+    end
+
+    class Blank < Fragment
+      def initialize(placeholder, solution)
+        Types.check( binding, { :placeholder => String, :solution => String } )
+
+        @placeholder = placeholder
+        @solution    = solution
+      end
+
+      attr_reader :placeholder, :solution
+    end
+
+    class NonBlank < Fragment
+      def initialize(text)
+        Types.check( binding, { :text => String } )
+
+        @text = text
+      end
+      
+      attr_reader :text
+    end
+
+    class Question
+      def initialize(data, formatter)
+        Types.check( binding, { :data => String, :formatter => HTML::Formatters::Formatter } )
+
+        @data = data
+        @formatter = formatter
+      end
+
+      # Transforms @data into html
+      def code
+        str = ComposedString.from_string(@data)
+
+        str = extract_blanks str
+        str = extract_nonblanks str
+
+        str.join do |fragment|
+          process_fragment(str)
+        end
+      end
+
+      protected
+      # Finds the blanks in str and replaces them by Blank objects
+      def extract_blanks(str)
+        Types.check( binding, { :str => ComposedString } )
+
+        str.gsub(/(__(?:.*?)__)/) do |fragment|
+          if not fragment =~ /^__([^:]*):([^:]*)__$/
+          then abort "Invalid blank specification: #{fragment}"
+          else
+            blank = Blank.new($1, $2)
+          end
+        end       
+      end
+
+      # Called after extract_blanks. Is given the rest of the string
+      # and deals with the nonblank parts.
+      def extract_nonblanks(str)
+        Types.check( binding, { :str => ComposedString } )
+
+        str.gsub(/(.*)/) do |text|
+          NonBlank(text)
+        end
+      end
+
+      # Given a Blank or NonBlank
+      def process_fragment(fragment)
+        Types.check( binding, { :fragment => Fragment } )
+        
+        if Blank === fragment
+        then process_blank(fragment)
+        else process_nonblank(fragment)
+        end
+      end
+
+      def process_blank(blank)
+        Types.check( binding, { :blank => Blank } )
+
+        HTML::blank_inputbox( blank.solution, blank.placeholder )
+      end
+
+      def process_nonblank(nonblank)
+        Types.check( binding, { :nonblank => NonBlank } )
+
+        @formatter.apply(nonblank, text)
+      end
+    end
+  end
+
+
+
   class FillInBlanksInCode
     def initialize(data, formatter)
       Types.check( binding, { :data => String, :formatter => HTML::Formatters::Formatter } )
@@ -26,21 +144,6 @@ module Questions
       str.join do |cell|
         cell.contents
       end
-
-#      fragments = @data.split(/__(.*?)__/) 
-
-      
-      # code_fragments, input_fragments = fragments.unthread
-      
-      # html_code_fragments = code_fragments.map do |code_fragment|
-      #   format_code_fragment(code_fragment)
-      # end
-
-      # html_input_fragments = input_fragments.map do |input_fragment|
-      #   format_input_element(input_fragment)
-      # end
-      
-      # html_code_fragments.thread(html_input_fragments).join
     end
 
     protected
