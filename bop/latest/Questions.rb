@@ -35,7 +35,7 @@ module Questions
     question
   end
 
-  module FillInBlanksInCode
+  class FillInBlanksInCode
     class Fragment < Expandable
     end
 
@@ -60,82 +60,80 @@ module Questions
       attr_reader :text
     end
 
-    class Builder
-      def initialize(formatter)
-        Types.check( binding, { :formatter => HTML::Formatters::Formatter } )
+    def initialize(formatter)
+      Types.check( binding, { :formatter => HTML::Formatters::Formatter } )
 
-        @formatter = formatter
+      @formatter = formatter
+    end
+
+    def parse(string)
+      Types.check( binding, { :string => String } )
+
+      str = ComposedString.from_string(string)
+
+      str = extract_blanks str
+      str = extract_nonblanks str
+
+      html = str.join do |fragment|
+        process_fragment(fragment)
       end
 
-      def parse(string)
-        Types.check( binding, { :string => String } )
-
-        str = ComposedString.from_string(string)
-
-        str = extract_blanks str
-        str = extract_nonblanks str
-
-        html = str.join do |fragment|
-          process_fragment(fragment)
-        end
-
-        ::Questions.build_question do |q|
-          q.code = html
-        end
+      ::Questions.build_question do |q|
+        q.code = html
       end
+    end
 
-      protected
-      # Finds the blanks in str and replaces them by Blank objects
-      def extract_blanks(str)
-        Types.check( binding, { :str => ComposedString } )
+    protected
+    # Finds the blanks in str and replaces them by Blank objects
+    def extract_blanks(str)
+      Types.check( binding, { :str => ComposedString } )
 
-        str.gsub(/(__(?:.*?)__)/) do |fragment|
-          create_blank(fragment[2..-3])
-        end       
+      str.gsub(/(__(?:.*?)__)/) do |fragment|
+        create_blank(fragment[2..-3])
+      end       
+    end
+
+    # Receives text between __ __ and wraps it into a Blank object
+    def create_blank(data)
+      Types.check( binding, { :data => String } )
+
+      if not data =~ /^([^:]*):([^:]*)$/
+      then raise "Invalid blank specification: #{data}"
+      else
+        Blank.new($1, $2)
       end
+    end
 
-      # Receives text between __ __ and wraps it into a Blank object
-      def create_blank(data)
-        Types.check( binding, { :data => String } )
+    # Called after extract_blanks. Is given the rest of the string
+    # and deals with the nonblank parts.
+    def extract_nonblanks(str)
+      Types.check( binding, { :str => ComposedString } )
 
-        if not data =~ /^([^:]*):([^:]*)$/
-        then raise "Invalid blank specification: #{data}"
-        else
-          Blank.new($1, $2)
-        end
+      str.gsub(/(.*)/) do |text|
+        NonBlank.new(text)
       end
+    end
 
-      # Called after extract_blanks. Is given the rest of the string
-      # and deals with the nonblank parts.
-      def extract_nonblanks(str)
-        Types.check( binding, { :str => ComposedString } )
+    # Given a Blank or NonBlank
+    def process_fragment(fragment)
+      Types.check( binding, { :fragment => Fragment } )
 
-        str.gsub(/(.*)/) do |text|
-          NonBlank.new(text)
-        end
+      if Blank === fragment
+      then process_blank(fragment)
+      else process_nonblank(fragment)
       end
+    end
 
-      # Given a Blank or NonBlank
-      def process_fragment(fragment)
-        Types.check( binding, { :fragment => Fragment } )
-        
-        if Blank === fragment
-        then process_blank(fragment)
-        else process_nonblank(fragment)
-        end
-      end
+    def process_blank(blank)
+      Types.check( binding, { :blank => Blank } )
 
-      def process_blank(blank)
-        Types.check( binding, { :blank => Blank } )
+      HTML::blank_inputbox( blank.solution, blank.placeholder )
+    end
 
-        HTML::blank_inputbox( blank.solution, blank.placeholder )
-      end
+    def process_nonblank(nonblank)
+      Types.check( binding, { :nonblank => NonBlank } )
 
-      def process_nonblank(nonblank)
-        Types.check( binding, { :nonblank => NonBlank } )
-
-        @formatter.apply(nonblank.text)
-      end
+      @formatter.apply(nonblank.text)
     end
   end
 
@@ -220,7 +218,7 @@ module Questions
     # Basic Fill-In-Blanks question
     # Each input field has its own placeholder
     # Template syntax: __placeholder:solution__
-    class FillInBlanks < ::Questions::FillInBlanksInCode::Builder
+    class FillInBlanks < ::Questions::FillInBlanksInCode
       def initialize
         super( HTML::Formatters::JavaFormatter.new )
       end
