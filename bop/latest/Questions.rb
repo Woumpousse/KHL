@@ -138,7 +138,7 @@ module Questions
   end
 
 
-  module SelectCodeFragments
+  class SelectCodeFragments
     class CodeFragment
       def initialize(string)
         @string = string
@@ -147,52 +147,50 @@ module Questions
       attr_reader :string
     end
 
-    class Builder
-      def parse(code)
-        ::Questions.build_question do |q|
-          q.code = fragments(code).join do |fragment|
-            process_fragment(fragment)
-          end
+    def parse(code)
+      ::Questions.build_question do |q|
+        q.code = fragments(code).join do |fragment|
+          process_fragment(fragment)
         end
       end
+    end
 
-      protected
-      def fragments(code)
-        abort "Left undefined; should be overriden in subclasses"
-      end
+    protected
+    def fragments(code)
+      abort "Left undefined; should be overriden in subclasses"
+    end
 
-      def process_fragment(fragment)
-        solution = if should_be_selected? fragment then 'true' else 'false' end
-        stripped = strip(fragment)
+    def process_fragment(fragment)
+      solution = if should_be_selected? fragment then 'true' else 'false' end
+      stripped = strip(fragment)
 
-        attributes = {
-          'class' => 'selectable',
-          'data-solution' => solution
-        }
+      attributes = {
+        'class' => 'selectable',
+        'data-solution' => solution
+      }
 
-        generate_html_element(stripped, attributes)
-      end
+      generate_html_element(stripped, attributes)
+    end
 
-      def should_be_selected?(fragment)
-        abort "Left undefined; should be overriden in subclasses"
-      end
+    def should_be_selected?(fragment)
+      abort "Left undefined; should be overriden in subclasses"
+    end
 
-      def strip(fragment)
-        abort "Left undefined; should be overriden in subclasses"
-      end
+    def strip(fragment)
+      abort "Left undefined; should be overriden in subclasses"
+    end
 
-      def generate_html_element(fragment, attributes)
-        Types.check( binding, { :attributes => { String => String } } )
+    def generate_html_element(fragment, attributes)
+      Types.check( binding, { :attributes => { String => String } } )
 
-        attributeString = attributes.to_a.map do |name, value|
-          unescaped_data = CGI.unescapeHTML(value)
+      attributeString = attributes.to_a.map do |name, value|
+        unescaped_data = CGI.unescapeHTML(value)
 
-          "#{name}=\"#{unescaped_data}\""
-        end.join(" ")
+        "#{name}=\"#{unescaped_data}\""
+      end.join(" ")
 
-        "<span #{attributeString}>#{fragment}</span>"
-      end
-    end 
+      "<span #{attributeString}>#{fragment}</span>"
+    end
   end
 
 
@@ -256,7 +254,7 @@ module Questions
       end
     end
 
-    class SelectTokens < ::Questions::SelectCodeFragments::Builder
+    class SelectTokens < ::Questions::SelectCodeFragments
       protected
       def fragments(code)
         result = ComposedString.from_string(code)
@@ -284,7 +282,7 @@ module Questions
       end
     end
 
-    class SelectLines < ::Questions::SelectCodeFragments::Builder
+    class SelectLines < ::Questions::SelectCodeFragments
       protected
       def fragments(code)
         result = ComposedString.from_string(code)
