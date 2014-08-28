@@ -136,3 +136,15 @@ img.control {
 .control-button.disabled {
     opacity: .2;
 }
+
+ul.pool {
+    list-style-type: none;
+    margin: 10px;
+    text-align: center;
+}
+
+ul.pool li {
+    display: inline;
+    border: solid 1px black;
+    padding: 5px;
+}

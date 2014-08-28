@@ -67,7 +67,7 @@
           <p>
             Illustreert het gebruik van FillInBlanks met pool.
           </p>
-          <%= HTML::unordered_list( fill_in_blanks_pooled.answers.sort.uniq ) %>
+          <%= HTML::unordered_list( fill_in_blanks_pooled.answers.sort.uniq, { 'class' => 'pool' } ) %>
           <pre>
 <%= fill_in_blanks_pooled.code %>
           </pre>
