@@ -37,6 +37,24 @@ class Exercises
   end
 
 
+  def fill_in_access_modifiers
+    # Syntax: __solution__
+    Questions::Java::FillInAccessModifiers.new( <<-END.unindent.strip )
+      class Foo
+      {
+          __private__ int foo;
+
+          __public__ static void main(String[] args)
+          {
+              int x = 5;
+
+              System.out.println(x);
+          }          
+      }   
+    END
+  end
+
+
   def fill_in_blanks_with_pool
     # Syntax: __placeholder:solution__
     Questions::Java::FillInBlanks.new( <<-END.unindent.strip )

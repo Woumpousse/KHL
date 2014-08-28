@@ -303,9 +303,9 @@ module Questions
       end
     end
 
-    class FillInLiterals < HomogeneousFillInBlanks
+    class FillInAccessModifiers < HomogeneousFillInBlanks
       def initialize(data)
-        super(data, "literal")
+        super(data, "access modifier")
       end
     end
 
