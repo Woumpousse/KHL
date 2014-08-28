@@ -4,7 +4,6 @@ require './Types.rb'
 require './Java.rb'
 
 module Questions
-
   class Expandable
     def initialize
       @properties = Hash.new
@@ -15,19 +14,30 @@ module Questions
 
       if symbol.to_s.end_with? '='
       then
-        abort unless args.length == 0
+        abort "Bug" unless args.length == 1
         arg = args[0]
 
-        @properties[symbol] = arg
+        @properties[symbol.to_s[0..-2].to_sym] = arg
       else
-        abort unless @properties.has_key? symbol
+        raise "Unknown property #{symbol.to_s}" unless @properties.has_key? symbol
 
         @properties[symbol]
       end
     end
   end
 
-  module FillInBlanksInCodeM
+  class Question < Expandable
+  end
+
+  def Questions::build_question
+    question = Question.new
+
+    yield question
+
+    question
+  end
+
+  module FillInBlanksInCode
     class Fragment < Expandable
     end
 
@@ -52,23 +62,27 @@ module Questions
       attr_reader :text
     end
 
-    class Question
-      def initialize(data, formatter)
-        Types.check( binding, { :data => String, :formatter => HTML::Formatters::Formatter } )
+    class Builder
+      def initialize(formatter)
+        Types.check( binding, { :formatter => HTML::Formatters::Formatter } )
 
-        @data = data
         @formatter = formatter
       end
 
-      # Transforms @data into html
-      def code
-        str = ComposedString.from_string(@data)
+      def parse(string)
+        Types.check( binding, { :string => String } )
+
+        str = ComposedString.from_string(string)
 
         str = extract_blanks str
         str = extract_nonblanks str
 
-        str.join do |fragment|
+        html = str.join do |fragment|
           process_fragment(fragment)
+        end
+
+        ::Questions.build_question do |q|
+          q.code = html
         end
       end
 
@@ -87,7 +101,7 @@ module Questions
         Types.check( binding, { :data => String } )
 
         if not data =~ /^([^:]*):([^:]*)$/
-        then abort "Invalid blank specification: #{fragment}"
+        then raise "Invalid blank specification: #{data}"
         else
           Blank.new($1, $2)
         end
@@ -201,15 +215,9 @@ module Questions
     # Basic Fill-In-Blanks question
     # Each input field has its own placeholder
     # Template syntax: __placeholder:solution__
-    class FillInBlanks < Questions::FillInBlanksInCodeM::Question
-      def initialize(data)
-        super(data, HTML::Formatters::JavaFormatter.new)
-      end
-
-      def verify
-        bundle = ::Java::Bundle.from_string( without_placeholders )
-
-        ::Java::compile( bundle )
+    class FillInBlanks < ::Questions::FillInBlanksInCode::Builder
+      def initialize
+        super( HTML::Formatters::JavaFormatter.new )
       end
     end
 
@@ -217,10 +225,11 @@ module Questions
     # Each input field has the same placeholder
     # Template syntax: __solution__
     class HomogeneousFillInBlanks < FillInBlanks
-      def initialize(data, placeholder)
+      def initialize(placeholder)
+        super()
+
         Types.check( binding, { :placeholder => String } )
 
-        super(data)
         @placeholder = placeholder
       end
 
@@ -228,19 +237,19 @@ module Questions
       def create_blank(data)
         Types.check( binding, { :data => String } )
 
-        ::Questions::FillInBlanksInCodeM::Blank.new(@placeholder, data)
+        ::Questions::FillInBlanksInCode::Blank.new(@placeholder, data)
       end     
     end
 
     class FillInTypes < HomogeneousFillInBlanks
-      def initialize(data)
-        super(data, "type")
+      def initialize
+        super("type")
       end
     end
 
     class FillInAccessModifiers < HomogeneousFillInBlanks
-      def initialize(data)
-        super(data, "access modifier")
+      def initialize
+        super("access modifier")
       end
     end
 

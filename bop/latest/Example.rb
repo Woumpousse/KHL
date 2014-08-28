@@ -7,7 +7,7 @@ class Exercises
 
   def fill_in_blanks
     # Syntax: __placeholder:solution__
-    Questions::Java::FillInBlanks.new( <<-END.unindent.strip )
+    Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
       class Foo
       {
           __access modifier:public__ static void __identifier:main__(String[] args)
@@ -23,7 +23,7 @@ class Exercises
 
   def fill_in_types
     # Syntax: __solution__
-    Questions::Java::FillInTypes.new( <<-END.unindent.strip )
+    Questions::Java::FillInTypes.new.parse( <<-END.unindent.strip )
       class Foo
       {
           public static __void__ main(__String[]__ args)
@@ -39,7 +39,7 @@ class Exercises
 
   def fill_in_access_modifiers
     # Syntax: __solution__
-    Questions::Java::FillInAccessModifiers.new( <<-END.unindent.strip )
+    Questions::Java::FillInAccessModifiers.new.parse( <<-END.unindent.strip )
       class Foo
       {
           __private__ int foo;

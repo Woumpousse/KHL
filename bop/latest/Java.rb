@@ -3,6 +3,23 @@ require 'open3'
 require './Types.rb'
 
 module Java
+  KEYWORDS = %w(abstract assert boolean break byte case catch char class const continue
+                default do double else enum extends final finally float for goto if
+                implements import instanceof int interface long native new package
+                private protected public return short static strictfp super switch
+                synchronized this throw throws transient try void volatile while
+                false null true)  
+
+  PRIMITIVE_TYPES = %w(char byte short int long float double boolean)
+
+  STANDARD_TYPES = PRIMITIVE_TYPES + %w(String void Boolean Byte Character Float Double Integer Long Short)
+
+  def find_declared_classes(code)
+    code.scan(/class\s+([a-zA-Z0-9_]+)/).map do |match|
+      match[0]
+    end
+  end
+
   class JavaError < StandardError
     def initialize(classes, message)
       super(message)

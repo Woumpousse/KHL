@@ -1,6 +1,7 @@
 require 'cgi'
 require './Shared.rb'
 require './Types.rb'
+require './Java.rb'
 
 module HTML
   module Formatters
@@ -71,10 +72,8 @@ module HTML
     end
 
     class JavaFormatter < CombinedHighlighter
-      KEYWORDS = %w(abstract assert boolean break byte case catch char class const continue default do double else enum extends final finally float for goto if implements import instanceof int interface long native new package private protected public return short static strictfp super switch synchronized this throw throws transient try void volatile while false null true)
-
       def initialize    
-        keyword_formatter = KeywordHighlighter.new(KEYWORDS)
+        keyword_formatter = KeywordHighlighter.new(Java::KEYWORDS)
         line_comment_formatter = LineCommentHighlighter.new
         block_comment_formatter = BlockCommentHighlighter.new
 

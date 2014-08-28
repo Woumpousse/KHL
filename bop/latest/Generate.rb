@@ -94,6 +94,8 @@ def main
   if options[:template] or options[:output]
   then generate(options[:template], options[:output])
   end
+
+  puts "Done!"
 end
 
 

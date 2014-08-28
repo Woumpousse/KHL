@@ -56,7 +56,7 @@ module Types
       object = context.eval(id)
 
       unless predicate.call(object)
-        raise TypeError, "'#{id}' should be a #{predicate.name} (value was #{object})"
+        raise TypeError, "'#{id}' should be a #{predicate.name} (value was #{object} : #{object.class})"
       end
     end
   end
