@@ -21,6 +21,22 @@ class Exercises
   end
 
 
+  def fill_in_types
+    # Syntax: __solution__
+    Questions::Java::FillInTypes.new( <<-END.unindent.strip )
+      class Foo
+      {
+          public static __void__ main(__String[]__ args)
+          {
+              __int__ x = 5;
+
+              System.out.println(x);
+          }
+      }   
+    END
+  end
+
+
   def fill_in_blanks_with_pool
     # Syntax: __placeholder:solution__
     Questions::Java::FillInBlanks.new( <<-END.unindent.strip )

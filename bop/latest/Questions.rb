@@ -293,17 +293,17 @@ module Questions
       def create_blank(data)
         Types.check( binding, { :data => String } )
 
-        Blank.new(@placeholder, data)
+        ::Questions::FillInBlanksInCodeM::Blank.new(@placeholder, data)
       end     
     end
 
-    class FillInTypes < FillInBlanks
+    class FillInTypes < HomogeneousFillInBlanks
       def initialize(data)
         super(data, "type")
       end
     end
 
-    class FillInLiterals < FillInBlanks
+    class FillInLiterals < HomogeneousFillInBlanks
       def initialize(data)
         super(data, "literal")
       end
