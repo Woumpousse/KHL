@@ -5,10 +5,14 @@
 
 all: icons export
 
-example: example-template.html *.rb icons
+example: example-template.html *.rb icons example-slides example-html
+
+example-html:
+	ruby Generate.rb --output example.html --template example-template.html --exercises ./Example.rb
+
+example-slides: slides-example.tex
 	$(LATEX) slides-example.tex
 	$(IMAGEMAGICK) -quality 90 -density 300 -trim -shave 3x3 slides-example.pdf slides-example-%d.png
-	ruby Generate.rb --output example.html --template example-template.html --exercises ./Example.rb
 
 clean_example:
 	rm -f slides-example-?.png slides-example.aux
