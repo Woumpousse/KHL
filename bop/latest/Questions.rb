@@ -31,9 +31,7 @@ module Questions
 
   def Questions::build_question
     question = Question.new
-
     yield question
-
     question
   end
 
@@ -141,62 +139,64 @@ module Questions
     end
   end
 
-  class CodeFragment
-    def initialize(string)
-      @string = string
-    end
 
-    attr_reader :string
-  end
-
-  class SelectCodeFragments
-    def initialize(code)
-      @code = code
-    end
-
-    def code
-      fragments.join do |fragment|
-        process_fragment(fragment)
+  module SelectCodeFragments
+    class CodeFragment
+      def initialize(string)
+        @string = string
       end
+      
+      attr_reader :string
     end
 
-    protected
-    def fragments
-      abort "Left undefined; should be overriden in subclasses"
-    end
+    class Builder
+      def parse(code)
+        ::Questions.build_question do |q|
+          q.code = fragments(code).join do |fragment|
+            process_fragment(fragment)
+          end
+        end
+      end
 
-    def process_fragment(fragment)
-      solution = if should_be_selected? fragment then 'true' else 'false' end
-      stripped = strip(fragment)
+      protected
+      def fragments(code)
+        abort "Left undefined; should be overriden in subclasses"
+      end
 
-      attributes = {
-        'class' => 'selectable',
-        'data-solution' => solution
-      }
+      def process_fragment(fragment)
+        solution = if should_be_selected? fragment then 'true' else 'false' end
+        stripped = strip(fragment)
 
-      generate_html_element(stripped, attributes)
-    end
+        attributes = {
+          'class' => 'selectable',
+          'data-solution' => solution
+        }
 
-    def should_be_selected?(fragment)
-      abort "Left undefined; should be overriden in subclasses"
-    end
+        generate_html_element(stripped, attributes)
+      end
 
-    def strip(fragment)
-      abort "Left undefined; should be overriden in subclasses"
-    end
+      def should_be_selected?(fragment)
+        abort "Left undefined; should be overriden in subclasses"
+      end
 
-    def generate_html_element(fragment, attributes)
-      Types.check( binding, { :attributes => { String => String } } )
+      def strip(fragment)
+        abort "Left undefined; should be overriden in subclasses"
+      end
 
-      attributeString = attributes.to_a.map do |name, value|
-        unescaped_data = CGI.unescapeHTML(value)
+      def generate_html_element(fragment, attributes)
+        Types.check( binding, { :attributes => { String => String } } )
 
-        "#{name}=\"#{unescaped_data}\""
-      end.join(" ")
+        attributeString = attributes.to_a.map do |name, value|
+          unescaped_data = CGI.unescapeHTML(value)
 
-      "<span #{attributeString}>#{fragment}</span>"
-    end
+          "#{name}=\"#{unescaped_data}\""
+        end.join(" ")
+
+        "<span #{attributeString}>#{fragment}</span>"
+      end
+    end 
   end
+
 
   class InterpretCode
     def initialize(code, formatter)
@@ -253,24 +253,17 @@ module Questions
       end
     end
 
-    class SelectTokens < SelectCodeFragments
-      def initialize(code)
-        super(code) # , /\w+(\[\])?(__)?*/)
-      end
-
-      def verify
-      end
-
+    class SelectTokens < ::Questions::SelectCodeFragments::Builder
       protected
-      def fragments
-        result = ComposedString.from_string(@code)
+      def fragments(code)
+        result = ComposedString.from_string(code)
 
         result = result.gsub(/(__.*?__)/) do |fragment|
-          CodeFragment.new(fragment)
+          ::Questions::SelectCodeFragments::CodeFragment.new(fragment)
         end
 
         result = result.gsub(/(\w+(?:\[\])*)/) do |fragment|
-          CodeFragment.new(fragment)
+          ::Questions::SelectCodeFragments::CodeFragment.new(fragment)
         end
 
         result
@@ -288,20 +281,13 @@ module Questions
       end
     end
 
-    class SelectLines < SelectCodeFragments
-      def initialize(code)
-        super(code)
-      end
-
-      def verify
-      end
-
+    class SelectLines < ::Questions::SelectCodeFragments::Builder
       protected
-      def fragments
-        result = ComposedString.from_string(@code)
+      def fragments(code)
+        result = ComposedString.from_string(code)
 
         result = result.gsub(/(^.*$)/) do |fragment|
-          CodeFragment.new(fragment)
+          ::Questions::SelectCodeFragments::CodeFragment.new(fragment)
         end
 
         result

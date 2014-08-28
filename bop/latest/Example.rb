@@ -74,7 +74,7 @@ class Exercises
 
   def select_types
     # Syntax: __must-be-selected__
-    Questions::Java::SelectTokens.new( <<-END.unindent.strip )
+    Questions::Java::SelectTokens.new.parse( <<-END.unindent.strip )
       class Foo
       {
           public static __void__ main(__String[]__ args)
@@ -106,7 +106,7 @@ class Exercises
 
   def select_lines
     # Syntax: lines to be selected must end on <<
-    Questions::Java::SelectLines.new( <<-END.unindent.strip )
+    Questions::Java::SelectLines.new.parse( <<-END.unindent.strip )
       class Foo
       {
           public Foo() <<
