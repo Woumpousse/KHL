@@ -2,6 +2,7 @@ require './Shared.rb'
 require './HTML.rb'
 require './Types.rb'
 require './Java.rb'
+require './JavaScript.rb'
 
 module Questions
   class Expandable
@@ -356,6 +357,25 @@ module Questions
       def compute_result(code)
         bundle = ::Java::Bundle.from_string(code)
         ::Java::run(bundle).strip
+      end
+    end
+  end
+
+  module JavaScript
+    class InterpretCode < ::Questions::InterpretCode
+      def initialize
+        super(HTML::Formatters::JavaScriptFormatter.new)
+      end
+
+      def parse(code)
+        ::Questions::build_question(super(code)) do |q|
+          q.result = compute_result(code)
+        end
+      end
+
+      protected
+      def compute_result(code)
+        ::JavaScript.run(code).strip
       end
     end
   end

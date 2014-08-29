@@ -2,6 +2,7 @@ require 'cgi'
 require './Shared.rb'
 require './Types.rb'
 require './Java.rb'
+require './JavaScript.rb'
 
 module HTML
   module Formatters
@@ -80,6 +81,17 @@ module HTML
         super( [keyword_formatter, line_comment_formatter, block_comment_formatter] )
       end
     end
+
+    class JavaScriptFormatter < CombinedHighlighter
+      def initialize    
+        keyword_formatter = KeywordHighlighter.new(JavaScript::KEYWORDS)
+        line_comment_formatter = LineCommentHighlighter.new
+        block_comment_formatter = BlockCommentHighlighter.new
+
+        super( [keyword_formatter, line_comment_formatter, block_comment_formatter] )
+      end
+    end
+
   end
 
   def HTML.unescape(value)

@@ -149,4 +149,12 @@ class Exercises
     END
   end
 
+  def js_interpret
+    Questions::JavaScript::InterpretCode.new.parse( <<-END.unindent.strip )
+      var x = 1;
+
+      console.log(x);
+    END
+  end
+
 end

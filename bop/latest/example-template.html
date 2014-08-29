@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Voorbeeld</title>
+    <title>Voorbeeldgebruik</title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
     <script src="khl.js"></script>
@@ -17,14 +17,12 @@
       <h1>Voorbeeld</h1>
 
       <section>
-        <h2>Invuloefening</h2>
+        <h2>Invuloefening (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             Vul in.
           </p>
-          <pre>
-<%= fill_in_blanks.code %>
-          </pre>
+          <pre><%= fill_in_blanks.code %></pre>
           <div class="hint">
             <p>Dit is de hint</p>
           </div>
@@ -32,14 +30,12 @@
       </section>
 
       <section>
-        <h2>Type-Invuloefening</h2>
+        <h2>Type-Invuloefening (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             Illustreert het gebruik van FillInTypes.
           </p>
-          <pre>
-<%= fill_in_types.code %>
-          </pre>
+          <pre><%= fill_in_types.code %></pre>
           <div class="hint">
             <p>Dit is de hint</p>
           </div>
@@ -47,14 +43,12 @@
       </section>
 
       <section>
-        <h2>Access Modifier Invuloefening</h2>
+        <h2>Access Modifier Invuloefening (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             Illustreert het gebruik van FillInAccessModifiers.
           </p>
-          <pre>
-<%= fill_in_access_modifiers.code %>
-          </pre>
+          <pre><%= fill_in_access_modifiers.code %></pre>
           <div class="hint">
             <p>Dit is de hint</p>
           </div>
@@ -62,14 +56,12 @@
       </section>
 
       <section>
-        <h2>Invuloefening met Validators</h2>
+        <h2>Invuloefening met Validators (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             Illustreert het gebruik van validators.
           </p>
-          <pre>
-<%= fill_in_blanks_validators.code %>
-          </pre>
+          <pre><%= fill_in_blanks_validators.code %></pre>
           <div class="hint">
             <p>Dit is de hint</p>
           </div>
@@ -77,15 +69,13 @@
       </section>
 
       <section>
-        <h2>Invuloefening met pool</h2>
+        <h2>Invuloefening met pool (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             Illustreert het gebruik van FillInBlanks met pool.
           </p>
           <%= HTML::unordered_list( fill_in_blanks_pooled.answers.sort.uniq, { 'class' => 'pool' } ) %>
-          <pre>
-<%= fill_in_blanks_pooled.code %>
-          </pre>
+          <pre><%= fill_in_blanks_pooled.code %></pre>
           <div class="hint">
             <p>Dit is de hint</p>
           </div>
@@ -93,38 +83,42 @@
       </section>
 
       <section>
-        <h2>Tokenselectie</h2>
+        <h2>Tokenselectie (Java)</h2>
         <div data-question="selection">
           <p>
             Selecteer de types.
           </p>
-          <pre>
-<%= select_types.code %>
-          </pre>
+          <pre><%= select_types.code %></pre>
         </div>
       </section>
 
       <section>
-        <h2>Lijnselectie</h2>
+        <h2>Lijnselectie (Java)</h2>
         <div data-question="selection">
           <p>
             Selecteer de constructor.
           </p>
-          <pre>
-<%= select_lines.code %>
-          </pre>
+          <pre><%= select_lines.code %></pre>
         </div>
       </section>
 
       <section>
-        <h2>Uitvoer bepalen</h2>
+        <h2>Uitvoer Bepalen (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
             De uitvoer van dit programma is <%= HTML::blank_inputbox(interpret.result) %>
           </p>
-          <pre>
-<%= interpret.code %>
-          </pre>
+          <pre><%= interpret.code %></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Uitvoer Bepalen (JavaScript)</h2>
+        <div data-question="fill-in-blanks">
+          <p>
+            De uitvoer van dit programma is <%= HTML::blank_inputbox(js_interpret.result) %>
+          </p>
+          <pre><%= js_interpret.code %></pre>
         </div>
       </section>
 
