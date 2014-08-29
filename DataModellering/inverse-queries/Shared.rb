@@ -35,6 +35,14 @@ end
 
 
 class Set
+  def self.universe
+    UniverseSet.new
+  end
+
+  def self.empty
+    Set.new
+  end
+
   def initialize(*xs)
     @items = Hash.new(false)
 
@@ -71,11 +79,38 @@ class Set
     subset_of?(set) and superset_of?(set)
   end
 
-  def to_a
-    @items.keys
+  def to_s
+    items.to_s
+  end
+end
+
+class UniverseSet
+  def add(x)
+    @items[x] = true
+  end
+
+  def items
+    raise "Infinite array"
+  end
+
+  def contains?(*xs)
+    true
+  end
+
+  def subset_of?(set)
+    set.superset_of?(self)
+  end
+
+  def superset_of?(set)
+    true
+  end
+
+  def same?(set)
+    subset_of?(set) and superset_of?(set)
   end
 
   def to_s
-    to_a.to_s
+    "universe"
   end
+  
 end

@@ -35,7 +35,7 @@ class Exercise
   end
 
   def to_s
-    @name
+    "Exercise[line #{@line} in #{@file}]"
   end
 
 
@@ -191,13 +191,13 @@ module Categories
 
   class InnerJoin < RegexCategory
     def initialize
-      super('inner join', /INNER JOIN/i)
+      super('inner-join', /INNER JOIN/i)
     end
   end
 
   class OuterJoin < RegexCategory
     def initialize
-      super('outer join', /OUTER JOIN|LEFT JOIN|RIGHT JOIN/i)
+      super('outer-join', /OUTER JOIN|LEFT JOIN|RIGHT JOIN/i)
     end
   end
 
@@ -210,6 +210,18 @@ module Categories
   class Having < RegexCategory
     def initialize
       super('having', /HAVING/i)
+    end
+  end
+
+  class Order < RegexCategory
+    def initialize
+      super('order', /ORDER/i)
+    end
+  end
+
+  class Select < RegexCategory
+    def initialize
+      super('select', /SELECT/i)
     end
   end
 end

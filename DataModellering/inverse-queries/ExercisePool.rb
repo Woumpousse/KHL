@@ -93,9 +93,32 @@ module ExercisePool
     end
   end
 
-  def self.pick(n)
+  def self.select
     ExercisePool::exercises.select do |exercise|
       yield exercise
-    end.pick(n)
+    end
+  end
+
+  def self.pick(n)
+    selection = ExercisePool::select do |exercise|
+      yield exercise
+    end
+
+    if selection.length < n
+    then abort "Only #{selection.length} exercises available!"
+    else selection.pick(n)
+    end
+  end
+
+  def self.all_categories
+    result = Set.new
+
+    exercises.each do |exercise|
+      exercise.categories.items.each do |category|
+        result.add(category)
+      end
+    end
+
+    result
   end
 end

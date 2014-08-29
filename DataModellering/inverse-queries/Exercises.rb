@@ -1,12 +1,13 @@
-require './Shared.rb'
-require './Exercise.rb'
 require './ExercisePool.rb'
-require './LaTeX.rb'
 
 
+# Extends the exercise pool
 module ExercisePool
 
+  # All exercises in this block will be categorized automatically
+  # It is also possible to add categories manually
   auto_categorize do
+
     #
     # Easy difficulty
     #
@@ -128,6 +129,7 @@ module ExercisePool
 
     end
 
+
     #
     # Medium difficulty
     #
@@ -175,6 +177,7 @@ module ExercisePool
       end
     end
 
+
     #
     # Hard difficulty
     #
@@ -202,50 +205,3 @@ module ExercisePool
   end
 end
 
-
-def example
-  # Picks 3 easy exercises combining inner joins with aggregation
-  puts LaTeX::format_bundle( IO.read('template.tex'),
-                             ExercisePool::pick(3) do |exercise|
-                               exercise[:difficulty] == :easy and exercise.categories.same?( Set.new('inner join', 'aggregation' ) )
-                             end )
-end
-
-
-def verify
-  error_count = 0
-
-  puts "Checking..."
-  ExercisePool::exercises.each do |exercise|
-    begin
-      exercise.solution
-    rescue Database::DatabaseError => e
-      error_count += 1
-
-      puts <<END
-Error in exercise defined on line #{exercise.line} in file #{exercise.file}
-Error message:
-#{e.message}
-
-END
-    end
-  end
-
-  if error_count == 0
-  then puts "No errors found!"
-  else
-    puts "#{error_count} error(s) found"
-  end  
-end
-
-# ExercisePool::exercises.select do |exercise|
-#   exercise[:difficulty] == :easy and  exercise.categories.same?( Set.new( 'inner join', 'aggregation' ) )
-# end.each do |exercise|
-#   puts exercise.categories
-#   puts( exercise.query )
-#   puts( LaTeX::format_table(exercise.solution) )
-#   puts
-# end
-
-
-verify
