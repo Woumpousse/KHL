@@ -1,8 +1,3 @@
-// Wijzig de waarde van deze variabele om een andere oefening te selecteren
-function drive(car) {
-    drive1(car);
-}
-
 function drive1(car) {
     forward(car);
 }
