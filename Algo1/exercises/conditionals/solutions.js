@@ -90,9 +90,9 @@ var Solutions;
     function maximumOfThree(a, b, c) {
         var result;
 
-        if (a <= b && a <= c) {
+        if (a >= b && a >= c) {
             result = a;
-        } else if (b <= a && b <= c) {
+        } else if (b >= a && b >= c) {
             result = b;
         } else {
             result = c;
@@ -173,7 +173,7 @@ var Solutions;
 
         result = n * 5 + k * 7;
 
-        if (result < 20) {
+        if (n + k < 3) {
             result += 0.5 * (n + k);
         }
 
@@ -186,7 +186,7 @@ var Solutions;
 
         result = n * 5 + k * 7;
 
-        if (result < 20 && n + k < 3) {
+        if (result < 20 || n + k < 3) {
             result += 0.5 * (n + k);
         }
 
