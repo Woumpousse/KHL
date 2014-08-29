@@ -169,53 +169,66 @@ module Solutions
 
     export function greatestDigitProduct(n : number) : number
     {
-        var best = 0;
-        var product = 1;
+        if ( n >= 10 ) {
+            var best = 0;
+            var product = 1;
 
-        while ( n > 0 )
-        {
-            var digit = n % 10;
-            n = Math.floor(n / 10);
+            while ( n > 0 )
+            {
+                var digit = n % 10;
+                n = Math.floor(n / 10);
 
-            if ( digit === 0 )
-            {
-                best = Math.max(best, product);
-                product = 1;
+                if ( digit === 0 )
+                {
+                    best = Math.max(best, product);
+                    product = 1;
+                }
+                else
+                {
+                    product *= digit;
+                }
             }
-            else
-            {
-                product *= digit;
-            }
+
+            best = Math.max(best, product);
+
+            return best;
         }
-
-        best = Math.max(best, product);
-
-        return best;
+        else
+        {
+            return -1;
+        }
     }
 
     export function greatestSumOfDigitTriples(n : number) : number
     {
-        var best = 0;
-        var d1, d2, d3;
-
-        d1 = n % 10;
-        n = Math.floor(n / 10);
-        d2 = n % 10;
-        n = Math.floor(n / 10);
-        d3 = n % 10;
-
-        best = d1 + d2 + d3;
-
-        while ( n > 0 )
+        if ( n >= 100 )
         {
-            d1 = d2;
-            d2 = d3;
-            d3 = n % 10;
+            var best = 0;
+            var d1, d2, d3;
+
+            d1 = n % 10;
             n = Math.floor(n / 10);
+            d2 = n % 10;
+            n = Math.floor(n / 10);
+            d3 = n % 10;
 
-            best = Math.max( d1 + d2 + d3, best );
+            best = d1 + d2 + d3;
+
+            while ( n > 0 )
+            {
+                d1 = d2;
+                d2 = d3;
+                d3 = n % 10;
+                n = Math.floor(n / 10);
+
+                best = Math.max( d1 + d2 + d3, best );
+            }
+
+            return best;
         }
-
-        return best;
+        else
+        {
+            return -1;
+        }
     }
 }

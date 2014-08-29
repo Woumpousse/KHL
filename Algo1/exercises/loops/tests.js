@@ -108,6 +108,9 @@ defineTests(function (test) {
         builder.addInput(23033024);
         builder.addInput(23033025);
         builder.addInput(93033025);
+        builder.addInput(5);
+        builder.addInput(-1);
+        builder.addInput(-1000);
     });
 
     test(Solutions.greatestSumOfDigitTriples, function (builder) {
@@ -118,5 +121,9 @@ defineTests(function (test) {
         builder.addInput(111111999);
         builder.addInput(111999111);
         builder.addInput(16782469);
+        builder.addInput(5);
+        builder.addInput(53);
+        builder.addInput(-1);
+        builder.addInput(-1000);
     });
 });
