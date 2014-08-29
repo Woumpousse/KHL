@@ -5,7 +5,16 @@ module Database
   @@db = SQLite3::Database.new ":memory:"
 
   class DatabaseError < Exception
+    def initialize(message, sql)
+      @message = message
+      @sql = sql
+    end
 
+    attr_reader :message, :sql
+
+    def to_s
+      self.message
+    end
   end
 
   class SimpleTable
@@ -21,12 +30,12 @@ module Database
     begin
       @@db.execute2(sql)
     rescue SQLite3::Exception => e
-      puts( <<-END.unindent )
-        #{e.to_s.indent}
-        while executing
-        #{sql.indent}
-        END
-      raise DatabaseError
+      # puts( <<-END.unindent )
+      #   #{e.to_s.indent}
+      #   while executing
+      #   #{sql.indent}
+      #   END
+      raise DatabaseError.new(e.to_s, sql)
     end
   end
 

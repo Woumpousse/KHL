@@ -3,12 +3,14 @@ require './Database.rb'
 
 
 class Exercise
-  def initialize
+  def initialize(file, line)
+    @file = file
+    @line = line
     @tables = []
     @query = nil
     @solution = nil
     @metadata = {}
-    @categories = []
+    @categories = Set.new
   end
 
   def [](key)
@@ -32,8 +34,13 @@ class Exercise
     @solution
   end
 
+  def to_s
+    @name
+  end
+
+
   attr_reader :tables
-  attr_accessor :query, :categories
+  attr_accessor :query, :categories, :file, :line
 
   private
   def execute

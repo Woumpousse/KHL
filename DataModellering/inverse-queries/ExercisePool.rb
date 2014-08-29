@@ -11,10 +11,10 @@ module ExercisePool
     @@exercises
   end
 
-  def self.exercise
+  def self.exercise(file, line)
     abort "Nested exercises are not allowed" if @@current_exercise
 
-    @@current_exercise = Exercise.new
+    @@current_exercise = Exercise.new(file, line)
     yield
     @@exercise_postprocessor[@@current_exercise]
     @@current_exercise.finalize
@@ -77,7 +77,7 @@ module ExercisePool
 
   def self.category(cat)
     postprocess_exercise( lambda do |exercise|
-                            exercise.categories.push(cat)
+                            exercise.categories.add(cat)
                           end ) do
       yield
     end
@@ -85,9 +85,17 @@ module ExercisePool
 
   def self.auto_categorize
     postprocess_exercise( lambda do |exercise|
-                            exercise.categories += categorize(exercise)
+                            categorize(exercise).each do |category|
+                              exercise.categories.add(category)
+                            end
                           end ) do
       yield
     end
+  end
+
+  def self.pick(n)
+    ExercisePool::exercises.select do |exercise|
+      yield exercise
+    end.pick(n)
   end
 end

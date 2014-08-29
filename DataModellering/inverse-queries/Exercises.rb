@@ -11,7 +11,7 @@ module ExercisePool
     # Easy difficulty
     #
     difficulty(:easy) do
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'a', 2 ]
           row [ 'b', 1 ]
@@ -29,7 +29,7 @@ module ExercisePool
         END
       end
 
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'a', 2 ]
           row [ 'b', 1 ]
@@ -47,7 +47,7 @@ module ExercisePool
         END
       end
 
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'a', 2 ]
           row [ 'b', 1 ]
@@ -65,7 +65,7 @@ module ExercisePool
         END
       end
 
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'a', 2 ]
           row [ 'b', 1 ]
@@ -83,7 +83,7 @@ module ExercisePool
         END
       end
 
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'id', 'col' ] ) do
           row [ 1, 'a' ]
           row [ 2, 'b' ]
@@ -103,13 +103,36 @@ module ExercisePool
           ORDER BY foo.col, bar.col
         END
       end
+
+      exercise(__FILE__, __LINE__) do
+        table( 'foo', [ 'col1' ] ) do
+          row [ 1 ]
+          row [ 2 ]
+          row [ 3 ]
+        end
+
+        table( 'bar', [ 'col1', 'col2' ] ) do
+          row [ 1, 'x' ]
+          row [ 2, 'y' ]
+          row [ 2, 'z' ]
+        end
+
+        query <<-END
+          SELECT foo.col1, COUNT(bar.col2)
+          FROM foo
+          INNER JOIN bar ON foo.col1 = bar.col1
+          GROUP BY foo.col1
+          ORDER BY foo.col1
+        END
+      end
+
     end
 
     #
     # Medium difficulty
     #
     difficulty(:medium) do
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'c', 2 ]
           row [ 'a', 1 ]
@@ -130,7 +153,7 @@ module ExercisePool
         END
       end
 
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2' ] ) do
           row [ 'a', 5 ]
           row [ 'b', 2 ]
@@ -156,7 +179,7 @@ module ExercisePool
     # Hard difficulty
     #
     difficulty(:hard) do
-      exercise do
+      exercise(__FILE__, __LINE__) do
         table( 'foo', [ 'col1', 'col2', 'col3' ] ) do
           row [ 'a', 'a', 1 ]
           row [ 'a', 'a', 2 ]
@@ -180,13 +203,49 @@ module ExercisePool
 end
 
 
-
-
-# puts LaTeX::format_bundle( IO.read('template.tex'), ExerciseDatabase::exercises )
-
-puts ExercisePool::exercises.length
-
-ExercisePool::exercises.each do |exercise|
-  puts exercise.categories
-  puts( LaTeX::format_table(exercise.solution) )
+def example
+  # Picks 3 easy exercises combining inner joins with aggregation
+  puts LaTeX::format_bundle( IO.read('template.tex'),
+                             ExercisePool::pick(3) do |exercise|
+                               exercise[:difficulty] == :easy and exercise.categories.same?( Set.new('inner join', 'aggregation' ) )
+                             end )
 end
+
+
+def verify
+  error_count = 0
+
+  puts "Checking..."
+  ExercisePool::exercises.each do |exercise|
+    begin
+      exercise.solution
+    rescue Database::DatabaseError => e
+      error_count += 1
+
+      puts <<END
+Error in exercise defined on line #{exercise.line} in file #{exercise.file}
+Error message:
+#{e.message}
+
+END
+    end
+  end
+
+  if error_count == 0
+  then puts "No errors found!"
+  else
+    puts "#{error_count} error(s) found"
+  end  
+end
+
+# ExercisePool::exercises.select do |exercise|
+#   exercise[:difficulty] == :easy and  exercise.categories.same?( Set.new( 'inner join', 'aggregation' ) )
+# end.each do |exercise|
+#   puts exercise.categories
+#   puts( exercise.query )
+#   puts( LaTeX::format_table(exercise.solution) )
+#   puts
+# end
+
+
+verify
