@@ -41,71 +41,31 @@
   \end{columns}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Puntenverdeling}
-%   \begin{columns}
-%     \column{.5\textwidth}
-%     \begin{itemize}
-%       \item {\color{red} 40\%: opdrachten}
-%              \begin{itemize}
-%                \item {\color{red} Toetsen}
-%              \end{itemize}
-%              \vskip4mm
-%       \item {\color{blue} 60\%: examen}
-%              \begin{itemize}
-%                \item {\color{blue} 10\% mondeling contactexamen}
-%                \item {\color{blue} 50\% schriftelijk contactexamen}
-%              \end{itemize}
-%     \end{itemize}
-%     \column{.5\textwidth}
-%     \begin{center}
-%       \begin{tikzpicture}
-%         \pgfkeys{/mylib/segpie/.cd, inner radius=1.5, outer radius=2.5}
-%         \segpie[fill=red]{0}{3}{10}
-%         \segpie[fill=blue]{4}{9}{10}
-%       \end{tikzpicture}
-%     \end{center}
-%   \end{columns}
-%   \vskip5mm
-%   {\tiny (Offici\"ele informatie te vinden op studiewijzer)}
-% \end{frame}
-
 \begin{frame}
-  \frametitle{Plaatsing}
+  \frametitle{Plaatsing (Onvolledig Overzicht)}
   \begin{center}
-    \begin{tikzpicture}[vak/.style={rectangle,draw=black,fill=blue!25,thin,minimum size=12mm},
-                        arr/.style={->,thick},
-                        sem/.style={left color=blue!75, right color=blue!25,drop shadow},
-                        semc/.style={rotate=90,fill=blue!75,rectangle,drop shadow},
-                        lang/.style={circle,fill=red!50,circular drop shadow},
-                        langarr/.style={ultra thick,->,red!50}]
-      \path[use as bounding box] (-3,0) rectangle (3,5);
-      \node[semc] at (-2.25,3.75) {S1};
-      \node[semc] at (-2.25,1.75) {S2};
-      \node[semc] at (-2.25,-0.25) {S3};
-      \shade[sem] (-2,4.75) rectangle (2, 3.25);
-      \shade[sem] (-2,2.75) rectangle (2, 1.25);
-      \shade[sem] (-2,0.75) rectangle (2, -0.75);
-      \node[vak] (bop)    at (-1,4)   {BOP};
-      \node[vak] (algo1)  at (1,4)    {Algo1};
-      \node[vak] (oop)    at (-1,2)   {OOP};
-      \node[vak] (algo2)  at (1,2)    {Algo2};
-      \node[vak] (ooo)    at (-1,0)   {OOO};
-      \draw[arr] (algo1) -- (bop);
-      \draw[arr] (bop) -- (oop);
-      \draw[arr] (oop) -- (ooo);
-      \draw[arr] (algo1) -- (algo2);
-      \draw[arr] (bop) -- (algo2);
-
-      \only<2>{
-        \node[lang] (java) at (-4,2.5) {Java};
-        \node[lang] (javascript) at (3.75,4) {JavaScript};
-        \draw[langarr] (java) to [bend left=45] (bop);
-        \draw[langarr] (java) to [bend left=45] (algo2);
-        \draw[langarr] (java) to [bend left=45] (oop);
-        \draw[langarr] (java) to [bend left=45] (ooo);
-        \draw[langarr] (javascript) to [bend right=45] (algo1);
-      }
+    \begin{tikzpicture}[vak/.style={anchor=south west,minimum height=.95cm},
+                        javascript/.style={vak,fill=blue!25},
+                        java/.style={vak,fill=red!25},
+                        csharp/.style={vak,fill=green!25},
+                        scilab/.style={vak,fill=yellow!50},
+                        cpp/.style={vak,fill=purple!25}
+                        ]
+      \node[javascript,minimum width=10cm] at (0,0) {Algo1};
+      \node[java,minimum width=1.95cm] at (0,1) {BOP};
+      \node[java,minimum width=1.95cm] at (0,2) {Algo2};
+      \node[java,minimum width=1.95cm] at (0,3) {OOP};
+      \node[java,minimum width=1.95cm] at (0,4) {OOO};
+      \node[csharp,minimum width=1.95cm] at (2,1) {VGO};
+      \node[csharp,minimum width=1.95cm] at (2,2) {.NET};
+      \node[scilab,minimum width=1.95cm] at (4,1) {TW1};
+      \node[scilab,minimum width=1.95cm] at (4,2) {TW2};
+      \node[scilab,minimum width=1.95cm] at (4,3) {TW3};
+      \node[javascript,minimum width=1.95cm,inner sep=0mm] at (6,1) {\tiny Webontwikkeling 1};
+      \node[javascript,minimum width=1.95cm,inner sep=0mm] at (6,2) {\tiny Webontwikkeling 2};
+      \node[javascript,minimum width=1.95cm,inner sep=0mm] at (6,3) {\tiny Dynweb};
+      \node[cpp,minimum width=1.95cm,inner sep=0mm] at (8,1) {\tiny Multimedia};
+      \node[cpp,minimum width=1.95cm,inner sep=0mm] at (8,2) {\tiny 3D Graphics};
     \end{tikzpicture}
   \end{center}
 \end{frame}
