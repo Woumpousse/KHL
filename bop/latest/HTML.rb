@@ -123,8 +123,18 @@ module HTML
   end
 
   def HTML.unordered_list(items, attributes = {})
+    Types.check( binding, {
+                   :items => [String],
+                   :attributes => { String => Types.any }
+                 } )
+
     items_string = items.map do |item|
-      "<li>#{unescape(item)}</li>"
+      text = if block_given?
+             then yield item
+             else unescape(item)
+             end
+
+      "<li>#{text}</li>"
     end.join("\n")
 
     attributes_string = string_of_attributes(attributes)
@@ -134,5 +144,19 @@ module HTML
       #{items_string}
     </ul>
     END
+  end
+
+  def HTML.output_sheet(output_map, attributes = {})
+    Types.check( binding, {
+                   :output_map => { String => String },
+                   :attributes => { String => Types.any }
+                 } )
+
+    unordered_list( output_map.keys, attributes ) do |key|
+      val = output_map[key]
+      input = blank_inputbox(val, "literal")
+
+      "<code>#{key}</code>=#{input}"
+    end 
   end
 end

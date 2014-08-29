@@ -106,7 +106,7 @@
         <h2>Uitvoer Bepalen (Java)</h2>
         <div data-question="fill-in-blanks">
           <p>
-            De uitvoer van dit programma is <%= HTML::blank_inputbox(interpret.result) %>
+            De uitvoer van dit programma is <%= HTML::blank_inputbox(interpret.output) %>
           </p>
           <pre><%= interpret.code %></pre>
         </div>
@@ -116,8 +116,9 @@
         <h2>Uitvoer Bepalen (JavaScript)</h2>
         <div data-question="fill-in-blanks">
           <p>
-            De uitvoer van dit programma is <%= HTML::blank_inputbox(js_interpret.result) %>
+            Na uitvoering zijn de volgende variabelen gelijk aan:
           </p>
+          <%= HTML::output_sheet( js_interpret.output_map ) %>
           <pre><%= js_interpret.code %></pre>
         </div>
       </section>

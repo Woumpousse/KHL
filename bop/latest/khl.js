@@ -340,10 +340,23 @@ function initialize()
                     });
                 }
 
+                function double_precision(precision)
+                {
+                    return function (input_element) {
+                        return function () {
+                            var expected = parseFloat( input_element.attr('data-solution') );
+                            var received = parseFloat( input_element.val() );
+
+                            return Math.abs(expected - received) < precision;
+                        }
+                    };
+                }
+
                 return { 
                     exact: exact,
                     case_insensitive: case_insensitive,
-                    ignore_whitespace: ignore_whitespace
+                    ignore_whitespace: ignore_whitespace,
+                    double_precision_2: double_precision(.01)
                 };
             } )();            
 
@@ -352,10 +365,15 @@ function initialize()
                 return question.find('input[data-solution]');
             }
 
+            function findValidator(validator_id)
+            {
+                return validators[validator_id];
+            }
+
             function hasCorrectInput(input)
             {
                 var validator_id = input.attr('data-validator') || 'exact';
-                var validator = validators[validator_id](input);
+                var validator = findValidator(validator_id)(input);
 
                 return validator();
             }

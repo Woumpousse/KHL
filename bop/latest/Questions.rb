@@ -5,6 +5,26 @@ require './Java.rb'
 require './JavaScript.rb'
 
 module Questions
+  def self.remove_redundant_whitespace(code)
+    Types.check( binding, { :code => String } )
+
+    result = []
+    last_line_empty = false
+
+    code.lines.each do |line|
+      if line.strip.empty? and not last_line_empty
+      then
+        last_line_empty = true
+        result.push('')
+      else
+        last_line_empty = false
+        result.push(line.strip)
+      end
+    end
+
+    result.join("\n").strip
+  end
+  
   class Expandable
     def initialize
       @properties = Hash.new
@@ -241,7 +261,59 @@ module Questions
       Types.check( binding, { :code => String } )
 
       ::Questions.build_question do |q|
-        q.code = @formatter.apply(code)
+        view_code = remove_hidden_code(code)
+        view_code = ::Questions::remove_redundant_whitespace(view_code)
+
+        q.code = @formatter.apply( view_code )
+      end
+    end
+
+    protected
+    module QuestionExtension
+      def output_key(k)
+        if output =~ /^#{k}=(.*)$/
+        then $1
+        else raise "Key not found in output"
+        end
+      end
+
+      def output_map
+        result = {}
+
+        output.scan(/^([^=]+)=([^=]+)$/).each do |key, val|
+          result[key.strip] = val.strip
+        end
+
+        result
+      end
+    end
+
+    def hide_by_tags(code)
+      Types.check( binding, { :code => String } )
+
+      code.gsub(/`([^:]+):([^`]*)`/) do
+        tag, body = $1, $2
+
+        if yield tag
+        then ""
+        else body
+        end
+      end
+    end
+
+    def remove_hidden_code(code)
+      Types.check( binding, { :code => String } )
+
+      hide_by_tags(code) do |tag|
+        tag == 'hide'
+      end
+    end
+
+    def remove_tags(code)
+      Types.check( binding, { :code => String } )
+
+      hide_by_tags(code) do
+        false
       end
     end
   end
@@ -349,7 +421,7 @@ module Questions
 
       def parse(code)
         ::Questions::build_question(super(code)) do |q|
-          q.result = compute_result(code)
+          q.output = compute_result(code)
         end
       end
 
@@ -369,7 +441,8 @@ module Questions
 
       def parse(code)
         ::Questions::build_question(super(code)) do |q|
-          q.result = compute_result(code)
+          q.output = compute_result(remove_tags(code))
+          q.extend QuestionExtension
         end
       end
 
