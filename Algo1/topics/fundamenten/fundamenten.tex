@@ -223,6 +223,126 @@
 }
 
 \begin{frame}
+  \frametitle{Variabelen}
+  \begin{overprint}
+    \onslide<1-2>
+    \code[width=.2\linewidth,font size=\small]{vars1.js}
+
+    \onslide<3>
+    \code[width=.2\linewidth,font size=\small]{vars2.js}
+
+    \onslide<4>
+    \code[width=.2\linewidth,font size=\small]{vars3.js}
+  \end{overprint}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<1>{
+      \node[/khl/note,anchor=south west] (note declaration) at ($ (declaration) + (1,1) $) {Declaratie};
+      \draw[/khl/note arrow] (note declaration) -- (declaration.north east);
+    }
+
+    \only<2>{
+      \node[/khl/note,anchor=south west] (note initialization) at ($ (initialization) + (1,1) $) {Toekenning};
+      \draw[/khl/note arrow] (note initialization) -- (initialization.north east);
+    }
+
+    \only<3>{
+      \node[/khl/note,anchor=south west] (note combination) at ($ (combination) + (1,1) $) {Declaratie + initialisatie};
+      \draw[/khl/note arrow] (note combination) -- (combination.north east);
+    }
+  \end{tikzpicture}
+  \begin{overprint}
+    \onslide<1>
+    Een \emph{declaratie} voert een nieuwe variabele in. De computer zoekt een stukje vrij geheugen en geeft dit een naam.
+
+    \onslide<2>
+    Een \emph{toekenning} kent een waarde toe aan een variabele. De eerste toekenning wordt vaak ook
+    \emph{initialisatie} genoemd.
+
+    \onslide<3>
+    Een variabele kan bij declaratie meteen ge\"initialiseerd worden.
+
+    \onslide<4>
+    Dit is fout: {\tt x} heeft geen waarde.
+  \end{overprint}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Toekenningen}
+  Variabelen zijn overschrijfbaar:
+  \vskip1cm
+  \code[width=.3\linewidth]{overwrite.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<1>{
+      \node[/khl/note,anchor=south west] (init note) at ($ (init) + (1,1) $) {{\tt x} wordt ge\"initialiseerd op {\tt 5}};
+      \draw[/khl/note arrow] (init note) -- (init.north east);
+    }
+
+    \only<2>{
+      \node[/khl/note,anchor=south west] (assignment note) at ($ (assignment) + (1,1) $) {{\tt x} wordt overschreven met {\tt 3}};
+      \draw[/khl/note arrow] (assignment note) -- (assignment.north east);
+    }
+
+    \only<3>{
+      \node[/khl/note,anchor=south west] (rhs note) at ($ (rhs) + (1,1) $) {\parbox{5cm}{\raggedright Rechterlid wordt eerst ge\"evalueerd}};
+      \draw[/khl/note arrow] (rhs note) -- (rhs.north east);
+    }
+
+    \only<4>{
+      \node[/khl/note] (lhs note) at ($ (lhs) + (-1,-1) $) {Resultaat ({\tt 6}) wordt toegekend aan {\tt x}};
+      \draw[/khl/note arrow] (lhs note) -- (lhs.south west);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Toekenningen: Oefening}
+  Welke waarden steken er in de variabelen {\tt x} en {\tt y}?
+  \vskip1cm
+  \code[width=.3\linewidth]{assign-exercise.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=west] (first note) at ($ (first) + (2,0) $) {\parbox{1cm}{{\tt x} = 5}};
+      \draw[/khl/note arrow] (first note) -- (first.east);
+    }
+
+    \only<3>{
+      \node[/khl/note,anchor=west] (second note) at ($ (second) + (2,0) $) {
+        \parbox{1cm}{{\tt x} = 5 \\ {\tt y} = 5}
+      };
+      \draw[/khl/note arrow] (second note) -- (second.east);
+    }
+
+    \only<4>{
+      \node[/khl/note,anchor=west] (third note) at ($ (third) + (2,0) $) {
+        \parbox{1.2cm}{{\tt x} = 10 \\ {\tt y} = 5}
+      };
+      \draw[/khl/note arrow] (third note) -- (third.east);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Speciale Notaties}
+  \begin{center}
+    \begin{tabular}{l@{\hspace{1cm}}l}
+      {\bf Notatie} & {\bf Betekenis} \\
+      \toprule
+      {\tt x += y} & {\tt x = x + y} \\
+      {\tt x -= y} & {\tt x = x - y} \\
+      {\tt x *= y} & {\tt x = x * y} \\
+      {\tt x /= y} & {\tt x = x / y} \\
+      {\tt x \%= y} & {\tt x = x \% y} \\[2mm]
+      {\tt ++x} of {\tt x++} & {x = x + 1} \\
+      {\tt --x} of {\tt x--} & {x = x - 1} \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Basiselementen van Algoritmes}
   Algoritmes bestaat uit een reeks basiselementen:
   \vskip2mm
@@ -438,7 +558,6 @@
     \item {\tt 0 * (0/0)} crasht dus wel!
   \end{itemize}
 \end{frame}
-
 
 
 \end{document}
