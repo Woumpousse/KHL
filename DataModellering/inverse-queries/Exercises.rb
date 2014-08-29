@@ -1,11 +1,15 @@
 require './Shared.rb'
 require './Exercise.rb'
-require './ExerciseDatabase.rb'
+require './ExercisePool.rb'
 require './LaTeX.rb'
 
 
-module ExerciseDatabase
-  category('aggregatie') do
+module ExercisePool
+
+  auto_categorize do
+    #
+    # Easy difficulty
+    #
     difficulty(:easy) do
       exercise do
         table( 'foo', [ 'col1', 'col2' ] ) do
@@ -78,8 +82,32 @@ module ExerciseDatabase
           ORDER BY col1 ASC
         END
       end
+
+      exercise do
+        table( 'foo', [ 'id', 'col' ] ) do
+          row [ 1, 'a' ]
+          row [ 2, 'b' ]
+          row [ 3, 'c' ]
+        end
+
+        table( 'bar', [ 'id', 'col' ] ) do
+          row [ 1, 'x' ]
+          row [ 2, 'y' ]
+          row [ 3, 'z' ]
+        end
+
+        query <<-END
+          SELECT foo.col, bar.col
+          FROM foo
+          INNER JOIN bar ON foo.id = bar.id
+          ORDER BY foo.col, bar.col
+        END
+      end
     end
 
+    #
+    # Medium difficulty
+    #
     difficulty(:medium) do
       exercise do
         table( 'foo', [ 'col1', 'col2' ] ) do
@@ -123,10 +151,31 @@ module ExerciseDatabase
         END
       end
     end
-  end # category('aggregatie')
 
-  category('inner join') do
-    
+    #
+    # Hard difficulty
+    #
+    difficulty(:hard) do
+      exercise do
+        table( 'foo', [ 'col1', 'col2', 'col3' ] ) do
+          row [ 'a', 'a', 1 ]
+          row [ 'a', 'a', 2 ]
+          row [ 'a', 'b', 3 ]
+          row [ 'a', 'b', 4 ]
+          row [ 'a', 'b', 5 ]
+          row [ 'b', 'a', 'NULL' ]
+          row [ 'b', 'b', 2 ]
+          row [ 'b', 'b', 'NULL' ]
+        end
+
+        query <<-END
+          SELECT col1, col2, SUM(col3) as som, COUNT(col3) as count
+          FROM foo
+          GROUP BY col1, col2
+          ORDER BY col1 ASC
+        END
+      end
+    end
   end
 end
 
@@ -135,7 +184,9 @@ end
 
 # puts LaTeX::format_bundle( IO.read('template.tex'), ExerciseDatabase::exercises )
 
-ExerciseDatabase::exercises.each do |exercise|
-  puts exercise[:difficulty]
+puts ExercisePool::exercises.length
+
+ExercisePool::exercises.each do |exercise|
+  puts exercise.categories
   puts( LaTeX::format_table(exercise.solution) )
 end

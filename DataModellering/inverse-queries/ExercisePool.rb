@@ -1,8 +1,7 @@
 require './Exercise.rb'
 
 
-
-module ExerciseDatabase
+module ExercisePool
   @@exercises = []
   @@current_exercise = nil
   @@current_table = nil
@@ -76,8 +75,18 @@ module ExerciseDatabase
     end
   end
 
-  def self.category(str)
-    metadata( { :category => str } ) do
+  def self.category(cat)
+    postprocess_exercise( lambda do |exercise|
+                            exercise.categories.push(cat)
+                          end ) do
+      yield
+    end
+  end
+
+  def self.auto_categorize
+    postprocess_exercise( lambda do |exercise|
+                            exercise.categories += categorize(exercise)
+                          end ) do
       yield
     end
   end

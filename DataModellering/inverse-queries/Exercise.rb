@@ -8,6 +8,7 @@ class Exercise
     @query = nil
     @solution = nil
     @metadata = {}
+    @categories = []
   end
 
   def [](key)
@@ -32,7 +33,7 @@ class Exercise
   end
 
   attr_reader :tables
-  attr_accessor :query
+  attr_accessor :query, :categories
 
   private
   def execute
@@ -148,5 +149,74 @@ class Table
     then mapping[type]
     else throw "Unknown SQL type for #{type.to_s}"
     end
+  end
+end
+
+
+class Category
+  def initialize(name)
+    @name = name
+  end
+
+  attr_reader :name
+end
+
+class RegexCategory < Category
+  def initialize(name, regex)
+    super(name)
+
+    @regex = regex
+  end
+
+  def member?(question)
+    question.query =~ @regex
+  end
+
+  attr_reader :name
+end
+
+module Categories
+  class Aggregation < RegexCategory
+    def initialize
+      super('aggregation', /GROUP BY|SUM|AVG|COUNT|MIN|MAX/i)
+    end
+  end
+
+  class InnerJoin < RegexCategory
+    def initialize
+      super('inner join', /INNER JOIN/i)
+    end
+  end
+
+  class OuterJoin < RegexCategory
+    def initialize
+      super('outer join', /OUTER JOIN|LEFT JOIN|RIGHT JOIN/i)
+    end
+  end
+
+  class Where < RegexCategory
+    def initialize
+      super('where', /WHERE/i)
+    end
+  end
+
+  class Having < RegexCategory
+    def initialize
+      super('having', /HAVING/i)
+    end
+  end
+end
+
+def categorize(question)
+  categories = Categories.constants.select do |constant|
+    Class === Categories.const_get(constant)
+  end
+
+  categories.map do |id|
+    Categories.const_get(id).new
+  end.select do |c|
+    c.member?(question)
+  end.map do |c|
+    c.name
   end
 end
