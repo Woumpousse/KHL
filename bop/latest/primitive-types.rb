@@ -4,8 +4,40 @@ require './Generation.rb'
 
 
 
+def fill_in_blanks
+  <<END
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= $current.class_name %></title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Types</h1>
+      <section>
+        <h2>Klasse <%= $current.class_name %></h2>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul de juiste types in. Je hebt de keuze tussen
+          </p>
+          <%= HTML::unordered_list( $current.answers.sort.uniq, { 'class' => 'pool' } ) %>
+          <pre><%= $current.code %></pre>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+END
+end
 
-class Exercises
+
+
+
+class Resources
   include Controller
 
   def persoon
@@ -59,6 +91,7 @@ class Exercises
     END
 
     question.class_name = 'Persoon'
+    question.template = fill_in_blanks
 
     question
   end
@@ -114,52 +147,30 @@ class Exercises
     END
 
     question.class_name = 'Film'
+    question.template = fill_in_blanks
 
     question
   end
 end
 
 
-def template(exercise)
-  <<END
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= #{exercise}.class_name %></title>
-    <meta charset="utf-8">
-    <script src="jquery.js"></script>
-    <script src="khl.js"></script>
-    <link rel="stylesheet" href="khl.css">
-  </head>
-  <body>
-    <div id="contents">
-      <h1>Types</h1>
-      <section>
-        <h2>Klasse <%= #{exercise}.class_name %></h2>
-        <div data-question="fill-in-blanks">
-          <p>
-            Vul de juiste types in. Je hebt de keuze tussen
-          </p>
-          <%= HTML::unordered_list( #{exercise}.answers.sort.uniq, { 'class' => 'pool' } ) %>
-          <pre><%= #{exercise}.code %></pre>
-        </div>
-      </section>
-    </div>
-  </body>
-</html>
-END
-end
 
+$current = nil
 
 def main
-  exercises = Exercises.new
+  exercises = Resources.new
 
-  %w(persoon film).each do |exercise_id|
-    File.open("#{exercise_id}.html", 'w') do |out|
-      result = Generation.generate( exercises, template( exercise_id ) )
+  %w(persoon film).each do |question_id|
+    puts "Processing #{question_id}"
 
+    $current = exercises.send question_id
+    filename = "#{question_id}.html"
+
+    result = Generation.generate( exercises, $current.template )
+
+    puts "Writing #{filename}"
+    File.open(filename, 'w') do |out|      
       out.write( result )
-      
     end
   end
 end

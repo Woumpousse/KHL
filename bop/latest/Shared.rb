@@ -141,3 +141,30 @@ class ComposedString
     @components.dup
   end
 end
+
+module Dynamic
+  @@variables = Hash.new
+
+  def self.get(id)
+    if @@variables.has_key? id
+    then @@variables[id]
+    else raise "Dynamic variable #{id} has no value"
+    end
+  end
+
+  def self.with(id, val)
+    contained = @@variables.has_key? id
+    old_val = @@variables[id]
+
+    @@variables[id] = val
+
+    begin
+      yield
+    ensure
+      if contained
+      then @@variables[id] = old_val
+      else @@variables.delete(id)
+      end
+    end    
+  end
+end
