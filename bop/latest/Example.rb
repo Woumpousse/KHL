@@ -3,7 +3,7 @@ require './Controller.rb'
 require './Shared.rb'
 require './Parameters.rb'
 
-class Exercises
+class Examples
   include Controller
 
   def fill_in_blanks

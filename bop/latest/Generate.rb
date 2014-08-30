@@ -4,7 +4,7 @@ require './Controller.rb'
 require './Parameters.rb'
 
 
-VERSION = 4
+VERSION = 5
 
 def parse_command_line_arguments
   options = {}
@@ -22,9 +22,14 @@ def parse_command_line_arguments
       options[:template] = file
     end
 
-    options[:exercises] = nil
-    opts.on( '-e', '--exercises FILE', 'Exercise file to be used') do |file|
-      options[:exercises] = file
+    options[:required] = []
+    opts.on( '-r', '--require FILE', 'Ruby files to be loaded') do |file|
+      options[:required].push(file)
+    end
+
+    options[:class] = nil
+    opts.on( '-c', '--class IDENTIFIER', 'Class containing exercises') do |file|
+      options[:class] = file
     end
 
     options[:output] = nil
@@ -49,11 +54,12 @@ def parse_command_line_arguments
   end
 
   optparse.parse!
+
   options
 end
 
 
-def load_exercises(file)
+def dynamically_load(file)
   abort "No exercises specified" unless file
 
   puts "Loading file #{file}..."
@@ -75,7 +81,7 @@ def verify
 end
 
 
-def generate(template, output)
+def generate(class_name, template, output)
   abort "No template specified" unless template
   abort "No output specified" unless output
 
@@ -84,8 +90,14 @@ def generate(template, output)
     template_data = IO.read(template)
     puts "Loaded template #{template} successfully"
 
+    puts "Looking for class #{class_name}"
+    resource_class = Kernel.const_get(class_name)
+    
+    puts "Instantiating class #{class_name}"
+    resource = resource_class.new
+
     puts "Processing template"
-    result = Exercises.new.process_template(template_data)
+    result = resource.process_template(template_data)
     puts "Successfully processed template"
 
     puts "Writing to file #{output}"
@@ -97,14 +109,16 @@ end
 def main
   options = parse_command_line_arguments
 
-  load_exercises(options[:exercises])
+  options[:required].each do |file|
+    dynamically_load(file)
+  end
 
   if options[:verify]
   then verify
   end
 
   if options[:template] or options[:output]
-  then generate(options[:template], options[:output])
+  then generate(options[:class], options[:template], options[:output])
   end
 
   puts "Done!"

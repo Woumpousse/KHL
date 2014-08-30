@@ -7,7 +7,7 @@ class Exercises
   include Controller
 
   def fill_in_types_person
-    Questions::Java::AutoFillInTypes.new.parse( <<-'END'.unindent.strip )
+    question = Questions::Java::AutoFillInTypes.new.parse( <<-'END'.unindent.strip )
       class Persoon
       {
           private String naam;
@@ -47,6 +47,9 @@ class Exercises
           }
       }
     END
+
+
+    question
   end
 
 end

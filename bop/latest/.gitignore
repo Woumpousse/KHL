@@ -4,5 +4,4 @@
 *.toc
 *.log
 *~
-example.html
-primitive-types.html
+*.html
