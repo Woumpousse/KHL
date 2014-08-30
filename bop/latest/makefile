@@ -8,7 +8,7 @@ all: icons export
 example: example-template.html *.rb icons example-slides example-html
 
 example-html:
-	ruby Generate.rb --output example.html --template example-template.html --exercises ./Example.rb
+	ruby Generate.rb --output example.html --template example-template.html --exercises ./Example.rb --parameter x=1 -p y=2
 
 example-slides: slides-example.tex
 	$(LATEX) slides-example.tex

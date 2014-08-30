@@ -1,9 +1,10 @@
 require 'optparse'
 require './Questions.rb'
 require './Controller.rb'
+require './Parameters.rb'
 
 
-VERSION = 3
+VERSION = 4
 
 def parse_command_line_arguments
   options = {}
@@ -31,6 +32,16 @@ def parse_command_line_arguments
       options[:output] = file
     end
 
+    opts.on( '-p', '--parameter KEY=VALUE', 'Define parameter') do |pair|
+      if pair =~ /^([^=]+)=([^=]+)$/
+      then
+        key, val = $1, $2
+        Parameters.add(key, val)
+      else
+        raise "Invalid parameter \"#{pair}\""
+      end
+    end
+
     opts.on( '-h', '--help', 'Display this screen' ) do
       puts opts
       exit
@@ -50,10 +61,11 @@ def load_exercises(file)
     require file
   rescue LoadError => e
     puts "Failed to load #{file}..."
-    puts 'Possible remedy: use "-e ./file" instead of "-e file"'
+    puts 'Possible remedy: use "./file" instead of "file"'
     puts "Error:\n#{e}"
-    exit -1
+    abort
   end
+
   puts "Successfully loaded #{file}..."
 end
 

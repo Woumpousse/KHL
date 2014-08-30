@@ -1,6 +1,7 @@
 require './Questions.rb'
 require './Controller.rb'
 require './Shared.rb'
+require './Parameters.rb'
 
 class Exercises
   include Controller
@@ -46,11 +47,6 @@ class Exercises
           }
       }
     END
-  end
-
-
-  def fill_in_blanks_datum
-    
   end
 
 end

@@ -151,6 +151,22 @@
           </div>
         </div>
       </section>
+
+      <section>
+        <h2>Parameters</h2>
+        <p>
+          Parameters kunnen via de command-line meegegeven worden
+          m.b.v. --parameter KEY=VALUE of -p KEY=VALUE. Zie makefile voor voorbeeld.
+        </p>
+        <p>
+          Parameters kunnen uitgelezen worden d.m.v. Parameters.get(KEY).
+        </p>
+        <%=
+           HTML::unordered_list( Parameters::keys ) do |key|
+             "#{key} = #{Parameters.get(key)}"
+           end
+        %>
+      </section>
     </div>
   </body>
 </html>
