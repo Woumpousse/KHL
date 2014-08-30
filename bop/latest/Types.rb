@@ -111,4 +111,10 @@ module Types
       true
     end
   end
+
+  def Types.nonnil
+    predicate("nonnil") do |object|
+      object != nil
+    end
+  end
 end

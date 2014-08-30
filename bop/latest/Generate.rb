@@ -2,6 +2,7 @@ require 'optparse'
 require './Questions.rb'
 require './Controller.rb'
 require './Parameters.rb'
+require './Generation.rb'
 
 
 VERSION = 5
@@ -82,6 +83,7 @@ end
 
 
 def generate(class_name, template, output)
+  abort "No class specified" unless class_name
   abort "No template specified" unless template
   abort "No output specified" unless output
 
@@ -94,10 +96,10 @@ def generate(class_name, template, output)
     resource_class = Kernel.const_get(class_name)
     
     puts "Instantiating class #{class_name}"
-    resource = resource_class.new
+    resources = resource_class.new
 
     puts "Processing template"
-    result = resource.process_template(template_data)
+    result = Generation.generate(resources, template_data)
     puts "Successfully processed template"
 
     puts "Writing to file #{output}"
