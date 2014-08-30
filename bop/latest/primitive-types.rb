@@ -37,8 +37,7 @@ end
 
 
 
-class Resources
-  include Controller
+class Resources < Controller
 
   def current
     Dynamic['current_question']

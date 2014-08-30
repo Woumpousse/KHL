@@ -24,4 +24,4 @@ export:
 	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
 
 primitive-types:
-	ruby Generate.rb --output primitive-types.html --template primitive-types.template --exercises ./primitive-types.rb
+	ruby primitive-types.rb

@@ -1,7 +1,7 @@
 require 'erb'
 require './Types.rb'
 
-module Controller
+class Controller
   def process_template(template)
     template = ERB.new template
 

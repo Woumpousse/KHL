@@ -3,8 +3,7 @@ require './Controller.rb'
 require './Shared.rb'
 require './Parameters.rb'
 
-class Examples
-  include Controller
+class Examples < Controller
 
   def fill_in_blanks
     # Syntax: __placeholder`solution`validator__
@@ -24,6 +23,8 @@ class Examples
 
 
   def fill_in_blanks_pooled
+    puts "..."
+
     # Syntax: __placeholder`solution`validator__
     # Validator can be left blank, 'exact' will be used
     Questions::Java::FillInBlanks.new.parse( <<-'END'.unindent.strip )
