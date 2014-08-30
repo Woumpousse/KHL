@@ -23,5 +23,5 @@ clean: clean_icons clean_example
 export:
 	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
 
-test:
-	ruby Generate.rb --output example.html --template example-template.html --exercises ./Example.rb
+primitive-types:
+	ruby Generate.rb --output primitive-types.html --template primitive-types-template.html --exercises ./primitive-types.rb

@@ -7,6 +7,7 @@ class Exercises
 
   def fill_in_blanks
     # Syntax: __placeholder`solution`validator__
+    # Validator can be left blank, 'exact' will be used
     Questions::Java::FillInBlanks.new.parse( <<-'END'.unindent.strip )
       class Foo
       {
@@ -23,6 +24,7 @@ class Exercises
 
   def fill_in_blanks_pooled
     # Syntax: __placeholder`solution`validator__
+    # Validator can be left blank, 'exact' will be used
     Questions::Java::FillInBlanks.new.parse( <<-'END'.unindent.strip )
       class Foo
       {
@@ -44,6 +46,7 @@ class Exercises
 
   def fill_in_types
     # Syntax: __solution__
+    # 'exact' will be used as validator
     Questions::Java::FillInTypes.new.parse( <<-'END'.unindent.strip )
       class Foo
       {

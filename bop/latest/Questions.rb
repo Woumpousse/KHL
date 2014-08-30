@@ -93,6 +93,11 @@ module Questions
 
       composed_string = decompose_string(string)
 
+      from_composed_string(composed_string)
+    end
+
+    def from_composed_string(composed_string)
+      Types.check( binding, { :composed_string => ComposedString } )
 
       ::Questions.build_question do |q|
         q.code =  composed_string.join do |fragment|
@@ -355,6 +360,25 @@ module Questions
         super("type", 'exact')
       end
     end
+
+    class AutoFillInTypes < FillInTypes
+      def initialize(types = ::Java::STANDARD_TYPES)
+        super()
+
+        @types = types
+      end
+
+      def extract_blanks(str)
+        Types.check( binding, { :str => ComposedString } )
+        
+        types = @types.join('|')
+
+        str.gsub(/(\b#{types}\b)/) do |fragment|
+          create_blank(fragment)
+        end
+      end
+    end
+    
 
     class FillInAccessModifiers < HomogeneousFillInBlanks
       def initialize
