@@ -8,7 +8,7 @@ module Controller
     template.result binding
   end
 
-  def dynamic(identifier)
+  def member(identifier)
     Types.check( binding, { :identifier => String } )
 
     self.send(identifier)

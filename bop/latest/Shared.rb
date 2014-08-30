@@ -145,7 +145,11 @@ end
 module Dynamic
   @@variables = Hash.new
 
-  def self.get(id)
+  module MixIn
+    
+  end
+
+  def self.[](id)
     if @@variables.has_key? id
     then @@variables[id]
     else raise "Dynamic variable #{id} has no value"
@@ -165,6 +169,6 @@ module Dynamic
       then @@variables[id] = old_val
       else @@variables.delete(id)
       end
-    end    
+    end
   end
 end

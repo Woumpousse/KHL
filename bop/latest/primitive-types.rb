@@ -9,7 +9,7 @@ def fill_in_blanks
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= $current.class_name %></title>
+    <title><%= current.class_name %></title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
     <script src="khl.js"></script>
@@ -19,13 +19,13 @@ def fill_in_blanks
     <div id="contents">
       <h1>Types</h1>
       <section>
-        <h2>Klasse <%= $current.class_name %></h2>
+        <h2>Klasse <%= current.class_name %></h2>
         <div data-question="fill-in-blanks">
           <p>
             Vul de juiste types in. Je hebt de keuze tussen
           </p>
-          <%= HTML::unordered_list( $current.answers.sort.uniq, { 'class' => 'pool' } ) %>
-          <pre><%= $current.code %></pre>
+          <%= HTML::unordered_list( current.answers.sort.uniq, { 'class' => 'pool' } ) %>
+          <pre><%= current.code %></pre>
         </div>
       </section>
     </div>
@@ -39,6 +39,10 @@ end
 
 class Resources
   include Controller
+
+  def current
+    Dynamic['current_question']
+  end
 
   def persoon
     question = Questions::Java::AutoFillInTypes.new.parse( <<-'END'.unindent.strip )
@@ -155,18 +159,18 @@ end
 
 
 
-$current = nil
-
 def main
   exercises = Resources.new
 
   %w(persoon film).each do |question_id|
     puts "Processing #{question_id}"
 
-    $current = exercises.send question_id
+    question = exercises.send question_id
     filename = "#{question_id}.html"
 
-    result = Generation.generate( exercises, $current.template )
+    result = Dynamic::with('current_question', question) do
+      Generation.generate( exercises, question.template )
+    end
 
     puts "Writing #{filename}"
     File.open(filename, 'w') do |out|      
