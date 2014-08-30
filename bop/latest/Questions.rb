@@ -377,12 +377,11 @@ module Questions
           create_blank(fragment)
         end
       end
-    end
-    
+    end    
 
     class FillInAccessModifiers < HomogeneousFillInBlanks
       def initialize
-        super("access modifier", 'exact')
+        super('access modifier', 'exact')
       end
     end
 
