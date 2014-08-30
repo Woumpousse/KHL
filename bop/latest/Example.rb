@@ -80,21 +80,6 @@ class Examples
   end
 
 
-  def fill_in_blanks_with_pool
-    # Syntax: __placeholder`solution`validator__
-    Questions::Java::FillInBlanks.new.parse( <<-'END'.unindent.strip )
-      class Foo
-      {
-          __access modifier`public`__ static void __identifier`main`__(String[] args)
-          {
-              __type`int`__ x = 5;
-
-              System.out.println(x);
-          }
-      }   
-    END
-  end
-
   def fill_in_blanks_validators
     # Syntax: __placeholder`solution`validator__
     Questions::Java::FillInBlanks.new.parse( <<-END.unindent.strip )
