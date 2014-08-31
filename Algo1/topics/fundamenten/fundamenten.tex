@@ -347,11 +347,20 @@
   Algoritmes bestaat uit een reeks basiselementen:
   \vskip2mm
   \begin{itemize}
-    \item Basisberekeningen {\tt +}, {\tt -}, {\tt *}, {\tt /}, \dots \vskip2mm
     \item Sequentie: berekeningen die elkaar opvolgen \vskip2mm
     \item Selectie: berekeningen overslaan naargelang een conditie \vskip2mm
     \item Iteratie: herhalen van bepaalde berekeningen
   \end{itemize}
+  \vskip5mm
+  \begin{center}
+    \begin{tikzpicture}[building block/.style={minimum width=2.9cm,minimum height=.9cm,fill=blue!50,font=\sc},
+                        algorithm/.style={minimum width=8.9cm,minimum height=.9cm,fill=green!50,font=\sc}]
+      \node[building block,anchor=south west] at (0,0) { sequentie };
+      \node[building block,anchor=south west] at (3,0) { selectie };
+      \node[building block,anchor=south west] at (6,0) { iteratie };
+      \node[algorithm,anchor=south west] at (0,1) { algoritmes };
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 
@@ -559,6 +568,59 @@
   \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Strings}
+  \begin{itemize}
+    \item Derde datatype: strings
+          \vskip2mm
+    \item Strings stellen stukken tekst voor
+          \vskip2mm
+    \item Worden geschreven tussen {\tt ' '} of {\tt " "}
+          \vskip2mm
+    \item Voorbeelden
+          \begin{itemize}
+            \item {\tt "dit is een string"}
+            \item De lege string {\tt ""}
+            \item {\tt 'Hello World!'}
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overzicht Datatypes}
+  \begin{itemize}
+    \item {\bf Getallen}
+          \begin{itemize}
+            \item Literals: {\tt 0}, {\tt 1}, {\tt 2}, {\tt -5}, {\tt 2.7}, \dots
+            \item Operaties {\tt +}, {\tt -}, {\tt *}, {\tt /}, {\tt \%}, {\tt <}, {\tt >}, \dots
+          \end{itemize}
+          \vskip2mm
+    \item {\bf Booleans}
+          \begin{itemize}
+            \item Literals: {\tt true}, {\tt false}
+            \item Operaties {\tt \&\&}, {\tt ||}, {\tt !}
+          \end{itemize}
+          \vskip2mm
+    \item {\bf Strings}
+          \begin{itemize}
+            \item Literals: {\tt ""}, {\tt "a"}, {\tt "b"}, {\tt "Hello"}
+            \item Later in detail
+          \end{itemize}
+          \vskip2mm
+    \item {\bf Arrays}
+          \begin{itemize}
+            \item Literals: {\tt []}, {\tt [1]}, {\tt [1,2,3]}, {\tt [1, "xyz", [true]]}, \dots
+            \item Later in detail
+          \end{itemize}
+          \vskip2mm
+    \item {\bf Objects}
+          \begin{itemize}
+            \item Literals: {\tt \{\}}, {\tt \{a:1, b:2, c:3\}}, \dots
+            \item Niet behandeld tijdens Algo1
+          \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \end{document}
 
