@@ -2,10 +2,18 @@ require 'erb'
 require './Types.rb'
 
 class Controller
-  def process_template(template)
-    template = ERB.new template
+  def process_template(template, passes = 1)
+    Types.check( binding, {
+                   :template => String,
+                   :passes => Fixnum
+                 } )
 
-    template.result binding
+    passes.times do
+      erb = ERB.new template
+      template = erb.result binding
+    end
+
+    template
   end
 
   def member(identifier)

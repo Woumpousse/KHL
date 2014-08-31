@@ -156,7 +156,7 @@
         <h2>Parameters</h2>
         <p>
           Parameters kunnen via de command-line meegegeven worden
-          m.b.v. --parameter KEY=VALUE of -p KEY=VALUE. Zie makefile voor voorbeeld.
+          m.b.v. --parameter KEY=VALUE of -P KEY=VALUE. Zie makefile voor voorbeeld.
         </p>
         <p>
           Parameters kunnen uitgelezen worden d.m.v. Parameters.get(KEY).

@@ -38,7 +38,12 @@ def parse_command_line_arguments
       options[:output] = file
     end
 
-    opts.on( '-p', '--parameter KEY=VALUE', 'Define parameter') do |pair|
+    options[:passes] = 1
+    opts.on( '-p', '--passes NUM', Integer, 'Number of ERB expansions', 'Defaults to 1') do |n|
+      options[:passes] = n.to_i
+    end
+
+    opts.on( '-P', '--parameter KEY=VALUE', 'Define parameter') do |pair|
       if pair =~ /^([^=]+)=([^=]+)$/
       then
         key, val = $1, $2
@@ -82,7 +87,7 @@ def verify
 end
 
 
-def generate(class_name, template, output)
+def generate(class_name, template, output, passes)
   abort "No class specified" unless class_name
   abort "No template specified" unless template
   abort "No output specified" unless output
@@ -99,7 +104,7 @@ def generate(class_name, template, output)
     resources = resource_class.new
 
     puts "Processing template"
-    result = Generation.generate(resources, template_data)
+    result = Generation.generate(resources, template_data, passes)
     puts "Successfully processed template"
 
     puts "Writing to file #{output}"
@@ -120,7 +125,7 @@ def main
   end
 
   if options[:template] or options[:output]
-  then generate(options[:class], options[:template], options[:output])
+  then generate(options[:class], options[:template], options[:output], options[:passes])
   end
 
   puts "Done!"

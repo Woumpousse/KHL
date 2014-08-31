@@ -165,7 +165,7 @@ def main
     puts "Processing #{question_id}"
 
     question = exercises.send question_id
-    filename = "#{question_id}.html"
+    filename = "example-#{question_id}.html"
 
     result = Dynamic::with('current_question', question) do
       Generation.generate( exercises, question.template )

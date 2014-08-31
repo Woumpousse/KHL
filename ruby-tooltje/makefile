@@ -1,14 +1,19 @@
 .SECONDEXPANSION:
 
+.PHONY: example example-html example-multimake
+
 -include shared.mk
 -include icons.mk
 
 all: icons export
 
-example: example-template.html *.rb icons example-slides example-html
+example: example-template.html *.rb icons example-slides example-html example-multimake
 
 example-html:
-	ruby Generate.rb --output example.html --template example.template --require ./Example.rb --class Examples --parameter x=1 -p y=2
+	ruby Generate.rb --output example.html --template example.template --require ./Example.rb --class Examples --parameter x=1 -P y=2
+
+example-multimake: multimake-example.rb
+	ruby multimake-example.rb
 
 example-slides: slides-example.tex
 	$(LATEX) slides-example.tex
@@ -23,5 +28,5 @@ clean: clean_icons clean_example
 export:
 	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
 
-primitive-types:
-	ruby primitive-types.rb
+variables-html:
+	ruby Generate.rb --output variables.html --template variables.template --require ./variables.rb --class Variables -p 2
