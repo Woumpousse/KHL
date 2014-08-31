@@ -3,7 +3,7 @@ require './Controller.rb'
 require './Shared.rb'
 require './Parameters.rb'
 
-class Variables < Controller
+class Fundamentals < Controller
   def template(n)
     <<-END.unindent
       <h2>Oefening #{n}</h2>
