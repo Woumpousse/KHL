@@ -1,0 +1,10 @@
+???
+    score = 0;
+    huidigeSpeler++;
+???
+    joker++;
+???
+    huidigeSpeler++;
+???
+    score += waarde;
+
