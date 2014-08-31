@@ -139,3 +139,4 @@
 
 %%%%%%%%%% Index %%%%%%%%%%
 \makeindex
+\indexsetup{othercode=\rm}
