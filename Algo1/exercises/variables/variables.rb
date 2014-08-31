@@ -11,8 +11,8 @@ class Variables < Controller
         <p>
           Geef aan welke waarden in de volgende variabele(n) bewaard zijn na uitvoering:
         </p>
-        <%= HTML::output_sheet( ex#{n}.output_map ) %>
         <pre><%= ex#{n}.code %></pre>
+        <%= HTML::output_sheet( ex#{n}.output_map ) %>
       </div>
     </section>
     END
