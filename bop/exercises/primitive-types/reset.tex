@@ -1,0 +1,12 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+
+\begin{document}
+
+\begin{tikzpicture}[stroke/.style={line width=3pt}]
+  \draw[stroke] (0,0) -- ++(1,0) -- ++(0,1.25) node (corner lower right) {} -- ++(-.25,.25) node (corner upper left) {} -- ++(-.75,0) -- cycle;
+  \draw[stroke] (corner lower right.center) -| (corner upper left.center);
+\end{tikzpicture}
+
+\end{document}

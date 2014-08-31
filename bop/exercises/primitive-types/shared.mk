@@ -1,0 +1,2 @@
+IMAGEMAGICK = convert
+LATEX = pdflatex
