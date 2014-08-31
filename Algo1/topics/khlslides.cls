@@ -125,7 +125,8 @@
   frame/.code=\lstset{frame=#1},
   font size/.code=\lstset{basicstyle={\ttfamily #1}},
   width/.initial=.8\linewidth,
-  language/.code=\lstset{language=#1}
+  language/.code=\lstset{language=#1},
+  show lines/.code=\lstset{showlines}
 }
 
 % Styles
@@ -163,7 +164,8 @@
 % Tikz related commands
 % \NODE{text}{id}
 \newcommand{\NODE}[2]{\tikz[baseline,remember picture]{\node[anchor=base,inner sep=0mm] (#2) {{#1}};}}
-\newcommand{\COORD}[1]{\tikz[baseline=-.5cm,remember picture]{\coordinate (#1);}}
+% \newcommand{\COORD}[1]{\tikz[baseline=-.5cm,remember picture,inner sep=0mm]{\coordinate (#1);}}
+\newcommand{\COORD}[1]{\tikz[overlay,baseline,remember picture]{\coordinate (#1);}}
 
 
 \newcommand{\toc}{
