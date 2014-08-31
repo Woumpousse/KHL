@@ -13,11 +13,10 @@
       <section>
 
       <%= 
-         (1..8).map do |n|
+         (1..10).map do |n|
            template(n)
          end.join("\n\n")
       %>
-
     </div>
   </body>
 </html>
