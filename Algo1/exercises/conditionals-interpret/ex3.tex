@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+
+\begin{document}
+
+\begin{tikzpicture}[sequence point/.style={thick,fill=white},
+                    execution path/.style={thin}]
+  \draw[execution path] (0,0) -- (1,0) -- (2,1) node[midway,sloped,yshift=1mm] {\tiny\tt x>0} -- (3,0);
+  \draw[execution path] (1,0) -- (2,0) node[midway,sloped,yshift=1mm] {\tiny\tt x>2} -- (3,0);
+  \draw[execution path] (1,0) -- (2,-1) node[midway,sloped,yshift=1mm] {\tiny\tt else} -- (3,0);
+
+  \draw[sequence point] (0,0) circle (.05) node[above] {\tiny\tt var x=3};
+  \draw[sequence point] (1,0) circle (.05) node[xshift=-2mm,yshift=-2mm] {\tiny\tt var y};
+  \draw[sequence point] (2,1) circle (.05) node[above] {\tiny\tt y=1};
+  \draw[sequence point] (2,0) circle (.05) node[above] {\tiny\tt y=2};
+  \draw[sequence point] (2,-1) circle (.05) node[above] {\tiny\tt y=3};
+  \draw[sequence point] (3,0) circle (.05);
+\end{tikzpicture}
+
+\end{document}

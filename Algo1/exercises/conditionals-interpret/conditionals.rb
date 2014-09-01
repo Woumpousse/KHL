@@ -13,9 +13,24 @@ class Conditionals < Controller
         </p>
         <pre><%= ex#{n}.code %></pre>
         <%= HTML::output_sheet( ex#{n}.output_map ) %>
+        <%= generate_hint(ex#{n}) %>       
       </div>
     </section>
     END
+  end
+
+  def generate_hint(exercise)
+    if exercise.hint?
+    then
+      hint = exercise.hint
+      <<-END
+        <div class="hint">
+          #{hint}
+        </div>
+      END
+    else
+      ""
+    end
   end
 
   def ex1
@@ -53,7 +68,7 @@ class Conditionals < Controller
 
   def ex3
     once(__method__) do
-      Questions::JavaScript::InterpretCode.new.parse( <<-'END'.unindent.strip )
+      q = Questions::JavaScript::InterpretCode.new.parse( <<-'END'.unindent.strip )
         var x = 3;
         var y;
 
@@ -69,12 +84,26 @@ class Conditionals < Controller
 
         `hide:console.log('y=%d\n', y);`
       END
+
+      q.hint = <<-END.unindent
+        <p>
+          We hebben hier te maken met 3 mogelijke paden.
+        </p>
+        <img src="ex3.png" width="80%" class="center"></img>
+        <p>
+          Enkel het eerste pad waarvoor de conditie <code>true</code> oplevert
+          wordt uitgevoerd: vanaf dat er een test slaagt, worden alle volgende
+          paden genegeerd.
+        </p>
+      END
+
+      q
     end
   end
 
   def ex4
     once(__method__) do
-      Questions::JavaScript::InterpretCode.new.parse( <<-'END'.unindent.strip )
+      q = Questions::JavaScript::InterpretCode.new.parse( <<-'END'.unindent.strip )
         var x = 3;
         var y;
 
@@ -90,6 +119,25 @@ class Conditionals < Controller
 
         `hide:console.log('y=%d\n', y);`
       END
+
+      q.hint = <<-END.unindent
+        <p>
+          Merk op dat de tweede <code>if</code> geen <code>else</code> bevat.
+          We hebben dus niet te maken met &eacute;&eacute;n splitsing in drie paden,
+          maar met twee op elkaar volgende splitsingen met elk twee paden.
+        </p>
+        <img src="ex4.png" width="80%" class="center"></img>
+        <p>
+          Eerst wordt nagegaan of <code>x &gt; 0</code>; dit is het geval en
+          <code>y = 1</code> wordt uitgevoerd. Omdat er geen <code>else</code>
+          staat, is de volgende uit te voeren statement <code>if ( x &gt; 2 ) ...</code>
+          Vermits <code>y &gt; 2</code>, wordt <code>y = 2</code> uitgevoerd.
+          De <code>y = 3</code> staat in de <code>else</code>-branch:
+          deze statement wordt overgeslagen.
+        </p>
+      END
+
+      q
     end
   end
 
