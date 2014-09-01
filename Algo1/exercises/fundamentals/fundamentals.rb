@@ -67,7 +67,7 @@ class Fundamentals < Controller
         x = 3;
 
         `hide:console.log('x=%d\n', x);`
-        `hide:console.log('y=%d\n', x);`
+        `hide:console.log('y=%d\n', y);`
       END
     end
   end
@@ -153,7 +153,7 @@ class Fundamentals < Controller
         var e = b !== c;
 
         `hide:console.log('a=%d\n', a);`
-        `hide:console.log('b=%d\n', b);`
+        `hide:console.log('b=%s\n', b ? 'true' : 'false');`
         `hide:console.log('c=%s\n', c);`
         `hide:console.log('d=%s\n', d ? 'true' : 'false');`
         `hide:console.log('e=%s\n', e ? 'true' : 'false');`
