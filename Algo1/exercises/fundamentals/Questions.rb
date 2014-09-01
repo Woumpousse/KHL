@@ -18,7 +18,7 @@ module Questions
         result.push('')
       else
         last_line_empty = false
-        result.push(line.strip)
+        result.push(line.rstrip)
       end
     end
 
