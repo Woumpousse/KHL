@@ -236,22 +236,37 @@
   \frametitle{Inputs--Outputs}
   We stellen een input-output tabel op:
   \vskip4mm
-  \begin{center}
-    \begin{tabular}{c@{\hspace{1cm}}c}
-      {\tt x} & {\tt abs} \\
-      \toprule
-      4 & \NODE{4}{r1} \\
-      7 & \NODE{7}{r2} \\
-      -4 &\NODE{4}{r3} \\
-      3.7 & \NODE{3.7}{r4} \\
-      -1.2 & \NODE{1.2}{r5} \\
-      -5 & \NODE{5}{r6}
-    \end{tabular}
-    \vskip8mm
-    \visible<8>{
-      We identificeren twee verschillende berekeningen
-    }
-  \end{center}
+  \begin{columns}
+    \column{.6\linewidth}
+    \begin{center}
+      \begin{tabular}{c@{\hspace{1cm}}c}
+        {\tt x} & {\tt abs} \\
+        \toprule
+        4 & \NODE{4}{r1} \\
+        7 & \NODE{7}{r2} \\
+        -4 &\NODE{4}{r3} \\
+        3.7 & \NODE{3.7}{r4} \\
+        -1.2 & \NODE{1.2}{r5} \\
+        -5 & \NODE{5}{r6}
+      \end{tabular}
+    \end{center}
+    \column{.4\linewidth}
+  \end{columns}
+  \vskip8mm
+
+  \begin{overprint}
+    \onslide<8>
+    \begin{center}
+        We identificeren twee verschillende berekeningen: \\
+        {\tt abs = x} \hspace{.5cm} en \hspace{.5cm} {\tt abs = -x}
+    \end{center}
+
+    \onslide<9>
+    \begin{center}
+        Welke berekening moet uitgevoerd worden hangt af van {\tt x} \\
+    \end{center}
+  \end{overprint}
+  
   \begin{tikzpicture}[remember picture,overlay]
     \foreach[count=\i] \sign in {,,-,,-,-} {
       \pgfmathparse{int(\i+1)}\let\slideindex\pgfmathresult
@@ -260,8 +275,98 @@
         \draw[-latex] (note \i.west) -- +(-0.5,0);
       }
     }
+
+    \only<9->{
+      \node (pos) at ($ (note 2.east) + (2,0) $)  {\tt x > 0};
+      \node (neg) at ($ (pos.south) + (0,-1) $)  {\tt x < 0};
+
+      \foreach \to in {1,2,4} {
+        \draw[-latex] (pos.west) -- (note \to.east);
+      }
+      \foreach \to in {3,5,6} {
+        \draw[-latex] (neg.west) -- (note \to.east);
+      }
+    }
   \end{tikzpicture}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Absolute Waarde in JavaScript}
+  \begin{overprint}
+    \onslide<1-2>
+    \code[width=.4\linewidth]{abs.js}
+
+    \onslide<3-4>
+    \code[width=.5\linewidth]{abs2.js}
+
+    \onslide<5-6>
+    \code[width=.5\linewidth]{abs3.js}
+
+    \onslide<7-8>
+    \code[width=.5\linewidth]{abs4.js}
+
+    \onslide<9-10>
+    \code[width=.5\linewidth]{abs5.js}
+
+    \onslide<11>
+    \code[width=.5\linewidth]{abs6.js}
+  \end{overprint}
+
+  \begin{overprint}
+    \onslide<2>
+    \begin{center}
+      Wat indien {\tt x === 0}?
+    \end{center}
+
+    \onslide<4>
+    \begin{center}
+      Laatste test {\tt x === 0} is overbodig.
+    \end{center}
+
+    \onslide<6>
+    \begin{center}
+      Derde berekening is zelfde als eerste\dots
+    \end{center}
+
+    \onslide<8>
+    \begin{center}
+      Tweede test is nu nutteloos geworden
+    \end{center}
+
+    \onslide<10>
+    \begin{center}
+      Eerste test kan properder
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Randgevallen}
+  \begin{center} \scriptsize
+    \begin{tabular}{lp{8cm}}
+      \bf Martin:   & How about this, guys?  Bart can have it Mondays and Thursdays, Milhouse will get it Tuesdays and Fridays, and yours truly will take it Wednesdays and Saturdays. \\
+      \bf Bart:     & Perfect! \\
+      \bf Milhouse: & Wait a minute!  What about Sundays? \\
+      \bf Bart:     & [suspiciously] Yeah, what \emph{about} Sundays? \\
+      \bf Martin:   & Well, Sunday possession will be determined by a random number
+                generator.  I will take the digits 1 through 3, Milhouse will
+                have 4 through 6, and Bart will have 7 through 9. \\
+      \bf Bart:     & Perfect! \\
+      \bf Milhouse: & Wait a minute!  What about 0? \\
+      \bf Bart:     & [suspiciously] Yeah, what \emph{about} 0? \\
+      \bf Milhouse: & Yeah. \\
+      \bf Martin:   & Well, in the unlikely event of a 0, possession will be determined
+                  by Rock Scissors Paper competition, best 3 out of 5.  How's that? \\
+      \bf Bart and & Oh, okay. \\
+      \bf Milhouse: & Yeah, all right.
+    \end{tabular}
+  \end{center}
+  \begin{center}
+    \includegraphics[width=3cm]{simpsons.png}
+  \end{center}
+\end{frame}
+
+
 
 \end{document}
 
