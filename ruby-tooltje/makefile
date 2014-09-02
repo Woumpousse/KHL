@@ -1,6 +1,6 @@
 .SECONDEXPANSION:
 
-.PHONY: example example-html example-multimake zip
+.PHONY: example example-html example-multimake zip current current-html
 
 PACKAGE=unnamed
 PACKAGE_CONTENTS=khl.js khl.css khluml.sty hint.tex next.tex previous.tex reset.tex reveal.tex verify.tex Controller.rb Generate.rb Generation.rb HTML.rb Java.rb JavaScript.rb Parameters.rb Questions.rb Shared.rb Types.rb makefile .gitignore shared.mk icons.mk
@@ -12,7 +12,7 @@ all: icons export
 -include icons.mk
 
 
-example: example-template.html *.rb icons example-slides example-html example-multimake
+example: example.template *.rb icons example-slides example-html example-multimake
 
 example-html:
 	ruby Generate.rb --output example.html --template example.template --require ./Example.rb --class Examples --parameter x=1 -P y=2
@@ -30,8 +30,12 @@ clean_example:
 clean: clean_icons clean_example
 	rm -f *~
 
-variables-html:
-	ruby Generate.rb --output variables.html --template variables.template --require ./variables.rb --class Variables -p 2
-
 zip:
 	$(ZIP) $(PACKAGE).zip $(PACKAGE_CONTENTS)
+
+current: current-html
+	$(LATEX) train.tex
+	$(IMAGEMAGICK) -quality 90 -density 300 train.pdf train.png
+
+current-html:
+	ruby Generate.rb --output train.html --template train.template --require ./train.rb --class Train -p 2
