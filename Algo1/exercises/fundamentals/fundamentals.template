@@ -11,12 +11,111 @@
     <div id="contents">
       <h1>Oefeningen Standaarddatatypes</h1>
       <section>
-
+        
       <%= 
          (1..10).map do |n|
            template(n)
          end.join("\n\n")
       %>
+
+      <h2>Oefening 11</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Naar welke waarde evalueren volgende expressies?
+        </p>
+        <ul>
+          <li><%= evaluate_exercise("0 % 10") %></li>
+          <li><%= evaluate_exercise("10 % 10") %></li>
+          <li><%= evaluate_exercise("123 % 10") %></li>
+          <li><%= evaluate_exercise("100 % 10") %></li>
+          <li><%= evaluate_exercise("-8 % 10") %></li>
+          <li><%= evaluate_exercise("-321 % 10") %></li>
+        </ul>
+      </div>
+      
+      <h2>Oefening 12</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          <code>Math.abs(x)</code> berekent de absolute waarde van <code>x</code>.
+          Naar welke waarde evalueren volgende expressies?
+        </p>
+        <ul>
+          <li><%= evaluate_exercise("Math.abs(5)") %></li>
+          <li><%= evaluate_exercise("Math.abs(-3)") %></li>
+          <li><%= evaluate_exercise("Math.abs(0 % 10)") %></li>
+          <li><%= evaluate_exercise("Math.abs(10 % 10)") %></li>
+          <li><%= evaluate_exercise("Math.abs(123 % 10)") %></li>
+          <li><%= evaluate_exercise("Math.abs(-321 % 10)") %></li>
+        </ul>
+      </div>
+
+      <h2>Oefening 13</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Omschrijf de betekenis van <code>Math.abs(x%10)</code>: <input data-solution="laatste cijfer van x" placeholder="omschrijving" data-validator="exact">
+        </p>
+      </div>
+
+      <h2>Oefening 14</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Geef aan welke waarde <code>(Math.abs(x - x%10)/10)%10</code> heeft met var x respectievelijk gelijk aan volgende waarde:
+        </p>
+
+        <ul>
+          <li><%= evaluate_penultimate_digit_exercise(0) %></li>
+          <li><%= evaluate_penultimate_digit_exercise(10) %></li>
+          <li><%= evaluate_penultimate_digit_exercise(123) %></li>
+          <li><%= evaluate_penultimate_digit_exercise(-321) %></li>
+          <li><%= evaluate_penultimate_digit_exercise(123456789) %></li>
+        </ul>
+      </div>
+
+      <h2>Oefening 15</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Omschrijf de betekenis van <code>(Math.abs(x - x%10)/10)%10</code>: <input data-solution="voorlaatste cijfer van x" placeholder="literal" data-validator="exact">
+        </p>
+      </div>
+
+
+      <h2>Oefening 16</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Naar welke waarde evalueren volgende expressies?
+        </p>
+        <ul>
+          <li><%= evaluate_exercise("0 % 2") %></li>
+          <li><%= evaluate_exercise("14 % 2") %></li>
+          <li><%= evaluate_exercise("123 % 2") %></li>
+          <li><%= evaluate_exercise("-321 % 2") %></li>
+          <li><%= evaluate_exercise("10000000 % 2") %></li>
+          <li><%= evaluate_exercise("10000001 % 2") %></li>
+        </ul>
+      </div>
+
+      <h2>Oefening 17</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          <code>x%2 === 0</code> geeft <code>true</code> indien <input data-solution="even is" placeholder="literal" data-validator="exact">
+        </p>
+      </div>
+
+
+      <h2>Oefening 18</h2>
+      <div data-question="fill-in-blanks">
+        <p>
+          Strings kan je optellen: zo levert <code>"a" + "b"</code> de nieuwe string <code>"ab"</code> op.
+          Naar welke waarde evalueren volgende expressies?
+        </p>
+        <ul>
+          <li><%= evaluate_exercise('"12" + "13"') %></li>
+          <li><%= evaluate_exercise('12 + 13') %></li>
+          <li><%= evaluate_exercise('"" + 12 + 34') %></li>
+          <li><%= evaluate_exercise('"" + (12 + 34)') %></li>
+        </ul>
+      </div>
     </div>
+
   </body>
 </html>

@@ -160,4 +160,21 @@ class Fundamentals < Controller
       END
     end
   end
+
+
+  def evaluate_exercise(code)
+    solution = JavaScript.evaluate_expression(code)
+
+    <<-END
+      <code>#{code}</code> evalueert naar <input data-solution="#{HTML::unescape(solution)}" placeholder="literal" data-validator="exact">
+    END
+  end
+
+  def evaluate_penultimate_digit_exercise(x)
+    solution = JavaScript.evaluate_expression( "(Math.abs(#{x} - #{x} % 10) / 10) % 10" )
+
+    <<-END
+      Bij <code>x = #{x}</code> evalueert de expressie naar <input data-solution="#{HTML::unescape(solution)}" placeholder="literal" data-validator="exact">
+    END
+  end
 end
