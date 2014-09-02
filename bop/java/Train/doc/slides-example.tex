@@ -1,0 +1,59 @@
+\documentclass{beamer}
+\usepackage{khluml}
+
+\usetikzlibrary{calc}
+
+\mode<presentation>
+\beamertemplatenavigationsymbolsempty
+
+\newlength{\mylength}
+
+\begin{document}
+
+{
+\settowidth{\mylength}{false}
+\begin{frame}
+  \begin{tikzpicture}
+    \path[use as bounding box,draw] (-5,-4.5) rectangle (5,1);
+
+    \begin{scope}[scale=.6,transform shape]
+      \node[/uml/object] (Game) {
+        \umlobject{}{Game}{
+        }
+      };
+
+      \node[/uml/object,anchor=north] (Hint) at ($ (Game.south) + (0,-2) $) {
+        \umlobject{}{Hint}{
+        }
+      };
+
+      \foreach[count=\i] \c in {z,e,b,r,a} {
+        \pgfmathparse{(\i - 3) * 3}\let\x\pgfmathresult
+        \node[/uml/object,anchor=north] (HintBox \c) at ($ (Hint.south) + (\x,-2) $) {%
+          \umlobject{}{HintBox}{
+            \umlobjfield{letter}{\c}
+            \umlobjfield{revealed}{\makebox[\mylength]{\ifnum\i=2\only<1-3>{false}\only<4->{true}\else false\fi}}
+          }
+        };
+      }
+
+      \draw[/uml/object association] (Game) -- (Hint)
+         node[midway,sloped,above] {\only<2>{\color{red} guess('e')} };
+
+      \foreach[count=\i] \c in {z,e,b,r,a} {
+        \pgfmathparse{int(\i+2)}\let\slideindex\pgfmathresult
+        \draw[/uml/object association] (Hint) -- (HintBox \c.north)
+          node[midway,sloped,above] {\only<\slideindex>{\color{red} guess('e');}};
+      }
+
+      \only<1>{
+        \draw[/uml/message] ($ (Game.west) + (-2,0) $) -- (Game.west)
+              node[midway,above] {guess('e')};
+      }
+    \end{scope}
+  \end{tikzpicture}
+\end{frame}
+}
+
+
+\end{document}

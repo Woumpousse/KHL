@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Train</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+    <style>
+       img.center {
+        display: block;
+        margin: 20px auto;
+      }
+
+       span.emphasize {
+         font-style: italic;
+       }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Train</h1>
+      <p>
+        Deze oefening heeft als doelstelling jullie in contact te brengen met een recursieve
+        datastructuur en hierop recursieve methodes te defini&euml;ren.
+      </p>
+      
+      <section>
+        <h2>Wagon</h2>
+        <p>
+          Een trein bestaat uit een locomotief die een reeks wagons voorttrekt. Voor deze
+          oefening zullen we de locomotief negeren en ons enkel bezighouden
+          met de wagons.
+        </p>
+        <p>
+          Een wagon stellen we voor d.m.v. een klasse <code>Wagon</code>.
+          Elke wagon heeft een capaciteit (<code>capacity</code>).
+          Wagons kunnen aan elkaar worden gekoppeld zodat ze een "sliert" vormen.
+          Een wagon moet daarom bijhouden welke andere wagon de volgende in de sliert is:
+          deze wagon noemt men de <code>tail</code>.
+        </p>
+        <img src="train.png" width="80%" class="center" />
+        <p>
+          Bovenstaande figuur stelt een trein voor bestaande uit 5 wagons.
+          De capaciteiten van de wagons zijn 20, 30, 25, 55 en 5, respectievelijk.
+          De eerste wagon is die met capaciteit 20, en heeft als tail de wagon met capaciteit 30.
+        </p>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul de types van de velden in.
+          </p>
+          <pre><%= fields.code %></pre>
+        </div>
+        <p>
+          Belangrijk is dat je beseft dat een <code>Wagon</code> geen andere <code>Wagon</code> bevat,
+          dat zou immers leiden tot een oneindig grote <a href="http://nl.wikipedia.org/wiki/Matroesjka">Matroesjka</a>-wagon. Het tweede veld, <code>tail</code>,
+          betekent dat een <code>Wagon</code> een <span class="emphasize">verwijzing</span> bevat
+          naar een andere <code>Wagon</code>.
+        </p>
+        <p>
+          Bijvoorbeeld, bovenstaande trein ziet er in het geheugen als volgt uit:
+        </p>
+        <img class="center" src="references.png" width="80%"></img>
+        <p>
+          Een <code>Wagon</code>-object wordt hier voorgesteld door een rechthoek. Het geheugenadres van het object staat
+          aangegeven in de linkeronderhoek van elke rechthoek. Elk <code>Wagon</code>-object heeft dus twee velden, waarbij <code>tail</code> altijd het <span class="emphasize">adres</span>
+          van de volgende <code>Wagon</code> bevat. De trein eindigt bij de 5de <code>Wagon</code>, dewelke als <code>tail</code> <code>null</code> heeft, hetgeen het einde
+          van de trein voorstelt.
+        </p>
+        <div data-question="extern">
+          <p>
+            Schrijf de volgende code:
+          </p>
+          <ul>
+            <li>
+              Een unaire constructor, m.a.w. een constructor met &eacute;&eacute;n parameter.
+              <ul>
+                <li>De constructor moet &eacute;&eacute;n parameter hebben, nl. <code>capacity</code>.</li>
+                <li>
+                  De gegeven <code>capacity</code> mag niet kleiner zijn dan <code>0</code>. Indien dit het geval is, wordt een <code>IllegalArgumentException</code> opgeworpen:
+                  <code>throw new IllegalArgumentException();</code>
+                </li>
+                <li>
+                  De constructor initialiseert het <code>tail</code>-veld op <code>null</code>.
+                </li>
+              </ul>
+            </li>
+            <li>Een publieke getter <code>getCapacity</code>.</li>
+            <li>Een private setter <code>setCapacity</code>.</li>
+            <li>Een publieke getter <code>getTail</code>.</li>
+          </ul>
+          Zorg ervoor dat de constructortests slagen.
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de volgende code:
+          </p>
+          <ul>
+            <li>
+              Een methode <code>attach</code>.
+              <ul>
+                <li>Deze methode ontvangt &eacute;&eacute;n parameter van type <code>Wagon</code>.</li>
+                <li>
+                  De <code>Wagon</code>-parameter mag niet <code>null</code> zijn. Is dit wel het geval, dan wordt een <code>IllegalArgumentException</code> opgeworpen.
+                </li>
+                <li>
+                  De methode <code>attach</code> overschrijft de <code>tail</code> met de gegeven <code>Wagon</code>.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Een methode <code>detach</code>.
+              <ul>
+                <li>Deze methode verwacht geen parameters.</li>
+                <li>
+                  De methode moet de <code>tail</code>-<code>Wagon</code> ontkoppelen. Dit houdt in dat de <code>tail</code> overschreven
+                  moet worden met <code>null</code>.
+                </li>
+                <li>
+                  Indien de <code>Wagon</code> reeds ontkoppeld is, moet er een <code>IllegalStateException</code> opgeworpen worden.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Een methode <code>isLast</code>.
+              <ul>
+                <li>Deze methode neemt geen parameters aan.</li>
+                <li>
+                  Deze methode moet <code>true</code> teruggeven indien de <code>Wagon</code> waarop het opgeroepen wordt
+                  de laatste in de trein is, m.a.w. indien <code>tail == null</code>.
+              </ul>
+            </li>
+          </ul>
+          Zorg ervoor dat de corresponderende tests slagen. Het doen slagen van de test <code>attachMakeCycle</code> mogen jullie uitstellen tot op het einde.
+        </div>
+      </section>
+
+      <section>
+        <h2>Aanmaak Trein</h2>
+        <p>
+          We wensen de volgende trein te modelleren in code:
+        </p>
+        <img src="train-creation.png" width="50%" class="center" />
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul in.
+          </p>
+          <pre><%= train_creation.code %></pre>
+        </div>
+        <p>
+        We kunnen stellen dat een trein wordt vertegenwoordigd door zijn eerste wagon.
+        In het voorbeeld stelt <code>w1</code> dus in feite de trein <code>w1</code>-<code>w2</code>-<code>w3</code> voor. Dit is belangrijk voor de volgende oefeningen: zo willen we de lengte van een trein
+        kunnen bepalen, en dit doet men doen dit te vragen aan de eerste wagon in de sliert.
+        </p>
+      </section>
+
+      <section>
+        <h2>Lengte van een Trein</h2>
+        <p>
+          De lengte van een trein is gelijk aan het aantal wagons waaruit de trein bestaat.
+          Om deze uit te rekenen voegen we een methode <code>getLength</code> toe aan
+          de klasse <code>Wagon</code>. Voor deze oefening moet deze methode worden
+          geschreven op recursieve wijze.
+        </p>
+        <p>
+          Om een recursieve <code>getLength</code>-methode te bekomen
+          moet deze zichzelf oproepen "op iets kleiner". In ons geval weten we
+          dat een trein bestaande uit wagons w1, w2, ..., wn kan opgesplitst
+          worden in w1 plus de kleinere trein bestaande uit w2, w3, ..., wn.
+          De lengte van de volledige trein is dus gelijk aan 1 + de lengte van de kleinere trein.
+          In codevorm kunnen we dit opgeschrijven als <code>w1.getLength() == 1 + w1.getTail().getLength()</code>.
+        </p>
+        <img src="reclength.png" width="75%" class="center" />
+        <p>
+          Als we elke <code>Wagon</code> zijn lengte laten bereken als
+          <code>getTail().getLength() + 1</code> komen we echter in de problemen:
+          dit lijkt nooit te eindigen. In de praktijk zal er echter wel
+          een wagon hebben waarvan de <code>tail</code> gelijk is aan <code>null</code>,
+          maar <code>null.getLength()</code> zou een <code>NullPointerException</code> opleveren.
+        </p>
+        <p>
+          Zoals altijd bij recursie zal er dus, om oneindige recursie te voorkomen, ergens een basisgeval zijn waarbij
+          de recursieve functie zichzelf niet verder oproept. We zien dat in ons huidig algoritme
+          de lengte van alsmaar kleiner wordende treinen wordt berekend; dit wijst erop dat het basisgeval
+          de kleinst mogelijke trein is. Met ons design kunnen we geen treinen van lengte 0 voorstellen (tenzij
+          door <code>null</code>, maar hierop kunnen we <code>getLength</code> niet oproepen). Het basisgeval
+          is dus de trein bestaande uit slechts &eacute;&eacute;n <code>Wagon</code>.
+        </p>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul in.
+          </p>
+          <pre><%= getLength.code %></pre>
+        </div>
+        <div data-question="extern">
+          <p>
+            Voeg de code van <code>getLength</code> toe aan de klasse <code>Wagon</code>. Ga na dat de tests slagen.
+          </p>
+        </div>
+      </section>
+      <section>
+        <h2>Andere Recursieve Methodes</h2>
+        <p>
+          Doe de tests slagen voor elk van de volgende methodes.
+        </p>
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>getTotalCapacity</code> dewelke de som van de capaciteiten van alle wagons
+            uitrekent. Bijvoorbeeld,
+          </p>
+          <img src="train-creation.png" width="50%" class="center" />
+          <p>
+            indien we <code>getTotalCapacity</code> oproepen op de eerste <code>Wagon</code>, geeft deze
+            <code>10 + 20 + 30 = 60</code> terug.
+          </p>
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>detachLast</code> dewelke de laatste wagon uit de trein ontkoppelt.
+          </p>
+          <img src="detach.png" width="75%" class="center" />
+          <p>
+            De methode moet aan volgende eisen voldoen:
+          </p>
+          <ul>
+            <li>
+              Indien men <code>detachLast</code> oproept op een <code>Wagon</code> zonder <code>tail</code> (m.a.w. <code>tail == null</code>),
+              dan moet er een <code>IllegalStateException</code> opgeworpen worden.
+            </li>
+            <li>
+              De methode <code>detachLast</code> moet als resultaat een verwijzing naar de verwijderde <code>Wagon</code> opleveren.
+            </li>
+          </ul>
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>nth</code> die de <code>n</code>-de wagon uit de trein teruggeeft. De eerste wagon heeft <code>n == 0</code>.
+          </p>
+          <img src="nth.png" width="75%" class="center" />
+          <p>
+            De methode moet aan volgende eisen voldoen:
+          </p>
+          <ul>
+            <li>
+              Indien de <code>n</code>-de <code>Wagon</code> niet bestaat (wegens te korte trein), moet er een <code>IllegalArgumentException</code> opgeworpen worden.
+            </li>
+          </ul>
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>last</code> die de laatste wagon uit de trein teruggeeft.
+          </p>
+          <img src="last.png" width="75%" class="center" />
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een methode <code>join</code> die twee treinen aan elkaar koppelt. <code>train1.join(train2)</code> zoekt
+            naar de laatste wagon van <code>train1</code> en attacht de eerste wagon van <code>train2</code>. Deze methode moet zelf niet recursief zijn maar mag
+            geen lussen bevatten. Om de laatste <code>Wagon</code> te vinden moet <code>join</code> beroep doen op een andere reeds bestaande methode.
+          </p>
+          <img src="join.png" width="75%" class="center" />
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>sameTrain</code> die twee treinen vergelijkt. Twee treinen zijn gelijk indien ze hetzelfde
+            aantal wagons hebben, en dat de wagons &eacute;&eacute;n aan &eacute;&eacute;n dezelfde capaciteit hebben.
+          </p>
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>keepWagons</code> die, gegeven een integer <code>n</code>,
+            de langste trein overhoudt die maximaal <code>n</code> wagons telt. Dit gebeurt door
+            het teveel aan wagons te ontkoppelen van de trein. De methode levert als resultaat
+            de eerste ontkoppelde <code>Wagon</code> terug.
+          </p>
+          <p>
+            Bijvoorbeeld, stel dat <code>train</code> verwijst naar de eerste <code>Wagon</code> van een trein van 5 lang.
+          </p>
+          <ul>
+            <li>
+              <code>train.keepWagons(2)</code> zorgt ervoor dat <code>train</code> nog maar twee wagons bevat.
+              <img class="center" src="keepWagons2.png" width="75%"></img>
+            </li>
+            <li>
+              <code>train.keepWagons(10)</code> laat de trein ongemoeid aangezien deze minder dan 10 wagons telt en geeft <code>null</code> terug.
+              <img class="center" src="keepWagons10.png" width="75%"></img>
+            </li>
+            <li>
+              <code>train.keepWagons(0)</code> werpt een <code>IllegalArgumentException</code> op.
+            </li>
+          </ul>
+        </div>
+
+        <div data-question="extern">
+          <p>
+            Schrijf een recursieve methode <code>takeWagonCapacity</code> die, gegeven een integer <code>n</code>,
+            de kortste trein overhoudt die minimaal <code>n</code> capaciteit heeft. Dit gebeurt door
+            het teveel aan wagons te ontkoppelen van de trein. De methode levert als resultaat
+            de eerste ontkoppelde <code>Wagon</code> terug.
+          </p>
+          <p>
+            Bijvoorbeeld, beschouw de volgende trein:
+          </p>
+          <ul>
+            <li>
+              <code>train.takeWagonCapacity(35)</code> heeft de drie eerste wagons nodig om een capaciteit van 35 te bereiken.
+              <img class="center" src="takeWagonCapacity.png" width="75%"></img>
+            </li>
+            <li>
+              Er moet minimaal &eacute;&eacute;n <code>Wagon</code> overblijven. <code>takeWagonCapacity</code> oproepen met argument <code>0</code>
+              zorgt ervoor dat enkel de eerste wagon behouden wordt.
+            </li>
+            <li>
+              <code>takeWagonCapacity</code> oproepen met een te grote capaciteit leidt tot een <code>IllegalArgumentException</code>.
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
