@@ -66,5 +66,16 @@ module JavaScript
       out.write(code)
     end
   end
+
+  def JavaScript.evaluate_expression(code)
+    code = <<-END
+      var x = #{code};
+
+      if ( typeof(x) === 'string' ) console.log('"' + x + '"');
+      else console.log(x);
+    END
+
+    JavaScript.run(code).strip
+  end
 end
 
