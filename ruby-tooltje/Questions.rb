@@ -18,7 +18,7 @@ module Questions
         result.push('')
       else
         last_line_empty = false
-        result.push(line.strip)
+        result.push(line.rstrip)
       end
     end
 
@@ -39,6 +39,9 @@ module Questions
         arg = args[0]
 
         @properties[symbol.to_s[0..-2].to_sym] = arg
+      elsif symbol.to_s.end_with? '?'
+      then
+        @properties.has_key?( symbol.to_s[0..-2].to_sym )
       else
         raise "Unknown property #{symbol.to_s}" unless @properties.has_key? symbol
 

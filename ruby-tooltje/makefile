@@ -1,11 +1,16 @@
 .SECONDEXPANSION:
 
-.PHONY: example example-html example-multimake
+.PHONY: example example-html example-multimake zip
+
+PACKAGE=unnamed
+PACKAGE_CONTENTS=khl.js khl.css khluml.sty hint.tex next.tex previous.tex reset.tex reveal.tex verify.tex Controller.rb Generate.rb Generation.rb HTML.rb Java.rb JavaScript.rb Parameters.rb Questions.rb Shared.rb Types.rb makefile .gitignore shared.mk icons.mk
+
+all: icons export
+
 
 -include shared.mk
 -include icons.mk
 
-all: icons export
 
 example: example-template.html *.rb icons example-slides example-html example-multimake
 
@@ -25,8 +30,8 @@ clean_example:
 clean: clean_icons clean_example
 	rm -f *~
 
-export:
-	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
-
 variables-html:
 	ruby Generate.rb --output variables.html --template variables.template --require ./variables.rb --class Variables -p 2
+
+zip:
+	$(ZIP) $(PACKAGE).zip $(PACKAGE_CONTENTS)
