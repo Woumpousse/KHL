@@ -154,7 +154,7 @@ class Fundamentals < Controller
 
         `hide:console.log('a=%d\n', a);`
         `hide:console.log('b=%s\n', b ? 'true' : 'false');`
-        `hide:console.log('c=%s\n', c);`
+        `hide:console.log('c="%s"\n', c);`
         `hide:console.log('d=%s\n', d ? 'true' : 'false');`
         `hide:console.log('e=%s\n', e ? 'true' : 'false');`
       END
