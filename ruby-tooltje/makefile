@@ -11,31 +11,24 @@ all: icons export
 -include shared.mk
 -include icons.mk
 
+-include example.mk
 
-example: example.template *.rb icons example-slides example-html example-multimake
 
-example-html:
-	ruby Generate.rb --output example.html --template example.template --require ./Example.rb --class Examples --parameter x=1 -P y=2
-
-example-multimake: multimake-example.rb
-	ruby multimake-example.rb
-
-example-slides: slides-example.tex
-	$(LATEX) slides-example.tex
-	$(IMAGEMAGICK) -quality 90 -density 300 -trim -shave 3x3 slides-example.pdf slides-example-%d.png
-
-clean_example:
-	rm -f slides-example-?.png slides-example.aux
-
-clean: clean_icons clean_example
+clean: clean_icons
 	rm -f *~
 
 zip:
 	$(ZIP) $(PACKAGE).zip $(PACKAGE_CONTENTS)
 
-current: current-html
-	$(LATEX) train.tex
-	$(IMAGEMAGICK) -quality 90 -density 300 train.pdf train.png
+
+
+%.pdf: %.tex
+	$(LATEX) $<
+
+%.png: %.pdf
+	$(IMAGEMAGICK) -quality 90 -density 300 $< $@
+
+current: current-html train.png references.png train-creation.png reclength.png detach.png nth.png last.png join.png keepWagons2.png keepWagons10.png takeWagonCapacity.png
 
 current-html:
 	ruby Generate.rb --output train.html --template train.template --require ./train.rb --class Train -p 2
