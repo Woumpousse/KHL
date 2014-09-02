@@ -97,7 +97,7 @@
       <h2>Oefening 17</h2>
       <div data-question="fill-in-blanks">
         <p>
-          <code>x%2 === 0</code> geeft <code>true</code> indien <input data-solution="even is" placeholder="literal" data-validator="exact">
+          <code>x%2 === 0</code> geeft <code>true</code> indien <code>x</code> <input data-solution="even is" placeholder="literal" data-validator="exact">
         </p>
       </div>
 
