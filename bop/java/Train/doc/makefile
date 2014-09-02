@@ -34,3 +34,4 @@ current-html:
 	ruby Generate.rb --output train.html --template train.template --require ./train.rb --class Train -p 2
 
 export:
+	echo *.css *.png Train.html *.js | ruby -e "puts STDIN.read.split" > export
