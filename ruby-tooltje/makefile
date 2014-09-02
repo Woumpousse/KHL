@@ -20,7 +20,7 @@ clean: clean_icons
 zip:
 	$(ZIP) $(PACKAGE).zip $(PACKAGE_CONTENTS)
 
-
+export:
 
 %.pdf: %.tex
 	$(LATEX) $<
