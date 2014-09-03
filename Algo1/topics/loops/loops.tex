@@ -76,73 +76,92 @@
   \draw[sequence link] (#2) -- (#3) node[midway,sloped,yshift=1mm,font=\tiny,black] {\seqlinklabel};
 }}
 
+\newcommand{\singleround}{
+        \coordinate (init) at (0,0);
+        \coordinate (turn wheel) at ($ (init) + (1,2) $);
+        \coordinate (bankruptcy lose money) at ($ (turn wheel) + (1,1.5) $);
+        \coordinate (bankruptcy next player) at ($ (bankruptcy lose money) + (2,0) $);
+        \coordinate (pass) at ($ (turn wheel) + (3,0.5) $);
+        \coordinate (joker) at ($ (turn wheel) + (3,-0.5) $);
+        \coordinate (consonant) at ($ (turn wheel) + (1,-1.5) $);
+        \coordinate (show consonant) at ($ (consonant) + (2,0) $);
+        \coordinate (no consonants) at ($ (show consonant) + (1,-0.5) $);
+        \coordinate (end consonants) at ($ (show consonant) + (2,0) $);
+        \coordinate (exit) at ($ (init) + (8,0) $);
+        \coordinate (vowel) at ($ (init) + (1,-2) $);
+        \coordinate (buy vowel) at ($ (vowel) + (1.5,0) $);
+        \coordinate (show vowels) at ($ (buy vowel) + (1.5,0) $);
+        \coordinate (no vowels) at ($ (show vowels) + (1.5,.5) $);
+        \coordinate (end vowels) at ($ (show vowels) + (3,0) $);
+
+        \seqlink[label=rad]{init}{turn wheel}
+        \seqlink[label=bankroet]{turn wheel}{bankruptcy lose money}
+        \seqlink{bankruptcy lose money}{bankruptcy next player}
+        \seqlink[label=verlies beurt]{turn wheel}{pass}
+        \seqlink[label=joker]{turn wheel}{joker}
+        \seqlink[label=else]{turn wheel}{consonant}
+        \seqlink{consonant}{show consonant}
+        \seqlink[label=0]{show consonant}{no consonants}
+        \seqlink[label=1+]{show consonant}{end consonants}
+        \seqlink{no consonants}{end consonants}
+        \seqlink{end consonants}{exit}
+        \seqlink{joker}{exit}
+        \seqlink{pass}{exit}
+        \seqlink{bankruptcy next player}{exit}
+        \seqlink[label=klinker]{init}{vowel}
+        \seqlink{vowel}{buy vowel}
+        \seqlink{buy vowel}{show vowels}
+        \seqlink[label=0]{show vowels}{no vowels}
+        \seqlink{no vowels}{end vowels}
+        \seqlink[label=1+]{show vowels}{end vowels}
+        \seqlink{end vowels}{exit}
+
+        \seqpoint[placement=left]{init}{rad/klinker}
+        \seqpoint[placement=left]{turn wheel}{draai rad}
+        \seqpoint{bankruptcy lose money}{score = 0}
+        \seqpoint{bankruptcy next player}{huidigeSpeler++}
+        \seqpoint{pass}{huidigeSpeler++}
+        \seqpoint{joker}{jokers++}
+        \seqpoint[placement=below]{consonant}{gok medeklinker}
+        \seqpoint{show consonant}{toon}
+        \seqpoint[placement=below]{no consonants}{huidigeSpeler++}
+        \seqpoint{end consonants}{}
+        \seqpoint[placement=below]{vowel}{gok klinker}
+        \seqpoint[placement=below]{buy vowel}{score -= 50}
+        \seqpoint{show vowels}{toon}
+        \seqpoint{no vowels}{huidigeSpeler++}
+        \seqpoint{end vowels}{}
+        \seqpoint{exit}{}
+}
+
 \begin{frame}
-  \frametitle{Rad van Fortuin}
+  \frametitle{Rad van Fortuin: E\'en Ronde}
   \begin{center}
     \begin{tikzpicture}[sequence point/.style={blue!50,thick,fill=white},
                         sequence point label/.style={font=\tiny,black},
                         sequence link/.style={blue!50,thick}]
-      \coordinate (init) at (0,0);
-      \coordinate (turn wheel) at ($ (init) + (1,2) $);
-      \coordinate (bankruptcy lose money) at ($ (turn wheel) + (1,1.5) $);
-      \coordinate (bankruptcy next player) at ($ (bankruptcy lose money) + (2,0) $);
-      \coordinate (pass) at ($ (turn wheel) + (3,0.5) $);
-      \coordinate (joker) at ($ (turn wheel) + (3,-0.5) $);
-      \coordinate (consonant) at ($ (turn wheel) + (1,-1.5) $);
-      \coordinate (show consonant) at ($ (consonant) + (2,0) $);
-      \coordinate (no consonants) at ($ (show consonant) + (1,-0.5) $);
-      \coordinate (end consonants) at ($ (show consonant) + (2,0) $);
-      \coordinate (exit) at ($ (init) + (8,0) $);
-      \coordinate (vowel) at ($ (init) + (1,-2) $);
-      \coordinate (buy vowel) at ($ (vowel) + (1.5,0) $);
-      \coordinate (show vowels) at ($ (buy vowel) + (1.5,0) $);
-      \coordinate (no vowels) at ($ (show vowels) + (1.5,.5) $);
-      \coordinate (end vowels) at ($ (show vowels) + (3,0) $);
+      \singleround
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
 
-      \seqlink[label=rad]{init}{turn wheel}
-      \seqlink[label=bankroet]{turn wheel}{bankruptcy lose money}
-      \seqlink{bankruptcy lose money}{bankruptcy next player}
-      \seqlink[label=verlies beurt]{turn wheel}{pass}
-      \seqlink[label=joker]{turn wheel}{joker}
-      \seqlink[label=else]{turn wheel}{consonant}
-      \seqlink{consonant}{show consonant}
-      \seqlink[label=0]{show consonant}{no consonants}
-      \seqlink[label=1+]{show consonant}{end consonants}
-      \seqlink{no consonants}{end consonants}
-      \seqlink{end consonants}{exit}
-      \seqlink{joker}{exit}
-      \seqlink{pass}{exit}
-      \seqlink{bankruptcy next player}{exit}
-      \seqlink[label=klinker]{init}{vowel}
-      \seqlink{vowel}{buy vowel}
-      \seqlink{buy vowel}{show vowels}
-      \seqlink[label=0]{show vowels}{no vowels}
-      \seqlink{no vowels}{end vowels}
-      \seqlink[label=1+]{show vowels}{end vowels}
-      \seqlink{end vowels}{exit}
+\begin{frame}
+  \frametitle{Rad van Fortuin: E\'en Ronde}
+  \begin{center}
+    \begin{tikzpicture}[sequence point/.style={blue!50,thick,fill=white},
+                        sequence point label/.style={font=\tiny,black},
+                        sequence link/.style={blue!50,thick}]
+      \begin{scope}[scale=0.25,transform shape]
+        \singleround
+      \end{scope}
 
-      \seqpoint[placement=left]{init}{rad/klinker}
-      \seqpoint[placement=left]{turn wheel}{draai rad}
-      \seqpoint{bankruptcy lose money}{score = 0}
-      \seqpoint{bankruptcy next player}{huidigeSpeler++}
-      \seqpoint{pass}{huidigeSpeler++}
-      \seqpoint{joker}{jokers++}
-      \seqpoint[placement=below]{consonant}{gok medeklinker}
-      \seqpoint{show consonant}{toon}
-      \seqpoint[placement=below]{no consonants}{huidigeSpeler++}
-      \seqpoint{end consonants}{}
-      \seqpoint{vowel}{gok klinker}
-      \seqpoint{buy vowel}{score -= 50}
-      \seqpoint{show vowels}{toon}
-      \seqpoint{no vowels}{huidigeSpeler++}
-      \seqpoint{end vowels}{}
-      \seqpoint{exit}{}
+      \begin{scope}[scale=0.25,transform shape,xshift=10cm]
+        \singleround
+      \end{scope}
     \end{tikzpicture}
   \end{center}
 \end{frame}
 }
-
-
 
 \end{document}
 
