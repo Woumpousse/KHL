@@ -130,6 +130,65 @@
 % \input{wof.tex}
 % \input{while.tex}
 
+\begin{frame}
+  \frametitle{Vaak Voorkomend Patroon}
+  \code[width=.4\linewidth]{while-pattern.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \node[/khl/note] (note init) at ($ (init) + (0,1) $) {Initialisatie iterator};
+    \draw[/khl/note arrow] (note init) -- (init);
+
+    \node[/khl/note] (note cond) at ($ (cond) + (1,1) $) {Conditie};
+    \draw[/khl/note arrow] (note cond) -- (cond);
+
+    \node[/khl/note,anchor=west] (note inc) at ($ (inc) + (1,0) $) {Incrementatie};
+    \draw[/khl/note arrow] (note inc) -- (inc);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{For-lus}
+  % \begin{columns}
+  %   \column{.4\linewidth}
+  %   \code{while-pattern2.js}
+
+  %   \column{.65\linewidth}
+  %   \code{for.js}
+  % \end{columns}
+
+  \begin{center}
+    \code[width=.6\linewidth]{while-pattern2.js}
+    \vskip2mm
+    is equivalent met
+    \vskip2mm
+    \code[width=.6\linewidth]{for.js}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{columns}
+    \column{.5\linewidth}
+    \begin{tikzpicture}
+      \node[flowchart/node] (init) {evalueren \PLACEHOLDER{init}};
+      \node (loop) at ($ (init.south) + (0,-0.25) $) {};
+      \node[flowchart/node] (cond) at ($ (init.south) + (0,-1) $) {evalueren \PLACEHOLDER{cond}};
+      \node (split) at ($ (cond.south) + (0,-0.5) $) {};
+      \node[flowchart/node] (body) at ($ (split.center) + (2,-1.5) $) {evalueren \PLACEHOLDER{body}};
+      \node[flowchart/node] (inc) at ($ (body.south) + (0,-1) $) {evalueren \PLACEHOLDER{inc}};
+
+      \draw[flowchart/arrow] ($ (init.north) + (0,0.5) $) -- (init.north);
+      \draw[flowchart/arrow] (init.south) -- (cond.north);
+      \draw[flowchart/arrow] (cond.south) -- (split.center) -- ++(-2,-0.5) -- ++(0,-3.5);
+      \draw[flowchart/arrow] (split.center) -- ++(2,-0.5) -- (body.north);
+      \draw[flowchart/arrow] (body.south) -- (inc.north);
+      \draw[flowchart/arrowline] (inc.south) -- ++(0,-0.5) -- ++(2,0) |- (loop.center);
+
+      \path ($ (split.center) + (0,.1) $) -- ++(-2,-0.5) node[midway,sloped,above] {\tt\tiny false};
+      \path ($ (split.center) + (0,.1) $) -- ++(2,-0.5) node[midway,sloped,above] {\tt\tiny true};
+    \end{tikzpicture}
+    \column{.5\linewidth}
+    \code[font size=\scriptsize]{for.js}
+  \end{columns}
+\end{frame}
 
 \end{document}
 
