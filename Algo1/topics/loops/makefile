@@ -1,8 +1,8 @@
-all: conditionals.pdf
+all: loops.pdf
 
-conditionals.pdf: *.js *.tex
-	pdflatex conditionals.tex
-	pdflatex conditionals.tex
+loops.pdf: *.tex
+	pdflatex loops.tex
+	pdflatex loops.tex
 
 clean:
-	rm -f *~ *.aux *.toc *.snm conditionals.pdf *.log *.out *.nav
+	rm -f *~ *.aux *.toc *.snm loops.pdf *.log *.out *.nav

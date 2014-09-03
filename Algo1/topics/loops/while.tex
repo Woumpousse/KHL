@@ -1,0 +1,108 @@
+\begin{frame}
+  \frametitle{Lussen in JavaScript}
+  \begin{columns}
+    \column{.5\linewidth}
+    \begin{center}
+      \begin{tikzpicture}
+        \node[flowchart/node] (while) {evalueren \PLACEHOLDER{conditie}};
+        \node (loop entry) at ($ (while.north) + (0,0.5) $) {};
+        \node[flowchart/node] (body) at ($ (while.south) + (2,-2) $) {\parbox{1.5cm}{\centering uitvoeren \PLACEHOLDER{body}}};
+        \node (split) at ($ (while.south) + (0,-0.5) $) {};
+
+        \draw[flowchart/arrow] ($ (while.north) + (0,1) $) -- (while.north);
+        \draw[flowchart/arrow] (while.south) -- (split.center) -- ++(-2,-0.5) -- ++(0,-2.5);
+        \draw[flowchart/arrow] (split.center) -- ++(2,-0.5) -- (body.north);
+        \draw[flowchart/arrowline] (body.south) -- ++(0,-0.5) -- ++(1.5,0) |- (loop entry.center);
+
+        \path ($ (while.south) + (0,-0.4) $) -- ++(-2,-0.5) node [midway,above,sloped] {false};
+        \path ($ (while.south) + (0,-0.4) $) -- ++(2,-0.5) node [midway,above,sloped] {true};
+      \end{tikzpicture}
+    \end{center}
+
+    \column{.5\linewidth}
+    \code{while.js}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening}
+  \code[width=.4\linewidth]{exwhile.js}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \coordinate (sp x init) at (0,0);
+      \coordinate (sp i init) at ($ (sp x init) + (1.5,0) $);
+      \coordinate (sp i check) at ($ (sp i init) + (1.5,0) $);
+      \coordinate (sp x mul 2) at ($ (sp i check) + (1.5,-1) $);
+      \coordinate (sp i dec) at ($ (sp x mul 2) + (1.5,0) $);
+      \coordinate (sp exit) at ($ (sp i check) + (1.5,0) $);
+
+      \visible<2->{
+        \draw[sequence link] (sp x init) -- (sp i init);
+        \draw[sequence link] (sp i init) -- (sp i check);
+        \draw[sequence link] (sp i check) -- (sp x mul 2) node[midway,black,font=\tiny,sloped,yshift=1mm] {\tt true};
+        \draw[sequence link] (sp x mul 2) -- (sp i dec);
+        \draw[sequence link,-latex] (sp i dec) -- ++(0,-.5) -| (sp i check);
+        \draw[sequence link] (sp i check) -- (sp exit) node[midway,black,font=\tiny,sloped,yshift=1mm] {\tt false};
+
+        \draw[sequence point] (sp x init) circle (.05) node[above,font=\tiny,black] {\tt var x=1};
+        \draw[sequence point] (sp i init) circle (.05) node[above,font=\tiny,black] {\tt var i = 5};
+        \draw[sequence point] (sp i check) circle (.05) node[above,font=\tiny,black] {\tt i > 0};
+        \draw[sequence point] (sp x mul 2) circle (.05) node[above right,font=\tiny,black] {\tt x *= 2};
+        \draw[sequence point] (sp i dec) circle (.05) node[above,font=\tiny,black] {\tt i--};
+        \draw[sequence point] (sp exit) circle (.05);
+
+        \node[anchor=north west,font=\small] at ($ (sp x init) + (0,-1) $) {
+          \begin{tabular}{c@{\hspace{1mm}}c@{\hspace{1mm}}l}
+            x & = & \tt
+            \only<2-4>{1}%
+            \only<5-7>{2}%
+            \only<8-10>{4}%
+            \only<11-13>{8}%
+            \only<14-16>{16}%
+            \only<17->{32}%
+            \\
+            \only<3->{i} & \only<3->{=} & \tt
+            \only<3-5>{5}%
+            \only<6-8>{4}%
+            \only<9-11>{3}%
+            \only<12-14>{2}%
+            \only<15-17>{1}%
+            \only<18->{0}%
+            \\
+          \end{tabular}
+        };
+
+        \only<2>{
+          \draw[active] (sp x init) circle (.05);
+        }
+
+        \only<3>{
+          \draw[active] (sp i init) circle (.05);
+        }
+
+        \only<4,7,10,13,16,19>{
+          \draw[active] (sp i check) circle (.05);
+        }
+
+        \only<5,8,11,14,17>{
+          \draw[active] (sp x mul 2) circle (.05);
+        }
+
+        \only<6,9,12,15,18>{
+          \draw[active] (sp i dec) circle (.05);
+        }
+
+        \only<20>{
+          \draw[active] (sp exit) circle (.05);
+        }
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "loops"
+%%% End: 
