@@ -304,17 +304,10 @@ module Questions
         interpret_code( parameterize(parameters) )
       end
 
-      def output_key(k)
-        if output =~ /^#{k}=(.*)$/
-        then $1
-        else raise "Key not found in output"
-        end
-      end
-
-      def output_map
+      def output_map(parameters = {})
         result = {}
 
-        output.scan(/^([^=]+)=([^=]+)$/).each do |key, val|
+        output(parameters).scan(/^([^=]+)=([^=]+)$/).each do |key, val|
           result[key.strip] = val.strip
         end
 
@@ -333,11 +326,11 @@ module Questions
           then
             id = tagged.contents
 
-            raise "Undefined parameter #{id}" unless parameters.has_key?(id)
+            raise "Undefined parameter #{id} in hash #{parameters}" unless parameters.has_key?(id)
             parameters[id]  
           else
             raise "Unknown tag #{tag}"
-          end          
+          end
         end
       end
     end

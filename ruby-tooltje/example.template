@@ -124,6 +124,22 @@
       </section>
 
       <section>
+        <h2>Uitvoer Bepalen (JavaScript, Parameters)</h2>
+        <div data-question="fill-in-blanks">
+          <p>
+            Na uitvoering zijn de volgende variabelen gelijk aan:
+          </p>
+          <pre><%= js_interpret_params.code %></pre>
+          <ul>
+            <il>
+              Bij <code>x=1</code>,
+                  <code>y=5</code> is 
+              z = <%= HTML::blank_inputbox(js_interpret_params.output( {'x' => 1, 'y' => 5} )) %>
+            </li>
+        </div>
+      </section>
+
+      <section>
         <h2>Slideshow</h2>
         <div class="slideshow">
           <div class="slide">

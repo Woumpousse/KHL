@@ -167,4 +167,14 @@ class Examples < Controller
       END
     end
   end
+
+  def js_interpret_params
+    once(__method__) do
+      q = Questions::JavaScript::InterpretCode.new.parse( <<-'END'.unindent.strip )
+        var z = `param:x` % `param:y`;
+
+        `hide:aux.print(z);`
+      END
+    end
+  end
 end
