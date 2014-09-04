@@ -25,6 +25,9 @@ module Questions
     result.join("\n").strip
   end
   
+  #
+  # Expandable
+  #
   class Expandable
     def initialize
       @properties = Hash.new
@@ -50,6 +53,9 @@ module Questions
     end
   end
 
+  #
+  # Question
+  #
   class Question < Expandable
   end
 
@@ -59,6 +65,9 @@ module Questions
     question
   end
 
+  #
+  # FillInBlanksInCode
+  #
   class FillInBlanksInCode
     class Fragment < Expandable
     end
@@ -201,6 +210,9 @@ module Questions
   end
 
 
+  #
+  # SelectCodeFragments
+  #
   class SelectCodeFragments
     class CodeFragment
       def initialize(string)
@@ -257,7 +269,9 @@ module Questions
   end
 
 
-
+  #
+  # InterpretCode
+  #
   class InterpretCode
     def initialize(formatter)
       Types.check( binding, { :formatter => HTML::Formatters::Formatter } )
