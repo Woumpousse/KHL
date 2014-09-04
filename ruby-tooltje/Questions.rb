@@ -293,7 +293,7 @@ module Questions
 
       ::Questions.build_question do |q|
         q.tagged = tagged
-        q.code = formatted
+        q.code = ::Questions::remove_redundant_whitespace(formatted)
       end
     end
 
@@ -369,7 +369,7 @@ module Questions
     end
 
     def format_untagged_fragment(fragment)
-      @formatter.apply( ::Questions::remove_redundant_whitespace(fragment) )
+      @formatter.apply( fragment )
     end
   end
 
