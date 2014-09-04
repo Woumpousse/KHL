@@ -282,11 +282,18 @@ module Questions
     def parse(code)
       Types.check( binding, { :code => String } )
 
-      ::Questions.build_question do |q|
-        view_code = remove_hidden_code(code)
-        view_code = ::Questions::remove_redundant_whitespace(view_code)
+      tagged = find_tagged(code)
 
-        q.code = @formatter.apply( view_code )
+      formatted = tagged.select do |fragment|
+        not (Tagged === fragment) or fragment.tag != 'hidden'
+      end.merge_consecutive_strings.map do |fragment|
+        format_fragment(fragment)
+      end.join
+
+
+      ::Questions.build_question do |q|
+        q.tagged = tagged
+        q.code = formatted
       end
     end
 
@@ -310,33 +317,41 @@ module Questions
       end
     end
 
-    def hide_by_tags(code)
+    class Tagged
+      def initialize(tag, contents)
+        @tag = tag
+        @contents = contents
+      end
+
+      attr_reader :tag, :contents
+    end
+
+    def find_tagged(code)
       Types.check( binding, { :code => String } )
 
-      code.gsub(/`([^:]+):([^`]*)`/) do
-        tag, body = $1, $2
+      ComposedString.from_string(code).gsub(/(`[^:]+:[^:]*?`)/) do |match|
+        tag, contents = match[1...-1].split(':')
 
-        if yield tag
-        then ""
-        else body
-        end
+        Tagged.new(tag, contents)
       end
     end
 
-    def remove_hidden_code(code)
-      Types.check( binding, { :code => String } )
-
-      hide_by_tags(code) do |tag|
-        tag == 'hide'
+    def format_fragment(fragment)
+      if Tagged === fragment
+      then format_tagged_fragment(fragment)
+      elsif String === fragment
+      then format_untagged_fragment(fragment)
+      else
+        abort "BUG: fragment should be either Tagged or String"
       end
     end
 
-    def remove_tags(code)
-      Types.check( binding, { :code => String } )
+    def format_tagged_fragment(fragment)
+      "<span class=\"meta\">#{fragment.contents}</span>"
+    end
 
-      hide_by_tags(code) do
-        false
-      end
+    def format_untagged_fragment(fragment)
+      @formatter.apply( ::Questions::remove_redundant_whitespace(fragment) )
     end
   end
 
@@ -481,7 +496,11 @@ module Questions
 
       def parse(code)
         ::Questions::build_question(super(code)) do |q|
-          q.output = compute_result(remove_tags(code))
+          code_without_tags = q.tagged.join do |tagged|
+            tagged.contents
+          end
+
+          q.output = compute_result(code_without_tags)
           q.extend QuestionExtension
         end
       end

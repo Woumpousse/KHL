@@ -106,6 +106,8 @@ class ComposedString
   end
 
   def initialize(components)
+    Types.check( binding, { :components => Array } )
+
     @components = components.dup
   end
 
@@ -114,6 +116,8 @@ class ComposedString
   # otherwise split will not work correctly
   # Noncapturing groups: (?:regex)
   def gsub(regex)
+    Types.check( binding, { :regex => Regexp } )
+
     result = @components.map do |component|
       if component.is_a? String
       then
@@ -136,7 +140,36 @@ class ComposedString
       end
     end.join(infix)
   end
-  
+
+  def merge_consecutive_strings
+    components = []
+
+    @components.each do |component|
+      if not components.empty? and String === components[-1] and String === component
+      then components[-1] += component
+      else components.push(component)
+      end
+    end
+
+    ComposedString.new( components )
+  end
+
+  def map
+    components = @components.map do |x|
+        yield x
+    end
+
+    ComposedString.new( components )
+  end
+
+  def select
+    components = @components.select do |x|
+      yield x
+    end
+
+    ComposedString.new( components )
+  end
+
   def to_a
     @components.dup
   end

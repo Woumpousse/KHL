@@ -162,8 +162,8 @@ class Examples < Controller
         var y = 2;
         x *= 5;
 
-        `hide:console.log('x=%d\n', x);`
-        `hide:console.log('y=%d\n', y);`
+        `hide:aux.printVar('x', x);`
+        `hide:aux.printVar('y', y);`
       END
     end
   end
