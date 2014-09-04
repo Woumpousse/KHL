@@ -314,6 +314,14 @@ module Questions
         result
       end
 
+      def parameter_names
+        tagged.to_a.select do |fragment|
+          Tagged === fragment and fragment.tag == 'param'
+        end.map do |fragment|
+          fragment.contents
+        end.uniq
+      end
+
       protected
       def parameterize(parameters)
         tagged.join do |tagged|

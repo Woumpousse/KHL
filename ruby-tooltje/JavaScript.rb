@@ -117,4 +117,3 @@ module JavaScript
     END
   end
 end
-
