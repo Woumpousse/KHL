@@ -25,6 +25,12 @@ module JavaScript
   def JavaScript.run(code)
     Types.check(binding, { 'code' => String })
 
+    run_without_aux( aux_library + "\n" + code )
+  end
+
+  def JavaScript.run_without_aux(code)
+    Types.check(binding, { 'code' => String })
+
     with_code_written_to_temporary_file(code) do |filename|
       JavaScript.invoke_interpreter(filename)
     end
@@ -76,6 +82,39 @@ module JavaScript
     END
 
     JavaScript.run(code).strip
+  end
+
+  def JavaScript.aux_library
+    <<-'END'.unindent
+    var aux = (function () {
+      function stringOfValue(value) {
+        if ( typeof(x) === 'string' ) {
+          return '"' + value + '"';
+        }
+        else {
+          return "" + value;
+        }
+      }
+
+      function print(str) {
+        console.log(str);
+      }
+
+      function println(str) {
+        print(str + "\n");
+      }
+
+      function printVar(id, val) {
+        println(id + "=" + stringOfValue(val));
+      }
+
+      return { stringOfValue: stringOfValue,
+               print: print,
+               println: println,
+               printVar: printVar
+             };
+    })();
+    END
   end
 end
 

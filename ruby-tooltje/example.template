@@ -118,8 +118,8 @@
           <p>
             Na uitvoering zijn de volgende variabelen gelijk aan:
           </p>
-          <%= HTML::output_sheet( js_interpret.output_map ) %>
           <pre><%= js_interpret.code %></pre>
+          <%= HTML::output_sheet( js_interpret.output_map ) %>
         </div>
       </section>
 

@@ -28,7 +28,9 @@ export:
 %.png: %.pdf
 	$(IMAGEMAGICK) -quality 90 -density 300 $< $@
 
-current: current-html train.png references.png train-creation.png reclength.png detach.png nth.png last.png join.png keepWagons2.png keepWagons10.png takeWagonCapacity.png
+CURRENT = loops
+
+current: current-html
 
 current-html:
-	ruby Generate.rb --output train.html --template train.template --require ./train.rb --class Train -p 2
+	ruby Generate.rb --output $(CURRENT).html --template $(CURRENT).template --require ./$(CURRENT).rb --class Resources -p 2
