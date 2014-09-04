@@ -285,7 +285,7 @@ module Questions
       tagged = find_tagged(code)
 
       formatted = tagged.select do |fragment|
-        not (Tagged === fragment) or fragment.tag != 'hidden'
+        not (Tagged === fragment) or fragment.tag != 'hide'
       end.merge_consecutive_strings.map do |fragment|
         format_fragment(fragment)
       end.join
@@ -299,6 +299,11 @@ module Questions
 
     protected
     module QuestionExtension
+      def output(parameters = {})
+        # Expects interpret_code to be added by another instance
+        interpret_code( parameterize(parameters) )
+      end
+
       def output_key(k)
         if output =~ /^#{k}=(.*)$/
         then $1
@@ -314,6 +319,26 @@ module Questions
         end
 
         result
+      end
+
+      protected
+      def parameterize(parameters)
+        tagged.join do |tagged|
+          tag = tagged.tag
+          
+          case tag
+          when 'hide'
+          then tagged.contents
+          when 'param'
+          then
+            id = tagged.contents
+
+            raise "Undefined parameter #{id}" unless parameters.has_key?(id)
+            parameters[id]  
+          else
+            raise "Unknown tag #{tag}"
+          end          
+        end
       end
     end
 
@@ -476,14 +501,17 @@ module Questions
 
       def parse(code)
         ::Questions::build_question(super(code)) do |q|
-          q.output = compute_result(code)
+          q.extend QuestionExtension
+          q.extend JavaMixIn
         end
       end
 
       protected
-      def compute_result(code)
-        bundle = ::Java::Bundle.from_string(code)
-        ::Java::run(bundle).strip
+      module JavaMixIn
+        def interpret_code(code)
+          bundle = ::Java::Bundle.from_string(code)
+          ::Java::run(bundle).strip
+        end
       end
     end
   end
@@ -496,19 +524,17 @@ module Questions
 
       def parse(code)
         ::Questions::build_question(super(code)) do |q|
-          code_without_tags = q.tagged.join do |tagged|
-            tagged.contents
-          end
-
-          q.output = compute_result(code_without_tags)
           q.extend QuestionExtension
+          q.extend JavaScriptMixIn
         end
       end
 
       protected
-      def compute_result(code)
-        ::JavaScript.run(code).strip
-      end
+      module JavaScriptMixIn
+        def interpret_code(code)
+          ::JavaScript.run(code).strip
+        end        
+      end      
     end
   end
 end
