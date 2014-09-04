@@ -1,0 +1,246 @@
+<%
+  $exercise_number = 0
+
+  def exercise_header
+    "<h2>Oefening #{$exercise_number += 1}</h2>"
+  end
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Loops</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Loops</h1>
+
+      <%=
+         interpret(<<-END)
+           var x = 5;
+
+           while ( x > 0 ) {
+               x--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 5;
+
+           while ( x > 0 ) {
+               x -= 2;
+           } 
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 1;
+           var y = 5;
+
+           while ( x > 0 && y > 0 ) {
+               x--;
+               x++;
+               y--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 0;
+           var y = 5;
+
+           while ( x > 0 && y > 0 ) {
+               x++;
+               y--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 0;
+           var y = 5;
+
+           while ( x > 0 && y > 0 ) {
+               x++;
+               y--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 0,1,10,100,1000,1234,1234567890 ])
+             var x = `param:init`;
+             var y = 0;
+
+             while ( x > 0 ) {
+                 x = (x - (x % 10)) / 10;
+                 y++;
+             } 
+
+             `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 3;
+           var z = 0;
+
+           while ( x > 0 ) {
+               var y = 5;
+
+               while ( y > 0 ) {
+                   z++;
+                   y--;
+               }
+
+               x--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+           `hide:aux.printVar('z', z);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 3;
+           var y = 5;
+           var z = 10;
+
+           while ( x === 0 ) {
+               while ( y > 0 || z > 0 ) {
+                   y = 3 * z - x * x;
+                   z = 2 * x + 3 * y - 4 * x;
+               }
+
+               x--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+           `hide:aux.printVar('z', z);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 3;
+           var y = 5;
+           var z = 10;
+
+           while ( x !== 0 ) {
+               while ( y > 0 && z > 0 ) {
+                   y += x * x;
+                   z -= x + y;
+               }
+
+               x--;
+           } 
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 0,1,4,9,16,17,100,101 ])
+             var result = 0;
+
+             while ( result * result < `param:n` ) {
+                 result++;
+             }
+
+             `hide:aux.printVar('result', result);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 0;
+
+           for ( var i = 0; i !== 10; ++i ) {
+               x++;
+           }
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 0;
+
+           for ( var i = 10; i > 0; --i ) {
+               x++;
+           }
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 0,1,2,3,4,5,6,10,100,1000000 ])
+             var result = 0;
+
+             for ( var i = 1; i <= `param:p`; ++i ) {
+                 if ( i % 2 === 0 ) {
+                     result++;
+                 }
+             }
+
+             `hide:aux.printVar('result', result);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 2,3,4,5,6,7,8,9,10,11,23 ])
+             var result = true;
+
+             for ( var i = 2; i < `param:p`; ++i ) {
+                 if ( `param:p` % i === 0 ) {
+                     result = false;
+                 }
+             }
+
+             `hide:aux.printVar('result', result);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 2,3,4,5,6,7,8,9,10,11,23 ])
+             var result = true;
+
+             for ( var i = 2; i * i <= `param:p`; ++i ) {
+                 if ( `param:p` % i === 0 ) {
+                     result = false;
+                 }
+             }
+
+             `hide:aux.printVar('result', result);`
+         END
+      %>
+    </div>
+  </body>
+</html>
