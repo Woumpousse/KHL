@@ -592,6 +592,11 @@ Vereenvoudig, o.a.\ gebruik makende van de tautologie\"en in \cref{tautologie}.
   \item $p \alsdan p$
   \item $(p \alsdan q) \en p$
   \item $(p \alsdan q) \en (\niet p \alsdan q)$
+  \item $\niet ((p \en q) \of \niet r)$
+  \item $\niet ((p \of q) \en \niet r)$
+  \item $\niet (\niet (p \of q) \en r)$
+  \item $(\niet p \of q) \en (\niet p \of r)$
+  \item $(\niet p \en q) \of (\niet p \en r)$
 \end{enumerate}
 \begin{opl}
 \begin{enumerate}
@@ -605,9 +610,52 @@ Vereenvoudig, o.a.\ gebruik makende van de tautologie\"en in \cref{tautologie}.
   \item 1
   \item $p$
   \item $q$
+  \item $\niet (p \en q) \en r$
+  \item $p \of q \alsdan r$
+  \item $r \alsdan p \of q$
+  \item $p \alsdan q \en r$
+  \item $\niet p \en (q \of r)$
 \end{enumerate}
 \end{opl}
 \end{oef}
+
+\begin{samepage}
+\begin{oef}
+Gegeven twee enkelvoudige proposities:
+\begin{center}
+  \begin{tabular}{c@{\hspace{1mm}:\hspace{1mm}}l}
+    f & ik fiets snel \\
+    d & ik krijg dorst
+  \end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Herschrijf de uitspraak ``Als ik snel fiets, dan krijg ik dorst'' als een logische formule.  Stel hier ook de waarheidstabel voor op. 
+  \item Welke van de volgende uitspraken zijn hiermee equivalent? Toon dit aan door de uitspraken om te zetten in logische formules en een waarheidstabel op te stellen. 
+        \begin{enumerate}
+          \item Als ik dorst krijg, dan heb ik snel gefietst.
+          \item Als ik geen dorst krijg, dan heb ik niet snel gefietst.
+          \item Als ik niet snel fiets, dan krijg ik geen dorst.
+          \item Ik fiets niet snel of ik krijg dorst.
+        \end{enumerate}
+\end{enumerate}
+\begin{opl}
+\begin{itemize}
+  \item \[
+          \begin{array}{ccc}
+            f & d & f \alsdan d \\
+            \toprule
+            0 & 0 & 1 \\
+            0 & 1 & 1 \\
+            1 & 0 & 0 \\
+            1 & 1 & 1 \\
+          \end{array}
+        \]
+  \item Uitspraken b en d zijn equivalent met de gegeven uitspraak.
+\end{itemize}
+\end{opl}
+\end{oef}
+\end{samepage}
 
 %%% Local Variables: 
 %%% mode: latex
