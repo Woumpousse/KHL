@@ -244,20 +244,21 @@ Zelfde vraag voor elke figuur:
 
 
 \begin{oef}
-De volgende grafieken stellen relaties voor met als bron- en doelverzameling het interval $[0,1]$. Geef voor elk van de relaties aan of deze
+De volgende grafieken stellen relaties voor met als bronverzameling $A$ en doelverzameling $B$ het interval $[0,1]$. Geef voor elk van de relaties aan of deze
 functies, afbeeldingen, injectief, surjectief en/of bijectief zijn.
 \begin{center}
   \newcommand{\axes}{
     \path[use as bounding box] (-.5,-.5) rectangle (4,4);
     \draw[step=3cm,gray,thin] (-.5,-.5) grid (4,4);
-    \draw[thin,->] (-.5,0) -- (4,0);
-    \draw[thin,->] (0,-.5) -- (0,4);
+    \draw[thin,->] (-.5,0) -- (4,0) node[at end,above left] {$A$};
+    \draw[thin,->] (0,-.5) -- (0,4) node[at end,left] {$B$};
   }
   \begin{tabular}{cc}
     1.
     \begin{tikzpicture}
       \axes
-      \draw[thick] (0,0) -- (3,3);
+      \draw[thick] (0,0) -- (1,1);
+      \draw[thick] (2,2) -- (3,3);
     \end{tikzpicture}
     &
     2.
@@ -301,9 +302,9 @@ functies, afbeeldingen, injectief, surjectief en/of bijectief zijn.
       & \rotatebox{90}{surjectief}
       & \rotatebox{90}{bijectief} \\
       \toprule
-      1. & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+      1. & \checkmark &            & \checkmark & \checkmark & \checkmark \\
       2. & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-      3. &            &            &            &            &            \\
+      3. &            &            &            & \checkmark &            \\
       4. & \checkmark & \checkmark &            &            &            \\
       5. & \checkmark & \checkmark &            & \checkmark &            \\
       6. &            &            &            &            &            \\

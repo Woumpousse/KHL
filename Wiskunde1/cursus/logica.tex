@@ -379,12 +379,13 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
 
 
 \section{Samenvatting}
+\paragraph{Logische Operatoren}
 \begin{center}
   \begin{tabular}{ccc}
   \toprule
    symbool  & betekenis & benaming \\
    \midrule
-    $\en$ & en & conjunctie\index{conjunctie} \\
+     $\en$ & en & conjunctie\index{conjunctie} \\
      $\of$ & of & disjunctie\index{disjunctie} \\
      $\niet$ & niet & negatie\index{negatie} \\
      $\alsdan$ & als \ldots\ dan & implicatie\index{implicatie} \\
@@ -393,6 +394,19 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
   \end{tabular}
 \end{center}
 
+\paragraph{Voorrangsregels} Bovenste bindt sterkst
+\[
+  \begin{array}{c}
+    \toprule
+    \niet \\
+    \en \\
+    \of \\
+    \alsdan \qquad \asa \\
+    \bottomrule
+  \end{array}
+\]
+
+\paragraph{Waarheidstabellen}
 \begin{center}
   \begin{tabular}{ccccccc}
     \toprule
@@ -406,6 +420,7 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
   \end{tabular}
 \end{center}
 
+\paragraph{Tautologie\"en}
 \[
   \begin{array}{r@{\quad\asa\quad}l}
     \toprule
@@ -423,7 +438,6 @@ onwaar & $0$ & \verb+%F+ &\verb+false+\\
     \bottomrule
   \end{array}
 \]
-
 
 \input{oefeningen/oeflogica}
 
