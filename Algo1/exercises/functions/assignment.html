@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../assignment.css">
+    <style>
+      .center {
+        margin: 10px auto;
+      }
+
+      .grid td {
+        width: 20px;
+        text-align: center;
+      }
+
+      #random-table {
+        border-collapse: collapse;
+      }
+
+      #random-table tr:first-child {
+        border-bottom: solid black 1px;
+      }
+
+      #random-table td {
+        min-width: 150px;
+        text-align: center;
+      }
+
+      #container > section > h2 {
+        text-align: center;
+      font-size: 150%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>Functions</h1>
+      </header>
+      <nav></nav>
+
+      <section>
+        <h2>Random</h2>
+        <section class="testcase" data-subject="randomInteger">
+          <p>
+            Schrijf een functie <code>randomInteger(a, b)</code> die een random geheel getal tussen
+            <code>a</code> (inclusief) en <code>b</code> (exclusief) teruggeeft. Gebruik de gegeven functie <code>random</code>
+            om een kommagetal tussen <code>0</code> (inclusief) en <code>1</code> (exclusief) te genereren.
+            Je zal vermoedelijk ook gebruik moeten maken van <a href="http://www.w3schools.com/jsref/jsref_floor.asp"><code>Math.floor</code></a>.
+          </p>
+          <p>
+            Er zijn veel manieren om aan de opgave te voldoen; om de  tests te doen slagen, moet je ervoor
+            zorgen dat er een "lineaire mapping" is tussen de intervallen <code>[0, 1)</code> en <code>[a, b)</code>.
+          </p>
+          <table class="center" id="random-table">
+            <tr>
+              <th><code>random</code></th>
+              <th><code>randomInteger(10,20)</code></th>
+            </tr>
+            <tr>
+              <td>0</td><td>10</td>
+            </tr>
+            <tr>
+              <td>0.25</td><td>12.5</td>
+            </tr>
+            <tr>
+              <td>0.5</td><td>15</td>
+            </tr>
+            <tr>
+              <td>0.75</td><td>17.5</td>
+            </tr>
+            <tr>
+              <td>0.9999</td><td>19.9999</td>
+            </tr>
+          </table>
+        </section>
+
+        <section class="testcase" data-subject="throwDie">
+          <p>
+            Schrijf een functie <code>throwDie()</code> die een dobbelsteenworp simuleert, m.a.w.
+            de functie geeft een random geheel getal terug tussen 1 (inclusief) en 6 (inclusief).
+            Herbruik hiervoor je eigen functie <code>randomInteger</code>.
+          </p>
+          <p>
+            Belangrijk: deze oefening en alle volgende in deze sectie
+            zijn afhankelijk van <code>randomInteger</code>: indien deze
+            laatste niet werkt exact zoals gevraagd, zal je alle komende oefeningen
+            niet kunnen doen slagen.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="sumDice">
+          <p>
+            Schrijf een functie <code>sumDice(n)</code> die een dobbelsteen <code>n</code> keer
+            werpt en de som van de ogen teruggeeft.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="countSumDice">
+          <p>
+            Schrijf een functie <code>countSumDice(diceCount, n, sum)</code> die <code>n</code> keer
+            <code>diceCount</code> dobbelstenen werpt, en telt hoe vaak de som der ogen
+            gelijk is aan <code>sum</code>.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="mostFrequentSum">
+          <p>
+            Schrijf een functie <code>mostFrequentSum(diceCount)</code>
+            die nagaat welke som-der-ogen het vaakst voorkomt. Dit moet gebeuren
+            als volgt:
+          </p>
+          <ul>
+            <li>Er worden 1000 keer <code>diceCount</code> dobbelstenen geworpen en geteld
+              hoe vaak de som der ogen gelijk aan <code>1</code> is. Men onthoudt dit aantal.
+            </li>
+            <li>Er worden 1000 keer <code>diceCount</code> dobbelstenen geworpen en
+              geteld hoe vaak de som der ogen gelijk aan <code>2</code> is. Indien de
+              som vaker <code>2</code> werd dan <code>1</code>, dan onthoudt
+              men dit nieuwe aantal.
+            </li>
+            <li>
+               Dit blijft men herhalen, altijd het hoogste resultaat onthoudend, tot
+               we uitkomen aan <code>6 * diceCount</code>: de som kan immers nooit groter zijn.
+            </li>
+            <li>
+              De functie <code>mostFrequentSum</code> geeft als resultaat
+              de som terug die het vaakst voorkwam.
+            </li>
+          </ul>
+        </section>
+
+
+      </section>
+    </div>
+
+    <script src="../underscore.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../clone.js"></script>
+    <script src="../util.js"></script>
+    <script src="../lazy.js"></script>
+    <script src="../test-framework.js"></script>
+    <script src="../html-tests.js"></script>
+    <script src="solutions.js"></script>
+    <script src="../rng.js"></script>
+    <script src="tests.js"></script>
+    <script src="student.js"></script>
+  </body>
+</html>
