@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\usetikzlibrary{calc}
+
+\begin{document}
+
+\begin{tikzpicture}[stroke/.style={line width=3pt}]
+  \draw[stroke,rounded corners=1pt]
+                    (0,0) ++(-60:1cm) arc (-60:240:1cm)
+                    node[at start] (arc start) {}
+                    -- ++(0,-.2)
+                    node (lower left) {}
+                    -- (lower left -| arc start)
+                    -- cycle;
+  \path let \p1=(lower left), \p2=(arc start) in
+        [draw,stroke,rounded corners=1pt] ($ (\x1, \y1) + (0,-0.1) $) rectangle ($ (\x2, \y1) + (0,-0.3) $);
+  \path let \p1=(lower left), \p2=(arc start) in
+        [draw,stroke,rounded corners=1pt] ($ (\x1, \y1) + (0,-0.4) $) rectangle ($ (\x2, \y1) + (0,-0.6) $);
+
+  \foreach \angle in {-30,0,...,210} {
+    \draw[line cap=round,line width=3pt] (\angle:1.2cm) -- (\angle:1.5cm);
+  };
+\end{tikzpicture}
+
+\end{document}

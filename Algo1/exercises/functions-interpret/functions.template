@@ -1,0 +1,285 @@
+<%
+  $exercise_number = 0
+
+  def exercise_header
+    "<h2>Oefening #{$exercise_number += 1}</h2>"
+  end
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Functions</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Loops</h1>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {
+               return 5;
+           }
+
+           var x = foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(a)
+           {
+               return a * 2;
+           }
+
+           var x = foo(5);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+               return x * 2;
+           }
+
+           var x = foo(5);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {
+               x = 3;
+           }
+
+           var x = 5;
+           foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+               x = 3;
+           }
+
+           var x = 5;
+           foo(x);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x, y, z)
+           {
+               x += y;
+               y += z;
+               z += x;
+           }
+
+           var x = 5;
+           var y = 3;
+           var z = 1;
+
+           foo(x, y, z);
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+           `hide:aux.printVar('z', z);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+               x = 3;
+
+               return x;
+           }
+
+           var x = 5;
+           foo(x);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+               return x;
+
+               x++;
+
+               return x;
+           }
+
+           var x = foo(2);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         multi_interpret(<<-END.unindent.strip, [ 2,3,4,5,6,10,23,0,157789532 ])
+           function foo(x)
+           {
+               for ( var i = 2; i <= x; ++i )
+               {
+                   if ( x % i === 0 ) {
+                       return i;
+                   }
+               }
+
+               return -1;
+           }
+
+           var x = foo(`param:p`);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {
+               return bar();
+           }
+
+           function bar()
+           {
+               return 5;
+           }
+
+           var x = foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+               return bar(x);
+           }
+
+           function bar(x)
+           {
+               return x;
+           }
+
+           var x = foo(9);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x, y)
+           {
+               return bar(y, x);
+           }
+
+           function bar(x, y)
+           {
+               return x - y;
+           }
+
+           var x = foo(3, 6);
+           var y = bar(3, 6);
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(x)
+           {
+                return x * 2;
+           }
+
+           function bar(x)
+           {
+                return x + 3;
+           }
+
+           var x = foo(bar(foo(1)));
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {        
+                var result = 2;
+
+                result = bar() * result;
+
+                return result;
+           }
+
+           function bar()
+           {
+                var result = 3;
+
+                return result;
+           }
+
+           var x = foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {        
+                result = 2;
+
+                result = bar() * result;
+
+                return result;
+           }
+
+           function bar()
+           {
+                result = 3;
+
+                return result;
+           }
+
+           var x = foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+    </div>
+  </body>
+</html>
