@@ -1,7 +1,15 @@
+function isVowel(c) {
+    c = c.toLowerCase();
+
+    return /^[aeiou]$/.test(c);
+}
+
 var Solutions;
 (function (Solutions) {
     function isOdd(n) {
-        if (n === 0) {
+        if (n < 0) {
+            isOdd(-n);
+        } else if (n === 0) {
             return false;
         } else if (n === 1) {
             return true;
@@ -173,4 +181,15 @@ var Solutions;
         }
     }
     Solutions.knapsack = knapsack;
+
+    function vowelCount(str) {
+        if (str.length === 0) {
+            return 0;
+        } else if (isVowel(str[0])) {
+            return 1 + vowelCount(str.substring(1));
+        } else {
+            return vowelCount(str.substring(1));
+        }
+    }
+    Solutions.vowelCount = vowelCount;
 })(Solutions || (Solutions = {}));

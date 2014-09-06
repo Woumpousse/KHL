@@ -1,3 +1,10 @@
+function isVowel(c : string) : boolean
+{
+    c = c.toLowerCase();
+
+    return /^[aeiou]$/.test(c);
+}
+
 module Solutions
 {
     export function isOdd(n : number) : boolean {
@@ -182,6 +189,22 @@ module Solutions
             else {
                 return knapsack(n, ns.slice(1));
             }
+        }
+    }
+
+    export function vowelCount(str)
+    {
+        if ( str.length === 0 )
+        {
+            return 0;
+        }
+        else if ( isVowel( str[0] ) )
+        {
+            return 1 + vowelCount( str.substring(1) );
+        }
+        else
+        {
+            return vowelCount( str.substring(1) );
         }
     }
 }

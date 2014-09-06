@@ -175,5 +175,14 @@ defineTests(function (test) {
             }
         } );
     });
-    
+
+    test(Solutions.vowelCount, function (builder) {
+        builder.addInput( "" );
+        builder.addInput( "a" );
+        builder.addInput( "b" );
+        builder.addInput( "ab" );
+        builder.addInput( "aeiou" );
+        builder.addInput( "aaa" );
+        builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
+    });
 });
