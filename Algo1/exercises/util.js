@@ -31,6 +31,11 @@ function stringOf(x, maxLength)
     {
         return "undefined";
     }
+    else if ( typeof(x) === 'string' )
+    {
+        console.log("{0} : {1}".format(x, typeof(x)));
+        return '"' + x + '"';
+    }
     else
     {
         var result = x.toString();

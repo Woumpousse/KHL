@@ -22,7 +22,7 @@ function newViewer(x) {
     }
     else
     {
-        return stringOf(x);
+        return x;
     }
 }
 
