@@ -2,6 +2,16 @@
 <html>
   <head>
     <link rel="stylesheet" href="../assignment.css">
+    <style>
+      #greatestDigitProduct-table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      td {
+        min-width: 100px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div id="container">
@@ -82,24 +92,35 @@
         </p>
       </section>
 
-      <section class="testcase" data-subject="greatestDigitProduct">
-        <p>
-          Schrijf een functie <code>greatestDigitProduct(n)</code> die,
-          gegeven een positief geheel getal <code>n</code> bestaande uit minstens 2 cijfers, het grootste
-          product van opeenvolgende cijfers zoekt. Bijvoorbeeld,
-          voor het getal 11102203 is dit 4, gezien we
-          1110<span style="font-weight: bold">22</span>03 als cijfers kunnen kiezen.
-        </p>
-        <p>
-          Bij foute invoer (negatief getal, te weinig cijfers) moet de functie -1 teruggeven.
-        </p>
-      </section>
-
       <section class="testcase" data-subject="greatestSumOfDigitTriples">
         <p>
           Schrijf een functie <code>greatestSumOfDigitTriples(n)</code> die,
           gegeven een positief geheel getal <code>n</code> groter dan 100, de grootste
           som van drie opeenvolgende cijfers zoekt.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="greatestDigitProduct">
+        <p>
+          Schrijf een functie <code>greatestDigitProduct(n)</code> die,
+          gegeven een positief geheel getal <code>n</code> bestaande uit minstens 2 cijfers, het grootste
+          product van opeenvolgende cijfers zoekt.
+        </p>
+        <table id="greatestDigitProduct-table">
+          <tr><th>Cijfers</th><th>Product</th></tr>
+          <tr><td><span style="font-weight: bold">111</span>02203</td><td>1</td></tr>
+          <tr><td><span style="font-weight: bold">1110</span>2203</td><td>0</td></tr>
+          <tr><td>1<span style="font-weight: bold">1102</span>203</td><td>0</td></tr>
+          <tr><td>1110<span style="font-weight: bold">22</span>03</td><td>4</td></tr>
+          <tr><td>1110<span style="font-weight: bold">220</span>3</td><td>0</td></tr>
+          <tr><td>1110220<span style="font-weight: bold">3</span></td><td>3</td></tr>
+        </table>
+        <p>
+          In bovenstaand voorbeeld vindt men het grootste product door de twee <code>2</code>'s te kiezen.
+          Geen enkele andere groepering van cijfers leidt tot een groter product.
+        </p>
+        <p>
+          Bij foute invoer (negatief getal, te weinig cijfers) moet de functie -1 teruggeven.
         </p>
       </section>
 
@@ -113,6 +134,7 @@
     <script src="../test-framework.js"></script>
     <script src="../html-tests.js"></script>
     <script src="solutions.js"></script>
+    <script src="../rng.js"></script>
     <script src="tests.js"></script>
     <script src="student.js"></script>
   </body>
