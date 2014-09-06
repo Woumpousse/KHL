@@ -93,13 +93,20 @@ module Solutions
 
     export function range(a : number, b : number) : Array<number>
     {
-        var result = new Array(b - a + 1);
-
-        for ( var i = 0; i !== result.length; ++i ) {
-            result[i] = a + i;
+        if ( a > b )
+        {
+            return [];
         }
+        else
+        {
+            var result = new Array(b - a + 1);
 
-        return result;
+            for ( var i = 0; i !== result.length; ++i ) {
+                result[i] = a + i;
+            }
+
+            return result;
+        }
     }
 
     export function reverse(xs : Array<any>) : void

@@ -81,13 +81,17 @@ var Solutions;
     Solutions.lastIndexOf = lastIndexOf;
 
     function range(a, b) {
-        var result = new Array(b - a + 1);
+        if (a > b) {
+            return [];
+        } else {
+            var result = new Array(b - a + 1);
 
-        for (var i = 0; i !== result.length; ++i) {
-            result[i] = a + i;
+            for (var i = 0; i !== result.length; ++i) {
+                result[i] = a + i;
+            }
+
+            return result;
         }
-
-        return result;
     }
     Solutions.range = range;
 

@@ -43,6 +43,11 @@
           Schrijf een functie <code>incrementEachItem(xs)</code> die 1 toevoegt aan
           elk getal in de array <code>xs</code>.
         </p>
+        <p>
+          Opmerking: <code>incrementEachItem</code> mag geen waarde teruggeven (m.a.w. geen <code>return</code>).
+          In de tests hieronder wordt dit weerspiegeld door <code>undefined</code> in de result-kolom.
+          Voor deze oefening gaat het er enkel om dat je de argumenten correct aanpast.
+        </p>
       </section>
 
       <section class="testcase" data-subject="countZeros">
@@ -126,14 +131,6 @@
         </p>
       </section>
 
-      <section class="testcase" data-subject="alternates">
-        <p>
-          Schrijf een functie <code>alternates(xs)</code> die de gegeven array <code>xs</code> in twee
-          delen partitioneert. De eerste partitie bevat alle elementen uit <code>xs</code> met even index,
-          de tweede die met oneven index.
-        </p>
-      </section>
-
       <section class="testcase" data-subject="lengthOfLongestIncreasingSubarray">
         <p>
           Schrijf een functie <code>lengthOfLongestIncreasingSubarray(xs)</code> die binnen de
@@ -141,6 +138,13 @@
         </p>
       </section>
 
+      <section class="testcase" data-subject="alternates">
+        <p>
+          Schrijf een functie <code>alternates(xs)</code> die de gegeven array <code>xs</code> in twee
+          delen partitioneert. De eerste partitie bevat alle elementen uit <code>xs</code> met even index,
+          de tweede die met oneven index.
+        </p>
+      </section>
     </div>
 
     <script src="../underscore.js"></script>
@@ -151,6 +155,7 @@
     <script src="../test-framework.js"></script>
     <script src="../html-tests.js"></script>
     <script src="solutions.js"></script>
+    <script src="../rng.js"></script>
     <script src="tests.js"></script>
     <script src="student.js"></script>
   </body>

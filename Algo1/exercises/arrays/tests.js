@@ -85,6 +85,7 @@ defineTests(function (test) {
         builder.addInput(2, 2);
         builder.addInput(2, 4);
         builder.addInput(1, 10);
+        builder.addInput(5, 1);
     });
 
     test(Solutions.reverse, function (builder) {
