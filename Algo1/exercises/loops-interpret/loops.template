@@ -74,21 +74,6 @@
       %>
 
       <%=
-         interpret(<<-END)
-           var x = 0;
-           var y = 5;
-
-           while ( x > 0 && y > 0 ) {
-               x++;
-               y--;
-           } 
-
-           `hide:aux.printVar('x', x);`
-           `hide:aux.printVar('y', y);`
-         END
-      %>
-
-      <%=
          multi_interpret(<<-END.unindent.strip, [ 0,1,10,100,1000,1234,1234567890 ])
              var x = `param:init`;
              var y = 0;
