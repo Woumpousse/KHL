@@ -8,6 +8,8 @@ defineTests(function (test) {
         builder.addInput(5);
         builder.addInput(100);
         builder.addInput(101);
+        builder.addInput(-5);
+        builder.addInput(-6);
     });
 
     test(Solutions.factorial, function (builder) {
