@@ -195,4 +195,44 @@ defineTests(function (test) {
         builder.addInput( "aaa" );
         builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
     });
+
+    test(Solutions.rle, function (builder) {
+        builder.addInput( "" );
+        builder.addInput( "a" );
+        builder.addInput( "aa" );
+        builder.addInput( "aaa" );
+        builder.addInput( "aaaaaaaaaaaaa" );
+        builder.addInput( "aabbcc" );
+        builder.addInput( "aaaaaaabbbbbbbbcccccc" );
+        builder.addInput( "aaaaaaabbbbbbbbaaaaaaaaaaaa" );
+    });
+
+    test(Solutions.compress, function (builder) {
+        builder.addInput( "" );
+        builder.addInput( "a" );
+        builder.addInput( "aa" );
+        builder.addInput( "aaa" );
+        builder.addInput( "aaaaaaaaaaaaa" );
+        builder.addInput( "aaaaaaaaaaaaaaaaaaaa" );
+        builder.addInput( "aabbcc" );
+        builder.addInput( "aaaaaaabbbbbbbbcccccc" );
+        builder.addInput( "aaaaaaabbbbbbbbaaaaaaaaaaaa" );
+    });
+
+    test(Solutions.repeat, function (builder) {
+        builder.addInput( "a", 0 );
+        builder.addInput( "a", 1 );
+        builder.addInput( "a", 2 );
+        builder.addInput( "a", 10 );
+        builder.addInput( "b", 5 );
+    });
+
+    test(Solutions.decompress, function (builder) {
+        builder.addInput( "" );
+        builder.addInput( "a1" );
+        builder.addInput( "a2" );
+        builder.addInput( "a9" );
+        builder.addInput( "a9a9a2" );
+        builder.addInput( "a2b3c6" );
+    });
 });

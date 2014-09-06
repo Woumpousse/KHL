@@ -12,7 +12,11 @@
 
       <section>
         <h2>Nota vooraf</h2>
-        Voor de oefeningen met strings kan <a href="http://www.w3schools.com/jsref/jsref_obj_string.asp">deze pagina</a> van pas komen, meer bepaald de volgende functies:
+        <p>
+        Voor de oefeningen met strings kan
+        <a href="http://www.w3schools.com/jsref/jsref_obj_string.asp">deze pagina</a> van
+        pas komen, meer bepaald de volgende functies:
+        </p>
         <ul>
           <li>
             <a href="http://www.w3schools.com/jsref/jsref_length_string.asp"><code>length</code></a>
@@ -27,6 +31,10 @@
             <a href="http://www.w3schools.com/jsref/jsref_substring.asp"><code>substring</code></a>
           </li>
         </ul>
+        <p>
+          Merk op dat je <code>str.substring(1)</code> kan gebruiken om de "staart" van de string
+          te bekomen, d.i. de string zonder het eerste teken.
+        </p>
       </section>
 
       <section class="testcase" data-subject="isOdd">
@@ -38,47 +46,55 @@
 
       <section class="testcase" data-subject="factorial">
         <p>
-          Schrijf een recursieve functie <code>factorial(n)</code> die <code>n</code> faculteit uitrekent, hetgeen gedefinieerd is als
+          Schrijf een recursieve functie <code>factorial(n)</code> die <code>n</code> faculteit
+          uitrekent, hetgeen gedefinieerd is als
           <code>1 * 2 * ... * n</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="sum">
         <p>
-          Schrijf een recursieve functie <code>sum(xs)</code> die de som der getallen in de gegeven array <code>xs</code> uitrekent.
+          Schrijf een recursieve functie <code>sum(xs)</code> die de som der getallen in de
+          gegeven array <code>xs</code> uitrekent.
         </p>
       </section>
 
       <section class="testcase" data-subject="product">
         <p>
-           Schrijf een recursieve functie <code>product(xs)</code> die het product uitrekent van de getallen in de gegeven array <code>xs</code>.
+           Schrijf een recursieve functie <code>product(xs)</code> die het product uitrekent van de getallen
+           in de gegeven array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="countZeros">
         <p>
-          Schrijf een recursieve functie <code>countZeros(xs)</code> die het aantal nullen telt in de array <code>xs</code>.
+          Schrijf een recursieve functie <code>countZeros(xs)</code> die het aantal nullen telt in
+          de array <code>xs</code>.
         </p>
       </section>
 
       <section class="testcase" data-subject="removeZeros">
         <p>
-           Schrijf een recursieve functie <code>removeZeros(xs)</code> die een nieuwe array teruggeeft die gelijk is aan de gegeven array <code>xs</code>
+           Schrijf een recursieve functie <code>removeZeros(xs)</code> die een nieuwe array teruggeeft die
+           gelijk is aan de gegeven array <code>xs</code>
            maar waaruit alle nullen werden verwijderd.
         </p>
       </section>
 
       <section class="testcase" data-subject="firstIndexOf">
         <p>
-          Schrijf een recursieve functie <code>firstIndexOf(x, xs)</code> die de array <code>xs</code> afgaat op zoek naar het eerste voorkomen van <code>x</code>.
-          M.a.w., de functie moet de kleinste index <code>i</code> teruggeven waarvoor geldt dat <code>xs[i] === x</code>. Indien er zo geen index bestaat,
+          Schrijf een recursieve functie <code>firstIndexOf(x, xs)</code> die de array <code>xs</code>
+          afgaat op zoek naar het eerste voorkomen van <code>x</code>.
+          M.a.w., de functie moet de kleinste index <code>i</code> teruggeven waarvoor geldt dat
+          <code>xs[i] === x</code>. Indien er zo geen index bestaat,
           moet de functie <code>-1</code> teruggeven.
         </p>
       </section>
 
       <section class="testcase" data-subject="removeAt">
         <p>
-          Schrijf een recursieve functie <code>removeAt(xs, index)</code> die een nieuwe array teruggeeft die gelijk is aan de gegeven array <code>xs</code>
+          Schrijf een recursieve functie <code>removeAt(xs, index)</code> die een nieuwe array teruggeeft
+          die gelijk is aan de gegeven array <code>xs</code>
           maar waaruit het element met index <code>index</code> verwijderd is.
         </p>
       </section>
@@ -107,7 +123,8 @@
 
       <section class="testcase" data-subject="subarrays">
         <p>
-          Schrijf een recursieve functie <code>subarrays(xs)</code> die alle mogelijke deelarrays van <code>xs</code> opsomt.
+          Schrijf een recursieve functie <code>subarrays(xs)</code> die alle mogelijke deelarrays
+          van <code>xs</code> opsomt.
           Een array A is een deelarray van een array B indien elk element van A in dezelfde volgorde voorkomt in B.
         </p>
       </section>
@@ -146,7 +163,60 @@
         </p>
       </section>
 
+      <section class="testcase" data-subject="rle">
+        <p>
+          Schrijf een recursieve functie <code>rle</code> die
+          <a href="http://en.wikipedia.org/wiki/Run-length_encoding">run length encoding</a> uitvoert,
+          een vorm van compressie. Dit houdt in dat er een nieuwe string
+          moet opgebouwd worden waarin elke reeks opeenvolgende gelijke tekens
+          wordt vervangen door het teken gevolgd door het aantal keer dat het herhaald moet worden.
+          Zo moet <code>rle("aaa")</code> de string <code>"a3"</code> opleveren, omdat
+          <code>a</code> drie keer na elkaar voorkomt. Andere voorbeelden vind je hieronder.
+        </p>
+        <p>
+          Hint: je zal een hulpfunctie moeten invoeren.
+        </p>
+      </section>
 
+      <section class="testcase" data-subject="compress">
+        <p>
+          Je wil de rle-strings uit voorgaande opgave weer decomprimeren.
+          Er is echter een probleem met de huidige implementatie:
+          het is duidelijk dat <code>"a3b2"</code> de string <code>"aaabb"</code> voorstelt,
+          maar wat moeten we met <code>"5231"</code>? Dit kan overeenkomen met een reeks van
+          231 <code>5</code>'jes, met of "553".
+        </p>
+        <p>
+          We lossen dit op door als frequentie maximum 9 toe te laten.
+          Indien er zich een reeks voordoet van langer dan 9 dezelfde tekens,
+          wordt deze opgesplitst stukken van 9 + een rest. Bijvoorbeeld,
+          de string <code>"aaaaaaaaaaaaaaaaaaaa"</code> (20 a's)
+          mag niet getransformeerd worden naar <code>"a20"</code>, maar naar <code>"a9a9a2"</code>.
+          Deze aanpak maakt decompressie mogelijk: we weten immers dat de frequentie
+          altijd exact &eacute;&eacute;n teken lang is.
+        </p>
+        <p>
+          Schrijf de recursieve functie <code>compress</code> dewelke hetzelfde doet als <code>rle</code>,
+          maar reeksen langer dan 9 tekens opsplitst.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="repeat">
+        <p>
+          Schrijf een recursieve functie <code>repeat(n, str)</code> die een string
+          opbouwt bestaande uit <code>n</code> opeenvolgende herhalingen van <code>str</code>.
+        </p>
+      </section>
+
+      <section class="testcase" data-subject="decompress">
+        <p>
+          Schrijf een recursieve functie <code>decompress</code> die
+          een gecomprimeerde string (zie vorige oefening <a href="#compress"><code>compress</code></a>)
+          terug decomprimeert.
+        </p>
+      </section>
+
+      
     </div>    
 
     <script src="../underscore.js"></script>
