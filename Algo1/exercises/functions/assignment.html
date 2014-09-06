@@ -61,6 +61,14 @@
             getal kleiner dan dit resultaat <code>4</code> is.
           </p>
           <p>
+            Bij ongeldige invoer moet <code>quotient</code> de string "invalid"
+            teruggeven. In het geval van deze oefening bestaat ongeldige invoer
+            uit een negatieve <code>a</code> of <code>b</code>, of <code>b</code> gelijk aan <code>0</code>.
+            We willen er wel op wijzen dat in normale omstandigheden quotient
+            w&eacute;l gedefinieerd is voor negatieve operanden, alleen wensen
+            we hier de opgave eenvoudig te houden.
+          </p>
+          <p>
             Maak geen gebruik van de ingebouwde deling! Herbruik <code>product</code> en
             zoek iteratief naar het juiste resultaat.
           </p>
@@ -69,11 +77,48 @@
         <section class="testcase" data-subject="modulo">
           <p>
             Schrijf een functie <code>modulo(a, b)</code> die, gegeven
-            gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
-            en <code>b &gt; 0</code>, de rest bij deling van <code>a</code> en <code>b</code> uitrekent.
+            gehele getallen <code>a</code> en <code>b</code> waarbij <code>b &gt; 0</code>,
+            de rest bij deling van <code>a</code> en <code>b</code> uitrekent.
+          </p>
+          <p>
+            Bij ongeldige invoer (bv. <code>0<sup>0</sup></code> is ongedefinieerd,
+            negatieve <code>b</code> zijn eveneens ongeldig)
+            hoort de functie de string <code>"invalid"</code> op te leveren
+            als resultaat.
           </p>
           <p>
             Maak geen gebruik van de ingebouwde modulo-operator!
+            Herbruik de functies die je in vorige oefeningen hebt gedefinieerd.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="pow">
+          <p>
+            Schrijf een functie <code>pow(a, b)</code> die, gegeven
+            positieve gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
+            en <code>b &gt; 0</code>, de machtsverheffing <code>a<sup>b</code> uitrekent.
+          </p>
+          <p>
+            Bij ongeldige invoer hoort de functie de string <code>"invalid"</code> op te leveren
+            als resultaat.
+          </p>
+          <p>
+            Herbruik de functies die je in vorige oefeningen hebt gedefinieerd.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="calc">
+          <p>
+            Schrijf een functie <code>calc(op, a, b)</code> die, gegeven een string <code>op</code> en
+            positieve gehele getallen <code>a</code> en <code>b</code>, de operatie voorgesteld door
+            <code>op</code> uitvoert op de twee getallen <code>a</code> en <code>b</code>.
+            Zo moet <code>calc("+", 5, 3)</code> als resultaat <code>8</code> opleveren.
+            De ondersteunde operaties zijn <code>"+"</code>, <code>"-"</code>, <code>"*"</code>,
+            <code>"/"</code>, <code>"%"</code> en <code>"^"</code>.
+            Bij ongeldige invoer (bv. onbestaande operator) hoort
+            de functie <code>calc</code> de string <code>"invalid"</code> terug te geven.
+          </p>
+          <p>
             Herbruik de functies die je in vorige oefeningen hebt gedefinieerd.
           </p>
         </section>

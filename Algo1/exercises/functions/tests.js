@@ -66,6 +66,10 @@ defineTests(function (test) {
         builder.addInput(12, 4);
         builder.addInput(12, 5);
         builder.addInput(30, 7);
+        builder.addInput(-3, 2);
+        builder.addInput(6, -7);
+        builder.addInput(2, 0);
+        builder.addInput(-3, -2);
     });
 
     test(Solutions.modulo, function (builder) {
@@ -82,5 +86,37 @@ defineTests(function (test) {
         builder.addInput(100, 31);
         builder.addInput(101, 31);
         builder.addInput(102, 31);
+        builder.addInput(4, -21);
+        builder.addInput(-12, 7);
+        builder.addInput(-44, -3);
+        builder.addInput(111, 0);
+    });
+
+    test(Solutions.pow, function (builder) {
+        builder.addInput(1, 0);
+        builder.addInput(1, 1);
+        builder.addInput(1, 2);
+        builder.addInput(2, 2);
+        builder.addInput(2, 5);
+        builder.addInput(0, 5);
+        builder.addInput(0, 0);
+        builder.addInput(3, 3);
+        builder.addInput(-3, 3);
+        builder.addInput(-3, -4);
+        builder.addInput(1, -2);
+    });
+
+    test(Solutions.calc, function (builder) {
+        builder.addInput("+", 5, 3);
+        builder.addInput("-", 8, 2);
+        builder.addInput("*", 6, 9);
+        builder.addInput("/", 9, 3);
+        builder.addInput("/", 9, 2);
+        builder.addInput("/", 33, 0);
+        builder.addInput("%", 10, 6);
+        builder.addInput("%", 10, 5);
+        builder.addInput("%", 15, 0);
+        builder.addInput("^", 13, 4);
+        builder.addInput("^", 13, -4);
     });
 });

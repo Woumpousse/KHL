@@ -72,18 +72,59 @@ var Solutions;
     Solutions.product = product;
 
     function quotient(a, b) {
-        var result = 0;
+        if (a < 0 || b <= 0) {
+            return "invalid";
+        } else {
+            var result = 0;
 
-        while (product(result, b) <= a) {
-            result++;
+            while (product(result, b) <= a) {
+                result++;
+            }
+
+            return result - 1;
         }
-
-        return result - 1;
     }
     Solutions.quotient = quotient;
 
     function modulo(a, b) {
-        return a - quotient(a, b) * b;
+        if (a < 0 || b <= 0) {
+            return "invalid";
+        } else {
+            return a - quotient(a, b) * b;
+        }
     }
     Solutions.modulo = modulo;
+
+    function pow(a, b) {
+        if ((a === 0 && b === 0) || b < 0) {
+            return "invalid";
+        } else {
+            var result = 1;
+
+            while (b > 0) {
+                result = product(result, a);
+                --b;
+            }
+
+            return result;
+        }
+    }
+    Solutions.pow = pow;
+
+    function calc(op, a, b) {
+        if (op === "+") {
+            return a + b;
+        } else if (op === "*") {
+            return product(a, b);
+        } else if (op === "/") {
+            return quotient(a, b);
+        } else if (op === "%") {
+            return modulo(a, b);
+        } else if (op === "^") {
+            return pow(a, b);
+        } else {
+            return "invalid";
+        }
+    }
+    Solutions.calc = calc;
 })(Solutions || (Solutions = {}));

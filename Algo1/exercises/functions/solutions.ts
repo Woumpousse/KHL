@@ -78,21 +78,82 @@ module Solutions
         return result;
     }
 
-    export function quotient(a : number, b : number) : number
+    export function quotient(a : number, b : number) : any
     {
-        var result = 0;
-
-        while ( product(result, b) <= a )
+        if ( a < 0 || b <= 0 )
         {
-            result++;
+            return "invalid";
         }
+        else
+        {
+            var result = 0;
 
-        return result - 1;
+            while ( product(result, b) <= a )
+            {
+                result++;
+            }
+
+            return result - 1;
+        }
     }
 
-    export function modulo(a : number, b : number) : number
+    export function modulo(a : number, b : number) : any
     {
-        return a - quotient(a, b) * b;
+        if ( a < 0 || b <= 0 )
+        {
+            return "invalid";
+        }
+        else
+        {
+            return a - quotient(a, b) * b;
+        }
     }
 
+    export function pow(a : number, b : number) : any
+    {
+        if ( (a === 0 && b === 0) || b < 0 )
+        {
+            return "invalid";
+        }
+        else
+        {
+            var result = 1;
+
+            while ( b > 0 )
+            {
+                result = product(result, a);
+                --b;
+            }
+
+            return result;
+        }
+    }
+
+    export function calc(op : string, a : number, b : number) : any
+    {
+        if ( op === "+" )
+        {
+            return a + b;
+        }
+        else if ( op === "*" )
+        {
+            return product(a, b);
+        }
+        else if ( op === "/" )
+        {
+            return quotient(a, b);
+        }
+        else if ( op === "%" )
+        {
+            return modulo(a, b);
+        }
+        else if ( op === "^" )
+        {
+            return pow(a, b);
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
 }
