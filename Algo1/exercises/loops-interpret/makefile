@@ -1,6 +1,6 @@
 .SECONDEXPANSION:
 
-.PHONY: example example-html example-multimake zip current current-html
+.PHONY: example example-html example-multimake zip current current-html export
 
 all: icons export current
 
@@ -13,7 +13,7 @@ clean: clean_icons
 	rm -f *~
 
 export:
-	echo loops.html *.js | ruby -e "puts STDIN.read.split" > export
+	echo loops.html *.js *.png *.css | ruby -e "puts STDIN.read.split" > export
 
 %.pdf: %.tex
 	$(LATEX) $<
