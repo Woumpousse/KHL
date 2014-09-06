@@ -33,7 +33,6 @@ function stringOf(x, maxLength)
     }
     else if ( typeof(x) === 'string' )
     {
-        console.log("{0} : {1}".format(x, typeof(x)));
         return '"' + x + '"';
     }
     else
