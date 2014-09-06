@@ -184,6 +184,7 @@ function Test(referenceImplementation)
     this.inputs = [];
     this.validator = validators.identical;
     this.formatter = formatters.simple;
+    this.setUp = function () { };
 }
 
 var tests = {};
@@ -225,6 +226,10 @@ function defineTests(addTestReceiver) {
 
             setValidator: function (validator) {
                 testUnderConstruction.validator = validator;
+            },
+
+            setUp: function (func) {
+                testUnderConstruction.setUp = func;
             }
         };
 

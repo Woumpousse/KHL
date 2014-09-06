@@ -132,7 +132,14 @@ function generatePage()
 
             function generateTestCaseBlock(input)
             {
+                var s = Math.random();
+                
+                seed(s);
+                testData.setUp();
                 var expected = runImplementation( testData.referenceImplementation, input );
+
+                seed(s);
+                testData.setUp();
                 var received = runImplementation( testData.implementation, input );
                 var correct = validateResults( input, expected, received, testData.validator );
 
