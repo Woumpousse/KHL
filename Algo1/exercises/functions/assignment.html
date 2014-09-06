@@ -26,8 +26,10 @@
       }
 
       #container > section > h2 {
+        padding: 20px 20px;
+        margin: 20px 100px;
         text-align: center;
-      font-size: 150%;
+        font-size: 175%;
       }
     </style>
   </head>
@@ -39,17 +41,60 @@
       <nav></nav>
 
       <section>
+        <h2>Rekenmachine</h2>
+        <section class="testcase" data-subject="product">
+          <p>
+            Schrijf een functie <code>product(a, b)</code> die
+            het product <code>a * b</code> uitrekent, enkel gebruik makend
+            van <code>+</code>.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="quotient">
+          <p>
+            Schrijf een functie <code>quotient(a, b)</code> die, gegeven
+            gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
+            en <code>b &gt; 0</code>, het quoti&euml;nt van <code>a</code> en <code>b</code> uitrekent,
+            m.a.w. zoekt naar het grootste gehele getal dat kleiner is dan <code>a / b</code>.
+            Zo is het quoti&euml;nt van <code>14</code> en <code>3</code>
+            gelijk aan <code>4</code>, omdat <code>14/3 == 4.6666</code> en het grootste geheel
+            getal kleiner dan dit resultaat <code>4</code> is.
+          </p>
+          <p>
+            Maak geen gebruik van de ingebouwde deling! Herbruik <code>product</code> en
+            zoek iteratief naar het juiste resultaat.
+          </p>
+        </section>
+
+        <section class="testcase" data-subject="modulo">
+          <p>
+            Schrijf een functie <code>modulo(a, b)</code> die, gegeven
+            gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
+            en <code>b &gt; 0</code>, de rest bij deling van <code>a</code> en <code>b</code> uitrekent.
+          </p>
+          <p>
+            Maak geen gebruik van de ingebouwde modulo-operator!
+            Herbruik de functies die je in vorige oefeningen hebt gedefinieerd.
+          </p>
+        </section>
+
+      </section>
+
+      <section>
         <h2>Random</h2>
         <section class="testcase" data-subject="randomInteger">
           <p>
             Schrijf een functie <code>randomInteger(a, b)</code> die een random geheel getal tussen
-            <code>a</code> (inclusief) en <code>b</code> (exclusief) teruggeeft. Gebruik de gegeven functie <code>random</code>
-            om een kommagetal tussen <code>0</code> (inclusief) en <code>1</code> (exclusief) te genereren.
-            Je zal vermoedelijk ook gebruik moeten maken van <a href="http://www.w3schools.com/jsref/jsref_floor.asp"><code>Math.floor</code></a>.
+            <code>a</code> (inclusief) en <code>b</code> (exclusief) teruggeeft.
+            Gebruik de gegeven functie <code>random</code> om een kommagetal tussen
+            <code>0</code> (inclusief) en <code>1</code> (exclusief) te genereren.
+            Je zal vermoedelijk ook gebruik moeten maken van
+            <a href="http://www.w3schools.com/jsref/jsref_floor.asp"><code>Math.floor</code></a>.
           </p>
           <p>
             Er zijn veel manieren om aan de opgave te voldoen; om de  tests te doen slagen, moet je ervoor
-            zorgen dat er een "lineaire mapping" is tussen de intervallen <code>[0, 1)</code> en <code>[a, b)</code>.
+            zorgen dat er een "lineaire mapping" is tussen de intervallen <code>[0, 1)</code>
+            en <code>[a, b)</code>.
           </p>
           <table class="center" id="random-table">
             <tr>

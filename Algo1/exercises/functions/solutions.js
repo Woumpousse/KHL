@@ -54,4 +54,36 @@ var Solutions;
         return bestSum;
     }
     Solutions.mostFrequentSum = mostFrequentSum;
+
+    function product(a, b) {
+        if (a < 0) {
+            a = -a;
+            b = -b;
+        }
+
+        var result = 0;
+        while (a > 0) {
+            result += b;
+            a--;
+        }
+
+        return result;
+    }
+    Solutions.product = product;
+
+    function quotient(a, b) {
+        var result = 0;
+
+        while (product(result, b) <= a) {
+            result++;
+        }
+
+        return result - 1;
+    }
+    Solutions.quotient = quotient;
+
+    function modulo(a, b) {
+        return a - quotient(a, b) * b;
+    }
+    Solutions.modulo = modulo;
 })(Solutions || (Solutions = {}));

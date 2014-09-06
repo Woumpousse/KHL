@@ -60,4 +60,39 @@ module Solutions
 
         return bestSum;
     }
+
+    export function product(a : number, b : number) : number
+    {
+        if ( a < 0 )
+        {
+            a = -a;
+            b = -b;
+        }
+
+        var result = 0;
+        while ( a > 0 ) {
+            result += b;
+            a--;
+        }
+
+        return result;
+    }
+
+    export function quotient(a : number, b : number) : number
+    {
+        var result = 0;
+
+        while ( product(result, b) <= a )
+        {
+            result++;
+        }
+
+        return result - 1;
+    }
+
+    export function modulo(a : number, b : number) : number
+    {
+        return a - quotient(a, b) * b;
+    }
+
 }
