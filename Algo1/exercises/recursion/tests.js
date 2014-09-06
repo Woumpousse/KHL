@@ -185,4 +185,14 @@ defineTests(function (test) {
         builder.addInput( "aaa" );
         builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
     });
+
+    test(Solutions.maskVowels, function (builder) {
+        builder.addInput( "" );
+        builder.addInput( "a" );
+        builder.addInput( "b" );
+        builder.addInput( "ab" );
+        builder.addInput( "aeiou" );
+        builder.addInput( "aaa" );
+        builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
+    });
 });

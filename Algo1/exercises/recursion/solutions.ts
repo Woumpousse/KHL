@@ -198,13 +198,43 @@ module Solutions
         {
             return 0;
         }
-        else if ( isVowel( str[0] ) )
+        else
         {
-            return 1 + vowelCount( str.substring(1) );
+            var head = str.charAt(0);
+            var tail = str.substring(1);
+            var tailVowelCount = vowelCount(tail);
+
+            if ( isVowel( head ) )
+            {
+                return 1 + tailVowelCount;
+            }
+            else
+            {
+                return tailVowelCount;
+            }
+        }
+    }
+
+    export function maskVowels(str)
+    {
+        if ( str.length === 0 )
+        {
+            return "";
         }
         else
         {
-            return vowelCount( str.substring(1) );
+            var head = str.charAt(0);
+            var tail = str.substring(1);
+            var maskedTail = maskVowels(tail);
+
+            if ( isVowel(head) )
+            {
+                return "*".concat(maskedTail);
+            }
+            else
+            {
+                return head.concat(maskedTail);
+            }
         }
     }
 }
