@@ -1,0 +1,280 @@
+\documentclass{../khlslides}
+
+
+\title[Functies]{Functies}
+\author{Fr\'ed\'eric Vogels}
+
+
+\pgfkeys{/tikz/flowchart/node/.style={rectangle,fill=blue,opacity=0.5,text opacity=1,drop shadow,inner sep=2mm}}
+\pgfkeys{/tikz/flowchart/arrow/.style={-latex,flowchart/arrowline}}
+\pgfkeys{/tikz/flowchart/arrowline/.style={thick}}
+
+
+\newcommand{\lcurly}{{\tt{\char '173}}}
+\newcommand{\link}[2]{\href{#1}{\beamergotobutton{#2}}}
+\newcommand{\PLACEHOLDER}[1]{\ensuremath{\langle}\textrm{\textit{#1}\ensuremath{\rangle}}}
+
+
+\pgfkeys{
+  /wof/sequence point/.cd,
+  placement/.initial=above,
+  rotation/.initial=0,
+  /wof/sequence link/.cd,
+  label/.initial={},
+  /wof/round/.cd,
+  name prefix/.initial=,
+  /tikz/.cd,
+  sequence point/.style={blue!50,thick,fill=white},
+  sequence point label/.style={font=\tiny,black},
+  sequence link/.style={blue!50,thick},
+  active/.style={fill=red,thick,red}
+}
+\newcommand<>{\seqpoint}[3][]{
+  \only#4{{
+  \pgfkeys{/wof/sequence point/.cd,#1}
+  \pgfkeys{/wof/sequence point/placement/.get=\placement}
+  \pgfkeys{/wof/sequence point/rotation/.get=\rotation}
+  \draw[sequence point] (#2) circle (.05)
+                        node[sequence point label,\placement,rotate=\rotation] {#3};
+}}}
+\newcommand<>{\seqlink}[3][]{\only#4{{
+  \pgfkeys{/wof/sequence link/.cd,#1}
+  \pgfkeys{/wof/sequence link/label/.get=\seqlinklabel}
+  \draw[sequence link] (#2) -- (#3) node[midway,sloped,yshift=1mm,font=\tiny,black] {\seqlinklabel};
+}}}
+
+\newcommand{\singleround}[1][]{{
+}}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rad van Fortuin}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \path[use as bounding box] (0,-2) rectangle (8,4);
+
+      \coordinate (init) at (0,0);
+      \coordinate (turn wheel) at ($ (init) + (1,2) $);
+      \coordinate (bankruptcy lose money) at ($ (turn wheel) + (1,1.5) $);
+      \coordinate (bankruptcy next player) at ($ (bankruptcy lose money) + (2,0) $);
+      \coordinate (pass) at ($ (turn wheel) + (3,0.5) $);
+      \coordinate (joker) at ($ (turn wheel) + (3,-0.5) $);
+      \coordinate (consonant) at ($ (turn wheel) + (1,-2) $);
+      \coordinate (show consonant) at ($ (consonant) + (1,0) $);
+      \coordinate (gain) at ($ (show consonant) + (1,0.5) $);
+      \coordinate (no consonants) at ($ (show consonant) + (1,-0.5) $);
+      \coordinate (end consonants) at ($ (show consonant) + (2,0) $);
+      \coordinate (vowel) at ($ (init) + (1,-2) $);
+      \coordinate (buy vowel) at ($ (vowel) + (1.5,0) $);
+      \coordinate (show vowels) at ($ (buy vowel) + (1.5,0) $);
+      \coordinate (no vowels) at ($ (show vowels) + (1,.5) $);
+      \coordinate (end vowels) at ($ (show vowels) + (2,0) $);
+      \coordinate (exit) at ($ (init) + (8,0) $);
+
+      \seqlink[label=rad]{init}{turn wheel}
+      \seqlink[label=bankroet]{turn wheel}{bankruptcy lose money}
+      \seqlink{bankruptcy lose money}{bankruptcy next player}
+      \seqlink[label=verlies beurt]{turn wheel}{pass}
+      \seqlink[label=joker]{turn wheel}{joker}
+      \seqlink[label=else]{turn wheel}{consonant}
+      \seqlink{consonant}{show consonant}
+      \seqlink[label=0]{show consonant}{no consonants}
+      \seqlink[label=1+]{show consonant}{gain}
+      \seqlink{gain}{end consonants}
+      \seqlink{no consonants}{end consonants}
+      \seqlink{end consonants}{exit}
+      \seqlink{joker}{exit}
+      \seqlink{pass}{exit}
+      \seqlink{bankruptcy next player}{exit}
+      \seqlink[label=klinker]{init}{vowel}
+      \seqlink{vowel}{buy vowel}
+      \seqlink{buy vowel}{show vowels}
+      \seqlink[label=0]{show vowels}{no vowels}
+      \seqlink{no vowels}{end vowels}
+      \seqlink[label=1+]{show vowels}{end vowels}
+      \seqlink{end vowels}{exit}
+
+      \draw[sequence link,-latex] (exit) -- +(0,-3) node[midway,sloped,black,yshift=1mm,font=\tiny] {!spel gedaan} -| ($ (init) + (0,-.2) $);
+      \draw[sequence link,-latex] (exit) -- +(2,0) node[midway,sloped,black,yshift=1mm,font=\tiny] {spel gedaan};
+
+      \seqpoint[placement=above left]{init}{rad/klinker}
+      \seqpoint[placement=left]{turn wheel}{draai rad}
+      \seqpoint{bankruptcy lose money}{score = 0}
+      \seqpoint<1-2>{bankruptcy next player}{huidigeSpeler++}
+      \seqpoint<3->[rotation=-12]{bankruptcy next player}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint<1-2>{pass}{huidigeSpeler++}
+      \seqpoint<3->[rotation=5]{pass}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint{joker}{jokers++}
+      \seqpoint[placement=below]{consonant}{gok medeklinker}
+      \seqpoint{show consonant}{toon}
+      \seqpoint{gain}{score += bedrag * k}
+      \seqpoint<1-2>[placement=below]{no consonants}{huidigeSpeler++}
+      \seqpoint<3->[placement=below]{no consonants}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint{end consonants}{}
+      \seqpoint[placement=below]{vowel}{gok klinker}
+      \seqpoint[placement=below]{buy vowel}{score -= 50}
+      \seqpoint[placement=below]{show vowels}{toon}
+      \seqpoint<1-2>{no vowels}{huidigeSpeler++}
+      \seqpoint<3->{no vowels}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint{end vowels}{}
+      \seqpoint{exit}{}
+
+
+      \only<2>{
+        \node[/khl/note,anchor=south west] (note next player correction) at ($ (bankruptcy next player) + (-5,.5) $) {\parbox{11cm}{\raggedright Moet eigenlijk \\ {\tt huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers} \\ zijn}};
+        \draw[/khl/note arrow] (note next player correction) to[bend left=30] (bankruptcy next player);
+        \draw[/khl/note arrow] (note next player correction) to[bend left=30] (pass);
+        \draw[/khl/note arrow] (note next player correction) to[bend left=30] (no consonants);
+        \draw[/khl/note arrow] (note next player correction) to[bend left=30] (no vowels);
+      }
+
+      \only<4-9>{
+        \node[/khl/note,anchor=south] (note consonants) at ($ (consonant) + (0,.5) $) {\parbox{5cm}{\raggedright Checken dat het wel een medeklinker is, zoniet beurtverlies}};
+        \draw[/khl/note arrow] (note consonants) to[bend left=30] (consonant);
+      }
+
+      \only<5-9>{
+        \node[/khl/note,anchor=south] (note vowels) at ($ (vowel) + (0,.5) $) {\parbox{5cm}{\raggedright Checken dat het wel een klinker is, zoniet beurtverlies}};
+        \draw[/khl/note arrow] (note vowels) to[bend left=30] (vowel);
+      }
+
+      \only<6-9>{
+        \node[/khl/note,anchor=north] (note vowels sufficient money) at ($ (vowel) + (2,-.5) $) {\parbox{8cm}{\raggedright Checken dat speler genoeg geld heeft, zoniet verliesbeurt}};
+        \draw[/khl/note arrow] (note vowels sufficient money.north) to[bend right=30] (vowel);
+      }
+
+      \only<7-9>{
+        \node[/khl/note,anchor=south] (note time) at ($ (vowel) + (5,1.5) $) {\parbox{3cm}{\raggedright Moet ook nog binnen de tijd}};
+        \draw[/khl/note arrow] (note time.west) to[bend left=30] (consonant);
+        \draw[/khl/note arrow] (note time) to[bend left=30] (vowel);
+      }
+
+      \only<8-9>{
+        \node[/khl/note,anchor=south] (note joker usage) at ($ (exit) + (0,0.5) $) {\parbox{3cm}{\raggedright Mogelijkheid om joker te gebruiken}};
+        \draw[/khl/note arrow] (note joker usage) to[bend left=30] (exit);
+      }
+
+      \only<9>{
+        \node[/khl/note] at (4,4) {\Huge Kortom: het wordt chaotisch};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rad van Fortuin}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \path[use as bounding box] (0,-2) rectangle (8,4);
+
+      \coordinate (init) at (0,0);
+      \coordinate (turn wheel) at ($ (init) + (1,2) $);
+      \coordinate (bankruptcy lose money) at ($ (turn wheel) + (1,1.5) $);
+      \coordinate (bankruptcy next player) at ($ (bankruptcy lose money) + (2,0) $);
+      \coordinate (pass) at ($ (turn wheel) + (3,0.5) $);
+      \coordinate (joker) at ($ (turn wheel) + (3,-0.5) $);
+      \coordinate (consonant) at ($ (turn wheel) + (1,-2) $);
+      \coordinate (show consonant) at ($ (consonant) + (1,0) $);
+      \coordinate (gain) at ($ (show consonant) + (1,0.5) $);
+      \coordinate (no consonants) at ($ (show consonant) + (1,-0.5) $);
+      \coordinate (end consonants) at ($ (show consonant) + (2,0) $);
+      \coordinate (vowel) at ($ (init) + (1,-2) $);
+      \coordinate (buy vowel) at ($ (vowel) + (1.5,0) $);
+      \coordinate (show vowels) at ($ (buy vowel) + (1.5,0) $);
+      \coordinate (no vowels) at ($ (show vowels) + (1,.5) $);
+      \coordinate (end vowels) at ($ (show vowels) + (2,0) $);
+      \coordinate (exit) at ($ (init) + (8,0) $);
+
+      \seqlink[label=rad]{init}{turn wheel}
+      \seqlink[label=bankroet]{turn wheel}{bankruptcy lose money}
+      \seqlink{bankruptcy lose money}{bankruptcy next player}
+      \seqlink[label=verlies beurt]{turn wheel}{pass}
+      \seqlink[label=joker]{turn wheel}{joker}
+      \seqlink[label=else]{turn wheel}{consonant}
+      \seqlink{consonant}{show consonant}
+      \seqlink[label=0]{show consonant}{no consonants}
+      \seqlink[label=1+]{show consonant}{gain}
+      \seqlink{gain}{end consonants}
+      \seqlink{no consonants}{end consonants}
+      \seqlink{end consonants}{exit}
+      \seqlink{joker}{exit}
+      \seqlink{pass}{exit}
+      \seqlink{bankruptcy next player}{exit}
+      \seqlink[label=klinker]{init}{vowel}
+      \seqlink{vowel}{buy vowel}
+      \seqlink{buy vowel}{show vowels}
+      \seqlink[label=0]{show vowels}{no vowels}
+      \seqlink{no vowels}{end vowels}
+      \seqlink[label=1+]{show vowels}{end vowels}
+      \seqlink{end vowels}{exit}
+
+      \draw[sequence link,-latex] (exit) -- +(0,-3) node[midway,sloped,black,yshift=1mm,font=\tiny] {!spel gedaan} -| ($ (init) + (0,-.2) $);
+      \draw[sequence link,-latex] (exit) -- +(2,0) node[midway,sloped,black,yshift=1mm,font=\tiny] {spel gedaan};
+
+      \seqpoint[placement=above left]{init}{rad/klinker}
+      \seqpoint[placement=left]{turn wheel}{draai rad}
+      \seqpoint{bankruptcy lose money}{score = 0}
+      \seqpoint<1>[rotation=-12]{bankruptcy next player}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint<2->{bankruptcy next player}{volgende speler}
+      \seqpoint<1>[rotation=5]{pass}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint<2->{pass}{volgende speler}
+      \seqpoint{joker}{jokers++}
+      \seqpoint[placement=below]{consonant}{gok medeklinker}
+      \seqpoint{show consonant}{toon}
+      \seqpoint{gain}{score += bedrag * k}
+      \seqpoint<1>[placement=below]{no consonants}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint<2->[placement=below]{no consonants}{volgende speler}
+      \seqpoint{end consonants}{}
+      \seqpoint[placement=below]{vowel}{gok klinker}
+      \seqpoint[placement=below]{buy vowel}{score -= 50}
+      \seqpoint[placement=below]{show vowels}{toon}
+      \seqpoint<1>{no vowels}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \seqpoint<2->{no vowels}{volgende speler}
+      \seqpoint{end vowels}{}
+      \seqpoint{exit}{}
+
+
+      \coordinate (next player init) at (6,4.5);
+      \coordinate (next player inc) at ($ (next player init) + (1,0) $);
+      \coordinate (next player exit) at ($ (next player inc) + (1,0) $);
+      \seqlink<2>{next player init}{next player inc}
+      \seqlink<2>{next player inc}{next player exit}
+      \seqpoint<2>{next player inc}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
+      \only<2>{
+        \draw[black] ($ (next player init) + (-1.5,-.25) $) rectangle ($ (next player exit) + (1.5,.5) $);
+        \node[anchor=north] at ($ (next player inc) + (0,-.25) $) {\tiny volgende speler};
+      }
+
+      \coordinate (bankrupt function init) at (6,4.5);
+      \coordinate (bankrupt function reset score) at ($ (bankrupt function init) + (1,0) $);
+      \coordinate (bankrupt function next player) at ($ (bankrupt function reset score) + (1,0) $);
+      \coordinate (bankrupt function exit) at ($ (bankrupt function next player) + (1,0) $);
+      \seqlink<3>{bankrupt function init}{bankrupt function reset score};
+      \seqlink<3>{bankrupt function reset score}{bankrupt function next player};
+      \seqlink<3>{bankrupt function next player}{bankrupt function exit};
+      \seqpoint<3>{bankrupt function reset score}{score = 0};
+      \seqpoint<3>[placement=below]{bankrupt function next player}{volgende speler};
+      \only<3>{
+        \draw[black] ($ (bankrupt function init) + (-.5,-.5) $) rectangle ($ (bankrupt function exit) + (.5,.5) $);
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny behandel bankroet};
+      }
+
+
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
