@@ -56,18 +56,7 @@ var Solutions;
     Solutions.mostFrequentSum = mostFrequentSum;
 
     function product(a, b) {
-        if (a < 0) {
-            a = -a;
-            b = -b;
-        }
-
-        var result = 0;
-        while (a > 0) {
-            result += b;
-            a--;
-        }
-
-        return result;
+        return a * b;
     }
     Solutions.product = product;
 
@@ -75,13 +64,7 @@ var Solutions;
         if (a < 0 || b <= 0) {
             return "invalid";
         } else {
-            var result = 0;
-
-            while (product(result, b) <= a) {
-                result++;
-            }
-
-            return result - 1;
+            return Math.floor(a / b);
         }
     }
     Solutions.quotient = quotient;
@@ -90,7 +73,7 @@ var Solutions;
         if (a < 0 || b <= 0) {
             return "invalid";
         } else {
-            return a - quotient(a, b) * b;
+            return a % b;
         }
     }
     Solutions.modulo = modulo;
@@ -99,14 +82,7 @@ var Solutions;
         if ((a === 0 && b === 0) || b < 0) {
             return "invalid";
         } else {
-            var result = 1;
-
-            while (b > 0) {
-                result = product(result, a);
-                --b;
-            }
-
-            return result;
+            return Math.pow(a, b);
         }
     }
     Solutions.pow = pow;
@@ -114,6 +90,8 @@ var Solutions;
     function calc(op, a, b) {
         if (op === "+") {
             return a + b;
+        } else if (op === "-") {
+            return a - b;
         } else if (op === "*") {
             return product(a, b);
         } else if (op === "/") {

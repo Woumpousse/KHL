@@ -14,4 +14,4 @@ clean:
 	rm -f solutions.js
 
 export:
-	echo assignment.html *.js | ruby -e "puts STDIN.read.split" > export
+	echo assignment.html solutions.js tests.js student.js | ruby -e "puts STDIN.read.split" > export

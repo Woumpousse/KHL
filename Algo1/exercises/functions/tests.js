@@ -118,5 +118,6 @@ defineTests(function (test) {
         builder.addInput("%", 15, 0);
         builder.addInput("^", 13, 4);
         builder.addInput("^", 13, -4);
+        builder.addInput("&", 13, -4);
     });
 });

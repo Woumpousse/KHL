@@ -1,58 +1,51 @@
-function random() : number
-{
+function random() {
     return 0;
 }
 
-module Solutions
-{
-    export function randomInteger(a : number, b : number) : number
-    {
+var Solutions;
+(function (Solutions) {
+    function randomInteger(a, b) {
         return Math.floor(random() * (b - a)) + a;
     }
+    Solutions.randomInteger = randomInteger;
 
-    export function throwDie() : number
-    {
+    function throwDie() {
         return randomInteger(1, 7);
     }
+    Solutions.throwDie = throwDie;
 
-    export function sumDice(n : number) : number
-    {
+    function sumDice(n) {
         var result = 0;
 
-        for ( var i = 0; i !== n; ++i )
-        {
+        for (var i = 0; i !== n; ++i) {
             result += throwDie();
         }
 
         return result;
     }
+    Solutions.sumDice = sumDice;
 
-    export function countSumDice(diceCount : number, n : number, sum : number) : number
-    {
+    function countSumDice(diceCount, n, sum) {
         var result = 0;
 
-        for ( var i = 0; i !== n; ++i )
-        {
-            if ( sumDice(diceCount) === sum )
-            {
+        for (var i = 0; i !== n; ++i) {
+            if (sumDice(diceCount) === sum) {
                 ++result;
             }
         }
 
         return result;
     }
+    Solutions.countSumDice = countSumDice;
 
-    export function mostFrequentSum(diceCount : number) : number
-    {
+    function mostFrequentSum(diceCount) {
         var bestSum = 0;
         var bestSumCount = 0;
 
-        for ( var i = 1; i !== 6 * diceCount; ++i )
-        {
+        for (var i = 1; i !== 6 * diceCount; ++i) {
             var count = countSumDice(diceCount, 1000, i);
 
-            if ( count > bestSumCount )
-            {
+            if (count > bestSumCount) {
                 bestSumCount = count;
                 bestSum = i;
             }
@@ -60,67 +53,55 @@ module Solutions
 
         return bestSum;
     }
+    Solutions.mostFrequentSum = mostFrequentSum;
 
-    export function product(a : number, b : number) : number
-    {
-        if ( a < 0 )
-        {
+    function product(a, b) {
+        if (a < 0) {
             a = -a;
             b = -b;
         }
 
         var result = 0;
-        while ( a > 0 ) {
+        while (a > 0) {
             result += b;
             a--;
         }
 
         return result;
     }
+    Solutions.product = product;
 
-    export function quotient(a : number, b : number) : any
-    {
-        if ( a < 0 || b <= 0 )
-        {
+    function quotient(a, b) {
+        if (a < 0 || b <= 0) {
             return "invalid";
-        }
-        else
-        {
+        } else {
             var result = 0;
 
-            while ( product(result, b) <= a )
-            {
+            while (product(result, b) <= a) {
                 result++;
             }
 
             return result - 1;
         }
     }
+    Solutions.quotient = quotient;
 
-    export function modulo(a : number, b : number) : any
-    {
-        if ( a < 0 || b <= 0 )
-        {
+    function modulo(a, b) {
+        if (a < 0 || b <= 0) {
             return "invalid";
-        }
-        else
-        {
+        } else {
             return a - quotient(a, b) * b;
         }
     }
+    Solutions.modulo = modulo;
 
-    export function pow(a : number, b : number) : any
-    {
-        if ( (a === 0 && b === 0) || b < 0 )
-        {
+    function pow(a, b) {
+        if ((a === 0 && b === 0) || b < 0) {
             return "invalid";
-        }
-        else
-        {
+        } else {
             var result = 1;
 
-            while ( b > 0 )
-            {
+            while (b > 0) {
                 result = product(result, a);
                 --b;
             }
@@ -128,32 +109,24 @@ module Solutions
             return result;
         }
     }
+    Solutions.pow = pow;
 
-    export function calc(op : string, a : number, b : number) : any
-    {
-        if ( op === "+" )
-        {
+    function calc(op, a, b) {
+        if (op === "+") {
             return a + b;
-        }
-        else if ( op === "*" )
-        {
+        } else if (op === "-") {
+            return a - b;
+        } else if (op === "*") {
             return product(a, b);
-        }
-        else if ( op === "/" )
-        {
+        } else if (op === "/") {
             return quotient(a, b);
-        }
-        else if ( op === "%" )
-        {
+        } else if (op === "%") {
             return modulo(a, b);
-        }
-        else if ( op === "^" )
-        {
+        } else if (op === "^") {
             return pow(a, b);
-        }
-        else
-        {
+        } else {
             return "invalid";
         }
     }
-}
+    Solutions.calc = calc;
+})(Solutions || (Solutions = {}));
