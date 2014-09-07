@@ -53,7 +53,166 @@
   \titlepage
 \end{frame}
 
-\input{wof.tex}
+% \input{wof.tex}
+
+\begin{frame}
+  \frametitle{Functies: Groeperen van Berekeningen}
+  \begin{columns}
+    \column{.5\linewidth}
+    \code[width=.4\linewidth]{seq.js}
+    \column{.5\linewidth}
+    \code{seq2.js}
+  \end{columns}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \foreach \from/\to in {a/b,b/c,c/d,d/e} {
+        \draw[-latex] (\from1.east) to[bend left=30] (\to1.east);
+      }
+
+      \draw[-latex] (a2.east) to[bend left=30] (f2.east);
+      \draw[-latex] (f2.west) to[bend left=30] (b2.west);
+      \foreach \from/\to in {b/c,c/d,d/e} {
+        \draw[-latex] (\from2.east) to[bend left=30] (\to2.east);
+      }
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI}
+  \code[font size=\small]{bmi.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI}
+  \code[font size=\small]{bmi2.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=south west] (note bmi computation) at ($ (compute bmi) + (1,1.5) $) {Plaatst bmi in variabele {\tt bmi}};
+      \draw[/khl/note arrow] (note bmi computation) |- (compute bmi);
+      \draw[/khl/note arrow] (note bmi computation) |- (set bmi);
+    }
+    \only<3>{
+      \node[/khl/note,anchor=south west] (note bmi evaluation) at ($ (compute bmi) + (1,1.5) $) {Plaatst string in variabele {\tt resultaat}};
+      \draw[/khl/note arrow] (note bmi evaluation) |- (evaluate bmi);
+      \draw[/khl/note arrow] (note bmi evaluation) |- (set result 1);
+      \draw[/khl/note arrow] ($ (note bmi evaluation.north west) ! 0.75 ! (note bmi evaluation.north) $) |- (set result 2);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI voor Twee Personen}
+  \begin{center}
+    \Huge Wat als we het BMI moeten uitrekenen van twee personen?
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI voor Twee Personen}
+  \code[font size=\small]{bmi-2people.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note] (note copy) at ($ (copy length) ! .5 ! (copy weight 2) + (5,0) $) {
+        \parbox{6cm}{\raggedright
+          {\tt berekenBMI()} verwacht waarden in {\tt gewicht} en {\tt lengte}
+        }        
+      };
+
+      \draw[/khl/note arrow] (note copy.north) |- (copy weight);
+      \draw[/khl/note arrow] ($ (note copy.north west) ! .75 ! (note copy.north) $) |- (copy length);
+      \draw[/khl/note arrow] ($ (note copy.south west) ! .75 ! (note copy.south) $) |- (copy weight 2);
+      \draw[/khl/note arrow] (note copy.south) |- (copy length 2);
+    }
+
+    \only<3>{
+      \node[/khl/note] (note bmi) at ($ (copy bmi) ! .5 ! (copy bmi 2) + (3,0) $) {
+        \parbox{6.5cm}{\raggedright
+          {\tt berekenBMI()} plaatst resultaat in {\tt bmi}
+        }        
+      };
+
+      \draw[/khl/note arrow] (note bmi.north) |- (copy bmi);
+      \draw[/khl/note arrow] (note bmi.south) |- (copy bmi 2);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI Berekening: Inputs en Outputs}
+  \begin{center}
+    \begin{tikzpicture}
+      \path[use as bounding box] (-1,-1) rectangle (1,1);
+      \node[minimum width=4cm,minimum height=1cm,fill=green!25,drop shadow] (bmi) {\tt berekenBMI()};
+      \draw[-latex] ($ (bmi.west) ! .5 ! (bmi.north west) $) +(-2,0) -- +(0,0)
+                    node[midway,above,font=\small] {lengte};
+      \draw[-latex] ($ (bmi.west) ! .5 ! (bmi.south west) $) +(-2,0) -- +(0,0)
+                    node[midway,below,font=\small] {gewicht};
+      \draw[-latex] (bmi.east) -- +(2,0)
+                    node[midway,below,font=\small] {bmi};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parameters}
+  \begin{itemize}
+    \item Functies kunnen \emph{parameters} hebben
+    \item Vermelden expliciet welke inputs een functie nodig heeft
+    \item BMI parameters: gewicht en lengte
+  \end{itemize}
+  \code[font size=\small]{bmi-params.js}
+\end{frame}
+
+
+{
+  \newcommand{\CODE}[9]{
+    \def\paramx{#1}
+    \def\paramy{#2}
+    \def\paramz{#3}
+    \def\localx{#4}
+    \def\localy{#5}
+    \def\localz{#6}
+    \def\argx{#7}
+    \def\argy{#8}
+    \def\argz{#9}
+    \code{params.js}
+  }
+  \newcommand{\values}[4]{
+    \node[anchor=north east,draw] (bar val) at ($ (bar.base) + (0,-.2) $) {\tt\tiny #1};
+    \node[anchor=north east,draw] (x val) at ($ (x.base) + (0,-.2) $) {\tt\tiny #2};
+    \node[anchor=north east,draw] (y val) at ($ (y.base) + (0,-.2) $) {\tt\tiny #3};
+    \node[anchor=north east,draw] (z val) at ($ (z.base) + (0,-.2) $) {\tt\tiny #4};
+    \draw (bar val) -- (bar);
+    \draw (x val) -- (x);
+    \draw (y val) -- (y);
+    \draw (z val) -- (z);
+  }
+\begin{frame}
+  \frametitle{Parameters}
+  \begin{overprint}
+    \onslide<1-3>
+    \CODE xyzabcabc
+
+    \onslide<4-5>
+    \CODE xyzabcbac
+
+  \end{overprint}  
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \draw[-latex] (argx) -- ++(0,.6) -| (paramx) node[pos=.75,yshift=1mm,sloped,font=\tiny] {kopie};
+      \draw[-latex] (argy) -- ++(0,.5) -| (paramy) node[pos=.75,yshift=1mm,sloped,font=\tiny] {kopie};
+      \draw[-latex] (argz) -- ++(0,.4) -| (paramz) node[pos=.75,yshift=1mm,sloped,font=\tiny] {kopie};
+    }
+    \only<3>{
+      \values 7123
+    }
+    \only<5>{
+      \values 5213
+    }
+  \end{tikzpicture}
+\end{frame}
+}
 
 \end{document}
 
