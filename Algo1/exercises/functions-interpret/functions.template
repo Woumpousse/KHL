@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Functions</title>
+    <title>Functies</title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
     <script src="khl.js"></script>
@@ -16,7 +16,7 @@
   </head>
   <body>
     <div id="contents">
-      <h1>Loops</h1>
+      <h1>Functies</h1>
 
       <%=
          interpret(<<-END)

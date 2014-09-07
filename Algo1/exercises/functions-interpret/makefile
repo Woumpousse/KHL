@@ -12,9 +12,6 @@ all: icons export current
 clean: clean_icons
 	rm -f *~
 
-export:
-	echo loops.html *.js *.png *.css | ruby -e "puts STDIN.read.split" > export
-
 %.pdf: %.tex
 	$(LATEX) $<
 
@@ -23,6 +20,9 @@ export:
 
 
 CURRENT = functions
+
+export:
+	echo $(CURRENT).html *.js *.png *.css | ruby -e "puts STDIN.read.split" > export
 
 current: current-html
 
