@@ -1,0 +1,87 @@
+\begin{frame}
+  \frametitle{Functies: Groeperen van Berekeningen}
+  \begin{columns}
+    \column{.5\linewidth}
+    \code[width=.4\linewidth]{seq.js}
+    \column{.5\linewidth}
+    \code{seq2.js}
+  \end{columns}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \foreach \from/\to in {a/b,b/c,c/d,d/e} {
+        \draw[-latex] (\from1.east) to[bend left=30] (\to1.east);
+      }
+
+      \draw[-latex] (a2.east) to[bend left=30] (f2.east);
+      \draw[-latex] (f2.west) to[bend left=30] (b2.west);
+      \foreach \from/\to in {b/c,c/d,d/e} {
+        \draw[-latex] (\from2.east) to[bend left=30] (\to2.east);
+      }
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI}
+  \code[font size=\small]{bmi.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI}
+  \code[font size=\small]{bmi2.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=south west] (note bmi computation) at ($ (compute bmi) + (1,1.5) $) {Plaatst bmi in variabele {\tt bmi}};
+      \draw[/khl/note arrow] (note bmi computation) |- (compute bmi);
+      \draw[/khl/note arrow] (note bmi computation) |- (set bmi);
+    }
+    \only<3>{
+      \node[/khl/note,anchor=south west] (note bmi evaluation) at ($ (compute bmi) + (1,1.5) $) {Plaatst string in variabele {\tt resultaat}};
+      \draw[/khl/note arrow] (note bmi evaluation) |- (evaluate bmi);
+      \draw[/khl/note arrow] (note bmi evaluation) |- (set result 1);
+      \draw[/khl/note arrow] ($ (note bmi evaluation.north west) ! 0.75 ! (note bmi evaluation.north) $) |- (set result 2);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI voor Twee Personen}
+  \begin{center}
+    \Huge Wat als we het BMI moeten uitrekenen van twee personen?
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{BMI voor Twee Personen}
+  \code[font size=\small]{bmi-2people.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note] (note copy) at ($ (copy length) ! .5 ! (copy weight 2) + (5,0) $) {
+        \parbox{6cm}{\raggedright
+          {\tt berekenBMI()} verwacht waarden in {\tt gewicht} en {\tt lengte}
+        }        
+      };
+
+      \draw[/khl/note arrow] (note copy.north) |- (copy weight);
+      \draw[/khl/note arrow] ($ (note copy.north west) ! .75 ! (note copy.north) $) |- (copy length);
+      \draw[/khl/note arrow] ($ (note copy.south west) ! .75 ! (note copy.south) $) |- (copy weight 2);
+      \draw[/khl/note arrow] (note copy.south) |- (copy length 2);
+    }
+
+    \only<3>{
+      \node[/khl/note] (note bmi) at ($ (copy bmi) ! .5 ! (copy bmi 2) + (3,0) $) {
+        \parbox{6.5cm}{\raggedright
+          {\tt berekenBMI()} plaatst resultaat in {\tt bmi}
+        }        
+      };
+
+      \draw[/khl/note arrow] (note bmi.north) |- (copy bmi);
+      \draw[/khl/note arrow] (note bmi.south) |- (copy bmi 2);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "functions"
+%%% End: 
