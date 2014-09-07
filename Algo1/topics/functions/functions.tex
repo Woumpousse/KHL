@@ -194,6 +194,9 @@
       \coordinate (no vowels) at ($ (show vowels) + (1,.5) $);
       \coordinate (end vowels) at ($ (show vowels) + (2,0) $);
       \coordinate (turn wheel function) at ($ (init) + (4,1) $);
+      \coordinate (guess vowel function) at ($ (init) + (4,-1) $);
+      \coordinate (play turn) at ($ (init) ! .5 ! (exit) $);
+      \coordinate (play game) at (play turn);
       \coordinate (exit) at ($ (init) + (8,0) $);
 
       \seqlink<1-6>[label=rad]{init}{turn wheel}
@@ -212,23 +215,32 @@
       \seqlink<1-5>{end consonants}{exit}
       \seqlink<6>[label=else]{turn wheel}{consonant call}
       \seqlink<6>{consonant call}{exit}
-      \seqlink<7->[label=rad]{init}{turn wheel function}
-      \seqlink<7->{turn wheel function}{exit}
+      \seqlink<7-8>[label=rad]{init}{turn wheel function}
+      \seqlink<7-8>{turn wheel function}{exit}
       \seqlink<1-6>{joker}{exit}
       \seqlink<1-6>{pass}{exit}
       \seqlink<1-2>{bankruptcy next player}{exit}
-      \seqlink[label=klinker]{init}{vowel}
-      \seqlink{vowel}{buy vowel}
-      \seqlink{buy vowel}{show vowels}
-      \seqlink[label=0]{show vowels}{no vowels}
-      \seqlink{no vowels}{end vowels}
-      \seqlink[label=1+]{show vowels}{end vowels}
-      \seqlink{end vowels}{exit}
+      \seqlink<1-7>[label=klinker]{init}{vowel}
+      \seqlink<1-7>{vowel}{buy vowel}
+      \seqlink<1-7>{buy vowel}{show vowels}
+      \seqlink<1-7>[label=0]{show vowels}{no vowels}
+      \seqlink<1-7>{no vowels}{end vowels}
+      \seqlink<1-7>[label=1+]{show vowels}{end vowels}
+      \seqlink<1-7>{end vowels}{exit}
+      \seqlink<8>[label=klinker]{init}{guess vowel function}
+      \seqlink<8>{guess vowel function}{exit}
+      \seqlink<9>{init}{play turn}
+      \seqlink<9>{play turn}{exit}
+      \seqlink<10>{init}{play game}
+      \seqlink<10>{play game}{exit}
 
-      \draw[sequence link,-latex] (exit) -- +(0,-3) node[midway,sloped,black,yshift=1mm,font=\tiny] {!spel gedaan} -| ($ (init) + (0,-.2) $);
-      \draw[sequence link,-latex] (exit) -- +(2,0) node[midway,sloped,black,yshift=1mm,font=\tiny] {spel gedaan};
+      \only<1-9>{
+        \draw[sequence link,-latex] (exit) -- +(0,-3) node[midway,sloped,black,yshift=1mm,font=\tiny] {!spel gedaan} -| ($ (init) + (0,-.2) $);
+        \draw[sequence link,-latex] (exit) -- +(2,0) node[midway,sloped,black,yshift=1mm,font=\tiny] {spel gedaan};
+      }
 
-      \seqpoint[placement=above left]{init}{rad/klinker}
+      \seqpoint<1-8>[placement=above left]{init}{rad/klinker}
+      \seqpoint<9>{init}{}
       \seqpoint<1-6>[placement=left]{turn wheel}{draai rad}
       \seqpoint<1-2>{bankruptcy lose money}{score = 0}
       \seqpoint<3-6>{bankruptcy call}{behandel bankroet}
@@ -246,14 +258,17 @@
       \seqpoint<2-5>[placement=below]{no consonants}{volgende speler}
       \seqpoint<1-5>{end consonants}{}
       \seqpoint<6>[placement=below]{consonant call}{behandel medeklinker}
-      \seqpoint<7->{turn wheel function}{draai het rad}
-      \seqpoint[placement=below]{vowel}{gok klinker}
-      \seqpoint[placement=below]{buy vowel}{score -= 50}
-      \seqpoint[placement=below]{show vowels}{toon}
+      \seqpoint<7-8>{turn wheel function}{draai het rad}
+      \seqpoint<1-7>[placement=below]{vowel}{gok klinker}
+      \seqpoint<1-7>[placement=below]{buy vowel}{score -= 50}
+      \seqpoint<1-7>[placement=below]{show vowels}{toon}
       \seqpoint<1>{no vowels}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
-      \seqpoint<2->{no vowels}{volgende speler}
-      \seqpoint{end vowels}{}
-      \seqpoint{exit}{}
+      \seqpoint<2-7>{no vowels}{volgende speler}
+      \seqpoint<1-7>{end vowels}{}
+      \seqpoint<8>{guess vowel function}{koop klinker}
+      \seqpoint<9>{play turn}{speel beurt}
+      \seqpoint<10>{play game}{speel spel}
+      \seqpoint<1-9>{exit}{}
 
       \coordinate (next player init) at (6,4.5);
       \coordinate (next player inc) at ($ (next player init) + (1,0) $);
@@ -295,7 +310,16 @@
         \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny behandel medeklinker};
       }
       \only<7>{
-        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny draai het raad};
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny draai het rad};
+      }
+      \only<8>{
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny draai het rad};
+      }
+      \only<9>{
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny speel beurt};
+      }
+      \only<10>{
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny speel spel};
       }
     \end{tikzpicture}
   \end{center}
