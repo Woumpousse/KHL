@@ -1,5 +1,5 @@
 function foo(`\NODE{\paramx}{paramx}`, `\NODE{\paramy}{paramy}`, `\NODE{\paramz}{paramz}`) {
-    `\NODE{bar}{bar}` = `\NODE{x}{x}` + `\NODE{y}{y}` * `\NODE{z}{z}`;
+    `\NODE{bar}{bar}` = `\NODE{\paramx}{x}` + `\NODE{\paramy}{y}` * `\NODE{\paramz}{z}`;
 }
 
 var `\NODE{\localx}{localx}` = 1;

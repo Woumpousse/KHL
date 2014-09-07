@@ -192,11 +192,19 @@
   \frametitle{Parameters}
   \begin{overprint}
     \onslide<1-3>
-    \CODE xyzabcabc
+    \only<1-3>{{\CODE xyzabcabc}}
 
     \onslide<4-5>
-    \CODE xyzabcbac
+    \only<4-5>{{\CODE xyzabcbac}}
 
+    \onslide<6>
+    \only<6>{{\CODE uvwabcbac}}
+
+    \onslide<7>
+    \only<7>{{\CODE rstabcbac}}
+
+    \onslide<8>
+    \only<8>{{\CODE abcabcbac}}
   \end{overprint}  
   \begin{tikzpicture}[overlay,remember picture]
     \only<2>{
@@ -207,10 +215,43 @@
     \only<3>{
       \values 7123
     }
-    \only<5>{
+    \only<5-8>{
       \values 5213
     }
   \end{tikzpicture}
+  \begin{overprint}
+    \onslide<2>
+    \begin{center}
+      De \emph{argumenten} {\tt a}, {\tt b} en {\tt c} worden gekopieerd en doorgegeven aan de functie
+    \end{center}
+
+    \onslide<3>
+    \begin{center}
+      De \emph{parameters} {\tt x}, {\tt y} en {\tt z} bevatten respectievelijk
+      de waarden {\tt 1},~{\tt 2}~en~{\tt 3}
+    \end{center}
+
+    \onslide<4>
+    \begin{center}
+      We veranderen de volgorde van de argumenten
+    \end{center}
+
+    \onslide<5>
+    \begin{center}
+      Nu hebben de parameters andere waarden
+    \end{center}
+
+    \onslide<6-7>
+    \begin{center}
+      De namen van de parameters maken niets uit
+    \end{center}
+
+    \onslide<8>
+    \begin{center}
+      Parameters horen bij de functie, het zijn \emph{lokale variabelen}.
+      Ze mogen dezelfde naam hebben als andere reeds bestaande variabelen.
+    \end{center}
+  \end{overprint}
 \end{frame}
 }
 
