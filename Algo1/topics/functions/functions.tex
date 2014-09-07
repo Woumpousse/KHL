@@ -196,8 +196,8 @@
 
       \seqlink[label=rad]{init}{turn wheel}
       \seqlink<1-2>[label=bankroet]{turn wheel}{bankruptcy lose money}
-      \seqlink<3>[label=bankroet]{turn wheel}{bankruptcy call}
-      \seqlink<3>{bankruptcy call}{exit}
+      \seqlink<3->[label=bankroet]{turn wheel}{bankruptcy call}
+      \seqlink<3->{bankruptcy call}{exit}
       \seqlink<1-2>{bankruptcy lose money}{bankruptcy next player}
       \seqlink[label=verlies beurt]{turn wheel}{pass}
       \seqlink[label=joker]{turn wheel}{joker}
@@ -229,8 +229,10 @@
       \seqpoint<1>[rotation=-12]{bankruptcy next player}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
       \seqpoint<2>{bankruptcy next player}{volgende speler}
       \seqpoint<1>[rotation=5]{pass}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
-      \seqpoint<2->{pass}{volgende speler}
-      \seqpoint{joker}{jokers++}
+      \seqpoint<2-3>{pass}{volgende speler}
+      \seqpoint<4->{pass}{behandel verliesbeurt}
+      \seqpoint<1-4>{joker}{jokers++}
+      \seqpoint<5->{joker}{behandel joker}
       \seqpoint[placement=below]{consonant}{gok medeklinker}
       \seqpoint{show consonant}{toon}
       \seqpoint{gain}{score += bedrag * k}
@@ -244,7 +246,6 @@
       \seqpoint<2->{no vowels}{volgende speler}
       \seqpoint{end vowels}{}
       \seqpoint{exit}{}
-
 
       \coordinate (next player init) at (6,4.5);
       \coordinate (next player inc) at ($ (next player init) + (1,0) $);
@@ -266,9 +267,21 @@
       \seqlink<3>{bankrupt function next player}{bankrupt function exit};
       \seqpoint<3>{bankrupt function reset score}{score = 0};
       \seqpoint<3>[placement=below]{bankrupt function next player}{volgende speler};
-      \only<3>{
+      \only<3->{
         \draw[black] ($ (bankrupt function init) + (-.5,-.5) $) rectangle ($ (bankrupt function exit) + (.5,.5) $);
+      }
+      \only<4->{
+        \node at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) $) {\dots};
+      }
+
+      \only<3>{
         \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny behandel bankroet};
+      }
+      \only<4>{
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny behandel verliesbeurt};
+      }
+      \only<5>{
+        \node[anchor=north] at ($ (bankrupt function init) ! .5 ! (bankrupt function exit) + (0,-.5) $) {\tiny behandel joker};
       }
 
 
