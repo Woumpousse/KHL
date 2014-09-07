@@ -34,11 +34,12 @@ $(OTHER_EXERCISES):
 dropbox: $(ALL_EXERCISES)
 	cp *.zip $(DROPBOX_FOLDER)/oefeningen
 
-solutions:
-	echo $(TEST_BASED_EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} solutions.js
+refimpl:
+	echo $(TEST_BASED_EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} refimpl.js
 
 lazy.js: lazy.ts
 	tsc -t ES5 lazy.ts
 
 clean: cleantemp
+	echo $(ALL_EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} clean
 	rm -f *.zip

@@ -5,7 +5,7 @@ TYPESCRIPT = true
 endif
 
 
-all: export refimpl.js
+all: refimpl.js export
 
 refimpl.js: refimpl.ts
 	tsc refimpl.ts

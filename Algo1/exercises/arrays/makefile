@@ -5,13 +5,14 @@ TYPESCRIPT = true
 endif
 
 
-all: export solutions.js
+all: refimpl.js export
 
-solutions.js: solutions.ts
-	tsc solutions.ts
+refimpl.js: refimpl.ts
+	tsc refimpl.ts
 
 clean:
-	rm -f solutions.js
+	rm -f refimpl.js
+	rm -f export
 
 export:
 	echo assignment.html *.js | ruby -e "puts STDIN.read.split" > export

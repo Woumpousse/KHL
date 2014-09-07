@@ -8,3 +8,5 @@ doc:
 export:
 	echo assignment.html *.js *.png | ruby -e "puts STDIN.read.split" > export
 	echo doc/assignment.pdf >> export
+
+clean:
