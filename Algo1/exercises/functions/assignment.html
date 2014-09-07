@@ -77,13 +77,12 @@
         <section class="testcase" data-subject="modulo">
           <p>
             Schrijf een functie <code>modulo(a, b)</code> die, gegeven
-            gehele getallen <code>a</code> en <code>b</code> waarbij <code>b &gt; 0</code>,
+            gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
+            en <code>b &gt; 0</code>,
             de rest bij deling van <code>a</code> en <code>b</code> uitrekent.
           </p>
           <p>
-            Bij ongeldige invoer (bv. <code>0<sup>0</sup></code> is ongedefinieerd,
-            negatieve <code>b</code> zijn eveneens ongeldig)
-            hoort de functie de string <code>"invalid"</code> op te leveren
+            Bij ongeldige invoer hoort de functie de string <code>"invalid"</code> op te leveren
             als resultaat.
           </p>
           <p>
@@ -95,12 +94,12 @@
         <section class="testcase" data-subject="pow">
           <p>
             Schrijf een functie <code>pow(a, b)</code> die, gegeven
-            positieve gehele getallen <code>a</code> en <code>b</code> waarbij <code>a &ge; 0</code>
-            en <code>b &gt; 0</code>, de machtsverheffing <code>a<sup>b</code> uitrekent.
+            gehele getallen <code>a</code> en <code>b</code> waarbij <code>b &ge; 0</code>, de machtsverheffing <code>a<sup>b</code> uitrekent.
           </p>
           <p>
-            Bij ongeldige invoer hoort de functie de string <code>"invalid"</code> op te leveren
-            als resultaat.
+            Bij ongeldige invoer hoort de
+            functie de string <code>"invalid"</code> op te leveren
+            als resultaat. <code>0<sup>0</sup></code> is ongedefinieerd en vormt dus tevens ongeldige invoer.
           </p>
           <p>
             Herbruik de functies die je in vorige oefeningen hebt gedefinieerd.
