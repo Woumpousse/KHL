@@ -3,7 +3,7 @@ function random() : number
     return 0;
 }
 
-module Solutions
+module ReferenceImplementations
 {
     export function randomInteger(a : number, b : number) : number
     {

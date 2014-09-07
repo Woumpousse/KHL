@@ -1,5 +1,5 @@
 defineTests(function (originalTest) {
-    var zigZag = Solutions.zigZag;
+    var zigZag = ReferenceImplementations.zigZag;
 
     function test( func, builder )
     {
@@ -25,7 +25,7 @@ defineTests(function (originalTest) {
                    zigZag(3, 3)
                  ];
 
-    test(Solutions.createGrid, function (builder) {
+    test(ReferenceImplementations.createGrid, function (builder) {
         builder.addInput( 1, 1, 1 );
         builder.addInput( 1, 2, 0 );
         builder.addInput( 2, 1, "a" );
@@ -33,7 +33,7 @@ defineTests(function (originalTest) {
         builder.addInput( 10, 10, 0 );
     });
 
-    test(Solutions.arrayLengths, function (builder) {
+    test(ReferenceImplementations.arrayLengths, function (builder) {
         builder.addInput( [[]] );
         builder.addInput( [[1]] );
         builder.addInput( [[1],[1]] );
@@ -43,7 +43,7 @@ defineTests(function (originalTest) {
         builder.addInput( [[1,2],[1,2]] );
     });
 
-    test(Solutions.isRectangular, function (builder) {
+    test(ReferenceImplementations.isRectangular, function (builder) {
         builder.addInput( [[]] );
         builder.addInput( [[1]] );
         builder.addInput( [[1],[1]] );
@@ -56,19 +56,19 @@ defineTests(function (originalTest) {
         builder.setFormatter( formatters.simple );
     });
 
-    test(Solutions.width, function (builder) {
+    test(ReferenceImplementations.width, function (builder) {
         _.each(gridInputs, function (input) {
             builder.addInput(input);
         });
     });
 
-    test(Solutions.height, function (builder) {
+    test(ReferenceImplementations.height, function (builder) {
         _.each(gridInputs, function (input) {
             builder.addInput(input);
         });
     });
 
-    test(Solutions.isSquare, function (builder) {
+    test(ReferenceImplementations.isSquare, function (builder) {
         builder.addInput( [[]] );
         builder.addInput( [[1]] );
         builder.addInput( [[1],[1]] );
@@ -80,7 +80,7 @@ defineTests(function (originalTest) {
         builder.setFormatter( formatters.simple );
     });
 
-    test(Solutions.zigZag, function (builder) {
+    test(ReferenceImplementations.zigZag, function (builder) {
         builder.addInput(1, 1);
         builder.addInput(1, 2);
         builder.addInput(1, 3);
@@ -92,7 +92,7 @@ defineTests(function (originalTest) {
         builder.addInput(3, 3);
     });
     
-    test(Solutions.getRow, function (builder) {
+    test(ReferenceImplementations.getRow, function (builder) {
         builder.addInput( zigZag(1, 1), 0 );
         builder.addInput( zigZag(1, 2), 0 );
         builder.addInput( zigZag(1, 2), 1 );
@@ -106,7 +106,7 @@ defineTests(function (originalTest) {
         builder.addInput( zigZag(5, 5), 4);
     });
 
-    test(Solutions.getColumn, function (builder) {
+    test(ReferenceImplementations.getColumn, function (builder) {
         builder.addInput( zigZag(1, 1), 0 );
         builder.addInput( zigZag(2, 2), 0 );
         builder.addInput( zigZag(2, 1), 0 );
@@ -119,19 +119,19 @@ defineTests(function (originalTest) {
         builder.addInput( zigZag(5, 5), 4 );
     });
 
-    test(Solutions.rowSums, function (builder) {
+    test(ReferenceImplementations.rowSums, function (builder) {
         _.each(gridInputs, function (input) {
             builder.addInput(input);
         });
     });
 
-    test(Solutions.columnSums, function (builder) {
+    test(ReferenceImplementations.columnSums, function (builder) {
         _.each(gridInputs, function (input) {
             builder.addInput(input);
         });
     });
 
-    test(Solutions.matrixAddition, function (builder) {
+    test(ReferenceImplementations.matrixAddition, function (builder) {
         builder.addInput( [[1]], [[1]] );
         builder.addInput( [[1]], [[2]] );
         builder.addInput( [[1,2]], [[1,2]] );
@@ -141,7 +141,7 @@ defineTests(function (originalTest) {
         builder.addInput( [[1,0,2],[4,2,0],[1,4,7]], [[7,5,3],[1,5,9],[0,1,3]] );
     });
 
-    test(Solutions.matrixMultiplication, function (builder) {
+    test(ReferenceImplementations.matrixMultiplication, function (builder) {
         builder.addInput( [[1]], [[1]] );
         builder.addInput( [[1]], [[2]] );
         builder.addInput( [[1],[1]], [[1,1]] );

@@ -4,8 +4,8 @@ function isVowel(c) {
     return /^[aeiou]$/.test(c);
 }
 
-var Solutions;
-(function (Solutions) {
+var ReferenceImplementations;
+(function (ReferenceImplementations) {
     function isOdd(n) {
         if (n < 0) {
             isOdd(-n);
@@ -17,7 +17,7 @@ var Solutions;
             return isOdd(n - 2);
         }
     }
-    Solutions.isOdd = isOdd;
+    ReferenceImplementations.isOdd = isOdd;
 
     function factorial(n) {
         if (n === 0) {
@@ -26,7 +26,7 @@ var Solutions;
             return n * factorial(n - 1);
         }
     }
-    Solutions.factorial = factorial;
+    ReferenceImplementations.factorial = factorial;
 
     function sum(xs) {
         if (xs.length === 0) {
@@ -35,7 +35,7 @@ var Solutions;
             return xs[0] + sum(xs.slice(1));
         }
     }
-    Solutions.sum = sum;
+    ReferenceImplementations.sum = sum;
 
     function product(xs) {
         if (xs.length === 0) {
@@ -44,7 +44,7 @@ var Solutions;
             return xs[0] * product(xs.slice(1));
         }
     }
-    Solutions.product = product;
+    ReferenceImplementations.product = product;
 
     function countZeros(xs) {
         if (xs.length === 0) {
@@ -55,7 +55,7 @@ var Solutions;
             return countZeros(xs.slice(1));
         }
     }
-    Solutions.countZeros = countZeros;
+    ReferenceImplementations.countZeros = countZeros;
 
     function removeZeros(xs) {
         if (xs.length === 0) {
@@ -66,7 +66,7 @@ var Solutions;
             return [xs[0]].concat(removeZeros(xs.slice(1)));
         }
     }
-    Solutions.removeZeros = removeZeros;
+    ReferenceImplementations.removeZeros = removeZeros;
 
     function firstIndexOf(x, xs) {
         if (xs.length === 0) {
@@ -83,7 +83,7 @@ var Solutions;
             }
         }
     }
-    Solutions.firstIndexOf = firstIndexOf;
+    ReferenceImplementations.firstIndexOf = firstIndexOf;
 
     function removeAt(xs, index) {
         if (xs.length === 0) {
@@ -94,7 +94,7 @@ var Solutions;
             return [xs[0]].concat(removeAt(xs.slice(1), index - 1));
         }
     }
-    Solutions.removeAt = removeAt;
+    ReferenceImplementations.removeAt = removeAt;
 
     function isSubsetOf(xs, ys) {
         if (xs.length === 0) {
@@ -105,7 +105,7 @@ var Solutions;
             return idx !== -1 && isSubsetOf(xs.slice(1), removeAt(ys, idx));
         }
     }
-    Solutions.isSubsetOf = isSubsetOf;
+    ReferenceImplementations.isSubsetOf = isSubsetOf;
 
     function range(a, b) {
         if (a > b) {
@@ -114,7 +114,7 @@ var Solutions;
             return [a].concat(range(a + 1, b));
         }
     }
-    Solutions.range = range;
+    ReferenceImplementations.range = range;
 
     function duplicateEachItem(xs) {
         if (xs.length === 0) {
@@ -123,7 +123,7 @@ var Solutions;
             return [xs[0], xs[0]].concat(duplicateEachItem(xs.slice(1)));
         }
     }
-    Solutions.duplicateEachItem = duplicateEachItem;
+    ReferenceImplementations.duplicateEachItem = duplicateEachItem;
 
     function subarrays(xs) {
         if (xs.length === 0) {
@@ -139,7 +139,7 @@ var Solutions;
             return result;
         }
     }
-    Solutions.subarrays = subarrays;
+    ReferenceImplementations.subarrays = subarrays;
 
     function permutations(xs) {
         if (xs.length === 0) {
@@ -161,7 +161,7 @@ var Solutions;
             return result;
         }
     }
-    Solutions.permutations = permutations;
+    ReferenceImplementations.permutations = permutations;
 
     function knapsack(n, ns) {
         if (n === 0) {
@@ -180,7 +180,7 @@ var Solutions;
             }
         }
     }
-    Solutions.knapsack = knapsack;
+    ReferenceImplementations.knapsack = knapsack;
 
     function vowelCount(str) {
         if (str.length === 0) {
@@ -197,7 +197,7 @@ var Solutions;
             }
         }
     }
-    Solutions.vowelCount = vowelCount;
+    ReferenceImplementations.vowelCount = vowelCount;
 
     function maskVowels(str) {
         if (str.length === 0) {
@@ -214,7 +214,7 @@ var Solutions;
             }
         }
     }
-    Solutions.maskVowels = maskVowels;
+    ReferenceImplementations.maskVowels = maskVowels;
 
     function rle(str) {
         // Auxialiry function
@@ -243,7 +243,7 @@ var Solutions;
             return aux(tail, head, 1);
         }
     }
-    Solutions.rle = rle;
+    ReferenceImplementations.rle = rle;
 
     function compress(str) {
         // Auxialiry function
@@ -276,7 +276,7 @@ var Solutions;
             return aux(tail, head, 1);
         }
     }
-    Solutions.compress = compress;
+    ReferenceImplementations.compress = compress;
 
     function repeat(x, n) {
         if (n === 0) {
@@ -285,7 +285,7 @@ var Solutions;
             return x.concat(repeat(x, n - 1));
         }
     }
-    Solutions.repeat = repeat;
+    ReferenceImplementations.repeat = repeat;
 
     function decompress(str) {
         if (str.length === 0) {
@@ -297,5 +297,5 @@ var Solutions;
             return repeat(c, n).concat(decompress(str.substring(2)));
         }
     }
-    Solutions.decompress = decompress;
-})(Solutions || (Solutions = {}));
+    ReferenceImplementations.decompress = decompress;
+})(ReferenceImplementations || (ReferenceImplementations = {}));

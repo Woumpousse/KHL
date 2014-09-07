@@ -1,5 +1,5 @@
 defineTests(function (test) {
-    test(Solutions.rangeSum, function (builder) {
+    test(ReferenceImplementations.rangeSum, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(0, -1);
         builder.addInput(1, 0);
@@ -11,7 +11,7 @@ defineTests(function (test) {
         builder.addInput(10, 20);
     });
 
-    test(Solutions.factorial, function (builder) {
+    test(ReferenceImplementations.factorial, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
@@ -21,7 +21,7 @@ defineTests(function (test) {
         builder.addInput(6);
     });
 
-    test(Solutions.gcd, function (builder) {
+    test(ReferenceImplementations.gcd, function (builder) {
         builder.addInput(1, 5);
         builder.addInput(2, 2);
         builder.addInput(2, 4);
@@ -31,7 +31,7 @@ defineTests(function (test) {
         builder.addInput(13 * 3, 13 * 5);
     });
 
-    test(Solutions.lcm, function (builder) {
+    test(ReferenceImplementations.lcm, function (builder) {
         builder.addInput(1, 5);
         builder.addInput(2, 2);
         builder.addInput(2, 4);
@@ -41,7 +41,7 @@ defineTests(function (test) {
         builder.addInput(13 * 3, 13 * 5);
     });
 
-    test(Solutions.countTrailingZeros, function (builder) {
+    test(ReferenceImplementations.countTrailingZeros, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(10);
@@ -52,7 +52,7 @@ defineTests(function (test) {
         builder.addInput(-70800);
     });
 
-    test(Solutions.countZeros, function (builder) {
+    test(ReferenceImplementations.countZeros, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(10);
@@ -63,7 +63,7 @@ defineTests(function (test) {
         builder.addInput(-70800);
     });
 
-    test(Solutions.countDigits, function (builder) {
+    test(ReferenceImplementations.countDigits, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(12);
@@ -74,7 +74,7 @@ defineTests(function (test) {
         builder.addInput(-135);
     });
 
-    test(Solutions.isPrime, function (builder) {
+    test(ReferenceImplementations.isPrime, function (builder) {
         builder.addInput(1);
         builder.addInput(2);
         builder.addInput(3);
@@ -89,7 +89,7 @@ defineTests(function (test) {
         builder.addInput(101);
     });
 
-    test(Solutions.sumDigits, function (builder) {
+    test(ReferenceImplementations.sumDigits, function (builder) {
         builder.addInput(1);
         builder.addInput(11);
         builder.addInput(111);
@@ -99,7 +99,7 @@ defineTests(function (test) {
         builder.addInput(54321);
     });
 
-    test(Solutions.greatestDigitProduct, function (builder) {
+    test(ReferenceImplementations.greatestDigitProduct, function (builder) {
         builder.addInput(10);
         builder.addInput(20);
         builder.addInput(304);
@@ -113,7 +113,7 @@ defineTests(function (test) {
         builder.addInput(-1000);
     });
 
-    test(Solutions.greatestSumOfDigitTriples, function (builder) {
+    test(ReferenceImplementations.greatestSumOfDigitTriples, function (builder) {
         builder.addInput(1000);
         builder.addInput(10203);
         builder.addInput(12345);

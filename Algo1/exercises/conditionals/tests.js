@@ -1,5 +1,5 @@
 defineTests(function (test) {
-    test(Solutions.average, function (builder) {
+    test(ReferenceImplementations.average, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(0, 2);
         builder.addInput(0, 10);
@@ -7,7 +7,7 @@ defineTests(function (test) {
         builder.addInput(1, 3);
     });
 
-    test(Solutions.isOdd, function (builder) {
+    test(ReferenceImplementations.isOdd, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
@@ -19,7 +19,7 @@ defineTests(function (test) {
         builder.addInput(100001);
     });
 
-    test(Solutions.isEven, function (builder) {
+    test(ReferenceImplementations.isEven, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
@@ -31,7 +31,7 @@ defineTests(function (test) {
         builder.addInput(100001);
     });
 
-    test(Solutions.endsInZero, function (builder) {
+    test(ReferenceImplementations.endsInZero, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(770);
@@ -43,7 +43,7 @@ defineTests(function (test) {
     });
 
 
-    test(Solutions.endsInThreeZeros, function (builder) {
+    test(ReferenceImplementations.endsInThreeZeros, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(770);
@@ -55,7 +55,7 @@ defineTests(function (test) {
     });
 
 
-    test(Solutions.minimumOfTwo, function (builder) {
+    test(ReferenceImplementations.minimumOfTwo, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(1, 0);
         builder.addInput(0, 1);
@@ -63,7 +63,7 @@ defineTests(function (test) {
         builder.addInput(5, 7);
     });
 
-    test(Solutions.abs, function (builder) {
+    test(ReferenceImplementations.abs, function (builder) {
         builder.addInput(0);
         builder.addInput(-1);
         builder.addInput(1);
@@ -71,7 +71,7 @@ defineTests(function (test) {
         builder.addInput(8);
     });
 
-    test(Solutions.maximumOfThree, function (builder) {
+    test(ReferenceImplementations.maximumOfThree, function (builder) {
         builder.addInput(0, 0, 0);
         builder.addInput(1, 0, 0);
         builder.addInput(0, 1, 0);
@@ -85,7 +85,7 @@ defineTests(function (test) {
         builder.addInput(45, 80, 79);
     });
 
-    test(Solutions.sort, function (builder) {
+    test(ReferenceImplementations.sort, function (builder) {
         builder.addInput(1, 2, 3);
         builder.addInput(1, 3, 2);
         builder.addInput(2, 1, 3);
@@ -99,14 +99,14 @@ defineTests(function (test) {
         builder.addInput(45, 80, 79);
     });
 
-    test(Solutions.cost1, function (builder) {
+    test(ReferenceImplementations.cost1, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
         builder.addInput(10);
     });
     
-    test(Solutions.cost2, function (builder) {
+    test(ReferenceImplementations.cost2, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(1, 0);
         builder.addInput(0, 1);
@@ -114,7 +114,7 @@ defineTests(function (test) {
         builder.addInput(3, 5);
     });
 
-    test(Solutions.cost3, function (builder) {
+    test(ReferenceImplementations.cost3, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(1, 0);
         builder.addInput(0, 1);
@@ -122,7 +122,7 @@ defineTests(function (test) {
         builder.addInput(3, 5);
     });
 
-    test(Solutions.cost4, function (builder) {
+    test(ReferenceImplementations.cost4, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(1, 0);
         builder.addInput(0, 1);
@@ -134,7 +134,7 @@ defineTests(function (test) {
         builder.addInput(3, 5);
     });
 
-    test(Solutions.cost5, function (builder) {
+    test(ReferenceImplementations.cost5, function (builder) {
         builder.addInput(0, 0);
         builder.addInput(1, 0);
         builder.addInput(0, 1);

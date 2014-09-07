@@ -1,5 +1,5 @@
-var Solutions;
-(function (Solutions) {
+var ReferenceImplementations;
+(function (ReferenceImplementations) {
     function factorial(n) {
         var result = 1;
 
@@ -9,7 +9,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.factorial = factorial;
+    ReferenceImplementations.factorial = factorial;
 
     function countDigits(n) {
         var result;
@@ -30,7 +30,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.countDigits = countDigits;
+    ReferenceImplementations.countDigits = countDigits;
 
     function gcd(a, b) {
         var result;
@@ -42,7 +42,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.gcd = gcd;
+    ReferenceImplementations.gcd = gcd;
 
     function lcm(a, b) {
         var result;
@@ -54,7 +54,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.lcm = lcm;
+    ReferenceImplementations.lcm = lcm;
 
     function countTrailingZeros(n) {
         var result;
@@ -71,7 +71,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.countTrailingZeros = countTrailingZeros;
+    ReferenceImplementations.countTrailingZeros = countTrailingZeros;
 
     function countZeros(n) {
         var result;
@@ -95,7 +95,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.countZeros = countZeros;
+    ReferenceImplementations.countZeros = countZeros;
 
     function rangeSum(a, b) {
         var result;
@@ -108,7 +108,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.rangeSum = rangeSum;
+    ReferenceImplementations.rangeSum = rangeSum;
 
     function isPrime(n) {
         var result;
@@ -129,7 +129,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.isPrime = isPrime;
+    ReferenceImplementations.isPrime = isPrime;
 
     function sumDigits(n) {
         var total = 0;
@@ -141,7 +141,7 @@ var Solutions;
 
         return total;
     }
-    Solutions.sumDigits = sumDigits;
+    ReferenceImplementations.sumDigits = sumDigits;
 
     function greatestDigitProduct(n) {
         if (n >= 10) {
@@ -167,7 +167,7 @@ var Solutions;
             return -1;
         }
     }
-    Solutions.greatestDigitProduct = greatestDigitProduct;
+    ReferenceImplementations.greatestDigitProduct = greatestDigitProduct;
 
     function greatestSumOfDigitTriples(n) {
         if (n >= 100) {
@@ -196,5 +196,5 @@ var Solutions;
             return -1;
         }
     }
-    Solutions.greatestSumOfDigitTriples = greatestSumOfDigitTriples;
-})(Solutions || (Solutions = {}));
+    ReferenceImplementations.greatestSumOfDigitTriples = greatestSumOfDigitTriples;
+})(ReferenceImplementations || (ReferenceImplementations = {}));

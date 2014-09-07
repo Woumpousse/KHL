@@ -1,5 +1,5 @@
-var Solutions;
-(function (Solutions) {
+var ReferenceImplementations;
+(function (ReferenceImplementations) {
     function average(a, b) {
         var result;
 
@@ -7,7 +7,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.average = average;
+    ReferenceImplementations.average = average;
 
     function isOdd(n) {
         var result;
@@ -20,7 +20,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.isOdd = isOdd;
+    ReferenceImplementations.isOdd = isOdd;
 
     function isEven(n) {
         var result;
@@ -33,7 +33,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.isEven = isEven;
+    ReferenceImplementations.isEven = isEven;
 
     function endsInZero(n) {
         var result;
@@ -46,7 +46,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.endsInZero = endsInZero;
+    ReferenceImplementations.endsInZero = endsInZero;
 
     function endsInThreeZeros(n) {
         var result;
@@ -59,7 +59,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.endsInThreeZeros = endsInThreeZeros;
+    ReferenceImplementations.endsInThreeZeros = endsInThreeZeros;
 
     function minimumOfTwo(a, b) {
         var result;
@@ -72,7 +72,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.minimumOfTwo = minimumOfTwo;
+    ReferenceImplementations.minimumOfTwo = minimumOfTwo;
 
     function abs(a) {
         var result;
@@ -85,7 +85,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.abs = abs;
+    ReferenceImplementations.abs = abs;
 
     function maximumOfThree(a, b, c) {
         var result;
@@ -100,7 +100,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.maximumOfThree = maximumOfThree;
+    ReferenceImplementations.maximumOfThree = maximumOfThree;
 
     function sort(a, b, c) {
         var x, y, z;
@@ -139,7 +139,7 @@ var Solutions;
 
         return [x, y, z];
     }
-    Solutions.sort = sort;
+    ReferenceImplementations.sort = sort;
 
     function cost1(n) {
         var result;
@@ -148,7 +148,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.cost1 = cost1;
+    ReferenceImplementations.cost1 = cost1;
 
     function cost2(n, k) {
         var result;
@@ -157,7 +157,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.cost2 = cost2;
+    ReferenceImplementations.cost2 = cost2;
 
     function cost3(n, k) {
         var result;
@@ -166,7 +166,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.cost3 = cost3;
+    ReferenceImplementations.cost3 = cost3;
 
     function cost4(n, k) {
         var result;
@@ -179,7 +179,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.cost4 = cost4;
+    ReferenceImplementations.cost4 = cost4;
 
     function cost5(n, k) {
         var result;
@@ -192,7 +192,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.cost5 = cost5;
+    ReferenceImplementations.cost5 = cost5;
 
     // TODO
     function bookOrder(n) {
@@ -212,7 +212,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.bookOrder = bookOrder;
+    ReferenceImplementations.bookOrder = bookOrder;
 
     // TODO
     function taxes(n) {
@@ -232,5 +232,5 @@ var Solutions;
 
         return result;
     }
-    Solutions.taxes = taxes;
-})(Solutions || (Solutions = {}));
+    ReferenceImplementations.taxes = taxes;
+})(ReferenceImplementations || (ReferenceImplementations = {}));

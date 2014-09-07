@@ -1,5 +1,5 @@
 defineTests(function (test) {
-    test(Solutions.contains, function (builder) {
+    test(ReferenceImplementations.contains, function (builder) {
         builder.addInput([], 1);
         builder.addInput([1], 1);
         builder.addInput([0], 1);
@@ -8,7 +8,7 @@ defineTests(function (test) {
         builder.addInput([1, 2, 3], 3);
     });
 
-    test(Solutions.sum, function (builder) {
+    test(ReferenceImplementations.sum, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([1]);
@@ -18,7 +18,7 @@ defineTests(function (test) {
         builder.addInput([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
 
-    test(Solutions.product, function (builder) {
+    test(ReferenceImplementations.product, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([1]);
@@ -28,7 +28,7 @@ defineTests(function (test) {
         builder.addInput([1, 2, 3, 4, 0]);
     });
 
-    test(Solutions.average, function (builder) {
+    test(ReferenceImplementations.average, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([1]);
@@ -38,14 +38,14 @@ defineTests(function (test) {
         builder.addInput([1, 2, 3, 4, 0]);
     });
 
-    test(Solutions.incrementEachItem, function (builder) {
+    test(ReferenceImplementations.incrementEachItem, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([0, 0, 0]);
         builder.addInput([1, 2, 3]);
     });
 
-    test(Solutions.countZeros, function (builder) {
+    test(ReferenceImplementations.countZeros, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([1]);
@@ -56,7 +56,7 @@ defineTests(function (test) {
         builder.addInput([2, 3, 4]);
     });
 
-    test(Solutions.firstIndexOf, function (builder) {
+    test(ReferenceImplementations.firstIndexOf, function (builder) {
         builder.addInput(1, []);
         builder.addInput(1, [1]);
         builder.addInput(1, [2]);
@@ -67,7 +67,7 @@ defineTests(function (test) {
         builder.addInput(1, [0, 1, 0, 1, 0, 1, 0]);
     });
 
-    test(Solutions.lastIndexOf, function (builder) {
+    test(ReferenceImplementations.lastIndexOf, function (builder) {
         builder.addInput(1, []);
         builder.addInput(1, [1]);
         builder.addInput(1, [2]);
@@ -78,7 +78,7 @@ defineTests(function (test) {
         builder.addInput(1, [0, 1, 0, 1, 0, 1, 0]);
     });
 
-    test(Solutions.range, function (builder) {
+    test(ReferenceImplementations.range, function (builder) {
         builder.addInput(1, 1);
         builder.addInput(1, 2);
         builder.addInput(1, 3);
@@ -88,7 +88,7 @@ defineTests(function (test) {
         builder.addInput(5, 1);
     });
 
-    test(Solutions.reverse, function (builder) {
+    test(ReferenceImplementations.reverse, function (builder) {
         builder.addInput([]);
         builder.addInput([1]);
         builder.addInput([1, 2]);
@@ -99,7 +99,7 @@ defineTests(function (test) {
         builder.addInput([1, 3, 5, 7, 9, 8, 4, 6, 2]);
     });
 
-    test(Solutions.isPalindrome, function (builder) {
+    test(ReferenceImplementations.isPalindrome, function (builder) {
         builder.addInput([]);
         builder.addInput([1]);
         builder.addInput([1, 2]);
@@ -109,7 +109,7 @@ defineTests(function (test) {
         builder.addInput([1, 2, 2, 1]);
     });
 
-    test(Solutions.minimum, function (builder) {
+    test(ReferenceImplementations.minimum, function (builder) {
         builder.addInput([0]);
         builder.addInput([0, 1]);
         builder.addInput([1, 0]);
@@ -118,7 +118,7 @@ defineTests(function (test) {
         builder.addInput([1, 3, 0, 5, 4, 2]);
     });
 
-    test(Solutions.maximum, function (builder) {
+    test(ReferenceImplementations.maximum, function (builder) {
         builder.addInput([0]);
         builder.addInput([0, 1]);
         builder.addInput([1, 0]);
@@ -127,7 +127,7 @@ defineTests(function (test) {
         builder.addInput([1, 3, 0, 5, 4, 2]);
     });
 
-    test(Solutions.isIncreasing, function (builder) {
+    test(ReferenceImplementations.isIncreasing, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([0, 1]);
@@ -139,7 +139,7 @@ defineTests(function (test) {
         builder.addInput([1, 1, 2, 3, 3]);
     });
 
-    test(Solutions.isDecreasing, function (builder) {
+    test(ReferenceImplementations.isDecreasing, function (builder) {
         builder.addInput([]);
         builder.addInput([0]);
         builder.addInput([0, 1]);
@@ -151,7 +151,7 @@ defineTests(function (test) {
         builder.addInput([1, 1, 2, 3, 3]);
     });
 
-    test(Solutions.areEqual, function (builder) {
+    test(ReferenceImplementations.areEqual, function (builder) {
         builder.addInput([], []);
         builder.addInput([], [1]);
         builder.addInput([1], []);
@@ -160,7 +160,7 @@ defineTests(function (test) {
         builder.addInput([1,2,3], [3,2,1]);
     });
 
-    test(Solutions.alternates, function (builder) {
+    test(ReferenceImplementations.alternates, function (builder) {
         builder.addInput([]);
         builder.addInput([1]);
         builder.addInput([1,2]);
@@ -170,7 +170,7 @@ defineTests(function (test) {
         builder.addInput([6,5,4,3,2,1]);
     });
 
-    test(Solutions.lengthOfLongestIncreasingSubarray, function (builder) {
+    test(ReferenceImplementations.lengthOfLongestIncreasingSubarray, function (builder) {
         builder.addInput([]);
         builder.addInput([1]);
         builder.addInput([1,2]);

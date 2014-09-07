@@ -1,4 +1,4 @@
-module Solutions
+module ReferenceImplementations
 {
     export function createGrid<T>(width : number, height : number, value : T) : Array<Array<T>> {
         var result = new Array(width);

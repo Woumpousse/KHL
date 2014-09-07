@@ -1,4 +1,4 @@
-module Solutions
+module ReferenceImplementations
 {
     export function average(a : number, b : number) : number
     {

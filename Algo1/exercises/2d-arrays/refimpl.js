@@ -1,5 +1,5 @@
-var Solutions;
-(function (Solutions) {
+var ReferenceImplementations;
+(function (ReferenceImplementations) {
     function createGrid(width, height, value) {
         var result = new Array(width);
 
@@ -13,7 +13,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.createGrid = createGrid;
+    ReferenceImplementations.createGrid = createGrid;
 
     function arrayLengths(xss) {
         var result = new Array(xss.length);
@@ -24,7 +24,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.arrayLengths = arrayLengths;
+    ReferenceImplementations.arrayLengths = arrayLengths;
 
     function allEqual(xs) {
         if (xs.length == 0) {
@@ -39,27 +39,27 @@ var Solutions;
             return true;
         }
     }
-    Solutions.allEqual = allEqual;
+    ReferenceImplementations.allEqual = allEqual;
 
     function isRectangular(xss) {
         return allEqual(arrayLengths(xss));
     }
-    Solutions.isRectangular = isRectangular;
+    ReferenceImplementations.isRectangular = isRectangular;
 
     function width(xss) {
         return xss.length;
     }
-    Solutions.width = width;
+    ReferenceImplementations.width = width;
 
     function height(xss) {
         return xss[0].length;
     }
-    Solutions.height = height;
+    ReferenceImplementations.height = height;
 
     function isSquare(xss) {
         return isRectangular(xss) && width(xss) === height(xss);
     }
-    Solutions.isSquare = isSquare;
+    ReferenceImplementations.isSquare = isSquare;
 
     function zigZag(width, height) {
         var result = createGrid(width, height, 0);
@@ -80,7 +80,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.zigZag = zigZag;
+    ReferenceImplementations.zigZag = zigZag;
 
     function getRow(xss, row) {
         var result = new Array(width(xss));
@@ -91,7 +91,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.getRow = getRow;
+    ReferenceImplementations.getRow = getRow;
 
     function getColumn(xss, col) {
         var result = new Array(height(xss));
@@ -102,7 +102,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.getColumn = getColumn;
+    ReferenceImplementations.getColumn = getColumn;
 
     function sum(xs) {
         var result = 0;
@@ -113,7 +113,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.sum = sum;
+    ReferenceImplementations.sum = sum;
 
     function rowSums(xss) {
         var result = new Array(height(xss));
@@ -124,7 +124,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.rowSums = rowSums;
+    ReferenceImplementations.rowSums = rowSums;
 
     function columnSums(xss) {
         var result = new Array(width(xss));
@@ -135,7 +135,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.columnSums = columnSums;
+    ReferenceImplementations.columnSums = columnSums;
 
     function matrixAddition(xss, yss) {
         var result = createGrid(width(xss), height(xss), 0);
@@ -148,7 +148,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.matrixAddition = matrixAddition;
+    ReferenceImplementations.matrixAddition = matrixAddition;
 
     function matrixMultiplication(xss, yss) {
         var result = createGrid(width(yss), height(xss), 0);
@@ -163,5 +163,5 @@ var Solutions;
 
         return result;
     }
-    Solutions.matrixMultiplication = matrixMultiplication;
-})(Solutions || (Solutions = {}));
+    ReferenceImplementations.matrixMultiplication = matrixMultiplication;
+})(ReferenceImplementations || (ReferenceImplementations = {}));

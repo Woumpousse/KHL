@@ -1,4 +1,4 @@
-module Solutions
+module ReferenceImplementations
 {
     export function factorial(n : number) : number
     {

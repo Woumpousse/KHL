@@ -5,7 +5,7 @@ function isVowel(c : string) : boolean
     return /^[aeiou]$/.test(c);
 }
 
-module Solutions
+module ReferenceImplementations
 {
     export function isOdd(n : number) : boolean {
         if ( n < 0 ) {

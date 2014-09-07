@@ -1,5 +1,5 @@
-var Solutions;
-(function (Solutions) {
+var ReferenceImplementations;
+(function (ReferenceImplementations) {
     function contains(xs, x) {
         for (var i = 0; i !== xs.length; ++i) {
             if (xs[i] === x) {
@@ -9,7 +9,7 @@ var Solutions;
 
         return false;
     }
-    Solutions.contains = contains;
+    ReferenceImplementations.contains = contains;
 
     function sum(xs) {
         var result = 0;
@@ -20,7 +20,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.sum = sum;
+    ReferenceImplementations.sum = sum;
 
     function product(xs) {
         var result = 1;
@@ -31,19 +31,19 @@ var Solutions;
 
         return result;
     }
-    Solutions.product = product;
+    ReferenceImplementations.product = product;
 
     function average(xs) {
         return sum(xs) / xs.length;
     }
-    Solutions.average = average;
+    ReferenceImplementations.average = average;
 
     function incrementEachItem(xs) {
         for (var i = 0; i !== xs.length; ++i) {
             xs[i]++;
         }
     }
-    Solutions.incrementEachItem = incrementEachItem;
+    ReferenceImplementations.incrementEachItem = incrementEachItem;
 
     function countZeros(xs) {
         var result = 0;
@@ -56,7 +56,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.countZeros = countZeros;
+    ReferenceImplementations.countZeros = countZeros;
 
     function firstIndexOf(x, xs) {
         for (var i = 0; i !== xs.length; ++i) {
@@ -67,7 +67,7 @@ var Solutions;
 
         return -1;
     }
-    Solutions.firstIndexOf = firstIndexOf;
+    ReferenceImplementations.firstIndexOf = firstIndexOf;
 
     function lastIndexOf(x, xs) {
         for (var i = xs.length - 1; i >= 0; --i) {
@@ -78,7 +78,7 @@ var Solutions;
 
         return -1;
     }
-    Solutions.lastIndexOf = lastIndexOf;
+    ReferenceImplementations.lastIndexOf = lastIndexOf;
 
     function range(a, b) {
         if (a > b) {
@@ -93,7 +93,7 @@ var Solutions;
             return result;
         }
     }
-    Solutions.range = range;
+    ReferenceImplementations.range = range;
 
     function reverse(xs) {
         for (var i = 0; 2 * i < xs.length; ++i) {
@@ -104,7 +104,7 @@ var Solutions;
             xs[j] = temp;
         }
     }
-    Solutions.reverse = reverse;
+    ReferenceImplementations.reverse = reverse;
 
     function isPalindrome(xs) {
         for (var i = 0; i < xs.length / 2; ++i) {
@@ -115,7 +115,7 @@ var Solutions;
 
         return true;
     }
-    Solutions.isPalindrome = isPalindrome;
+    ReferenceImplementations.isPalindrome = isPalindrome;
 
     function minimum(xs) {
         var result = xs[0];
@@ -128,7 +128,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.minimum = minimum;
+    ReferenceImplementations.minimum = minimum;
 
     function maximum(xs) {
         var result = xs[0];
@@ -141,7 +141,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.maximum = maximum;
+    ReferenceImplementations.maximum = maximum;
 
     function isIncreasing(xs) {
         if (xs.length === 0) {
@@ -160,7 +160,7 @@ var Solutions;
             return true;
         }
     }
-    Solutions.isIncreasing = isIncreasing;
+    ReferenceImplementations.isIncreasing = isIncreasing;
 
     function isDecreasing(xs) {
         if (xs.length === 0) {
@@ -179,7 +179,7 @@ var Solutions;
             return true;
         }
     }
-    Solutions.isDecreasing = isDecreasing;
+    ReferenceImplementations.isDecreasing = isDecreasing;
 
     function areEqual(xs, ys) {
         if (xs.length !== ys.length) {
@@ -194,7 +194,7 @@ var Solutions;
             return true;
         }
     }
-    Solutions.areEqual = areEqual;
+    ReferenceImplementations.areEqual = areEqual;
 
     function alternates(xs) {
         var result = [[], []];
@@ -205,7 +205,7 @@ var Solutions;
 
         return result;
     }
-    Solutions.alternates = alternates;
+    ReferenceImplementations.alternates = alternates;
 
     function lengthOfLongestIncreasingSubarray(xs) {
         if (xs.length === 0) {
@@ -234,5 +234,5 @@ var Solutions;
             return result;
         }
     }
-    Solutions.lengthOfLongestIncreasingSubarray = lengthOfLongestIncreasingSubarray;
-})(Solutions || (Solutions = {}));
+    ReferenceImplementations.lengthOfLongestIncreasingSubarray = lengthOfLongestIncreasingSubarray;
+})(ReferenceImplementations || (ReferenceImplementations = {}));

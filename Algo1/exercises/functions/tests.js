@@ -1,19 +1,19 @@
 defineTests(function (test) {
 
-    test(Solutions.randomInteger, function (builder) {
+    test(ReferenceImplementations.randomInteger, function (builder) {
         builder.addInput( 0, 5 );
         builder.addInput( 0, 10 );
         builder.addInput( 1, 10 );
         builder.addInput( 5, 10 );
     });
 
-    test(Solutions.throwDie, function (builder) {
+    test(ReferenceImplementations.throwDie, function (builder) {
         builder.addInput();
         builder.addInput();
         builder.addInput();
     });
 
-    test(Solutions.sumDice, function (builder) {
+    test(ReferenceImplementations.sumDice, function (builder) {
         builder.addInput(1);
         builder.addInput(2);
         builder.addInput(3);
@@ -21,7 +21,7 @@ defineTests(function (test) {
         builder.addInput(5);
     });
 
-    test(Solutions.countSumDice, function (builder) {
+    test(ReferenceImplementations.countSumDice, function (builder) {
         builder.addInput(1, 1, 1);
         builder.addInput(1, 1, 3);
         builder.addInput(2, 1, 7);
@@ -31,7 +31,7 @@ defineTests(function (test) {
         builder.addInput(5, 1000, 20);
     });
 
-    test(Solutions.mostFrequentSum, function (builder) {
+    test(ReferenceImplementations.mostFrequentSum, function (builder) {
        builder.addInput(1); 
        builder.addInput(2); 
        builder.addInput(3);
@@ -39,7 +39,7 @@ defineTests(function (test) {
        builder.addInput(5); 
     });
 
-    test(Solutions.product, function (builder) {
+    test(ReferenceImplementations.product, function (builder) {
        builder.addInput(0, 0); 
        builder.addInput(0, 5); 
        builder.addInput(5, 0);
@@ -56,7 +56,7 @@ defineTests(function (test) {
        builder.addInput(-101, -36);
     });
 
-    test(Solutions.quotient, function (builder) {
+    test(ReferenceImplementations.quotient, function (builder) {
         builder.addInput(0, 1);
         builder.addInput(1, 1);
         builder.addInput(5, 1);
@@ -72,7 +72,7 @@ defineTests(function (test) {
         builder.addInput(-3, -2);
     });
 
-    test(Solutions.modulo, function (builder) {
+    test(ReferenceImplementations.modulo, function (builder) {
         builder.addInput(0, 1);
         builder.addInput(1, 1);
         builder.addInput(2, 1);
@@ -92,7 +92,7 @@ defineTests(function (test) {
         builder.addInput(111, 0);
     });
 
-    test(Solutions.pow, function (builder) {
+    test(ReferenceImplementations.pow, function (builder) {
         builder.addInput(1, 0);
         builder.addInput(1, 1);
         builder.addInput(1, 2);
@@ -106,7 +106,7 @@ defineTests(function (test) {
         builder.addInput(1, -2);
     });
 
-    test(Solutions.calc, function (builder) {
+    test(ReferenceImplementations.calc, function (builder) {
         builder.addInput("+", 5, 3);
         builder.addInput("-", 8, 2);
         builder.addInput("*", 6, 9);

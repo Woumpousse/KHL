@@ -1,5 +1,5 @@
 defineTests(function (test) {
-    test(Solutions.isOdd, function (builder) {
+    test(ReferenceImplementations.isOdd, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
@@ -12,7 +12,7 @@ defineTests(function (test) {
         builder.addInput(-6);
     });
 
-    test(Solutions.factorial, function (builder) {
+    test(ReferenceImplementations.factorial, function (builder) {
         builder.addInput(0);
         builder.addInput(1);
         builder.addInput(2);
@@ -21,7 +21,7 @@ defineTests(function (test) {
         builder.addInput(5);
     });
 
-    test(Solutions.sum, function (builder) {
+    test(ReferenceImplementations.sum, function (builder) {
         builder.addInput( [] );
         builder.addInput( [0] );
         builder.addInput( [1] );
@@ -30,7 +30,7 @@ defineTests(function (test) {
         builder.addInput( [1,2,3,4,5,6,7,8,9,10] );
     });
 
-    test(Solutions.product, function (builder) {
+    test(ReferenceImplementations.product, function (builder) {
         builder.addInput( [] );
         builder.addInput( [0] );
         builder.addInput( [1] );
@@ -40,7 +40,7 @@ defineTests(function (test) {
         builder.addInput( [1,2,3,4,0] );
     });
 
-    test(Solutions.countZeros, function (builder) {
+    test(ReferenceImplementations.countZeros, function (builder) {
         builder.addInput( [] );
         builder.addInput( [0] );
         builder.addInput( [1] );
@@ -52,7 +52,7 @@ defineTests(function (test) {
         builder.addInput( [2,3,4] );
     });
 
-    test(Solutions.removeZeros, function (builder) {
+    test(ReferenceImplementations.removeZeros, function (builder) {
         builder.addInput( [] );
         builder.addInput( [0] );
         builder.addInput( [1] );
@@ -64,7 +64,7 @@ defineTests(function (test) {
         builder.addInput( [2,3,4] );
     });
 
-    test(Solutions.firstIndexOf, function (builder) {
+    test(ReferenceImplementations.firstIndexOf, function (builder) {
         builder.addInput( 1, [] );
         builder.addInput( 1, [1] );
         builder.addInput( 1, [2] );
@@ -74,7 +74,7 @@ defineTests(function (test) {
         builder.addInput( 4, [1,2,3] );
     });
 
-    test(Solutions.removeAt, function (builder) {
+    test(ReferenceImplementations.removeAt, function (builder) {
         builder.addInput([0], 0);
         builder.addInput([1], 0);
         builder.addInput([], 0);
@@ -84,7 +84,7 @@ defineTests(function (test) {
         builder.addInput([1,2,3], 3);
     });
 
-    test(Solutions.isSubsetOf, function (builder) {
+    test(ReferenceImplementations.isSubsetOf, function (builder) {
         builder.addInput( [], [] );
         builder.addInput( [], [1] );
         builder.addInput( [1], [1] );
@@ -103,7 +103,7 @@ defineTests(function (test) {
         builder.addInput( [1,2,3], [1,1,2,2,3,3] );
     });
 
-    test(Solutions.duplicateEachItem, function (builder) {
+    test(ReferenceImplementations.duplicateEachItem, function (builder) {
         builder.addInput( [] );
         builder.addInput( [0] );
         builder.addInput( [1] );
@@ -112,7 +112,7 @@ defineTests(function (test) {
         builder.addInput( [1,1,2,2] );
     });
 
-    test(Solutions.range, function (builder) {
+    test(ReferenceImplementations.range, function (builder) {
         builder.addInput(1,1);
         builder.addInput(1,2);
         builder.addInput(1,3);
@@ -121,7 +121,7 @@ defineTests(function (test) {
         builder.addInput(1,10);
     });
 
-    test(Solutions.subarrays, function (builder) {
+    test(ReferenceImplementations.subarrays, function (builder) {
         builder.addInput( [] );
         builder.addInput( [1] );
         builder.addInput( [1,2] );
@@ -130,7 +130,7 @@ defineTests(function (test) {
         builder.setValidator(validators.io( equality.deep, equality.permutation(equality.deep) ));
     });
 
-    test(Solutions.permutations, function (builder) {
+    test(ReferenceImplementations.permutations, function (builder) {
         builder.addInput( [] );
         builder.addInput( [1] );
         builder.addInput( [1,2] );
@@ -140,7 +140,7 @@ defineTests(function (test) {
         builder.setValidator(validators.io( equality.deep, equality.permutation(equality.deep) ));
     });
 
-    test(Solutions.knapsack, function (builder) {
+    test(ReferenceImplementations.knapsack, function (builder) {
         builder.addInput( 0, [] );
         builder.addInput( 0, [1] );
         builder.addInput( 1, [1] );
@@ -176,7 +176,7 @@ defineTests(function (test) {
         } );
     });
 
-    test(Solutions.vowelCount, function (builder) {
+    test(ReferenceImplementations.vowelCount, function (builder) {
         builder.addInput( "" );
         builder.addInput( "a" );
         builder.addInput( "b" );
@@ -186,7 +186,7 @@ defineTests(function (test) {
         builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
     });
 
-    test(Solutions.maskVowels, function (builder) {
+    test(ReferenceImplementations.maskVowels, function (builder) {
         builder.addInput( "" );
         builder.addInput( "a" );
         builder.addInput( "b" );
@@ -196,7 +196,7 @@ defineTests(function (test) {
         builder.addInput( "abcdefghijklmnopqrstuvwxyz" );
     });
 
-    test(Solutions.rle, function (builder) {
+    test(ReferenceImplementations.rle, function (builder) {
         builder.addInput( "" );
         builder.addInput( "a" );
         builder.addInput( "aa" );
@@ -207,7 +207,7 @@ defineTests(function (test) {
         builder.addInput( "aaaaaaabbbbbbbbaaaaaaaaaaaa" );
     });
 
-    test(Solutions.compress, function (builder) {
+    test(ReferenceImplementations.compress, function (builder) {
         builder.addInput( "" );
         builder.addInput( "a" );
         builder.addInput( "aa" );
@@ -219,7 +219,7 @@ defineTests(function (test) {
         builder.addInput( "aaaaaaabbbbbbbbaaaaaaaaaaaa" );
     });
 
-    test(Solutions.repeat, function (builder) {
+    test(ReferenceImplementations.repeat, function (builder) {
         builder.addInput( "a", 0 );
         builder.addInput( "a", 1 );
         builder.addInput( "a", 2 );
@@ -227,7 +227,7 @@ defineTests(function (test) {
         builder.addInput( "b", 5 );
     });
 
-    test(Solutions.decompress, function (builder) {
+    test(ReferenceImplementations.decompress, function (builder) {
         builder.addInput( "" );
         builder.addInput( "a1" );
         builder.addInput( "a2" );

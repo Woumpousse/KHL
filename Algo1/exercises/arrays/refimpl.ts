@@ -1,4 +1,4 @@
-module Solutions
+module ReferenceImplementations
 {
     export function contains(xs : Array<any>, x : any) : boolean
     {
