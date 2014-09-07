@@ -179,6 +179,7 @@
       \coordinate (turn wheel) at ($ (init) + (1,2) $);
       \coordinate (bankruptcy lose money) at ($ (turn wheel) + (1,1.5) $);
       \coordinate (bankruptcy next player) at ($ (bankruptcy lose money) + (2,0) $);
+      \coordinate (bankruptcy call) at ($ (bankruptcy lose money) + (2,0) $);
       \coordinate (pass) at ($ (turn wheel) + (3,0.5) $);
       \coordinate (joker) at ($ (turn wheel) + (3,-0.5) $);
       \coordinate (consonant) at ($ (turn wheel) + (1,-2) $);
@@ -194,8 +195,10 @@
       \coordinate (exit) at ($ (init) + (8,0) $);
 
       \seqlink[label=rad]{init}{turn wheel}
-      \seqlink[label=bankroet]{turn wheel}{bankruptcy lose money}
-      \seqlink{bankruptcy lose money}{bankruptcy next player}
+      \seqlink<1-2>[label=bankroet]{turn wheel}{bankruptcy lose money}
+      \seqlink<3>[label=bankroet]{turn wheel}{bankruptcy call}
+      \seqlink<3>{bankruptcy call}{exit}
+      \seqlink<1-2>{bankruptcy lose money}{bankruptcy next player}
       \seqlink[label=verlies beurt]{turn wheel}{pass}
       \seqlink[label=joker]{turn wheel}{joker}
       \seqlink[label=else]{turn wheel}{consonant}
@@ -207,7 +210,7 @@
       \seqlink{end consonants}{exit}
       \seqlink{joker}{exit}
       \seqlink{pass}{exit}
-      \seqlink{bankruptcy next player}{exit}
+      \seqlink<1-2>{bankruptcy next player}{exit}
       \seqlink[label=klinker]{init}{vowel}
       \seqlink{vowel}{buy vowel}
       \seqlink{buy vowel}{show vowels}
@@ -221,9 +224,10 @@
 
       \seqpoint[placement=above left]{init}{rad/klinker}
       \seqpoint[placement=left]{turn wheel}{draai rad}
-      \seqpoint{bankruptcy lose money}{score = 0}
+      \seqpoint<1-2>{bankruptcy lose money}{score = 0}
+      \seqpoint<3->{bankruptcy call}{behandel bankroet}
       \seqpoint<1>[rotation=-12]{bankruptcy next player}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
-      \seqpoint<2->{bankruptcy next player}{volgende speler}
+      \seqpoint<2>{bankruptcy next player}{volgende speler}
       \seqpoint<1>[rotation=5]{pass}{huidigeSpeler = (huidigeSpeler + 1) \% aantalSpelers}
       \seqpoint<2->{pass}{volgende speler}
       \seqpoint{joker}{jokers++}
