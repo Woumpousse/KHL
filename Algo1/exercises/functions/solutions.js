@@ -90,8 +90,6 @@ var Solutions;
     function calc(op, a, b) {
         if (op === "+") {
             return a + b;
-        } else if (op === "-") {
-            return a - b;
         } else if (op === "*") {
             return product(a, b);
         } else if (op === "/") {
