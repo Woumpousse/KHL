@@ -5,7 +5,7 @@ ZIP = zip
 endif
 
 TEST_BASED_EXERCISES = conditionals 2d-arrays arrays recursion loops functions
-OTHER_EXERCISES = car fundamentals conditionals-interpret loops-interpret
+OTHER_EXERCISES = car fundamentals conditionals-interpret loops-interpret functions-interpret recursion-interpret arrays-interpret
 SHARED = *.js *.css
 ALL_EXERCISES = $(TEST_BASED_EXERCISES) $(OTHER_EXERCISES)
 DROPBOX_FOLDER = /cygdrive/g/Dropbox/KHLeuven/Algo1/1415
