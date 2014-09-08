@@ -80,4 +80,41 @@ defineTests(function (test) {
         builder.addInput( "a9a9a2" );
         builder.addInput( "a2b3c6" );
     });
+
+    test(ReferenceImplementations.highestDivisor, function (builder) {
+        builder.addInput( 2, 2 );
+        builder.addInput( 2, 4 );
+        builder.addInput( 2, 5 );
+        builder.addInput( 10, 10 );
+        builder.addInput( 9, 10 );
+        builder.addInput( 36, 37 );
+    });
+
+    test(ReferenceImplementations.isPrime, function (builder) {
+        builder.addInput( 1 );
+        builder.addInput( 2 );
+        builder.addInput( 3 );
+        builder.addInput( 4 );
+        builder.addInput( 5 );
+        builder.addInput( 6 );
+        builder.addInput( 7 );
+        builder.addInput( 8 );
+        builder.addInput( 9 );
+        builder.addInput( 10 );
+        builder.addInput( 11 );
+    });
+    
+    test(ReferenceImplementations.sumPrimes, function (builder) {
+        builder.addInput( 1 );
+        builder.addInput( 2 );
+        builder.addInput( 3 );
+        builder.addInput( 4 );
+        builder.addInput( 5 );
+        builder.addInput( 6 );
+        builder.addInput( 7 );
+        builder.addInput( 8 );
+        builder.addInput( 9 );
+        builder.addInput( 10 );
+        builder.addInput( 11 );
+    });
 });

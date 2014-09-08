@@ -188,4 +188,33 @@ module ReferenceImplementations
             return repeat(c, n).concat( decompress( str.substring(2) ) );
         }
     }
+
+    export function highestDivisor(k : number, n : number) : number
+    {
+        if ( n % k === 0 )
+        {
+            return k;
+        }
+        else
+        {
+            return highestDivisor(k - 1, n);
+        }
+    }
+
+    export function isPrime(n : number) : boolean
+    {
+        return n >= 2 && highestDivisor(n - 1, n) === 1;
+    }
+
+    export function sumPrimes(n : number) : number
+    {
+        if ( n === 1 )
+        {
+            return 0;
+        }
+        else
+        {
+            return (isPrime(n) ? n : 0) + sumPrimes(n - 1);
+        }
+    }
 }

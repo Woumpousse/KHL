@@ -144,4 +144,27 @@ var ReferenceImplementations;
         }
     }
     ReferenceImplementations.decompress = decompress;
+
+    function highestDivisor(k, n) {
+        if (n % k === 0) {
+            return k;
+        } else {
+            return highestDivisor(k - 1, n);
+        }
+    }
+    ReferenceImplementations.highestDivisor = highestDivisor;
+
+    function isPrime(n) {
+        return n >= 2 && highestDivisor(n - 1, n) === 1;
+    }
+    ReferenceImplementations.isPrime = isPrime;
+
+    function sumPrimes(n) {
+        if (n === 1) {
+            return 0;
+        } else {
+            return (isPrime(n) ? n : 0) + sumPrimes(n - 1);
+        }
+    }
+    ReferenceImplementations.sumPrimes = sumPrimes;
 })(ReferenceImplementations || (ReferenceImplementations = {}));
