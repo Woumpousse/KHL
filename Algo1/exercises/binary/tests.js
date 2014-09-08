@@ -17,6 +17,7 @@ defineTests(function (test) {
         builder.addInput(1000);
         builder.addInput(10101011);
         builder.addInput(2);
+        builder.addInput(-101);
     });
 
     test(ReferenceImplementations.decimalToBinary, function (builder) {
