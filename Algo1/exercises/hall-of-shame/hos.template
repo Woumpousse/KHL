@@ -1,0 +1,201 @@
+<%
+  $exercise_number = 0
+
+  def exercise_header
+    "<h2>Oefening #{$exercise_number += 1}</h2>"
+  end
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Challenge</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>JavaScript Challenge</h1>
+
+      <%=
+         interpret(<<-END)
+           var a = "";
+           var b = 0;
+           var c = false;
+           var d = " ";
+
+           var ab = (a == b);
+           var bc = (b == c);
+           var cd = (c == d);
+           var ad = (a == d);
+
+           `hide:aux.printVar('ab', ab);`
+           `hide:aux.printVar('bc', bc);`
+           `hide:aux.printVar('cd', cd);`
+           `hide:aux.printVar('ad', ad);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 0;
+
+           function foo() {
+               x = 1;
+               var x = 5;
+               return x;
+           }
+
+           var y = foo();
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var r = {};
+
+           var a = 0;
+           var b = "0";
+           var c = [0];
+
+           r[a] = 'a';
+           r[b] = 'b';
+           r[c] = 'c';
+
+           `hide:aux.printVar('r[a]', r[a]);`
+           `hide:aux.printVar('r[b]', r[b]);`
+           `hide:aux.printVar('r[c]', r[c]);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo() {
+               undefined = 1;
+               return undefined;
+           }
+
+           function bar() {
+               var undefined = 1;
+               return undefined;
+           }
+
+           var x = foo();
+           var y = bar();
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = 5;
+           var y = 0;
+
+           if ( x > 9 )
+           {
+               y = 1;
+           }
+           else ( x > 100 )
+           {
+               y = 2;
+           }
+           
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var foo = { bar: function () { return this.a; },
+                       a : 5 };
+
+           var x = foo.bar();
+           a = 1;
+
+           var f = foo.bar;
+           var y = f();
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var xs = [0,1,2,3];
+           xs[6] = 6;
+
+           var x = xs.length;
+
+           xs[-1] = -1;
+           var y = xs.length;
+
+           `hide:aux.printVar('x', x);`
+           `hide:aux.printVar('y', y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = "5";
+           var y = "2";
+
+           `hide:aux.printVar('x + y', x + y);`
+           `hide:aux.printVar('x - y', x - y);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           var x = "abc";
+           var y = String("abc");
+           var z = new String("abc");
+
+           var a = (x === y);
+           var b = (y === z);
+           var c = (x === z);
+           
+           `hide:aux.printVar('a', a);`
+           `hide:aux.printVar('b', b);`
+           `hide:aux.printVar('c', c);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo() {
+               return
+                  { a: 1 };
+           }
+
+           var a = foo();
+           
+           `hide:aux.printVar('a', a);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo(a) {
+               var x = arguments[0];
+               a = 1;
+               var y = arguments[0];
+
+               return [x, y];
+           }
+
+           var a = foo(0);
+           
+           `hide:aux.printVar('a[0]', a[0]);`
+           `hide:aux.printVar('a[1]', a[1]);`
+         END
+      %>
+    </div>
+  </body>
+</html>
