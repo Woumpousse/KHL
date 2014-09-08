@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../assignment.css">
+    <style>
+      .center {
+        margin: 10px auto;
+      }
+
+      .grid td {
+        width: 20px;
+        text-align: center;
+      }
+
+      #random-table {
+        border-collapse: collapse;
+      }
+
+      #random-table tr:first-child {
+        border-bottom: solid black 1px;
+      }
+
+      #random-table td {
+        min-width: 150px;
+        text-align: center;
+      }
+
+      #container > section > h2 {
+        padding: 20px 20px;
+        margin: 20px 100px;
+        text-align: center;
+        font-size: 175%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>Binair Rekenen</h1>
+      </header>
+      <nav></nav>
+        <section class="testcase" data-subject="isBinary">
+          <p>
+            Schrijf een functie <code>isBinary(x)</code> die, gegeven een geheel getal <code>x</code>,
+            nagaat of <code>x</code> een geldig binair getal voorstelt,
+            m.a.w. de cijfers zijn uitsluitend <code>0</code> of <code>1</code>.
+          </p>
+          <p>Bij ongeldige invoer dient de functie <code>"invalid"</code> terug te geven als resultaat.</p>
+        </section>
+
+        <section class="testcase" data-subject="binaryToDecimal">
+          <p>
+            Schrijf een functie <code>binaryToDecimal(x)</code> die, gegeven een binair getal <code>x</code>
+            (d.i. een getal dat enkel bestaat uit <code>0</code>en en <code>1</code>en),
+            dit getal <code>x</code> omrekent naar decimaal.
+          </p>
+          <p>Bij ongeldige invoer dient de functie <code>"invalid"</code> terug te geven als resultaat.</p>
+        </section>
+
+        <section class="testcase" data-subject="decimalToBinary">
+          <p>
+            Schrijf een functie <code>decimalToBinary(x)</code> die, gegeven een getal <code>x</code>
+            dit getal <code>x</code> omrekent naar binair.
+          </p>
+          <p>Bij ongeldige invoer dient de functie <code>"invalid"</code> terug te geven als resultaat.</p>
+        </section>
+
+        <section class="testcase" data-subject="binaryAdd">
+          <p>
+            Schrijf een functie <code>binaryAdd(x, y)</code> die,
+            gegeven binaire getallen <code>x</code> en <code>y</code>,
+            deze getallen optelt. Laat je implementatie het manueel, bit per bit, uitrekenen.
+          </p>
+          <p>Bij ongeldige invoer dient de functie <code>"invalid"</code> terug te geven als resultaat.</p>
+        </section>
+      </section>
+    </div>
+
+    <script src="../underscore.js"></script>
+    <script src="../jquery.js"></script>
+    <script src="../clone.js"></script>
+    <script src="../util.js"></script>
+    <script src="../lazy.js"></script>
+    <script src="../test-framework.js"></script>
+    <script src="../html-tests.js"></script>
+    <script src="refimpl.js"></script>
+    <script src="../rng.js"></script>
+    <script src="tests.js"></script>
+    <script src="student.js"></script>
+  </body>
+</html>
