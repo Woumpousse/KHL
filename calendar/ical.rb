@@ -144,6 +144,10 @@ module ICal
     def end
       ICal::parse_datetime(self['DTEND'].value)
     end
+
+    def <=>(other)
+      start <=> other.start
+    end
   end
 
   class EventProperty

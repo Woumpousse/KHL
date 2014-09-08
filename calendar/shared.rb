@@ -26,3 +26,9 @@ class String
   end
 end
 
+
+class Array
+  def zip_index(start = 0)
+    (start ... start + length).zip self
+  end
+end
