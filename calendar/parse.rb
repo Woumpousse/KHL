@@ -1,3 +1,82 @@
+class Calendar
+  def self.from_content_lines(content_lines)
+    events = []
+    current = nil
+
+    content_lines.each do |content_line|
+      case content_line
+      when /^BEGIN:(.*)$/
+      then
+        if $1 == 'VEVENT'
+        then
+          abort "Nested BEGIN:VEVENT #{current}" if current
+          current = []
+        end
+      when /^END:(.*)$/
+      then
+        if $1 == 'VEVENT'
+        then
+          abort "Unexpected END:VEVENT" unless current
+          event = Event.from_content_lines(current)
+          events.push(event)
+          current = nil
+        end
+      else
+        current.push(content_line) if current
+      end
+    end
+
+    Calendar.new(events)
+  end
+
+  def self.from_lines(lines)
+    content_lines = []
+
+    lines.each do |line|
+      if line =~ /^\s/
+      then content_lines[-1] += $'.strip
+      else content_lines.push line.strip
+      end
+    end
+
+    Calendar.from_content_lines(content_lines)
+  end
+
+  def self.from_file(path)
+    Calendar.from_lines( IO.readlines(path) )
+  end
+
+  def initialize(events)
+    @events = events
+  end
+end
+
+class Event
+  def self.from_content_lines(content_lines)
+    properties = content_lines.map do |content_line|
+      EventProperty.from_content_line(content_line)
+    end
+
+    Event.new(properties)
+  end
+
+  def initialize(properties)
+    @properties = {}
+
+    properties.each do |property|
+      @properties[ property.name ] = property
+    end
+  end
+
+  def [](property)
+    @properties[property]
+  end
+
+  def to_s
+    "Event #{self['SUMMARY'].value}"
+  end
+end
+
 class EventProperty
   def self.from_content_line(content_line)
     abort "Invalid content line #{content_line}" unless content_line =~ /^([^:;]+)(;[^:]+)*:(.*)$/
@@ -15,7 +94,7 @@ class EventProperty
                             end ]
     end
 
-    Property.new(property_name, property_value, parameters)
+    EventProperty.new(property_name, property_value, parameters)
   end
 
   def initialize(name, value, parameters)
@@ -29,17 +108,12 @@ class EventProperty
   def [](parameter)
     @parameters[parameter]
   end
-end
 
-class Event
-  def self.from_content_lines(content_lines)
-    properties = content_lines.map do |content_line|
-      EventProperty.from_content_line(content_line)
-    end
-
-    Event.new(properties)
+  def to_s
+    "#{@name}=#{@value}"
   end
 end
+
 
 def content_lines(lines)
   result = []
@@ -64,39 +138,20 @@ def parse_events(content_lines)
     then
       if $1 == 'VEVENT'
       then
-        abort "Nested BEGIN:VEVENT" if current
-        current = {}
+        abort "Nested BEGIN:VEVENT #{current}" if current
+        current = []
       end
     when /^END:(.*)$/
     then
       if $1 == 'VEVENT'
       then
         abort "Unexpected END:VEVENT" unless current
-        result.push(current)
+        event = Event.from_content_lines(current)
+        result.push(event)
         current = nil
       end
-    when /^([^:;]+)(;[^:]+)*:(.*)$/
-    then
-      if current then
-        property_name = $1
-        property_parameters = $2
-        property_value = $3
-
-        if not property_parameters or property_parameters.empty?
-        then hash = {}
-        else hash = Hash[ property_parameters.split(/(?<!\\);/)[1..-1].map do |pair|
-                            abort "Invalid parameter '#{pair}' in #{property_parameters}" unless pair =~ /^([^=]+)=(.+)$/
-                            parameter_name, parameter_value = $1, $2
-                            [ parameter_name, parameter_value ]
-                          end ]
-        end
-        
-        hash[:value] = property_value
-
-        current[property_name] = hash
-      end
     else
-      puts "Unrecognized content line #{content_line}"
+      current.push(content_line) if current
     end
   end
   result
@@ -116,10 +171,6 @@ end
 end
 
 
-$content_lines = content_lines( IO.readlines('calendar.ics') )
+$cal = Calendar.from_file('calendar.ics')
 
-$events = parse_events($content_lines)
-
-find_courses($events, /MBI04a/).each do |event|
-  puts event['LOCATION'][:value]
-end
+p $cal
