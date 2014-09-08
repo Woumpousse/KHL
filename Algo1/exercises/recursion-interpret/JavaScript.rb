@@ -88,7 +88,7 @@ module JavaScript
     <<-'END'.unindent
     var aux = (function () {
       function stringOfValue(value) {
-        if ( typeof(x) === 'string' ) {
+        if ( typeof(value) === 'string' ) {
           return '"' + value + '"';
         }
         else {
