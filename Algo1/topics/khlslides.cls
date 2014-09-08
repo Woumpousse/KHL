@@ -163,8 +163,7 @@
 
 % Tikz related commands
 % \NODE{text}{id}
-\newcommand{\NODE}[2]{\tikz[baseline,remember picture]{\node[anchor=base,inner sep=0mm] (#2) {{#1}};}}
-% \newcommand{\COORD}[1]{\tikz[baseline=-.5cm,remember picture,inner sep=0mm]{\coordinate (#1);}}
+\newcommand{\NODE}[3][]{\tikz[baseline,remember picture]{\node[anchor=base,inner sep=0mm,#1] (#3) {{#2}};}}
 \newcommand{\COORD}[1]{\tikz[overlay,baseline,remember picture]{\coordinate (#1);}}
 
 
