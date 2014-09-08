@@ -1,3 +1,6 @@
+require 'date'
+require './shared.rb'
+
 module ICal
   class Calendar
     def self.from_content_lines(content_lines)
@@ -54,13 +57,13 @@ module ICal
     def to_s
       @events.to_s
     end
-
+    
     attr_reader :events
-
+    
     def courses
       Calendar.new( @events.select do |event|
-        event.course?
-      end )
+                      event.course?
+                    end )
     end
 
     def which_groups
@@ -79,6 +82,12 @@ module ICal
       Calendar.new( events.select do |e|
                       yield e
                     end )
+    end
+
+    def between(mindate, maxdate)
+      select do |e|
+        mindate <= e.start and e.end <= maxdate
+      end
     end
 
     def each
@@ -110,7 +119,12 @@ module ICal
     end
 
     def to_s
-      "Event #{self['SUMMARY'].value}"
+      <<-END.unindent
+        Event
+        Summary: #{summary}
+        Description: #{description}
+        Location: #{location}
+      END
     end
 
     def groups
@@ -128,11 +142,15 @@ module ICal
     end
 
     def summary
-      self['SUMMARY']
+      self['SUMMARY'].value
     end
 
     def description
-      self['DESCRIPTION']
+      self['DESCRIPTION'].value
+    end
+
+    def location
+      self['LOCATION'].value
     end
 
     def course?
