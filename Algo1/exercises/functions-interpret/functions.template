@@ -161,6 +161,38 @@
 
       <%=
          interpret(<<-END)
+           function foo(x)
+           {
+               var y = 3 * x;
+
+               return x + y;
+           }
+
+           var x = foo(5);
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {
+               var y = 0;
+               y++;
+               return y;
+           }
+
+           var x = foo();
+           x += foo();
+           x += foo();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
+      <%=
+         interpret(<<-END)
            function foo()
            {
                return bar();
@@ -256,6 +288,28 @@
            `hide:aux.printVar('x', x);`
          END
       %>
+
+      <%=
+         interpret(<<-END)
+           function foo()
+           {
+               var x = 0;
+           }
+
+           function bar()
+           {
+               x++;
+           }
+
+           var x = 0;
+           bar();
+           foo();
+           bar();
+
+           `hide:aux.printVar('x', x);`
+         END
+      %>
+
 
       <%=
          interpret(<<-END)
