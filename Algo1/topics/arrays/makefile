@@ -1,7 +1,7 @@
-all: slides.pdf
+all: arrays.pdf
 
-slides.pdf: *.tex *.js
-	pdflatex slides.tex
+arrays.pdf: *.tex *.js
+	pdflatex arrays.tex
 
 clean:
 	rm -f *.toc *.aux *.log *.nav *.pdf *~
