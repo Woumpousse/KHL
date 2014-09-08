@@ -1,7 +1,7 @@
 \documentclass{../khlslides}
 
 
-\title[Fundamenten]{Conditionals}
+\title[Loops]{Loops}
 \author{Fr\'ed\'eric Vogels}
 
 
@@ -127,8 +127,8 @@
   \end{center}
 \end{frame}
 
-% \input{wof.tex}
-% \input{while.tex}
+\input{wof.tex}
+\input{while.tex}
 
 \begin{frame}
   \frametitle{Vaak Voorkomend Patroon}
@@ -147,14 +147,6 @@
 
 \begin{frame}
   \frametitle{For-lus}
-  % \begin{columns}
-  %   \column{.4\linewidth}
-  %   \code{while-pattern2.js}
-
-  %   \column{.65\linewidth}
-  %   \code{for.js}
-  % \end{columns}
-
   \begin{center}
     \code[width=.6\linewidth]{while-pattern2.js}
     \vskip2mm
@@ -201,6 +193,36 @@
       \tt j = 1 + 2 + 3 + 4 + 5 = 15
     \end{center}
   }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Keuze tussen {\tt while} en {\tt for}}
+  \begin{itemize}
+    \item {\tt while} en {\tt for} zijn even krachtig
+          \begin{itemize}
+            \item Een {\tt for}-lus kan als {\tt while}-lus herschreven worden
+            \item Een {\tt while}-lus kan als {\tt for}-lus herschreven worden
+          \end{itemize}
+    \item Keuze kwestie van leesbaarheid
+    \item Lus kiezen die best intentie weerspiegelt
+    \item Gebruik {\tt for} indien
+          \begin{itemize}
+            \item er \'e\'en duidelijke iterator is, en
+            \item deze enkel nuttig is binnen de lus, en
+            \item deze bij elke stap verhoogd wordt
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening}
+  Stel dat de variabele {\tt x} een positief geheel getal bevat. Schrijf code die berekent hoeveel opeenvolgende veelvouden van 3 je moet optellen
+  opdat de som net kleiner dan het gegeven getal zou zijn. Schrijf dit aantal naar een variabele {\tt y}.
+
+  \vskip5mm
+
+  \structure{Voorbeeld} \\
+  Bij {\tt x = 20} moet {\tt y === 3} want $3+6+9 = 18 \leq 20$ en $3+6+9+12 > 20$.
 \end{frame}
 
 \end{document}
