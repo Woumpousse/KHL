@@ -111,6 +111,143 @@
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Bestaande Functies}
+  \structure{Interactie met gebruiker} \link{http://www.w3schools.com/js/js_popup.asp}{w3schools}
+  \begin{itemize}
+    \item {\tt alert(msg)} toont boodschap
+          \begin{center}
+            \includegraphics[width=5cm]{alert.png}
+          \end{center}
+    \item {\tt var input = prompt(msg)} vraagt gebruiker om invoer
+          \begin{center}
+            \includegraphics[width=5cm]{prompt.png}
+          \end{center}
+    \item {\tt var n = parseInt("123")}: omzetten string naar getal
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bestaande Functies}
+  \structure{Wiskunde-functies} \link{http://www.w3schools.com/js/js_math.asp}{w3schools}
+  \begin{itemize}
+    \item {\tt Math.sqrt}: vierkantswortel
+    \item {\tt Math.floor}: afronden naar beneden
+    \item {\tt Math.ceil}: afronden naar boven
+    \item {\tt Math.pow}: machtsverheffing
+    \item {\tt Math.abs}: absolute waarde
+    \item {\tt Math.random}: genereer random getal
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lokale Variabelen}
+  \begin{itemize}
+    \item Een functie kan lokale variabelen invoeren
+    \item Tijdelijke variabelen
+    \item Worden telkens opnieuw aangemaakt bij functie-oproep
+  \end{itemize}
+  \code[width=.4\linewidth]{locals.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \node[/khl/note,anchor=west] (note a) at ($ (a) + (1.5,0) $) {1};
+      \draw[/khl/note arrow] (note a) -- (a);
+    }
+
+    \only<3>{
+      \node[/khl/note,anchor=west] (note b) at ($ (b) + (1.5,0) $) {1};
+      \draw[/khl/note arrow] (note b) -- (b);
+    }
+
+    \only<4>{
+      \node[/khl/note,anchor=west] (note c) at ($ (c) + (1.5,0) $) {1};
+      \draw[/khl/note arrow] (note c) -- (c);
+    }
+  \end{tikzpicture}
+ \end{frame}
+
+\begin{frame}
+  \frametitle{Scope: Zichtbaarheid van een Variabele}
+  \code[width=.4\linewidth,font size=\small]{scope.js}
+  \begin{tikzpicture}[overlay,remember picture,arrow/.style={-latex,red,thick}]
+    \only<2>{
+      \draw[arrow] (foo ref x) to[bend right=30] (foo x);
+    }
+    \only<3>{
+      \draw[arrow] (bar ref x) to[bend right=30] (bar x);
+    }
+    \only<4>{
+      \draw[arrow] (qux ref x) to[bend right=30] (global x);
+      \draw[arrow] (qux x) to[bend right=30] (global x);
+    }
+    \only<5>{
+      \draw[arrow] (global ref x) to[bend right=30] (global x);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scope: Zichtbaarheid van een Variabele}
+  \structure{Regels}
+  \begin{itemize}
+    \item {\tt var} verklaart dat variabele lokaal is in huidige functie
+    \item Functie kan aan ``buitenliggende'' variabelen
+    \item Buiten functie F kan men niet aan lokale variabelen van F
+  \end{itemize}
+
+  \vskip5mm
+  \structure{Java vs JavaScript}
+  \begin{itemize}
+    \item Regels verschillen tussen Java en JavaScript
+    \item JavaScript regels eigenwijs, complex en onintu\"itief
+    \item Exacte JavaScript regels hoef je niet te kennen
+    \item Vuistregel: scope werkt per functie, gebruik altijd {\tt var}
+    \item Java regels moet je w\'el goed kennen (komen immers overeen met regels van andere talen)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Globale Variabelen}
+  \begin{itemize}
+    \item Globale globale variabele = variabele buiten functie
+    \item Sterk afgeraden!
+    \item Zorgt dat ongerelateerde stukken code kunnen interferen
+    \item Niet modulair
+    \item Leidt snel tot moeilijk te vinden bugs
+  \end{itemize}
+  \vskip5mm
+  \code[width=.5\linewidth]{globals.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analogie: Met Lokale Schalen}
+  \code[font size=\small,width=.95\linewidth]{recipe.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analogie: Met Globale Schaal}
+  \code[font size=\small,width=.95\linewidth]{recipe2.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analogie}
+  \begin{itemize}
+    \item Met lokale schalen: chocolade en deeg in aparte schalen
+          \vskip4mm
+    \item Met globale schaal: alles zit in \'e\'en schaal, recept mislukt
+          \vskip4mm
+    \item Mogelijke oplossing: aparte schaal per handeling
+          \begin{itemize}
+            \item Veel globale schalen nodig
+            \item Zouden allemaal verschillende namen nodig hebben
+            \item Zou veel plaats in beslag nemen
+          \end{itemize}
+          \vskip4mm
+    \item Idem voor variabelen
+  \end{itemize}
+\end{frame}
+
+
 \end{document}
 
 %%% Local Variables: 
