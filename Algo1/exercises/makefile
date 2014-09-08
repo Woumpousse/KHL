@@ -4,7 +4,7 @@ else
 ZIP = zip
 endif
 
-TEST_BASED_EXERCISES = conditionals 2d-arrays arrays recursion loops functions
+TEST_BASED_EXERCISES = conditionals 2d-arrays arrays recursion loops functions binary
 OTHER_EXERCISES = car fundamentals conditionals-interpret loops-interpret functions-interpret recursion-interpret arrays-interpret
 SHARED = *.js *.css
 ALL_EXERCISES = $(TEST_BASED_EXERCISES) $(OTHER_EXERCISES)
