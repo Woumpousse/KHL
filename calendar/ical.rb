@@ -66,12 +66,6 @@ module ICal
                     end )
     end
 
-    def which_groups
-      events.map do |event|
-        event.groups
-      end.to_a.uniq
-    end
-
     def sort
       Calendar.new( events.sort do |x, y|
                       x.start <=> y.start
@@ -87,7 +81,7 @@ module ICal
     def between(mindate, maxdate)
       select do |e|
         mindate <= e.start and e.end <= maxdate
-      end
+      end                    
     end
 
     def each
@@ -127,20 +121,6 @@ module ICal
       END
     end
 
-    def groups
-      description = self['DESCRIPTION'].value
-
-      abort "Cannot parse groups from #{description}" unless description =~ /Groepen:(.*?)Gemaakt/m
-
-      result = $1
-      result = result.gsub("\\n", "\n").strip
-      result = result.gsub(/^MZ-/, "")
-
-      result.lines.map do |line|
-        line.strip
-      end
-    end
-
     def summary
       self['SUMMARY'].value
     end
@@ -155,26 +135,6 @@ module ICal
 
     def course?
       self['CATEGORIES'] and self['CATEGORIES'].value == 'Lessenrooster'
-    end
-
-    def algo_theory?
-      course? and summary.value =~ /MBI04a/ and description.value !~ /OEFENINGEN/
-    end
-
-    def algo_practice?
-      course? and summary.value =~ /MBI04a/ and description.value =~ /OEFENINGEN/
-    end
-
-    def bop?
-      course? and summary.value =~ /MBI08a/
-    end
-
-    def wiskunde?
-      course? and summary.value =~ /MBI71a/
-    end
-
-    def dotnet?
-      course? and summary.value =~ /MBI80x/
     end
 
     def start
