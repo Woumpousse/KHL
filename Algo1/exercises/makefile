@@ -32,7 +32,7 @@ $(OTHER_EXERCISES):
 
 
 dropbox: $(ALL_EXERCISES)
-	cp *.zip $(DROPBOX_FOLDER)/oefeningen
+	cp -v *.zip $(DROPBOX_FOLDER)/oefeningen
 
 refimpl:
 	echo $(TEST_BASED_EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} refimpl.js
