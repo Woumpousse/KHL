@@ -5,11 +5,11 @@
 
 module ReferenceImplementations
 {
-    export function isBinary(x : number) : boolean
+    export function isBinary(x : number) : any
     {
         if ( x < 0 )
         {
-            return false;
+            return "invalid";
         }
         else
         {
