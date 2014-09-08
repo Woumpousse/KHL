@@ -54,10 +54,18 @@ class Calendar
     @events.to_s
   end
 
-  def find_courses(course_regex)
-    @events.select do |event|
-      event['CATEGORIES'] and event['CATEGORIES'].value == 'Lessenrooster' and event['DESCRIPTION'] and event['DESCRIPTION'].value =~ course_regex
-    end
+  attr_reader :events
+
+  def courses
+    Calendar.new( @events.select do |event|
+      event.course?
+    end )
+  end
+
+  def which_groups
+    events.map do |event|
+      event.groups
+    end.to_a.uniq
   end
 end
 
@@ -97,6 +105,26 @@ class Event
     result.lines.map do |line|
       line.strip
     end
+  end
+
+  def course?
+    self['CATEGORIES'] and self['CATEGORIES'].value == 'Lessenrooster'
+  end
+
+  def algo?
+    course? and self['SUMMARY'].value =~ /MBI04a/
+  end
+
+  def bop?
+    course? and self['SUMMARY'].value =~ /MBI08a/
+  end
+
+  def wiskunde?
+    course? and self['SUMMARY'].value =~ /MBI71a/
+  end
+
+  def dotnet?
+    course? and self['SUMMARY'].value =~ /MBI80x/
   end
 end
 
@@ -154,6 +182,8 @@ end
 
 $cal = Calendar.from_file('calendar.ics')
 
-$cal.find_courses(/WISK/).each do |event|
-  p event.groups
+$cal.events.select do |event|
+  event.bop?
+end.each do |event|
+  puts event
 end
