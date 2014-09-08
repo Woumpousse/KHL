@@ -49,6 +49,16 @@ class Calendar
   def initialize(events)
     @events = events
   end
+
+  def to_s
+    @events.to_s
+  end
+
+  def find_courses(course_regex)
+    @events.select do |event|
+      event['CATEGORIES'] and event['CATEGORIES'].value == 'Lessenrooster' and event['DESCRIPTION'] and event['DESCRIPTION'].value =~ course_regex
+    end
+  end
 end
 
 class Event
@@ -74,6 +84,19 @@ class Event
 
   def to_s
     "Event #{self['SUMMARY'].value}"
+  end
+
+  def groups
+    description = self['DESCRIPTION'].value
+
+    abort "Cannot parse groups from #{description}" unless description =~ /Groepen:(.*?)Gemaakt/m
+
+    result = $1
+    result = result.gsub("\\n", "\n").strip
+    
+    result.lines.map do |line|
+      line.strip
+    end
   end
 end
 
@@ -115,48 +138,6 @@ class EventProperty
 end
 
 
-def content_lines(lines)
-  result = []
-
-  lines.each do |line|
-    if line =~ /^\s/
-    then result[-1] += $'.strip
-    else result.push line.strip
-    end
-  end
-
-  result
-end
-
-def parse_events(content_lines)
-  result = []
-  current = nil
-
-  content_lines.each do |content_line|
-    case content_line
-    when /^BEGIN:(.*)$/
-    then
-      if $1 == 'VEVENT'
-      then
-        abort "Nested BEGIN:VEVENT #{current}" if current
-        current = []
-      end
-    when /^END:(.*)$/
-    then
-      if $1 == 'VEVENT'
-      then
-        abort "Unexpected END:VEVENT" unless current
-        event = Event.from_content_lines(current)
-        result.push(event)
-        current = nil
-      end
-    else
-      current.push(content_line) if current
-    end
-  end
-  result
-end
-
 def parse_datetime(string)
   if string =~ /(?<year>\d{4})(?<month>\d{2})(?<day>\d{2})T(?<hour>\d{2})(?<minutes>\d{2})(?<seconds>\d{2})/
   then DateTime.new(year, month, day, hour, minutes, seconds)
@@ -167,10 +148,12 @@ end
 def find_courses(events, course_regex)
   events.select do |event|
     event['CATEGORIES'] and event['CATEGORIES'][:value] == 'Lessenrooster' and event['DESCRIPTION'] and event['DESCRIPTION'][:value] =~ course_regex
-end
+  end
 end
 
 
 $cal = Calendar.from_file('calendar.ics')
 
-p $cal
+$cal.find_courses(/WISK/).each do |event|
+  p event.groups
+end
