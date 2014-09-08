@@ -1,3 +1,7 @@
+/*
+Dit bestand bevat niet voor elke functie een implementatie
+die aan de opgave voldoet.
+*/
 function random() {
     return 0;
 }
@@ -103,4 +107,77 @@ var ReferenceImplementations;
         }
     }
     ReferenceImplementations.calc = calc;
+
+    function isBinary(x) {
+        if (x < 0) {
+            return false;
+        } else {
+            while (x > 0) {
+                var lastDigit = x % 10;
+
+                if (lastDigit > 1) {
+                    return false;
+                }
+
+                x = (x - lastDigit) / 10;
+            }
+
+            return true;
+        }
+    }
+    ReferenceImplementations.isBinary = isBinary;
+
+    function binaryToDecimal(x) {
+        if (!isBinary(x)) {
+            return "invalid";
+        } else {
+            var result = 0;
+            var weight = 1;
+
+            while (x > 0) {
+                var lastDigit = x % 10;
+
+                result += weight * lastDigit;
+                x = Math.floor(x / 10);
+                weight *= 2;
+            }
+
+            return result;
+        }
+    }
+    ReferenceImplementations.binaryToDecimal = binaryToDecimal;
+
+    function decimalToBinary(x) {
+        if (x < 0) {
+            return "invalid";
+        } else {
+            var result = 0;
+            var weight = 1;
+
+            while (x > 0) {
+                var lastDigit = x % 2;
+
+                result += weight * lastDigit;
+                x = Math.floor(x / 2);
+                weight *= 10;
+            }
+
+            return result;
+        }
+    }
+    ReferenceImplementations.decimalToBinary = decimalToBinary;
+
+    function binaryAdd(x, y) {
+        if (!isBinary(x) || !isBinary(y)) {
+            return "invalid";
+        } else {
+            var decimalX = binaryToDecimal(x);
+            var decimalY = binaryToDecimal(y);
+            var decimalSum = decimalX + decimalY;
+            var binarySum = decimalToBinary(decimalSum);
+
+            return binarySum;
+        }
+    }
+    ReferenceImplementations.binaryAdd = binaryAdd;
 })(ReferenceImplementations || (ReferenceImplementations = {}));
