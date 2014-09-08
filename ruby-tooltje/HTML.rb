@@ -146,6 +146,7 @@ module HTML
     END
   end
 
+  # Fix bug: attributes are added to wrong element
   def HTML.output_sheet(output_map, attributes = {})
     Types.check( binding, {
                    :output_map => { String => String },
