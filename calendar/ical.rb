@@ -145,6 +145,10 @@ module ICal
       ICal::parse_datetime(self['DTEND'].value)
     end
 
+    def cweek
+      start.cweek
+    end
+
     def <=>(other)
       start <=> other.start
     end

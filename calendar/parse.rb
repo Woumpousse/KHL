@@ -97,7 +97,7 @@ module KHL
     end
 
     def match?(event)
-      super and event.summary =~ /MBI71a/
+      super and event.summary =~ /MBI71a|Wiskunde/
     end
   end
 
@@ -107,7 +107,7 @@ module KHL
     end
 
     def match?(event)
-      super and event.location =~ /LESLOKAAL/
+      super and event.location =~ /LESLOKAAL/ and event.location !~ /318/
     end
   end
 
@@ -117,11 +117,11 @@ module KHL
     end
 
     def match?(event)
-      super and event.location =~ /PC LLOKAAL|STUDIELANDSCHAP/
+      super and event.location =~ /PC LLOKAAL|STUDIELANDSCHAP|318/
     end
   end
 
-  class Event
+  class Session
     def initialize(course, event)
       @course = course
       @event = event
@@ -147,6 +147,24 @@ module KHL
       @course.id
     end
 
+    def theory?
+      /Theory/ =~ course_name
+    end
+
+    def exercises?
+      /Exercises/ =~ course_name
+    end
+
+    def location
+      case @event.location
+      when /(\d+{3}) - (LESLOKAAL|PC LLOKAAL)/
+      then "GT#{$1}"
+      when /STUDIELANDSCHAP/
+      then "GT107"
+      else @event.location
+      end
+    end
+
     def start
       @event.start
     end
@@ -156,16 +174,25 @@ module KHL
     end
 
     def to_s
-      format("%n (%g) %t %d")
+      format("[%w] %n (%g) %t %d")
     end
 
-    def format(str)
+    def format(str, week_mapping = nil)
       str.gsub("%n") do
         course_name
       end.gsub("%g") do
         group.join(",")
+      end.gsub("%w") do
+        week_mapping[ start.cweek ]
       end.gsub("%d") do
         start.strftime("%a %d/%m")
+      end.gsub("%T") do
+        if theory?
+        then 'T'
+        else 'E'
+        end
+      end.gsub("%l") do
+        location
       end.gsub("%t") do
         start.strftime("%H:%M-") + stop.strftime("%H:%M")
       end
@@ -202,9 +229,10 @@ module KHL
   def self.convert(ical_event)
     course = KHL::identify(ical_event)
 
-    Event.new( course, ical_event )
+    Session.new( course, ical_event )
   end
 end
+
 
 $cal = ICal::Calendar.from_file('calendar.ics')
 
@@ -224,6 +252,24 @@ def algo_exercises
   end
 end
 
+def wiskunde_all
+  $events.select do |event|
+    KHL::Wiskunde === event.course
+  end
+end
+
+def wiskunde_theory
+  $events.select do |event|
+    KHL::WiskundeTheory === event.course
+  end
+end
+
+def wiskunde_exercises
+  $events.select do |event|
+    KHL::WiskundeExercises === event.course
+  end
+end
+
 def groups(events)
   events.map do |event|
     event.group
@@ -236,8 +282,34 @@ def for_group(events, group)
   end
 end
 
+def sweeks_map(sessions)
+  cweeks = sessions.map do |session|
+    session.event.cweek
+  end.sort.uniq
 
-def tex_template(course, group, schedule)
+  abort unless cweeks.length == 12
+
+  Hash[ cweeks.zip(1..12) ]
+end
+
+def tex_template(course, schedules)
+  schedules_tex = schedules.map do |group, schedule|
+    <<-END.unindent
+    \\begin{center}
+      {\\Huge #{course}} \\\\[2mm]
+      {\\Large #{group}} \\\\
+      \\vfil\\large
+      \\begin{tabular}{c|cc}
+        \\bf Week & \\bf Theorie & \\bf Labo \\\\
+        \\toprule
+        #{schedule}
+      \\end{tabular}
+      \\vfil
+    \\end{center}
+    \\clearpage
+    END
+  end.join("\n")
+
   <<-END.unindent
     \\documentclass[a4paper]{article}
     \\usepackage{booktabs}
@@ -250,22 +322,10 @@ def tex_template(course, group, schedule)
       \\hline
     }
 
-    \\newenvironment{groupschedule}{
-    }{
-    }
-
     \\begin{document}
-    \\begin{center}
-      {\\Huge #{course}} \\\\[2mm]
-      {\\Large #{group}} \\\\
-      \\vfil\\large
-      \\begin{tabular}{c|cc}
-        \\bf Week & \\bf Theorie & \\bf Labo \\\\
-        \\toprule
-        #{schedule}
-      \\end{tabular}
-      \\vfil
-    \\end{center}
+
+    #{schedules_tex}
+
     \\end{document}
   END
 end
@@ -273,7 +333,7 @@ end
 
 def algo
   theory = algo_theory.sort
-  groups(algo_theory).map do |group|
+  pairs = groups(algo_theory).map do |group|
     exercises = for_group( algo_exercises, group ).sort
 
     schedule = (0...12).map do |index|
@@ -285,9 +345,60 @@ def algo
       END
     end.join("\n")
 
-    puts tex_template("Algo1", group.join(','), schedule)
+    [ group.join(","), schedule ]
+  end
+
+  File.open('algo1.tex', 'w') do |out|
+    out.write( tex_template("Algo1", Hash[pairs]) )
   end
 end
 
 
-algo
+def wiskunde
+  all = wiskunde_all.sort
+  week_mapping = sweeks_map(all)
+  
+  groups(all).each do |group|
+    gs = group.join(",")
+
+    sessions = for_group(all, group).sort    
+
+    theory = sessions.select do |session|
+      session.theory?
+    end
+
+    exercises = sessions.select do |session|
+      session.exercises?
+    end
+
+    if theory.empty?
+      theory = []
+      exercises = []
+
+      (0...sessions.length).each do |i|
+        if i.even?
+        then theory
+        else exercises
+        end.push(sessions[i])
+      end
+    end
+
+    puts "Theorie #{gs}"
+
+    theory.each_with_index do |session, index|
+      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", week_mapping)
+    end
+
+    puts
+    puts "Oefeningen #{gs}"
+
+    exercises.each_with_index do |session, index|
+      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", week_mapping)
+    end
+
+    puts
+  end
+  
+end
+
+wiskunde
