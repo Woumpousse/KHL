@@ -8,9 +8,8 @@ endif
 all: refimpl.js export
 
 refimpl.js: refimpl.ts
-	tsc --out refimpl-maxi.js refimpl.ts
+	$(TYPESCRIPT) --out refimpl-maxi.js refimpl.ts
 	cat refimpl-maxi.js | ruby minify.rb > refimpl.js
-	rm refimpl-maxi.js
 
 clean:
 	rm -f refimpl.js
