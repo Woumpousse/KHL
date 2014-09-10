@@ -174,7 +174,7 @@ module KHL
     end
 
     def to_s
-      format("[%w] %n (%g) %t %d")
+      format("%n (%g) %t %d")
     end
 
     def format(str, week_mapping = nil)
@@ -233,12 +233,24 @@ module KHL
   end
 end
 
+def sweeks_map(sessions)
+  cweeks = sessions.map do |session|
+    session.event.cweek
+  end.sort.uniq
+
+  abort unless cweeks.length == 12
+
+  Hash[ cweeks.zip(1..12) ]
+end
+
 
 $cal = ICal::Calendar.from_file('calendar.ics')
 
 $events = $cal.courses.between(DateTime.new(2014,9,1), DateTime.new(2015,9,1)).events.map do |event|
   KHL.convert(event)
 end
+
+$week_mapping = sweeks_map($events)
 
 def algo_theory
   $events.select do |event|
@@ -282,81 +294,34 @@ def for_group(events, group)
   end
 end
 
-def sweeks_map(sessions)
-  cweeks = sessions.map do |session|
-    session.event.cweek
-  end.sort.uniq
 
-  abort unless cweeks.length == 12
-
-  Hash[ cweeks.zip(1..12) ]
-end
-
-def tex_template(course, schedules)
-  schedules_tex = schedules.map do |group, schedule|
-    <<-END.unindent
-    \\begin{center}
-      {\\Huge #{course}} \\\\[2mm]
-      {\\Large #{group}} \\\\
-      \\vfil\\large
-      \\begin{tabular}{c|cc}
-        \\bf Week & \\bf Theorie & \\bf Labo \\\\
-        \\toprule
-        #{schedule}
-      \\end{tabular}
-      \\vfil
-    \\end{center}
-    \\clearpage
-    END
-  end.join("\n")
-
-  <<-END.unindent
-    \\documentclass[a4paper]{article}
-    \\usepackage{booktabs}
-    \\usepackage{a4wide}
-
-    \\pagestyle{empty}
-
-    \\newcommand{\\week}[3]{
-      #1 & #2 & #3 \\\\
-      \\hline
-    }
-
-    \\begin{document}
-
-    #{schedules_tex}
-
-    \\end{document}
-  END
-end
 
 
 def algo
   theory = algo_theory.sort
-  pairs = groups(algo_theory).map do |group|
+  groups(theory).each do |group|
+    gs = group.join(",")
+
     exercises = for_group( algo_exercises, group ).sort
+    abort "Oops" unless theory.length == exercises.length
 
-    schedule = (0...12).map do |index|
-      t = theory[index]
-      e = exercises[index]
+    puts "Groep #{gs}"
+    puts
 
-      <<-END.unindent
-        \\week{#{index+1}}{#{t.format("%d %t")}}{#{e.format("%d %t")}}
-      END
-    end.join("\n")
+    theory.zip(exercises).each_with_index do |pair, i|
+      t, e = pair[0], pair[1]
 
-    [ group.join(","), schedule ]
-  end
-
-  File.open('algo1.tex', 'w') do |out|
-    out.write( tex_template("Algo1", Hash[pairs]) )
+      puts "Sessie #{i+1}"
+      puts "Theorie: " + t.format("%d %t %l")
+      puts "Labo   : " + e.format("%d %t %l")
+      puts
+    end
   end
 end
 
 
 def wiskunde
   all = wiskunde_all.sort
-  week_mapping = sweeks_map(all)
   
   groups(all).each do |group|
     gs = group.join(",")
@@ -386,19 +351,48 @@ def wiskunde
     puts "Theorie #{gs}"
 
     theory.each_with_index do |session, index|
-      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", week_mapping)
+      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", $week_mapping)
     end
 
     puts
     puts "Oefeningen #{gs}"
 
     exercises.each_with_index do |session, index|
-      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", week_mapping)
+      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", $week_mapping)
     end
 
     puts
   end
-  
 end
 
-wiskunde
+def bop
+  theory = $events.select do |event|
+    KHL::BOPTheory === event.course
+  end.sort
+
+
+  groups(theory).each do |group|
+    gs = group.join(",")
+
+    exercises = $events.select do |event|
+      KHL::BOPExercises === event.course
+    end.sort
+    
+    exercises = for_group( algo_exercises, group ).sort
+    abort "Oops" unless theory.length == exercises.length
+
+    puts "Groep #{gs}"
+    puts
+
+    theory.zip(exercises).each_with_index do |pair, i|
+      t, e = pair[0], pair[1]
+
+      puts "Sessie #{i+1}"
+      puts "Theorie: " + t.format("%d %t %l [%w]", $week_mapping)
+      puts "Labo   : " + e.format("%d %t %l [%w]", $week_mapping)
+      puts
+    end
+  end
+end
+
+
