@@ -3,7 +3,8 @@
 \LoadClass{scrartcl}
 
 \RequirePackage{a4wide}
-\RequirePackage[headheight=40pt]{geometry}
+\RequirePackage[headheight=140pt,top=200pt]{geometry}
+%\RequirePackage[headheight=40pt]{geometry}
 \RequirePackage{scrpage2}
 \RequirePackage{afterpage}
 \RequirePackage{tabularx}
@@ -13,6 +14,7 @@
 \RequirePackage{microtype}
 \RequirePackage{lastpage}
 \RequirePackage{tikz}
+\RequirePackage[utf8]{inputenc}
 
 \makeatletter
 
@@ -24,7 +26,7 @@
 }{%
   {L}%
   {R}%
-  {\rm\rlap{\exam@datum} \hspace{\fill} pagina \thepage\ van \pageref{LastPage} \hspace{\fill} \llap{KHLeuven}}%
+  {\normalfont\rlap{\exam@datum} \hspace{\fill} pagina \thepage\ van \pageref{LastPage} \hspace{\fill} \llap{KHLeuven}}%
 }
 
 \newpagestyle{firstexampage}{%
@@ -35,12 +37,12 @@
 }{%
   {L}%
   {R}%
-  {\rm\rlap{\exam@datum} \hspace{\fill} pagina \thepage\ van \pageref{LastPage} \hspace{\fill} \llap{KHLeuven}}%
+  {\normalfont\rlap{\exam@datum} \hspace{\fill} pagina \thepage\ van \pageref{LastPage} \hspace{\fill} \llap{KHLeuven}}%
 }
 
+% \pagestyle{exampage}
 
-\pagestyle{exampage}
-
+\pagestyle{firstexampage}
 
 
 \pgfkeys{
@@ -65,7 +67,7 @@
 
 
 \newcommand{\header@produce}{%
-  \rm\footnotesize%
+  \footnotesize\normalfont%
   \begin{tabular}{rlr}
     Academiejaar: & \exam@academiejaar & \multirow{4}{2cm}[0mm]{\includegraphics[width=3cm]{logoGT.pdf}} \\
     Opleiding: & \exam@opleiding  & \\
@@ -83,7 +85,7 @@
 }
 
 \newcommand{\smallheader@produce}{
-  \footnotesize\rm\hspace*{\fill}
+  \footnotesize\normalfont\hspace*{\fill}
   \begin{tabular}{rlr}
     OLA: & \exam@ola  & \\
     Datum: & \exam@datum &  \\[2mm]
@@ -93,9 +95,18 @@
 
 \makeatother
 
+\newcommand{\figuur}[1]{\includegraphics[width=.9\linewidth]{#1}}
 
-\AtBeginDocument{
-  \setlength{\headheight}{140pt}
-  \thispagestyle{firstexampage}
-  \afterpage{\global\setlength{\headheight}{40pt}}
+\newcounter{questioncounter}
+\newenvironment{question}[1][]{
+  \begin{minipage}{\linewidth}
+    \textsc{\Large Vraag \stepcounter{questioncounter}\arabic{questioncounter}} \\[2mm]}
+{
+  \end{minipage} \vspace{2mm}
 }
+
+% \AtBeginDocument{
+%   \setlength{\headheight}{140pt}
+%   \thispagestyle{firstexampage}
+%   \afterpage{\global\setlength{\headheight}{40pt}}
+% }
