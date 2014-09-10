@@ -16,7 +16,7 @@ $exam = Exam::build do
     richtlijnen
 
     terminologie do
-      latijn_ndl 5
+      latijn_ndl 7
       ndl_latijn 5
     end
 

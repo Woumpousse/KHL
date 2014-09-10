@@ -67,7 +67,7 @@ Questions::define do
   question do
     <<-'END'.unindent
     \raggedright Benoem de aangeduide structuren op volgende tekening:
-    \figuur{brain.png}
+    \figuur[height=8cm]{brain.png}
     \begin{center}
       \begin{tabular}{p{.4\linewidth}p{.4\linewidth}}
         1. \hrulefill & 2. \hrulefill \\[4mm]
@@ -77,6 +77,23 @@ Questions::define do
         9. \hrulefill & 10. \hrulefill \\[4mm]
         11. \hrulefill & 12. \hrulefill \\[4mm]
         13. \hrulefill & \\[4mm]
+      \end{tabular}
+    \end{center}
+    END
+  end
+
+  question do
+    <<-'END'.unindent
+    \raggedright Benoem de aangeduide structuren op volgende tekening:
+    \figuur[height=8cm]{resp.png}
+    \begin{center}
+      \begin{tabular}{p{.4\linewidth}p{.4\linewidth}}
+        1. \hrulefill & 2. \hrulefill \\[4mm]
+        3. \hrulefill & 4. \hrulefill \\[4mm]
+        5. \hrulefill & 6. \hrulefill \\[4mm]
+        7. \hrulefill & 8. \hrulefill \\[4mm]
+        9. \hrulefill & 10. \hrulefill \\[4mm]
+        11. \hrulefill
       \end{tabular}
     \end{center}
     END

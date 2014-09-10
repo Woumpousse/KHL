@@ -109,7 +109,7 @@ module Exam
     def richtlijnen
       @exam_builder.append(<<-'END'.unindent)
         \begin{center}
-          \begin{minipage}{.9\linewidth}
+          \begin{minipage}{\linewidth}
             \begin{framed}
               Het examen ``menselijke biologie'' is een
               schriftelijk examen. Lees de vragen aandachtig
@@ -122,9 +122,6 @@ module Exam
               afloop van het examen afgegeven aan de
               surveillant en maken geen deel uit van het examen.
               Ze worden dan ook nooit nagelezen of beoordeeld.
-              \begin{center}
-              Veel succes!
-              \end{center}
             \end{framed}
           \end{minipage}
         \end{center}
@@ -173,12 +170,12 @@ module Exam
         Meervoudsvormen moeten ook als dusdanig vertaald worden.
         \vskip5mm
         \begin{center}
-          \begin{tabular}{p{.33\linewidth}p{.50\linewidth}}
+          \begin{tabular}{p{.40\linewidth}p{.50\linewidth}}
       END
 
       MedicalDictionary.entries.pick(n).each do |entry|
         @exam_builder.append(<<-END.unindent)
-          #{entry[:latijn]} & \\hrulefill \\\\[4mm]
+          \\textbf{#{entry[:latijn]}} & \\hrulefill \\\\[4mm]
         END
       end
 
@@ -195,12 +192,12 @@ module Exam
         Geef de medische term voor
         \vskip5mm
         \begin{center}
-          \begin{tabular}{p{.33\linewidth}p{.50\linewidth}}
+          \begin{tabular}{p{.40\linewidth}p{.50\linewidth}}
       END
 
       MedicalDictionary.entries.pick(n).each do |entry|
         @exam_builder.append(<<-END.unindent)
-          #{entry[:ndl]} & \\hrulefill \\\\[4mm]
+          \\textbf{#{entry[:ndl]}} & \\hrulefill \\\\[4mm]
         END
       end
 
@@ -209,7 +206,6 @@ module Exam
         \end{center}
         \end{minipage}
       END
-
     end
   end
 end

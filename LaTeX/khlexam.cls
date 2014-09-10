@@ -95,7 +95,11 @@
 
 \makeatother
 
-\newcommand{\figuur}[1]{\includegraphics[width=.9\linewidth]{#1}}
+\newcommand{\figuur}[2][]{
+  \begin{center}
+    \includegraphics[#1]{#2}
+  \end{center}
+}
 
 \newcounter{questioncounter}
 \newenvironment{question}[1][]{
