@@ -42,7 +42,10 @@ module JavaScript
                   'file' => String
                 })
 
-    Open3.popen3("node #{file}", :chdir=>path) do |stdin, stdout, stderr, wait_thr|
+    abort "Set NODEJS environment variable ('node' on Windows, 'nodejs' on Linux)" unless ENV['NODEJS']
+    node_executable = ENV['NODEJS']
+
+    Open3.popen3("#{node_executable} #{file}", :chdir=>path) do |stdin, stdout, stderr, wait_thr|
       err = stderr.readlines.join
 
       raise RunError.new(err) unless err.empty?
