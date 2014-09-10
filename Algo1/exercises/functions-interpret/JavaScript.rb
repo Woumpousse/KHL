@@ -94,7 +94,24 @@ module JavaScript
         if ( typeof(value) === 'string' ) {
           return '"' + value + '"';
         }
-        else {
+        else if ( value instanceof Array )
+        {
+            var result = "[";
+
+            for ( var i = 0; i !== value.length; ++i )
+            {
+                if ( i !== 0 )
+                {
+                    result = result.concat(",");
+                }
+
+                result = result.concat( stringOfValue(value[i]) );
+            }
+
+            return result.concat("]");
+        }
+        else
+        {
           return "" + value;
         }
       }
