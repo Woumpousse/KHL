@@ -8,7 +8,7 @@ endif
 all: refimpl.js export
 
 refimpl.js: refimpl.ts
-	tsc refimpl.ts
+	$(TYPESCRIPT) refimpl.ts
 
 clean:
 	rm -f refimpl.js
