@@ -25,6 +25,12 @@ module JavaScript
   def JavaScript.run(code)
     Types.check(binding, { 'code' => String })
 
+    run_without_aux( aux_library + "\n" + code )
+  end
+
+  def JavaScript.run_without_aux(code)
+    Types.check(binding, { 'code' => String })
+
     with_code_written_to_temporary_file(code) do |filename|
       JavaScript.invoke_interpreter(filename)
     end
@@ -36,7 +42,10 @@ module JavaScript
                   'file' => String
                 })
 
-    Open3.popen3("node #{file}", :chdir=>path) do |stdin, stdout, stderr, wait_thr|
+    abort "Set NODEJS environment variable ('node' on Windows, 'nodejs' on Linux)" unless ENV['NODEJS']
+    node_executable = ENV['NODEJS']
+
+    Open3.popen3("#{node_executable} #{file}", :chdir=>path) do |stdin, stdout, stderr, wait_thr|
       err = stderr.readlines.join
 
       raise RunError.new(err) unless err.empty?
@@ -66,5 +75,48 @@ module JavaScript
       out.write(code)
     end
   end
-end
 
+  def JavaScript.evaluate_expression(code)
+    code = <<-END
+      var x = #{code};
+
+      if ( typeof(x) === 'string' ) console.log('"' + x + '"');
+      else console.log(x);
+    END
+
+    JavaScript.run(code).strip
+  end
+
+  def JavaScript.aux_library
+    <<-'END'.unindent
+    var aux = (function () {
+      function stringOfValue(value) {
+        if ( typeof(value) === 'string' ) {
+          return '"' + value + '"';
+        }
+        else {
+          return "" + value;
+        }
+      }
+
+      function print(str) {
+        console.log(str);
+      }
+
+      function println(str) {
+        print(str + "\n");
+      }
+
+      function printVar(id, val) {
+        println(id + "=" + stringOfValue(val));
+      }
+
+      return { stringOfValue: stringOfValue,
+               print: print,
+               println: println,
+               printVar: printVar
+             };
+    })();
+    END
+  end
+end
