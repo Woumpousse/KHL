@@ -2,6 +2,9 @@ require 'date'
 require './ical.rb'
 require './shared.rb'
 
+FILE = 'calendar.ics'
+# FILE = 'merel.ics'
+
 module KHL
   MINIMUM_DATE = DateTime.new(2014, 9, 1)
 
@@ -121,6 +124,66 @@ module KHL
     end
   end
 
+  class DistributedApplications < Course
+    def initialize
+      super('Distributed Applications')
+    end
+
+    def match?(event)
+      super and event.summary =~ /MBI63a/
+    end
+  end
+
+  class DataModellering < Course
+    def initialize
+      super('Datamodellering')
+    end
+
+    def match?(event)
+      super and event.summary =~ /MBI70a/
+    end
+  end
+
+  class ServiceOrientedArchitectures < Course
+    def initialize
+      super('SOA')
+    end
+
+    def match?(event)
+      super and event.summary =~ /MBI44a/
+    end
+  end
+
+  class OOO < Course
+    def initialize(id)
+      super
+    end
+
+    def match?(event)
+      super and event.summary =~ /MBI51x/
+    end
+  end
+
+  class OOOTheory < OOO
+    def initialize
+      super('OOO Theory')
+    end
+
+    def match?(event)
+      super and event.description !~ /oefeningen/
+    end
+  end
+
+  class OOOExercises < OOO
+    def initialize
+      super('OOO Exercises')
+    end
+
+    def match?(event)
+      super and event.description =~ /oefeningen/
+    end
+  end
+
   class Session
     def initialize(course, event)
       @course = course
@@ -170,7 +233,7 @@ module KHL
     end
 
     def stop
-      @event.end
+      @event.stop
     end
 
     def to_s
@@ -209,7 +272,12 @@ module KHL
               BOPExercises.new,
               DotNet.new,
               WiskundeTheory.new, 
-              WiskundeExercises.new
+              WiskundeExercises.new,
+              DistributedApplications.new,
+              DataModellering.new,
+              ServiceOrientedArchitectures.new,
+              OOOTheory.new,
+              OOOExercises.new
             ]
 
   def self.identify(event)
@@ -244,11 +312,11 @@ def sweeks_map(sessions)
 end
 
 
-$cal = ICal::Calendar.from_file('calendar.ics')
+$cal = ICal::Calendar.from_file(FILE)
 
 $events = $cal.courses.between(DateTime.new(2014,9,1), DateTime.new(2015,9,1)).events.map do |event|
   KHL.convert(event)
-end
+end.sort
 
 $week_mapping = sweeks_map($events)
 
@@ -294,30 +362,35 @@ def for_group(events, group)
   end
 end
 
-
-
-
-def algo
-  theory = algo_theory.sort
-  groups(theory).each do |group|
-    gs = group.join(",")
-
-    exercises = for_group( algo_exercises, group ).sort
-    abort "Oops" unless theory.length == exercises.length
-
-    puts "Groep #{gs}"
-    puts
-
-    theory.zip(exercises).each_with_index do |pair, i|
-      t, e = pair[0], pair[1]
-
-      puts "Sessie #{i+1}"
-      puts "Theorie: " + t.format("%d %t %l")
-      puts "Labo   : " + e.format("%d %t %l")
-      puts
-    end
+def each_group(events)
+  groups(events).each do |group|
+    yield group, for_group(events, group)
   end
 end
+
+
+
+# def algo
+#   theory = algo_theory.sort
+#   groups(theory).each do |group|
+#     gs = group.join(",")
+
+#     exercises = for_group( algo_exercises, group ).sort
+#     abort "Oops" unless theory.length == exercises.length
+
+#     puts "Groep #{gs}"
+#     puts
+
+#     theory.zip(exercises).each_with_index do |pair, i|
+#       t, e = pair[0], pair[1]
+
+#       puts "Sessie #{i+1}"
+#       puts "Theorie: " + t.format("%d %t %l")
+#       puts "Labo   : " + e.format("%d %t %l")
+#       puts
+#     end
+#   end
+# end
 
 
 def wiskunde
@@ -350,49 +423,93 @@ def wiskunde
 
     puts "Theorie #{gs}"
 
-    theory.each_with_index do |session, index|
-      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", $week_mapping)
-    end
+    print_series(theory)
 
     puts
     puts "Oefeningen #{gs}"
 
-    exercises.each_with_index do |session, index|
-      puts session.format("Sessie #{index + 1} [week %w] %d %t %l", $week_mapping)
-    end
-
+    print_series(exercises)
     puts
+  end
+end
+
+# def bop
+#   theory = $events.select do |event|
+#     KHL::BOPTheory === event.course
+#   end.sort
+
+
+#   groups(theory).each do |group|
+#     gs = group.join(",")
+
+#     exercises = $events.select do |event|
+#       KHL::BOPExercises === event.course
+#     end.sort
+    
+#     exercises = for_group( exercises, group ).sort
+#     abort "Oops" unless theory.length == exercises.length
+
+#     puts "Groep #{gs}"
+#     puts
+
+#     theory.zip(exercises).each_with_index do |pair, i|
+#       t, e = pair[0], pair[1]
+
+#       puts "Sessie #{i+1}"
+#       puts "Theorie: " + t.format("%d %t %l [%w]", $week_mapping)
+#       puts "Labo   : " + e.format("%d %t %l [%w]", $week_mapping)
+#       puts
+#     end
+#   end
+# end
+
+
+def print_course(course)
+  series = $events.select do |session|
+    course === session.course
+  end
+
+  each_group(series) do |group, sessions|
+    puts "#{course.new.id} #{group.join(',')}"
+    print_series(sessions)
+    puts
+  end
+end
+
+def print_series(series)
+  series.each_with_index do |session, index|
+    index_string = sprintf("%2d", index + 1)
+    week_string = sprintf("%2d", $week_mapping[session.start.cweek])
+    puts session.format("[#{index_string}|#{week_string}] %d %t", $week_mapping)
   end
 end
 
 def bop
-  theory = $events.select do |event|
-    KHL::BOPTheory === event.course
-  end.sort
-
-
-  groups(theory).each do |group|
-    gs = group.join(",")
-
-    exercises = $events.select do |event|
-      KHL::BOPExercises === event.course
-    end.sort
-    
-    exercises = for_group( algo_exercises, group ).sort
-    abort "Oops" unless theory.length == exercises.length
-
-    puts "Groep #{gs}"
-    puts
-
-    theory.zip(exercises).each_with_index do |pair, i|
-      t, e = pair[0], pair[1]
-
-      puts "Sessie #{i+1}"
-      puts "Theorie: " + t.format("%d %t %l [%w]", $week_mapping)
-      puts "Labo   : " + e.format("%d %t %l [%w]", $week_mapping)
-      puts
-    end
-  end
+  print_course(KHL::BOPTheory)
+  print_course(KHL::BOPExercises)
 end
 
+def algo
+  print_course(KHL::AlgoTheory)
+  print_course(KHL::AlgoExercises)
+  # theory_sessions = $events.select do |event|
+  #   KHL::AlgoTheory === event.course
+  # end.sort
+
+  # exercise_sessions = $events.select do |event|
+  #   KHL::AlgoExercises === event.course
+  # end.sort
+
+  # each_group(theory_sessions) do |group, sessions|
+  #   puts "Algo Theorie #{group.join(',')}"
+  #   print_series(sessions)
+  #   puts
+  # end
+
+  # each_group(exercise_sessions) do |group, sessions|
+  #   puts "Algo Labo #{group.join(',')}"
+  #   print_series(sessions)
+  #   puts
+  # end
+end
 

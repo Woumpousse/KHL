@@ -80,7 +80,7 @@ module ICal
 
     def between(mindate, maxdate)
       select do |e|
-        mindate <= e.start and e.end <= maxdate
+        mindate <= e.start and e.stop <= maxdate
       end                    
     end
 
@@ -118,6 +118,8 @@ module ICal
         Summary: #{summary}
         Description: #{description}
         Location: #{location}
+        Start: #{start}
+        End: #{stop}
       END
     end
 
@@ -141,7 +143,7 @@ module ICal
       ICal::parse_datetime(self['DTSTART'].value)
     end
 
-    def end
+    def stop
       ICal::parse_datetime(self['DTEND'].value)
     end
 
