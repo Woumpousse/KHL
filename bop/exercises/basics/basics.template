@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vul In</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Vul In</h1>
+      <div data-question="fill-in-blanks">
+        Complete the program so that it writes "Good-bye" on the computer monitor.
+        <pre>
+class Bye
+{  
+  public static void main ( String[] args )  
+  { 
+    System.out.println("<%= HTML::blank_inputbox('Good-bye') %>");
+  }
+}
+        </pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>The source file that this program is saved in should be called <%= HTML::blank_inputbox('Bye.java') %> (Be sure you use correct upper and lower case characters.)</p>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>To compile the program, enter this command into the console:</p>
+        <pre>
+C:\SomeDir&gt; <%= HTML::blank_inputbox('javac') %> Bye.java</pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+           The compiler will create a file containing  bytecode. This file will be named <%= HTML::blank_inputbox('Bye.class') %>.
+        </p>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          To run the program, enter this command into the console:
+        </p>
+        <pre>
+C:\SomeDir&gt; <%= HTML::blank_inputbox('java') %> Bye</pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          The program that interprets the byte codes on your hardware is called the Java <%= HTML::blank_inputbox('virtual machine', '', 'case_insensitive') %>
+        </p>
+      </div>      
+    </div>
+  </body>
+</html>
