@@ -19,7 +19,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Taak \#1}
+  \frametitle{Taak: Sommeren}
   \begin{center}
     Sommeer alle getallen van 1 t.e.m.\ 10
   \end{center}
@@ -206,6 +206,46 @@
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Recursie}
+  \structure{Componenten}
+  \begin{itemize}
+    \item Een manier om het werk op te delen
+    \item Een basisgeval
+  \end{itemize}
+  \vskip5mm
+  \structure{Belangrijk}
+  \begin{itemize}
+    \item Het opdelen van het werk moet leiden tot het basisgeval
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sommeren: Code}
+  \code[width=.7\linewidth]{summation.js}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+
+      \draw[opacity=.5,fill=blue!50] ($ (base case check.south west) + (-.1,-.1) $) rectangle ($ (base case check.north east) + (.1,.1) $);
+      \node[/khl/note,anchor=south west] (base case check note) at ($ (base case check) + (.5,.5) $) {basisgeval};
+      \draw[/khl/note arrow] (base case check note) -- (base case check);
+
+      \draw[opacity=.5,fill=blue!50] ($ (work.south west) + (-.1,-.1) $) rectangle ($ (work.north east) + (.1,.1) $);
+      \node[/khl/note,anchor=south] (work note) at ($ (work) + (0,.5) $) {werk voor jezelf};
+      \draw[/khl/note arrow] (work note) -- (work);
+
+      \draw[opacity=.5,fill=blue!50] ($ (recursion.south west) + (-.1,-.1) $) rectangle ($ (recursion.north east) + (.1,.1) $);
+
+      \node[/khl/note,anchor=north] (recursion note) at ($ (recursion) + (0,-.5) $) {werk voor je kloon};
+      \draw[/khl/note arrow] (recursion note) -- (recursion);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sommeren: Code}
+  \code[width=.7\linewidth]{summation2.js}
+\end{frame}
 
 
 %%% Local Variables: 

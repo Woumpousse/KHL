@@ -1,5 +1,5 @@
 \documentclass{../khlslides}
-
+\usepackage{eurosym}
 
 \title[Recursie]{Recursie}
 \author{Fr\'ed\'eric Vogels}
@@ -52,11 +52,170 @@
 
 \begin{document}
 
+
 \begin{frame}
   \titlepage
 \end{frame}
 
 \input{summation.tex}
+
+\begin{frame}
+  \frametitle{Cash Betalen}
+  Je moet \EUR{$n$} betalen, met in je portefeuille
+  \begin{overprint}
+    \onslide<1-2>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+    \end{itemize}
+
+    \onslide<3-4>
+    \begin{itemize}
+      \item $y$ centen van \EUR{2}
+    \end{itemize}
+
+    \onslide<5-6>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+      \item $y$ centen van \EUR{2}
+    \end{itemize}
+
+    \onslide<7-8>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+      \item $y$ centen van \EUR{2}
+      \item $z$ briefjes van \EUR{5}
+    \end{itemize}
+  \end{overprint}
+  \vskip4mm
+  Kan je exact betalen?
+  \vskip5mm
+  \begin{overprint}
+    \onslide<1>
+    \code{cash1.js}
+    \onslide<2>
+    \code{cash1b.js}
+    \onslide<3>
+    \code{cash2.js}
+    \onslide<4>
+    \code{cash2b.js}
+    \onslide<5>
+    \code{cash12.js}
+    \onslide<6>
+    \code{cash12b.js}
+    \onslide<7>
+    \code{cash125.js}
+    \onslide<8>
+    \code{cash125b.js}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cash Betalen}
+  \begin{center}
+    \Huge We beginnen opnieuw, maar met recursie
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cash Betalen}
+  Je moet \EUR{$n$} betalen, met in je portefeuille
+  \begin{overprint}
+    \onslide<1-2>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+    \end{itemize}
+
+    \onslide<3-4>
+    \begin{itemize}
+      \item $y$ centen van \EUR{2}
+    \end{itemize}
+
+    \onslide<5-6>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+      \item $y$ centen van \EUR{2}
+    \end{itemize}
+
+    \onslide<7-8>
+    \begin{itemize}
+      \item $x$ centen van \EUR{1}
+      \item $y$ centen van \EUR{2}
+      \item $z$ briefjes van \EUR{5}
+    \end{itemize}
+  \end{overprint}
+  \vskip4mm
+  Kan je exact betalen?
+  \vskip5mm
+  \begin{overprint}
+    \onslide<1>
+    \code{cash1.js}
+    \onslide<2>
+    \code{cashr1.js}
+    \onslide<3>
+    \code{cash2.js}
+    \onslide<4>
+    \code{cashr2.js}
+    \onslide<5>
+    \code{cash12.js}
+    \onslide<6>
+    \code[width=.9\linewidth]{cashr12.js}
+    \onslide<7>
+    \code{cash125.js}
+    \onslide<8>
+    \code[width=.9\linewidth]{cashr125.js}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cash Betalen: Optimisatie}
+  \only<1>{
+    \code[width=.9\linewidth]{cashr125.js}
+  }
+  \only<2-5>{
+    \code[width=.9\linewidth]{cashr125b.js}
+  }
+  \only<6-7>{
+    \code[width=.95\linewidth]{cashr125c.js}
+  }
+  \only<7>{
+    Pas deze code aan zodat {\tt cash} nagaat
+    of je \EUR{$n$} kan vormen
+    met centjes van \EUR{2} en
+    briefjes van \EUR{5}, \EUR{20} en \EUR{100}.
+  }
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<3>{
+      \node[/khl/note,anchor=south west] (negative check note) at ($ (negative check) + (.5,.5) $) {
+        \parbox{6cm}{\raggedright
+          E\'enmaal negatief kunnen we niet meer exact betalen
+        }
+      };
+      \draw[/khl/note arrow] (negative check note) -- (negative check);
+    }
+
+    \only<4>{
+      \node[/khl/note,anchor=south] (five note) at ($ (five) + (.5,.5) $) {
+        \parbox{6cm}{\raggedright
+          We beginnen bij de briefjes van 5 om hopelijk sneller tot ons doel te geraken
+        }
+      };
+      \draw[/khl/note arrow] (five note) -- (five);
+    }
+
+    \only<5>{
+      \node[/khl/note,anchor=south east] (zero 1 note) at ($ (zero 1) + (.5,.5) $) {
+        \parbox{6cm}{\raggedright
+          We gaan de briefjes/centen in strikte volgorde af. Als we \'e\'enmaal
+          besluiten geen gebruik meer te maken van briefjes van \EUR{5},
+          dan komen we hier niet op terug.
+        }
+      };
+      \draw[/khl/note arrow] (zero 1 note) -- (zero 1);
+      \draw[/khl/note arrow] (zero 1 note) -- (zero 2);
+      \draw[/khl/note arrow] (zero 1 note) -- (zero 3);
+    }
+  \end{tikzpicture}
+\end{frame}
 
 \end{document}
 

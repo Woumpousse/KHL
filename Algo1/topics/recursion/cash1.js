@@ -1,0 +1,3 @@
+function cash(n, x) {
+    // ???
+}
