@@ -1,0 +1,214 @@
+\begin{frame}[plain]
+  \begin{tikzpicture}[overlay,remember picture]
+    \node at (current page.center) {\includegraphics[width=\paperwidth]{watals.jpg}};
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Wat als\dots}
+  \begin{itemize}
+    \item Je krijgt een taak toegewezen
+    \item Je bent lui
+    \item Je kan jezelf klonen
+    \item Je kan de taak \emph{deels} delegeren aan je kloon
+          \begin{itemize}
+            \item Je kloon zou het niet appreci\"eren zou hij al je werk voor jou moeten doen (je kloon is immers exact even lui als jij)
+            \item Je moet minstens zelf \emph{iets} doen van je taak, hoe weinig ook
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Taak \#1}
+  \begin{center}
+    Sommeer alle getallen van 1 t.e.m.\ 10
+  \end{center}
+  \begin{center}
+    \begin{tikzpicture}
+      \path[use as bounding box] (0,0) rectangle (11,2);
+
+      \foreach[count=\i] \c in {10,9,...,1} {
+        \node[inner sep=0mm] (node \c) at (\i, 1) {\c};
+      }
+
+      \foreach \c in {10,9,...,2} {
+        \pgfmathparse{int(\c - 1)}\let\d\pgfmathresult
+        \node (add \c) at ($ (node \c) ! .5 ! (node \d) $) {+};
+      }
+
+      \coordinate (clone 10) at ($ (node 10.north west) + (0,.3) $);
+      \coordinate (clone 9) at ($ (node 9.north west) + (0,.3) $);
+      \coordinate (clone 8) at ($ (node 8.north west) + (0,.3) $);
+      \coordinate (clone 7) at ($ (node 7.north west) + (0,.3) $);
+      \coordinate (clone 6) at ($ (node 6.north west) + (0,.3) $);
+      \coordinate (clone 5) at ($ (node 5.north west) + (0,.3) $);
+      \coordinate (clone 4) at ($ (node 4.north west) + (0,.3) $);
+      \coordinate (clone 3) at ($ (node 3.north west) + (0,.3) $);
+      \coordinate (clone 2) at ($ (node 2.north west) + (0,.3) $);
+      \coordinate (clone 1) at ($ (node 1.north west) + (0,.3) $);
+
+
+      \only<2>{
+        \dude{($ (clone 10) $)}
+        \draw[|-|] ($ (node 10.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<3>{
+        \coordinate (clone 9) at ($ (node 9.north west) + (0,.3) $);
+        \dude{(clone 10)}
+        \dude{(clone 9)}
+        \draw[|-|] ($ (node 10.north west) + (0,0.1) $) -- ($ (node 9.north west) + (0,0.1) $);
+        \draw[|-|] ($ (node 9.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+
+        \node[/khl/note,anchor=north west] (note clone 9) at ($ (node 9.north west) + (0,-1) $) {
+          \parbox{6cm}{Je laat je kloon sommeren van 1 t.e.m.\ 9, en je voegt zelf nog 10 toe}
+        };
+        \draw[/khl/note arrow] (note clone 9) -- ($ (clone 9) + (.2,0) $);
+      }
+
+      \only<4>{
+        \dude{(clone 10)}
+        \dude{(clone 9)}
+        \dude{(clone 8)}
+        \draw[|-|] ($ (node 10.north west) + (0,0.1) $) -- ($ (node 9.north west) + (0,0.1) $);
+        \draw[|-|] ($ (node 9.north west) + (0,0.1) $) -- ($ (node 8.north west) + (0,0.1) $);
+        \draw[|-|] ($ (node 8.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+
+        \node[/khl/note,anchor=north west] (note clone 8) at ($ (node 9.north west) + (0,-1) $) {
+          \parbox{6cm}{Je kloon is even lui als jij, dus doet hetzelfde}
+        };
+        \draw[/khl/note arrow] (note clone 8) -- ($ (clone 8) + (.2,0) $);
+      }
+
+      \only<5>{
+        \dude{(clone 10)}
+        \foreach \c in {7,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 7.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<6>{
+        \dude{(clone 10)}
+        \foreach \c in {6,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 6.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<7>{
+        \dude{(clone 10)}
+        \foreach \c in {5,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 5.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<8>{
+        \dude{(clone 10)}
+        \foreach \c in {4,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 4.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<9>{
+        \dude{(clone 10)}
+        \foreach \c in {3,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 3.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<10>{
+        \dude{(clone 10)}
+        \foreach \c in {2,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+
+        \draw[|-|] ($ (node 2.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<11->{
+        \dude{(clone 10)}
+        \foreach \c in {1,...,9} {
+          \dude{(clone \c)}
+          \pgfmathparse{int(\c + 1)}\let\d\pgfmathresult
+          \draw[|-|] ($ (node \d.north west) + (0,0.1) $) -- ($ (node \c.north west) + (0,0.1) $);
+        }
+        \draw[|-|] ($ (node 1.north west) + (0,0.1) $) -- ($ (node 1.north east) + (0,0.1) $);
+      }
+
+      \only<11>{
+        \node[/khl/note,anchor=north east] (note clone 1) at ($ (node 1.north west) + (0,-1) $) {
+          \parbox{6cm}{\raggedright Deze kloon moet 1 t.e.m. 1 optellen. Dit is eenvoudig genoeg dat hij het zelf wel doet. Klonen is meer werk dan dat.}
+        };
+        \draw[/khl/note arrow] (note clone 1) -- ($ (clone 1) + (.2,0) $);
+      }
+
+      \only<12>{
+        \draw[-latex] ($ (clone 1) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 1};
+      }
+
+      \only<13>{
+        \draw[-latex] ($ (clone 2) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 3};
+      }
+
+      \only<14>{
+        \draw[-latex] ($ (clone 3) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 6};
+      }
+
+      \only<15>{
+        \draw[-latex] ($ (clone 4) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 10};
+      }
+
+      \only<16>{
+        \draw[-latex] ($ (clone 5) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 15};
+      }
+
+      \only<17>{
+        \draw[-latex] ($ (clone 6) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 21};
+      }
+
+      \only<18>{
+        \draw[-latex] ($ (clone 7) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 28};
+      }
+
+      \only<19>{
+        \draw[-latex] ($ (clone 8) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 36};
+      }
+
+      \only<20>{
+        \draw[-latex] ($ (clone 9) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 45};
+      }
+
+      \only<21>{
+        \draw[-latex] ($ (clone 10) + (0.1,0.55) $) -- +(-.7,0) node[midway,above] {\tiny 55};
+      }        
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "recursion"
+%%% End: 
