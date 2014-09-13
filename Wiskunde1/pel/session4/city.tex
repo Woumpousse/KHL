@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[city/.style={minimum size=1cm,circle,fill=white,draw},
+                    junction/.style={minimum size=.5cm,circle,fill=white}]
+  \coordinate (a) at (0,0);
+  \coordinate (b) at (10,0);
+  \coordinate (c) at (10,10);
+  \coordinate (d) at (0,10);
+  \coordinate (e) at (2,5);
+  \coordinate (f) at (8,5);
+
+  \draw (a) -- (b) -- (c) -- (d) -- (a) -- (e) -- (f) -- (b)
+        (c) -- (f)
+        (e) -- (d);
+
+  \node[city] at (a) {a};
+  \node[city] at (b) {b};
+  \node[city] at (c) {c};
+  \node[city] at (d) {d};  
+  \node[junction] at (e) {e};  
+  \node[junction] at (f) {f};  
+\end{tikzpicture}
+
+\end{document}

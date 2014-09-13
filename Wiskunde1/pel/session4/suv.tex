@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \draw[thick] (0,0) -- ++(5,0) -- ++(0,2.5) -- ++(-5,0);
+  \draw (1,0.25) -- ++(3,0) -- ++(0,.75) -- ++(-0.5,0) -- (3,2) -- (1,2) -- cycle;
+  \draw[fill=white] (1.75,0.35) circle (.35);
+  \draw[fill=white] (3.25,0.35) circle (.35);
+
+  \draw[thin,latex-latex] (0.9,0) -- +(0,2) node[midway,sloped,yshift=1mm] {\tiny 2m};
+  \draw[thin,latex-latex] (4.9,0) -- +(0,2.5) node[midway,sloped,yshift=1mm] {\tiny 2.5m};
+
+  \draw[thin] (0,.77) -- (1, 2.5);    
+\end{tikzpicture}
+
+\end{document}
