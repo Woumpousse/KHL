@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Passer en Liniaal: Sessie 2</title>
+    <link rel="stylesheet" href="wiskunde.css">
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Passer en Liniaal: Sessie 2</h1>
+      <div class="exercise">
+        <p>
+          Gegeven is het lijnstuk AB. Maak een macro op basis van
+          AB die het lijnstuk verdubbelt (resultaat is het lijnstuk AC met
+          d(A,C)=2*d(A,B)). Maak gebruik van de werktuigen punt,
+          lijnstuk, rechte, cirkel (niet cirkel met vaste straal).
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Maak een macro voor een vierkant op basis van 1 zijde.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Maak een macro voor een  gelijkzijdige driehoek op basis van 2 punten.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Gegeven de rechte R en het punt C. Teken de evenwijdige aan R door C
+          zonder gebruik te maken van het werktuig "teken evenwijdige".
+          Maak vervolgens een macro die deze werkwijze gebruikt om op basis van een
+          rechte en een punt een evenwijdige aan die rechte door het gegeven punt tekent.
+        </p>
+        <p>
+          Om de evenwijdige te tekenen kan je als volgt te werk gaan:
+        </p>
+        <ol>
+          <li>
+            Teken de loodlijn L op R door C. L en R snijden in D.
+          </li>
+          <li>
+            Teken een cirkel C1 met centrum C met straal CD.
+          </li>
+          <li>
+            Teken een cirkel C2 met centrum D met straal CD. Het snijpunt met R noemen we E.
+          </li>
+          <li>
+            Teken een cirkel C3 met centrum E met straal CD. Het snijpunt tussen C1 en C3 noemen we F.
+          </li>
+          <li>
+            De rechte door C en F loopt evenwijdig met R.
+          </li>
+        </ol>
+        <img src="parallel.png"></img>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Construeer een macro voor de regelmatige zeshoek op basis van 1 zijde
+          (de lengte van een zijde van de zeshoek is gelijk aan de straal van de omschreven cirkel).
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Maak een macro voor een parallellogram op basis van 1 zijde.
+          E&eacute;n hoek en de lengte van de andere zijde wordt ingegeven door de gebruiker.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Maak een macro die een lijnstuk AB in 3 gelijke delen verdeelt. Je kan hiervoor als volgt te werk gaan:
+        </p>
+        <ol>
+          <li>
+            Teken een halve rechte vanuit A die een hoek van 45&deg; maakt met AB.
+          </li>
+          <li>
+            Teken een cirkel met middelpunt A en straal AB. Deze snijdt de halve rechte in S1.
+          </li>
+          <li>
+            Teken een cirkel met middelpunt S1 en straal AB. Deze snijdt de halve rechte in S2.
+          </li>
+          <li>
+            Teken een cirkel met middelpunt S2 en straal AB. Deze snijdt de halve rechte in S3.
+          </li>
+          <li>
+            Teken een rechte a door S3 en B.
+          </li>
+          <li>
+            Teken een rechte b parallel met a door S2. Deze snijdt het lijnstuk AB op 2/3de.
+          </li>
+          <li>
+            Teken een rechte c parallel met a door S1. Deze snijdt het lijnstuk AB op 1/3de.
+          </li>
+        </ol>
+        <img src="div3.png"></img>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Construeer een macro voor de loodrechte spiegeling van een punt ten opzichte van een rechte.
+        </p>
+      </div>
+
+      <div class="exercise">
+        <p>
+          Construeer de figuur folding simple shapes. Pas je constructie vervolgens aan
+          zodat je een macro kan maken van je constructie waarbij een zijde van het vierkant
+          als basis dient. Gebruik deze macro om een vlak te vullen.   
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>
