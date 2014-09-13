@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Vul In</title>
+    <title>Java Basics</title>
     <meta charset="utf-8">
     <script src="jquery.js"></script>
     <script src="khl.js"></script>
@@ -11,47 +11,37 @@
     <div id="contents">
       <h1>Vul In</h1>
       <div data-question="fill-in-blanks">
-        Complete the program so that it writes "Good-bye" on the computer monitor.
-        <pre>
-class Bye
-{  
-  public static void main ( String[] args )  
-  { 
-    System.out.println("<%= HTML::blank_inputbox('Good-bye') %>");
-  }
-}
-        </pre>
-      </div>
-
-      <div data-question="fill-in-blanks">
-        <p>The source file that this program is saved in should be called <%= HTML::blank_inputbox('Bye.java') %> (Be sure you use correct upper and lower case characters.)</p>
-      </div>
-
-      <div data-question="fill-in-blanks">
-        <p>To compile the program, enter this command into the console:</p>
-        <pre>
-C:\SomeDir&gt; <%= HTML::blank_inputbox('javac') %> Bye.java</pre>
-      </div>
-
-      <div data-question="fill-in-blanks">
+        <h2>Hello World</h2>
         <p>
-           The compiler will create a file containing  bytecode. This file will be named <%= HTML::blank_inputbox('Bye.class') %>.
+          Het volgende programma is verondersteld <code>Hello World</code> op het scherm te tonen.
+          Vul de code aan gebruik makende van de volgende fragmenten:
+        </p>
+        <%= HTML::unordered_list( hello_world.answers.sort.uniq, { 'class' => 'pool' } ) %>
+        <pre><%= hello_world.code %></pre>
+        <p>
+          Deze code definieert een <%= HTML::blank_inputbox("klasse") %> met naam <code>HelloWorld</code>.
+          Java verwacht dat deze code in een bestand wordt bewaard met als bestandsnaam
+          <%= HTML::blank_inputbox("HelloWorld.java") %> (hoofdlettergevoelig!).
+        </p>
+        <p>
+          Java-code kan niet rechtstreeks uitgevoerd worden door de computer. In een eerste stap
+          dient deze eerst gecompileerd te worden door de Java <%= HTML::blank_inputbox("compiler") %>.
+          Compileren vertaalt de broncode naar een compacte tussentaal, deze
+          heet de Java <%= HTML::blank_inputbox("bytecode") %>. Dit compilatieresultaat
+          wordt bewaard in een bestand met de naam <%= HTML::blank_inputbox("HelloWorld.class") %>.
+          Om het programma daadwerkelijk uit te voeren moeten we beroep doen op de JVM: dit staat
+          voor <%= HTML::blank_inputbox("Java Virtual Machine", "", "case_insensitive") %>.
+          Deze vertaalt de tussentaal naar machinecode, dewelke wel begrepen wordt door de computer.
+        </p>
+        <p>
+          De klasse die je hierboven gedefinieerd hebt, bevat
+          &eacute;&eacute;n <%= HTML::blank_inputbox("methode") %>, genaamd <code>main</code>.
+          Als de JVM gevraagd wordt een programma uit te voeren, zoekt deze altijd eerst
+          naar deze <code>main</code>. In bovenstaande code
+          bevat <code>main</code> slechts &eacute;&eacute;n statement, dewelke
+          ervoor zorgt dat <%= HTML::blank_inputbox("Hello World") %> afgeprint wordt.
         </p>
       </div>
-
-      <div data-question="fill-in-blanks">
-        <p>
-          To run the program, enter this command into the console:
-        </p>
-        <pre>
-C:\SomeDir&gt; <%= HTML::blank_inputbox('java') %> Bye</pre>
-      </div>
-
-      <div data-question="fill-in-blanks">
-        <p>
-          The program that interprets the byte codes on your hardware is called the Java <%= HTML::blank_inputbox('virtual machine', '', 'case_insensitive') %>
-        </p>
-      </div>      
     </div>
   </body>
 </html>
