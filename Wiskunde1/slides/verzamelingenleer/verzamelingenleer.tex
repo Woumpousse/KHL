@@ -1,4 +1,4 @@
-\documentclass[dutch]{beamer}
+\documentclass[dutch]{../khlslides}
 \usepackage{graphicx}
 \usepackage{pxfonts}
 \usepackage{tikz}
@@ -7,9 +7,6 @@
 
 \usetikzlibrary{calc,shadows}
 
-
-\mode<presentation>
-\usetheme[height=.75cm]{Rochester}
 
 \title{Verzamelingenleer}
 \author{Fr\'ed\'eric Vogels}
@@ -104,9 +101,9 @@
     \end{tikzpicture}
   \end{center}
   \structure{Opsomming}
-  \[ A = \{\; 2,3,5,7,11,13,17 \;\} \]
+  \[ A = \left\{\; 2,3,5,7,11,13,17 \;\right\} \]
   \structure{Omschrijving}
-  \[ A = \{\; x \;|\; x \leq 18 \textrm{ en } x \text{ is een priemgetal} \;\} \]
+  \[ A = \left\{\; x \;|\; x \leq 18 \textrm{ en } x \text{ is een priemgetal} \;\right\} \]
   \structure{Lege verzameling}
   \[ \emptyset = \{ \; \} \]
 \end{frame}
@@ -255,9 +252,9 @@
   \end{center}
   \[
     \begin{array}{rcl}
-      \mathrm{A} & = & \{ \mathrm{a}, \mathrm{b} \} \\
-      \mathrm{B} & = & \{ 1, 2, 3 \} \\
-      \mathrm{A} \times \mathrm{B} & = & \{ ( \mathrm{a}, 1 ), (\mathrm{a}, 2 ), (\mathrm{a}, 3 ), ( \mathrm{b}, 1 ), (\mathrm{b}, 2 ), (\mathrm{b}, 3 ) \}
+      \mathrm{A} & = & \left\{ \mathrm{a}, \mathrm{b} \right\} \\
+      \mathrm{B} & = & \left\{ 1, 2, 3 \right\} \\
+      \mathrm{A} \times \mathrm{B} & = & \left\{ ( \mathrm{a}, 1 ), (\mathrm{a}, 2 ), (\mathrm{a}, 3 ), ( \mathrm{b}, 1 ), (\mathrm{b}, 2 ), (\mathrm{b}, 3 ) \right\}
     \end{array}
   \]
   \vskip2mm
@@ -312,10 +309,18 @@
   \]
 \end{frame}
 
-
-% Deelverzameling
-% Disjunct, conjunct
-
+\begin{frame}
+  \frametitle{Oefeningen}
+  \begin{itemize}
+    \item 1.2
+    \item 1.4
+    \item 1.6
+    \item 1.9
+    \item 1.10
+    \item 1.12
+    \item Rest: thuis
+  \end{itemize}
+\end{frame}
 
 \end{document}
 
