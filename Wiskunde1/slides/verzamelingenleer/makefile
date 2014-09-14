@@ -1,4 +1,6 @@
-all: verzamelingenleer.pdf
+CURRENT = verzamelingenleer
 
-verzamelingenleer.pdf: verzamelingenleer.tex
-	pdflatex verzamelingenleer.tex
+all: $(CURRENT).pdf
+
+%.pdf: %.tex
+	pdflatex $<
