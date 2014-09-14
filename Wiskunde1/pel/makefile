@@ -1,6 +1,4 @@
-SESSIONS = session1 session2 session3 session4
-
-.PHONY: $(SESSIONS) zip upload
+.PHONY: sessions zip upload
 
 ifeq ($(OS),Windows_NT)
 ZIP = 7z a
@@ -18,12 +16,12 @@ URL = alexander.khleuven.be
 REMOTE_DIRECTORY = /var/www/tw1/pel
 
 
-all: $(SESSIONS)
+all: sessions
 
-$(SESSIONS):
-	make -C $@
+sessions:
+	find . -mindepth 1 -maxdepth 1 -type d | xargs --max-args=1 make -C
 
-zip: $(SESSIONS)
+zip: sessions
 	ruby exports.rb $(SESSIONS) | dos2unix | xargs $(ZIP) $(ZIP_FILE)
 
 upload: zip
