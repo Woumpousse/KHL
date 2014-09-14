@@ -12,9 +12,11 @@ all: icons export current
 PORT = 22345
 
 ifeq ($(OS),Windows_NT)
+PASSWORD_LOCATION = g:/pw
 SCP=scp2 -P $(PORT)
 SSH=ssh2
 else
+PASSWORD_LOCATION = ~/pw
 SCP=scp -P $(PORT)
 SSH=ssh
 endif
@@ -24,7 +26,6 @@ LOGIN = u0057764
 URL = alexander.khleuven.be
 DIRECTORY = /var/www/bop/exercises/
 ZIP_FILE = $(CURRENT).zip
-
 
 
 clean: clean_icons
@@ -37,14 +38,15 @@ clean: clean_icons
 %.png: %.pdf
 	$(IMAGEMAGICK) -quality 90 -density 300 $< $@
 
+export:
+	echo *.css *.png *.js *.html | ruby -e "puts STDIN.read.split" > export
 
-
-zip: current
-	echo *.css *.png basics.html *.js | xargs $(ZIP) $(ZIP_FILE)
+zip: export current
+	cd ..; cat $(CURRENT)/export | awk '{printf "$(CURRENT)/%s\n", $$0}' | xargs $(ZIP) $(CURRENT)/$(CURRENT).zip
 
 upload: zip
-	$(SCP) $(ZIP_FILE) $(LOGIN)@$(URL):$(DIRECTORY)	
-	$(SSH) -p $(PORT) $(LOGIN)@$(URL) 'cd $(DIRECTORY); unzip -o $(ZIP_FILE)'
+	$(SCP) -W $(PASSWORD_LOCATION) $(ZIP_FILE) $(LOGIN)@$(URL):$(DIRECTORY)	
+	$(SSH) -W $(PASSWORD_LOCATION) -p $(PORT) $(LOGIN)@$(URL) 'cd $(DIRECTORY); unzip -o $(ZIP_FILE)'
 
 
 current: current-html
