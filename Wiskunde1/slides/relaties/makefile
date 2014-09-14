@@ -1,4 +1,6 @@
-all: relaties.pdf
+CURRENT = relaties
 
-relaties.pdf: relaties.tex
-	pdflatex relaties.tex
+all: $(CURRENT).pdf
+
+%.pdf: %.tex
+	pdflatex $<
