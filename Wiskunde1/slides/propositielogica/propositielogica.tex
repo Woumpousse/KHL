@@ -250,98 +250,107 @@
   \]
 \end{frame}
 
-\begin{frame}
-  \frametitle{Logische Equivalenties}
-  \Large
-  \begin{overprint}
-    \onslide<1-2>
-    \[
-      p \IMPLIES (\NOT q \IMPLIES p \OR q \OR r)
-    \]
+{
+  % \newcommand{\highlight}[2][]{
+  %   \draw[opacity=.5,#1] ($ (#2.south west) + (-.1,-.1) $) rectangle ($ (#2.north east) + (.1,.1) $);
+  % }
+  \newcommand<>{\highlight}[2]{
+    \alt#3{{\color{#2}#1}}{{#1}}
+  }
 
-    \onslide<3-4>
-    \[
-      \NOT p \OR (\NOT q \IMPLIES p \OR q \OR r)
-    \]
+  \begin{frame}
+    \frametitle{Logische Equivalenties}
+    \Large
+    \begin{overprint}
+      \onslide<1-2>
+      \[
+        \highlight<2>{p}{red} \IMPLIES \highlight<2>{(\NOT q \IMPLIES p \OR q \OR r)}{blue}
+      \]
 
-    \onslide<5-6>
-    \[
-      \NOT p \OR (q \OR p \OR q \OR r)
-    \]
+      \onslide<3-4>
+      \[
+        \NOT \highlight<3>{p}{red} \OR \highlight<3>{( \highlight<4>{\NOT q}{red} \IMPLIES \highlight<4>{p \OR q \OR r}{blue})}{blue}
+      \]
 
-    \onslide<7-8>
-    \[
-      (\NOT p \OR p) \OR q \OR q \OR r
-    \]
+      \onslide<5-6>
+      \[
+        \NOT p \OR (\highlight<5>{q}{red} \OR \highlight<5>{p \OR q \OR r}{blue})
+      \]
 
-    \onslide<9-10>
-    \[
-      1 \OR q \OR q \OR r
-    \]
+      \onslide<7-8>
+      \[
+        (\highlight<8>{p \OR \NOT p}{red}) \OR q \OR q \OR r
+      \]
 
-    \onslide<11>
-    \[
-      1
-    \]
-  \end{overprint}
-  \vskip2cm
-  \begin{overprint}
-    \onslide<2-3>
-    Logische equivalentie:
-    \[
-      \begin{array}{rcl}
-        (P \IMPLIES Q) & \IFF & (\NOT P \OR Q)
-      \end{array}
-    \]
-    We kiezen
-    \[
-      \begin{array}{rcl}
-        P & = & p \\
-        Q & = & \NOT q \IMPLIES p \OR q \OR r \\
-      \end{array}
-    \]
+      \onslide<9-10>
+      \[
+        \highlight<10>{\highlight<9>{1}{blue} \OR q \OR q \OR r}{red}
+      \]
 
-    \onslide<4-5>
-    Logische equivalentie:
-    \[
-      \begin{array}{rcl}
-        (P \IMPLIES Q) & \IFF & (\NOT P \OR Q)
-      \end{array}
-    \]
-    We kiezen
-    \[
-      \begin{array}{rcl}
-        P & = & \NOT q \\
-        Q & = & p \OR q \OR r \\
-      \end{array}
-    \]
+      \onslide<11>
+      \[
+        \highlight<11>{1}{blue}
+      \]
+    \end{overprint}
+    \vskip2cm
+    \begin{overprint}
+      \onslide<2-3>
+      Logische equivalentie:
+      \[
+        \begin{array}{rcl}
+          (\highlight{P}{red} \IMPLIES \highlight{Q}{blue}) & \IFF & (\NOT \highlight{P}{red} \OR \highlight{Q}{blue})
+        \end{array}
+      \]
+      We kiezen
+      \[
+        \begin{array}{rcl}
+          \NODE{$P$}{P4} & = & p \\
+          \NODE{$Q$}{Q4} & = & \NOT q \IMPLIES p \OR q \OR r \\
+        \end{array}
+      \]
 
-    \onslide<6-7>
-    Logische equivalenties:
-    \[
-      \begin{array}{rcl}
-        (P \OR (Q \OR R) & \IFF & ((P \OR Q) \OR R) \\
-        P \OR Q & \IFF & Q \OR P
-      \end{array}
-    \]
+      \onslide<4-5>
+      Logische equivalentie:
+      \[
+        \begin{array}{rcl}
+          (\highlight{P}{red} \IMPLIES \highlight{Q}{blue}) & \IFF & (\NOT \highlight{P}{red} \OR \highlight{Q}{blue})
+        \end{array}
+      \]
+      We kiezen
+      \[
+        \begin{array}{rcl}
+          P & = & \NOT q \\
+          Q & = & p \OR q \OR r \\
+        \end{array}
+      \]
 
-    \onslide<8-9>
-    Logische equivalentie:
-    \[
-      \begin{array}{rcl}
-        (P \OR \NOT P) & \IFF & 1
-      \end{array}
-    \]
+      \onslide<6-7>
+      Logische equivalenties:
+      \[
+        \begin{array}{rcl}
+          (P \OR (Q \OR R) & \IFF & ((P \OR Q) \OR R) \\
+          P \OR Q & \IFF & Q \OR P
+        \end{array}
+      \]
 
-    \onslide<10-11>
-    Logische equivalentie:
-    \[
-      \begin{array}{rcl}
-        (1 \OR P) & \IFF & 1
-      \end{array}
-    \]
-  \end{overprint}
-\end{frame}
+      \onslide<8-9>
+      Logische equivalentie:
+      \[
+        \begin{array}{rcl}
+          (\highlight{P \OR \NOT P}{red}) & \IFF & \highlight{1}{blue}
+        \end{array}
+      \]
+
+      \onslide<10-11>
+      Logische equivalentie:
+      \[
+        \begin{array}{rcl}
+          (\highlight{1 \OR P}{red}) & \IFF & \highlight{1}{blue}
+        \end{array}
+      \]
+    \end{overprint}
+  \end{frame}
+}
 
 \begin{frame}
   \frametitle{Oefeningen}
