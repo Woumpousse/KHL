@@ -1,0 +1,365 @@
+\documentclass[dutch]{../khlslides}
+\usepackage{graphicx}
+\usepackage{pxfonts}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{fourier}
+
+\usetikzlibrary{calc,shadows,decorations.markings}
+
+
+\title{Propositielogica}
+\logo{\includegraphics[height=0.5cm]{../KHL.jpg}}
+\institute[KHL]{KHLeuven}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+\newcommand{\IMPLIES}{\rightarrow}
+\newcommand{\IFF}{\leftrightarrow}
+\newcommand{\NOT}{\neg}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+
+
+\pgfkeys{
+  /tikz/.cd,
+  axis/.style={thin,-latex},
+  plot/.style={domain=-5:5,thick}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+  \frametitle{Algebra\"ische Structuren}
+  \structure{Wat is een Algebra\"ische Structuur?}
+  \begin{itemize}
+    \item Een verzameling $A$
+    \item Operaties op elementen van $A$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Voorbeeld \#1: Re\"ele Getallen}
+  \begin{itemize}
+    \item Verzameling: $\mathbb{R}$
+    \item Elementen: re\"ele getallen
+    \item Operaties
+          \begin{center}
+            \begin{tabular}{lc}
+              \bf Naam & \bf Notatie \\
+              \toprule
+              Optelling & $x + y$ \\
+              Aftrekking & $x - y$ \\
+              Vermenigvuldiging & $x \cdot y$ \\
+              Deling & $x / y$ \\
+              Machtsverheffing & $x^y$
+            \end{tabular}
+          \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Voorbeeld \#2: Verzamelingen}
+  \begin{itemize}
+    \item Verzameling: verzameling der verzamelingen
+    \item Elementen: verzamelingen
+    \item Operaties
+          \begin{center}
+            \begin{tabular}{lc}
+              \bf Naam & \bf Notatie \\
+              \toprule
+              Unie & $A \union B$ \\
+              Doorsnede & $A \intersect B$ \\
+              Verschil & $A - B$ \\
+              Cartesisch product & $A \times B$
+            \end{tabular}
+          \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Voorbeeld \#3: Booleanse Algebra}
+  \begin{itemize}
+    \item Verzameling: $\left\{ \; \mathbf{true}, \mathbf{false} \; \right\}$
+    \item Elementen: $\mathbf{true}$ en $\mathbf{false}$
+    \item Kortere notatie: $1$ en $0$, respectievelijk
+    \item Operaties
+          \begin{center}
+            \begin{tabular}{lcl}
+              \bf Naam & \bf Notatie & \bf Uitspraak \\
+              \toprule
+              Conjunctie & $p \AND  q$ & $p$ en $q$ \\
+              Disjunctie & $p \OR  q$ & $p$ of $q$ \\
+              Negatie & $\NOT p$ & niet $p$ \\ 
+              Implicatie & $p \IMPLIES  q$ & als $p$ dan $q$ \\
+              Equivalentie & $p \IFF  q$ & $p$ als en slechts als $q$
+            \end{tabular}
+          \end{center}
+          \vskip2mm
+    \item Booleaanse uitdrukkingen heten proposities
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waarheidstabellen}
+  \begin{center}
+    \Large\bf Conjunctie
+  \end{center}
+  \Large
+  \[
+    \begin{array}{ccc}
+      p & q & p \AND q \\
+      \toprule
+      0 & 0 & 0 \\
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      1 & 1 & 1 \\
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waarheidstabellen}
+  \begin{center}
+    \Large\bf Disjunctie
+  \end{center}
+  \Large
+  \[
+    \begin{array}{ccc}
+      p & q & p \OR q \\
+      \toprule
+      0 & 0 & 0 \\
+      0 & 1 & 1 \\
+      1 & 0 & 1 \\
+      1 & 1 & 1 \\
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waarheidstabellen}
+  \begin{center}
+    \Large\bf Negatie
+  \end{center}
+  \Large
+  \[
+    \begin{array}{ccc}
+      p & \NOT p \\
+      \toprule
+      0 & 1 \\
+      1 & 0 \\
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waarheidstabellen}
+  \begin{center}
+    \Large\bf Implicatie
+  \end{center}
+  \Large
+  \[
+    \begin{array}{ccc}
+      p & q & p \IMPLIES q \\
+      \toprule
+      0 & 0 & 1 \\
+      0 & 1 & 1 \\
+      1 & 0 & 0 \\
+      1 & 1 & 1 \\
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Waarheidstabellen}
+  \begin{center}
+    \Large\bf Equivalentie
+  \end{center}
+  \Large
+  \[
+    \begin{array}{ccc}
+      p & q & p \IFF q \\
+      \toprule
+      0 & 0 & 1 \\
+      0 & 1 & 0 \\
+      1 & 0 & 0 \\
+      1 & 1 & 1 \\
+    \end{array}
+  \]
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Oefening Waarheidstabellen}
+  \large
+  \[
+    p \IMPLIES (\NOT q \IMPLIES p \OR q \OR r)
+  \]
+  
+  \[
+    \begin{array}{cccc@{\quad}c@{\quad}c@{\quad}c}
+      p & q & r & \NOT q & p \AND q \AND r & \NOT q \IMPLIES p \OR q \OR r & p \IMPLIES (\NOT q \IMPLIES p \OR q \OR r) \\
+      \toprule
+      0 & 0 & 0 & \only<2->{1} & \only<10->{0} & \only<12->{0} & \only<13->{1} \\
+      0 & 0 & 1 & \only<3->{1} & \only<10->{1} & \only<12->{1} & \only<13->{1} \\
+      0 & 1 & 0 & \only<4->{0} & \only<10->{1} & \only<11->{1} & \only<13->{1} \\
+      0 & 1 & 1 & \only<5->{0} & \only<10->{1} & \only<11->{1} & \only<13->{1} \\
+      1 & 0 & 0 & \only<6->{1} & \only<10->{1} & \only<12->{1} & \only<13->{1} \\
+      1 & 0 & 1 & \only<7->{1} & \only<10->{1} & \only<12->{1} & \only<13->{1} \\
+      1 & 1 & 0 & \only<8->{0} & \only<10->{1} & \only<11->{1} & \only<13->{1} \\
+      1 & 1 & 1 & \only<9->{0} & \only<10->{1} & \only<11->{1} & \only<13->{1} \\
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Tautologie\"en}
+  \structure{Definitie}
+  \begin{center}
+    Proposities die altijd waar zijn, ongeacht de waarden van de variabelen
+  \end{center}
+  \vskip4mm
+  \structure{Voorbeelden}
+  \[
+  \begin{array}{r@{\;}c@{\;}l}
+      p & \OR & \NOT p \\[2mm]
+      p & \IMPLIES & p \\[2mm]
+      \NOT\NOT p & \IFF & p \\[2mm]
+      p \AND q & \IFF & q \AND p \\[2mm]
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Logische Equivalenties}
+  \structure{Definitie}
+  \begin{center}
+    Tautologie van de vorm $P \IFF Q$
+  \end{center}
+  \vskip4mm
+  \structure{Voorbeelden}
+  \[
+  \begin{array}{r@{\;}c@{\;}l}
+      \NOT\NOT p & \IFF & p \\[2mm]
+      p \AND q & \IFF & q \AND p \\[2mm]
+      p \OR q & \IFF & q \OR p \\[2mm]
+      p \OR (q \OR r) & \IFF & (p \OR q) \OR r \\[2mm]
+    \end{array}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Logische Equivalenties}
+  \Large
+  \begin{overprint}
+    \onslide<1-2>
+    \[
+      p \IMPLIES (\NOT q \IMPLIES p \OR q \OR r)
+    \]
+
+    \onslide<3-4>
+    \[
+      \NOT p \OR (\NOT q \IMPLIES p \OR q \OR r)
+    \]
+
+    \onslide<5-6>
+    \[
+      \NOT p \OR (q \OR p \OR q \OR r)
+    \]
+
+    \onslide<7-8>
+    \[
+      (\NOT p \OR p) \OR q \OR q \OR r
+    \]
+
+    \onslide<9-10>
+    \[
+      1 \OR q \OR q \OR r
+    \]
+
+    \onslide<11>
+    \[
+      1
+    \]
+  \end{overprint}
+  \vskip2cm
+  \begin{overprint}
+    \onslide<2-3>
+    Logische equivalentie:
+    \[
+      \begin{array}{rcl}
+        (P \IMPLIES Q) & \IFF & (\NOT P \OR Q)
+      \end{array}
+    \]
+    We kiezen
+    \[
+      \begin{array}{rcl}
+        P & = & p \\
+        Q & = & \NOT q \IMPLIES p \OR q \OR r \\
+      \end{array}
+    \]
+
+    \onslide<4-5>
+    Logische equivalentie:
+    \[
+      \begin{array}{rcl}
+        (P \IMPLIES Q) & \IFF & (\NOT P \OR Q)
+      \end{array}
+    \]
+    We kiezen
+    \[
+      \begin{array}{rcl}
+        P & = & \NOT q \\
+        Q & = & p \OR q \OR r \\
+      \end{array}
+    \]
+
+    \onslide<6-7>
+    Logische equivalenties:
+    \[
+      \begin{array}{rcl}
+        (P \OR (Q \OR R) & \IFF & ((P \OR Q) \OR R) \\
+        P \OR Q & \IFF & Q \OR P
+      \end{array}
+    \]
+
+    \onslide<8-9>
+    Logische equivalentie:
+    \[
+      \begin{array}{rcl}
+        (P \OR \NOT P) & \IFF & 1
+      \end{array}
+    \]
+
+    \onslide<10-11>
+    Logische equivalentie:
+    \[
+      \begin{array}{rcl}
+        (1 \OR P) & \IFF & 1
+      \end{array}
+    \]
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefeningen}
+  \begin{itemize}
+    \item 3.1 (1, 2, 3)
+    \item 3.2
+    \item 3.15 (6, 10, 11, 12)
+    \item 3.6
+    \item Rest: thuis
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
