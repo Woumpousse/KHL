@@ -11,6 +11,11 @@ class Counter
     {
         this.value += 1;
     }
+    
+    public void decrement()
+    {
+        this.value -= 1;
+    }
 
     public int getValue()
     {
