@@ -33,6 +33,10 @@ module Java
     def initialize(classes, message)
       super(classes, message)
     end
+
+    def to_s
+      super + "\n" + @classes.to_s
+    end
   end
 
   class RunError < JavaError

@@ -279,8 +279,11 @@ module Questions
       @formatter = formatter
     end
 
-    def parse(code)
-      Types.check( binding, { :code => String } )
+    def parse(code, background_code = "")
+      Types.check( binding, {
+                     :code => String,
+                     :background_code => String
+                   } )
 
       tagged = find_tagged(code)
 
@@ -290,10 +293,10 @@ module Questions
         format_fragment(fragment)
       end.join
 
-
       ::Questions.build_question do |q|
         q.tagged = tagged
         q.code = ::Questions::remove_redundant_whitespace(formatted)
+        q.background_code = background_code
       end
     end
 
@@ -301,7 +304,7 @@ module Questions
     module QuestionExtension
       def output(parameters = {})
         # Expects interpret_code to be added by another instance
-        interpret_code( parameterize(parameters) )
+        interpret_code( parameterize(parameters) + "\n" + background_code )
       end
 
       def output_map(parameters = {})
@@ -500,8 +503,8 @@ module Questions
         super(HTML::Formatters::JavaFormatter.new)
       end
 
-      def parse(code)
-        ::Questions::build_question(super(code)) do |q|
+      def parse(code, background_code = "")
+        ::Questions::build_question(super(code, background_code)) do |q|
           q.extend QuestionExtension
           q.extend JavaMixIn
         end
