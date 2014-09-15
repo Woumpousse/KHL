@@ -146,6 +146,54 @@ module HTML
     END
   end
 
+  def HTML.tablerow(items, attributes = {})
+    Types.check( binding, {
+                   :items => [Types.any],
+                   :attributes => { String => Types.any }
+                 } )
+
+    items_html = items.map do |row_item|
+      row_item_html = if block_given?
+                      then yield row_item
+                      else row_item
+                      end
+      
+      "<td>#{row_item_html}</td>"
+    end.join
+
+    attributes_html = string_of_attributes(attributes)
+
+    "<tr #{attributes_html}>#{items_html}</tr>"
+  end
+
+  def HTML.table(headers, rows, attributes = {})
+    Types.check( binding, {
+                   :headers => [String],
+                   :rows => [Types.any],
+                   :attributes => { String => Types.any }
+                 } )
+
+    headers_html = "<tr>" + headers.map do |header|
+      "<th>#{header}</th>"
+    end.join + "</tr>"
+
+    rows_html = rows.map do |row_items|
+      if block_given?
+      then yield row_items
+      else row_items
+      end
+    end.join("\n")
+
+    attributes_html = string_of_attributes(attributes)
+
+    <<-END.unindent
+      <table #{attributes_html}>
+        #{headers_html}
+        #{rows_html}
+      </table>
+    END
+  end
+
   # Fix bug: attributes are added to wrong element
   def HTML.output_sheet(output_map, attributes = {})
     Types.check( binding, {
