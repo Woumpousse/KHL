@@ -44,4 +44,18 @@ class Resources < Controller
       HTML::tablerow([ "<code>#{literal}</code>", inputbox ])
     end
   end
+
+  def course
+    Questions::Java::AutoFillInTypes.new.parse( <<-'END'.unindent.strip )
+        public class Vak
+        {
+            private String naam;
+            private int aantalStudiepunten;
+            private boolean tolereerbaar;
+            private String omschrijving;
+            private double urenLesPerWeek;
+            private double urenOefeningenPerWeek;
+        }
+    END
+  end
 end
