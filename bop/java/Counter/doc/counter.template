@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Counter</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+    <style>
+      .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      h3 {
+          text-align: center;
+          background-color: #AAF;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Counter</h1>
+      <img class="center" style="width:20%" src="counter.png"></img>
+      <div data-question="selection">
+        <p>
+          De klasse <code>Counter</code> heeft slechts &eacute;&eacute;n veld nodig:
+          een <code>Counter</code>-object moet enkel kunnen onthouden wat de huidige
+          waarde is. Selecteer de regel waarop dit veld wordt gedefinieerd.
+        </p>
+        <ul>
+          <li>
+            Om te zien of je oplossing klopt, klik je op het vinkje.
+          </li>
+          <li>
+            Om opnieuw te beginnen, klik je op het icoontje dat een blanco blad voorstelt.
+          </li>
+          <li>
+            Om de oplossing te zien te krijgen, klik je de lamp.
+          </li>
+        </ul>
+        <pre><%= pick_field.code %></pre>
+      </div>
+
+      <div data-question="selection">
+        <p>
+          De klasse <code>Counter</code> heeft een constructor. De constructor
+          bevat initialisatiecode: in ons geval willen we dan een nieuwe <code>Counter</code>
+          initieel op <code>0</code> staat. Je kan een constructor gemakkelijk herkennen op
+          basis van de volgende kenmerken:
+        </p>
+        <ul>
+          <li>
+            Een constructor is een methode die dezelfde naam draagt
+            als de klasse (in ons geval, <code>Counter</code>).
+          </li>
+          <li>Een constructor mag geen return-type declareren.</li>
+        </ul>
+        <p>
+          Selecteer alle regels die de constructor vormen.
+        </p>
+        <pre><%= pick_constructor.code %></pre>
+      </div>
+
+      <div data-question="selection">
+        <p>
+          Om te kunnen interageren met een <code>Counter</code>, moet
+          deze methodes aanbieden. Onze <code>Counter</code>
+          ondersteunt drie interacties:
+        </p>
+        <ul>
+          <li>
+            Je kan de <code>Counter</code> met 1 verhogen.
+          </li>
+          <li>
+            Je kan de huidige waarde van de <code>Counter</code> opvragen.
+          </li>
+          <li>
+            Je kan de <code>Counter</code> terug op 0 zetten.
+          </li>
+        </ul>
+        <p>
+          Selecteer de methodenamen van de drie methodes.
+        </p>
+        <pre><%= pick_method_identifiers.code %></pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          De klasse <code>Counter</code> definieert welke operaties <code>Counter</code>s 
+          ondersteunen. Laten we nu even een programma schrijven dat gebruik maakt
+          van een <code>Counter</code>. Wat is de uitvoer van het onderstaande
+          programma? <%= HTML::blank_inputbox(interpret1.output) %>
+        </p>
+        <pre><%= interpret1.code %></pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          Laten we wat meer interageren met de <code>Counter</code>.
+          Wat is de uitvoer van het onderstaande
+          programma? <%= HTML::blank_inputbox(interpret2.output) %>
+        </p>
+        <pre><%= interpret2.code %></pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          Wat is de uitvoer van het onderstaande
+          programma? <%= HTML::blank_inputbox(interpret3.output) %>
+        </p>
+        <pre><%= interpret3.code %></pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          Wat is de uitvoer van het onderstaande
+          programma? <%= HTML::blank_inputbox(interpret4.output) %>
+        </p>
+        <pre><%= interpret4.code %></pre>
+      </div>
+
+      <div data-question="fill-in-blanks">
+        <p>
+          We hoeven ons niet te beperken tot &eacute;&eacute;n <code>Counter</code>:
+          we kunnen er zoveel maken als we willen.
+          Wat is de uitvoer van het onderstaande
+          programma? <%= HTML::blank_inputbox(interpret5.output, '', 'ignore_whitespace') %>
+        </p>
+        <pre><%= interpret5.code %></pre>
+      </div>
+
+      <h2>Eclipse</h2>
+      <h3>Stap 1</h3>
+      <p>
+        Start nu Eclipse. Maak een nieuw project aan.
+      </p>
+      <img class="center" style="width:60%;" src="new-project.png"></img>
+      <h3>Stap 2</h3>
+      <p>
+        Noem het nieuwe project <code>Counter</code>.
+      </p>
+      <img class="center" style="width:60%;" src="new-project-dialog.png"></img>
+      <h3>Stap 3</h3>
+      <p>
+        Voeg een nieuwe klasse toe aan het project.
+      </p>
+      <img class="center" style="width:60%;" src="new-class.png"></img>
+      <h3>Stap 4</h3>
+      <p>
+        Noem de klasse <code>Counter</code>.
+      </p>
+      <img class="center" style="width:60%;" src="new-class-dialog.png"></img>
+      <h3>Stap 5</h3>
+      <p>
+        Het aanmaken van een nieuwe klasse <code>Counter</code> maakt een nieuw bestand
+        <code>Counter.java</code> aan. Copy-paste de volgende code naar dit bestand.
+      </p>
+      <pre><%= format(counter_code) %></pre>
+      <h3>Stap 6</h3>
+      <p>
+        We voegen nu een testklasse toe. Deze zal allerlei tests uitvoeren
+        op <code>Counter</code>-objecten om na te gaan of deze correct werkt.
+      </p>
+      <p>
+        Maak een nieuwe JUnit test case.
+      </p>
+      <img class="center" style="width:60%;" src="new-test.png"></img>
+      <h3>Stap 7</h3>
+      <p>
+        Noem deze <code>CounterTest</code>.
+      </p>
+      <img class="center" style="width:60%;" src="new-test-dialog.png"></img>
+      <h3>Stap 8</h3>
+      <p>
+        Tests hangen af van een externe component. Eclipse stelt voor om deze toe te voegen
+        aan het project. 
+      </p>
+      <img class="center" style="width:60%;" src="add-junit.png"></img>
+      <h3>Stap 9</h3>
+      <p>
+        Een JUnit test case neemt de vorm aan van een klasse: Eclipse
+        heeft een nieuw bestand <code>CounterTest.java</code> aangemaakt
+        met daarin wat code.
+      </p>
+      <pre><%= format(empty_test_code) %></pre>
+      <h3>Stap 10</h3>
+      <p>
+        Vervang de inhoud van het bestand <code>CounterTest.Java</code>
+        door de volgende code.
+      </p>
+      <pre><%= format(test_code) %></pre>
+      <h3>Stap 11</h3>
+      <p>
+        We voeren de tests uit.
+      </p>      
+      <img class="center" style="width:60%;" src="run-test.png"></img>
+      <h3>Stap 11</h3>
+      <p>
+        Eclipse voert de tests uit. Een nieuw kader verschijnt met de resultaten.
+      </p>      
+      <img class="center" style="width:40%;" src="junit.png"></img>
+
+    </div>
+  </body>
+</html>
