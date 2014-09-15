@@ -13,6 +13,35 @@ class Resources < Controller
                 System.out.__`println`__("__`Hello World`__");
             }
         }
-      END
+    END
+  end
+
+  def types
+    entries = <<-END.unindent
+      5 : int
+      "Hello" : String
+      'f' : char
+      -9 : int
+      true : boolean
+      0.5 : double
+      "0" : String
+      false : boolean
+      '7' : char
+      0.0 : double
+    END
+
+    entries = entries.lines.map do |entry|
+      entry.split(':').map do |token|
+        token.strip
+      end
+    end
+
+    HTML::table( [ 'Literal', 'Type' ],
+                 entries,
+                 { 'class' => 'types-table' } ) do |literal, type|
+      inputbox = HTML::blank_inputbox(type)
+      
+      HTML::tablerow([ "<code>#{literal}</code>", inputbox ])
+    end
   end
 end
