@@ -15,47 +15,4 @@ class Resources < Controller
         }
     END
   end
-
-  def types
-    entries = <<-END.unindent
-      5 : int
-      "Hello" : String
-      'f' : char
-      -9 : int
-      true : boolean
-      0.5 : double
-      "0" : String
-      false : boolean
-      '7' : char
-      0.0 : double
-    END
-
-    entries = entries.lines.map do |entry|
-      entry.split(':').map do |token|
-        token.strip
-      end
-    end
-
-    HTML::table( [ 'Literal', 'Type' ],
-                 entries,
-                 { 'class' => 'types-table' } ) do |literal, type|
-      inputbox = HTML::blank_inputbox(type)
-      
-      HTML::tablerow([ "<code>#{literal}</code>", inputbox ])
-    end
-  end
-
-  def course
-    Questions::Java::AutoFillInTypes.new.parse( <<-'END'.unindent.strip )
-        public class Vak
-        {
-            private String naam;
-            private int aantalStudiepunten;
-            private boolean tolereerbaar;
-            private String omschrijving;
-            private double urenLesPerWeek;
-            private double urenOefeningenPerWeek;
-        }
-    END
-  end
 end

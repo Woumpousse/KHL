@@ -59,37 +59,6 @@
         </p>
       </div>
 
-      <div data-question="fill-in-blanks">
-        <h2>Types</h2>
-        <p>
-          Wat is het type van de volgende waardes? Ter herinnering geven we je volgend overzicht:
-        </p>
-        <ul>
-          <li><code>int</code>: gehele getallen</li>
-          <li><code>double</code>: kommagetallen</li>
-          <li><code>boolean</code>: waarheidswaarden</li>
-          <li><code>char</code>: &eacute;&eacute;n teken (letter, cijfer, &hellip;)</li>
-          <li><code>String</code>: woorden/tekst</li>
-        </ul>
-        <%= types %>
-      </div>
-
-      <div data-question="fill-in-blanks">
-        <h2>Velden</h2>
-        <p>
-          We willen een klasse <code>Vak</code> schrijven.
-          Hieronder staan de nodige velden (= kenmerken van een vak). Vul aan met de gepaste types.
-        </p>
-        <ul>
-          <li><code>int</code>: gehele getallen</li>
-          <li><code>double</code>: kommagetallen</li>
-          <li><code>boolean</code>: waarheidswaarden</li>
-          <li><code>char</code>: &eacute;&eacute;n teken (letter, cijfer, &hellip;)</li>
-          <li><code>String</code>: woorden/tekst</li>
-        </ul>
-        <pre><%= course.code %></pre>
-      </div>
-
     </div>
   </body>
 </html>
