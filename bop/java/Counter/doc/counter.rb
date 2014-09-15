@@ -320,4 +320,24 @@ class Resources < Controller
       }
     END
   end
+
+  def extra_test_code
+    <<-'END'.unindent
+      @Test
+      public void decrement()
+      {
+          // Aanmaak Counter-object
+          Counter counter = new Counter();
+
+          // Incrementeren, 0 -> 1
+          counter.increment();
+
+          // Decrementer, 1 -> 0
+          counter.decrement();
+
+          // Verifieer dat counter op 0 staat
+          assertEquals(0, counter.getValue());
+      }
+    END
+  end
 end

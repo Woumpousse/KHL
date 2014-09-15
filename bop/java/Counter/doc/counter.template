@@ -195,12 +195,31 @@
         We voeren de tests uit.
       </p>      
       <img class="center" style="width:60%;" src="run-test.png"></img>
-      <h3>Stap 11</h3>
+      <h3>Stap 12</h3>
       <p>
         Eclipse voert de tests uit. Een nieuw kader verschijnt met de resultaten.
       </p>      
       <img class="center" style="width:40%;" src="junit.png"></img>
-
+      <h3>Stap 13</h3>
+      <p>
+        Voeg nu een extra test toe in <code>CounterTest</code>. Let op dat deze
+        op de juiste plaats wordt ingevoegd: de testmethode moet binnen de klasse,
+        "naast" de andere testmethodes staan.
+      </p>
+      <pre><%= format(extra_test_code) %></pre>
+      <p>
+        Deze code roept een methode met de naam <code>decrement</code> op
+        op een <code>Counter</code>-object. De klasse <code>Counter</code>
+        definieert echter geen methode met die naam. Eclipse zal dus
+        klagen.
+      </p>
+      <img class="center" style="width:40%;" src="extra-test.png"></img>      
+      <h3>Stap 14</h3>
+      <p>
+        Breid de klasse <code>Counter</code> uit met een methode <code>decrement</code>.
+        Deze moet het tegenovergestelde doen van <code>increment</code>, nl. de waarde
+        met 1 verlagen. Zorg ervoor dat deze tests slagen.
+      </p>
     </div>
   </body>
 </html>
