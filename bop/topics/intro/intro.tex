@@ -1,0 +1,40 @@
+\documentclass{../khlslides}
+
+\usetikzlibrary{calc,decorations.pathmorphing,patterns,mindmap,shapes.arrows,shapes,shadings,arrows,automata,positioning,shadows}
+
+
+\title[Introductie]{Introductie}
+\author{Fr\'ed\'eric Vogels}
+
+
+\newcommand{\codeblock}[3][]{\begin{block}{#3}\lstinputlisting[language=MyJava,#1]{#2}\end{block}}
+\newcommand{\X}[2]{\tikz[baseline,remember picture]{\node[anchor=base,inner sep=0mm] (#2) {{#1}};}}
+
+\lstdefinelanguage{MyJava}[]{java}{
+  escapechar=@,%
+  basicstyle={\ttfamily},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+}
+
+
+
+\begin{document}
+
+\maketitle
+
+\input{overview}
+\input{programmeren}
+\input{oop}
+
+
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
