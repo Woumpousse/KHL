@@ -1,30 +1,31 @@
-.PHONY: assignment solution doc clean
+.PHONY: doc clean assignment_source_zip solution_source_zip
 
-ifeq ($(OS),Windows_NT)
-ZIP = 7z a
-else
-ZIP = zip
-endif
-
-ASSIGNMENT = opgave.zip
-SOLUTION = opgave-met-oplossingen.zip
+-include zip.mk
+-include ssh.mk
 
 
+ASSIGNMENT_SOURCE_ZIP = source.zip
+SOLUTION_SOURCE_ZIP = solution.zip
 
-all: $(ASSIGNMENT) $(SOLUTION)
+REMOTE_DIRECTORY = $(ROOT_REMOTE_DIRECTORY)/exercises/Hangman/
 
-$(ASSIGNMENT): doc
-	$(ZIP) $(ASSIGNMENT) src tests
-	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) $(ASSIGNMENT)
+all:
 
-$(SOLUTION): doc
-	$(ZIP) $(SOLUTION) src tests solution
-	cat doc/export | awk '{printf "doc/%s\n", $$0}' | xargs $(ZIP) $(SOLUTION)
+
+assignment_source_zip:
+	$(ZIP) $(ASSIGNMENT_SOURCE_ZIP) src tests
+
+solution_source_zip:
+	$(ZIP) $(SOLUTION_SOURCE_ZIP) src tests solution
+
+source_zips: assignment_source_zip solution_source_zip
+
+upload_source: source_zips
+	$(call UPLOAD,$(ASSIGNMENT_SOURCE_ZIP),$(REMOTE_DIRECTORY))
+	$(call UPLOAD,$(SOLUTION_SOURCE_ZIP),$(REMOTE_DIRECTORY))
+
+upload: upload_source
+	make -C doc upload
 
 doc:
-	$(MAKE) -C doc
-
-clean:
-	rm -f $(ASSIGNMENT) $(SOLUTION)
-	rm -r -f bin
-	make -C doc clean
+	make -C doc

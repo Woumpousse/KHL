@@ -2,12 +2,22 @@
 
 .PHONY: export
 
+-include ../zip.mk
+-include ../ssh.mk
+
+ZIP_FILE = doc.zip
+REMOTE_DIRECTORY = $(ROOT_REMOTE_DIRECTORY)/exercises/Hangman/
+
+
+
 CONVERT = convert
 IMAGE_OPTIONS = -quality 90 -density 300 -trim
 ICON_OPTIONS = -quality 90 -density 100 -trim -bordercolor white -border 10x10 -transparent white
 CONVERT_IMAGE = $(CONVERT) $(IMAGE_OPTIONS)
 CONVERT_ICON = $(CONVERT) $(ICON_OPTIONS)
 LATEX = pdflatex
+
+
 
 
 all: assignment.html export
@@ -38,5 +48,9 @@ hint.png verify.png next.png previous.png reveal.png reset.png: $$(subst png,pdf
 clean:
 	rm -f *~ *.aux *.pdf *.png *.log export
 
-export:
-	echo *.css *.png assignment.html *.js | ruby -e "puts STDIN.read.split" > export
+zip: assignment.html
+	ruby exports.rb . | dos2unix | xargs $(ZIP) $(ZIP_FILE)
+
+upload: zip
+	$(call UPLOAD,$(ZIP_FILE),$(REMOTE_DIRECTORY))
+	$(SSH) $(LOGIN)@$(URL) "cd $(REMOTE_DIRECTORY); unzip -o $(ZIP_FILE)"
