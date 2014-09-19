@@ -76,3 +76,30 @@ function isPrime(n)
 
     return result;
 }
+
+function sumDigits(n)
+{
+    var result;
+
+    // Schrijf je oplossing hier
+
+    return result;
+}
+
+function greatestSumOfDigitTriples(n)
+{
+    var result;
+
+    // Schrijf je oplossing hier
+
+    return result;
+}
+
+function greatestDigitProduct(n)
+{
+    var result;
+
+    // Schrijf je oplossing hier
+
+    return result;
+}
