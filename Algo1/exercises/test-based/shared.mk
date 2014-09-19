@@ -5,11 +5,10 @@
 all: refimpl.js
 
 refimpl.js: refimpl.ts
-	$(TYPESCRIPT) --out refimpl-maxi.js refimpl.ts
-	cat refimpl-maxi.js | ruby minify.rb > refimpl.js
+	$(TYPESCRIPT) refimpl.ts
 
 clean:
-	rm -f refimpl.js
+	rm -f refimpl.js *~ $(CURRENT.zip)
 
 zip: refimpl.js
 	rm -f $(CURRENT).zip

@@ -1,0 +1,144 @@
+body {
+    background-color: black;
+}
+
+#container {
+    background-color: white;
+    max-width: 1000px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    box-shadow: 0px 0px 10px 20px white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 2px;
+}
+
+h1 {
+    background-color: #CCCCFF;
+    padding: 10px;
+    box-shadow: 2px 2px gray;
+    text-align: center;
+    font-size: 300%;
+    text-shadow: 2px 2px gray;
+}
+
+h2 {
+    background-color: #CCCCFF;
+    padding: 5px;
+    box-shadow: 2px 2px gray;
+}
+
+nav {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #CCCCFF;
+    padding: 5px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+nav ul li {
+    display: inline;
+    padding: 5px;
+}
+
+.testcase-table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testcase-table > tbody > tr:nth-child(3n+1) {
+    border-bottom: thin solid black;
+}
+
+.testcase-table > tbody > tr:first-child {
+    border-bottom: thick solid black;
+}
+
+.testcase-table > tbody > tr > td {
+    padding: 5px;
+    min-width: 50px;
+}
+
+.testcase-table > tbody > tr > td.block-row-caption {
+    font-weight: bold;
+    font-variant: small-caps;
+    padding-right: 10px;
+}
+
+.testcase-table [correct=true] {
+    border-left: 10px green solid;
+}
+
+.testcase-table [correct=false] {
+    border-left: 10px red solid;
+}
+
+span.viewer:after {
+    position: absolute;
+    display: block;
+    visibility: hidden;
+    content: attr(data-full);
+    z-index: 999;
+    background-color: #8888FF;
+    padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+span.viewer {
+    position: relative;
+    display: inline;
+}
+
+span.viewer:hover:after {
+    visibility: visible;
+}
+
+a.focus {
+    font-size: small;
+    float: right;
+}
+
+td.missing-implementation, td.error {
+    text-align: center;
+    font-style: italic;
+    background-color: #FFCCCC;
+}
+
+section.testcase {
+    display: none;
+}
+
+section.testcase[active=true] {
+    display: initial;
+}
+
+table.matrix {
+    border-collapse: collapse;
+}
+
+table.matrix > tbody > tr:nth-child(n+2) td {
+    border-top: thin black solid;
+}
+
+table.matrix > tbody > tr > td:nth-child(n+2) {
+    border-left: thin black solid;
+}
+
+table.matrix td {
+    padding: 2px;
+    text-align: center;
+}
