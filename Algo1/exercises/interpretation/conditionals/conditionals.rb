@@ -3,7 +3,7 @@ require './Controller.rb'
 require './Shared.rb'
 require './Parameters.rb'
 
-class Conditionals < Controller
+class Resources < Controller
   def template(n)
     <<-END.unindent
       <h2>Oefening #{n}</h2>
