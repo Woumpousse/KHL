@@ -3,7 +3,7 @@
 DROPBOX_DIRECTORY = $(DROPBOX_ROOT_FOLDER)/Algo1/1415
 
 
-TEST_BASED_EXERCISES = car conditionals 2d-arrays arrays recursion recursion2 loops functions binary
+TEST_BASED_EXERCISES = conditionals 2d-arrays arrays recursion recursion2 loops functions binary
 OTHER_EXERCISES = fundamentals-interpret conditionals-interpret loops-interpret functions-interpret recursion-interpret arrays-interpret
 SHARED = *.js *.css
 ALL_EXERCISES = $(TEST_BASED_EXERCISES) $(OTHER_EXERCISES)
@@ -42,7 +42,7 @@ zip: $(ALL_EXERCISES)
 
 upload: zip
 	$(call UPLOAD,$(ZIP_FILE),$(DIRECTORY))
-	$(REMOTE_EXECUTE) 'cd $(ROOT_REMOTE_DIRECTORY)/$(DIRECTORY); unzip -o $(ZIP_FILE)'
+	$(REMOTE_EXECUTE) 'cd $(REMOTE_ROOT_DIRECTORY)/$(DIRECTORY); unzip -o $(ZIP_FILE)'
 
 refimpl:
 	echo $(TEST_BASED_EXERCISES) | sed 's/\s/\n/g' | xargs -I{} make -C {} refimpl.js

@@ -1,6 +1,3 @@
-ifeq ($(OS),Windows_NT)
-TYPESCRIPT = tsc
-else
-TYPESCRIPT = true
-endif
+-include $(KHL_ROOT)/shared.mk
 
+EXERCISES_ROOT = $(REMOTE_ROOT_DIRECTORY)
