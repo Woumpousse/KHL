@@ -1,12 +1,12 @@
 .PHONY: doc
 
-all: doc export
+-include $(KHL_ROOT)/shared.mk
+
+all: doc
 
 doc:
 	make -C doc all
 
-export:
-	echo assignment.html *.js *.png | ruby -e "puts STDIN.read.split" > export
-	echo doc/assignment.pdf >> export
+zip:
+	ruby ../exports.rb . | dos2unix | xargs $(ZIP) car.zip
 
-clean:
