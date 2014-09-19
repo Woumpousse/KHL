@@ -2,7 +2,7 @@
 
 LIBS = underscore.js jquery.js clone.js util.js lazy.js test-framework.js html-tests.js
 
-all:
+all: update
 
 libs:
 	find . -mindepth 1 -type d | xargs -I{} sh -c "cat $(LIBS) > '{}/libs.js'"
