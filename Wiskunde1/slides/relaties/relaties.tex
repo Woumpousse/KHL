@@ -28,6 +28,15 @@
   /tikz/.cd,
 }
 
+
+\newcommand{\axes}{
+  \path[use as bounding box] (-.5,-.5) rectangle (4,4);
+  \draw[step=3cm,gray,thin] (-.5,-.5) grid (4,4);
+  \draw[thin,->] (-.5,0) -- (4,0) node[at end,above left] {$A$};
+  \draw[thin,->] (0,-.5) -- (0,4) node[at end,left] {$B$};
+}
+
+
 \begin{document}
 
 \maketitle
@@ -184,6 +193,22 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Oefening}
+  Geef door opsomming en teken de grafiek
+  \[
+      \left\{ \; (x, y)  \;|\; (x, y) \in \mathbb{Z}^2, y = x^2 \right\}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening}
+  Geef door opsomming
+  \[
+      f : \mathbb{Z}^2 \rightarrow \mathbb{Z} : (x, y) \mapsto x \cdot y
+  \]
+\end{frame}
+
+\begin{frame}
   \frametitle{Notaties}
   \begin{itemize}
     \item Opsomming
@@ -199,7 +224,6 @@
 
 \subsection{Functies}
 \frame{ \tableofcontents[currentsubsection] }
-
 
 
 \begin{frame}
@@ -439,6 +463,80 @@
     \end{tabular}
   \end{center}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) -- (1,1);
+      \draw[thick] (2,2) -- (3,3);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) to[out=90,in=-90] (3,3);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (1.5,0) -- (1.5,3);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,1.5) -- (3,1.5);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (0,0) to[out=45,in=180] (1,2) to[out=0,in=180] (2,1) to[out=0,in=225] (3,3);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Oefening 2.9}
+  \begin{center}
+    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    \vskip1cm
+    \begin{tikzpicture}
+      \axes
+      \draw[thick] (1.5,1.5) circle (1cm);
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
 
 \section{Inverse Relatie}
 
