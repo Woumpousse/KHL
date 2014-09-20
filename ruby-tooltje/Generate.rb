@@ -5,13 +5,11 @@ require './Parameters.rb'
 require './Generation.rb'
 
 
-VERSION = 5
-
 def parse_command_line_arguments
   options = {}
 
   optparse = OptionParser.new do |opts|
-    opts.banner = "KHL Generator Release #{VERSION}"
+    opts.banner = "KHL Generator"
 
     options[:verify] = false
     opts.on( '-v', '--verify', 'Verify code where possible') do
