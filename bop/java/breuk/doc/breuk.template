@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BOP: Breuk</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+    <style>
+      img.center {
+        display: block;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Breuk</h1>
+      <section>
+        <h2>Inleiding</h2>
+        <p>
+          Java heeft standaard geen ondersteuning voor breuken. Een <code>double</code> vormt
+          hier niet echt een goed alternatief voor: veel breuken kunnen niet exact
+          voorgesteld worden door een <code>double</code>. Door ons eigen <code>Breuk</code>-klasse
+          te ontwerpen kunnen we dit probleem verhelpen.
+        </p>
+      </section>
+
+      <section>
+        <h2>Velden</h2>
+        <p>
+          Vaak beginnen we bij het schrijven van een nieuwe klasse met de velden.
+          Zonder velden hebben de methodes immers niets om op in te werken.
+        </p>
+        <p>
+          Een breuk bestaat uit twee componenten:
+        </p>
+        <ul>
+          <li>De teller</li>
+          <li>De noemer</li>
+        </ul>
+        <p>
+          Dit zijn meteen ook de enige twee velden die nodig zijn. Immers, wat zou een breuk meer moeten onthouden over zichzelf?
+        </p>
+
+        <div data-question="fill-in-blanks" id="field-types">
+          <p>
+            Vul de veldtypes in.
+          </p>
+          <pre><%= fields.code %></pre>
+        </div>
+
+        <p>
+          Er is echter wel een probleem met onze voorstelling: meerdere breuken die in feite gelijk zijn kunnen voorgesteld
+          worden door objecten met ongelijke velden. Enkele voorbeelden:
+        </p>
+        <ul>
+          <li>De breuk 2/4 is wiskundig gezien gelijk aan 1/2.</li>
+          <li>De breuk -2/3 is equivalent met 2/-3.</li>
+        </ul>
+        <p>
+          Wanneer zulk een fenomeen zich voordoet, kan men best gebruik maken van een <em>canonieke vorm</em>.
+          Dit houdt in dat alle gelijke breuken voorgesteld worden door dezelfde interne waarden. Voor breuken defini&euml;ren
+          we de canonieke vorm als volgt:
+        </p>
+        <ul>
+          <li>
+            De grootste gemene deler van teller en noemer moet gelijk zijn aan 1. Met andere woorden,
+            een canonieke vorm mag niet vereenvoudigbaar zijn. 2/4 is dus niet canoniek, maar wel 1/2.
+          </li>
+          <li>
+            De noemer moet altijd positief zijn. Indien deze negatief is, kan met het teken verplaatsen naar de teller.
+          </li>
+        </ul>
+        <div data-question="fill-in-blanks">
+          <p>
+            Herschrijf de volgende breuken in hun canonieke vorm:
+          </p>
+          <%=
+             HTML::unordered_list( [[3,6], [1,3], [-6,10], [2,-3], [6,3], [9,-6]] ) do |a, b|
+               "#{a}/#{b} = " + HTML::blank_inputbox( simplify(a,b), '', 'ignore_whitespace')
+             end
+          %>
+        </div>
+        <p>
+          Laten we nu code schrijven.
+        </p>
+      </section>
+
+      <section>
+        <h2>Eclipse</h2>
+        <p>
+          Start Eclipse op. Maak een nieuw project aan (vergeet niet de meest recente Javaversie te kiezen).
+          Je krijgt al wat code van ons; download deze <a href="code.zip">hier</a> en voeg
+          deze toe aan je project. Het gaat om de klassen <code>Util</code> en <code>BreukTest</code>.
+        </p>
+        <p>
+          Normaliter zal Eclipse klagen over het bestand <code>BreukTest</code> zoals hieronder getoond.
+        </p>
+        <img class="center" src="errors.png"></img>
+        <p>
+          De reden hiervoor is omdat <code>BreukTest</code> gebruik maakt van een externe library,
+          dewelke je nog moet toevoegen aan je project. De eenvoudigste manier om dit te doen
+          is door met je muiscursor over <code>@Test</code> te hoveren, d.i. er met de cursor
+          naartoe te gaan zonder te klikken. Na een ogenblik zou je volgend menu moeten zien verschijnen:
+        </p>
+        <img class="center" src="junit-fix.png"></img>
+        <p>
+          Selecteer de optie om JUnit 4 aan de build path toe te voegen. Er zouden nu nog tal
+          van fouten moeten zijn van het type <code>Breuk cannot be resolved to a type</code>.
+          Dit is normaal: je hebt de klasse <code>Breuk</code> immers nog nergens gedefinieerd.
+        </p>
+        <p>
+          Je kan de tests al eens uitvoeren. Je kan hiervoor gebruik maken van de toolbarknop:
+        </p>
+        <img class="center" src="run-test.png"></img>
+        <p>
+          De meeste tests falen, wat te verwachten viel.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Implementatie Basiselementen</h2>
+        <p>
+          Voeg een nieuwe klasse toe aan je project, genaamd <code>Breuk</code>. Eclipse
+          maakt een nieuw bestand <code>Breuk.java</code> aan. Vul dit aan met de velden <code>teller</code> en <code>noemer</code> (de code zie je <a href="#field-types">hier</a>.)
+        </p>
+        <p>
+          Nu kunnen we een breuk aanmaken met de volgende code:
+        </p>
+        <pre><%= format('Breuk breuk = new Breuk();') %></pre>
+        <p>
+          We stellen ons nu de vraag welke breuk <code>breuk</code> voorstelt; we hebben immers nergens een teller of noemer gespecificeerd.
+          We kunnen momenteel ook niet de teller- of noemerwaarden opvragen: de velden zijn private. Zo kunnen we volgende code proberen te gebruiken om de teller op te vragen:
+        </p>
+        <pre><%= format('int teller = breuk.teller') %></pre>
+        <p>
+          Eclipse zal aangeven dat dit fout is met als melding <code>The field Breuk.teller is not visible</code>.
+          We zouden ervoor kunnen kiezen om het veld <code>teller</code> publiek te maken, dan zou bovenstaande
+          code wel werken. Dit is echter niet aangeraden: <code>teller</code> stelt de interne toestand voor,
+          de "organen" van het object als het ware, en deze dienen beschermd te blijven.
+        </p>
+        <p>
+          Om gebruikers van <code>Breuk</code> toch de mogelijkheid te geven om teller en noemer
+          op te vragen, kunnen we getter-methodes ter beschikking stellen. Methodes van een klasse
+          kunnen w&eacute;l altijd aan de private componenten van de klasse waartoe ze behoren;
+          m.a.w. ze kunnen wel aan de velden <code>teller</code> en <code>noemer</code>.
+        </p>
+        <p>
+          Een getter voor de teller heet volgens de Java-conventies <code>getTeller</code>.
+          De code ziet er als volgt uit:
+        </p>
+        <pre><%= getTeller_code %></pre>
+        <p>
+          Let op de volgende details:
+        </p>
+        <ul>
+          <li>
+            <p>De access modifier <code>public</code> geeft aan dat de methode <code>getTeller</code> mag opgeroepen
+            worden door gebruikers van de <code>Breuk</code>-klasse. Volgende code is dus geldig:</p>
+            <pre><%= getTeller_code %></pre>
+            <p>Bovenstaande code maakt eerst een <code>Breuk</code>-object aan en bewaart deze in een variabele
+              met naam <code>breuk</code>. Vervolgens wordt aan dit object gevraagd wat zijn teller
+              is via het oproepen van <code>getTeller</code>. Het resultaat van de oproep wordt opgeslagen
+              in de variabele <code>teller</code>.
+            </p>
+            <p>Variabelenamen zijn altijd vrij te kiezen: we vragen je dat ze voldoen aan de conventies (<a href="http://en.wikipedia.org/wiki/Naming_convention_(programming)#Java">camel case</a>)
+              en descriptief is. Bovenstaande code had evengoed zo kunnen geschreven worden:
+            </p>
+        <pre><%= getTeller_code2 %></pre>
+          </li>
+          <li>
+            <p>Het returntype van de methode is <code>int</code>: dit betekent dat de methode <code>getTeller</code> een <code>int</code>
+              teruggeeft als resultaat. Dit is vrij logisch: de teller wordt intern voorgesteld door een <code>int</code>, en als
+              we deze opvragen, verwachten we dan ook een <code>int</code>. Doorgaans zal een getter dus
+              als returntype het type van het overeenkomstig veld hebben.
+            </p>
+          </li>
+          <li>
+            <p>
+              De <code>getTeller</code>-methode verwacht geen parameters: dit is te zien aan de haakjes <code>()</code> waartussen normaalgezien
+              de parameters staan. <code>()</code> stelt de lege parameterlijst voor, m.a.w. <code>getTeller</code> verwacht geen parameters.
+            </p>
+          </li>
+          <li>
+            <p>
+              De body van de <code>getTeller</code>-methode bestaat uit een enkele statement, nl. de <code>return</code>.
+              Een methode maakt gebruik van <code>return</code> om aan te geven welk resultaat het wil opleveren.
+              In ons geval wil de <code>getTeller</code>-methode als resultaat de waarde van het veld <code>teller</code> opleveren.
+            </p>
+          </li>
+        </ul>
+
+        <div data-question="extern">
+          <p>
+            Kopieer de code <code>getTeller</code> naar Eclipse. Schrijf tevens de getter <code>getNoemer</code>.
+          </p>
+        </div>
+        
+        <p>
+          Nu we getters hebben gedefinieerd, kunnen we de teller en noemer opvragen van een <code>Breuk</code>-object.
+          We vroegen ons eerder af welke teller- en noemerwaarden we krijgen bij volgende code:
+        </p>
+        <pre><%= getters_code %></pre>
+        <div data-question="fill-in-blanks">
+          <p>
+            Maak een klasse <code>App</code> aan met daarin een <code>main</code>-methode. Ter herinnering, de <code>main</code>-methode
+            ziet er als volgt uit:
+          </p>
+          <pre><%= format('public static void main(String[] args) { ... }') %></pre>
+          <p>
+            Schrijf bovenstaande code over en voeg code toe (<%= format('System.out.println') %>) om de waarden
+            van <code>teller</code> en <code>noemer</code> naar het scherm te printen. Vul de waarden in die je ontvangt:
+          </p>
+          <ul>
+            <li><code>teller = </code><%= HTML::blank_inputbox('0')%></li>
+            <li><code>noemer = </code><%= HTML::blank_inputbox('0')%></li>
+          </ul>
+        </div>
+        <p>
+          In de huidige situatie zitten we dus vast met <code>Breuk</code>-objecten die 0/0 voorstellen.
+          Dit is problematisch: we kunnen maar &eacute;&eacute;n breukwaarde voorstellen,
+          en deze is dan nog eens wiskundig ongeldig. Er zijn dus twee problemen die we wensen op te lossen:
+        </p>
+        <ul>
+          <li>
+            We willen kunnen aangeven welke breukwaarde een <code>Breuk</code>-object voorstelt.
+            Zo willen we <code>Breuk</code>-objecten kunnen aanmaken die 2/3, -4/9, &hellip; voorstellen.
+          </li>
+          <li>
+            We willen kunnen verbieden dat er ongeldige breuken aangemaakt worden. M.a.w. de noemer mag niet 0 zijn.
+          </li>
+        </ul>
+        <p>
+          <em>Constructoren</em> bieden een oplossing voor beide deze problemen. Een constructor
+          is een speciale methode die automatisch wordt opgeroepen bij de aanmaak van een object (m.a.w. wanneer
+          <code>new</code> wordt gebruikt). Een constructor kan parameters hebben dewelke
+          hij gebruikt om te weten hoe het nieuwe object moet ge&iuml;nitialiseerd moet worden.
+          In ons geval zal de <code>Breuk</code>-constructor twee parameters hebben:
+          &eacute;&eacute;n voor de teller, &eacute;&eacute;n voor de noemer.
+        </p>
+        <pre><%= constructor_code %></pre>
+        <p>
+          Let op het volgende:
+        </p>
+        <ul>
+          <li>
+            <p>Een constructor heeft dezelfde naam als de klasse waartoe deze behoort.</p>
+          </li>
+          <li>
+            <p>Een constructor heeft <em>geen</em> returntype.</p>
+          </li>
+          <li>
+            <p>
+              De constructor heeft twee parameters, genaamd <code>a</code> en <code>b</code>, dewelke
+              gebruikt worden om <code>teller</code> en <code>noemer</code>, respectievelijk, te initialiseren.
+              <code>a</code> en <code>b</code> zijn echter geen goede namen; het gaat
+              om de teller en noemer van de breuk, dus in principe zouden de parameters zelf ook
+              <code>teller</code> en <code>noemer</code> moeten heten. De velden hebben deze namen echter al, wat
+              voor problemen zorgt. Later zullen we zien hoe we dit probleem elegant kunnen oplossen.
+            </p>
+          </li>
+        </ul>
+        <p>
+          Nu we een constructor hebben gedefinieerd met twee parameters, moeten we bij aanmaak van een
+          <code>Breuk</code>-object tevens twee argumenten meegeven.
+        </p>
+        <pre><%= breuk_creation %></pre>
+        <div data-question="fill-in-blanks">
+          <p>
+            De uitvoer van dit programma is <%= HTML::blank_inputbox(interpret_creation.output) %>
+          </p>
+          <pre><%= interpret_creation.code %></pre>
+        </div>
+
+
+        <p>
+          Om in Java de canonieke vorm te vinden, kan je als volgt te werk gaan:
+        </p>
+        <ol>
+          <li>
+            Zorg er eerst voor dat de noemer positief is. Je kan het teken omkeren van een variabele d.m.v. <code>x = -x;</code>
+          </li>
+          <li>
+            Neem de grootste gemene deler van de teller en de noemer.
+          </li>
+        </ol>
+      </section>
+    </div>
+  </body>
+</html>
