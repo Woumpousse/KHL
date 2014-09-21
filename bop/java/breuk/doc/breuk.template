@@ -63,7 +63,7 @@
           Dit houdt in dat alle gelijke breuken voorgesteld worden door dezelfde interne waarden. Voor breuken defini&euml;ren
           we de canonieke vorm als volgt:
         </p>
-        <ul>
+        <ul id="canonical">
           <li>
             De grootste gemene deler van teller en noemer moet gelijk zijn aan 1. Met andere woorden,
             een canonieke vorm mag niet vereenvoudigbaar zijn. 2/4 is dus niet canoniek, maar wel 1/2.
@@ -267,24 +267,129 @@
         </p>
         <pre><%= breuk_creation %></pre>
         <div data-question="fill-in-blanks">
-          <p>
-            De uitvoer van dit programma is <%= HTML::blank_inputbox(interpret_creation.output) %>
-          </p>
           <pre><%= interpret_creation.code %></pre>
+          <p>
+            Zonder gebruik te maken van Eclipse, wat is de uitvoer van dit programma? <%= HTML::blank_inputbox(interpret_creation.output, '', 'ignore_whitespace') %>
+          </p>
         </div>
 
+        <div data-question="extern">
+          <p>
+            Voeg de constructor toe aan je Eclipse-code. Voer de tests uit. De test met naam <code>testConstructor</code>
+            zou moeten slagen.
+          </p>
+        </div>
+
+        <p>
+          De constructor staat nog niet op punt: een <code>0</code> ingeven als noemer wordt aanvaard. We moeten de constructor
+          laten checken op geldige waarden.
+        </p>
+
+        <div data-question="extern">
+          <p>
+            Voeg code toe aan de constructor die nagaat of de gegeven noemer (m.a.w. parameter <code>b</code>) gelijk is aan <code>0</code>
+            m.b.v. een <a href="http://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html">if-statement</a>.
+            Indien dit het geval, moet het programma afgebroken worden met een <em>exception</em>. Dit doe je met d.m.v. volgende code:
+          </p>
+          <pre><%= format('throw new IllegalArgumentException();') %></pre>
+          <p>
+            Indien je de constructor correct hebt uitgebreid, zou de test <code>constructor_NoemerMagNietNulZijn</code> ook moeten slagen.
+          </p>
+        </div>
+
+        <p>
+          De constructor staat nog niet op punt. We hadden het eerder over de canonieke vorm. We willen
+          nu dat de constructor, gegeven een teller en een noemer, de breuk vereenvoudigt volgens
+          de <a href="#canonical">eerder vermelde regels</a>.
+        </p>
 
         <p>
           Om in Java de canonieke vorm te vinden, kan je als volgt te werk gaan:
         </p>
         <ol>
           <li>
-            Zorg er eerst voor dat de noemer positief is. Je kan het teken omkeren van een variabele d.m.v. <code>x = -x;</code>
+            <p>Zorg er eerst voor dat de noemer positief is. Je kan het teken omkeren van een variabele d.m.v. <code>x = -x;</code></p>
           </li>
           <li>
-            Neem de grootste gemene deler van de teller en de noemer.
+           <p>Neem de grootste gemene deler van de teller en de noemer. Om de grootste gemene deler van de waarden in variabelen <code>x</code>
+             en <code>y</code> te vinden, kan je gebruik maken van de volgende code:
+           </p>
+           <pre><%= format('int ggdVanXEnY = Util.ggd(x, y);') %></pre>
+          </li>
+          <li>
+            <p>Deel beide teller en noemer door deze grootste gemene deler.</p>
           </li>
         </ol>
+
+        <div data-question="extern">
+          <p>
+            Voeg code toe aan de constructor die de teller en noemer naar canonieke vorm omzet.
+          </p>
+          <p>
+            Indien je de constructor correct hebt uitgebreid, zouden de tests <code>constructor_MetVereenvoudigen</code> en <code>constructor_MetVereenvoudigen2</code> ook moeten slagen.
+          </p>
+        </div>
+
+        <div data-question="fill-in-blanks">
+          <pre><%= interpret_canonical.code %></pre>
+          <p>
+            Zonder gebruik te maken van Eclipse, wat is de uitvoer van dit programma? <%= HTML::blank_inputbox(interpret_canonical.output, '', 'ignore_whitespace') %>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Tweede Constructor</h2>
+        <p>
+          Een klasse kan meerdere constructoren defini&euml;ren. Stel dat we een gewoon geheel getal willen voorstellen
+          als een breuk, bv. 8/1. Momenteel moeten we hiervoor
+        </p>
+        <pre><%= format('Breuk b = new Breuk(8, 1);') %></pre>
+        <p>
+          schrijven. Een alternatieve, eenvoudigere syntax zou zijn
+        </p>
+        <pre><%= format('Breuk b = new Breuk(8); // maakt 8/1 aan') %></pre>
+        <p>
+          Momenteel dicteert de <code>Breuk</code>-constructor dat we bij het aanmaken
+          van een <code>Breuk</code>-object twee parameters moeten doorgeven.
+          Onze alternatieve syntax zou door Eclipse dus niet goedgekeurd worden.
+        </p>
+        <p>
+          Het is echter mogelijk meerdere constructoren te defini&euml;ren.
+          Dit staat bekend als <em>constructor overloading</em>.
+        </p>
+        <div data-question="extern">
+          <p>
+            Voeg een tweede constructor toe. Deze moet &eacute;&eacute;n parameter hebben, waarvan
+            de waarde in het veld <code>teller</code> wordt bewaard. Het veld <code>noemer</code>
+            wordt op <code>1</code> ge&iuml;nitialiseerd.
+            De test <code>unaireConstructor</code> moet hierna slagen.
+          </p>
+        </div>
+        <p>
+          Je hebt nu twee constructoren die beiden de velden initialiseren. Dit is eigenlijk
+          wat redundant; tijdens het programmeren is het zeer belangrijk alle vormen
+          van redundantie te vermijden.
+        </p>
+        <p>
+          Je tweede constructor kan in feite beroep doen op de eerste constructor:
+          eigenlijk wil de tweede constructor de eerste oproepen met argumenten <code>(teller, 1)</code>.
+          Dit is perfect mogelijk als volgt:
+        </p>
+        <pre><%= constructor_this %></pre>
+        <div data-question="extern">
+          <p>
+            Voer deze wijziging door en ga na dat de eerder geslaagde tests nog steeds slagen.
+          </p>
+        </div>
+      </section>
+
+
+      <section>
+        <h2>Breuken Vermenigvuldigen</h2>
+        <p>
+          We kunnen nu <code>Breuk</code>-objecten aanmaken en de er teller en noemer van opvragen. Dit is vrij beperkt: 
+        </p>
       </section>
     </div>
   </body>

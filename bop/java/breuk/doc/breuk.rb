@@ -96,7 +96,6 @@ class Resources < Controller
 
   def interpret_creation
     once(__method__) do
-      # Classes must have no access modifier!
       Questions::Java::InterpretCode.new.parse( <<-'END'.unindent.strip, <<-'BACKGROUND'.unindent )
         class App
         {
@@ -128,4 +127,85 @@ class Resources < Controller
       BACKGROUND
     end
   end
+
+  def interpret_canonical
+    once(__method__) do
+      Questions::Java::InterpretCode.new.parse( <<-'END'.unindent.strip, <<-'BACKGROUND'.unindent )
+        class App
+        {
+            public static void main(String[] args)
+            {
+                Breuk breuk = new Breuk(5, -15);
+
+                System.out.println( breuk.getTeller() + "/" + breuk.getNoemer() );
+            }
+        }
+      END
+        class Breuk {
+            private int teller;
+            private int noemer;
+
+            public Breuk(int teller, int noemer) {
+                if ( noemer < 0 ) {
+                    teller = -teller;
+                    noemer = -noemer;
+                }
+
+                this.teller = teller / Util.ggd(teller, noemer);
+                this.noemer = noemer / Util.ggd(teller, noemer);
+            }
+
+            public int getTeller() {
+                return this.teller;
+            }
+
+            public int getNoemer() {
+                return this.noemer;
+            }
+        }
+
+        class Util
+        {
+            public static int ggd(int x, int y)
+            {
+                x = Math.abs( x );
+                y = Math.abs( y );
+
+                while ( y != 0 )
+                {
+                    if ( x < y )
+                    {
+                        int temp = x;
+                        x = y;
+                        y = temp;
+                    }
+                    else
+                    {
+                        x %= y;
+                    }
+                }
+
+                return x;
+            }
+        }
+      BACKGROUND
+    end
+  end
+
+  def constructor_this
+    format(<<-'END')
+      class Breuk {
+          private int teller;
+          private int noemer;
+
+          public Breuk(int a, int b) { ... }
+
+          public Breuk(int a) {
+              // Roept de andere constructor op
+              this(a, 1);
+          }
+      }
+    END
+  end
+
 end
