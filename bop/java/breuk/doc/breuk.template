@@ -7,7 +7,7 @@
     <script src="khl.js"></script>
     <link rel="stylesheet" href="khl.css">
     <style>
-      img.center {
+      .center {
         display: block;
         margin: 10px auto;
       }
@@ -71,6 +71,11 @@
           <li>
             De noemer moet altijd positief zijn. Indien deze negatief is, kan met het teken verplaatsen naar de teller.
           </li>
+          <li>
+            Een breuk kan gelijk zijn aan 0: voorbeelden hiervan zijn 0/5 en 0/9. Als canonieke vorm
+            kiezen we 0/1 om 0 voor te stellen. Dit is conform de vorige regels: 1 is positief, en de grootste
+            gemene deler van 0 en 1 is 1.
+          </li>
         </ul>
         <div data-question="fill-in-blanks">
           <p>
@@ -78,7 +83,7 @@
           </p>
           <%=
              HTML::unordered_list( [[3,6], [1,3], [-6,10], [2,-3], [6,3], [9,-6]] ) do |a, b|
-               "#{a}/#{b} = " + HTML::blank_inputbox( simplify(a,b), '', 'ignore_whitespace')
+               "#{a}/#{b} = " + HTML::blank_inputbox( simplify_s(a,b), '', 'ignore_whitespace')
              end
           %>
         </div>
@@ -382,14 +387,159 @@
             Voer deze wijziging door en ga na dat de eerder geslaagde tests nog steeds slagen.
           </p>
         </div>
+        <p>
+          In het algemeen zal gelden dat indien je meerdere constructoren hebt,
+          er &eacute;&eacute;n "hoofdconstructor" alle velden zal initialiseren, en de andere
+          constructoren zullen beroep doen op deze hoofdconstructor.
+        </p>
       </section>
 
+      <section>
+        <h2>Unaire Operaties</h2>
+        <p>
+          We kunnen nu <code>Breuk</code>-objecten aanmaken en de er teller en noemer van opvragen. Dit is vrij beperkt;
+          liefst zijn er ook operaties die we kunnen toepassen op onze breuken. Zo denken we aan
+        </p>
+        <ul>
+          <li>Optelling: <code>a/b + c/d</code></li>
+          <li>Aftrekking: <code>a/b - c/d</code></li>
+          <li>Vermenigvuldiging: <code>a/b * c/d</code></li>
+          <li>Deling: <code>a/b / c/d</code></li>
+          <li>Tegengestelde: <code>-a/b</code></li>
+          <li>Inversie: <code>(a/b)<sup>-1</sup></code></li>
+          <li>Gelijkheid: <code>a/b == c/d</code></li>
+          <li>
+            Vergelijking: <code>a/b &lt; c/d</code>, <code>a/b &le; c/d</code>, <code>a/b &gt; c/d</code>, <code>a/b &ge; c/d</code>
+          </li>
+        </ul>
+        <p>
+          We beginnen met de tegengestelde: deze lijkt de eenvoudigste operatie om te implementeren. De tegengestelde breuk
+          van een breuk a/b is de breuk -a/b.
+        </p>
+
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul in
+          </p>
+          <%=
+             HTML::unordered_list( [[1,2], [3,-6], [0,5]] ) do |a, b|
+               "Tegengestelde van #{a}/#{b} = " + HTML::blank_inputbox( opposite_s(a,b), '', 'ignore_whitespace')
+             end
+          %>
+        </div>
+
+        <p>
+          We kunnen deze operator implementeren als een methode:
+        </p>
+        <pre><%= opposite_code %></pre>
+        <p>
+          Merk op:
+        </p>
+        <ul>
+          <li>
+            De methode <code>tegengestelde</code> heeft als returntype <code>Breuk</code>. Dit houdt steek:
+            het tegengestelde van een breuk is immers weer een breuk.
+          </li>
+          <li>
+            In de body van de methode <code>tegengestelde</code> maken we een nieuwe breuk aan
+            met een gepaste teller en noemer. 
+          </li>
+        </ul>
+        <div data-question="extern">
+          <p>
+            Voeg de methode <code>tegengestelde</code> toe aan je code in Eclipse. Ga na of de test <code>test_tegengestelde</code> slaagt.
+          </p>
+        </div>
+
+        <p>
+          We focussen nu op invertering. De inverse van een breuk <code>a/b</code> is <code>b/a</code>.
+        </p>
+        <div data-question="fill-in-blanks">
+          <p>
+            Vul in
+          </p>
+          <%=
+             HTML::unordered_list( [[1,2], [3,-6], [1,5]] ) do |a, b|
+               "Inverse van #{a}/#{b} = " + HTML::blank_inputbox( invert_s(a,b), '', 'ignore_whitespace')
+             end
+          %>
+        </div>
+        <div data-question="extern">
+          <p>
+            Voeg de methode <code>inverse</code> toe aan je code in Eclipse. Wees zeker dat de tests <code>inverteer</code> en <code>inverteer_nul</code> slagen.
+          </p>
+        </div>
+      </section>
 
       <section>
-        <h2>Breuken Vermenigvuldigen</h2>
-        <p>
-          We kunnen nu <code>Breuk</code>-objecten aanmaken en de er teller en noemer van opvragen. Dit is vrij beperkt: 
+        <h2>Binaire Operaties</h2>
+        <p>De operaties <code>tegengestelde</code> en <code>inverse</code> werken in op &eacute;&eacute;n breuk; vandaar
+          de benaming <em>unaire operatoren</em>. Nu schakelen we over naar <em>binaire operatoren</em>:
+          dit zijn operatoren waar twee breuken bij betrokken zijn.
         </p>
+        <p>
+          Laten we beginnen bij de optelling. De optelling van breuken kunnen we defini&euml;ren als volgt:
+        </p>
+        <p style="text-align:center;">
+          <code>a/b + c/d = (a * d + b * c) / (b * d)</code>
+        </p>
+        <p>
+          Deze formule zorgt ervoor dat beide breuken eerst op gelijke noemer gezet worden waarna de tellers
+          opgeteld kunnen worden. In Java ziet de code er als volgt uit:
+        </p>
+        <pre><%= addition_code %></pre>
+        <p>
+          Korte bespreking:
+        </p>
+        <ul>
+          <li>
+            <p>
+              Om breuken op te tellen heeft men twee breuken nodig. Bij de optelling <code>a/b + c/d</code>
+              wordt de linkeroperand voorgesteld door het <code>Breuk</code>-object waarop de methode
+              <code>telOp</code> wordt opgeroepen, en de rechteroperand wordt doorgegeven als parameter.
+              In code ziet optellen er als volgt uit:
+            </p>
+            <pre><%= telOp_code %></pre>
+          </li>
+          <li>
+            De code in de body hadden we op &eacute;&eacute;n lijn kunnen plaatsen,
+            maar dit zou onoverzichtelijk zijn geweest. Daarom voerden we lokale variabelen in,
+            genaamd <code>a</code> en <code>b</code>. Deze vormen een soort "klad",
+            een tijdelijke werkplaats om tussenresultaten in te bewaren.
+          </li>
+        </ul>
+        <div data-question="extern">
+          <p>
+            Voeg de methode <code>telOp</code> toe aan je code in Eclipse. Verzeker je dat de corresponderende tests slagen.
+          </p>
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de methode <code>vermenigvuldig</code>. Vermenigvuldiging van breuken gaat als volgt:
+          </p>
+          <p style="text-align:center;">
+            <code>a/b * c/d = (a * c)/(b * d)</code>
+          </p>
+          <p>Ga na dat de corresponderende tests slagen.</p>
+        </div>
+        <p>
+          We focussen nu op de aftrekking. Wiskundig is dit gelijk aan
+        </p>
+        <p style="text-align:center;">
+          <code>a/b - c/d = (a * d - b * c) / (b * d)</code>
+        </p>
+        <p>
+          We zouden deze relatief ingewikkelde formule rechtstreeks kunnen implementeren,
+          maar er bestaat een eenvoudiger verband:
+        </p>
+        <p style="text-align:center;">
+          <code>a/b - c/d = a/b + (-c/d)</code>
+        </p>
+        <p>
+          We kunnen dus de aftrekking herschrijven in functie van de optelling en het tegengestelde.
+          Dit kan ook in code:
+        </p>
+        <pre><%= trekAf_code %></pre>
       </section>
     </div>
   </body>
