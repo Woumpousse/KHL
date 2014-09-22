@@ -18,9 +18,17 @@
       }
 
       table.center {
-        max-width: 50%;
         margin-left: auto;
         margin-right: auto;
+      }
+
+      table.links tr {
+        text-align: center;
+        line-height: 50px;
+      }
+
+      table.links td {
+        min-width: 80px;
       }
     </style>
   </head>
@@ -411,7 +419,7 @@
           We kunnen nu <code>Breuk</code>-objecten aanmaken en de er teller en noemer van opvragen. Dit is vrij beperkt;
           liefst zijn er ook operaties die we kunnen toepassen op onze breuken. Zo denken we aan
         </p>
-        <table class="center">
+        <table class="center links" style="width: 450px;">
           <tr>
             <td>Optelling</td>
             <td><latex>\frac{a}{b} + \frac{c}{d}</latex></td>
@@ -565,6 +573,135 @@
           Dit kan ook in code:
         </p>
         <pre><%= trekAf_code %></pre>
+        <p>
+          Het is belangrijk dat je doorhebt hoe de Javacode gerelateerd is met het aftrekken van breuken.
+          Gegeven de wiskundige bewerking
+        </p>
+        <latex class="center">\frac{a}{b} - \frac{c}{d}</latex>
+        <p>dan komen de volgende elementen overeen:</p>
+        <table class="center links" style="width: 45%;">
+          <tr><th style="width:50px;">Wiskunde</th><th style="width:350px;">Java</th></tr>
+          <tr>
+            <td><latex>a</latex></td>
+            <td><code>teller</code></td>
+          </tr>
+          <tr>
+            <td><latex>b</latex></td>
+            <td><code>noemer</code></td>
+          </tr>
+          <tr>
+            <td><latex>c</latex></td>
+            <td><code>andere.getTeller()</code></td>
+          </tr>
+          <tr>
+            <td><latex>d</latex></td>
+            <td><code>andere.getNoemer()</code></td>
+          </tr>
+          <tr>
+            <td><latex>-\frac{c}{d}</latex></td>
+            <td><code>andere.tegengestelde()</code></td>
+          </tr>
+          <tr>
+            <td><latex>\frac{a}{b}-\frac{c}{d}</latex></td>
+            <td><code>telOp( andere.tegengestelde() )</code></td>
+          </tr>
+        </table>
+        <div data-question="extern">
+          <p>
+            Voeg de code voor <code>trekAf</code> toe in Eclipse.
+          </p>
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de methode <code>deel</code> gebruik makende van de volgende gelijkheid:
+          </p>
+          <latex class="center">\frac{a}{b} / \frac{c}{d} = \frac{a}{b} \cdot \left(\frac{d}{c}\right)^{-1}</latex>
+          <p>
+            Zorg ervoor dat alle betrokken tests werken.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Gelijkheid en Vergelijking</h2>
+        <p>
+          Twee breuken zijn gelijk indien tellers en noemers &eacute;&eacute;n aan &eacute;&eacute;n gelijk zijn.
+          Omdat we breuken telkens in canonieke vorm bijhouden, hoeven we ons geen zorgen te maken
+          over mogelijke vereenvoudigingen.
+        </p>
+        <div data-question="fill-in-blanks" id="field-types">
+          <p>
+            Vul de types in.
+          </p>
+          <pre><%= equality.code %></pre>
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de code voor <code>isGelijkAan</code> in Eclipse. Schrijf
+            tevens de methode <code>isNietGelijkAan</code>, dewelke
+            <code>isGelijkAan</code> oproept. Zorg ervoor dat de tests slagen.
+          </p>
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de volgende methodes:
+          </p>
+          <table class="center links" style="width:550px;">
+            <tr><th style="min-width:200px;">Methode</th><th style="width:150px;">Voorbeeldgebruik</th><th style="width:100px;">Betekenis</th></tr>
+            <tr>
+              <td><code>isPositief</code></td>
+              <td><code>b.isPositief()</code></td>
+              <td><latex>b \geq 0</latex></td>
+            </tr>
+            <tr>
+              <td><code>isStriktPositief</code></td>
+              <td><code>b.isStriktPositief()</code></td>
+              <td><latex>b > 0</latex></td>
+            </tr>
+            <tr>
+              <td><code>isNegatief</code></td>
+              <td><code>b.isNegatief()</code></td>
+              <td><latex>b \leq 0</latex></td>
+            </tr> 
+            <tr>
+              <td><code>isStriktNegatief</code></td>
+              <td><code>b.isStriktNegatief()</code></td>
+              <td><latex>b < 0</latex></td>
+            </tr>
+         </table>
+          <p>
+            Merk op dat enkel de teller een rol speelt in het schrijven van deze methodes:
+            de canonieke vorm verbiedt immers dat de noemer negatief wordt.
+          </p>
+        </div>
+        <div data-question="extern">
+          <p>
+            Schrijf de volgende methodes:
+          </p>
+          <table class="center links" style="width:450px;">
+            <tr><th style="width:150px;">Voorbeeldgebruik</th><th style="width:100px;">Betekenis</th></tr>
+            <tr>
+              <td><code>a.isKleinerDan(b)</code></td>
+              <td><latex>a < b</latex></td>
+            </tr>
+            <tr>
+              <td><code>a.isKleinerDanOfGelijkAan(b)</code></td>
+              <td><latex>a \leq b</latex></td>
+            </tr>
+            <tr>
+              <td><code>a.isGroterDan(b)</code></td>
+              <td><latex>a > b</latex></td>
+            </tr> 
+            <tr>
+              <td><code>a.isGroterDanOfGelijkAan(b)</code></td>
+              <td><latex>a \geq b</latex></td>
+            </tr>
+          </table>
+          <p>Een eenvoudige aanpak om <code>isKleinerDan</code> te implementeren is</p>
+          <pre><%= format('return trekAf(b).isNegative();') %></pre>
+          <p>Gelijkaarde implementaties zijn mogelijk voor de andere methodes.</p>
+        </div>
+                
       </section>
     </div>
   </body>

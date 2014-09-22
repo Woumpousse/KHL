@@ -243,4 +243,20 @@ class Resources < Controller
       }
     END
   end
+
+  def equality
+    once(__method__) do
+      Questions::Java::FillInTypes.new.parse( <<-'END'.unindent.strip )
+        class Breuk
+        {
+            // ...
+
+            public __boolean__ isGelijkAan(__Breuk__ andere) {
+                return teller == andere.getTeller() &&
+                       noemer == andere.getNoemer();
+            }
+        }   
+      END
+    end
+  end
 end
