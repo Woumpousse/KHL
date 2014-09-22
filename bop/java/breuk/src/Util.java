@@ -7,17 +7,23 @@ public class Util
      */
     public static int ggd(int x, int y)
     {
-        if ( y == 0 )
+        x = Math.abs( x );
+        y = Math.abs( y );
+
+        while ( y != 0 )
         {
-            return x;
+            if ( x < y )
+            {
+                int temp = x;
+                x = y;
+                y = temp;
+            }
+            else
+            {
+                x %= y;
+            }
         }
-        else if ( x < y )
-        {
-            return ggd( y, x );
-        }
-        else
-        {
-            return ggd( y, x % y );
-        }
+
+        return x;
     }
 }
