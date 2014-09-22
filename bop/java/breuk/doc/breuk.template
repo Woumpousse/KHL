@@ -115,7 +115,7 @@
         <h2>Eclipse</h2>
         <p>
           Start Eclipse op. Maak een nieuw project aan (vergeet niet de meest recente Javaversie te kiezen).
-          Je krijgt al wat code van ons; download deze <a href="code.zip">hier</a> en voeg
+          Je krijgt al wat code van ons; download deze <a href="source.zip">hier</a> en voeg
           deze toe aan je project. Het gaat om de klassen <code>Util</code> en <code>BreukTest</code>.
         </p>
         <p>
@@ -701,7 +701,6 @@
           <pre><%= format('return trekAf(b).isNegative();') %></pre>
           <p>Gelijkaarde implementaties zijn mogelijk voor de andere methodes.</p>
         </div>
-                
       </section>
     </div>
   </body>
