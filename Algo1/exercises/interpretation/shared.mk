@@ -28,5 +28,5 @@ zip: current
 
 upload: zip
 	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT); mkdir -p $(CURRENT)")
-	$(call UPLOAD,$(CURRENT).zip,$(EXERCISES_ROOT)/$(CURRENT))
-	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT)/$(CURRENT); unzip -o $(CURRENT)")
+	$(call UPLOAD,$(CURRENT)-interpret.zip,$(EXERCISES_ROOT)/$(CURRENT))
+	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT)/$(CURRENT); unzip -o $(CURRENT)-interpret")
