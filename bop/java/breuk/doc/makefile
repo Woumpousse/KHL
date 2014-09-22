@@ -29,4 +29,7 @@ export:
 CURRENT = breuk
 
 current: 
-	ruby Generate.rb --output $(CURRENT).html --template $(CURRENT).template --require ./$(CURRENT).rb --class Resources -p 2
+	ruby Generate.rb --output $(CURRENT)-intermediary.html --template $(CURRENT).template --require ./$(CURRENT).rb --class Resources -p 2
+	ruby latex.rb --input $(CURRENT)-intermediary.html --output $(CURRENT).html --latex $(CURRENT).tex
+	pdflatex $(CURRENT).tex
+	$(IMAGEMAGICK) -quality 90 -density 150 -trim $(CURRENT).pdf latex%d.png

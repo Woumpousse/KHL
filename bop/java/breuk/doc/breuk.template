@@ -11,6 +11,17 @@
         display: block;
         margin: 10px auto;
       }
+
+      img.latex {
+        display: block;
+        margin: 10px auto;
+      }
+
+      table.center {
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
   </head>
   <body>
@@ -400,18 +411,40 @@
           We kunnen nu <code>Breuk</code>-objecten aanmaken en de er teller en noemer van opvragen. Dit is vrij beperkt;
           liefst zijn er ook operaties die we kunnen toepassen op onze breuken. Zo denken we aan
         </p>
-        <ul>
-          <li>Optelling: <code>a/b + c/d</code></li>
-          <li>Aftrekking: <code>a/b - c/d</code></li>
-          <li>Vermenigvuldiging: <code>a/b * c/d</code></li>
-          <li>Deling: <code>a/b / c/d</code></li>
-          <li>Tegengestelde: <code>-a/b</code></li>
-          <li>Inversie: <code>(a/b)<sup>-1</sup></code></li>
-          <li>Gelijkheid: <code>a/b == c/d</code></li>
-          <li>
-            Vergelijking: <code>a/b &lt; c/d</code>, <code>a/b &le; c/d</code>, <code>a/b &gt; c/d</code>, <code>a/b &ge; c/d</code>
-          </li>
-        </ul>
+        <table class="center">
+          <tr>
+            <td>Optelling</td>
+            <td><latex>\frac{a}{b} + \frac{c}{d}</latex></td>
+          </tr>
+          <tr>
+            <td>Aftrekking</td>
+            <td><latex>\frac{a}{b} - \frac{c}{d}</latex></td>
+          </tr>
+          <tr>
+            <td>Vermenigvuldiging</td>
+            <td><latex>\frac{a}{b} \cdot \frac{c}{d}</latex></td>
+          </tr>
+          <tr>
+            <td>Deling</td>
+            <td><latex>\frac{a}{b} / \frac{c}{d}</latex></td>
+          </tr>
+          <tr>
+            <td>Tegengestelde</td>
+            <td><latex>-\frac{a}{b}</latex></td>
+          </tr>
+          <tr>
+            <td>Inverse</td>
+            <td><latex>\left(\frac{a}{b}\right)^{-1}</latex></td>
+          </tr>
+          <tr>
+            <td>Gelijkheid</td>
+            <td><latex>\frac{a}{b} = \frac{c}{d}</latex></td>
+          </tr>
+          <tr>
+            <td>Vergelijking</td>
+            <td><latex>\frac{a}{b} < \frac{c}{d}, \frac{a}{b} \leq \frac{c}{d}, \frac{a}{b} \geq \frac{c}{d}, \frac{a}{b} > \frac{c}{d}</latex></td>
+          </tr>
+        </table>
         <p>
           We beginnen met de tegengestelde: deze lijkt de eenvoudigste operatie om te implementeren. De tegengestelde breuk
           van een breuk a/b is de breuk -a/b.
@@ -480,9 +513,7 @@
         <p>
           Laten we beginnen bij de optelling. De optelling van breuken kunnen we defini&euml;ren als volgt:
         </p>
-        <p style="text-align:center;">
-          <code>a/b + c/d = (a * d + b * c) / (b * d)</code>
-        </p>
+        <latex class="center">\frac{a}{b} + \frac{c}{d} = \frac{a \cdot d + b \cdot c}{b \cdot d}</latex>
         <p>
           Deze formule zorgt ervoor dat beide breuken eerst op gelijke noemer gezet worden waarna de tellers
           opgeteld kunnen worden. In Java ziet de code er als volgt uit:
@@ -517,24 +548,18 @@
           <p>
             Schrijf de methode <code>vermenigvuldig</code>. Vermenigvuldiging van breuken gaat als volgt:
           </p>
-          <p style="text-align:center;">
-            <code>a/b * c/d = (a * c)/(b * d)</code>
-          </p>
+          <latex class="center">\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}</latex>
           <p>Ga na dat de corresponderende tests slagen.</p>
         </div>
         <p>
           We focussen nu op de aftrekking. Wiskundig is dit gelijk aan
         </p>
-        <p style="text-align:center;">
-          <code>a/b - c/d = (a * d - b * c) / (b * d)</code>
-        </p>
+        <latex class="center">\frac{a}{b} - \frac{c}{d} = \frac{a \cdot d - b \cdot c}{b \cdot d}</latex>
         <p>
           We zouden deze relatief ingewikkelde formule rechtstreeks kunnen implementeren,
           maar er bestaat een eenvoudiger verband:
         </p>
-        <p style="text-align:center;">
-          <code>a/b - c/d = a/b + (-c/d)</code>
-        </p>
+        <latex class="center">\frac{a}{b} - \frac{c}{d} = \frac{a}{b} + \left(-\frac{c}{d}\right)</latex>
         <p>
           We kunnen dus de aftrekking herschrijven in functie van de optelling en het tegengestelde.
           Dit kan ook in code:
