@@ -1,0 +1,116 @@
+\chapter{Conditionele Logica}
+Een programma dat altijd hetzelfde doet zou maar een saai programma zijn.
+Stel je bijvoorbeeld een muziekspeler voor die telkens hetzelfde liedje afspeelt.
+We willen natuurlijk dat een gebruiker invoer kan leveren (bijv. een liedje uit zijn
+muziekbibliotheek kiezen), en dat het programma daar dan op reageert (het gekozen liedje afspeelt).
+
+Om zulke code te schrijven hebben we conditionele logica nodig. Dit zijn stukjes code die enkel uitgevoerd worden onder bepaalde voorwaarden. In JavaScript kunnen we hier het if-sleutelwoord voor gebruiken.
+
+\examplecode{ConditioneleLogica/example.js}
+
+De \emph{<conditie>} in bovenstaand voorbeeld moet vervangen worden door een stukje JavaScript dat evalueert naar een boolse waarde (de waarde \textbf{true} of \textbf{false}). Indien het resultaat true is, dan zal de conditionele code die binnen de haakjes staat uitgevoerd worden.
+
+Als conditie gaan we meestal een eerder berekend resultaat (of een resultaat van een methode die we hebben opgeroepen) vergelijken met iets. Bijvoorbeeld, stel dat we een programma willen schrijven dat aan de gebruiker een getal vraagt, en dat dan een bericht toont aan de gebruiker indien het ingegeven getal gelijk is aan 0. Om het ingegeven getal te vergelijken met 0 hebben we in JavaScript de `=='-operator. We kunnen onze code dan als volgt schrijven:
+
+\examplecode{ConditioneleLogica/iszero.js}
+
+Let vooral op het verschil tussen een enkel en een dubbel gelijkheidsteken! Een enkel gelijkheidsteken is een toekenning (het deel rechts van het gelijkheidsteken wordt toegekend aan het de variabele die links van het gelijkheidsteken staat), terwijl een dubbel gelijkheidsteken een vergelijking is (die dan `true' teruggeeft indien de waarde links en de waarde rechts van de dubbele gelijkheidstekens gelijk zijn, of `false' in het andere geval). Wat gaat de volgende code doen?
+
+\examplecode{ConditioneleLogica/comparison.js}
+
+Het juiste antwoord is dat JavaScript gaat controleren of de variabelen a en b gelijk zijn. Indien ze gelijk zijn, wordt de waarde `true' in de variabele `gelijk' gestoken, anders de waarde `false'.
+
+JavaScript heeft een aantal vergelijkingsoperatoren. Figuur~\ref{tab:compoperators} geeft een kort overzicht.
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{|c|p{10.5cm}|}
+\hline
+\textbf{a == b} & true als a gelijk is aan b, anders false. \\
+\hline
+\textbf{a != b} & true als a niet gelijk is aan b, anders false. \\
+\hline
+\textbf{a > b} & true als a strikt groter is dan b, anders false. \\
+\hline
+\textbf{a >= b} & true als a groter of gelijk is aan b, anders false. \\
+\hline
+\textbf{a < b} & true als a strikt kleiner is dan b, anders false. \\
+\hline
+\textbf{a <= b} & true als a kleiner of gelijk is aan b, anders false. \\
+\hline
+\textbf{===} & true als a gelijk is aan b, anders false. Het verschil met == is dat hier ook gecontroleerd wordt dat het type van de variabele overeenkomt. Wij gaan deze variant niet gebruiken. \\
+\hline
+\textbf{!==} & true als a niet gelijk is aan b, anders false. Het verschil met != is dat hier ook gecontroleerd wordt dat het type van de variabele overeenkomt. Wij gaan deze variant niet gebruiken. \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Vergelijkingsoperatoren in JavaScript}\label{tab:compoperators}
+\end{figure}
+
+\section{If - else if - else}
+
+De if kan ook uitgebreid worden met een conditioneel stuk dat uitgevoerd wordt indien de conditie van de if niet geldt. Bijvoorbeeld, stel dat we een programma moeten schrijven dat een getal vraagt aan de gebruiker en dan zegt of het getal even is of niet. We kunnen dit als volgt schrijven:
+
+\examplecode{ConditioneleLogica/ifelse.js}
+
+De conditie van de if gaat de rest van het ingegeven getal berekenen bij deling door 2. Indien het getal even is, is de rest gelijk aan 0 (want een even getal is altijd deelbaar door 2). Het resultaat van de berekening wordt vergeleken met 0, en indien het resultaat gelijk is aan 0 zal de code binnen het if-blok uitgevoerd worden. In het andere geval zal de code in het else-blok uitgevoerd worden.
+
+We kunnen onze if nog verder uitbreiden. Stel dat we een programma willen schrijven waar gecontroleerd wordt of iemand alcoholische drank mag kopen. Volgens de wet mogen jongeren onder 16 jaar geen alcohol kopen, en jongeren tussen 16 en 18 geen sterke drank. We kunnen onze code als volgt schrijven:
+
+\examplecode{ConditioneleLogica/ifelseif.js}
+
+JavaScript zal eerst controleren of de leeftijd kleiner dan 16 is, en zal in dat geval melden dat de gebruiker geen alcoholische drank mag kopen. Merk op dat in dit geval de twee andere codeblokken niet worden uitgevoerd (ook al is een leeftijd die kleiner dan 16 is natuurlijk ook kleiner dan 18)! Indien de leeftijd niet kleiner dan 16 is, wordt gecontroleerd of de leeftijd kleiner dan 18 is. Zo ja, zal JavaScript het verbod op sterke drank aan de gebruiker melden. Indien de leeftijd 18 of hoger is, dan zal geen van deze condities waar zijn, en komen we in het else-gedeelte.
+
+Het gebruik van \'e\'en of meerdere else if's, of een else is optioneel, afhankelijk van wat je nodig hebt als programmeur.
+
+JavaScript heeft een truukje om op een heel korte manier een if-else te schrijven:
+
+\examplecode{ConditioneleLogica/ternary.js}
+
+De tweede lijn in bovenstaand voorbeeld bevat onze mini-``if-else''. We kunnen die lijn in vier delen opdelen:
+
+\begin{center}
+\begin{tabular}{c c c c c c c c}
+var resultaat & = & getal \% 2 == 0 & ? & ``even'' & : & ``oneven'' & ; \\
+\cline{1-1} \cline{3-3} \cline{5-5} \cline{7-7}
+1 & & 2 & & 3 & & 4 & \\
+\end{tabular}
+\end{center}
+
+Het tweede deel is de conditie van de if. Die conditie zal naar `true' of `false' evalueren. Indien ze naar true evalueert, zal het derde stuk het resultaat zijn van onze mini-``if-else''; in het andere geval zal het vierde gedeelte het resultaat zijn. Dit resultaat wordt dan gestoken in de variabele resultaat (het eerste deel). Deze ene lijn is dus equivalent met de volgende code:
+
+\examplecode{ConditioneleLogica/evenodd.js}
+
+\section{Boolse logica}
+
+Soms moeten een aantal verschillende condities gecombineerd worden eer een if-blok mag uitgevoerd worden. Stel dat we code schrijven die controleert of iemand gratis op de bus mag rijden. Kinderen onder 12 jaar en senioren mogen gratis op de bus, wat we als volgt kunnen uitdrukken:
+
+\examplecode{ConditioneleLogica/disj.js}
+
+Bovenstaande code controleert dat de leeftijd kleiner is dan 12 of groter of gelijk dan 65 jaar is. Het dubbele sluisteken (het verticale streepje in de volksmond) is de wiskundige OF-operator. Als hetgeen voor deze operator true is OF hetgeen achter de operator true is, dan is het geheel true. Enkel als beide delen false zijn, zal de combinatie ook false zijn.
+
+Naast de OF-operator hebben we ook een EN-operator. In JavaScript wordt deze voorgesteld met een dubbele ampersand (\&\&). Verder hebben we, zoals in de wiskundige logica, ook een negatie (voorgesteld door het uitroepteken). We krijgen uiteindelijk de waarheidstabel van Tabel~\ref{tab:truthtable}.
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{p} & \textbf{q} & \textbf{p \&\& q} & \textbf{p || q} & \textbf{!p} \\
+\hline
+true & true & true & true & false \\
+\hline
+true & false & false & true &  \\
+\hline
+false & true & false & true & true \\
+\hline
+false & false & false & false &  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Waarheidstabel voor JavaScript's boolse logica}\label{tab:truthtable}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

@@ -1,0 +1,1 @@
+var tekst = naam + ": " + leeftijd;

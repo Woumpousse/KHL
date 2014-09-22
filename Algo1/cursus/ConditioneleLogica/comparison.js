@@ -1,0 +1,1 @@
+gelijk = a == b;

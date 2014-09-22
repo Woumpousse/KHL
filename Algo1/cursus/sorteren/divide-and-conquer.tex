@@ -1,0 +1,753 @@
+\section{Verdeel en Heers Algoritmen}
+In de vorige paragraaf toonden we aan hoe Insertion Sort en Selection Sort
+beide geconstrueerd zijn op een gemeenschappelijke basis, namelijk
+dat we over twee rijen beschikken, een ongesorteerde \inlinecode{input} en een gesorteerde \inlinecode{output},
+waarbij we stapsgewijs elementen verhuisden van \inlinecode{input} naar \inlinecode{output}.
+Dit verhuizen bestond uit twee stappen: \emph{selectie} en \emph{plaatsing};
+Insertion Sort heeft een gemakkelijke selectie maar een complexe plaatsing,
+Selection Sort doet het omgekeerde.
+
+Een gelijkaardige structuur is te vinden bij Merge Sort en Quicksort. Om dit duidelijk te maken
+moeten we eerst uitleggen welke de basisstructuur is waarop beide gebaseerd zijn.
+
+Merge Sort en Quicksort maken beide gebruik van een ``Verdeel en Heers'' methode.
+Algemeen houdt dit in dat het op te lossen probleem in kleinere deelproblemen
+wordt verdeeld, dewelke afzonderlijk verwerkt worden en waarvan de resultaten
+in een finale stap samengevoegd worden.
+
+In het geval van sorteeralgoritmen betekent dit dat de te sorteren rij
+eerst wordt opgesplitst in twee deelrijen. Deze twee worden dan apart
+gesorteerd, waarna de gesorteerde deelrijen
+weer samengevoegd worden.
+Het opsplitsen van rijen gaat uiteraard niet door tot in het oneindige:
+uiteindelijk stuiten we op een deelrij van lengte 1, dewelke
+triviaal gesorteerd is.
+\Cref{fig:sorteer:divcon} toont een visuele voorstelling van dit proces.
+
+\begin{figure}
+{
+  \newcommand{\IELT}{{\color{red}\square}}
+  \newcommand{\OELT}{{\color{green}\square}}
+  \newcommand{\X}[2]{{\tikz[baseline, remember picture]{\node[anchor=base] (divconvis#2) { #1 };}}}
+
+  \begin{center}
+    \begin{tabular}{c}
+      \makebox[.8\linewidth]{\X{$\IELT\IELT\IELT\IELT\IELT\IELT\IELT\IELT$}{a}} \\[3mm]
+      \makebox[.4\linewidth]{\X{$\IELT\IELT\IELT\IELT$}{b1}}%
+      \makebox[.4\linewidth]{\X{$\IELT\IELT\IELT\IELT$}{b2}} \\[3mm]
+      \makebox[.2\linewidth]{\X{$\IELT\IELT$}{c1}}%
+      \makebox[.2\linewidth]{\X{$\IELT\IELT$}{c2}}%
+      \makebox[.2\linewidth]{\X{$\IELT\IELT$}{c3}}%
+      \makebox[.2\linewidth]{\X{$\IELT\IELT$}{c4}} \\[3mm]
+      \makebox[.1\linewidth]{\X{$\OELT$}{d1}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d2}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d3}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d4}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d5}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d6}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d7}}%
+      \makebox[.1\linewidth]{\X{$\OELT$}{d8}} \\[3mm]
+      \makebox[.2\linewidth]{\X{$\OELT\OELT$}{e1}}%
+      \makebox[.2\linewidth]{\X{$\OELT\OELT$}{e2}}%
+      \makebox[.2\linewidth]{\X{$\OELT\OELT$}{e3}}%
+      \makebox[.2\linewidth]{\X{$\OELT\OELT$}{e4}} \\[3mm]
+      \makebox[.4\linewidth]{\X{$\OELT\OELT\OELT\OELT$}{f1}}%
+      \makebox[.4\linewidth]{\X{$\OELT\OELT\OELT\OELT$}{f2}} \\[3mm]
+      \makebox[.8\linewidth]{\X{$\OELT\OELT\OELT\OELT\OELT\OELT\OELT\OELT$}{g}}
+    \end{tabular}
+
+    \newcommand{\SPLIT}[3]{\draw[->] (divconvis#1.south) -- (divconvis#2.north east);
+                           \draw[->] (divconvis#1.south) -- (divconvis#3.north west);}
+    \newcommand{\MERGE}[3]{\draw[->] (divconvis#1.south east) -- (divconvis#3.north west);
+                           \draw[->] (divconvis#2.south west) -- (divconvis#3.north east);}
+
+    \begin{tikzpicture}[overlay, remember picture]
+      \SPLIT{a}{b1}{b2}
+      \SPLIT{b1}{c1}{c2} \SPLIT{b2}{c3}{c4}
+      \SPLIT{c1}{d1}{d2} \SPLIT{c2}{d3}{d4} \SPLIT{c3}{d5}{d6} \SPLIT{c4}{d7}{d8}
+      \MERGE{d1}{d2}{e1} \MERGE{d3}{d4}{e2} \MERGE{d5}{d6}{e3} \MERGE{d7}{d8}{e4}
+      \MERGE{e1}{e2}{f1} \MERGE{e3}{e4}{f2}
+      \MERGE{f1}{f2}{g}
+    \end{tikzpicture}
+  \end{center}
+}
+\caption{Verdeel en Heers}\label{fig:sorteer:divcon}
+\end{figure}
+
+Zoals we bij Insertion Sort en Selection Sort te maken hadden met een selectie en een plaatsing,
+hebben we bij Merge Sort en QuickSort een \emph{splitsing} en een \emph{samenvoeging}.
+De complexiteit moet ergens gestoken worden: Merge Sort kiest voor een simpele splitsing
+in ruil voor een moeilijke samenvoeging, QuickSort doet het tegenovergestelde.
+
+\subsection{Merge Sort} \label{sec:sorteren:merge-sort}
+We geven eerst een voorbeeld van hoe Merge Sort conceptueel werkt. Dit model
+zullen we in een tweede stap aanpassen om het effici\"ent te kunnen implementeren.
+
+\begin{example} \label{example:sorteer:mergesort}
+We willen de rij $[4,1,3,6,5,8,7,2]$ sorteren. We splitsen deze in twee.
+Elke manier is goed, zolang we maar twee deelrijen van gelijke lengte\footnote{Indien de te splitsen
+rij een oneven aantal elementen bevat, mag de ene deelrij een element meer bevatten dan de andere.
+Met andere woorden, een rij van lengte 8 moet opgesplitst worden in twee rijen van 4,
+een rij van lengte 9 in deelrijen van lengtes 4 en 5.} verkrijgen.
+We doen dit op de meest voor de hand liggende wijze:
+\[
+  [4,1,3,6,5,8,7,2] \qquad\rightarrow\qquad [4,1,3,6] \quad [5,8,7,2]
+\]
+We sorteren beide deze deelrijen (de details hiervan slaan we over):
+\[
+  [1,3,4,6] \quad [2,5,7,8]
+\]
+Deze twee deelrijen moeten samengevoegd worden tot \'e\'en enkele gesorteerde rij.
+
+
+We maken hiervoor een nieuwe lege rij aan, laten we deze \inlinecode{output} noemen.
+Vervolgens vergelijken we herhaaldelijk de eerste elementen van beide deelrijen
+(1 en 2 in dit voorbeeld) en we verhuizen het kleinste van de twee naar \inlinecode{output}.
+Dit geeft ons, in stappen:
+\[
+  \newcommand{\SPACE}{\\[5mm]}
+  \newcommand{\X}[2]{{\tikz[baseline, remember picture]{\node[anchor=base] (msmerging#2) {\ensuremath{#1}};}}}
+  \begin{array}{c|ll@{\quad}||@{\quad}c|ll}
+    {\bf stap} & \multicolumn{1}{c}{\bf deelrijen} & \textrm{\tt\bfseries output} &
+    {\bf stap} & \multicolumn{1}{c}{\bf deelrijen} & \textrm{\tt\bfseries output} \\[2mm]
+    1 &
+    \begin{array}{l}
+      [\X1a,\X3z,\X4z,\X6z] \\{}
+      [\X2z,\X5z,\X7z,\X8z]
+    \end{array}
+    &
+    [\X{}b]
+    &
+    5
+    &
+    \begin{array}{l}
+      [\X6z] \\{}
+      [\X5i,\X7z,\X8z]
+    \end{array}
+    &
+    [\X1z, \X2z, \X3z, \X4z, \X{}j]
+\SPACE
+    2 &
+    \begin{array}{l}
+      [\X3z,\X4z,\X6z] \\{}
+      [\X2c,\X5z,\X7z,\X8z]
+    \end{array}
+    &
+    [\X1z, \X{}d]
+    &
+    6
+    &
+    \begin{array}{l}
+      [\X6k] \\{}
+      [\X7z,\X8z]
+    \end{array}
+    &
+    [\X1z, \X2z, \X3z, \X4z, \X5z, \X{}l]
+\SPACE
+    3 &
+    \begin{array}{l}
+      [\X3e,\X4z,\X6z] \\{}
+      [\X5z,\X7z,\X8z]
+    \end{array}
+    &
+    [\X1z, \X2z, \X{}f]
+    &
+    7
+    &
+    \begin{array}{l}
+      [] \\{}
+      [\X7m,\X8z]
+    \end{array}
+    &
+    [\X1z, \X2z, \X3z, \X4z, \X5z, \X6z, \X{}n]
+\SPACE
+    4 &
+    \begin{array}{l}
+      [\X4g,\X6z] \\{}
+      [\X5z,\X7z,\X8z]
+    \end{array}
+    &
+    [\X1z, \X2z, \X3z, \X{}h]
+    &
+    8
+    &
+    \begin{array}{l}
+      [] \\{}
+      [\X8o]
+    \end{array}
+    &
+    [\X1z, \X2z, \X3z, \X4z, \X5z, \X6z, \X7z, \X{}p]
+  \end{array}
+\]
+\newcommand{\MOVE}[2]{\draw[->] (msmerging#1.north) --
+                                 ++(0,2pt) --
+                                 ($ (msmerging#2.north) + (0,12pt) $) --
+                                 (msmerging#2.north);}
+\newcommand{\MOVEB}[2]{\draw[->] (msmerging#1.south) --
+                                  ++(0,-2pt) -- 
+                                  ($ (msmerging#2.south) + (0,-8pt) $) --
+                                  (msmerging#2.south);}
+\begin{tikzpicture}[overlay, remember picture]
+  \MOVE{a}{b}
+  \MOVEB{c}{d}
+  \MOVE{e}{f}
+  \MOVE{g}{h}
+  \MOVEB{i}{j}
+  \MOVE{k}{l}
+  \MOVEB{m}{n}
+  \MOVEB{o}{p}
+\end{tikzpicture}
+\end{example}
+
+In dit voorbeeld negeerden we hoe we de deelrijen zelf sorteerden.
+Dit klinkt vrij absurd: het ganse doel was om te illustreren hoe we een rij sorteren en
+juist dat deel slaan we over.
+
+In feite hebben we niets overgeslagen: het sorteren van de deelrijen
+gebeurt op exact dezelfde manier als waarop we de volledige rij zelf aanpakken, namelijk
+opsplitsen, sorteren en samenvoegen. Dit klinkt weliswaar
+als een cirkelredenering: als het sorteren van een rij telkens weer
+afhangt van het sorteren van twee andere rijen, hebben we de situatie dan niet
+enkel exponentieel erger gemaakt?
+
+Het is belangrijk op te merken dat de deelrijen telkens kleiner worden:
+eerst hebben we in \cref{example:sorteer:mergesort} een rij van lengte 8, dewelke
+we opsplitsen in 2 deelrijen van lengte 4, die vervolgens leiden tot 4 ``deeldeelrijen'' van lengte 2.
+Uiteindelijk komen we uit op 8 rijtjes van elk een enkel element, dewelke automatisch
+gesorteerd zijn en geen verdere behandeling vergen. Het principe
+gebruikt in \cref{example:sorteer:mergesort} kan dus weldegelijk gebruikt worden
+om te sorteren.
+
+\Cref{code:sorting:merge-sort} toont een implementatie van Merge Sort. Merk op dat we
+de functie \inlinecode{voegSamen} nergens gedefinieerd hebben; dit stellen we nog even uit.
+
+\codefigure[numbers=left]{sorteren/mergesort.js}{Merge Sort}{code:sorting:merge-sort}
+
+\begin{itemize}
+  \item De functie \inlinecode{mergeSortRec}
+        (\crefrange{line:sorteer:merge:mergeSortRec}{line:sorteer:merge:mergeSortRec-end} voert
+        het eigenlijke werk uit. Vermits het algoritme recursief wordt
+        opgeroepen op alsmaar kleiner wordende deelrijen, is het noodzakelijk
+        om aan te geven over welke deelrij we het hebben.
+        \inlinecode{begin} en \inlinecode{einde} stellen
+        de grenzen voor. Bijvoorbeeld, beschikken we over \inlinecode{rij = [1,5,4,3,2,6]}
+        en willen we de deelrij \inlinecode{[4,3,2]} sorteren, dan kunnen we hiervoor
+        \inlinecode{mergeSortRec(rij, 2, 4)} gebruiken.
+  \item Op \cref{line:sorteer:merge:rec:recleft,line:sorteer:merge:rec:recright}
+        roept \inlinecode{mergeSortRec} zichzelf op. We moeten ervoor zorgen
+        dat er een pad bestaat waarin dit \emph{niet} gebeurt, anders hebben we te maken met
+        oneindige recursie. Voor Merge Sort willen we de
+        triviale gevallen waarbij de lijst slechts \'e\'en element
+        apart afhandelen (dus geen splits-sorteer-samenvoeging). Dit gebeurt
+        door middel van de \inlinecode{if} op \cref{line:sorteer:merge:rec:if}.
+        De conditie \inlinecode{begin < einde} komt overeen met het
+        checken of een lijst meer dan \'e\'en element bevat. Zo ja
+        mogen \crefrange{line:sorteer:merge:rec:midden}{line:sorteer:merge:rec:merge}
+        uitgevoerd worden. Zo niet, dan moet er niets gebeuren vermits
+        een rij bestaande uit een enkel element reeds gesorteerd is.
+  \item \Crefrange{line:sorteer:merge:rec:midden}{line:sorteer:merge:rec:merge}
+        stellen het splitsen-sorteren-samenvoegen voor.
+        \begin{description}
+          \item[Splitsen] Op \cref{line:sorteer:merge:rec:midden} wordt de index uitgerekend
+            van het middelste element. \inlinecode{Math.floor} rondt af naar beneden:
+            deze oproep is nodig indien de te sorteren rij een oneven aantal elementen bevat.
+          \item[Sorteren] Vervolgens worden de deelrijen gesorteerd op
+            \cref{line:sorteer:merge:rec:recleft,line:sorteer:merge:rec:recright}.
+            Let goed op de indices: de linkerdeelrij gaat van \inlinecode{begin}
+            tot \inlinecode{midden}, de rechterdeelrij van \inlinecode{midden+1} tot \inlinecode{einde}.
+          \item[Samenvoegen] Uiteindelijk worden de twee deelrijen weer samengevoegd op
+            \cref{line:sorteer:merge:rec:merge}.
+        \end{description}
+        Dit is een visualisering van de betekenissen van de verschillende indices:
+        \[
+          \newcommand{\HL}[1]{{\color{green}#1}}
+          \begin{array}{cccccccccccc}
+            && \rotatebox{-90}{\hskip2mm{\tt begin}$\rightarrow$}
+            &&& \rotatebox{-90}{{\tt midden}$\rightarrow$}
+            &&& \rotatebox{-90}{\hskip2mm{\tt einde}$\rightarrow$} \\
+            \square & \square & \HL\square & \HL\square & \HL\square & \HL\square &
+            \HL\square & \HL\square &\HL\square & \square & \square & \square \\
+          \end{array}
+        \]
+        Hier is \inlinecode{begin==2}, \inlinecode{einde==8} en \inlinecode{midden==5}.
+\end{itemize}
+
+\begin{exercise}
+Op \cref{line:sorteer:merge:rec:if} in \cref{code:sorting:merge-sort}
+staat de conditie \inlinecode{begin < einde}. Wat gebeurt er als we dit vervangen
+door \inlinecode{begin != einde}? Dit maakt enkel een verschil uit wanneer
+\inlinecode{begin > einde}, maar dit komt toch nooit voor?
+\begin{solution}
+\inlinecode{mergeSortRec} zal zichzelf nooit oproepen met \inlinecode{begin > einde},
+maar \inlinecode{mergeSort} zal echter wel \inlinecode{mergeSortRec} kunnen oproepen
+met \inlinecode{begin==0} en \inlinecode{einde==-1}: dit komt voor indien
+men de lege rij wil sorteren. Hoewel dit wel een randgeval is, is het belangrijk
+dat dit ook correct wordt afgehandeld.
+\end{solution}
+\end{exercise}
+
+
+\subsubsection{Samenvoegen van rijen}
+Om Merge Sort volledig af te werken rest ons nog de functie \inlinecode{voegSamen} te defini\"eren.
+Hoewel het conceptueel eenvoudig is (zie \cref{example:sorteer:mergesort} op
+\cpageref{example:sorteer:mergesort}), is het algoritme vrij omslachtig zoals te zien is
+in \cref{code:sorting:merge-sort:merge}. \Cref{example:sorteer:mergesort:voegsamen}
+op \cpageref{example:sorteer:mergesort:voegsamen} geeft een gedetailleerde uitwerking.
+
+\codefigure[numbers=left]{sorteren/mergesort-voegsamen.js}{Samenvoegen van gesorteerde deelrijen}{code:sorting:merge-sort:merge}
+
+\begin{itemize}
+  \item In eerste instantie is het belangrijk duidelijk te defini\"eren
+        wat de betekenis van elk argument is.
+        \begin{itemize}
+          \item \inlinecode{rij} is een rij die twee gesorteerde deelrijen bevat, dewelke samengevoegd
+                horen te worden.
+          \item \inlinecode{begin} is de index van het eerste element van de linkerdeelrij.
+          \item \inlinecode{midden} is de index van het laatste element van de linkerdeelrij.
+          \item \inlinecode{midden+1} komt dan overeen met de index van het eerste element
+                van de rechterdeelrij.
+          \item \inlinecode{einde} is de index van het laatste element van de rechterdeelrij.
+        \end{itemize}
+        Gevisualiseerd geeft dit
+        \[
+          \settowidth{\MYLEN}{\inlinecode{midden+1} $\rightarrow\quad$}
+          \newcommand{\BOX}[2]{\rotatebox{-90}{\parbox{\MYLEN}{\flushright #1\ensuremath{\color{#2}\square}}}}
+          \newcommand{\IDX}[2]{\BOX{\inlinecode{#1} \ensuremath{\rightarrow\;}}{#2}}
+          \BOX{}{black} \BOX{}{black} \BOX{}{black}
+          \IDX{begin}{green}
+          \BOX{}{green} \BOX{}{green}
+          \IDX{midden}{green}
+          \IDX{midden+1}{blue}
+          \BOX{}{blue}
+          \BOX{}{blue}
+          \IDX{einde}{blue}
+          \BOX{}{black}
+          \BOX{}{black}
+        \]
+        Opdat \inlinecode{voegSamen} correct werkt, moeten de elementen
+        van \inlinecode{begin}\dots\inlinecode{midden} gesorteerd zijn, alsook
+        die van \inlinecode{midden+1}\dots\inlinecode{einde}.
+  \item Zoals uitgelegd werd in \cref{example:sorteer:mergesort} (\cpageref{example:sorteer:mergesort})
+        gebeurt het samenvoegen van de twee deelrijen door telkens het kleinste eerste element
+        te verhuizen naar een \inlinecode{output} rij.
+        De lokale variabele \inlinecode{links} wordt gebruikt om de
+        linkerdeelrij af te gaan en moet dus de indices van \inlinecode{begin} tot \inlinecode{midden} afgaan.
+        Analoog voor \inlinecode{rechts} gaat de rechterdeelrij af en
+        varieert van \inlinecode{midden+1} tot \inlinecode{einde}.
+        Op \cref{line:sorteer:mergesort:voegSamen:output} maken we de rij
+        \inlinecode{output} aan, dewelke voldoende groot moet zijn om de elementen
+        uit de twee deelrijen te bevatten: deze moet dus \inlinecode{einde-begin+1} lang zijn.
+        De variabele \inlinecode{i} wordt gebruikt om aan te geven waar in
+        \inlinecode{output} het volgende element moet geplaatst worden. Deze zal
+        dus alle waarden van \inlinecode{0} tot \inlinecode{einde-begin} afgaan.
+  \item In de eerste \inlinecode{while}-lus
+        (\crefrange{line:sorteer:mergesort:voegSamen:while1}{line:sorteer:mergesort:voegSamen:while1-end})
+        gaat het algoritme telkens op zoek welke van de twee deelrijen
+        het volgende kleinste element bevat (\cref{line:sorteer:mergesort:voegSamen:while1:if}).
+        Indien dit de linkerdeelrij is, wordt het element gekopieerd naar
+        \inlinecode{output} (\cref{line:sorteer:mergesort:voegSamen:while1:lcopy}) en
+        worden de indices \inlinecode{links} (\cref{line:sorteer:mergesort:voegSamen:while1:linc})
+        en \inlinecode{i} (\cref{line:sorteer:mergesort:voegSamen:while1:inc}) ge\"incrementeerd.
+        Het geval dat de rechterdeelrij het kleinste element bevat wordt analoog afgehandeld
+        (\cref{line:sorteer:mergesort:voegSamen:while1:rcopy,line:sorteer:mergesort:voegSamen:while1:rinc,%
+        line:sorteer:mergesort:voegSamen:while1:inc}).
+  \item Opdat de eerste \inlinecode{while}-lus de eerste elementen van beide deelrijen
+        kan vergelijken, mogen deze niet leeg zijn. De uitdrukking
+        \inlinecode{links <= midden && rechts <= einde} op \cref{line:sorteer:mergesort:voegSamen:while1}
+        drukt deze voorwaarde uit.
+  \item Uiteindelijk zal \'e\'en van beide deelrijen uitgeput raken terwijl de andere nog minstens
+        \'e\'en element bevat. Zo kan je in \cref{example:sorteer:mergesort} (\cpageref{example:sorteer:mergesort})
+        zien dat in stap 6 het laatste element van de linkerdeelrij wordt overgezet
+        naar \inlinecode{output} en er nog twee elementen overblijven in de rechterdeelrij (7 en 8).
+        Zulke overblijvende elementen worden niet afgehandeld door de eerste \inlinecode{lus} maar
+        moeten wel nog overgeplaatst worden naar \inlinecode{output}. Dit is de taak
+        van de twee lussen op
+        \crefrange{line:sorteer:mergesort:voegSamen:while2}{line:sorteer:mergesort:voegSamen:while3-end}.
+  \item De lus op \crefrange{line:sorteer:mergesort:voegSamen:while2}{line:sorteer:mergesort:voegSamen:while2-end}
+        dient om alle resterende elementen uit de linkerdeelrij naar \inlinecode{output} te kopi\"eren.
+        De andere lus
+        (\crefrange{line:sorteer:mergesort:voegSamen:while3}{line:sorteer:mergesort:voegSamen:while3-end})
+        zorgt voor resterende elementen in de rechterdeelrij. Merk op dat slechts \'e\'en van deze
+        beide lussen zal worden uitgevoerd! Stel bijvoorbeeld dat de linkerdeelrij
+        als eerste uitgeput raakt: dit betekent dat \inlinecode{links > midden}, met als gevolg
+        dat de eerste lus
+        (\crefrange{line:sorteer:mergesort:voegSamen:while1}{line:sorteer:mergesort:voegSamen:while1-end})
+        zal eindigen. We komen dan de tweede lus tegen
+        (\crefrange{line:sorteer:mergesort:voegSamen:while2}{line:sorteer:mergesort:voegSamen:while2-end}).
+        Deze heeft als conditie \inlinecode{links <= midden}, wat evalueert naar \inlinecode{false}.
+        Deze lus wordt dus volledig overgeslagen. Dan komt de beurt aan de derde lus
+        (\crefrange{line:sorteer:mergesort:voegSamen:while3}{line:sorteer:mergesort:voegSamen:while3-end}):
+        deze zal wel minstens \'e\'en iteratie doorlopen.
+  \item Als laatste stap overschrijven we de deelrijen in \inlinecode{rij}
+        met de inhoud van \inlinecode{output}
+        (\crefrange{line:sorteer:mergesort:voegSamen:for}{line:sorteer:mergesort:voegSamen:for-end}).
+        Het is in principe mogelijk het samenvoegen te laten gebeuren
+        zonder hulprij \inlinecode{output} en rechtstreeks \inlinecode{rij} zelf te manipuleren,
+        maar dit is te complex voor deze cursus.
+\end{itemize}
+
+\begin{example} \label{example:sorteer:mergesort:voegsamen}
+We beschouwen
+\begin{center}
+   \settowidth{\MYLEN}{\inlinecode{midden+1} $\rightarrow$}
+   \newcommand{\BOX}[3]{\rotatebox{-90}{\parbox{\MYLEN}{\flushright #1\rotatebox{90}{\ensuremath{\color{#2}#3}}}}}
+   \newcommand{\IDX}[2]{\BOX{\inlinecode{#1} \ensuremath{\rightarrow\;}}{#2}}
+
+   \BOX{}{black}{7}
+   \BOX{}{black}{0}
+   \IDX{begin}{green}{2}
+   \BOX{}{green}{4}
+   \BOX{}{green}{8}
+   \IDX{midden}{green}{9}
+   \BOX{}{blue}{3}
+   \IDX{einde}{blue}{5}
+   \BOX{}{black}{1}
+\end{center}
+m.a.w.\ we onderzoeken hoe de oproep \inlinecode{voegSamen([7,0,2,4,8,9,3,5,1], 2, 5, 7)} afgehandeld wordt.
+\newcommand{\LEFTARR}{{\color{green} \downarrow}}
+\newcommand{\RIGHTARR}{{\color{blue} \bigtriangledown}}
+\newcommand{\IARR}{\vee}
+\begin{center}
+  \newcommand{\LEFT}[1]{\ensuremath{\stackrel{\LEFTARR}}{{#1}}}
+  \newcommand{\RIGHT}[1]{\ensuremath{\stackrel{\RIGHTARR}}{{#1}}}
+  \newcommand{\II}[1]{\ensuremath{\stackrel{\IARR}}{{#1}}}
+  \begin{tabular}{cccccc}
+    {\bf lus} & {\tt\bfseries links} & {\tt\bfseries rechts} & {\tt\bfseries i} & {\tt rij} & {\tt output} \\
+    \hline\hline
+    (init) & {\tt 2} & {\tt 6} & {\tt 0} &
+    $[7,0,{\color{green}\LEFT2,4,8,9},{\color{blue}\RIGHT3,5},1]$ &
+    $[ \II{\times}, \times, \times, \times, \times, \times ]$
+\\ \hline
+    1 & {\tt 3} & {\tt 6} & {\tt 1} &
+    $[7,0,{\color{green}2,\LEFT4,8,9},{\color{blue}\RIGHT3,5},1]$ &
+    $[ 2, \II{\times}, \times, \times, \times, \times ]$
+\\ \hline
+    1 & {\tt 3} & {\tt 7} & {\tt 2} &
+    $[7,0,{\color{green}2,\LEFT4,8,9},{\color{blue}3,\RIGHT5},1]$ &
+    $[ 2, 3, \II{\times}, \times, \times, \times ]$
+\\ \hline
+    1 & {\tt 4} & {\tt 7} & {\tt 3} &
+    $[7,0,{\color{green}2,4,\LEFT8,9},{\color{blue}3,\RIGHT5},1]$ &
+    $[ 2, 3, 4, \II{\times}, \times, \times ]$
+\\ \hline
+    1 & {\tt 4} & {\tt 8} & {\tt 4} &
+    $[7,0,{\color{green}2,4,\LEFT8,9},{\color{blue}3,5},\RIGHT1]$ &
+    $[ 2, 3, 4, 5, \II{\times}, \times ]$
+\\ \hline
+    2 & {\tt 5} & {\tt 8} & {\tt 5} &
+    $[7,0,{\color{green}2,4,8,\LEFT9},{\color{blue}3,5},\RIGHT1]$ &
+    $[ 2, 3, 4, 5, 8, \II{\times} ]$
+\\ \hline
+    2 & {\tt 6} & {\tt 8} & {\tt 6} &
+    $[7,0,{\color{green}2,4,8,9},{\color{blue}\LEFT3,5},\RIGHT1]$ &
+    $[ 2, 3, 4, 5, 8, 9 ] \II{\phantom{\times}}$
+  \end{tabular}
+\end{center}
+De eerste kolom geeft weer door welke \inlinecode{while}-lus de huidige stap werd afgehandeld.
+De eerste rij komt overeen met de initi\"ele toestand.
+De waarden van \inlinecode{links}, \inlinecode{rechts} en \inlinecode{i}
+worden symbolisch voorgesteld door de pijlen $\LEFTARR$, $\RIGHTARR$ en $\IARR$, respectievelijk.
+\end{example}
+
+
+\subsection{Quicksort} \label{sec:sorteren:quicksort}
+QuickSort is zoals Merge Sort een verdeel-sorteer-samenvoeging algoritme,
+maar waarbij de complexiteit niet ligt in het samenvoegen, maar het opsplitsen.
+We beginnen met een voorbeeld om een beeld te schetsen van de werking van het algoritme.
+
+\begin{example} \label{example:sorteer:quicksort}
+We sorteren dezelfde rij als in \cref{example:sorteer:mergesort},
+namelijk $[4,1,3,6,5,8,7,2]$. In een eerste stap moeten we deze
+rij splitsen in twee deelrijen van (ongeveer) gelijke lengte.
+Dit doen we door een \emph{spil} te kiezen en vervolgens
+de elementen kleiner of gelijk aan deze spil te scheiden
+van de elementen groter dan deze spil: dit vormen de twee deelrijen.
+\[
+  \begin{array}{c}
+    \square\square\square\square\dots\square\square\square\square \\
+    \swarrow \quad \searrow \\
+    \underbrace{\square\square\dots\square\square}_{\leq \mathrm{spil}} \quad \underbrace{\square\square\dots\square\square}_{> \mathrm{spil}}
+  \end{array}
+\]
+De spilkeuze bepaalt hoe de rij opgesplitst wordt in twee deelrijen.
+We tonen een aantal mogelijke spilkeuzes en de bijhorende splitsing:
+\[
+  \newcommand{\EXAMPLE}[3]{#1 & #2 & #3}
+  \begin{array}{c|c|c}
+    \mathbf{spil} & \mathbf{deelrij \leq spil} & \mathbf{deelrij > spil} \\
+    \hline\hline
+    \EXAMPLE{0}{[]}{[4,1,3,6,5,8,7,2]} \\ \hline
+    \EXAMPLE{3}{[1,3,2]}{[4,6,5,8,7]} \\ \hline
+    \EXAMPLE{4}{[1,3,2,4]}{[6,5,8,7]} \\ \hline
+    \EXAMPLE{6}{[1,3,2,4,6,5]}{[8,7]} \\ \hline
+    \EXAMPLE{10}{[4,1,3,6,5,8,7,2]}{[]}
+  \end{array}
+\]
+We zien dat indien we 4 als spil kiezen, we twee deelrijen van gelijke lengte bekomen: dit is
+ideaal. Algemeen kunnen we stellen dat we in principe telkens de mediaan\footnote{Het ``middelste'' element.}
+van de rij moeten kiezen als spil. In de praktijk wordt dit echter niet gedaan.
+
+Verschillende implementaties van Quicksort maken verschillende keuzes voor de spil: sommige
+nemen het eerste element uit de rij als spil (4 in ons geval), anderen het laatste (2), nog anderen
+kiezen een telkens een willekeurig element uit de rij, etc. Telkens hopen ze dat hun
+spilkeuze leidt tot twee deelrijen van ongeveer gelijke lengte\footnote{Je kan je afvragen
+waarom het zo belangrijk is dat de deelrijen gelijke lengtes hebben. Het is wiskundig aantoonbaar
+dat dit de meest effici\"ente manier van sorteren is. Vergelijk het met een spelletje hoger lager
+waar je een getal tussen 0 en 100 moet raden: de optimale speelwijze bestaat erin
+om telkens het middelste element te raden: je gokt eerst 50, dan (indien lager) 25, dan (indien hoger)
+37 of 38, etc. Iemand die gewoon 1, 2, 3, 4, 5, \dots gokt zal er veel langer over doen om het getal te vinden.}
+, maar uiteraard is dit verre van altijd het geval. Dit is een pragmatische keuze:
+het kost meer tijd om telkens de perfecte spil te zoeken dan om met suboptimale spils te werken.
+
+In deze tekst zullen we als spil gewoon het eerste element uit de rij kiezen. In ons geval
+is dit 4 en is dit toevallig de optimale spil. We bekomen als deelrijen $[1,3,2,4]$
+en $[6,5,8,7]$.
+
+Na de splitsing komt het sorteren van de deelrijen: dit geeft ons $[1,2,3,4]$ en
+$[5,6,7,8]$. Als laatste stap moeten we de deze twee gesorteerde deelrijen
+samenvoegen. Gezien we weten dat alle elementen van de eerste deelrij
+kleiner zijn dan die uit de tweede, kunnen we gewoon de twee deelrijen
+aan elkaar plakken:
+\[
+  [\underbrace{1,\;2,\;3,\;4}_{\textrm{linker}},\;\underbrace{5,\;6,\;7,\;8}_{\textrm{rechter}}]
+\]
+\end{example}
+
+De aanpak ge\'illustreerd in \cref{example:sorteer:quicksort} is elegant:
+hij voldoet perfect aan de splitsen-sorteren-samenvoegen structuur. Het kiezen
+van een suboptimale spil (zoals het kiezen van het eerste element
+van de rij, in plaats van de mediaan) heeft echter nefaste gevolgen, zoals
+aangetoond wordt in volgend voorbeeld.
+
+\begin{example}\label{example:sorteer:quicksort-oops}
+We willen de rij $[9,4,3,8,6,2,1]$ sorteren. De spil is dan 9 en de twee
+deelrijen worden $[9,4,3,8,6,2,1]$ en $[]$. Als we de eerste deelrij
+dan willen sorteren, passen we hetzelfde algoritme toe: we kiezen weer
+9 als spil, en dit levert weer dezelfde deelrijen op. Zo blijft dit doorgaan
+tot in het oneindige.
+\end{example}
+
+\Cref{example:sorteer:quicksort-oops} toont aan dat indien
+we de spil verkeerd kiezen (bv.\ de spil blijkt het grootste element uit de rij te zijn),
+dit leidt tot oneindige recursie. Om dit te voorkomen,
+moeten we ervoor zorgen dat beide deelrijen op zijn minst
+\emph{korter} zijn dan de rij zelf.
+
+We lossen dit eenvoudig op als volgt: we kiezen eerst de spil, we \emph{halen deze uit de rij},
+we splitsen de rij zonder de spil, sorteren de bekomen deelrijen, en voegen alles samen.
+
+\begin{example}
+Het sorteren van $[4,1,3,6,5,8,7,2]$ gaat nu als volgt:
+\begin{itemize}
+  \item We kiezen 4 als spil.
+  \item We splitsen de rij zonder spil op: we verkrijgen $[1,3,2]$ en $[6,5,8,7]$.
+  \item We sorteren de deelrijen: $[1,2,3]$ en $[5,6,7,8]$.
+  \item We voegen alles samen:
+        \[
+          [ \overbrace{1,\;2,\;3}^{\textrm{links}},\;
+          \stackrel{\stackrel{\scriptstyle\textrm{spil}}{\downarrow}}{4},\;
+          \overbrace{5,6,7,8}^{\textrm{rechts}} ]
+        \]
+\end{itemize}
+\end{example}
+
+\codefigure[numbers=left]{sorteren/quicksort.js}{Quicksort}{code:sorting:quicksort}
+
+We kunnen nu overgaan tot de implementatie. We pakken het top-down aan
+en geven eerst de code voor \inlinecode{quickSort} zelf, zie hiervoor
+\cref{code:sorting:quicksort}.
+\begin{itemize}
+  \item Zoals bij Merge Sort (\cref{code:sorting:merge-sort}) defini\"eren we
+        twee functies: \inlinecode{quickSortRec}
+        (\crefrange{line:sorteer:quick:quickSortRec}{line:sorteer:quick:quickSortRec-end})
+        die van een gegeven \inlinecode{rij} het stuk gaande van \inlinecode{begin}
+        tot \inlinecode{einde} sorteert, en \inlinecode{quickSort}
+        (\crefrange{line:sorteer:quick:quickSort}{line:sorteer:quick:quickSort-end})
+        die \inlinecode{quickSortRec} oproept op de volledige rij.
+  \item \Cref{line:sorteer:quick:quickSortRec:if} checkt of er iets gesorteerd moet worden:
+        indien de te sorteren deelrij 0 of 1 element bevat, hoeft er niets gedaan te worden.
+  \item Op \cref{line:sorteer:quick:quickSortRec:partition} roepen we de
+        totnogtoe ongedefinieerde functie \inlinecode{partitioneer} op.
+        We verwachten dat deze functie de gegeven deelrij \inlinecode{rij[begin...einde]} partitioneert.
+        Als resultaat geeft het terug waar de spil gepositioneerd staat (zie
+        \cref{example:sorteer:quicksort:partitioneer}).
+  \item We weten dat de spil juist staat. We hoeven nu enkel nog de linkerdeelrij
+        \inlinecode{rij[begin...spilIndex-1]} en de rechterdeelrij
+        \inlinecode{rij[spilIndex+1...einde]} te sorteren; dit doen
+        we met recursieve oproepen op
+        \cref{line:sorteer:quick:quickSortRec:recl,line:sorteer:quick:quickSortRec:recr}.
+  \item Voor de samenvoegingsstap hoeven we niets te doen doordat we het sorteren
+        in-place uitvoeren.
+\end{itemize}
+
+\begin{example} \label{example:sorteer:quicksort:partitioneer}
+\newcommand{\HERE}{\ensuremath{\downarrow}}
+Algemeen verwachten we hetvolgende van \inlinecode{partitioneer}:
+\begin{center}
+  \begin{tikzpicture}
+    \foreach \x in {0, 1, ..., 2} {
+      \node at (\x, 0) {$\square$};
+      \node at (\x, 2) {$\square$};
+      \draw [->] (\x, 1.9) -- (\x, 0.1);
+    };
+    \foreach \x in {3, 4, ..., 8} {
+      \node at (\x, 0) {$\color{green}\square$};
+      \node at (\x, 2) {$\color{green}\square$};
+    };
+    \foreach \x in {9, 10, ..., 11} {
+      \node at (\x, 0) {$\square$};
+      \node at (\x, 2) {$\square$};
+      \draw [->] (\x, 1.9) -- (\x, 0.1);
+    };
+    \node (begin) at (3, 2.75) { {\tt begin} };
+    \draw [->] (begin) -- (3, 2.2);
+    \node (end) at (8, 2.75) { {\tt end} };
+    \draw [->] (end) -- (8, 2.2);
+    \draw [->] (3, 1.9) -- (3, 1) -- (5, 1) -- (5, 0.2);
+    \draw (3.8, 1.9) -- (8.2, 1.9);
+    \draw (2.8, 0.2) -- (4.2, 0.2);
+    \draw (5.8, 0.2) -- (8.2, 0.2);
+    \draw [->] (5.5, 1.9) -- (5.5, 1.5) -- (3.5, 1.5) -- (3.5, 0.2);
+    \draw [->] (6.5, 1.9) -- (6.5, 1.5) -- (7, 1.5) -- (7, 0.2);
+    \node at (4.45, 1.65) {$\scriptstyle \leq \mathrm{spil}$};
+    \node at (7, 1.65) {$\scriptstyle > \mathrm{spil}$};
+  \end{tikzpicture}
+\end{center}
+Concrete voorbeelden zijn
+\begin{center}
+  \newcommand{\PIVOT}[1]{\stackrel{{\color{black}\HERE}}{#1}}
+  \newcommand{\SUB}[1]{{\color{green}#1}}
+  \begin{tabular}{ccccc}
+    {\tt\bfseries rij} &
+    {\tt\bfseries begin} &
+    {\tt\bfseries einde} &
+    {\tt\bfseries rij} na oproep &
+    {\bf resultaat} \\
+    \hline
+    $[\SUB{3,1,5}]$ & 0 & 2 & $[\SUB{1,\PIVOT3,5}]$ & 1 \\{}
+    $[\SUB{3,2,1}]$ & 0 & 2 & $[\SUB{1,2,\PIVOT3}]$ & 2 \\{}
+    $[\SUB{4,9,2,3,8,7,5,6,1}]$ & 0 & 8 & $[\SUB{3,1,2,\PIVOT4,8,7,5,6,9}]$ & 3 \\{}
+    $[4,9,\SUB{2,3,8,7,5},6,1]$ & 2 & 6 & $[4,9,\SUB{\PIVOT2,3,8,7,5},6,1]$ & 2 \\{}
+    $[7,4,6,\SUB{2,1,5,8,9},3]$ & 3 & 7 & $[7,4,6,\SUB{1,\PIVOT2,5,8,9},3]$ & 4 \\{}
+  \end{tabular}
+\end{center}
+Deze tabel geeft weer wat de verwachte effecten zijn van de oproep \inlinecode{partitioneer(rij, begin, einde)}.
+De kolom ``\inlinecode{rij}'' bevat de array waarvan we een deelrij wensen te partitioneren.
+\inlinecode{begin} en \inlinecode{einde} geven weer wat de grenzen zijn van deze deelrij.
+De kolom ``\inlinecode{rij} na oproep'' toont aan hoe de array er na de oproep moet uitzien:
+elementen kleiner dan of gelijk aan de spil moeten links van de spil staan, de rest rechts ervan.
+Het resultaat van de oproep moet de index van de spil zijn: deze wordt ook visueel aangegeven
+met een $\HERE$.
+\end{example}
+
+Nu we weten wat we van \inlinecode{partitioneer} verwachten, kunnen we een algoritme
+ervoor ontwikkelen. Intu\"itief werkt het als volgt: we weten
+dat links de elementen kleiner dan of gelijk aan de spil moeten geplaatst worden en
+rechts die die groter zijn. We beginnen aan beide uiteinden van de rij en bewegen naar binnen toe.
+Wanneer we links een te groot element vinden en rechts een te klein, verwisselen we deze van plaats.
+Uiteindelijk bereiken we het midden en is de rij gepartitioneerd. We geven een voorbeeld.
+
+\begin{example}
+\newcommand{\GENERIC}[3]{\rotatebox{-90}{\parbox{\MYLEN}{\flushright #1\ensuremath{\color{#2}\rotatebox{90}{$#3$}}}}}
+\newcommand{\OUT}[1]{\GENERIC{}{black}{#1}}
+\newcommand{\IN}[1]{\GENERIC{}{green}{#1}}
+\newcommand{\IDX}[2]{\GENERIC{\inlinecode{#1} $\rightarrow\;$}{green}{#2}}
+\newcommand{\LEFT}{\ensuremath{\downharpoonleft}}
+\newcommand{\RIGHT}{\ensuremath{\downharpoonright}}
+\newcommand{\HL}[1]{{\color{green}#1}}
+\settowidth{\MYLEN}{\inlinecode{begin} $\rightarrow\quad$}
+\[
+  \OUT{8}\OUT{2}\OUT{0}
+  \IDX{begin}{5}\IN{3}\IN{2}\IN{6}\IN{1}\IN{7}\IN{0}\IN{2}\IN{9}\IN{1}\IN{8}\IDX{einde}{7}
+  \OUT{3}\OUT{5}
+\]
+We kiezen het eerste element van de deelrij, dit is dus 5. We gaan nu de rest van de deelrij
+(het stuk zonder de spil) partitioneren. We beginnen aan de uiteindes:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   & \LEFT &   &   &   &   &   &   &   &   &   & \RIGHT &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL6 & \HL1 & \HL7 & \HL0 & \HL2 & \HL9 & \HL1 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+De linkerpijl verschuiven we naar rechts zolang het elementen tegenkomt
+die kleiner dan of gelijk zijn aan de spil. De rechterpijl verplaatsen we naar links
+zolang de elementen groter zijn dan de spil.
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & \LEFT &   &   &   &   &   & \RIGHT  &   & &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL6 & \HL1 & \HL7 & \HL0 & \HL2 & \HL9 & \HL1 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+De 6 en de 1 staan niet op hun plaats. We verwisselen ze:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & \LEFT &   &   &   &   &   & \RIGHT  &   & &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL1 & \HL1 & \HL7 & \HL0 & \HL2 & \HL9 & \HL6 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+We laten de pijlen weer naar elkaar toe gaan:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & &   & \LEFT &   & \RIGHT &   & &   & &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL1 & \HL1 & \HL7 & \HL0 & \HL2 & \HL9 & \HL6 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+Weeral verwisselen we de elementen van plaats:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & &   & \LEFT &   & \RIGHT &   & &   & &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL1 & \HL1 & \HL2 & \HL0 & \HL7 & \HL9 & \HL6 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+We bewegen de pijlen:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & &   & & \RIGHT & \LEFT &   & &   & &   &   \\
+    8 & 2 & 0 & \HL5 & \HL3 & \HL2 & \HL1 & \HL1 & \HL2 & \HL0 & \HL7 & \HL9 & \HL6 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+We zien dat de pijlen elkaar voorbijgegaan zijn: dit betekent dat de rij
+gepartitioneerd is. We willen nu nog de spil juist plaatsen.
+De rechterpijl $\RIGHT$ (die nu wel links staat) staat boven het laatste
+element van de linkerdeelrij. We kunnen de spil daarheen verhuizen:
+\[
+  \begin{array}{ccccccccccccccccc}
+      &   &   &   &  &   & &   & & \RIGHT & \LEFT &   & &   & &   &   \\
+    8 & 2 & 0 & \HL0 & \HL3 & \HL2 & \HL1 & \HL1 & \HL2 & \HL5 & \HL7 & \HL9 & \HL6 & \HL8 & \HL7 & 3 & 5
+  \end{array}
+\]
+Merk op dat de buitenliggende elementen ($[8, 2, 0]$ links, $[3, 5]$ rechts) volledig genegeerd moeten worden.
+\end{example}
+
+\codefigure[numbers=left]{sorteren/quicksort-partition.js}{Partitioneren}{code:sorting:quicksort:partition}
+
+De implementatie voor de functie \inlinecode{partitioneer} is te vinden in
+\cref{code:sorting:quicksort:partition}.
+
+{
+\newcommand{\LEFT}{\ensuremath{\downharpoonleft}}
+\newcommand{\RIGHT}{\ensuremath{\downharpoonright}}
+\begin{itemize}
+  \item Op \cref{line:sorteer:quicksort:partition:spil} kiezen we de spil, namelijk
+        het eerste element van de deelrij.
+  \item Op \cref{line:sorteer:quicksort:partition:links,line:sorteer:quicksort:partition:rechts}
+        plaatsen we onze pijlen $\LEFT$ en $\RIGHT$ op hun initi\"ele posities.
+  \item De \inlinecode{while}-lus op
+        \crefrange{line:sorteer:quicksort:partition:while-1}{line:sorteer:quicksort:partition:while-1-end}
+        verplaatst de linkerpijl~$\LEFT$ naar rechts tot een foutief geplaatst element
+        gevonden wordt. De \inlinecode{while}-lus op
+        \crefrange{line:sorteer:quicksort:partition:while-2}{line:sorteer:quicksort:partition:while-2-end}
+        doet analoog voor de rechterpijl~$\RIGHT$.
+  \item \Cref{line:sorteer:quicksort:partition:swap} wisselt de twee foutief geplaatste elementen
+        van plaats.
+  \item De spil wordt door \cref{line:sorteer:quicksort:partition:lastswap} op zijn plaats gezet.
+  \item De positie van de spil wordt uiteindelijk als
+        resultaat teruggegeven (\cref{line:sorteer:quicksort:partition:return}).
+\end{itemize}
+}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

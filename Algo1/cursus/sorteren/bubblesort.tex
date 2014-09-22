@@ -1,0 +1,408 @@
+\section{Bubble Sort} \label{sec:sorteren:bubble-sort}
+We beginnen in \cref{sec:sorteren:bubble-sort:werking} met een conceptuele
+beschrijving van de werking van Bubble Sort. Daarna
+implementeren we het algoritme (\cref{sec:sorteren:bubble-sort:implementatie}).
+Deze implementatie is echter voor verbetering vatbaar: we zullen
+het dan ook optimiseren, hetgeen we doen in twee stappen
+(\cref{sec:sorteren:bubble-sort:opt1} en \cref{sec:sorteren:bubble-sort:opt2}).
+
+\subsection{Werking} \label{sec:sorteren:bubble-sort:werking}
+Een (vrij triviale) eigenschap van een gesorteerde rij is dat indien men
+twee willekeurige opeenvolgende elementen beschouwt uit de rij, het eerste kleiner of gelijk is aan het tweede.
+Bijvoorbeeld, de rij $[1, 5, 6, 9]$ is duidelijk gesorteerd. We kunnen dit nazien
+door op te merken dat elk opeenvolgend paar elementen correct geordend is:
+\[
+  1 \leq 5 \qquad 5 \leq 6 \qquad 6 \leq 9
+\]
+Omgekeerd kunnen we dus ook stellen dat een ongeordende rij op zijn minst ergens
+twee opeenvolgende elementen moet bevatten die niet juist geordend staan. Zo is
+de rij $[1,4,6,5,8,9]$ niet helemaal juist gesorteerd.
+\[
+  1 \leq 4 \qquad 4 \leq 6 \qquad \underbrace{\color{red} 6 \not\leq 5}_{!!!} \qquad 5 \leq 8 \qquad 8 \leq 9
+\]
+Om een rij te sorteren kunnen we deze afspeuren
+op zoek naar zulke verkeerd geordende koppels. Telkens we er zo \'e\'en vinden,
+verwisselen we deze van plaats. Uiteindelijk zullen we
+geen verkeerd geordend koppel meer vinden, wat betekent dat de rij gesorteerd is.
+
+\begin{example}
+We voeren dit eens handmatig uit: stel, we willen de rij $[5, 7, 2, 6]$ sorteren.
+We merken op dat 7 en 2 verkeerd staan;
+met andere woorden, we moeten deze verwisselen van plaats. De rij wordt dan $[5, 2, 7, 6]$.
+Nu zien we dat 5 en 2 fout geordend zijn;
+we wisselen deze om en we krijgen $[2, 5, 7, 6]$. We herhalen dit proces zolang we
+``foute koppels'' vinden. In tabelvorm ziet
+dit er zo uit:
+
+{
+\newcommand{\HL}[1]{\textbf{#1}}
+\newcommand{\swap}{\ensuremath{\searrow\kern-10pt\swarrow}}
+\begin{center}
+  \begin{tabular}{rcccccccl}
+    {[} & 5, && \HL7, && \HL2, && 6 & ] \\
+    &&&& \swap \\
+    {[} & \HL5, && \HL2, && 7, && 6 & ] \\
+    && \swap \\
+    {[} & 2, && 5, && \HL7, && \HL6 & ] \\
+    &&&&&& \swap \\
+    {[} & 2, && 5, && 6, && 7 & ] \\
+  \end{tabular}
+\end{center}
+}
+We hadden bij de tweede stap in plaats van 5 en 2 te verwisselen ook 7 en 6 kunnen van plaats doen wisselen.
+Het maakt niet uit in welke volgorde we de elementen van plaats verwisselen: het valt wiskundig
+te bewijzen\footnote{Hoeven jullie weliswaar niet te kunnen.} dat we sowieso uiteindelijk
+zullen uitmonden in een gesorteerde rij.
+\end{example}
+
+Indien er dus meerdere verkeerd geordende koppels zijn in een rij,
+kunnen we dus in principe willekeurig kiezen welke koppel we
+als volgende onder handen nemen. Het Bubble Sort algoritme pakt het
+als volgt aan: het begint helemaal links in de rij, vergelijkt de eerste twee elementen en
+wisselt deze om indien nodig (d.i.\ dus als het eerste element groter is dan het tweede).
+Daarna verschuift de aandacht van het algoritme
+\'e\'en stap naar rechts: het 2de en 3de element uit de rij worden vergeleken en weeral
+omgewisseld indien nodig. Zo gaat dit door
+tot het voorlaatste en laatste element. Dit afgaan van de volledige rij van links
+naar rechts wordt een \emph{pass} genoemd.
+
+\begin{example}
+We werken een Bubble Sort pass uit. We nemen als voorbeeld de rij $[4,1,3,7,6,2]$.
+{
+\newcommand{\HL}[1]{\textbf{#1}}
+\newcommand{\swap}{\ensuremath{\searrow\kern-10pt\swarrow}}
+\newcommand{\keep}{\ensuremath{\downarrow}}
+\begin{center}
+  \begin{tabular}{rcccccccccccl}
+    {[} & \HL4, && \HL1, && 3, && 7, && 6, && 2 & ] \\
+    && \swap && \phantom{\swap} && \phantom{\swap} && \phantom{\swap} && \phantom{\swap} \\
+    {[} & 1, && \HL4, && \HL3, && 7, && 6, && 2 & ] \\
+    &&&& \swap \\
+    {[} & 1, && 3, && \HL4, && \HL7, && 6, && 2 & ] \\
+    &&&&& \keep && \keep \\
+    {[} & 1, && 3, && 4, && \HL7, && \HL6, && 2 & ] \\
+    &&&&&&&& \swap \\
+    {[} & 1, && 3, && 4, && 6, && \HL7, && \HL2 & ] \\
+    &&&&&&&&&& \swap \\
+    {[} & 1, && 3, && 4, && 6, && 2, && 7 & ] \\
+  \end{tabular}
+\end{center}
+}
+In de eerste stap wordt 4 met 1 vergeleken. Deze staan duidelijk in de verkeerde
+volgorde, dus moeten ze omgewisseld worden. Hetzelfde geldt voor de tweede stap:
+4 staat voor 3, dus moeten ze ook verwisseld worden. In de derde stap blijkt
+dat 4 en 7 reeds juist staan: deze kunnen we op hun plaats laten staan.
+Daarna volgen er nog twee stappen waarbij telkens blijkt dat de elementen
+verkeerd geordend staan.
+\end{example}
+
+Aan de hand van dit voorbeeld kunnen we zien dat \'e\'en enkele pass niet zal voldoen
+om de rij volledig te sorteren. De oplossing is eenvoudig: we blijven maar passes
+uitvoeren zolang de rij niet gesorteerd is.
+
+\begin{example} \label{example:sorteren:passes}
+We voeren een tweede pass uit:
+{
+\newcommand{\HL}[1]{\textbf{#1}}
+\newcommand{\swap}{\ensuremath{\searrow\kern-10pt\swarrow}}
+\newcommand{\keep}{\ensuremath{\downarrow}}
+\begin{center}
+  \begin{tabular}{rcccccccccccl}
+    {[} & \HL1, && \HL3, && 4, && 6, && 2, && 7 & ] \\
+    & \keep & \phantom{\swap} & \keep & \phantom{\swap} && \phantom{\swap} && \phantom{\swap} && \phantom{\swap} \\
+    {[} & 1, && \HL3, && \HL4, && 6, && 2, && 7 & ] \\
+    &&& \keep && \keep \\
+    {[} & 1, && 3, && \HL4, && \HL6, && 2, && 7 & ] \\
+    &&&&& \keep && \keep \\
+    {[} & 1, && 3, && 4, && \HL6, && \HL2, && 7 & ] \\
+    &&&&&&&& \swap \\
+    {[} & 1, && 3, && 4, && 2, && \HL6, && \HL7 & ] \\
+    &&&&&&&&& \keep && \keep \\
+    {[} & 1, && 3, && 4, && 2, && 6, && 7 & ]
+  \end{tabular}
+\end{center}}
+{\flushleft Een derde pass transformeert de rij naar}
+\begin{center}
+  [ 1, 3, 4, 6, 2, 7 ] $\quad\rightarrow\quad \dots \quad\rightarrow\quad$ [ 1, 3, 2, 4, 6, 7 ]
+\end{center}
+Een vierde pass blijkt ook nog eens nodig te zijn:
+\begin{center}
+  [ 1, 3, 2, 4, 6, 7 ] $\quad\rightarrow\quad \dots \quad\rightarrow\quad$ [ 1, 2, 3, 4, 6, 7 ]
+\end{center}
+\end{example}
+We kunnen ons afvragen hoeveel passes er nodig zijn om een rij gesorteerd te krijgen.
+Indien de rij slechts \'e\'en element bevat, is het triviaal: zo een rij is reeds gesorteerd,
+dus er zijn geen passes nodig.
+In het geval van een rij bestaande uit twee elementen, onderscheiden we twee mogelijkheden:
+ofwel staan ze reeds in de juiste volgorde en zijn er dus geen passes nodig,
+ofwel staan ze verkeerd maar zal een enkele pass de rij gesorteerd krijgen.
+Algemener is het aantoonbaar dat om een rij van $N$ aantal elementen te sorteren,
+er maximaal $N - 1$ passes nodig zijn.
+Met andere woorden, gegeven een rij van lengte $N$ kan men er gewoon $N-1$ passes op
+uitvoeren om dan met zekerheid te eindigen met een gesorteerde rij.
+We zijn nu klaar om dit algoritme te implementeren.
+
+\subsection{Implementatie} \label{sec:sorteren:bubble-sort:implementatie}
+Bubble Sort moet twee elementen uit een rij kunnen verwisselen.
+De andere sorteeralgoritmen die we later bespreken zullen
+deze operatie ook veelvuldig gebruiken, waardoor het interessant wordt hiervoor een aparte functie te
+defini\"eren. Zodoende hoeven we de code voor het verwisselen van twee elementen niet telkens te dupliceren.
+De code voor de verwisselfunctie is te zien in \cref{code:sorting:swap}.
+
+\codefigure{sorteren/swap.js}{Een functie om twee elementen uit een rij van plaats
+te verwisselen}{code:sorting:swap}
+
+\begin{example}
+We illustreren het gebruik van de verwisselfunctie.
+\examplecode{sorteren/swap-vb.js}
+\end{example}
+
+\codefigure[numbers=left]{sorteren/bubblesort.js}{Bubble Sort}{code:sorting:bubble-sort}
+
+Zoals besproken in de vorige paragraaf, kunnen we een rij van lengte $N$ sorteren door
+$N - 1$ passes erop uit te voeren.
+\Cref{code:sorting:bubble-sort} toont de volledige code voor het Bubble Sort algoritme. We lichten de code toe:
+
+\begin{itemize}
+  \item \Crefrange{line:sorteer:bubble-sort:pass-begin}{line:sorteer:bubble-sort:pass-end} defini\"eren
+        de functie \inlinecode{bubbleSortPass} dewelke een enkele pass uitvoert op de gegeven rij.
+        Het is een hulpfunctie die we later in de code (op~\cref{line:sorteer:bubble-sort:sort-passcall})
+        zullen oproepen.
+  \item \Crefrange{line:sorteer:bubble-sort:pass-forloop}{line:sorteer:bubble-sort:pass-forloop-end}
+        vormen een lus waarbij de variabele \lstinline{i} de waarden \inlinecode{0} tot \inlinecode{rij.length-2}
+        afgaat: dit komt overeen met het van links naar rechts afgaan van de rij.
+        Merk op dat bij het afgaan van een rij de iteratievariabele (hier dus \inlinecode{i})
+        \emph{doorgaans} \inlinecode{0} tot \inlinecode{rij.length-1} afgaat; dit is hier echter
+        niet het geval: \inlinecode{i} stopt hier \'e\'en stap eerder omdat
+        we telkens \inlinecode{rij[i]} en \inlinecode{rij[i+1]} willen vergelijken.
+        Indien \inlinecode{i} zou gaan tot \inlinecode{rij.length-1}, zouden
+        we in de laatste lusiteratie \inlinecode{rij[rij.length]} willen uitlezen, wat voorbij het
+        einde van de rij is.
+  \item \Cref{line:sorteer:bubble-sort:pass-if} checkt of de elementen
+        met index \inlinecode{i} en \inlinecode{i+1} in de juiste volgorde staan.
+        Zoniet, wordt \cref{line:sorteer:bubble-sort:pass-swap} uitgevoerd:
+        deze roept de functie \inlinecode{verwissel} op om de elementen
+        om te wisselen.
+  \item \Crefrange{line:sorteer:bubble-sort:sort-begin}{line:sorteer:bubble-sort:sort-end}
+        bevatten de definitie voor de functie \inlinecode{bubbleSort}. Als we een rij willen
+        sorteren, kunnen we deze functie erop loslaten (zie later, \cref{example:sorteer-bubblesort}).
+  \item \Crefrange{line:sorteer:bubble-sort:sort-for}{line:sorteer:bubble-sort:sort-for-end}
+        stellen een lus voor die \inlinecode{rij.length-1} keer een pass uitvoert.
+        Stel dat de rij lengte 5 heeft, dan willen we dat er 4 maal een pass wordt uitgevoerd.
+        We beginnen bij \inlinecode{i = 0} en itereren zolang \inlinecode{i < rij.length - 1}.
+        De variabele \inlinecode{i} zal dus de waarden \inlinecode{0}, \inlinecode{1},
+        \inlinecode{2} en \inlinecode{3} aannemen, wat overeenkomt met 4 iteraties, exact wat we willen.
+        Wanneer \inlinecode{i} gelijk wordt aan \inlinecode{4}, is de conditie
+        \inlinecode{i < rij.length - 1} niet meer waar en wordt de lus afgebroken.
+  \item Op~\cref{line:sorteer:bubble-sort:sort-passcall} roepen we onze hulpfunctie
+        \inlinecode{bubbleSortPass} op, dewelke dus een enkele pass uitvoert op \inlinecode{rij}.
+\end{itemize}
+
+\begin{example} \label{example:sorteer-bubblesort}
+Om een rij te sorteren kunnen we volgende code gebruiken:
+\examplecode{sorteren/bubblesort-usage.js}
+\end{example}
+
+\begin{exercise}
+Op \cref{line:sorteer:bubble-sort:pass-if} van \cref{code:sorting:bubble-sort}
+gebruiken we de operator \inlinecode{>} om de elementen op posities \inlinecode{i}
+en \inlinecode{i+1} te vergelijken. Wat gebeurt er indien we \inlinecode{<} gebruiken in de plaats?
+\begin{solution}
+De elementen zullen van groot naar klein gesorteerd worden.
+\end{solution}
+\end{exercise}
+
+\subsection{Eerste Optimisatie} \label{sec:sorteren:bubble-sort:opt1}
+De Bubble Sort implementatie uit de vorige paragraaf (\cref{code:sorting:bubble-sort})
+kan wat effici\"enter gemaakt worden: nu worden voor een rij van $N$ elementen
+$N-1$ passes uitgevoerd, maar soms is dit overbodig en is de rij reeds gesorteerd
+na minder passes. Beschouw bijvoorbeeld het geval waarin we \inlinecode{bubbleSort}
+oproepen met een reeds gesorteerde rij: idealiter willen we dat het algoritme
+dit doorheeft en meteen zijn werk stopzet. In \cref{example:sorteren:passes} (\cpageref{example:sorteren:passes})
+zagen we eveneens dat 4 passes bleken voldoende te zijn, terwijl de rij 6 elementen bevatte.
+
+\codefigure{sorteren/bubblesort-opt1-naive.js}{Een na\"ieve manier om Bubble Sort
+te optimiseren}{code:sorting:bubble:naive-opt}
+
+We zouden het algoritme conceptueel kunnen neerschrijven zoals getoond in \cref{code:sorting:bubble:naive-opt}:
+in plaats van $N-1$ passes uit te voeren voor een rij van lengte $N$, blijven
+we maar passes uitvoeren zolang de rij niet gesorteerd is.
+We moeten echter bij elke iteratie checken of de rij nu eindelijk gesorteerd is,
+maar dit checken kost ook tijd. Hebben we door deze ``optimisatie'' het algoritme
+echt wel sneller gemaakt?
+
+Stel dat we een rij van lengte 10 hebben waarvoor blijkt dat er 9 passes nodig
+zijn om het deze gesorteerd te krijgen. In de eerste versie van onze implementatie
+(\cref{code:sorting:bubble-sort}) moesten we gewoon 9 keer \inlinecode{bubbleSortPass} oproepen.
+In onze nieuwe versie (\cref{code:sorting:bubble:naive-opt}) hebben we eveneens
+9 keer \inlinecode{bubbleSortPass} moeten oproepen, maar daarbij ook nog eens
+10 keer \inlinecode{isGesorteerd}! De nieuwe versie werkt in dit geval dus trager.
+
+Er zijn uiteraard ook gevallen waar onze nieuwe implementatie sneller werkt. Men kan stellen
+dat deze sneller werkt voor quasi-gesorteerde rijen (waarvoor weinig passes nodig zijn)
+maar trager voor ``moeilijk sorteerbare'' rijen. Het is betwistbaar of dit een nuttige optimisatie is.
+
+We kunnen het gelukkig iets slimmer aanpakken: we kunnen \inlinecode{bubbleSortPass}
+zelf gebruiken om te weten te komen of een rij gesorteerd is: zo slaan
+we twee vliegen in \'e\'en klap en is een aparte oproep naar \inlinecode{isGesorteerd} overbodig geworden.
+
+Wanneer \inlinecode{bubbleSortPass} een niet-gesorteerde rij ontvangt,
+zal het bepaalde elementen van plaats verwisselen. Indien de rij in kwestie echter
+w\'el reeds gesorteerd is, zal \inlinecode{bubbleSortPass} alle elementen
+ongemoeid laten. Als we \inlinecode{bubbleSortPass} laten bijhouden of er elementen
+verwisseld werden, kunnen we ook detecteren of de rij gesorteerd is. We implementeren
+deze aanpak in \cref{code:sorting:bubble:opt}.
+
+\codefigure[numbers=left]{sorteren/bubblesort-opt1.js}{Een geoptimiseerde Bubble Sort}{code:sorting:bubble:opt}
+
+\begin{itemize}
+  \item De functie \inlinecode{bubbleSortPass} breiden we uit met een lokale variabele
+        \inlinecode{bewerkt} op \cref{line:sorteer:bubble-sort-opt:var-bewerkt}.
+        Deze gebruiken we om bij te houden of er ergens elementen verwisseld werden.
+  \item In het begin van een pass zijn er nog geen omwisselingen verricht:
+        \inlinecode{bewerkt} moet dus ge\"initialiseerd worden op \inlinecode{false}
+        op~\cref{line:sorteer:bubble-sort-opt:var-bewerkt}.
+        Bij elke omwisseling overschrijven we (op~\cref{line:sorteer:bubble-sort-opt:bewerkt-true})
+        deze waarde met \inlinecode{true}. 
+  \item Op lijn \cref{line:sorteer:bubble-sort-opt:return} geven we de waarde
+        van \inlinecode{bewerkt} terug. Zo kunnen we in de functie \inlinecode{bubbleSort}
+        te weten komen of \inlinecode{bubbleSortPass} al dan niet de rij heeft aangepast.
+  \item Ook de functie \inlinecode{bubbleSort} voorzien we van een lokale variabele:
+        op \cref{line:sorteer:bubble-sort-opt:var-ongesorteerd} declareren
+        we \inlinecode{ongesorteerd}, dewelke aangeeft of de rij gesorteerd is of niet.
+  \item We initialiseren de variabele \inlinecode{ongesorteerd} op \inlinecode{true}:
+        we weten op dat moment immers nog niet of \inlinecode{rij} gesorteerd is
+        en het is veilig ervan uit te gaan dat dit nog niet het geval is.
+  \item De lus op \crefrange{line:sorteer:bubble-sort-opt:while}{line:sorteer:bubble-sort-opt:while-end}
+        zal blijven itereren zolang \inlinecode{ongesorteerd} \inlinecode{true} is.
+        Op \cref{line:sorteer:bubble-sort-opt:ongesorteerd-set} roepen we \inlinecode{bubbleSortPass}
+        op. Zoals eerder uitgelegd, geeft deze functie als resultaat terug of er elementen werden van
+        plaats verwisseld. Indien het resultaat gelijk is aan \inlinecode{true},
+        moeten we verder itereren; is het \inlinecode{false}, dan mogen we stoppen met sorteren.
+        Dit bekomen we door het resultaat toe te kennen aan \inlinecode{ongesorteerd}.
+\end{itemize}
+
+\begin{exercise}
+Op \cref{line:sorteer:bubble-sort-opt:cmp} van \cref{code:sorting:bubble:opt}
+wordt \inlinecode{rij[i]} vergeleken met \inlinecode{rij[i+1]}. Dit gebeurt
+met de \inlinecode{>} operator. Wat als men \inlinecode{>=} gebruikt?
+\begin{solution}
+Indien de rij twee gelijke elementen bevatten, zullen deze constant verwisseld
+worden en eindigt het algoritme nooit.
+\end{solution}
+\end{exercise}
+
+\subsection{Tweede Optimisatie} \label{sec:sorteren:bubble-sort:opt2}
+Om deze tweede optimisatie te begrijpen, moeten we eerst wat inzicht
+verwerven in de werking van Bubble Sort.
+
+\begin{example} \label{example:sorteren:bubble:passes}
+\newcommand{\HL}[1]{\textbf{#1}}
+We beschouwen de rij $[ 9, 5, 2, 8, 1, 3, 7, 6 ]$ en voeren er Bubble Sort passes op uit:
+\begin{center}
+  \begin{tabular}{c|c}
+    \textbf{pass} & \textbf{rij} \\
+    \hline
+    0 & $[ 9, 5, 2, 8, 1, 3, 7, 6 ]$ \\
+    1 & $[ 5, 2, 8, 1, 3, 7, 6, \HL9 ]$ \\
+    2 & $[ 2, 5, 1, 3, 7, 6, \HL8, \HL9 ]$ \\
+    3 & $[ 2, 1, 3, \HL5, \HL6, \HL7, \HL8, \HL9 ]$ \\
+    4 & $[ \HL1, \HL2, \HL3, \HL5, \HL6, \HL7, \HL8, \HL9 ]$ \\
+  \end{tabular}
+\end{center}
+In het vet werd aangeduid welke deelrij (te beginnen van rechts) volledig gesorteerd is.
+We zien dat dit bij elke pass groeit: na pass 1 is enkel de deelrij $[9]$ gesorteerd,
+na pass 2 groeit deze tot $[8, 9]$, terwijl de 3de pass goed werk lijkt te leveren:
+plots staan de elementen $[5, 6, 7, 8, 9]$ allemaal juist geordend. De 4de pass
+werkt het af: de 3 overgebleven elementen staan nu ook correct.
+\end{example}
+
+Een pass gaat telkens de \emph{volledige} rij af, terwijl dit niet nodig blijkt te zijn:
+de 2de pass uit \cref{example:sorteren:bubble:passes} hoeft slechts de 7 eerste elementen te bekijken,
+de 3de pass enkel de 6 eerste, de 4de pass kan zich beperken tot de 3 eerste, etc.
+
+Hoe kunnen we nu te weten komen tot waar een pass de rij moet afgaan?
+In de vorige paragraaf zagen we hoe \inlinecode{bubbleSortPass} bijhield
+of er omwisselingen werden uitgevoerd of niet. Maar wat als we ook de index
+onthouden van het laatst verplaatste element? Indien een pass een rij doorloopt
+en het laatst verwisselde koppel elementen indices \inlinecode{i} en \inlinecode{i+1}
+hebben, dan kunnen we daaruit afleiden dat alle elementen vanaf \inlinecode{i+2} juist
+gesorteerd staan. We maken gebruik van dit principe in \cref{code:sorting:bubble:opt2}.
+
+\codefigure[numbers=left]{sorteren/bubblesort-opt2.js}{Finale versie van Bubble Sort}{code:sorting:bubble:opt2}
+
+\begin{itemize}
+  \item We moeten twee wijzigingen aanbrengen aan de functie \inlinecode{bubbleSortPass}. Ten eerste
+        moeten we de index bijhouden van het laatste verplaatste element. Dit gebeurt
+        op \cref{line:sorteer:bubble-sort-opt2:laatstBewerkt-set}. De initi\"ele waarde
+        voor de lokale variabele \inlinecode{laatstBewerkt} kiezen we $-1$:
+        deze ongeldige index gebruiken we om symbolisch aan te geven dat
+        er (nog) geen laatste gewijzigde element is.
+  \item Ten tweede moet \inlinecode{bubbleSortPass} verteld worden tot waar het de rij moet afgaan.
+        Dit wordt voorgesteld door het argument \inlinecode{tot} dat ingevoerd wordt
+        op \cref{line:sorteer:bubble-sort-opt2:bubbleSortPass}. \inlinecode{max} stelt de index
+        voor van het laatste element dat bekeken moet worden door de huidige pass.
+        Merk ook op dat de iteratievariabele \inlinecode{i} nu varieert van
+        \inlinecode{0} tot \inlinecode{max-1} in plaats van tot \inlinecode{rij.length-2}\footnote{Indien
+        je verward wordt door de \inlinecode{-1} enerzijds en de \inlinecode{-2} anderzijds:
+        \inlinecode{i} moet gaan van \inlinecode{0} tot de \emph{index van het voorlaatste element}.
+        Vermits \inlinecode{max} de index is van het laatste element, is de bovengrens \inlinecode{max-1}.
+        In de vorige implementatie was de bovengrens \inlinecode{rij.length-2}: indien de rij $N$ elementen
+        bevat, dan is de index van het laatste element $N-1$ en de index van het voorlaatste element dus
+        $N-2$, vandaar \inlinecode{rij.length-2}.}.
+  \item Ook de functie \inlinecode{bubbleSort} moet wat aangepast worden.
+        De lokale variabele \inlinecode{ongesorteerdTot} wordt gebruikt
+        om de index van het laatste ongesorteerde element te bevatten.
+        Vermits in het begin de rij als volledig ongesorteerd beschouwd wordt,
+        moet deze variabele ge\"initialiseerd worden op \inlinecode{rij.length-1}.
+  \item Op \cref{line:sorteer:bubble-sort-opt2:body} wordt \inlinecode{bubbleSortPass} opgeroepen.
+        Merk op dat we nu de index van het laatste ongesorteerde elementen mee moeten geven
+        (het tweede argument). \inlinecode{bubbleSortPass} geeft de nieuwe
+        waarde voor \inlinecode{ongesorteerdTot} terug, dit resultaat moeten we dus bewaren.
+  \item De lusconditie op \cref{line:sorteer:bubble-sort-opt2:while} checkt
+        of de rij volledig gesorteerd is. We weten dat \inlinecode{bubbleSortPass}
+        als resultaat \inlinecode{-1} oplevert indien de rij gesorteerd is,
+        wat ervoor zal zorgen dat het itereren zal eindigen.
+\end{itemize}
+
+\begin{example}
+\newcommand{\HL}[1]{\textbf{#1}}
+We herbekijken dezelfde reeks als uit \cref{example:sorteren:bubble:passes}
+en rekenen handmatig uit hoe de waarden van de variabelen
+\inlinecode{rij} en \inlinecode{gesorteerdTot} evolueren.
+We tonen de waarden van beide variabelen nadat een pass werd uitgevoerd;
+met andere woorden, het is alsof we een \inlinecode{alert} hebben toegevoegd
+juist na \cref{line:sorteer:bubble-sort-opt2:body}.
+\begin{center}
+  \begin{tabular}{c|c|c}
+    \textbf{pass} & {\tt rij} & {\tt gesorteerdTot} \\
+    \hline
+1 & {\tt [ 5, 2, 8, 1, 3, 7, 6, 9 ]} & {\tt 7} \\
+2 & {\tt [ 2, 5, 1, 3, 7, 6, 8, 9 ]} & {\tt 6} \\
+3 & {\tt [ 2, 1, 3, 5, 6, 7, 8, 9 ]} & {\tt 5} \\
+4 & {\tt [ 1, 2, 3, 5, 6, 7, 8, 9 ]} & {\tt 1} \\
+5 & {\tt [ 1, 2, 3, 5, 6, 7, 8, 9 ]} & {\tt -1} \\
+  \end{tabular}
+\end{center}
+\end{example}
+
+\begin{exercise}
+\Cref{line:sorteer:bubble-sort-opt2:while} in \cref{code:sorting:bubble:opt2} toont als
+while-conditie \inlinecode{i >= 0}. Kunnen we dit veranderen naar \inlinecode{i > 0}? Wat zijn hiervan
+de gevolgen?
+\begin{solution}
+\inlinecode{i > 0} geeft exact hetzelfde als \inlinecode{i >= 0} vermits
+\inlinecode{bubbleSortPass} nooit \inlinecode{0}
+kan teruggeven: ofwel worden er geen elementen aangepast en geeft de functie \inlinecode{-1}
+terug, ofwel wordt \inlinecode{i+1} teruggegeven waarbij \inlinecode{i} minimaal gelijk is aan \inlinecode{0}.
+Met andere woorden, indien het element met index \inlinecode{0} wordt verplaatst, \emph{moet} ook
+het element met index \inlinecode{1} zijn betrokken geweest. Vermits de index van het laatste verplaatste element
+(d.i.\ dat met de hoogste index) moet teruggegeven worden, betekent dit dat \inlinecode{1} het resultaat moet zijn
+(of een hogere index indien er nog andere elementen verwisseld werden).
+\end{solution}
+\end{exercise}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

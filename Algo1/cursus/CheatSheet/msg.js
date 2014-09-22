@@ -1,0 +1,2 @@
+confirm(tekst);
+alert(tekst);

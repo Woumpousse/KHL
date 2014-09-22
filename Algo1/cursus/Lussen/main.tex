@@ -1,0 +1,38 @@
+\chapter{Lussen}
+
+Bij het schrijven van een programma gaan we vaak een nood hebben om eenzelfde stuk code een aantal keer uit te voeren. Denk bijvoorbeeld aan het stukje code dat een tekening naar het scherm kopieert. Elke pixel in de tekening zal afzonderlijk gekopieerd worden, dus voor een grote tekening ga je al snel meer dan een miljoen pixels afzonderlijk moeten kopi\"eren. Als we voor elke pixel een klein stukje code zouden moeten schrijven dat de pixel kopieert, komen we dus voor zulke eenvoudige operaties al snel aan een gigantisch programma.
+
+Gelukkig bevatten programmeertalen constructies om stukjes code op een eenvoudige manier meerdere keren uit te voeren. Een zogenaamde lus gaat een stuk code blijven herhalen totdat aan een bepaalde voorwaarde voldaan wordt\footnote{Voor een ons nog onduidelijke reden speken veel studenten regelmatig over \emph{``een if-lus''}. Voor alle duidelijkheid: een `if' is g\'e\'en lus, maar een \emph{statement}! Een if-lus bestaat dus niet, maar een if-statement wel...}. JavaScript biedt meerdere types van lussen aan, die allen ervoor zorgen dat code gemakkelijk herhaald kan worden. Ze verschillen lichtjes in gebruik, waardoor de ene lus handiger kan zijn in een bepaalde situatie dan een andere lus.
+
+De meest algemene lus is de while-lus. Deze lus zal een stuk code herhalen totdat een bepaalde voorwaarde niet meer geldt. Zo kunnen we met een while-lus een programma schrijven dat getallen vraagt aan de gebruiker en deze getallen optelt, totdat de gebruiker een negatief getal ingeeft. De som wordt daarna getoond.
+
+\examplecode{Lussen/sum.js}
+
+De while-lus begint met een conditie (tussen de haakjes) te evalueren. Zo lang die `true' is, zal de code tussen de accolades uitgevoerd worden. Natuurlijk moet de code tussen de accolades er op een bepaald moment voor zorgen dat de conditie `false' wordt. Indien niet, zal de lus nooit stoppen (wat meestal niet de bedoeling is). In bovenstaand voorbeeld wordt er aan de gebruiker telkens een nieuwe waarde gevraagd en in `getal' gestoken. Zodra de gebruiker een negatieve waarde ingeeft (en de conditie niet meer `true' is) zal de lus stoppen.
+
+De code in dit voorbeeld zal een aantal keer uitgevoerd worden. Het precieze aantal wordt bepaald door de gebruiker die de lus kan doen stoppen door een negatief getal in te geven. Vaak moeten we echter de lus een vooraf bepaald aantal keer uitvoeren (bijvoorbeeld als we de getallen 1 tot 100 willen optellen - deze lus moet exact 100x uitgevoerd worden). We kunnen hiervoor een while-lus gebruiken, maar er bestaat een lus die beter geschikt is voor deze situatie (waar we dus op voorhand weten hoeveel keer de lus uitgevoerd moet worden). We kunnen de code als volgt schrijven:
+
+\examplecode{Lussen/sumfor.js}
+
+In plaats van een conditie die naar `true' of `false' evalueert, staan er tussen de ronde haakjes van een for lus drie verschillende onderdelen (gescheiden door een puntkomma). Het eerste deel is de initialisatiecode van de lus. Deze wordt \'e\'en keer uitgevoerd, net voor de lus begint. Het tweede deel is de conditie van de lus. Zolang deze conditie evalueert naar `true' zal de lus uitgevoerd worden. In dit geval zal de lus dus stoppen van zodra de inhoud van variabele `i' een getal groter of gelijk aan 100 wordt. Het laatste stuk is code die telkens op het einde van de lus uitgevoerd wordt. In dit geval  wordt de variabele `i' telkens met \'e\'en verhoogd na elke iteratie van de lus.
+
+\section{Equivalente lussen}
+
+For- en while-lussen zijn eigenlijk equivalent, maar in de ene situatie kan je makkelijker de ene lus gebruiken, terwijl je in een andere situatie best een andere kan gebruiken. Indien je op voorhand weet dat de lus een vooraf bepaald aantal stappen moet uitvoeren, kan je best een for-lus gebruiken op de manier die getoond werd in vorig voorbeeld. In het initialiserende deel van de for lus kan je dan een teller-variabele aanmaken en instellen op de waarde waar de lus bij moet beginnen. Op het einde van de lus ga je die tellervariabele dan op een bepaalde manier manipuleren, bijvoorbeeld door er \'e\'en bij op te tellen. De lus zal dan uitgevoerd worden tot een bepaalde waarde bereikt is. Deze waarde hoeft geen waarde te zijn die op voorhand vastgelegd is in het programma (bijv. `100' in bovenstaand voorbeeld), maar kan ook een vooraf berekende waarde zijn. Zo kunnen we bovenstaand voorbeeld omvormen tot een versie waar de gebruiker het getal kan ingeven tot waar de som berekend moet worden:
+
+\examplecode{Lussen/sumfor2.js}
+
+Aangezien een for-lus en een while-lus equivalent zijn, kan je de ene lus herschrijven tot de andere, en omgekeerd. Zo zou je hetzelfde stuk code kunnen schrijven als de volgende while-lus:
+
+\examplecode{Lussen/sumwhile2.js}
+
+Ook een while-lus kan omgezet worden naar een for-lus, alhoewel dit meestal tot bijzonder onoverzichtelijke code leidt. Zo zou het eerste stukje voorbeeldcode van dit hoofdstuk kunnen geschreven worden als volgt:
+
+\examplecode{Lussen/ugly.js}
+
+Alhoewel dit werkt, is deze code veel onduidelijker als de eerste versie. Zo zie je dat het belangrijk is om de juiste lus voor het juiste probleem te gebruiken. 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

@@ -1,0 +1,86 @@
+\chapter{Functies}
+
+In de codevoorbeelden die we tot nu toe al gezien hebben, hebben we vaak gebruik gemaakt van functies (of methodes). Zo hebben we al gebruik gemaakt van de methode prompt die vraagt aan de gebruiker om een stuk tekst in te geven, de methode parseInt die een stuk tekst kan converteren naar een getal en de methode alert die een bericht aan de gebruiker toont. In het algemeen implementeert een functie bepaalde functionaliteit die dan eenvoudig kan hergebruikt worden door de programmeur door de functie op te roepen en er bepaalde parameters aan mee te geven.
+
+Het gebruik van functies heeft veel voordelen. Het is vooral een gemakkelijke manier om nuttige code te hergebruiken (en programmeertalen bieden typisch tal van methodes aan waarmee de programmeur onmiddellijk aan de slag kan). Maar het kan ook dienen als een manier om code te structureren en veel leesbaarder te maken. Bijvoorbeeld, stel je voor dat je een algoritme moet implementeren om koffie te maken. Je zou de grote lijnen kunnen weergeven als volgt:
+
+\begin{enumerate}
+\item Doe gemalen koffie in de filter
+\item Breng water aan de kook
+\item Giet water over de gemalen koffie
+\end{enumerate}
+
+De specifieke implementaties van deze stappen kan je dan in een functie onderbrengen. Zo zou de functie ``breng water aan de kook'' kunnen bestaan uit de volgende stappen:
+
+\begin{enumerate}
+\item Neem een pan
+\item Doe er water in
+\item Zet de pan op het vuur
+\item Zet het vuur op de maximale stand
+\item Wacht tot het water kookt
+\item Zet het vuur af
+\end{enumerate}
+
+Het is veel makkelijker om te redeneren over het probleem (``koffie maken'') op een hoger abstractieniveau, en dan de details (``hoe kan ik water doen koken?'') ergens apart uitwerken in een methode. Eenmaal een methode geschreven is moet ze goed getest worden, en van zodra je er zeker van bent dat ze correct werkt kan je de methode in al je programma's hergebruiken zonder dat je je zorgen moet maken of de code wel juist is.
+
+In JavaScript defini\"eren we en functie door middel van het function sleutelwoord. Elke methode heeft een unieke naam en een aantal (0, 1, of meerdere) parameters. De programmeur kan de functie later aanspreken door middel van de unieke naam, en kan bij zo een methode-oproep ook de parameters kiezen die het gewenste resultaat opleveren. Een functiedefinitie volgt de volgende structuur:
+
+\examplecode{Functies/example.js}
+
+De naam is dus uniek en moet voldoen aan een aantal regels. Zo mag de naam niet beginnen met een cijfer, mogen er geen spaties in staan en is het gebruik van een aantal speciale symbolen verboden. Typisch kiezen we een naam die beschrijft wat de functie doet. Zo geeft de naam parseInt duidelijk aan dat de methode een `int' (d.i. kort voor `integer'  ?  een geheel getal) gaat `parsen' (of `ontleden'). Bij de naamgeving volgen we de conventies die in JavaScript gebruikt worden voor functienamen: de functienaam bestaat uit kleine letters. Indien de naam een opeenvolging van woorden is, dan begint elke woord met een hoofdletter (behalve het eerste woord). Een voorbeeld van een correcte naam is ``berekenAbsoluteWaarde''. Namen die niet aan deze conventie voldoen zijn: ``BerekenAbsoluteWaarde'', ``berekenabsolutewaarde'', ``BEREKEN\_ABSOLUTE\_WAARDE''. Deze namen zijn echter wel toegelaten door JavaScript; de regels zijn dus gewoon een afspraak.
+
+De parameters zijn een aantal variabelen die in de berekening van de functie kunnen gebruikt worden. Ze krijgen een bepaalde waarde mee wanneer de functie opgeroepen wordt. Het aantal parameters hangt af van de functie. Sommige functies hebben geen parameters nodig (in dit geval doen ze dus altijd hetzelfde, telkens ze worden opgeroepen), andere functies hebben \'e\'en, twee of meerdere parameters nodig. Binnen de functie zijn de parameters doodgewone variabelen waarmee gerekend kan worden.
+
+Elke parameter heeft een specifieke betekenis en ook hier kiezen we een zinvolle naam die de betekenis van de parameter in de functie verduidelijkt. Bijvoorbeeld een functie die de BMI (body mass index) van een persoon berekent op basis van gewicht en lengte: function berekenBMI(gewicht,lengte). De naamgeving verduidelijkt dat de betekenis van de eerste parameter gelijk is aan het gewicht van de persoon en de tweede de lengte van de persoon.  De bmi van een persoon met gewicht 50 kg en lengte 170cm is namelijk heel anders dan deze van een persoon van 170kg en lengte 50cm.  Het is ook nuttig om in enkel lijnen voorafgaand aan de functiedefinitie de functionaliteit en de betekenis van de parameters  te  verduidelijken in een stukje commentaar.
+
+\examplecode{Functies/bmi.js}
+
+De code is de feitelijke implementatie van de functie, en staat tussen de twee overeenkomstige accolades. Hier gaat dus de eigenlijke berekening gebeuren die gebruik kan maken van de parameters die meegegeven zijn door het stukje code die de methode opgeroepen heeft. Indien de functie iets berekend heeft en deze waarde terug wil geven aan het stukje code die de functieoproep gedaan heeft, dan kan gebruik gemaakt worden van het return-sleutelwoord. Wat achter het return-sleutelwoord staat wordt de teruggeefwaarde van de methode (en de uitvoering van de methode wordt ook onmiddellijk be\"eindigd; code die achter het return-sleutelwoord staat zal dus niet uitgevoerd worden!).
+
+Bijvoorbeeld:
+
+\examplecode{Functies/bmi2.js}
+
+Stel dat we een methode schrijven die de absolute waarde van een getal moet berekenen. Als naam kiezen we `berekenAbsoluteWaarde' en de methode zal \'e\'en parameter nodig hebben: het getal waarvan we de absolute waarde willen berekenen. De teruggeefwaarde van de functie zal de absolute waarde van het opgegeven getal zijn. We kunnen deze methode als volgt implementeren:
+
+\examplecode{Functies/abs.js}
+
+De parameter getal bevat het getal waarvan we de absolute waarde moeten berekenen. De implementatie van de functie is redelijk eenvoudig: indien getal positief is, moeten de teruggeefwaarde van de functie gelijk zijn aan getal. Indien de parameter echter negatief is, dan is de teruggeefwaarde van de functie gelijk aan -getal. Afhankelijk van of getal positief of negatief is, zal de juiste waarde in de variabele resultaat opgeslagen worden. De laatste regel van de functie zorgt er voor dat de teruggeefwaarde van de methode het berekende resultaat wordt.
+
+\section{Variabelen in functies}
+
+Wanneer een variabele in een functie gedeclareerd wordt, is dit een lokale variabele. Dit wil zeggen dat de waarde van die variabele enkel in de functie bestaat en gebruikt kan worden. Het veranderen van de waarde van die variabele heeft dus geen effect op code die buiten de functie staat. In het vorig voorbeeld is de variabele resultaat een lokale variabele van de functie `berekenAbsoluteWaarde'.
+
+Variabelen die buiten een functie gedeclareerd worden zijn globale variabelen. Ze kunnen aangesproken worden door code die binnen of buiten een functie staat. Hoewel het aanlokkelijk is om alle variabelen die je programma gebruikt als globale variabelen te declareren, en dan functies te schrijven die deze globale variabelen gebruiken, is dit toch ten sterkste afgeraden. Indien verschillende functies globale variabelen gaan aanpassen, wordt het al snel zeer moeilijk om nog te begrijpen hoe de code precies werkt en om wijzigingen aan te brengen.
+
+Het gebruik van globale variabelen in een functie is slechts uiterst zelden nodig. Meestal heb je meer dan genoeg aan de parameters die kunnen meegegeven worden aan een functie. Het resultaat van de functie kan teruggegeven worden door gebruik te maken van het return-sleutelwoord. Het is belangrijk om te weten dat parameters van een functie lokale variabelen zijn die een kopie bevatten van de waarde die aan de functie meegegeven wordt. Binnen de functie kan er met die parameters dus gewoon gewerkt worden als elke andere lokale variabele, en indien de parameter van waarde wijzigt dan zal deze verandering niet gereflecteerd naar de code die de functie opgeroepen heeft.
+
+\examplecode{Functies/abs2.js}
+
+In bovenstaand voorbeeld wijzigen we de implementatie van `berekenAbsoluteWaarde' een beetje zodat we nu niet meer de variabele resultaat gebruiken om de berekende waarde in op te slaan, maar in de lokale variabele getal van de functie `berekenAbsoluteWaarde' (deze lokale variabele bestaat impliciet omdat we de parameter getal hebben). Bij de functieoproep geven we als parameter de waarde van invoer mee. Deze waarde wordt gekopieerd naar de lokale variabele getal in de functie. Het feit dat de functie de waarde van getal aanpast (indien getal < 0) heeft dus absoluut geen invloed op de waarde van de variabele invoer.
+
+Indien er een globale en lokale variabele bestaat met eenzelfde naam, dan zal JavaScript de lokale variabele gebruiken. We maken dit verschil duidelijk met onderstaande code.
+
+\examplecode{Functies/global-local.js}
+
+Er worden drie variabelen aangemaakt, en dan roepen we de functie foobar op. Deze functie heeft \'e\'en parameter met de naam `a' en maakt een (tweede) lokale variabele aan met de naam `b'. Na de aanroep van foobar zijn de waarden van de globale variabelen a, b, en c als volgt:
+\begin{itemize}
+  \item a behoudt de waarde 10. De toekenning van het getal 31 in de functie heeft geen effect op de globale variabele a omdat in de functie gewerkt zal worden met de lokale variabele a die impliciet aangemaakt wordt omdat de functie een parameter a heeft.
+  \item b behoudt ook de waarde 20. Binnen de functie wordt eerst een lokale variabele met dezelfde naam aangemaakt, en daar wordt dan de waarde 77 aan toegekend. Maar deze toekenning heeft dus geen effect op de globale variabele b.
+  \item c krijgt de nieuwe waarde 59. In de functie is er geen parameter of lokale variabele met de naam c, dus JavaScript zal bij de toekenning de globale variabele c aanpassen.
+\end{itemize}
+
+\section{JavaScript-bibliotheken}
+
+Functies zijn handig om op een eenvoudige manier code die eerder al geschreven is te hergebruiken. Het enige wat tot nu toe een beetje lastig was, is het feit dat we telkens de functies die we eerder geschreven hadden moesten opzoeken en kopi\"eren in ons HTML-bestand alvorens we ze kunnen gebruiken. Gelukkig bestaat er een oplossing voor dit probleem die het hergebruiken van bestaande code nog makkelijker maakt. We kunnen namelijk een JavaScript-bibliotheek aanmaken waar we onze verschillende functies in kunnen zetten. Zo een bibliotheek is in feite gewoon een tekstbestand met als extensie `.js' waar JavaScript-code in staat. Aangezien er in dit bestand enkel JavaScript-code mag staan, zijn onze HTML-annotaties niet meer nodig. Met andere woorden, we moeten geen <script> of </script> meer schrijven.
+
+We hebben natuurlijk nog wel een HTML-bestandje nodig waar code in staat (en door de web browser uitgevoerd wordt), maar in plaats van al onze bestaande functies ook in dit HTML-bestand te kopi\"eren, kunnen we nu eenvoudigweg een link leggen naar onze JavaScript-bibliotheek waar de bestaande functies in staan. Zo blijft de code die we in ons HTML-bestand schrijven kort en overzichtelijk.
+
+\examplecode[html]{Functies/lib.html}
+
+De link naar de bibliotheek leggen we door een script-tag te gebruiken waarvan de eigenschap `src' wijst naar ons bibliotheekbestand. Verder staat er geen code in deze script-tag. Er kunnen meerdere van zulke links in het bestand staan. Uiteindelijk beginnen we dan een nieuwe script-tag waar we onze code in zetten. Vanuit deze code kunnen we alle functies aanspreken die gedefinieerd zijn in de bibliotheken waar het bestand mee gelinkt is.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

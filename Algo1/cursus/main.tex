@@ -1,0 +1,166 @@
+\documentclass[a4paper,dutch,10pt]{book}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{answers}
+\usepackage{color,xcolor}
+\usepackage{url}
+\usepackage{float}
+\usepackage{caption}
+%\usepackage{appendix}
+\usepackage{fancybox}
+\usepackage{longtable}
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{cleveref} % Must be after hyperref
+\usepackage{pxfonts}
+\usepackage{mathabx}
+\usepackage{pdfpages}
+
+\title{Algoritmen en Datastructuren deel 1}
+\author{Marina Lens, Leentje Verfaillie, Pieter Philippaerts}
+
+
+% TODO: Translate Listing caption to Dutch
+% TODO: add verwissel to previous chapter as a simple exercise
+
+\usetikzlibrary{calc,shapes.arrows,shapes,arrows,positioning}
+
+\newcommand{\compln}[0]{$O($log $n)$}
+\newcommand{\compn}[0]{$O(n)$}
+\newcommand{\compnln}[0]{$O(n$ log $n)$}
+\newcommand{\compnk}[0]{$O(n^{2})$}
+
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\newcommand{\key}[1]{\fcolorbox{black}{lightgray}{{#1}}}
+
+
+\newlength{\MYLEN}
+
+\lstdefinelanguage{generic}{
+  escapechar=@,%
+  basicstyle={\ttfamily},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+  frame=lines,%
+  captionpos=b%
+}
+
+\lstdefinelanguage{javascript}[]{generic}{%  
+  morekeywords={function,var,if,for,while,break,do,delete,in,instanceof,new,return,this,switch,throw,try,catch,typeof,int,void,with,yield,label,import,export,continue,true,false},%
+  escapechar=@,%
+  basicstyle={\ttfamily},%
+  keywordstyle={\ttfamily\bfseries},%
+  commentstyle={\it},%
+  frame=lines,%
+  captionpos=b,%
+  sensitive=true,%
+  morecomment=[l]{//},%
+  morecomment=[s]{/*}{*/},%
+  morestring=[b]",%
+  moredelim=**[is][\color{red}]{\#}{\#}%
+}
+
+\lstdefinelanguage{HTML}[]{generic}{
+    morecomment = [l]{//},
+    morecomment = [l]{///},
+    morecomment = [s]{/*}{*/},
+    morestring=[b]",
+    sensitive = true,
+    captionpos=b,
+    morekeywords = {html, head, body, script, title}
+}
+
+
+\newcommand{\examplecode}[2][javascript]{\begin{center}\begin{minipage}{.9\linewidth}\lstinputlisting[language=#1]{#2}\end{minipage}\end{center}}
+\newcommand{\codefigure}[4][]{\begin{figure}\lstinputlisting[language=javascript,caption=#3,label=#4,#1]{#2}\end{figure}}
+\newcommand{\htmlcodefigure}[4][]{\begin{figure}\lstinputlisting[language=HTML,caption=#3,label=#4,#1]{#2}\end{figure}}
+\newcommand{\inlinecode}[1]{\lstinline[language=javascript]{#1}}
+
+\newenvironment{javascriptcode}%
+{%
+  \begin{minipage}{\linewidth}%
+  \begin{lstlisting}[language=javascript]%
+}%
+{%
+ \end{lstlisting}%
+ \end{minipage}%
+}
+
+\newtheorem{example}{Voorbeeld}[section]
+\newtheorem{exercise}{Oefening}[section]
+
+\Newassociation{solution}{Oplossing}{answers}
+
+\begin{document}
+
+\clearpage
+%% temporary titles
+% command to provide stretchy vertical space in proportion
+\newcommand\nbvspace[1][3]{\vspace*{\stretch{#1}}}
+% allow some slack to avoid under/overfull boxes
+\newcommand\nbstretchyspace{\spaceskip0.5em plus 0.25em minus 0.25em}
+% To improve spacing on titlepages
+\newcommand{\nbtitlestretch}{\spaceskip0.6em}
+
+
+\includegraphics[width=1.5in]{GenT.jpg}
+\thispagestyle{empty}
+\begin{center}
+\bfseries
+\nbvspace[3]
+\Huge
+{\nbtitlestretch\huge
+%\fontsize{20mm}{20mm}\selectfont
+ALGORITMEN EN DATASTRUCTUREN}
+\normalsize
+DEEL 1 \\
+\nbvspace[4]
+\Large MARINA LENS\\[0.5em]
+\Large LEENTJE VERFAILLIE\\[0.5em]
+\Large PIETER PHILIPPAERTS\\[0.5em]
+\Large FREDERIC VOGELS\\[0.5em]
+\end{center}
+
+\clearpage
+\thispagestyle{empty}
+
+\Opensolutionfile{answers}
+
+
+\tableofcontents
+
+\input{LerenProgrammeren/main}
+\input{JavaScript/main}
+\input{ConditioneleLogica/main}
+\input{Lussen/main}
+\input{Functies/main}
+\input{Recursie/main}
+\input{Rijen/main}
+\input{Sorteren/main}
+\input{Complexiteit/main}
+
+\Closesolutionfile{answers}
+
+\appendix
+\input{Debuggen/main.tex}
+
+\chapter{Oplossingen}
+\input{answers}
+
+\input{CheatSheet/main.tex}
+\input{Oefeningen/main.tex}
+\input{Testen/main.tex}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

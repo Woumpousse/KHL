@@ -1,0 +1,76 @@
+\chapter{JavaScript Cheat Sheet}
+{
+\newcommand{\ENTRY}[2]{%
+  \parbox{5cm}{\vskip2pt #1 \vskip2pt} &%
+  \parbox{8cm}{{\lstinputlisting[language=javascript,frame=none,basicstyle=\small]{CheatSheet/#2.js}}} \\ \hline}
+
+\begin{longtable}{||l|l||}
+
+%\caption{JavaScript cheat sheet \label{table:cheatsheet}}\\
+
+%This is the header for the first page of the table...
+
+\hline \hline
+ \textbf{Wat je wil doen} &
+ \textbf{Hoe in JavaScript} \\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- vervolg} \\
+\hline \hline
+ \textbf{Wat je wil doen} &
+ \textbf{Hoe in JavaScript} \\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{r}{{Vervolg op de volgende pagina\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+
+%Now the data...
+
+\ENTRY{Commentaar invoegen}{comments}
+\ENTRY{Declareren van variabele}{vardecl}
+\ENTRY{Declareren + toekennen}{varinit}
+\ENTRY{Voorbeeldjes van bovenstaande}{varexampl}
+\ENTRY{Booleaanse waardes (nodig waar voorwaarde staat, evalueert tot true (T) of false (F)!)}{bools}
+\ENTRY{Later toekennen van waarde aan variabele (moet al gedeclareerd zijn)}{assign}
+\ENTRY{Inlezen van variabele (moet al gedeclareerd zijn)}{prompt}
+\ENTRY{Strings samenstellen (= concatenatie)}{strcat}
+\ENTRY{String-bewerkingen: lengte opvragen (= aantal karakters), karakter i opvragen (vanaf 0), deelstring (i tot j), naar kleine letters omzetten}{strops}
+\ENTRY{Wiskundige bewerkingen - alternatieve notatie}{mathops}
+\ENTRY{Boodschap aan gebruiker}{msg}
+\ENTRY{Omzetten van String variabele naar geheel getal}{parse}
+\ENTRY{Sequentie}{seq}
+\ENTRY{Selectie (if)}{if}
+\ENTRY{Selectie (if...else)}{ifelse}
+\ENTRY{Selectie (if...else if...else)}{ifelseif}
+\ENTRY{Conditionele expressie (is zelfde als if(vw){expr1} else {expr2})}{ternary}
+\ENTRY{Iteratie (for)}{for}
+\ENTRY{Iteratie (while)}{while}
+\ENTRY{Deelprogramma's (of `functions')}{functions}
+\ENTRY{Deelprogramma met return waarde (vb boolean)}{funcret}
+\ENTRY{Deelprogramma met parameters (vb integers)}{funcparams}
+\ENTRY{Rijen (meer-dimensionale variabelen)}{rows}
+\ENTRY{Rijen als parameter in functies}{funcrowparam}
+\ENTRY{Voeg een element toe op het einde van een rij}{push}
+\ENTRY{Haal het laatste element van een rij weg}{pop}
+\ENTRY{Voeg een element toe in het begin van een rij}{unshift}
+\ENTRY{Haal het eerste element van een rij weg}{shift}
+\ENTRY{Neem een sub-rij (analoog aan substring)}{slice}
+\ENTRY{Voeg 2 rijen samen (analoog aan het samenvoegen van strings)}{arrayconcat}
+
+\end{longtable} 
+}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 

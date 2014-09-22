@@ -1,0 +1,1 @@
+var eerste = rij.shift();

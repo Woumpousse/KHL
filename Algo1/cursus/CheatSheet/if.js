@@ -1,0 +1,3 @@
+if (voorwaarde) {
+    instructie1;
+}

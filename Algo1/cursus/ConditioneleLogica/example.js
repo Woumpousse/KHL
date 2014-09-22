@@ -1,0 +1,3 @@
+if (<conditie>) {
+    <conditionele code>
+}

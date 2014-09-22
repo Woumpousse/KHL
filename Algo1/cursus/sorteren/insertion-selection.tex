@@ -1,0 +1,508 @@
+\section{Selection Sort en Insertion Sort}
+Selection Sort en Insertion Sort bespreken we samen doordat ze dezelfde basisstructuur
+vertonen maar een licht verschillende uitwerking hebben.
+
+\subsection{Werking}
+Zoals elk sorteeralgoritme verwachten Selection Sort en Insertion Sort een rij getallen waarvan we willen
+dat ze gesorteerd worden. Laten we deze rij \inlinecode{input} noemen.
+We beschouwen ook een lege rij, \inlinecode{output} genaamd.
+We gaan nu \'e\'en na \'e\'en de elementen
+van \inlinecode{input} naar \inlinecode{output} verhuizen tot \inlinecode{input} leeg is.
+We willen dan dat \inlinecode{output} alle getallen in gesorteerde volgorde bevat.
+
+\begin{center}
+  \begin{tabular}{r|c|c|c|c|c|c}
+    & begin & & & & & einde \\
+    \hline
+    {\tt input} & $\square\square\square\square\square$ &
+                  $\square\square\square\square$ &
+                  $\square\square\square$ &
+                  $\square\square$ &
+                  $\square$ \\
+    {\tt output} & &
+                   $\square$ &
+                   $\square\square$ &
+                   $\square\square\square$ &
+                   $\square\square\square\square$ &
+                   $\square\square\square\square\square$                   
+  \end{tabular}
+\end{center}
+
+De vraag is nu uiteraard hoe dit stapsgewijs elementen verhuizen
+van \inlinecode{input} naar \inlinecode{output} juist moet gebeuren.
+Een enkele verhuisoperatie bestaat uit twee stappen:
+\begin{itemize}
+  \item We moeten eerst een element uit \inlinecode{input} selecteren dat we gaan verhuizen.
+  \item We moeten dit element correct plaatsen in \inlinecode{output}.
+\end{itemize}
+Nu zijn er twee mogelijkheden:
+\begin{itemize}
+  \item We houden de eerste stap (het selecteren) simpel, maar dan wordt de tweede stap (het plaatsen) moeilijker.
+  \item We kunnen ervoor zorgen dat het plaatsen eenvoudig gaat, maar dan is het selecteren ingewikkelder. 
+\end{itemize}
+Beide mogelijkheden stemmen overeen met een sorteeralgoritme:
+Insertion Sort komt overeen met de eerste optie, Selection Sort met de tweede optie.
+We bespreken nu concreet hoe beiden te werk gaat door middel van een voorbeeld.
+
+\begin{example}
+We willen de rij $[5, 1, 2, 4, 3]$ sorteren. We beginnen dus met
+\inlinecode{input = [5, 1, 2, 4, 3]} en \inlinecode{output = []}.
+We moeten nu \'e\'en na \'e\'en elk element uit \inlinecode{input}
+naar \inlinecode{output} verhuizen.
+\begin{itemize}
+  \item Insertion Sort neemt een willekeurig element uit \inlinecode{input}
+        (voor het gemak is dit gewoon telkens het eerste) en gaat
+        dan \inlinecode{output} af op zoek naar de juiste positie voor dit element.
+  \item Selection Sort gaat voor elke verhuisstap zoeken we naar het kleinste element uit \inlinecode{input} en
+        voegt dit toe aan het einde van \inlinecode{output}.
+\end{itemize}
+\begin{center}
+  \newcommand{\HL}[1]{{\bfseries #1}}
+  \begin{tabular}{l|l|l}
+    & \multicolumn{1}{c}{\bf Insertion Sort} & \multicolumn{1}{c}{\bf Selection Sort} \\
+     \hline\hline
+       {\tt input} & {\tt [\HL5, 1, 2, 4, 3]} & {\tt [5, \HL1, 2, 4, 3]} \\
+       {\tt output} & {\tt []} & {\tt []}
+\\ \hline
+      {\tt input} & {\tt [\HL1, 2, 4, 3]} & {\tt [5, \HL2, 4, 3]} \\
+      {\tt output} & {\tt [5]} & {\tt [1]}
+\\ \hline
+      {\tt input} & {\tt [\HL2, 4, 3]} & {\tt [5, 4, \HL3]} \\
+      {\tt output} & {\tt [1, 5]} & {\tt [1, 2]}
+\\ \hline
+      {\tt input} & {\tt [\HL4, 3]}& {\tt [5, \HL4]} \\
+      {\tt output} & {\tt [1, 2, 5]} & {\tt [1, 2, 3]}
+\\ \hline
+      {\tt input} & {\tt [\HL3]}& {\tt [\HL5]} \\
+      {\tt output} & {\tt [1, 2, 4, 5]} & {\tt [1, 2, 3, 4]}
+\\ \hline
+      {\tt input} & {\tt []} & {\tt []} \\
+      {\tt output} & {\tt [1, 2, 3, 4, 5]} & {\tt [1, 2, 3, 4, 5]}
+  \end{tabular}
+\end{center}
+Het uitgekozen element uit \inlinecode{input} staat telkens in het vet. Bij Insertion Sort
+is dit het eerste element uit de rij, bij Selection Sort is dit het kleinste.
+\end{example}
+
+We kunnen de werking van beide algoritmes als volgt schematisch voorstellen:
+\begin{center}
+  \begin{tabular}{r||c|c}
+    & {\bf Insertion Sort} & {\bf Selection Sort} \\
+    \hline \hline
+    {\bfseries Selectie uit {\tt\bfseries input}} & Eerste element (simpel) & Minimum element (complex) \\
+    \hline
+    {\bfseries Plaatsing in {\tt\bfseries output}} & Invoegen op juiste positie (complex) & Op het einde (simpel) \\
+  \end{tabular}
+\end{center}
+
+We willen nu een \emph{in-place} versie ontwikkelen van beide algoritmen. Hiermee bedoelen we
+dat al het sorteerwerk moet gebeuren in de oorspronkelijke gegeven rij zelf; met andere woorden,
+we willen enkel gebruik maken van de rij \inlinecode{input} zonder een aparte rij
+\inlinecode{output} nodig te hebben.
+Dit kan door conceptueel \inlinecode{input} en \inlinecode{output} te herbergen in
+\inlinecode{input} zelf. We kunnen dit als volgt visualiseren:
+
+\begin{center}
+  \newcommand{\IN}[1]{{\color{red}#1}}
+  \newcommand{\OUT}[1]{{\color{green}#1}}
+  \begin{tabular}{l|c}
+    \multicolumn{1}{c}{{\bf oorspronkelijk}} & {\bf in-place} \\
+    \hline\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square\square\square\square\square$} \\
+      {\tt output} & \OUT{$$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square\square\square\square\square$}\OUT{$$}
+    \end{tabular} \\
+\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square\square\square\square$} \\
+      {\tt output} & \OUT{$\square$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \OUT{$\square$}\IN{$\square\square\square\square$}
+    \end{tabular} \\
+\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square\square\square$} \\
+      {\tt output} & \OUT{$\square\square$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \OUT{$\square\square$}\IN{$\square\square\square$}
+    \end{tabular} \\
+\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square\square$} \\
+      {\tt output} & \OUT{$\square\square\square$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \OUT{$\square\square\square$}\IN{$\square\square$}
+    \end{tabular} \\
+\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$\square$} \\
+      {\tt output} & \OUT{$\square\square\square\square$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \OUT{$\square\square\square\square$}\IN{$\square$}
+    \end{tabular} \\
+\hline
+    \begin{tabular}{rl}
+      {\tt input} & \IN{$$} \\
+      {\tt output} & \OUT{$\square\square\square\square\square$}
+    \end{tabular}
+    &
+    \begin{tabular}{rl}
+      {\tt input} & \OUT{$\square\square\square\square\square$}\IN{$$}
+    \end{tabular} \\
+  \end{tabular}
+\end{center}
+
+De rij \inlinecode{input} moet dus denkbeeldig opgesplitst worden
+in een linkse en rechtse deelrij (aangegeven door groen en rood).
+De linkerdeelrij moet te allen tijde gesorteerd zijn, de rechterdeelrij
+stelt ``het overschot'' over dat nog moet gesorteerd worden.
+We lichten dit toe in de volgende paragrafen.
+
+\subsection{Insertion Sort} \label{sec:sorteren:insertion-sort}
+We illustreren de werking van Insertion Sort in detail door middel van een uitgebreid voorbeeld.
+
+\begin{example} \label{example:sorteer:insertion}
+\newcommand{\IN}[1]{{\color{red}#1}}
+\newcommand{\OUT}[1]{{\color{green}#1}}
+\newcommand{\swap}{\stackrel{\curvearrowleftright}{,}}
+We beschouwen de rij $[6,4,2,1,3,9]$. Zoals eerder uitgelegd splitsen we deze
+rij in twee delen: het gesorteerde linkerstuk en het ongesorteerde rechterstuk.
+Vermits we nog niets hebben gedaan, is het linkerstuk leeg, en het rechterstuk
+komt overeen met de ganse rij.
+\[
+  [ \IN6, \IN4, \IN2, \IN1, \IN3, \IN9 ]
+\]
+Insertion Sort neemt altijd het eerste element van het ongesorteerde stuk
+(in ons voorbeeld is dit $6$) en voegt dit in de ongesorteerde deelrij.
+Vermits deze laatste leeg is, is dit triviaal:
+\[
+  [ \OUT6, \IN4, \IN2, \IN1, \IN3, \IN9 ]
+\]
+Vervolgens is het element 4 aan de beurt. We moeten dit op de juiste plaats
+invoegen in de rij [\OUT6]. We zien dat 4 links van rechts hoort te staan.
+We bereiken dit door 6 en 4 van plaats te verwisselen.
+\[
+  [ \OUT6 \swap \IN4, \IN2, \IN1, \IN3, \IN9 ] \rightarrow [ \OUT4, \OUT6, \IN2, \IN1, \IN3, \IN9 ]
+\]
+Nu pakken we 2 aan. Het is duidelijk dat 2 helemaal links hoort te staan.
+Dit betekent dat we 4 en 6 een positie naar rechts moeten verschuiven,
+terwijl 2 naar links moet verplaatst worden. We doen dit stapsgewijs door middel van een reeks verwisselingen.
+\[
+  [ \OUT4, \OUT6 \swap \IN2, \IN1, \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT4 \swap \IN2, \OUT6, \IN1, \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT2, \OUT4, \OUT6, \IN1, \IN3, \IN9 ]
+\]
+Nu is het de beurt aan 1. We moeten dit getal weer helemaal naar links verschuiven,
+terwijl 2, 4 en 6 een stap naar rechts moeten verplaatst worden.
+\[
+  [ \OUT2, \OUT4, \OUT6 \swap \IN1, \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT2, \OUT4 \swap \IN1, \OUT6, \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT2 \swap \IN1, \OUT4, \OUT6, \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT1, \OUT2, \OUT4, \OUT6, \IN3, \IN9 ]
+\]
+Het element 3 moet slechts 2 stappen naar links.
+\[
+  [ \OUT1, \OUT2, \OUT4, \OUT6 \swap \IN3, \IN9 ]
+  \rightarrow
+  [ \OUT1, \OUT2, \OUT4 \swap \IN3, \OUT6, \IN9 ]
+  \rightarrow
+  [ \OUT1, \OUT2, \OUT3, \OUT4, \OUT6, \IN9 ]
+\]
+We zien dat 9 reeds juist staat, we zijn dus klaar met sorteren.
+\end{example}
+
+\codefigure[numbers=left]{sorteren/insertion.js}{Insertion Sort}{code:sorting:insertion-sort}
+
+Een implementatie van dit algoritme vind je in \cref{code:sorting:insertion-sort}.
+\begin{itemize}
+  \item De functie \inlinecode{voegIn} gedefinieerd op
+        \crefrange{line:sorteer:insertion:voegin}{line:sorteer:insertion:voegin-end}
+        voegt het element met index \inlinecode{i} in in de linkerdeelrij die
+        gaat van \inlinecode{rij[0]} tot \inlinecode{rij[i-1]}. Visueel komt dit overeen met
+        {
+          \newcommand{\IN}[1]{{\color{red}#1}}
+          \newcommand{\OUT}[1]{{\color{green}#1}}
+          \[
+            \begin{array}{cccccccc}
+              \OUT\square & \OUT\square & \OUT\square & \OUT\cdots & \OUT\square &
+                \IN\square & \IN\cdots &  \IN\square \\
+              \uparrow & \uparrow & \uparrow && \uparrow & \uparrow && \uparrow\\
+              {\tt 0} & {\tt 1} & {\tt 2} && {\tt i-1} & {\tt i} && \makebox[5pt][l]{\tt rij.length-1} \\
+            \end{array}
+          \]
+        }
+  \item De \inlinecode{while}-lus op
+        \crefrange{line:sorteer:insertion:voegin:while}{line:sorteer:insertion:voegin:while-end}
+        verschuift het toe te voegen element stapsgewijs door middel van een reeks verwisselingen.
+  \item De lusconditie op \cref{line:sorteer:insertion:voegin:while} bestaat uit twee delen:
+        \begin{itemize}
+          \item \inlinecode{i-1 >= 0} zorgt ervoor dat we het element niet verschuiven tot
+                voorbij het begin van de rij. De \inlinecode{-1} is nodig omdat
+                we telkens de elementen met indices \inlinecode{i-1} en \inlinecode{i} verschuiven
+                (\cref{line:sorteer:insertion:voegin:swap});
+                indien we zouden toelaten dat \inlinecode{i == 0}, dan zouden
+                we de elementen met indices \inlinecode{-1} en \inlinecode{0} willen verwisselen,
+                wat uiteraard niet gaat. We moeten dus voorkomen dat \inlinecode{i} tot \inlinecode{0} gaat.
+          \item \inlinecode{rij[i-1] > rij[i]} checkt of de elementen wel verwisseld moeten worden.
+                Indien \inlinecode{rij[i-1] <= rij[i]}, heeft het in te voegen elementen
+                zijn juiste plaats in de rij bereikt en moet het stapsgewijs verschuiven stopgezet worden.
+        \end{itemize}
+  \item De functie \inlinecode{insertionSort}
+        (\crefrange{line:sorteer:insertion:insertion-sort}{line:sorteer:insertion:insertion-sort-end})
+        voert het eigenlijke sorteren uit.
+  \item De \inlinecode{for}-lus op \crefrange{line:sorteer:insertion:for}{line:sorteer:insertion:for-end}
+        gaat de rij van links naar rechts af. Elk element wordt \'e\'en na \'e\'en ingevoegd
+        door middel van een oproep naar \inlinecode{voegIn} op \cref{line:sorteer:insertion:voegin-inv}.
+\end{itemize}
+
+\begin{example}
+We geven een schematisch overzicht van de verschillende stappen dat de
+lus op \crefrange{line:sorteer:insertion:for}{line:sorteer:insertion:for-end}
+in \cref{code:sorting:insertion-sort} doorloopt. We gebruiken de rij $[6,3,7,5,1,2,4,8,9]$ als voorbeeld.
+Deze tabel geeft weer wat we zouden bekomen indien we een \inlinecode{alert} zouden toevoegen
+juist na \cref{line:sorteer:insertion:voegin-inv} die de huidige waarden van \inlinecode{i}
+en \inlinecode{rij} zou afdrukken.
+\begin{center}
+  \newcommand{\IN}[1]{{\color{red}#1}}
+  \newcommand{\OUT}[1]{{\color{green}#1}}
+  \begin{tabular}{cc}
+    {\tt\bfseries i} & {\tt\bfseries rij} \\
+    \hline
+    {\it voor de lus} & $[\OUT6,\IN3,\IN7,\IN5,\IN1,\IN2,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 1} & $[\OUT3,\OUT6,\IN7,\IN5,\IN1,\IN2,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 2} & $[\OUT3,\OUT6,\OUT7,\IN5,\IN1,\IN2,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 3} & $[\OUT3,\OUT5,\OUT6,\OUT7,\IN1,\IN2,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 4} & $[\OUT1,\OUT3,\OUT5,\OUT6,\OUT7,\IN2,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 5} & $[\OUT1,\OUT2,\OUT3,\OUT5,\OUT6,\OUT7,\IN4,\IN8,\IN9]$ \\ \hline
+    {\tt 6} & $[\OUT1,\OUT2,\OUT3,\OUT4,\OUT5,\OUT6,\OUT7,\IN8,\IN9]$ \\ \hline
+    {\tt 7} & $[\OUT1,\OUT2,\OUT3,\OUT4,\OUT5,\OUT6,\OUT7,\OUT8,\IN9]$ \\ \hline
+    {\tt 8} & $[\OUT1,\OUT2,\OUT3,\OUT4,\OUT5,\OUT6,\OUT7,\OUT8,\OUT9]$
+  \end{tabular}
+\end{center}
+\end{example}
+
+\begin{exercise}
+Op \cref{line:sorteer:insertion:for} van \cref{code:sorting:insertion-sort} staat als
+initialisering van de iteratievariabele \inlinecode{i=1}. Wat gebeurt er als
+we \inlinecode{i=0} zouden schrijven?
+\begin{solution}
+Het resultaat blijft hetzelfde. Het geval waarbij \inlinecode{i} gelijk is aan
+\inlinecode{0} komt overeen met het invoegen van een element in een lege rij.
+Vermits hiervoor in ons geval niets hoeft te gebeuren, kunnen we deze stap gewoon overslaan.
+In \cref{example:sorteer:insertion} kwamen we dit ook tegen: het invoegen
+van 6 benodigde geen verwisselingen.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+De \inlinecode{while}-conditie op \cref{line:sorteer:insertion:voegin:while} van
+\cref{code:sorting:insertion-sort} is een conjunctie\footnote{Conjunctie: een EN-operatie,
+geschreven \inlinecode{&&} in JavaScript. Een OF-operatie (\inlinecode{||}) heet een disjunctie.}
+van twee voorwaarden. Kunnen we deze twee voorwaarden van plaats verwisselen;
+met andere woorden, kunnen we \inlinecode{rij[i-1] > rij[i] && i-1 >= 0} schrijven?
+\begin{solution}
+Dit doe je best niet vermits je het risico loopt om, indien \inlinecode{i == 0},
+\inlinecode{rij[-1]} met \inlinecode{rij[0]} te vergelijken. 
+Een conjunctie (\inlinecode{&&}) wordt van links naar rechts uitgevoerd:
+indien de linkervoorwaarde faalt, zal de rechtervoorwaarde niet ge\"evalueerd worden.
+Eerst nakijken of \inlinecode{i-1 >= 0} verhindert dus dat \inlinecode{rij[i-1] > rij[i]}
+wordt uitgevoerd indien \inlinecode{i} niet groter is dan \inlinecode{0}.
+
+Terzijde: hoewel het gedrag
+van zulke code wel gedefinieerd is in JavaScript (\inlinecode{rij[-1]} zal de waarde \inlinecode{undefined}
+opleveren) en ironisch genoeg de code uiteindelijk zelfs zal werken (je kan zelfs
+\inlinecode{i-1 >= 0} weglaten!), moet je JavaScript al h\'e\'el goed kennen
+om op zulk gedrag te kunnen steunen teneinde correct werkende algoritmen te schrijven.
+De bedoeling van deze cursus om de algoritmen te begrijpen en te kunnen implementeren,
+en niet de gekheden en frivoliteiten van JavaScript te leren benutten;
+indien je code steunt op zulke taalspecifieke details, zal het dan ook als fout beschouwd worden.
+We willen dus dat je code weldegelijk \emph{eerst} checkt dat \inlinecode{i-1 >= 0}.
+\end{solution}
+\end{exercise}
+
+\subsection{Selection Sort} \label{sec:sorteren:selection-sort}
+Zoals met Insertion Sort beginnen we met een uitgebreid voorbeeld.
+
+\begin{example} \label{example:sorteer:selection}
+\newcommand{\IN}[1]{{\color{red}#1}}
+\newcommand{\OUT}[1]{{\color{green}#1}}
+\newcommand{\MIN}[1]{\stackrel{\downarrow}{\IN{\mathbf{#1}}}}
+\newcommand{\HERE}[1]{\stackrel{\downarrow}{#1}}
+\newcommand{\SWAP}[2]{%
+\begin{tikzpicture}[overlay, remember picture]
+  \draw[<->] ($ (#1.north) + (1pt,0pt) $) --
+                ++(1pt,5pt)
+                -- ($ (#2.north) + (-2pt,5pt) $)
+                -- ($ (#2.north) + (-1pt, 0) $);
+\end{tikzpicture}}
+\newcommand{\XIN}[2]{{\tikz[baseline, remember picture]{\node[anchor=base] (#2) { \ensuremath{\IN{#1}} };}}}
+\newcommand{\XOUT}[2]{{\tikz[baseline, remember picture]{\node[anchor=base] (#2) { \ensuremath{\OUT{#1}} };}}}
+
+We beschouwen dezelfde rij $[6,4,2,1,3,9]$ als in \cref{example:sorteer:insertion}.
+We splitsen de rij weeral in twee: een gesorteerd linkerdeel en een ongesorteerd rechterdeel.
+Het linkerdeel is op dit moment nog leeg, en het rechterdeel omvat de volledige rij.
+Selection Sort bestaat erin om de linkerdeelrij op te bouwen door telkens
+het minimum van de rechterdeelrij eraan toe te voegen. We zoeken dus naar het minimum:
+dit blijkt \inlinecode{1} te zijn.
+We verplaatsen dit minimumelement naar voren door het te verwisselen
+met het element dat momenteel vooraan in de rij staat:
+\[ \newcommand{\XI}[1]{\XIN{#1}{elta#1}} \newcommand{\XO}[1]{\XOUT{#1}{elta#1}}
+  [ \XI{6}, \XI{4}, \XI{2}, \XI{1}, \XI{3}, \XI{9} ]
+\]
+\SWAP{elta6}{elta1}
+We herhalen dit proc\'ed\'e: we verwisselen het rode minimum telkens met het eerste rode element.
+\[
+  \newcommand{\XI}[2]{\XIN{#1}{elt#2#1}}\newcommand{\XO}[2]{\XOUT{#1}{elt#2#1}}
+  \begin{array}{rc}
+    & [ \XO1b, \XI4b, \XI2b, \XI6b, \XI3b, \XI9b  ] \\[2mm]
+    \rightarrow &
+    [ \XO1c, \XO2c, \XI4c, \XI6c, \XI3c, \XI9c ] \\[2mm]
+    \rightarrow &
+    [ \XO1d, \XO2d, \XO3d, \XI6d, \XI4d, \XI9d ] \\[2mm]
+    \rightarrow &
+    [ \XO1e, \XO2e, \XO3e, \XO4e, \XI6e, \XI9e ] \\[2mm]
+    \rightarrow &
+    [ \XO1f, \XO2f, \XO3f, \XO4f, \XO6f, \XO9f ]
+  \end{array}
+\]
+\SWAP{eltb4}{eltb2}\SWAP{eltc4}{eltc3}\SWAP{eltd6}{eltd4}\SWAP{elte6}{elte6}
+We zien dat het kan voorkomen dat we een element met zichzelf verwisselen,
+namelijk indien het eerste rode element reeds het minimum is. Zoals
+je kan zien kan dit geen kwaad en hoeven we in onze code geen rekening te
+houden met dit randgeval.
+\end{example}
+
+\codefigure[numbers=left]{sorteren/selection.js}{Selection Sort}{code:sorting:selection-sort}
+
+De code voor Selection Sort vind je in \cref{code:sorting:selection-sort}.
+\begin{itemize}
+  \item We maken gebruik van een hulpfunctie \inlinecode{zoekIndexMinimum}
+        (\crefrange{line:sorteer:selection:zoekMin}{line:sorteer:selection:zoekMin-end}).
+        Deze zoekt de index van het minimaal element uit \inlinecode{rij} dat zich bevindt
+        tussen indices \inlinecode{i} en \inlinecode{imax} (zie ook \cref{example:sorteer:selection:min}
+        op \cpageref{example:sorteer:selection:min}).
+  \item De functie \inlinecode{zoekIndexMinimum} gaat de rij af
+        van index \inlinecode{i} tot \inlinecode{imax}
+        door middel van de \inlinecode{while}-lus op
+        \crefrange{line:sorteer:selection:zoekMin:while}{line:sorteer:selection:zoekMin:while-end}.
+        De lokale variabele \inlinecode{resultaat} houdt
+        de index van het totnogtoe kleinste element bij.
+        Telkens er een kleiner element wordt gevonden,
+        wordt \inlinecode{resultaat} aangepast (\cref{line:sorteer:selection:zoekMin:set-resultaat}).
+  \item De functie \inlinecode{selectionSort} gedefinieerd op lijnen
+        \crefrange{line:sorteer:selection:sort}{line:sorteer:selection:sort-end}
+        voert het eigenlijke sorteren uit.
+        De variabele \inlinecode{i} stelt de denkbeeldige grens voor
+        tussen de gesorteerde linkerdeelrij (gaande van \inlinecode{0} tot \inlinecode{i-1})
+        en de ongesorteerde rechterdeelrij (\inlinecode{i} tot \inlinecode{rij.length-1}).
+        Bij elke iteratie van de \inlinecode{for}-lus wordt de index van
+        het kleinste element uit de rechterdeelrij gezocht
+        met een oproep naar \inlinecode{zoekMinimumIndex}. Merk op hoe
+        de grenzen van de rechterdeelrij \inlinecode{i} tot \inlinecode{rij.length-1} worden doorgegeven
+        als argumenten. Op \cref{line:sorteer:selection:swap} wordt het kleinste element
+        verwisseld met het eerste element uit de rechterdeelrij.
+  \item Nota: hoewel \inlinecode{zoekIndexMinimum} de variabele \inlinecode{i}
+        wijzigt (\cref{line:sorteer:selection:zoekMin:i-inc,line:sorteer:selection:zoekMin:i-inc2}),
+        heeft dit geen invloed op de waarde van \inlinecode{i} binnen \inlinecode{selectionSort}.
+        \inlinecode{zoekIndexMinimum} werkt immers met een \emph{kopie} van \inlinecode{i}.
+\end{itemize}
+
+\begin{example} \label{example:sorteer:selection:min}
+We illustreren de werking van \inlinecode{zoekIndexMinimum}. Zoals eerder
+uitgelegd, zal een oproep \inlinecode{zoekIndexMinimum(rij, i, imax)} als resultaat
+opleveren de index van het kleine element waarvan de index ligt tussen \inlinecode{i}
+en \inlinecode{imax}. De volgende tabel geeft een aantal voorbeelden die inwerken
+op de volgende rij (voor de duidelijkheid staan de indices in subscript):
+\[
+  \newcommand{\IDX}[2]{#1_{\scriptscriptstyle(#2)}}
+  [\IDX70, \IDX31, \IDX12, \IDX63, \IDX44, \IDX25, \IDX96]
+\]
+\begin{center}
+  \newcommand{\NHL}[1]{{\color{red} #1}}
+  \newcommand{\HL}[1]{{\color{green} #1}}
+  \newcommand{\MIN}[1]{\framebox{#1}}
+  \begin{tabular}{cccc}
+    {\tt i} & {\tt imax} & resultaat & visueel voorgesteld \\ \hline
+    0 & 6 & 2 & $[\HL{7,3,\MIN1,6,4,2,9}]$ \\
+    0 & 3 & 2 & $[\NHL{\HL{7,3,\MIN1,6},4,2,9}]$ \\
+    0 & 2 & 2 & $[\NHL{\HL{7,3,\MIN1},6,4,2,9}]$ \\
+    0 & 1 & 1 & $[\NHL{\HL{7,\MIN3},1,6,4,2,9}]$ \\
+    3 & 6 & 5 & $[\NHL{7,3,1,\HL{6,4,\MIN2,9}}]$ \\
+    6 & 6 & 6 & $[\NHL{7,3,1,6,4,2,\HL{\MIN9}}]$ \\
+  \end{tabular}
+\end{center}
+In de laatste kolom staat de deelrij \inlinecode{i}\dots\inlinecode{imax} in het groen aangegeven
+en staat het minimumelement omkaderd.
+\end{example}
+
+\begin{exercise}
+De implementatie van \inlinecode{zoekIndexMinimum}
+in \cref{code:sorting:selection-sort} verwacht dat \inlinecode{i <= imax}.
+Wat gebeurt er als men \inlinecode{zoekIndexMinimum} oproept met \inlinecode{i > imax}?
+\begin{solution}
+Het algoritme geeft in dit geval \inlinecode{i} terug, wat in feite foutief is.
+De functie \inlinecode{selectionSort} roept echter \inlinecode{zoekIndexMinimum}
+op met \inlinecode{i <= imax} waardoor alles correct werkt. In principe zou
+men echter \inlinecode{zoekIndexMinimum} robuuster moeten maken.
+\end{solution}
+\end{exercise}
+
+\begin{example}
+\newcommand{\NHL}[1]{{\color{red} #1}}
+\newcommand{\HL}[1]{{\color{green} #1}}
+\newcommand{\MIN}[1]{\framebox{#1}}
+We passen het Selection Sort algoritme toe op de rij $[7,3,1,6,4,2,9]$.
+De volgende tabel bevat de waarden van \inlinecode{i}, \inlinecode{minimumIndex} en
+\inlinecode{rij} juist na de oproep naar \inlinecode{verwissel};
+met andere woorden, de tabel geeft weer wat we te zien krijgen
+zouden we juist na \cref{line:sorteer:selection:swap} een \inlinecode{alert} toevoegen.
+\begin{center}
+  \begin{tabular}{c|c|c}
+    {\tt \bfseries i} & {\tt \bfseries minimumIndex} & {\tt \bfseries rij} \\
+    \hline
+    voor de lus & & $[\NHL{7,3,1,6,4,2,9}]$ \\
+    0 & 2 & $[\HL1,\NHL{3,7,6,4,2,9}]$ \\
+    1 & 5 & $[\HL{1,2},\NHL{7,6,4,3,9}]$ \\
+    2 & 5 & $[\HL{1,2,3},\NHL{6,4,7,9}]$ \\
+    3 & 4 & $[\HL{1,2,3,4},\NHL{6,7,9}]$ \\
+    4 & 4 & $[\HL{1,2,3,4,6},\NHL{7,9}]$ \\
+    5 & 5 & $[\HL{1,2,3,4,6,7},\NHL{9}]$ \\
+  \end{tabular}
+\end{center}
+\end{example}
+
+\begin{exercise}
+Op \cref{line:sorteer:selection:sort:for} van \cref{code:sorting:selection-sort} staat
+als \inlinecode{for}-conditie \inlinecode{i < rij.length - 1}. Waarom staat de \inlinecode{-1} er?
+\begin{solution}
+Het geval \inlinecode{i == rij.length - 1} betekent dit dat we aan het laatste
+element toe zijn. De rode rechterdeelrij bevat dus slechts \'e\'en enkel element.
+Het minimum hiervan vinden is triviaal: het is dat element zelf.
+We zouden dus \inlinecode{minimumIndex == i} bekomen. Vervolgens zouden we
+op \cref{line:sorteer:selection:swap} die element met zichzelf verwisselen,
+wat geen effect heeft. Met andere woorden, het laatste element krijgen we ``gratis'':
+het staat automatisch reeds op de juiste plaats in de rij.
+\end{solution}
+\end{exercise}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End: 
