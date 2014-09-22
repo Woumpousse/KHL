@@ -1,0 +1,4 @@
+Environment variables:
+
+KHL_LOGIN = uxxxxxxx
+KHL_ROOT = <root directory>
