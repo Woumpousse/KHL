@@ -88,8 +88,8 @@
   \frametitle{Relaties}
   \begin{itemize}
     \item Relatie van verzameling A naar verzameling B
-    \item A heet bronverzameling
-    \item B heet doelverzameling
+    \item A heet \emph{bronverzameling} of \emph{domein}
+    \item B heet \emph{doelverzameling} of \emph{bereik}
     \item Een relatie maakt associaties
     \item Elk element uit A wordt met 0+ elementen uit B verbonden
   \end{itemize}
@@ -100,15 +100,15 @@
   \frametitle{Voorbeelden}
   \structure{Studenten en Vakken}
   \begin{itemize}
-    \item Bron: verzameling studenten
-    \item Doel: verzameling vakken
+    \item Domein: verzameling studenten
+    \item Bereik: verzameling vakken
     \item Relatie: student ``volgt'' vak
   \end{itemize}
   \vskip5mm
   \structure{Acteurs en Films}
   \begin{itemize}
-    \item Bron: verzameling acteurs
-    \item Doel: verzameling films
+    \item Domein: verzameling acteurs
+    \item Bereik: verzameling films
     \item Relatie: acteur ``speelt mee in'' film
   \end{itemize}
 \end{frame}
@@ -220,7 +220,7 @@
   \end{itemize}
 \end{frame}
 
-\section{Indeling op basis van bronverzameling}
+\section{Indeling op basis van domein}
 
 \subsection{Functies}
 \frame{ \tableofcontents[currentsubsection] }
@@ -318,7 +318,7 @@
 \end{frame}
 
 
-\section{Indeling op basis van doelverzameling}
+\section{Indeling op basis van bereik}
 \subsection{Surjectief}
 
 \frame{ \tableofcontents[currentsubsection] }
@@ -465,9 +465,20 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Injecties, Surjecties en Bijecties}
+  \begin{itemize}
+    \item Injectie: injectief + afbeelding
+          \vskip4mm
+    \item Surjectie: surjectief + afbeelding
+          \vskip4mm
+    \item Bijectie: bijectief + afbeelding
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -480,7 +491,7 @@
 \begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -492,7 +503,7 @@
 \begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -504,7 +515,7 @@
 \begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -516,7 +527,7 @@
 \begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -528,7 +539,7 @@
 \begin{frame}
   \frametitle{Oefening 2.9}
   \begin{center}
-    relatie, functie, afbeelding, injectief, surjectief, bijectief
+    relatie, functie, afbeelding, injectie(f), surjectie(f), bijectie(f)
     \vskip1cm
     \begin{tikzpicture}
       \axes
@@ -575,15 +586,13 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Oefeningen}
-  \begin{itemize}
-    \item 2.1
-    \item 2.7
-    \item 2.8
-    \item 2.9
-    \item 2.6
-    \item Rest: thuis
-  \end{itemize}
+  \frametitle{Oefening 2.7}
+  Geef de inverse relaties
+  \begin{enumerate}
+    \item \[ \{ (1, 7), (2, 10), (3, 9) \} \]
+    \item \[ f : \mathbb{R} \rightarrow \mathbb{R} : x \mapsto y \;|\; 2 \cdot x + 10 \]
+    \item \[ f : \mathbb{R}^+ \rightarrow \mathbb{R} : x \mapsto y \;|\; y = \sqrt{x} \]
+  \end{enumerate}
 \end{frame}
 
 \end{document}

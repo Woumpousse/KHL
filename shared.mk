@@ -9,8 +9,8 @@ TYPESCRIPT = tsc
 EXPORTS = ruby `cygpath -w $(KHL_ROOT)/exports.rb`
 else
 DROPBOX_DIRECTORY = TODO
-SCP=scp -P $(PORT) -W ~/pw
-SSH=ssh -p $(PORT) -W ~/pw
+SCP=scp -P $(PORT)
+SSH=ssh -p $(PORT)
 ZIP = zip
 TYPESCRIPT = true
 EXPORTS = ruby $(KHL_ROOT)/exports.rb
