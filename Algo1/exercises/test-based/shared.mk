@@ -1,6 +1,9 @@
-.PHONY: zip
+.PHONY: zip upload
 
 -include ../../shared.mk
+
+# TODO: fix this
+ZIP_EXPORTS=ruby $(KHL_ROOT)/exports.rb . | xargs $(ZIP) $(CURRENT).zip
 
 all: refimpl.js
 

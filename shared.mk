@@ -5,8 +5,8 @@ SCP=scp2 -P $(PORT) -W g:/pw
 SSH=ssh2 -p $(PORT) -W g:/pw
 ZIP = 7z a
 else
-SCP=scp -P $(PORT) -W ~/pw
-SSH=ssh -p $(PORT) -W ~/pw
+SCP=scp -P $(PORT)
+SSH=ssh -p $(PORT)
 ZIP = zip
 endif
 
