@@ -15,6 +15,7 @@ REMOTE_DIRECTORY = /var/www/tw1/slides
 
 %.pdf: %.tex
 	pdflatex $<
+	pdflatex $<
 
 upload: $(CURRENT).pdf
 	$(SCP) $(CURRENT).pdf $(LOGIN)@$(URL):$(REMOTE_DIRECTORY)

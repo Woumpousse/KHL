@@ -21,3 +21,5 @@ slides:
 upload:
 	find . -mindepth 1 -maxdepth 1 -type d | xargs --max-args=1 -I{} make -C {} upload
 
+zip: slides
+	find . -name *.pdf | xargs $(ZIP) slides.zip
