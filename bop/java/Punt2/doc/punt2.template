@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BOP: Punt v2</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="khl.js"></script>
+    <link rel="stylesheet" href="khl.css">
+    <style>
+      .center {
+        display: block;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contents">
+      <h1>Punt v2</h1>
+      <section>
+        <h2>Inleiding</h2>
+        <p>
+          Maak een nieuw project (minstens Java 7!) en importeer <a href="punt2.zip">dit zip-bestand</a>.
+        </p>
+        <p>
+          Bij deze oefening horen tests: deze zitten in de klasse <code>Punt2DTest</code>.
+          De werking ervan hangt af van een aparte library (JUnit 4), dewelke je eerst zal moeten toevoegen
+          aan je project.
+        </p>
+        <p>
+          De eenvoudigste manier om JUnit 4 toe te voegen is om het bestand <code>Punt2DTest.java</code>
+          te openen in Eclipse en je muiscursor over <code>@Test</code> te plaatsen (niet klikken!), dewelke
+          normaalgezien rood onderstreept is. Na een poosje verschijnt er een menu, waaruit je
+          de juiste optie moet kiezen.
+        </p>
+        <img class="center" src="junit.png"></img>
+        <p>
+          Vervolgens moet je de tests runnen. Dit doe je via de toolbar:
+        </p>
+        <img class="center" src="runtest.png"></img>
+        <p>
+          Je krijgt nu de volgende resultaten te zien:
+        </p>
+        <img class="center" src="testresults.png"></img>
+        <p>
+          Pas nu de code aan in <code>Punt2D</code> zodat alle tests slagen. E&eacute;nmaal
+          je dit gelukt is, kan je het via Toledo inzenden.
+        </p>
+      </section>
+
+    </div>
+  </body>
+</html>

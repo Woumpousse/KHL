@@ -62,7 +62,7 @@ public class Punt2D {
      * @throws IllegalArgumentException
      *          Opgeworpen iindien x negatief is
      */
-    private  setX( ){
+    public  setX( ){
          
     }
     
@@ -75,7 +75,7 @@ public class Punt2D {
      * @throws IllegalArgumentException
      *          Opgeworpen indien y negatief is
      */
-    private   setY( ){
+    public   setY( ){
          
     }
     
