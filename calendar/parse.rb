@@ -306,7 +306,7 @@ def sweeks_map(sessions)
     session.event.cweek
   end.sort.uniq
 
-  abort unless cweeks.length == 12
+  abort "Insufficient weeks: found #{cweeks.length}, expected 12" unless cweeks.length == 12
 
   Hash[ cweeks.zip(1..12) ]
 end
@@ -368,29 +368,35 @@ def each_group(events)
   end
 end
 
+def print_course(course)
+  series = $events.select do |session|
+    course === session.course
+  end
+
+  each_group(series) do |group, sessions|
+    puts "#{course.new.id} #{group.join(',')}"
+    print_series(sessions)
+    puts
+  end
+end
+
+def print_series(series)
+  series.each_with_index do |session, index|
+    index_string = sprintf("%2d", index + 1)
+    week_string = sprintf("%2d", $week_mapping[session.start.cweek])
+    puts session.format("[#{index_string}|#{week_string}] %d %t %l", $week_mapping)
+  end
+end
+
+def html_series(series)
+  series.each_with_index do |session, index|
+    index_string = sprintf("%2d", index + 1)
+    week_string = sprintf("%2d", $week_mapping[session.start.cweek])
+    puts session.format("<tr><td>#{index_string}</td><td>#{week_string}</td><td>%d %t</td><td></td>", $week_mapping)
+  end
+end
 
 
-# def algo
-#   theory = algo_theory.sort
-#   groups(theory).each do |group|
-#     gs = group.join(",")
-
-#     exercises = for_group( algo_exercises, group ).sort
-#     abort "Oops" unless theory.length == exercises.length
-
-#     puts "Groep #{gs}"
-#     puts
-
-#     theory.zip(exercises).each_with_index do |pair, i|
-#       t, e = pair[0], pair[1]
-
-#       puts "Sessie #{i+1}"
-#       puts "Theorie: " + t.format("%d %t %l")
-#       puts "Labo   : " + e.format("%d %t %l")
-#       puts
-#     end
-#   end
-# end
 
 
 def wiskunde
@@ -409,7 +415,7 @@ def wiskunde
       session.exercises?
     end
 
-    if theory.empty?
+    if theory.size < 2
       theory = []
       exercises = []
 
@@ -433,57 +439,6 @@ def wiskunde
   end
 end
 
-# def bop
-#   theory = $events.select do |event|
-#     KHL::BOPTheory === event.course
-#   end.sort
-
-
-#   groups(theory).each do |group|
-#     gs = group.join(",")
-
-#     exercises = $events.select do |event|
-#       KHL::BOPExercises === event.course
-#     end.sort
-    
-#     exercises = for_group( exercises, group ).sort
-#     abort "Oops" unless theory.length == exercises.length
-
-#     puts "Groep #{gs}"
-#     puts
-
-#     theory.zip(exercises).each_with_index do |pair, i|
-#       t, e = pair[0], pair[1]
-
-#       puts "Sessie #{i+1}"
-#       puts "Theorie: " + t.format("%d %t %l [%w]", $week_mapping)
-#       puts "Labo   : " + e.format("%d %t %l [%w]", $week_mapping)
-#       puts
-#     end
-#   end
-# end
-
-
-def print_course(course)
-  series = $events.select do |session|
-    course === session.course
-  end
-
-  each_group(series) do |group, sessions|
-    puts "#{course.new.id} #{group.join(',')}"
-    print_series(sessions)
-    puts
-  end
-end
-
-def print_series(series)
-  series.each_with_index do |session, index|
-    index_string = sprintf("%2d", index + 1)
-    week_string = sprintf("%2d", $week_mapping[session.start.cweek])
-    puts session.format("[#{index_string}|#{week_string}] %d %t", $week_mapping)
-  end
-end
-
 def bop
   print_course(KHL::BOPTheory)
   print_course(KHL::BOPExercises)
@@ -492,24 +447,5 @@ end
 def algo
   print_course(KHL::AlgoTheory)
   print_course(KHL::AlgoExercises)
-  # theory_sessions = $events.select do |event|
-  #   KHL::AlgoTheory === event.course
-  # end.sort
-
-  # exercise_sessions = $events.select do |event|
-  #   KHL::AlgoExercises === event.course
-  # end.sort
-
-  # each_group(theory_sessions) do |group, sessions|
-  #   puts "Algo Theorie #{group.join(',')}"
-  #   print_series(sessions)
-  #   puts
-  # end
-
-  # each_group(exercise_sessions) do |group, sessions|
-  #   puts "Algo Labo #{group.join(',')}"
-  #   print_series(sessions)
-  #   puts
-  # end
 end
 
