@@ -1,0 +1,50 @@
+\section{RoboProg}
+
+In deze oefeningen ga je een robotje besturen aan de hand van JavaScript-commando's. Het robotje verstaat en aantal elementaire commando's (deze worden hieronder uitgelegd), en jij moet er voor zorgen dat het robotje zijn doel bereikt. Hiervoor kan je, naast de commando's die de robot begrijpt, natuurlijk ook gebruik maken van JavaScript-functionaliteit zoals iteraties (for, while) en selecties (if).
+
+De commando's die de robot begrijpt kan je aanspreken door de volgende methodes op te roepen:
+
+\begin{itemize}
+\item \textbf{turnRight();}	Draai de robot 90 graden naar rechts
+\item \textbf{turnLeft();}	Draai de robot 90 graden naar links
+\item \textbf{wallAhead();}	Geeft de waarde true terug indien er een muur voor de robot staat, of false in het andere geval
+\item \textbf{wallOnLeft();}	Geeft de waarde true terug indien er een muur links van de robot staat, of false in het andere geval
+\item \textbf{wallOnRight();}	Geeft de waarde true terug indien er een muur rechts van de robot staat, of false in het andere geval
+\item \textbf{moveForward();} Beweegt de robot \'e\'en vakje vooruit (let op: indien je deze methode oproept terwijl er een muur voor de robot staat, dan gaat de robot stuk!)
+\item \textbf{out();}		Geeft de waarde true terug indien de robot de eindstaat bereikt, of false in het andere geval
+\item \textbf{mark();}		Markeert de tegel waar de robot op staat
+\end{itemize}
+
+De robot moet een aantal opdrachten uitvoeren. Elke opdracht staat beschreven in een HTML-bestand dat je verder moet aanvullen. De opdrachten staan gerangschikt van gemakkelijk naar moeilijk.
+
+\subsection{ZoekMuur.html}
+
+Schrijf een algoritme dat de robot naar een muur doet rijden. Hij moet halt houden op een vakje dat grenst met een muur. De robot begint altijd op een random positie.
+
+\subsection{ZoekHoek.html}
+
+Schrijf een algoritme dat de robot naar een hoek doet rijden. De robot begint altijd op een random positie.
+
+\subsection{TekenP.html}
+
+Schrijf een algoritme dat de letter 'P' tekent op het bord. Hiervoor kan je de mark()-methode gebruiken. De P moet zes vakjes hoog zijn en drie vakjes breed. De robot begint altijd op dezelfde plaats (en dezelfde ori\"entatie). Opgelet: nadat je de P getekend hebt, zal je geen automatische bevestiging krijgen dat je opdracht geslaagd is! Je moet dus zelf kijken of de output van de robot correct is.
+
+\subsection{Spiraal.html}
+
+Schrijf een algoritme dat de robot naar het midden van de spiraal leidt. Werk dit algoritme twee keer uit: eenmaal door gebruik te maken van enkel for-lussen, een tweede keer door gebruik te maken van enkel while-lussen. De robot begint altijd op dezelfde plaats (en dezelfde ori\"entatie).
+
+\subsection{ZoekUitgang1.html}
+
+De robot begint altijd op een random plaats in een random-gegenereerde kamer met \'e\'en uitgang. Schrijf een algoritme dat de robot naar de uitgang leidt.
+
+\subsection{ZoekUitgang2.html}
+
+De robot begint altijd op een random plaats in een random-gegenereerde kamer met \'e\'en uitgang. Het verschil met de vorige oefening is dat de kamer nu niet meer rechthoekig is. Schrijf een algoritme dat de robot naar de uitgang leidt.
+
+\subsection{TekenPiramide.html}
+
+Schrijf een algoritme dat een piramide tekent op het bord. De piramide heeft een basis van 10 blokjes, en per rij omhoog gaan er twee blokjes af. De robot begint altijd op dezelfde plaats (en dezelfde ori\"entatie).
+
+\subsection{ZoekIngang.html}
+
+De robot begint altijd op een random plaats buiten een random-gegenereerde kamer. Schrijf een algoritme dat de robot naar binnen loodst.
