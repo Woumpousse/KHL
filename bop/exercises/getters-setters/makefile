@@ -1,8 +1,10 @@
 .SECONDEXPANSION:
 
-.PHONY: example example-html example-multimake
+CURRENT = getters-setters
 
-all: icons export primitive-types
+.PHONY:
+
+all: icons export $(CURRENT)
 
 -include shared.mk
 -include icons.mk
@@ -13,5 +15,5 @@ clean: clean_icons
 export:
 	echo *.css *.png *.html *.js | ruby -e "puts STDIN.read.split" > export
 
-primitive-types:
-	ruby primitive-types.rb
+$(CURRENT):
+	ruby $(CURRENT).rb

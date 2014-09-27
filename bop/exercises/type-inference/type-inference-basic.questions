@@ -1,0 +1,169 @@
+#<
+  Level 1 Type Inference
+
+  No playing with classes/objects
+>#
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__boolean__ x) {
+        if ( x ) {
+            ...
+        }
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__boolean__ x) {
+        while ( x ) {
+            ...
+        }
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__boolean__ x) {
+        for ( int i = 0; x; i++ ) {
+            ...
+        }
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __boolean__ bar(__boolean__ x, __boolean__ y) {
+        return x && y;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __boolean__ bar(__boolean__ x, __boolean__ y) {
+        return x || y;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __boolean__ bar(__boolean__ x) {
+        return !x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__boolean__ x) {
+        if ( x || qux() ) {
+            ...
+        }
+    }
+
+    public __boolean__ qux() {
+        ...
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __boolean__ bar() {
+        return 1 == 2;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public boolean bar(boolean x, __boolean__ y) {
+        return x == y;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int|double__ bar() {
+        return 1 + 5;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __double__ bar() {
+        return 0.5 + 5;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __void__ bar() {
+        // NOP
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int__ bar(int x) {
+        return x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __int__ bar(int x) {
+        return x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public int bar(__int__ x) {
+        return x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(__boolean__ x) {
+        boolean y = x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public void bar(double x) {
+        __double__ y = x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public double bar(__double__ x) {
+        return x;
+    }
+}
+
+#infer-types[template=infer]
+
+class Foo {
+    public __String__ bar(String x) {
+        return x;
+    }
+}
