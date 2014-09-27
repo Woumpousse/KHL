@@ -1,7 +1,7 @@
 \documentclass[a4paper]{article}
 \usepackage{listings}
 
-\lstset{language=java}
+\lstset{language=java,frame=single}
 
 \pagestyle{empty}
 

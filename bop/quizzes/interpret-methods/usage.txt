@@ -1,7 +1,5 @@
 Usage:
 
-make exercises.zip
+make upload
 
-Upload the files to Toledo
-
-make exercises.txt URL=[url]
+Upload exercises.txt to Toledo
