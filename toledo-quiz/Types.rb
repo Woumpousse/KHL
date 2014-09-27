@@ -48,11 +48,15 @@ module Types
 
   def Types.check(context, map)
     map.each do |id, t|
+      if id.is_a? Symbol
+      then id = id.to_s
+      end
+
       predicate = smart_predicate(t)
       object = context.eval(id)
 
       unless predicate.call(object)
-        raise TypeError, "'#{id}' should be a #{predicate.name} (value was #{object})"
+        raise TypeError, "'#{id}' should be a #{predicate.name} (value was #{object} : #{object.class})"
       end
     end
   end
@@ -105,6 +109,12 @@ module Types
   def Types.any
     predicate("any") do |object|
       true
+    end
+  end
+
+  def Types.nonnil
+    predicate("nonnil") do |object|
+      object != nil
     end
   end
 end
