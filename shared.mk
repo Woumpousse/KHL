@@ -22,11 +22,14 @@ IMAGEMAGICK = convert
 LATEX = pdflatex
 
 
-# $(call UPLOAD,file,directory)
-UPLOAD=$(SCP) $(1) $(KHL_LOGIN)@$(URL):$(REMOTE_ROOT_DIRECTORY)/$(2)
-
 # $(call REMOTE_EXECUTE,command)
 REMOTE_EXECUTE=$(SSH) $(KHL_LOGIN)@$(URL) $(1)
 
+# $(call UPLOAD,file,directory)
+UPLOAD=$(SCP) $(1) $(KHL_LOGIN)@$(URL):$(REMOTE_ROOT_DIRECTORY)/$(2)
+
 # $(call ZIP_EXPORTS,directory,zip)
 ZIP_EXPORTS=$(EXPORTS) $(1) | dos2unix | xargs $(ZIP) $(2)
+
+# $(call EXPORT_TO_SERVER,directory)
+EXPORT_TO_SERVER=$(call ZIP_EXPORTS,.,package.zip);$(call REMOTE_EXECUTE,"mkdir -p $(REMOTE_ROOT_DIRECTORY)/$(1)");$(call UPLOAD,package.zip,$(1));rm package.zip;$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(1);unzip -o package.zip")
