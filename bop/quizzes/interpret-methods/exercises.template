@@ -1,0 +1,13 @@
+\documentclass[a4paper]{article}
+\usepackage{listings}
+
+\lstset{language=java}
+
+\pagestyle{empty}
+
+
+\begin{document}
+
+%GSUB%
+
+\end{document}

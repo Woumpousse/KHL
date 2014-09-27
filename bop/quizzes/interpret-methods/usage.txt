@@ -1,0 +1,7 @@
+Usage:
+
+make exercises.zip
+
+Upload the files to Toledo
+
+make exercises.txt URL=[url]
