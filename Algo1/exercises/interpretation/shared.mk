@@ -9,6 +9,7 @@ all: icons current
 -include icons.mk
 -include ../../shared.mk
 
+ZIP_FILE = $(CURRENT).zip
 
 clean: clean_icons
 	rm -f *~
@@ -23,10 +24,10 @@ current:
 	ruby Generate.rb --output $(CURRENT).html --template $(CURRENT).template --require ./$(CURRENT).rb --class Resources -p 2
 
 zip: current
-	rm -f $(CURRENT).zip
-	$(call ZIP_EXPORTS,.,$(CURRENT).zip)
+	rm -f $(ZIP_FILE)
+	$(call ZIP_EXPORTS,.,$(ZIP_FILE))
 
 upload: zip
 	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT); mkdir -p $(CURRENT)")
-	$(call UPLOAD,$(CURRENT)-interpret.zip,$(EXERCISES_ROOT)/$(CURRENT))
-	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT)/$(CURRENT); unzip -o $(CURRENT)-interpret")
+	$(call UPLOAD,$(ZIP_FILE),$(EXERCISES_ROOT)/$(CURRENT))
+	$(call REMOTE_EXECUTE,"cd $(REMOTE_ROOT_DIRECTORY)/$(EXERCISES_ROOT)/$(CURRENT); unzip -o $(ZIP_FILE)")
