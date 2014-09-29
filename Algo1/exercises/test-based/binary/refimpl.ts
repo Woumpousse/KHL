@@ -9,7 +9,7 @@ module ReferenceImplementations
     {
         if ( x < 0 )
         {
-            return "invalid";
+            return false;
         }
         else
         {
@@ -31,7 +31,7 @@ module ReferenceImplementations
 
     export function binaryToDecimal(x : number) : any
     {
-        if ( isBinary(x) !== true )
+        if ( !isBinary(x) )
         {
             return "invalid";
         }
@@ -79,7 +79,7 @@ module ReferenceImplementations
 
     export function binaryAdd(x : number, y : number) : any
     {
-        if ( isBinary(x) !== true || isBinary(y) !== true )
+        if ( !isBinary(x) || !isBinary(y) )
         {
             return "invalid";
         }

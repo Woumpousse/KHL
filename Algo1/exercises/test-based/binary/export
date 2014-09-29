@@ -1,4 +1,5 @@
 libs.js
+rng.js
 refimpl.js
 student.js
 tests.js

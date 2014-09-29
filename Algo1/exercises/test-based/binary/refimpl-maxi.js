@@ -6,7 +6,7 @@ var ReferenceImplementations;
 (function (ReferenceImplementations) {
     function isBinary(x) {
         if (x < 0) {
-            return "invalid";
+            return false;
         } else {
             while (x > 0) {
                 var ld = x % 10;
@@ -24,7 +24,7 @@ var ReferenceImplementations;
     ReferenceImplementations.isBinary = isBinary;
 
     function binaryToDecimal(x) {
-        if (isBinary(x) !== true) {
+        if (!isBinary(x)) {
             return "invalid";
         } else {
             var rs = 0;
@@ -64,7 +64,7 @@ var ReferenceImplementations;
     ReferenceImplementations.decimalToBinary = decimalToBinary;
 
     function binaryAdd(x, y) {
-        if (isBinary(x) !== true || isBinary(y) !== true) {
+        if (!isBinary(x) || !isBinary(y)) {
             return "invalid";
         } else {
             var dx = binaryToDecimal(x);
